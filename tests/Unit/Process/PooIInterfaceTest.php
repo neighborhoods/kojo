@@ -8,7 +8,7 @@ use NHDS\Jobs\ProcessInterface;
 use NHDS\Jobs\Test\Unit\AbstractTest;
 
 /** @covers PoolInterface */
-class PoolTest extends TestCase implements PoolTestInterface
+class PoolTest extends TestCase
 {
     /** @test */
     public function testIsEmpty(): bool

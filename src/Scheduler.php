@@ -2,6 +2,7 @@
 
 namespace NHDS\Jobs;
 
+use Cron\CronExpression;
 use Psr\Cache\CacheItemPoolInterface;
 use NHDS\Jobs\Db\Connection\ContainerInterface;
 use NHDS\Jobs\Scheduler\ScheduleInterface;
@@ -79,7 +80,8 @@ class Scheduler implements SchedulerInterface
     protected function _generateJobs()
     {
         foreach ($this->_getJobTypes() as $jobType) {
-            $this->_getScheduleClone()->setJobCode($jobType['code'])->setCronExpression($jobType['cron_expression']);
+            $cron = CronExpression::factory('3-59/15 2,6-12 */15 1 2-5');
+            $ime3 = $cron->getNextRunDate()->format('Y-m-d H:i:s');
 
             foreach ($this->_unscheduledMinutes as $unscheduledMinute => $time) {
                 if (isset($this->_existingJobs[$jobType['code']][$unscheduledMinute])) {

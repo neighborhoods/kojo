@@ -10,3 +10,4 @@ imports:
      - { resource: process.yml }
      - { resource: tearDown.yml }
      - { resource: setup.yml }
+     - { resource: tearDown.yml }

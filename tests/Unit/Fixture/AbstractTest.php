@@ -3,19 +3,19 @@
 namespace NHDS\Jobs\Test\Unit\Fixture;
 
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
-use PHPUnit\DbUnit\TestCase;
-use NHDS\Jobs\Container;
+use PHPUnit\DbUnit;
 use NHDS\Jobs\Data\Property\Crud;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use \NHDS\Jobs\Test\Unit\ContainerBuilder;
+use ReflectionClass;
+use Symfony\Component\Finder\Finder;
 
-class AbstractTest extends TestCase
+class AbstractTest extends DbUnit\TestCase
 {
     use Crud\AwareTrait;
-    const PROP_CONTAINER_BUILDER = 'container_builder';
+    use ContainerBuilder\AwareTrait;
+    const PROP_DATA_SET = 'data_set';
 
-    /**
-     * @expectedException
-     */
+    /**  @expectedException */
     public function setUp()
     {
         $tearDown = $this->_getTestContainerBuilder()->get('tear_down');
@@ -35,20 +35,35 @@ class AbstractTest extends TestCase
 
     protected function getDataSet()
     {
-        $yamlDataSet = new YamlDataSet(__DIR__ . DIRECTORY_SEPARATOR);
-        $yamlDataSet->addYamlFile(__DIR__ . DIRECTORY_SEPARATOR);
+        $reflectionClass = new ReflectionClass($this);
 
-        return $yamlDataSet;
-    }
-
-    protected function _getTestContainerBuilder(): ContainerBuilder
-    {
-        if (!$this->_exists(self::PROP_CONTAINER_BUILDER)) {
-            $container = new Container();
-            $container->setServicesYamlFilePath(__DIR__ . DIRECTORY_SEPARATOR);
-            $this->_create(self::PROP_CONTAINER_BUILDER, $container->getContainerBuilder());
+        $testClassFilePath = $reflectionClass->getFileName();
+        $testClassDirectoryPath = dirname($testClassFilePath);
+        $className = $reflectionClass->getShortName();
+        $fixturesDiurectoryPath = $testClassDirectoryPath . '/fixtures/' . $className;
+        $finder = new Finder();
+        $finder->files()->in($fixturesDiurectoryPath);
+        $finder->sortByName();
+        foreach ($finder as $filePath => $file) {
+            $this->_addFilePathToYamlDataSet($filePath);
         }
 
-        return $this->_read(self::PROP_CONTAINER_BUILDER);
+        return $this->_getYamlDataSet();
+    }
+
+    protected function _addFilePathToYamlDataSet(string $yamlDataSetFilePath): AbstractTest
+    {
+        if (!$this->_exists(YamlDataSet::class)) {
+            $this->_create(YamlDataSet::class, new YamlDataSet($yamlDataSetFilePath));
+        }else {
+            $this->_getYamlDataSet()->addYamlFile($yamlDataSetFilePath);
+        }
+
+        return $this;
+    }
+
+    protected function _getYamlDataSet(): YamlDataSet
+    {
+        return $this->_read(YamlDataSet::class);
     }
 }
