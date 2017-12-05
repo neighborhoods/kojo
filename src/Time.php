@@ -4,7 +4,7 @@ namespace NHDS\Jobs;
 
 class Time implements TimeInterface
 {
-    protected $_dateTimeZones = array();
+    protected $_dateTimeZones = [];
 
     public function getNow(string $timezoneCode = self::DEFAULT_TIMEZONE_CODE): \DateTime
     {

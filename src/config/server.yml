@@ -1,32 +1,32 @@
 services:
-    server:
-        class: NHDS\Jobs\Process\Pool\Server
-        calls:
-            - [setLogger, ['@logger']]
-            - [setTime, ['@time']]
-            - [setPool, ['@process_pool']]
-            - [addSemaphoreResource, ['server', '@server_semaphore_resource']]
-            - [setSemaphore, ['@semaphore']]
-    server_semaphore_resource:
-        class: NHDS\Jobs\Semaphore\Resource
-        calls:
-            - [setResourceName, ['server.lock']]
-            - [setResourcePath, ['/tmp/nhds/jobs']]
-            - [setIsBlocking, [true]]
-            - [setMutex, ['@flock_mutex']]
-        shared: false
-    process_pool:
-        class: NHDS\Jobs\Process\Pool
-        calls:
-            - [setLogger, ['@logger']]
-            - [setStrategy, ['@strategy']]
-    strategy:
-        class: NHDS\Jobs\Process\Pool\Strategy
-        calls:
-            - [setLogger, ['@logger']]
-            - [setPool, ['@process_pool']]
-            - [setMaxProcesses, ['%process_pool_strategy.max_processes%']]
-            - [setProcessWaitThrottle, ['%process_pool_strategy.process_wait_throttle%']]
-            - [setMaxAlarmTime, ['%process_pool_strategy.max_alarm_time%']]
-            - [addProcessType, ['listener.message', '@message_listener_process']]
-            - [addProcessType, ['job', '@job_process']]
+  server:
+    class: NHDS\Jobs\Process\Pool\Server
+    calls:
+      - [setLogger, ['@logger']]
+      - [setTime, ['@time']]
+      - [setPool, ['@process_pool']]
+      - [addSemaphoreResource, ['server', '@server_semaphore_resource']]
+      - [setSemaphore, ['@semaphore']]
+  server_semaphore_resource:
+    class: NHDS\Jobs\Semaphore\Resource
+    calls:
+      - [setResourceName, ['server.lock']]
+      - [setResourcePath, ['/tmp/nhds/jobs']]
+      - [setIsBlocking, [true]]
+      - [setMutex, ['@flock_mutex']]
+    shared: false
+  process_pool:
+    class: NHDS\Jobs\Process\Pool
+    calls:
+      - [setLogger, ['@logger']]
+      - [setStrategy, ['@strategy']]
+  strategy:
+    class: NHDS\Jobs\Process\Pool\Strategy
+    calls:
+      - [setLogger, ['@logger']]
+      - [setPool, ['@process_pool']]
+      - [setMaxProcesses, ['%process_pool_strategy.max_processes%']]
+      - [setProcessWaitThrottle, ['%process_pool_strategy.process_wait_throttle%']]
+      - [setMaxAlarmTime, ['%process_pool_strategy.max_alarm_time%']]
+      - [addProcessType, ['listener.message', '@message_listener_process']]
+      - [addProcessType, ['job', '@job_process']]

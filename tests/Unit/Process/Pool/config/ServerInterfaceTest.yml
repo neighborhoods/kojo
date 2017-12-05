@@ -1,2 +1,2 @@
 imports:
-     - { resource: ../../../../../src/config/root.yml }
+  - { resource: ../../../../../src/config/root.yml }

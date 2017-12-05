@@ -1,22 +1,22 @@
 services:
-   message_listener_process:
-        class: NHDS\Jobs\Process\Type\Listener\Command
-        calls:
-            - [setPool, ['@process_pool']]
-            - [setBrokerTypeCollection, ['@broker_type_collection']]
-            - [setLogger, ['@logger']]
-            - [setBrokerTypeCode, ['job_broker']]
-            - [addProcessType, ['listener.message', '@message_listener_process']]
-            - [addProcessType, ['job', '@job_process']]
-            - [setExpressionLanguage, ['@expression_language']]
-   job_process:
-        class: NHDS\Jobs\Process\Type\Job
-        calls:
-            - [setPool, ['@process_pool']]
-            - [setLogger, ['@logger']]
-            - [setBrokerTypeCollection, ['@broker_type_collection']]
-            - [setBrokerTypeCode, ['job_broker']]
-            - [setForeman, ['@foreman']]
+  message_listener_process:
+    class: NHDS\Jobs\Process\Type\Listener\Command
+    calls:
+      - [setPool, ['@process_pool']]
+      - [setBrokerTypeCollection, ['@broker_type_collection']]
+      - [setLogger, ['@logger']]
+      - [setBrokerTypeCode, ['job_broker']]
+      - [addProcessType, ['listener.message', '@message_listener_process']]
+      - [addProcessType, ['job', '@job_process']]
+      - [setExpressionLanguage, ['@expression_language']]
+  job_process:
+    class: NHDS\Jobs\Process\Type\Job
+    calls:
+      - [setPool, ['@process_pool']]
+      - [setLogger, ['@logger']]
+      - [setBrokerTypeCollection, ['@broker_type_collection']]
+      - [setBrokerTypeCode, ['job_broker']]
+      - [setForeman, ['@foreman']]
 #            - [setBootstrap, ['@bootstrap_example']]
-   expression_language:
-        class: \Symfony\Component\ExpressionLanguage\ExpressionLanguage
+  expression_language:
+    class: \Symfony\Component\ExpressionLanguage\ExpressionLanguage

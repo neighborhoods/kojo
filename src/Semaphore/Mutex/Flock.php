@@ -2,7 +2,7 @@
 
 namespace NHDS\Jobs\Semaphore\Mutex;
 
-use NHDS\Jobs\Exception\Runtime\Filesystem as FilesystemException;
+use NHDS\Jobs\Exception\Runtime;
 use NHDS\Jobs\Filesystem;
 
 class Flock extends AbstractMutex
@@ -38,7 +38,7 @@ class Flock extends AbstractMutex
 
             $filePointer = fopen($this->_getFilePath(), $this->_getFileMode());
             if (!is_resource($filePointer) || $filePointer === false) {
-                $this->_throwNewFilesystemException(FilesystemException::CODE_FOPEN_FAILED);
+                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FOPEN_FAILED);
             }
             $this->_filePointer = $filePointer;
         }
@@ -59,14 +59,14 @@ class Flock extends AbstractMutex
     {
         if ($this->_hasLock === true) {
             if (unlink($this->_getFilePath()) === false) {
-                $this->_throwNewFilesystemException(FilesystemException::CODE_UNLINK_FAILED);
+                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_UNLINK_FAILED);
             }
             if (flock($this->_getLockFilePointer(), LOCK_UN) === false) {
-                $this->_throwNewFilesystemException(FilesystemException::CODE_UNLOCK_FAILED);
+                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_UNLOCK_FAILED);
             }
             $this->_hasLock = false;
             if (fclose($this->_getLockFilePointer()) === false) {
-                $this->_throwNewFilesystemException(FilesystemException::CODE_FCLOSE_FAILED);
+                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FCLOSE_FAILED);
                 $this->_filePointer = null;
             }
         }else {

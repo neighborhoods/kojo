@@ -11,7 +11,7 @@ use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\PreparableSqlInterface;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
-use \Zend\Db\Adapter\Driver\Pdo\Pdo as PdoDriver;
+use Zend\Db\Adapter\Driver;
 use Zend\Db\Sql\Update;
 
 class Container implements ContainerInterface
@@ -93,7 +93,7 @@ class Container implements ContainerInterface
     public function getDriver(): DriverInterface
     {
         if ($this->_driver === null) {
-            $this->_driver = new PdoDriver($this->getConnection());
+            $this->_driver = new Driver\Pdo\Pdo($this->getConnection());
         }
 
         return $this->_driver;

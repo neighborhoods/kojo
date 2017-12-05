@@ -2,11 +2,15 @@
 
 namespace NHDS\Jobs\Test\Unit\Fixture;
 
+use NHDS\Jobs\TimeInterface;
+use PHPUnit\DbUnit\DataSet\DefaultTable;
+use PHPUnit\DbUnit\DataSet\DefaultTableIterator;
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
 use PHPUnit\DbUnit;
 use NHDS\Jobs\Data\Property\Crud;
 use \NHDS\Jobs\Test\Unit\ContainerBuilder;
 use ReflectionClass;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Finder\Finder;
 
 class AbstractTest extends DbUnit\TestCase
@@ -36,7 +40,6 @@ class AbstractTest extends DbUnit\TestCase
     protected function getDataSet()
     {
         $reflectionClass = new ReflectionClass($this);
-
         $testClassFilePath = $reflectionClass->getFileName();
         $testClassDirectoryPath = dirname($testClassFilePath);
         $className = $reflectionClass->getShortName();
@@ -48,7 +51,7 @@ class AbstractTest extends DbUnit\TestCase
             $this->_addFilePathToYamlDataSet($filePath);
         }
 
-        return $this->_getYamlDataSet();
+        return $this->_getEvaluatedYamlDataSet();
     }
 
     protected function _addFilePathToYamlDataSet(string $yamlDataSetFilePath): AbstractTest
@@ -62,8 +65,35 @@ class AbstractTest extends DbUnit\TestCase
         return $this;
     }
 
+    protected function _getEvaluatedYamlDataSet(): YamlDataSet
+    {
+        /** @var DefaultTableIterator $tableIterator */
+        $tableIterator = $this->_getYamlDataSet()->getIterator();
+        $language = new ExpressionLanguage();
+        /** @var  DefaultTable $table */
+        foreach ($tableIterator as $table) {
+            $rowCount = $table->getRowCount();
+            while (--$rowCount >= 0) {
+                $row = $table->getRow($rowCount);
+                foreach ($row as $columnName => $value) {
+                    if (is_string($value)) {
+                        $expressedValue = $language->evaluate($value, ['time' => $this->_getTime()]);
+                        $table->setValue($rowCount, $columnName, $expressedValue);
+                    }
+                }
+            }
+        }
+
+        return $this->_getYamlDataSet();
+    }
+
     protected function _getYamlDataSet(): YamlDataSet
     {
         return $this->_read(YamlDataSet::class);
+    }
+
+    protected function _getTime(): TimeInterface
+    {
+        return $this->_getTestContainerBuilder()->get('time');
     }
 }
