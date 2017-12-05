@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: true
+imports:
+     - { resource: dependencies.yml }
+     - { resource: foreman.yml }
+     - { resource: server.yml }
+     - { resource: process.yml }
+     - { resource: tearDown.yml }
+     - { resource: setup.yml }

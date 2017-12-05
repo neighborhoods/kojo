@@ -1,0 +1,39 @@
+{
+    "name": "nhds/jobs",
+    "type": "library",
+    "description": "NHDS Jobs is meant to solve the problem of easily writing distributed, fast, fault tolerant tasks.",
+    "license": "proprietary",
+    "keywords": [],
+    "authors": [
+        {
+            "name": "Brad Wilson",
+            "email": "brad.wilson@neighborhoods.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "zendframework/zend-db": "^2.8",
+        "zendframework/zend-code": "^3.3",
+        "symfony/filesystem": "3.3",
+        "symfony/config": "3.3",
+        "symfony/yaml": "3.3",
+        "symfony/dependency-injection": "3.3",
+        "symfony/expression-language": "3.3",
+        "symfony/cache": "3.3",
+        "dragonmantank/cron-expression": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4",
+        "phpunit/dbunit": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NHDS\\Jobs\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NHDS\\Jobs\\Test\\": "tests"
+        }
+    }
+}

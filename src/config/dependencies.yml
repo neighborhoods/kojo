@@ -1,0 +1,42 @@
+parameters:
+    process_pool_strategy.max_processes: 30
+    process_pool_strategy.process_wait_throttle: 1
+    process_pool_strategy.max_alarm_time: 300
+services:
+    time:
+        class: NHDS\Jobs\Time
+    logger:
+        class: NHDS\Jobs\Process\Pool\Logger
+        calls:
+            - [setIsEnabled, [true]]
+            - [setTime, ['@time']]
+            - [setPool, ['@process_pool']]
+    job_broker:
+        class: NHDS\Jobs\Message\Broker\Redis
+        calls:
+            - [setLogger, ['@logger']]
+            - [setPort, ['6379']]
+            - [setHost, ['redis']]
+            - [setSubscriptionChannelName, ['job_queue']]
+            - [setPublishChannelName, ['job_queue']]
+        shared: false
+    broker_type_collection:
+        class: NHDS\Jobs\Message\Broker\Type\Collection
+        calls:
+            - [addBrokerType, ['job_broker', '@job_broker']]
+    db_connection_container_job:
+        class: NHDS\Jobs\Db\Connection\Container
+        calls:
+            - [setName, ["@=constant('NHDS\\\\Jobs\\\\Db\\\\Connection\\\\ContainerInterface::NAME_JOB')"]]
+    db_connection_container_schema:
+        class: NHDS\Jobs\Db\Connection\Container
+        calls:
+            - [setName, ["@=constant('NHDS\\\\Jobs\\\\Db\\\\Connection\\\\ContainerInterface::NAME_SCHEMA')"]]
+    semaphore:
+        class: NHDS\Jobs\Semaphore
+    flock_mutex:
+        class: NHDS\Jobs\Semaphore\Mutex\Flock
+        calls:
+            - [setFileMode, ['c']]
+            - [setDirectoryMode, ['0777']]
+        shared: false

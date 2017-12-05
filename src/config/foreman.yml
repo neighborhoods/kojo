@@ -1,0 +1,64 @@
+services:
+    foreman:
+        class: NHDS\Jobs\Foreman
+        calls:
+            - [addDbConnectionContainer, ['@db_connection_container_job']]
+            - [setJob, ['@job']]
+            - [setSemaphore, ['@semaphore']]
+            - [addSemaphoreResource, ['maintain', '@maintain_semaphore_resource']]
+            - [addSemaphoreResource, ['schedule', '@schedule_semaphore_resource']]
+            - [setSelector, ['@selector']]
+            - [setMaintainer, ['@maintainer']]
+            - [setScheduler, ['@scheduler']]
+        shared: false
+    maintain_semaphore_resource:
+        class: NHDS\Jobs\Semaphore\Resource
+        calls:
+            - [setResourceName, ['maintain.lock']]
+            - [setResourcePath, ['/tmp/nhds/jobs']]
+            - [setIsBlocking, [false]]
+            - [setMutex, ['@flock_mutex']]
+        shared: false
+    schedule_semaphore_resource:
+        class: NHDS\Jobs\Semaphore\Resource
+        calls:
+            - [setResourceName, ['schedule.lock']]
+            - [setResourcePath, ['/tmp/nhds/jobs']]
+            - [setIsBlocking, [false]]
+            - [setMutex, ['@flock_mutex']]
+        shared: false
+    job_semaphore_resource:
+        class: NHDS\Jobs\Semaphore\Resource
+        calls:
+            - [setResourceName, ['server.lock']]
+            - [setResourcePath, ['/tmp/nhds/jobs']]
+            - [setIsBlocking, [false]]
+            - [setMutex, ['@flock_mutex']]
+        shared: false
+    selector:
+        class: NHDS\Jobs\Data\Job\Selector
+        calls:
+            - [setPageSize, [50]]
+            - [setOffset, [50]]
+            - [addSemaphoreResource, ['job', '@job_semaphore_resource']]
+            - [setCollection, ['@job_collection']]
+        shared: false
+    maintainer:
+        class: NHDS\Jobs\Maintainer
+        shared: false
+    scheduler:
+        class: NHDS\Jobs\Scheduler
+        shared: false
+    job:
+        class: NHDS\Jobs\Data\Job
+        shared: false
+    job_collection:
+        class: NHDS\Jobs\Data\Job\Collection
+        calls:
+            - [setIterator, ['@job_collection_iterator']]
+            - [addDbConnectionContainer, ['@db_connection_container_job']]
+            - [setModel, ['@job']]
+        shared: false
+    job_collection_iterator:
+        class: NHDS\Jobs\Data\Job\Collection\Iterator
+        shared: false

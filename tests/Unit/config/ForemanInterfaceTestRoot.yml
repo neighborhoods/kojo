@@ -1,0 +1,11 @@
+imports:
+     - { resource: ../../../src/config/root.yml }
+services:
+    db_connection_container_schema:
+        class: NHDS\Jobs\Db\Connection\Container
+        calls:
+            - [setName, ["@=constant('Rhift\\\\Jobs\\\\Db\\\\Connection\\\\ContainerInterface::NAME_SCHEMA')"]]
+            - [setPdo, ["@pdo"]]
+    pdo:
+        class: \Pdo
+        arguments: ['mysql:dbname=jobs;host=mysql', 'root', 'nhdsroot']

@@ -1,0 +1,22 @@
+nhds_job:
+  -
+    nhds_job_id: 1
+    type_code: "type_code_1"
+    name: "NAme 1"
+    priority: 10
+    importance: 10
+    status_id: 2
+    work_at_datetime: 2010-04-26 12:14:20
+    next_state_request: working
+    assigned_state: "new"
+    previous_state: "empty"
+    worker_uri: ""
+    worker_method: "work"
+    can_run_in_parallel: 1
+    last_transition_datetime: 2010-04-26 12:14:20
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
