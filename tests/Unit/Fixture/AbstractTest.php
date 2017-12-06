@@ -17,7 +17,8 @@ class AbstractTest extends DbUnit\TestCase
 {
     use Crud\AwareTrait;
     use ContainerBuilder\AwareTrait;
-    const PROP_DATA_SET = 'data_set';
+    const YAML_SIGIL_PREFIX_FIXTURE_EXPRESSION = '!fixture/expression:';
+    const PROP_DATA_SET                        = 'data_set';
 
     /**  @expectedException */
     public function setUp()
@@ -76,8 +77,9 @@ class AbstractTest extends DbUnit\TestCase
             while (--$rowCount >= 0) {
                 $row = $table->getRow($rowCount);
                 foreach ($row as $columnName => $value) {
-                    if (is_string($value)) {
-                        $expressedValue = $language->evaluate($value, ['time' => $this->_getTime()]);
+                    if (is_string($value) && (0 === strpos($value, self::YAML_SIGIL_PREFIX_FIXTURE_EXPRESSION))) {
+                        $expression = str_replace(self::YAML_SIGIL_PREFIX_FIXTURE_EXPRESSION, '', $value);
+                        $expressedValue = $language->evaluate($expression, ['time' => $this->_getTime()]);
                         $table->setValue($rowCount, $columnName, $expressedValue);
                     }
                 }
