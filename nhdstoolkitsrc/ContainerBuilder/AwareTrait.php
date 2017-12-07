@@ -2,13 +2,12 @@
 
 namespace NHDS\Toolkit\ContainerBuilder;
 
-use ReflectionClass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
-use Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\RepeatedPass;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
+use Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass;
 
 trait AwareTrait
 {
@@ -50,20 +49,5 @@ trait AwareTrait
         }
 
         return $this->_containerBuilder;
-    }
-
-    protected function _getTestContainerBuilder(): ContainerBuilder
-    {
-        if (!$this->_exists(ContainerBuilder::class)) {
-            $reflectionClass = new ReflectionClass($this);
-            $testClassFilePath = $reflectionClass->getFileName();
-            $testClassDirectoryPath = dirname($testClassFilePath);
-            $shortName = $reflectionClass->getShortName();
-            $testServicesYamlFilePath = $testClassDirectoryPath . '/config/' . $shortName . '.yml';
-            $this->setServicesYamlFilePath($testServicesYamlFilePath);
-            $this->_create(ContainerBuilder::class, $this->getContainerBuilder());
-        }
-
-        return $this->_read(ContainerBuilder::class);
     }
 }

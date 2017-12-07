@@ -2,30 +2,35 @@
 
 namespace NHDS\Watch\Fixture;
 
+use PHPUnit\DbUnit;
+use ReflectionClass;
+use NHDS\Watch\TestCase\ContainerBuilder;
 use NHDS\Toolkit\TimeInterface;
 use PHPUnit\DbUnit\DataSet\DefaultTable;
 use PHPUnit\DbUnit\DataSet\DefaultTableIterator;
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
-use PHPUnit\DbUnit;
 use NHDS\Toolkit\Data\Property\Crud;
-use NHDS\Toolkit\ContainerBuilder;
-use ReflectionClass;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Finder\Finder;
 use NHDS\Watch\TestCase\Service;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 abstract class AbstractTest extends DbUnit\TestCase
 {
+    use ContainerBuilder\AwareTrait;
     use Service\AwareTrait;
     use Crud\AwareTrait;
-    use ContainerBuilder\AwareTrait;
     const YAML_SIGIL_PREFIX_FIXTURE_EXPRESSION = '!fixture/expression:';
     const PROP_DATA_SET                        = 'data_set';
+    const PROP_EXPRESSION_VALUES               = 'expression_values';
 
     /**  @expectedException */
     public function setUp()
     {
-        $tearDown = $this->_getTestContainerBuilder()->get('tear_down');
+        $yamlServiceFilePath = dirname(dirname(__FILE__)) . '/config/root.yml';
+        $this->setServicesYamlFilePath($yamlServiceFilePath);
+        $testCaseService = $this->getContainerBuilder()->get('nhds.watch.testcase.service');
+        $this->setTestCaseService($testCaseService);
+        $tearDown = $this->_getTestContainerBuilder()->get('nhds.jobs.db.teardown');
         $tearDown->uninstall();
         $setup = $this->_getTestContainerBuilder()->get('nhds.jobs.db.setup');
         $setup->install();
@@ -46,9 +51,9 @@ abstract class AbstractTest extends DbUnit\TestCase
         $testClassFilePath = $reflectionClass->getFileName();
         $testClassDirectoryPath = dirname($testClassFilePath);
         $className = $reflectionClass->getShortName();
-        $fixturesDiurectoryPath = $testClassDirectoryPath . '/fixtures/' . $className;
+        $fixturesDirectoryPath = $testClassDirectoryPath . '/fixtures/' . $className;
         $finder = new Finder();
-        $finder->files()->in($fixturesDiurectoryPath);
+        $finder->files()->in($fixturesDirectoryPath);
         $finder->sortByName();
         foreach ($finder as $filePath => $file) {
             $this->_addFilePathToYamlDataSet($filePath);
@@ -73,6 +78,7 @@ abstract class AbstractTest extends DbUnit\TestCase
         /** @var DefaultTableIterator $tableIterator */
         $tableIterator = $this->_getYamlDataSet()->getIterator();
         $expressionLanguage = new ExpressionLanguage();
+        $expressionValues = &$this->_getTestCaseService()->getExpressionValues();
         /** @var  DefaultTable $table */
         foreach ($tableIterator as $table) {
             $rowCount = $table->getRowCount();
@@ -81,7 +87,7 @@ abstract class AbstractTest extends DbUnit\TestCase
                 foreach ($row as $columnName => $value) {
                     if (is_string($value) && (0 === strpos($value, self::YAML_SIGIL_PREFIX_FIXTURE_EXPRESSION))) {
                         $expression = str_replace(self::YAML_SIGIL_PREFIX_FIXTURE_EXPRESSION, '', $value);
-                        $expressedValue = $expressionLanguage->evaluate($expression, ['time' => $this->_getTime()]);
+                        $expressedValue = $expressionLanguage->evaluate($expression, $expressionValues);
                         $table->setValue($rowCount, $columnName, $expressedValue);
                     }
                 }

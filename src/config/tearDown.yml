@@ -1,5 +1,5 @@
 services:
-  tear_down:
+  nhds.jobs.db.teardown:
     class: NHDS\Jobs\Db\TearDown
     calls:
       - [addVersion, ["@nhds.jobs.jobs.db.teardown.schema.version.5_0_0"]]

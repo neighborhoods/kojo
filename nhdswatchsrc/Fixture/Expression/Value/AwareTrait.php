@@ -16,12 +16,12 @@ trait AwareTrait
         return $this;
     }
 
-    protected function _hasExpressionValues(): bool
+    public function hasExpressionValues(): bool
     {
         return empty($this->_expressionValues) ? false : true;
     }
 
-    protected function _getExpressionValues(): array
+    public function &getExpressionValues(): array
     {
         if (empty($this->_expressionValues)) {
             throw new \LogicException('Expression values is empty.');

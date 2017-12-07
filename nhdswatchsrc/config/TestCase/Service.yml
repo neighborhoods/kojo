@@ -2,4 +2,5 @@ services:
   nhds.watch.testcase.service:
     class: NHDS\Watch\TestCase\Service
     calls:
-      - [addExpressionValue, ['time', ]]
+      - [addExpressionValue, ['time', '@nhds.toolkit.time']]
+      - [addExpressionValue, ['numberPool', '@nhds.watch.fixture.expression.numberpool']]

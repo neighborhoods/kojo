@@ -3,5 +3,9 @@ services:
     autowire: false
     autoconfigure: false
     public: true
+  nhds.toolkit.time:
+    class: NHDS\Toolkit\Time
+  nhds.watch.fixture.expression.numberpool:
+    class: NHDS\Watch\Fixture\Expression\NumberPool
 imports:
-   - { resource: TestCase/Service.yml.yml }
+   - { resource: TestCase/Service.yml }
