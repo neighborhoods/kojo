@@ -3,31 +3,33 @@
 namespace NHDS\Jobs;
 
 use Cron\CronExpression;
-use Psr\Cache\CacheItemPoolInterface;
-use NHDS\Jobs\Db\Connection\ContainerInterface;
 use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Db;
 use NHDS\Toolkit\Time;
+use NHDS\Jobs\CacheItemPool;
+use NHDS\Jobs\Data\Job\Type\Collection;
 
 class Scheduler implements SchedulerInterface
 {
+    use Collection\Service\AwareTrait;
+    use CacheItemPool\AwareTrait;
     use Db\Connection\Container\AwareTrait;
     use Time\AwareTrait;
     use Crud\AwareTrait;
-    const DATE_TIME_FORMAT_CACHE_MINUTE     = 'Y_m_d_H_i';
-    const DATE_TIME_FORMAT_MYSQL_MINUTE     = 'Y-m-d H:i:0';
-    const CACHE_SCHEDULED_AHEAD_VALUE       = 'scheduled';
-    const CACHE_SCHEDULE_TAG_NAMESPACE      = 'nhds_jobs';
-    const CACHE_SCHEDULED_AHEAD_KEY_PREFIX  = 'schedule_';
-    const PROP_CACHE_ADAPTER                = 'cache_adapter';
-    const PROP_CACHE_ITEM_POOL              = 'cache_item_pool';
-    const PROP_JOB_TYPES                    = 'job_types';
-    const PROP_MINUTES_SCHEDULED_AHEAD_FOR  = 'minutes_scheduled_ahead_for';
-    const PROP_SCHEDULED_KEY_LIFETIME       = 'scheduled_key_lifetime';
-    const PROP_REFERENCE_DATE_TIME          = 'reference_date_time';
-    const PROP_REFERENCE_DISTANCE_DATE_TIME = 'reference_distance_date_time';
+    const DATE_TIME_FORMAT_CACHE_MINUTE        = 'Y_m_d_H_i';
+    const DATE_TIME_FORMAT_MYSQL_MINUTE        = 'Y-m-d H:i:0';
+    const CACHE_SCHEDULED_AHEAD_VALUE          = 'scheduled';
+    const CACHE_SCHEDULE_TAG_NAMESPACE         = 'nhds_jobs';
+    const CACHE_SCHEDULED_AHEAD_KEY_PREFIX     = 'schedule_';
+    const PROP_CACHE_ADAPTER                   = 'cache_adapter';
+    const PROP_JOB_TYPES                       = 'job_types';
+    const PROP_MINUTES_SCHEDULED_AHEAD_FOR     = 'minutes_scheduled_ahead_for';
+    const PROP_SCHEDULED_KEY_LIFETIME          = 'scheduled_key_lifetime';
+    const PROP_REFERENCE_DATE_TIME_CLONE       = 'reference_date_time_clone';
+    const PROP_REFERENCE_DISTANCE_DATE_TIME    = 'reference_distance_date_time';
+    const PROP_NEXT_REFERENCE_MINUTE_DATE_TIME = 'next_reference_minute_date_time';
     protected $_scheduledKeyLifetime;
-    protected $_unscheduledMinutes = [];
+    protected $_scheduleMinutesNotInCache = [];
     protected $_existingJobs;
 
     public function schedule(): SchedulerInterface
@@ -39,55 +41,51 @@ class Scheduler implements SchedulerInterface
         return $this;
     }
 
-    protected function _getJobTypes(): array
-    {
-        if (!$this->_exists(self::PROP_JOB_TYPES)) {
-            $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB);
-        }
-
-        return $this->_read(self::PROP_JOB_TYPES);
-    }
-
     protected function _getUnscheduledMinutes()
     {
-        if (empty($this->_unscheduledMinutes)) {
+        if (empty($this->_scheduleMinutesNotInCache)) {
             $nexReferenceMinuteDateTime = $this->_getNextReferenceMinuteDateTime();
             while ($this->_getReferenceDistanceDateTime() >= $nexReferenceMinuteDateTime) {
-                if ($this->_isMinuteScheduled($nexReferenceMinuteDateTime)) {
+                if ($this->_isMinuteScheduledInCache($nexReferenceMinuteDateTime)) {
                     continue;
                 }else {
-                    $this->_unscheduledMinutes[$minute] = $time;
+                    $scheduleMinute = $nexReferenceMinuteDateTime->format(self::DATE_TIME_FORMAT_MYSQL_MINUTE);
+                    $this->_scheduleMinutesNotInCache[] = $scheduleMinute;
                 }
+                $nexReferenceMinuteDateTime = $this->_getNextReferenceMinuteDateTime();
             }
         }
 
-        return $this->_unscheduledMinutes;
+        return $this->_scheduleMinutesNotInCache;
     }
 
-    protected function _isMinuteScheduled(\DateTime $referenceMinuteDateTime): bool
+    protected function _isMinuteScheduledInCache(\DateTime $referenceMinuteDateTime): bool
     {
-        $isMinnuteScheduled = false;
+        $isMinuteScheduled = false;
         $referenceMinuteDateTimeString = $referenceMinuteDateTime->format(self::DATE_TIME_FORMAT_CACHE_MINUTE);
         $cacheItemPool = $this->_getCacheItemPool();
         $hasItem = $cacheItemPool->hasItem(self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $referenceMinuteDateTimeString);
-        if (!$hasItem) {
-//            if (){}
+        if ($hasItem) {
+            $isMinuteScheduled = true;
         }
 
         return $isMinuteScheduled;
     }
 
-    protected function _scheduleJobs()
+    protected function _scheduleJobs(): SchedulerInterface
     {
-        foreach ($this->_getJobTypes() as $jobType) {
+        $jobTypeCollectionService = $this->_getJobTypeCollectionService();
+        foreach ($jobTypeCollectionService->getAllJobTypes()->getIterator() as $jobType) {
             $cron = CronExpression::factory('3-59/15 2,6-12 */15 1 2-5');
             $ime3 = $cron->getNextRunDate()->format('Y-m-d H:i:s');
-
-            foreach ($this->_unscheduledMinutes as $unscheduledMinute => $time) {
+            $existingJobs = $this->_getExistingJobs();
+            foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $time) {
                 if (isset($this->_existingJobs[$jobType['code']][$unscheduledMinute])) {
                     // already scheduled
                     continue;
                 }
+                $cron = CronExpression::factory('3-59/15 2,6-12 */15 1 2-5');
+                $ime3 = $cron->getNextRunDate()->format('Y-m-d H:i:s');
                 if (!$this->_getScheduleClone()->trySchedule($time)) {
                     // time does not match cron expression
                     continue;
@@ -96,7 +94,7 @@ class Scheduler implements SchedulerInterface
             }
         }
 
-        foreach ($this->_unscheduledMinutes as $unscheduledMinute => $time) {
+        foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $time) {
             $this->_cacheScheduledMinutes($unscheduledMinute);
         }
 
@@ -126,18 +124,6 @@ class Scheduler implements SchedulerInterface
         return $this;
     }
 
-    public function setCacheItemPool(CacheItemPoolInterface $cacheItemPool): SchedulerInterface
-    {
-        $this->_create(self::PROP_CACHE_ITEM_POOL, $cacheItemPool);
-
-        return $this;
-    }
-
-    protected function _getCacheItemPool(): CacheItemPoolInterface
-    {
-        return $this->_read(self::PROP_CACHE_ITEM_POOL);
-    }
-
     protected function _getExistingJobs(): SchedulerInterface
     {
         $minutesToScheduleAheadFor = $this->_getMinutesToScheduleAheadFor();
@@ -153,7 +139,7 @@ class Scheduler implements SchedulerInterface
         if (!$this->_exists(self::PROP_REFERENCE_DISTANCE_DATE_TIME)) {
             $minutesToScheduleAheadFor = $this->_getMinutesToScheduleAheadFor();
             $minutesToScheduleAheadForDateTimeInterval = new \DateInterval('PT' . $minutesToScheduleAheadFor . 'M');
-            $referenceDateTime = $this->_getReferenceDateTime();
+            $referenceDateTime = $this->_getReferenceDateTimeClone();
             $referenceDistanceDateTime = $referenceDateTime->add($minutesToScheduleAheadForDateTimeInterval);
 
             $this->_create(self::PROP_REFERENCE_DISTANCE_DATE_TIME, $referenceDistanceDateTime);
@@ -162,18 +148,29 @@ class Scheduler implements SchedulerInterface
         return $this->_read(self::PROP_REFERENCE_DISTANCE_DATE_TIME);
     }
 
-    protected function _getReferenceDateTime(): \DateTime
+    protected function _getReferenceDateTimeClone(): \DateTime
     {
-        if (!$this->_exists(self::PROP_REFERENCE_DATE_TIME)) {
-            $this->_create(self::PROP_REFERENCE_DATE_TIME, $this->_getTime()->getNow());
+        if (!$this->_exists(self::PROP_REFERENCE_DATE_TIME_CLONE)) {
+            $this->_create(self::PROP_REFERENCE_DATE_TIME_CLONE, $this->_getTime()->getNow());
         }
 
-        return $this->_read(self::PROP_REFERENCE_DATE_TIME);
+        return $this->_read(self::PROP_REFERENCE_DATE_TIME_CLONE);
     }
 
     protected function _getNextReferenceMinuteDateTime(): \DateTime
     {
+        if (!$this->_exists(self::PROP_NEXT_REFERENCE_MINUTE_DATE_TIME)) {
+            $referenceDateTime = $this->_getReferenceDateTimeClone();
+            $referenceDateTimeMinuteString = $referenceDateTime->format(self::DATE_TIME_FORMAT_MYSQL_MINUTE);
+            $nextReferenceMinuteDateTime = new \DateTime($referenceDateTimeMinuteString);
+            $this->_create(self::PROP_NEXT_REFERENCE_MINUTE_DATE_TIME, $nextReferenceMinuteDateTime);
+        }else {
+            /** @var \DateTime $nextReferenceMinuteDateTime */
+            $nextReferenceMinuteDateTime = $this->_read(self::PROP_NEXT_REFERENCE_MINUTE_DATE_TIME);
+            $nextReferenceMinuteDateTime->add(new \DateInterval('PT1M'));
+        }
 
+        return $this->_read(self::PROP_NEXT_REFERENCE_MINUTE_DATE_TIME);
     }
 
     protected function _getMinutesToScheduleAheadFor(): int

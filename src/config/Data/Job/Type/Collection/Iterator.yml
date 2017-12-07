@@ -1,0 +1,4 @@
+services:
+  nhds.jobs.data.job.type.collection.iterator:
+    class: NHDS\Jobs\Data\Job\Type\Collection\Iterator
+    shared: false

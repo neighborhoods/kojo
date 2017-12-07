@@ -1,0 +1,6 @@
+services:
+  nhds.jobs.data.job.type.collection.service:
+    class: NHDS\Jobs\Data\Job\Type\Collection\Service
+    shared: false
+    calls:
+      - [setCollection, ['@nhds.jobs.data.job.type.collection']]

@@ -14,14 +14,14 @@ abstract class AbstractCollection implements CollectionInterface
     use Model\AwareTrait;
     use Db\Connection\Container\AwareTrait;
     const PROP_SELECT  = 'select';
-    const PROP_MODELS  = 'objects';
+    const PROP_MODELS  = 'models';
     const PROP_RECORDS = 'records';
 
     public function getSelect(): Select
     {
         if (!$this->_exists(self::PROP_SELECT)) {
-            $select = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB);
-            $select->select($this->_getModel()->getTableName());
+            $dbConnectionContainer = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB);
+            $select = $dbConnectionContainer->select($this->_getModel()->getTableName());
             $this->_create(self::PROP_SELECT, $select);
         }
 
@@ -48,11 +48,14 @@ abstract class AbstractCollection implements CollectionInterface
         if (!$this->_exists(self::PROP_RECORDS)) {
             $select = $this->getSelect();
             $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($select);
-            $records = $statement->execute()->current();
+            /** @var \PDOStatement $pdoStatement */
+            $pdoStatement = $statement->execute()->getResource();
+            $pdoStatement->setFetchMode(\PDO::FETCH_ASSOC);
+            $records = $pdoStatement->fetchAll();
             if ($records === false) {
                 $this->_create(self::PROP_RECORDS, []);
             }else {
-                $this->_create(self::PROP_RECORDS, $statement->execute()->current());
+                $this->_create(self::PROP_RECORDS, $records);
             }
         }
 

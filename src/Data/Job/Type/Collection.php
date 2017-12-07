@@ -1,13 +1,15 @@
 <?php
 
-namespace NHDS\Jobs\Data\Job\Collection\Iterator;
+namespace NHDS\Jobs\Data\Job\Type;
 
-use NHDS\Jobs\Data\Job\Collection\IteratorInterface;
+use NHDS\Jobs\Data\Job\Type\Collection\IteratorInterface;
+use NHDS\Jobs\Db\Model\AbstractCollection;
 
-trait AwareTrait
+class Collection extends AbstractCollection
 {
     public function setIterator(IteratorInterface $iterator)
     {
+        $iterator->setCollection($this);
         $this->_create(IteratorInterface::class, $iterator);
 
         return $this;

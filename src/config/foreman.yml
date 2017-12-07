@@ -46,11 +46,6 @@ services:
   nhds.jobs.maintainer:
     class: NHDS\Jobs\Maintainer
     shared: false
-  nhds.jobs.scheduler:
-    class: NHDS\Jobs\Scheduler
-    shared: false
-    calls:
-      - [setTime, ['@nhds.toolkit.time']]
   nhds.jobs.data.job:
     class: NHDS\Jobs\Data\Job
     shared: false

@@ -3,7 +3,7 @@ nhds_job_type:
     nhds_job_type_id: 1
     type_code: "type_code_1"
     name: "Name 1"
-    worker_uri: "''"
+    worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
     default_importance: 10

@@ -1,8 +1,8 @@
 <?php
 
-namespace NHDS\Jobs\Data\Job\Collection;
+namespace NHDS\Jobs\Data\Job\Type\Collection;
 
-use NHDS\Jobs\Data\JobInterface;
+use NHDS\Jobs\Data\Job\TypeInterface;
 use NHDS\Jobs\Db\Model\CollectionInterface;
 
 interface IteratorInterface extends \Iterator
@@ -11,11 +11,11 @@ interface IteratorInterface extends \Iterator
 
     function rewind();
 
-    function current(): JobInterface;
+    function current(): TypeInterface;
 
     function key(): int;
 
-    function next(): JobInterface;
+    function next(): TypeInterface;
 
     function valid(): bool;
 }

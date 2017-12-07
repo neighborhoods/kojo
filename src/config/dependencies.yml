@@ -40,3 +40,10 @@ services:
       - [setFileMode, ['c']]
       - [setDirectoryMode, ['0777']]
     shared: false
+  symfony.component.cache.adpater.redisadapter:
+    class: Symfony\Component\Cache\Adapter\RedisAdapter
+    arguments: ['@redis']
+  redis:
+    class: \Redis
+    calls:
+      - [connect, ['redis', '6379']]

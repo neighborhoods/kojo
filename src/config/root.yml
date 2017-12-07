@@ -10,4 +10,8 @@ imports:
    - { resource: process.yml }
    - { resource: tearDown.yml }
    - { resource: setup.yml }
-   - { resource: tearDown.yml }
+   - { resource: Scheduler.yml }
+   - { resource: Data/Job/Type/Collection.yml }
+   - { resource: Data/Job/Type/Collection/Iterator.yml}
+   - { resource: Data/Job/Type/Collection/Service.yml }
+   - { resource: Data/Job/Type.yml }
