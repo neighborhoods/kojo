@@ -3,8 +3,8 @@
 namespace NHDS\Jobs\Process\Pool;
 
 use Psr\Log;
-use NHDS\Jobs\Time;
-use NHDS\Jobs\Data\Property\Crud;
+use NHDS\Toolkit\Time;
+use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Process\Pool;
 
 abstract class AbstractLogger extends Log\AbstractLogger implements LoggerInterface

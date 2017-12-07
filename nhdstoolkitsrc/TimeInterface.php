@@ -1,6 +1,6 @@
 <?php
 
-namespace NHDS\Jobs;
+namespace NHDS\Toolkit;
 
 interface TimeInterface
 {

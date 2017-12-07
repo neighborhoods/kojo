@@ -5,7 +5,7 @@ namespace NHDS\Jobs;
 use NHDS\Jobs\Process\Pool;
 use NHDS\Jobs\Message\Broker;
 use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Jobs\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Crud;
 
 abstract class AbstractProcess implements ProcessInterface
 {

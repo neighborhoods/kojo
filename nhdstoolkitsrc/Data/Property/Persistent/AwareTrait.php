@@ -1,6 +1,6 @@
 <?php
 
-namespace NHDS\Jobs\Data\Property\Persistent;
+namespace NHDS\Toolkit\Data\Property\Persistent;
 
 trait AwareTrait
 {

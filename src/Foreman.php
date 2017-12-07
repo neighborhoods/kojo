@@ -2,7 +2,7 @@
 
 namespace NHDS\Jobs;
 
-use NHDS\Jobs\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Db;
 use NHDS\Jobs\Message;
 use NHDS\Jobs\Data\Job;
@@ -32,9 +32,11 @@ class Foreman implements ForemanInterface
         return $this;
     }
 
-    protected function _workWorker()
+    protected function _workWorker(): ForemanInterface
     {
         $job = $this->_getSelector()->getNextJobToWork();
+
+        return $this;
     }
 
     protected function _schedule(): ForemanInterface

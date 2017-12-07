@@ -3,7 +3,7 @@
 namespace NHDS\Jobs\Test\Unit;
 
 use NHDS\Jobs\ForemanInterface;
-use NHDS\Jobs\Test\Unit\Fixture\AbstractTest;
+use NHDS\Watch\Fixture\AbstractTest;
 
 class ForemanInterfaceTest extends AbstractTest
 {
@@ -18,6 +18,6 @@ class ForemanInterfaceTest extends AbstractTest
 
     protected function _getForeman(): ForemanInterface
     {
-        return $this->_getTestContainerBuilder()->get('foreman');
+        return $this->_getTestContainerBuilder()->get('nhds.jobs.foreman');
     }
 }

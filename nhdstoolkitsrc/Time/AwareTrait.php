@@ -1,8 +1,8 @@
 <?php
 
-namespace NHDS\Jobs\Time;
+namespace NHDS\Toolkit\Time;
 
-use NHDS\Jobs\TimeInterface;
+use NHDS\Toolkit\TimeInterface;
 
 trait AwareTrait
 {

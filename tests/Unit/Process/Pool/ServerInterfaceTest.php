@@ -2,14 +2,14 @@
 
 namespace NHDS\Jobs\Test\Unit\Process\Pool;
 
-use NHDS\Jobs\Test\Unit\AbstractTest;
+use NHDS\Watch\Fixture\AbstractTest;
 
 class ServerInterfaceTest extends AbstractTest
 {
     /** @test */
     public function start()
     {
-        $server = $this->_getTestContainerBuilder()->get('server');
+        $server = $this->_getTestContainerBuilder()->get('nhds.jobs.process.pool.server');
 
 //        $server->start();
     }

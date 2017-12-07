@@ -1,6 +1,6 @@
 <?php
 
-namespace NHDS\Jobs\Data\Property\Crud;
+namespace NHDS\Toolkit\Data\Property\Crud;
 
 trait AwareTrait
 {

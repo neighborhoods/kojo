@@ -1,6 +1,6 @@
 <?php
 
-namespace NHDS\Jobs\Container\Builder;
+namespace NHDS\Toolkit\Container;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

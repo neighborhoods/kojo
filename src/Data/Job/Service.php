@@ -3,7 +3,7 @@
 namespace NHDS\Jobs\Data\Job;
 
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Time;
+use NHDS\Toolkit\Time;
 
 class Service implements ServiceInterface
 {

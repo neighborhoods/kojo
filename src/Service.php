@@ -2,7 +2,7 @@
 
 namespace NHDS\Jobs;
 
-use NHDS\Jobs\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Data\JobInterface;
 
 class Service implements ServiceInterface

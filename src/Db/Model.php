@@ -2,7 +2,7 @@
 
 namespace NHDS\Jobs\Db;
 
-use NHDS\Jobs\Data\Property;
+use NHDS\Toolkit\Data\Property;
 use NHDS\Jobs\Db;
 use NHDS\Jobs\Db\Connection\ContainerInterface;
 use Zend\Db\Sql\Select;

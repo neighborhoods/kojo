@@ -2,13 +2,11 @@
 
 namespace NHDS\Jobs\Test\Unit\Process\Pool;
 
-use PHPUnit\Framework\TestCase;
 use NHDS\Jobs\Process\PoolInterface;
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Jobs\Test\Unit\AbstractTest;
+use NHDS\Watch\Fixture\AbstractTest;
 
 /** @covers PoolInterface */
-class PoolTest extends TestCase
+class PoolTest extends AbstractTest
 {
     /** @test */
     public function testIsEmpty(): bool

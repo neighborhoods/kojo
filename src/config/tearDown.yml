@@ -2,33 +2,33 @@ services:
   tear_down:
     class: NHDS\Jobs\Db\TearDown
     calls:
-      - [addVersion, ["@tear_down_schema_version_5_0_0"]]
-      - [addVersion, ["@tear_down_schema_version_4_0_0"]]
-      - [addVersion, ["@tear_down_schema_version_3_0_0"]]
-      - [addVersion, ["@tear_down_schema_version_2_0_0"]]
-      - [addVersion, ["@tear_down_schema_version_1_0_0"]]
-      - [addVersion, ["@tear_down_schema_version_0_0_0"]]
-  tear_down_schema_version_0_0_0:
+      - [addVersion, ["@nhds.jobs.jobs.db.teardown.schema.version.5_0_0"]]
+      - [addVersion, ["@nhds.jobs.jobs.db.teardown.schema.version.4_0_0"]]
+      - [addVersion, ["@nhds.jobs.jobs.db.teardown.schema.version.3_0_0"]]
+      - [addVersion, ["@nhds.jobs.jobs.db.teardown.schema.version.2_0_0"]]
+      - [addVersion, ["@nhds.jobs.jobs.db.teardown.schema.version.1_0_0"]]
+      - [addVersion, ["@nhds.jobs.jobs.db.teardown.schema.version.0_0_0"]]
+  nhds.jobs.jobs.db.teardown.schema.version.0_0_0:
     class: NHDS\Jobs\Db\TearDown\Schema\Version_0_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
-  tear_down_schema_version_1_0_0:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  nhds.jobs.jobs.db.teardown.schema.version.1_0_0:
     class: NHDS\Jobs\Db\TearDown\Schema\Version_1_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
-  tear_down_schema_version_2_0_0:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  nhds.jobs.jobs.db.teardown.schema.version.2_0_0:
     class: NHDS\Jobs\Db\TearDown\Schema\Version_2_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
-  tear_down_schema_version_3_0_0:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  nhds.jobs.jobs.db.teardown.schema.version.3_0_0:
     class: NHDS\Jobs\Db\TearDown\Schema\Version_3_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
-  tear_down_schema_version_4_0_0:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  nhds.jobs.jobs.db.teardown.schema.version.4_0_0:
     class: NHDS\Jobs\Db\TearDown\Schema\Version_4_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
-  tear_down_schema_version_5_0_0:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  nhds.jobs.jobs.db.teardown.schema.version.5_0_0:
     class: NHDS\Jobs\Db\TearDown\Schema\Version_5_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]

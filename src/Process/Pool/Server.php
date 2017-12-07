@@ -3,8 +3,8 @@
 namespace NHDS\Jobs\Process\Pool;
 
 use NHDS\Jobs\Process\Pool;
-use NHDS\Jobs\Time;
-use NHDS\Jobs\Data\Property\Crud;
+use NHDS\Toolkit\Time;
+use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Semaphore;
 
 class Server implements ServerInterface

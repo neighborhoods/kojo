@@ -4,7 +4,7 @@ namespace NHDS\Jobs\Process;
 
 use NHDS\Jobs\Process\Pool\Logger;
 use NHDS\Jobs\Process\Pool\Strategy;
-use NHDS\Jobs\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\ProcessInterface;
 
 class Pool implements PoolInterface

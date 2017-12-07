@@ -3,7 +3,7 @@
 namespace NHDS\Jobs\Message\Broker;
 
 use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Jobs\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Crud;
 
 abstract class AbstractBroker implements BrokerInterface
 {

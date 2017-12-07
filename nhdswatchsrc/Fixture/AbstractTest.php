@@ -1,20 +1,22 @@
 <?php
 
-namespace NHDS\Jobs\Test\Unit\Fixture;
+namespace NHDS\Watch\Fixture;
 
-use NHDS\Jobs\TimeInterface;
+use NHDS\Toolkit\TimeInterface;
 use PHPUnit\DbUnit\DataSet\DefaultTable;
 use PHPUnit\DbUnit\DataSet\DefaultTableIterator;
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
 use PHPUnit\DbUnit;
-use NHDS\Jobs\Data\Property\Crud;
-use \NHDS\Jobs\Test\Unit\ContainerBuilder;
+use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\ContainerBuilder;
 use ReflectionClass;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Finder\Finder;
+use NHDS\Watch\TestCase\Service;
 
-class AbstractTest extends DbUnit\TestCase
+abstract class AbstractTest extends DbUnit\TestCase
 {
+    use Service\AwareTrait;
     use Crud\AwareTrait;
     use ContainerBuilder\AwareTrait;
     const YAML_SIGIL_PREFIX_FIXTURE_EXPRESSION = '!fixture/expression:';
@@ -25,7 +27,7 @@ class AbstractTest extends DbUnit\TestCase
     {
         $tearDown = $this->_getTestContainerBuilder()->get('tear_down');
         $tearDown->uninstall();
-        $setup = $this->_getTestContainerBuilder()->get('setup');
+        $setup = $this->_getTestContainerBuilder()->get('nhds.jobs.db.setup');
         $setup->install();
 
         parent::setUp();
@@ -70,7 +72,7 @@ class AbstractTest extends DbUnit\TestCase
     {
         /** @var DefaultTableIterator $tableIterator */
         $tableIterator = $this->_getYamlDataSet()->getIterator();
-        $language = new ExpressionLanguage();
+        $expressionLanguage = new ExpressionLanguage();
         /** @var  DefaultTable $table */
         foreach ($tableIterator as $table) {
             $rowCount = $table->getRowCount();
@@ -79,7 +81,7 @@ class AbstractTest extends DbUnit\TestCase
                 foreach ($row as $columnName => $value) {
                     if (is_string($value) && (0 === strpos($value, self::YAML_SIGIL_PREFIX_FIXTURE_EXPRESSION))) {
                         $expression = str_replace(self::YAML_SIGIL_PREFIX_FIXTURE_EXPRESSION, '', $value);
-                        $expressedValue = $language->evaluate($expression, ['time' => $this->_getTime()]);
+                        $expressedValue = $expressionLanguage->evaluate($expression, ['time' => $this->_getTime()]);
                         $table->setValue($rowCount, $columnName, $expressedValue);
                     }
                 }
@@ -96,6 +98,6 @@ class AbstractTest extends DbUnit\TestCase
 
     protected function _getTime(): TimeInterface
     {
-        return $this->_getTestContainerBuilder()->get('time');
+        return $this->_getTestContainerBuilder()->get('nhds.toolkit.time');
     }
 }

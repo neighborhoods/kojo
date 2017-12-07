@@ -3,7 +3,7 @@
 namespace NHDS\Jobs\Data;
 
 use NHDS\Jobs\Db\Model;
-use NHDS\Jobs\TimeInterface;
+use NHDS\Toolkit\TimeInterface;
 
 class Job extends Model implements JobInterface
 {

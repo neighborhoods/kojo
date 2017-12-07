@@ -4,7 +4,7 @@ namespace NHDS\Jobs\Data\Job;
 
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Semaphore\ResourceInterface;
 use NHDS\Jobs\Data\Job\State\ServiceInterface;
 use Zend\Db\Sql\Select;

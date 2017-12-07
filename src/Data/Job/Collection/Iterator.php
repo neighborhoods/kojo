@@ -3,7 +3,7 @@
 namespace NHDS\Jobs\Data\Job\Collection;
 
 use NHDS\Jobs\Data\JobInterface;
-use NHDS\Jobs\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Db\Model\Collection;
 
 class Iterator implements IteratorInterface

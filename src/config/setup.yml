@@ -1,34 +1,34 @@
 services:
-  setup:
+  nhds.jobs.db.setup:
     class: NHDS\Jobs\Db\Setup
     calls:
-      - [addVersion, ["@setup_schema_version_0_0_0"]]
-      - [addVersion, ["@setup_schema_version_1_0_0"]]
-      - [addVersion, ["@setup_schema_version_2_0_0"]]
-      - [addVersion, ["@setup_schema_version_3_0_0"]]
-      - [addVersion, ["@setup_schema_version_4_0_0"]]
-      - [addVersion, ["@setup_schema_version_5_0_0"]]
-  setup_schema_version_0_0_0:
+      - [addVersion, ["@nhds.jobs.jobs.db.setup.schema.version.0_0_0"]]
+      - [addVersion, ["@nhds.jobs.jobs.db.setup.schema.version.1_0_0"]]
+      - [addVersion, ["@nhds.jobs.jobs.db.setup.schema.version.2_0_0"]]
+      - [addVersion, ["@nhds.jobs.jobs.db.setup.schema.version.3_0_0"]]
+      - [addVersion, ["@nhds.jobs.jobs.db.setup.schema.version.4_0_0"]]
+      - [addVersion, ["@nhds.jobs.jobs.db.setup.schema.version.5_0_0"]]
+  nhds.jobs.jobs.db.setup.schema.version.0_0_0:
     class: NHDS\Jobs\Db\Setup\Schema\Version_0_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
-  setup_schema_version_1_0_0:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  nhds.jobs.jobs.db.setup.schema.version.1_0_0:
     class: NHDS\Jobs\Db\Setup\Schema\Version_1_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
-  setup_schema_version_2_0_0:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  nhds.jobs.jobs.db.setup.schema.version.2_0_0:
     class: NHDS\Jobs\Db\Setup\Schema\Version_2_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
-  setup_schema_version_3_0_0:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  nhds.jobs.jobs.db.setup.schema.version.3_0_0:
     class: NHDS\Jobs\Db\Setup\Schema\Version_3_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
-  setup_schema_version_4_0_0:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  nhds.jobs.jobs.db.setup.schema.version.4_0_0:
     class: NHDS\Jobs\Db\Setup\Schema\Version_4_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
-  setup_schema_version_5_0_0:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  nhds.jobs.jobs.db.setup.schema.version.5_0_0:
     class: NHDS\Jobs\Db\Setup\Schema\Version_5_0_0
     calls:
-      - [addDbConnectionContainer, ["@db_connection_container_schema"]]
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]

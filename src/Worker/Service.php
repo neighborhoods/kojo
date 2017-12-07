@@ -3,10 +3,9 @@
 namespace NHDS\Jobs\Worker;
 
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Data\Property\Crud;
-use NHDS\Jobs\Data\Job\State;
-use NHDS\Jobs\Time;
-use NHDS\Jobs\TimeInterface;
+use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Time;
+use NHDS\Toolkit\TimeInterface;
 use NHDS\Jobs\Db;
 
 class Service implements ServiceInterface
@@ -33,12 +32,12 @@ class Service implements ServiceInterface
 
     public function didWorkerCrash(): bool
     {
-        return ($this->_getJob()->getAssignedState() == State\ServiceInterface::STATE_CRASHED);
+        return ($this->_getJob()->getAssignedState() == Job\ServiceInterface::STATE_CRASHED);
     }
 
     public function isRetry(): bool
     {
-        return ($this->_getJob()->getAssignedState() == State\ServiceInterface::STATE_WAIT_RETRY);
+        return ($this->_getJob()->getAssignedState() == Job\ServiceInterface::STATE_WAIT_RETRY);
     }
 
     public function getTimesRetried(): int
@@ -50,40 +49,40 @@ class Service implements ServiceInterface
     {
         $utc = $this->_getTime()->getDateTimeZone();
         $this->_workAtDatetimeUpdate = $dateTime->setTimezone($utc)->format(TimeInterface::MYSQL_DATETIME_FORMAT);
-        $this->_nextStateRequestUpdate = State\ServiceInterface::STATE_WAIT_RETRY;
-        $this->_assignedStateUpdate = State\ServiceInterface::STATE_WAIT;
+        $this->_nextStateRequestUpdate = Job\ServiceInterface::STATE_WAIT_RETRY;
+        $this->_assignedStateUpdate = Job\ServiceInterface::STATE_WAIT;
 
         return $this;
     }
 
     public function holdJob(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = State\ServiceInterface::STATE_EMPTY;
-        $this->_assignedStateUpdate = State\ServiceInterface::STATE_HOLD;
+        $this->_nextStateRequestUpdate = Job\ServiceInterface::STATE_EMPTY;
+        $this->_assignedStateUpdate = Job\ServiceInterface::STATE_HOLD;
 
         return $this;
     }
 
     public function quitJob(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = State\ServiceInterface::STATE_EMPTY;
-        $this->_assignedStateUpdate = State\ServiceInterface::STATE_COMPLETE_QUIT;
+        $this->_nextStateRequestUpdate = Job\ServiceInterface::STATE_EMPTY;
+        $this->_assignedStateUpdate = Job\ServiceInterface::STATE_COMPLETE_QUIT;
 
         return $this;
     }
 
     public function jobSucceeded(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = State\ServiceInterface::STATE_EMPTY;
-        $this->_assignedStateUpdate = State\ServiceInterface::STATE_COMPLETE_SUCCESS;
+        $this->_nextStateRequestUpdate = Job\ServiceInterface::STATE_EMPTY;
+        $this->_assignedStateUpdate = Job\ServiceInterface::STATE_COMPLETE_SUCCESS;
 
         return $this;
     }
 
     public function jobFailed(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = State\ServiceInterface::STATE_EMPTY;
-        $this->_assignedStateUpdate = State\ServiceInterface::STATE_COMPLETE_FAILED;
+        $this->_nextStateRequestUpdate = Job\ServiceInterface::STATE_EMPTY;
+        $this->_assignedStateUpdate = Job\ServiceInterface::STATE_COMPLETE_FAILED;
 
         return $this;
     }

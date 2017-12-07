@@ -1,66 +1,66 @@
 services:
-  foreman:
+  nhds.jobs.foreman:
     class: NHDS\Jobs\Foreman
     calls:
-      - [addDbConnectionContainer, ['@db_connection_container_job']]
-      - [setJob, ['@job']]
-      - [setSemaphore, ['@semaphore']]
-      - [addSemaphoreResource, ['maintain', '@maintain_semaphore_resource']]
-      - [addSemaphoreResource, ['schedule', '@schedule_semaphore_resource']]
-      - [setSelector, ['@selector']]
-      - [setMaintainer, ['@maintainer']]
-      - [setScheduler, ['@scheduler']]
+      - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-job']]
+      - [setJob, ['@nhds.jobs.data.job']]
+      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [addSemaphoreResource, ['maintain', '@nhds.jobs.semaphore.resource-maintain']]
+      - [addSemaphoreResource, ['schedule', '@nhds.jobs.semaphore.resource-schedule']]
+      - [setSelector, ['@nhds.jobs.data.job.selector']]
+      - [setMaintainer, ['@nhds.jobs.maintainer']]
+      - [setScheduler, ['@nhds.jobs.scheduler']]
     shared: false
-  maintain_semaphore_resource:
+  nhds.jobs.semaphore.resource-maintain:
     class: NHDS\Jobs\Semaphore\Resource
     calls:
       - [setResourceName, ['maintain.lock']]
       - [setResourcePath, ['/tmp/nhds/jobs']]
       - [setIsBlocking, [false]]
-      - [setMutex, ['@flock_mutex']]
+      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
     shared: false
-  schedule_semaphore_resource:
+  nhds.jobs.semaphore.resource-schedule:
     class: NHDS\Jobs\Semaphore\Resource
     calls:
       - [setResourceName, ['schedule.lock']]
       - [setResourcePath, ['/tmp/nhds/jobs']]
       - [setIsBlocking, [false]]
-      - [setMutex, ['@flock_mutex']]
+      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
     shared: false
-  job_semaphore_resource:
+  nhds.jobs.semaphore.resource-job:
     class: NHDS\Jobs\Semaphore\Resource
     calls:
       - [setResourceName, ['server.lock']]
       - [setResourcePath, ['/tmp/nhds/jobs']]
       - [setIsBlocking, [false]]
-      - [setMutex, ['@flock_mutex']]
+      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
     shared: false
-  selector:
+  nhds.jobs.data.job.selector:
     class: NHDS\Jobs\Data\Job\Selector
     calls:
       - [setPageSize, [50]]
       - [setOffset, [50]]
-      - [addSemaphoreResource, ['job', '@job_semaphore_resource']]
-      - [setCollection, ['@job_collection']]
+      - [addSemaphoreResource, ['job', '@nhds.jobs.semaphore.resource-job']]
+      - [setCollection, ['@nhds.jobs.data.job.collection']]
     shared: false
-  maintainer:
+  nhds.jobs.maintainer:
     class: NHDS\Jobs\Maintainer
     shared: false
-  scheduler:
+  nhds.jobs.scheduler:
     class: NHDS\Jobs\Scheduler
     shared: false
     calls:
-      - [setTime, ['@time']]
-  job:
+      - [setTime, ['@nhds.toolkit.time']]
+  nhds.jobs.data.job:
     class: NHDS\Jobs\Data\Job
     shared: false
-  job_collection:
+  nhds.jobs.data.job.collection:
     class: NHDS\Jobs\Data\Job\Collection
     calls:
-      - [setIterator, ['@job_collection_iterator']]
-      - [addDbConnectionContainer, ['@db_connection_container_job']]
-      - [setModel, ['@job']]
+      - [setIterator, ['@nhds.jobs.data.job.collection.iterator']]
+      - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-job']]
+      - [setModel, ['@nhds.jobs.data.job']]
     shared: false
-  job_collection_iterator:
+  nhds.jobs.data.job.collection.iterator:
     class: NHDS\Jobs\Data\Job\Collection\Iterator
     shared: false
