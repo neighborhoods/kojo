@@ -5,4 +5,5 @@ services:
     calls:
       - [setTime, ['@nhds.toolkit.time']]
       - [setCacheItemPool, ['@symfony.component.cache.adpater.redisadapter']]
-      - [setJobTypeCollectionService, ['@nhds.jobs.data.job.type.collection.service']]
+      - [setSchedulerJobCollection, ['@nhds.jobs.data.job.collection.scheduler']]
+      - [setSchedulerJobTypeCollection, ['@nhds.jobs.data.job.type.collection.scheduler']]

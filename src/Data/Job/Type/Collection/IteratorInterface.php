@@ -15,7 +15,7 @@ interface IteratorInterface extends \Iterator
 
     function key(): int;
 
-    function next(): TypeInterface;
+    function next();
 
     function valid(): bool;
 }

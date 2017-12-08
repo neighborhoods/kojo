@@ -11,8 +11,8 @@ use NHDS\Jobs\Data\Job;
 
 class Scheduler implements SchedulerInterface
 {
-    use Job\Collection\Service\AwareTrait;
-    use Job\Type\Collection\Service\AwareTrait;
+    use Job\Collection\Scheduler\AwareTrait;
+    use Job\Type\Collection\Scheduler\AwareTrait;
     use CacheItemPool\AwareTrait;
     use Db\Connection\Container\AwareTrait;
     use Time\AwareTrait;
@@ -36,14 +36,14 @@ class Scheduler implements SchedulerInterface
 
     public function schedule(): SchedulerInterface
     {
-        if (!empty($this->_getUnscheduledMinutes())) {
+        if (!empty($this->_getScheduledMinutesNotInCache())) {
             $this->_scheduleJobs();
         }
 
         return $this;
     }
 
-    protected function _getUnscheduledMinutes()
+    protected function _getScheduledMinutesNotInCache()
     {
         if (empty($this->_scheduleMinutesNotInCache)) {
             $nexReferenceMinuteDateTime = $this->_getNextReferenceMinuteDateTime();
@@ -51,7 +51,7 @@ class Scheduler implements SchedulerInterface
                 if ($this->_isMinuteScheduledInCache($nexReferenceMinuteDateTime)) {
                     continue;
                 }else {
-                    $scheduleMinute = $nexReferenceMinuteDateTime->format(self::DATE_TIME_FORMAT_MYSQL_MINUTE);
+                    $scheduleMinute = $nexReferenceMinuteDateTime;
                     $this->_scheduleMinutesNotInCache[] = $scheduleMinute;
                 }
                 $nexReferenceMinuteDateTime = $this->_getNextReferenceMinuteDateTime();
@@ -76,16 +76,19 @@ class Scheduler implements SchedulerInterface
 
     protected function _scheduleJobs(): SchedulerInterface
     {
-        $jobTypeCollectionService = $this->_getJobTypeCollectionService();
-        $schedulerCollection = $jobTypeCollectionService->getNamedCollection(self::SCHEDULER_COLLECTION_NAME);
-        foreach ($schedulerCollection->getIterator() as $jobType) {
+        $this->_getSchedulerJobCollection()->setReferenceDateTime($this->_getReferenceDateTimeClone());
+        foreach ($this->_getSchedulerJobTypeCollection()->getIterator() as $jobType) {
             $cronExpressionString = $jobType->getCronExpression();
-            if ($cronExpressionString !== '') {
-                $cron = CronExpression::factory($cronExpressionString);
-                $nextRunDateTime = $cron->getNextRunDate()->format(self::DATE_TIME_FORMAT_MYSQL_MINUTE);
-                foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $time) {
-                    if (isset($this->_existingJobs[$jobType['code']][$unscheduledMinute])) {
+            $typeCode = $jobType->getCode();
+            $cron = CronExpression::factory($cronExpressionString);
+            $nextRunDateTime = $cron->getNextRunDate();
+            foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $time) {
+                if($nextRunDateTime == $time)
+                {
+                    if (isset($this->_getSchedulerJobCollection()->getRecords()[$typeCode][$unscheduledMinute])) {
                         // already scheduled
+                        continue;
+                    }else{
                         continue;
                     }
                 }
@@ -158,7 +161,7 @@ class Scheduler implements SchedulerInterface
             $nextReferenceMinuteDateTime->add(new \DateInterval('PT1M'));
         }
 
-        return $this->_read(self::PROP_NEXT_REFERENCE_MINUTE_DATE_TIME);
+        return clone $this->_read(self::PROP_NEXT_REFERENCE_MINUTE_DATE_TIME);
     }
 
     protected function _getMinutesToScheduleAheadFor(): int

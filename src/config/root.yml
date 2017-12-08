@@ -15,3 +15,5 @@ imports:
    - { resource: Data/Job/Type/Collection/Iterator.yml}
    - { resource: Data/Job/Type/Collection/Service.yml }
    - { resource: Data/Job/Type.yml }
+   - { resource: Data/Job/Collection/Scheduler.yml }
+   - { resource: Data/Job/Type/Collection/Scheduler.yml }

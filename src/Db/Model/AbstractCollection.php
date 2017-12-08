@@ -29,7 +29,7 @@ abstract class AbstractCollection implements CollectionInterface
         return $this->_read(self::PROP_SELECT);
     }
 
-    public function setFetchMode(int $fetchMode): AbstractCollection
+    protected function _setFetchMode(int $fetchMode): AbstractCollection
     {
         $this->_create(self::PROP_FETCH_MODE, $fetchMode);
 
@@ -47,6 +47,11 @@ abstract class AbstractCollection implements CollectionInterface
 
     public function &getModelsArray(): array
     {
+        return $this->_getModelsArray();
+    }
+
+    protected function &_getModelsArray(): array
+    {
         if (!$this->_exists(self::PROP_MODELS)) {
             $models = [];
             $records = &$this->getRecords();
@@ -62,6 +67,11 @@ abstract class AbstractCollection implements CollectionInterface
     }
 
     public function &getRecords(): array
+    {
+        return $this->_getRecords();
+    }
+
+    protected function &_getRecords(): array
     {
         if (!$this->_exists(self::PROP_RECORDS)) {
             $select = $this->getSelect();

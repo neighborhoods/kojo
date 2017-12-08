@@ -15,7 +15,7 @@ interface IteratorInterface extends \Iterator
 
     function key(): int;
 
-    function next(): JobInterface;
+    function next();
 
     function valid(): bool;
 }

@@ -32,7 +32,7 @@ class Iterator implements IteratorInterface
         return key($modelsArray);
     }
 
-    function next(): TypeInterface
+    function next()
     {
         $modelsArray = &$this->_getCollection()->getModelsArray();
 

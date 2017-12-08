@@ -5,7 +5,7 @@ namespace NHDS\Jobs\Data\Job\Type;
 use NHDS\Jobs\Data\Job\Type\Collection\IteratorInterface;
 use NHDS\Jobs\Db\Model\AbstractCollection;
 
-class Collection extends AbstractCollection
+class Collection extends AbstractCollection implements CollectionInterface
 {
     public function setIterator(IteratorInterface $iterator)
     {

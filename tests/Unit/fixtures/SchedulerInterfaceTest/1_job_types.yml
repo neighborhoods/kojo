@@ -7,7 +7,7 @@ nhds_job_type:
     worker_method: "work"
     can_work_in_parallel: 1
     default_importance: 10
-    cron_expression: ""
+    cron_expression:
     schedule_limit: 0
     is_enabled: 1
   -

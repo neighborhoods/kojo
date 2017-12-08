@@ -1,0 +1,8 @@
+services:
+  nhds.jobs.data.job.type.collection.scheduler:
+    class: NHDS\Jobs\Data\Job\Type\Collection\Scheduler
+    shared: false
+    calls:
+      - [setModel, ['@nhds.jobs.data.job.type']]
+      - [setIterator, ['@nhds.jobs.data.job.type.collection.iterator']]
+      - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-job']]

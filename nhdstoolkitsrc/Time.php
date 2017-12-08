@@ -37,4 +37,9 @@ class Time implements TimeInterface
 
         return clone $this->_dateTimeZones[$timezoneCode];
     }
+
+    public function getNewDateInterval(string $intervalSpec): \DateInterval
+    {
+        return new \DateInterval($intervalSpec);
+    }
 }
