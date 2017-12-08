@@ -9,9 +9,16 @@ class Service implements ServiceInterface
 {
     use Collection\AwareTrait;
     use Crud\AwareTrait;
+    protected $_namedCollections = [];
 
-    public function getAllJobTypes(): Collection
+    public function getNamedCollection(string $collectionName): Collection
     {
-        return $this->_getCollection();
+        if (isset($this->_namedCollections[$collectionName])) {
+            $namedCollection = $this->_namedCollections[$collectionName];
+        }else {
+            $namedCollection = $this->_getCollectionClone();
+        }
+
+        return $namedCollection;
     }
 }

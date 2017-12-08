@@ -2,16 +2,17 @@
 
 namespace NHDS\Jobs;
 
-use Cron\CronExpression;
-use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Db;
 use NHDS\Toolkit\Time;
+use Cron\CronExpression;
 use NHDS\Jobs\CacheItemPool;
-use NHDS\Jobs\Data\Job\Type\Collection;
+use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Jobs\Data\Job;
 
 class Scheduler implements SchedulerInterface
 {
-    use Collection\Service\AwareTrait;
+    use Job\Collection\Service\AwareTrait;
+    use Job\Type\Collection\Service\AwareTrait;
     use CacheItemPool\AwareTrait;
     use Db\Connection\Container\AwareTrait;
     use Time\AwareTrait;
@@ -28,6 +29,7 @@ class Scheduler implements SchedulerInterface
     const PROP_REFERENCE_DATE_TIME_CLONE       = 'reference_date_time_clone';
     const PROP_REFERENCE_DISTANCE_DATE_TIME    = 'reference_distance_date_time';
     const PROP_NEXT_REFERENCE_MINUTE_DATE_TIME = 'next_reference_minute_date_time';
+    const SCHEDULER_COLLECTION_NAME            = 'scheduler_collection';
     protected $_scheduledKeyLifetime;
     protected $_scheduleMinutesNotInCache = [];
     protected $_existingJobs;
@@ -75,22 +77,18 @@ class Scheduler implements SchedulerInterface
     protected function _scheduleJobs(): SchedulerInterface
     {
         $jobTypeCollectionService = $this->_getJobTypeCollectionService();
-        foreach ($jobTypeCollectionService->getAllJobTypes()->getIterator() as $jobType) {
-            $cron = CronExpression::factory('3-59/15 2,6-12 */15 1 2-5');
-            $ime3 = $cron->getNextRunDate()->format('Y-m-d H:i:s');
-            $existingJobs = $this->_getExistingJobs();
-            foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $time) {
-                if (isset($this->_existingJobs[$jobType['code']][$unscheduledMinute])) {
-                    // already scheduled
-                    continue;
+        $schedulerCollection = $jobTypeCollectionService->getNamedCollection(self::SCHEDULER_COLLECTION_NAME);
+        foreach ($schedulerCollection->getIterator() as $jobType) {
+            $cronExpressionString = $jobType->getCronExpression();
+            if ($cronExpressionString !== '') {
+                $cron = CronExpression::factory($cronExpressionString);
+                $nextRunDateTime = $cron->getNextRunDate()->format(self::DATE_TIME_FORMAT_MYSQL_MINUTE);
+                foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $time) {
+                    if (isset($this->_existingJobs[$jobType['code']][$unscheduledMinute])) {
+                        // already scheduled
+                        continue;
+                    }
                 }
-                $cron = CronExpression::factory('3-59/15 2,6-12 */15 1 2-5');
-                $ime3 = $cron->getNextRunDate()->format('Y-m-d H:i:s');
-                if (!$this->_getScheduleClone()->trySchedule($time)) {
-                    // time does not match cron expression
-                    continue;
-                }
-                // @bwilson - schedule
             }
         }
 
@@ -120,16 +118,6 @@ class Scheduler implements SchedulerInterface
         $cacheItem->set(self::CACHE_SCHEDULED_AHEAD_VALUE);
         $cacheItem->expiresAt($this->_getScheduledKeyLifetime());
         $cacheItemPool->save($cacheItem);
-
-        return $this;
-    }
-
-    protected function _getExistingJobs(): SchedulerInterface
-    {
-        $minutesToScheduleAheadFor = $this->_getMinutesToScheduleAheadFor();
-        $referenceDateTime = $this->_getTime()->getNow();
-        $dateInterval = new \DateInterval('PT' . $minutesToScheduleAheadFor . 'M');
-        $referenceDateTime->add($dateInterval);
 
         return $this;
     }

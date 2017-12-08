@@ -6,5 +6,5 @@ use NHDS\Jobs\Data\Job\Type\Collection;
 
 interface ServiceInterface
 {
-    public function getAllJobTypes(): Collection;
+    public function getNamedCollection(string $collectionName): Collection;
 }
