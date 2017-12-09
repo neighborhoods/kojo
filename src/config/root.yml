@@ -33,3 +33,4 @@ imports:
    - { resource: Process/Pool/Server.yml }
    - { resource: Process/Pool/Strategy.yml }
    - { resource: Data/Job/Collection/Iterator.yml }
+   - { resource: Semaphore/Resource/Owner/Job.yml }

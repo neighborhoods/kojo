@@ -3,73 +3,88 @@
 namespace NHDS\Jobs\Semaphore;
 
 use NHDS\Jobs\Semaphore\Mutex\MutexInterface;
+use NHDS\Jobs\Semaphore\Resource\OwnerInterface;
+use NHDS\Toolkit\Data\Property\Crud;
 
 class Resource implements ResourceInterface
 {
+    use Crud\AwareTrait;
+    const PROP_RESOURCE_OWNER = 'resource_owner';
+    const PROP_RESOURCE_NAME  = 'resource_name';
+    const PROP_RESOURCE_PATH  = 'resource_path';
+    const PROP_IS_BLOCKING    = 'is_blocking';
     protected $_mutex;
-    protected $_resourceName;
-    protected $_resourcePath;
-    protected $_isBlocking;
     protected $_resourceId;
+
+    public function setResourceOwner(OwnerInterface $resourceOwner): ResourceInterface
+    {
+        $this->_create(self::PROP_RESOURCE_OWNER, $resourceOwner);
+
+        return $this;
+    }
+
+    public function getResourceOwner(): OwnerInterface
+    {
+        return $this->_read(self::PROP_RESOURCE_OWNER);
+    }
 
     public function setResourceName(string $resourceName): ResourceInterface
     {
-        if ($this->_resourceName === null) {
-            $this->_resourceName = $resourceName;
-        }else {
-            throw new \LogicException('Resource name is already set.');
-        }
+        $this->_create(self::PROP_RESOURCE_NAME, $resourceName);
 
         return $this;
     }
 
     public function getResourceName(): string
     {
-        if ($this->_resourceName === null) {
-            throw new \LogicException('Resource name is not set.');
+        if (!$this->_exists(self::PROP_RESOURCE_NAME)) {
+            if ($this->_exists(self::PROP_RESOURCE_OWNER)) {
+                $this->_create(self::PROP_RESOURCE_NAME, $this->getResourceOwner()->getResourceName());
+            }else {
+                throw new \LogicException('Resource name is not set.');
+            }
         }
 
-        return $this->_resourceName;
+        return $this->_read(self::PROP_RESOURCE_NAME);
     }
 
     public function setResourcePath(string $resourcePath): ResourceInterface
     {
-        if ($this->_resourcePath === null) {
-            $this->_resourcePath = $resourcePath;
-        }else {
-            throw new \LogicException('Resource path is already set.');
-        }
+        $this->_create(self::PROP_RESOURCE_PATH, $resourcePath);
 
         return $this;
     }
 
     public function getResourcePath(): string
     {
-        if ($this->_resourcePath === null) {
-            throw new \LogicException('Resource path is not set.');
+        if (!$this->_exists(self::PROP_RESOURCE_PATH)) {
+            if ($this->_exists(self::PROP_RESOURCE_OWNER)) {
+                $this->_create(self::PROP_RESOURCE_PATH, $this->getResourceOwner()->getResourcePath());
+            }else {
+                throw new \LogicException('Resource path is not set.');
+            }
         }
 
-        return $this->_resourcePath;
+        return $this->_read(self::PROP_RESOURCE_PATH);
     }
 
     public function setIsBlocking(bool $isBlocking): ResourceInterface
     {
-        if ($this->_isBlocking === null) {
-            $this->_isBlocking = $isBlocking;
-        }else {
-            throw new \LogicException('Is blocking is already set.');
-        }
+        $this->_create(self::PROP_IS_BLOCKING, $isBlocking);
 
         return $this;
     }
 
     public function getIsBlocking(): bool
     {
-        if ($this->_isBlocking === null) {
-            throw new \LogicException('Is blocking is not set.');
+        if (!$this->_exists(self::PROP_IS_BLOCKING)) {
+            if ($this->_exists(self::PROP_RESOURCE_OWNER)) {
+                $this->_create(self::PROP_IS_BLOCKING, $this->getResourceOwner()->getIsBlocking());
+            }else {
+                throw new \LogicException('Is blocking is not set.');
+            }
         }
-
-        return $this->_isBlocking;
+        return $this->_read(self::PROP_IS_BLOCKING);
     }
 
     public function getResourceId(): string

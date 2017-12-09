@@ -1,0 +1,3 @@
+services:
+  nhds.semaphore.resource.owner.job:
+    class: NHDS\Jobs\Semaphore\Resource\Owner\Job

@@ -5,3 +5,4 @@ services:
     calls:
       - [setFileMode, ['c']]
       - [setDirectoryMode, ['0777']]
+      - [setDirectoryPathPrefix, ['/tmp/']]

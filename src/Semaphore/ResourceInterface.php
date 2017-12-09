@@ -3,6 +3,7 @@
 namespace NHDS\Jobs\Semaphore;
 
 use NHDS\Jobs\Semaphore\Mutex\MutexInterface;
+use NHDS\Jobs\Semaphore\Resource\OwnerInterface;
 
 interface ResourceInterface
 {
@@ -23,4 +24,8 @@ interface ResourceInterface
     public function setMutex(MutexInterface $mutex): ResourceInterface;
 
     public function getMutex(): MutexInterface;
+
+    public function setResourceOwner(OwnerInterface $resourceOwner): ResourceInterface;
+
+    public function getResourceOwner(): OwnerInterface;
 }

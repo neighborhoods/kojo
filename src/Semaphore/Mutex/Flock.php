@@ -4,10 +4,13 @@ namespace NHDS\Jobs\Semaphore\Mutex;
 
 use NHDS\Jobs\Exception\Runtime;
 use NHDS\Jobs\Filesystem;
+use NHDS\Toolkit\Data\Property\Crud;
 
 class Flock extends AbstractMutex
 {
+    use Crud\AwareTrait;
     use Filesystem\AwareTrait;
+    const PROP_DIRECTORY_PATH_PREFIX = 'directory_path_prefix';
     protected $_fileName;
     protected $_directoryPath;
     protected $_filePointer;
@@ -76,6 +79,18 @@ class Flock extends AbstractMutex
         return $this;
     }
 
+    public function setDirectoryPathPrefix(string $directoryPathPrefix): Flock
+    {
+        $this->_create(self::PROP_DIRECTORY_PATH_PREFIX, $directoryPathPrefix);
+
+        return $this;
+    }
+
+    protected function _getDirectoryPathPrefix(): string
+    {
+        return $this->_read(self::PROP_DIRECTORY_PATH_PREFIX);
+    }
+
     public function setFileMode(string $fileMode)
     {
         if ($this->_fileMode === null) {
@@ -99,7 +114,12 @@ class Flock extends AbstractMutex
     protected function _getDirectoryPath()
     {
         if ($this->_directoryPath === null) {
-            $this->_directoryPath = $this->_getResource()->getResourcePath();
+            if ($this->_exists(self::PROP_DIRECTORY_PATH_PREFIX)) {
+                $directoryPathPrefix = $this->_getDirectoryPathPrefix();
+            }else {
+                $directoryPathPrefix = '';
+            }
+            $this->_directoryPath = $directoryPathPrefix . $this->_getResource()->getResourcePath();
         }
 
         return $this->_directoryPath;
