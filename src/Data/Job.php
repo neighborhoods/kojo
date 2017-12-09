@@ -40,36 +40,44 @@ class Job extends Model implements JobInterface
     public function setTypeCode(string $typeCode): JobInterface
     {
         $this->_setPersistentProperty(JobInterface::FIELD_NAME_TYPE_CODE, $typeCode);
+
+        return $this;
     }
 
     public function getTypeCode(): string
     {
-        // TODO: Implement getTypeCode() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_TYPE_CODE);
     }
 
     public function setName(string $name): JobInterface
     {
         $this->_setPersistentProperty(JobInterface::FIELD_NAME_NAME, $name);
+
+        return $this;
     }
 
     public function getName(): string
     {
-        // TODO: Implement getName() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_NAME);
     }
 
     public function setPriority(int $priority): JobInterface
     {
         $this->_setPersistentProperty(JobInterface::FIELD_NAME_PRIORITY, $priority);
+
+        return $this;
     }
 
     public function getPriority(): int
     {
-        // TODO: Implement getPriority() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_PRIORITY);
     }
 
     public function setImportance(int $importance): JobInterface
     {
         $this->_setPersistentProperty(JobInterface::FIELD_NAME_IMPORTANCE, $importance);
+
+        return $this;
     }
 
     public function getImportance(): int
@@ -80,66 +88,73 @@ class Job extends Model implements JobInterface
     public function setStatusId(int $statusId): JobInterface
     {
         $this->_setPersistentProperty(JobInterface::FIELD_NAME_STATUS_ID, $statusId);
+
+        return $this;
     }
 
     public function getStatusId(): int
     {
-        // TODO: Implement getStatusId() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_STATUS_ID);
     }
 
     public function setWorkAtDateTime(\DateTime $workAtDateTime): JobInterface
     {
         $this->_setPersistentProperty(JobInterface::FIELD_NAME_WORK_AT_DATETIME, $workAtDateTime);
+
+        return $this;
     }
 
     public function getWorkAtDateTime(): \DateTime
     {
-        // TODO: Implement getWorkAtDateTime() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_WORK_AT_DATETIME);
     }
 
     public function setPreviousState(string $previousState): JobInterface
     {
         $this->_setPersistentProperty(JobInterface::FIELD_NAME_PREVIOUS_STATE, $previousState);
+
+        return $this;
     }
 
     public function getPreviousState(): string
     {
-        // TODO: Implement getPreviousState() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_PREVIOUS_STATE);
     }
 
     public function setWorkerUri(string $workerUri): JobInterface
     {
         $this->_setPersistentProperty(JobInterface::FIELD_NAME_WORKER_URI, $workerUri);
+
+        return $this;
     }
 
     public function getWorkerUri(): string
     {
-        // TODO: Implement getWorkerUri() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_WORKER_URI);
     }
 
     public function setWorkerMethod(string $workerMethod): JobInterface
     {
         $this->_setPersistentProperty(JobInterface::FIELD_NAME_WORKER_METHOD, $workerMethod);
+
+        return $this;
     }
 
     public function getWorkerMethod(): string
     {
-        // TODO: Implement getWorkerMethod() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_WORKER_METHOD);
     }
 
     public function setCanRunInParallel(bool $canRunInParallel): JobInterface
     {
         $this->_setPersistentProperty(JobInterface::FIELD_NAME_CAN_RUN_IN_PARALLEL, $canRunInParallel);
+
+        return $this;
     }
 
     public function getCanRunInParallel(): bool
     {
-        // TODO: Implement getCanRunInParallel() method.
-    }
-
-    public function getLastTransitionInDateTime(): \DateTime
-    {
-        // TODO: Implement getLastTransitionInDateTime() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_CAN_RUN_IN_PARALLEL);
     }
 
     public function setLastTransitionInDateTime(\DateTime $dateTime): JobInterface
@@ -153,9 +168,9 @@ class Job extends Model implements JobInterface
         return $this;
     }
 
-    public function getLastTransitionInMicroTime(): \DateTime
+    public function getLastTransitionInDateTime(): \DateTime
     {
-        // TODO: Implement getLastTransitionInMicroTime() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_LAST_TRANSITION_DATETIME);
     }
 
     public function setLastTransitionInMicroTime(\DateTime $dateTime): JobInterface
@@ -169,53 +184,68 @@ class Job extends Model implements JobInterface
         return $this;
     }
 
+    public function getLastTransitionInMicroTime(): \DateTime
+    {
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_LAST_TRANSITION_MICRO_TIME);
+    }
+
     public function setTimesWorked(int $timesWorked): JobInterface
     {
-        // TODO: Implement setTimesWorked() method.
+        $this->_setPersistentProperty(JobInterface::FIELD_NAME_TIMES_WORKED, $timesWorked);
+
+        return $this;
     }
 
     public function getTimesWorked(): int
     {
-        // TODO: Implement getTimesWorked() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_TIMES_WORKED);
     }
 
     public function setTimesRetried(int $timesRetried): JobInterface
     {
-        // TODO: Implement setTimesRetried() method.
+        $this->_setPersistentProperty(JobInterface::FIELD_NAME_TIMES_RETRIED, $timesRetried);
+
+        return $this;
     }
 
     public function getTimesRetried(): int
     {
-        // TODO: Implement getTimesRetried() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_TIMES_RETRIED);
     }
 
     public function setTimesHeld(int $timesHeld): JobInterface
     {
-        // TODO: Implement setTimesHeld() method.
+        $this->_setPersistentProperty(JobInterface::FIELD_NAME_TIMES_HELD, $timesHeld);
+
+        return $this;
     }
 
     public function getTimesHeld(): int
     {
-        // TODO: Implement getTimesHeld() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_TIMES_HELD);
     }
 
     public function setTimesCrashed(int $timesCrashed): JobInterface
     {
-        // TODO: Implement setTimesCrashed() method.
+        $this->_setPersistentProperty(JobInterface::FIELD_NAME_TIMES_CRASHED, $timesCrashed);
+
+        return $this;
     }
 
     public function getTimesCrashed(): int
     {
-        // TODO: Implement getTimesCrashed() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_TIMES_CRASHED);
     }
 
     public function setTimesPanicked(int $timesPanicked): JobInterface
     {
-        // TODO: Implement setTimesPanicked() method.
+        $this->_setPersistentProperty(JobInterface::FIELD_NAME_TIMES_PANICKED, $timesPanicked);
+
+        return $this;
     }
 
     public function getTimesPanicked(): int
     {
-        // TODO: Implement getTimesPanicked() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_TIMES_PANICKED);
     }
 }
