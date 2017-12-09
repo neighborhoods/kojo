@@ -17,3 +17,5 @@ imports:
    - { resource: Data/Job/Type.yml }
    - { resource: Data/Job/Collection/Scheduler.yml }
    - { resource: Data/Job/Type/Collection/Scheduler.yml }
+   - { resource: Data/Job/State/Service.yml }
+   - { resource: Data/Job/Service/Create.yml }

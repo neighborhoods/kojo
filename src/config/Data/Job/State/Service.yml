@@ -1,0 +1,6 @@
+services:
+  nhds.jobs.data.job.state.service:
+    class: NHDS\Jobs\Data\Job\State\Service
+    shared: false
+    calls:
+      - [setTime, ['@nhds.toolkit.time']]

@@ -8,6 +8,7 @@ use Cron\CronExpression;
 use NHDS\Jobs\CacheItemPool;
 use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Data\Job;
+use NHDS\Jobs\Data\Job\Service\Create;
 
 class Scheduler implements SchedulerInterface
 {
@@ -17,6 +18,7 @@ class Scheduler implements SchedulerInterface
     use Db\Connection\Container\AwareTrait;
     use Time\AwareTrait;
     use Crud\AwareTrait;
+    use Create\AwareTrait;
     const DATE_TIME_FORMAT_CACHE_MINUTE        = 'Y_m_d_H_i';
     const DATE_TIME_FORMAT_MYSQL_MINUTE        = 'Y-m-d H:i:0';
     const CACHE_SCHEDULED_AHEAD_VALUE          = 'scheduled';
@@ -82,20 +84,18 @@ class Scheduler implements SchedulerInterface
             $typeCode = $jobType->getCode();
             $cron = CronExpression::factory($cronExpressionString);
             $nextRunDateTime = $cron->getNextRunDate();
-            foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $time) {
-                if($nextRunDateTime == $time)
-                {
-                    if (isset($this->_getSchedulerJobCollection()->getRecords()[$typeCode][$unscheduledMinute])) {
-                        // already scheduled
-                        continue;
-                    }else{
-                        continue;
+            foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $unscheduledDateTime) {
+                if ($nextRunDateTime == $unscheduledDateTime) {
+                    if (!isset($this->_getSchedulerJobCollection()->getRecords()[$typeCode][$unscheduledMinute])) {
+                        $this->_getJobServiceCreate()->setJobTypeCode($typeCode);
+                        $this->_getJobServiceCreate()->setWorkAtDateTime($unscheduledDateTime);
+                        $this->_getJobServiceCreate()->save();
                     }
                 }
             }
         }
 
-        foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $time) {
+        foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $unscheduledDateTime) {
             $this->_cacheScheduledMinutes($unscheduledMinute);
         }
 

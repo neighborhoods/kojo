@@ -72,7 +72,7 @@ trait AwareTrait
         return $this;
     }
 
-    protected function _getPersistentProperties(): array
+    public function getPersistentProperties(): array
     {
         if (!$this->_hasPersistentProperties()) {
             throw new \LogicException('Persistent properties is not set.');

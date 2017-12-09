@@ -71,7 +71,7 @@ interface JobInterface extends ModelInterface
 
     public function getWorkerUri(): string;
 
-    public function setWorkerMethod(string $workerUri): JobInterface;
+    public function setWorkerMethod(string $workerMethod): JobInterface;
 
     public function getWorkerMethod(): string;
 

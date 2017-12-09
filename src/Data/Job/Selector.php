@@ -77,7 +77,7 @@ class Selector implements SelectorInterface
     {
         if (!$this->_exists(self::PROP_PREPARED_COLLECTION)) {
             $select = $this->_getCollection()->getSelect();
-            $select->where([JobInterface::FIELD_NAME_ASSIGNED_STATE => ServiceInterface::STATE_WAIT]);
+            $select->where([JobInterface::FIELD_NAME_ASSIGNED_STATE => ServiceInterface::STATE_WAITING]);
             $select->columns(
                 [
                     JobInterface::FIELD_NAME_ID,

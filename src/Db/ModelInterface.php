@@ -25,4 +25,6 @@ interface ModelInterface
     public function delete(): ModelInterface;
 
     public function setPersistentProperties(array $persistentProperties);
+
+    public function getPersistentProperties(): array;
 }
