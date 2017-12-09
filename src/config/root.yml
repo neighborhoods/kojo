@@ -5,9 +5,7 @@ services:
     public: true
 imports:
    - { resource: dependencies.yml }
-   - { resource: foreman.yml }
-   - { resource: server.yml }
-   - { resource: process.yml }
+   - { resource: Foreman.yml }
    - { resource: tearDown.yml }
    - { resource: setup.yml }
    - { resource: Scheduler.yml }
@@ -19,3 +17,19 @@ imports:
    - { resource: Data/Job/Type/Collection/Scheduler.yml }
    - { resource: Data/Job/State/Service.yml }
    - { resource: Data/Job/Service/Create.yml }
+   - { resource: Data/Job.yml }
+   - { resource: Data/Job/Selector.yml }
+   - { resource: Semaphore/Resource.yml }
+   - { resource: Maintainer.yml }
+   - { resource: Data/Job/Type/Collection.yml }
+   - { resource: Process/Type/Listener/Command.yml }
+   - { resource: Process/Type/Job.yml }
+   - { resource: Semaphore/Mutex/Flock.yml }
+   - { resource: Db/Connection/Container.yml }
+   - { resource: Semaphore.yml }
+   - { resource: Message/Broker/Redis.yml }
+   - { resource: Process/Pool/Logger.yml }
+   - { resource: Message/Broker/Type/Collection.yml }
+   - { resource: Process/Pool/Server.yml }
+   - { resource: Process/Pool/Strategy.yml }
+   - { resource: Data/Job/Collection/Iterator.yml }

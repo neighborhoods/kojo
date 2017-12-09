@@ -1,0 +1,7 @@
+services:
+  nhds.jobs.process.pool.logger:
+    class: NHDS\Jobs\Process\Pool\Logger
+    calls:
+      - [setIsEnabled, [true]]
+      - [setTime, ['@nhds.toolkit.time']]
+      - [setPool, ['@nhds.jobs.process.pool']]

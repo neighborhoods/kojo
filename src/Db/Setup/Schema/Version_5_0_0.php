@@ -101,7 +101,7 @@ class Version_5_0_0 extends AbstractVersion
                 ]));
         $createTable->addColumn(
             new Boolean(
-                JobInterface::FIELD_NAME_CAN_RUN_IN_PARALLEL, false, null,
+                JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL, false, null,
                 [
                     'comment' => 'COMMENT',
                 ]));
@@ -162,7 +162,7 @@ class Version_5_0_0 extends AbstractVersion
                     JobInterface::FIELD_NAME_WORK_AT_DATETIME,
                     JobInterface::FIELD_NAME_ID,
                     JobInterface::FIELD_NAME_TYPE_CODE,
-                    JobInterface::FIELD_NAME_CAN_RUN_IN_PARALLEL,
+                    JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
                 ],
                 JobInterface::INDEX_NAME_PICK_AND_MAINTAIN
             )

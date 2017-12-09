@@ -1,0 +1,10 @@
+services:
+  nhds.jobs.message.broker.redis:
+    class: NHDS\Jobs\Message\Broker\Redis
+    shared: false
+    calls:
+      - [setLogger, ['@nhds.jobs.process.pool.logger']]
+      - [setPort, ['6379']]
+      - [setHost, ['redis']]
+      - [setSubscriptionChannelName, ['job_queue']]
+      - [setPublishChannelName, ['job_queue']]

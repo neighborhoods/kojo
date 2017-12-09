@@ -1,0 +1,10 @@
+services:
+  nhds.jobs.process.type.job:
+    class: NHDS\Jobs\Process\Type\Job
+    calls:
+      - [setPool, ['@nhds.jobs.process.pool']]
+      - [setLogger, ['@nhds.jobs.process.pool.logger']]
+      - [setBrokerTypeCollection, ['@nhds.jobs.message.broker.type.collection-job']]
+      - [setBrokerTypeCode, ['job_broker']]
+      - [setForeman, ['@nhds.jobs.foreman']]
+#            - [setBootstrap, ['@bootstrap_example']]

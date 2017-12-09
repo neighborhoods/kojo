@@ -1,0 +1,11 @@
+services:
+  nhds.jobs.process.pool.strategy:
+    class: NHDS\Jobs\Process\Pool\Strategy
+    calls:
+      - [setMaxProcesses, ['%process_pool_strategy.max_processes%']]
+      - [setProcessWaitThrottle, ['%process_pool_strategy.process_wait_throttle%']]
+      - [setMaxAlarmTime, ['%process_pool_strategy.max_alarm_time%']]
+      - [setLogger, ['@nhds.jobs.process.pool.logger']]
+      - [setPool, ['@nhds.jobs.process.pool']]
+      - [addProcessType, ['listener.message', '@nhds.jobs.process.type.listener.command']]
+      - [addProcessType, ['job', '@nhds.jobs.process.type.job']]

@@ -17,7 +17,7 @@ abstract class AbstractTest extends TestCase
     {
         $yamlServiceFilePath = dirname(__FILE__) . '/config/root.yml';
         $this->setServicesYamlFilePath($yamlServiceFilePath);
-        $testCaseService = $this->_getTestContainerBuilder()->get('nhds.watch.testcase.service');
+        $testCaseService = $this->getContainerBuilder()->get('nhds.watch.testcase.service');
         $this->setTestCaseService($testCaseService);
 
         parent::setUp();

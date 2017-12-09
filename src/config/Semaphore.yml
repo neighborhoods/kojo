@@ -1,0 +1,3 @@
+services:
+  nhds.jobs.semaphore:
+    class: NHDS\Jobs\Semaphore

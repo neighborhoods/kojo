@@ -1,0 +1,9 @@
+services:
+  nhds.jobs.data.job.selector:
+    class: NHDS\Jobs\Data\Job\Selector
+    calls:
+      - [setPageSize, [50]]
+      - [setOffset, [50]]
+      - [addSemaphoreResource, ['job', '@nhds.jobs.semaphore.resource-job']]
+      - [setCollection, ['@nhds.jobs.data.job.collection']]
+    shared: false

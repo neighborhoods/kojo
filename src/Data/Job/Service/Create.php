@@ -58,6 +58,7 @@ class Create implements CreateInterface
         $job->setWorkAtDateTime($this->_read(self::PROP_WORK_AT_DATE_TIME));
         $job->setNextStateRequest(State\Service::STATE_NONE);
         $job->setAssignedState(State\Service::STATE_NEW);
+        $job->setTimesWorked(0);
         $this->_getJobStateService()->setJob($job);
         $this->_getJobStateService()->requestWork();
         $this->_getJobStateService()->applyRequest();

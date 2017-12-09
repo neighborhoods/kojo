@@ -19,7 +19,7 @@ interface JobInterface extends ModelInterface
     const FIELD_NAME_PREVIOUS_STATE             = 'previous_state';
     const FIELD_NAME_WORKER_URI                 = 'worker_uri';
     const FIELD_NAME_WORKER_METHOD              = 'worker_method';
-    const FIELD_NAME_CAN_RUN_IN_PARALLEL        = 'can_run_in_parallel';
+    const FIELD_NAME_CAN_WORK_IN_PARALLEL       = 'can_work_in_parallel';
     const FIELD_NAME_LAST_TRANSITION_DATETIME   = 'last_transition_datetime';
     const FIELD_NAME_LAST_TRANSITION_MICRO_TIME = 'last_transition_micro_time';
     const FIELD_NAME_TIMES_WORKED               = 'times_worked';
@@ -75,9 +75,9 @@ interface JobInterface extends ModelInterface
 
     public function getWorkerMethod(): string;
 
-    public function setCanRunInParallel(bool $canRunInParallel): JobInterface;
+    public function setCanWorkInParallel(bool $canRunInParallel): JobInterface;
 
-    public function getCanRunInParallel(): bool;
+    public function getCanWorkInParallel(): bool;
 
     public function setLastTransitionInDateTime(\DateTime $dateTime): JobInterface;
 

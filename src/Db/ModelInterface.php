@@ -2,6 +2,8 @@
 
 namespace NHDS\Jobs\Db;
 
+use NHDS\Jobs\Db\Connection\ContainerInterface;
+
 interface ModelInterface
 {
     public function setTableName(string $tableName): ModelInterface;
@@ -27,4 +29,6 @@ interface ModelInterface
     public function setPersistentProperties(array $persistentProperties);
 
     public function getPersistentProperties(): array;
+
+    public function addDbConnectionContainer(ContainerInterface $container);
 }

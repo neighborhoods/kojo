@@ -21,7 +21,6 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
         $this->_assignedStateUpdate = ServiceInterface::STATE_WAITING;
-        $this->_updateExpression = 'job.setTimesWorked(job.getTimesWorked()+1);';
 
         return $this;
     }
@@ -54,7 +53,7 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
         $this->_assignedStateUpdate = ServiceInterface::STATE_CRASHED;
-        $this->_updateExpression = 'job.setTimesCrashed(job.getTimesCrashed()+1);';
+        $this->_updateExpression = 'job.setTimesCrashed(job.getTimesCrashed()+1)';
 
         return $this;
     }
@@ -63,7 +62,7 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
         $this->_assignedStateUpdate = ServiceInterface::STATE_PANICKED;
-        $this->_updateExpression = 'job.setTimesPanicked(job.getTimesPanicked()+1);';
+        $this->_updateExpression = 'job.setTimesPanicked(job.getTimesPanicked()+1)';
 
         return $this;
     }
@@ -72,7 +71,8 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
         $this->_assignedStateUpdate = ServiceInterface::STATE_HOLD;
-        $this->_updateExpression = 'job.setTimesHeld(job.getTimesHeld()+1);';
+        $this->_updateExpression = 'job.setTimesHeld(job.getTimesHeld()+1)';
+
         return $this;
     }
 
@@ -80,7 +80,8 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
         $this->_assignedStateUpdate = ServiceInterface::STATE_WAITING;
-        $this->_updateExpression = 'job.setWorkAtDateTime(retryDateTime);job.setTimesRetried(job.getTimesRetried()+1);';
+        $this->_updateExpression = 'job.setWorkAtDateTime(retryDateTime) 
+            && job.setTimesRetried(job.getTimesRetried()+1)';
         $this->_retryDateTime = $retryDateTime;
 
         return $this;

@@ -1,0 +1,7 @@
+services:
+  nhds.jobs.semaphore.mutex.flock:
+    class: NHDS\Jobs\Semaphore\Mutex\Flock
+    shared: false
+    calls:
+      - [setFileMode, ['c']]
+      - [setDirectoryMode, ['0777']]

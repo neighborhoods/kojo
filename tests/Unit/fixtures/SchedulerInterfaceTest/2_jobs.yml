@@ -12,7 +12,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -33,7 +33,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -54,7 +54,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -75,7 +75,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -96,7 +96,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -117,7 +117,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -138,7 +138,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -159,7 +159,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -180,7 +180,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -201,7 +201,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -222,7 +222,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -243,7 +243,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -264,7 +264,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -285,7 +285,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -306,7 +306,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -327,7 +327,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -348,7 +348,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -369,7 +369,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -390,7 +390,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -411,7 +411,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -432,7 +432,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -453,7 +453,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -474,7 +474,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -495,7 +495,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -516,7 +516,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -537,7 +537,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -558,7 +558,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -579,7 +579,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -600,7 +600,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -621,7 +621,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
@@ -642,7 +642,7 @@ nhds_job:
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
-    can_run_in_parallel: 1
+    can_work_in_parallel: 1
     last_transition_datetime: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0

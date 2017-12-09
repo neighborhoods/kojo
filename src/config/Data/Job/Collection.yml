@@ -1,0 +1,8 @@
+services:
+  nhds.jobs.data.job.collection:
+    class: NHDS\Jobs\Data\Job\Collection
+    shared: false
+    calls:
+      - [setIterator, ['@nhds.jobs.data.job.collection.iterator']]
+      - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-job']]
+      - [setModel, ['@nhds.jobs.data.job']]

@@ -36,7 +36,7 @@ class Model implements ModelInterface
 
     public function getIdPropertyName(): string
     {
-        if (empty($this->_idPropertyName === null)) {
+        if ($this->_idPropertyName === null) {
             throw new \LogicException('ID property name is not set.');
         }
 

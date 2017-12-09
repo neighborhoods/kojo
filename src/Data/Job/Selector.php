@@ -51,7 +51,7 @@ class Selector implements SelectorInterface
             // Find and obtain a job mutex.
             foreach ($jobCandidateRecords as $jobCandidateRecord) {
                 $jobSemaphoreResource = $this->_getJobSemaphoreResource();
-                $resourceName = ($jobCandidateRecord[JobInterface::FIELD_NAME_CAN_RUN_IN_PARALLEL] == 1)
+                $resourceName = ($jobCandidateRecord[JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL] == 1)
                     ? $jobCandidateRecord[JobInterface::FIELD_NAME_ID]
                     : 'job';
                 $jobSemaphoreResource->setResourceName($resourceName);
@@ -82,7 +82,7 @@ class Selector implements SelectorInterface
                 [
                     JobInterface::FIELD_NAME_ID,
                     JobInterface::FIELD_NAME_TYPE_CODE,
-                    JobInterface::FIELD_NAME_CAN_RUN_IN_PARALLEL,
+                    JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
                 ]
             );
             $select->order(JobInterface::FIELD_NAME_PRIORITY . ' DESC');

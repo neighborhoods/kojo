@@ -4,9 +4,12 @@ namespace NHDS\Jobs\Data;
 
 use NHDS\Jobs\Db\Model;
 use NHDS\Toolkit\TimeInterface;
+use NHDS\Toolkit\Time;
 
 class Job extends Model implements JobInterface
 {
+    use Time\AwareTrait;
+
     public function __construct()
     {
         $this->setTableName(JobInterface::TABLE_NAME);
@@ -17,7 +20,7 @@ class Job extends Model implements JobInterface
 
     public function setAssignedState(string $assignedState): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_ASSIGNED_STATE, $assignedState);
+        $this->_upsertPersistentProperty(JobInterface::FIELD_NAME_ASSIGNED_STATE, $assignedState);
 
         return $this;
     }
@@ -29,7 +32,7 @@ class Job extends Model implements JobInterface
 
     public function setNextStateRequest(string $nextStateRequest): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_NEXT_STATE_REQUEST, $nextStateRequest);
+        $this->_upsertPersistentProperty(JobInterface::FIELD_NAME_NEXT_STATE_REQUEST, $nextStateRequest);
 
         return $this;
     }
@@ -65,7 +68,7 @@ class Job extends Model implements JobInterface
 
     public function setPriority(int $priority): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_PRIORITY, $priority);
+        $this->_upsertPersistentProperty(JobInterface::FIELD_NAME_PRIORITY, $priority);
 
         return $this;
     }
@@ -101,19 +104,24 @@ class Job extends Model implements JobInterface
 
     public function setWorkAtDateTime(\DateTime $workAtDateTime): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_WORK_AT_DATETIME, $workAtDateTime);
+        $this->_upsertPersistentProperty(
+            JobInterface::FIELD_NAME_WORK_AT_DATETIME,
+            $workAtDateTime->format(TimeInterface::MYSQL_DATETIME_FORMAT)
+        );
 
         return $this;
     }
 
     public function getWorkAtDateTime(): \DateTime
     {
-        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_WORK_AT_DATETIME);
+        $workAtDateTimeString = $this->_getPersistentProperty(JobInterface::FIELD_NAME_WORK_AT_DATETIME);
+
+        return new \DateTime($workAtDateTimeString);
     }
 
     public function setPreviousState(string $previousState): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_PREVIOUS_STATE, $previousState);
+        $this->_upsertPersistentProperty(JobInterface::FIELD_NAME_PREVIOUS_STATE, $previousState);
 
         return $this;
     }
@@ -147,22 +155,25 @@ class Job extends Model implements JobInterface
         return $this->_getPersistentProperty(JobInterface::FIELD_NAME_WORKER_METHOD);
     }
 
-    public function setCanRunInParallel(bool $canRunInParallel): JobInterface
+    public function setCanWorkInParallel(bool $canRunInParallel): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_CAN_RUN_IN_PARALLEL, $canRunInParallel);
+        $this->_setPersistentProperty(JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL, $canRunInParallel);
 
         return $this;
     }
 
-    public function getCanRunInParallel(): bool
+    public function getCanWorkInParallel(): bool
     {
-        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_CAN_RUN_IN_PARALLEL);
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL);
     }
 
     public function setLastTransitionInDateTime(\DateTime $dateTime): JobInterface
     {
-        $this->setLastTransitionInMicroTime($dateTime);
-        $this->_setPersistentProperty(
+        $this->_upsertPersistentProperty(
+            JobInterface::FIELD_NAME_LAST_TRANSITION_MICRO_TIME,
+            $dateTime->format(TimeInterface::MICRO_TIME)
+        );
+        $this->_upsertPersistentProperty(
             JobInterface::FIELD_NAME_LAST_TRANSITION_DATETIME,
             $dateTime->format(TimeInterface::MYSQL_DATETIME_FORMAT)
         );
@@ -172,13 +183,20 @@ class Job extends Model implements JobInterface
 
     public function getLastTransitionInDateTime(): \DateTime
     {
-        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_LAST_TRANSITION_DATETIME);
+        $lastTransitionInDateTimeString = $this->_getPersistentProperty(
+            JobInterface::FIELD_NAME_LAST_TRANSITION_DATETIME
+        );
+
+        return new \DateTime($lastTransitionInDateTimeString);
     }
 
     public function setLastTransitionInMicroTime(\DateTime $dateTime): JobInterface
     {
-        $this->setLastTransitionInDateTime($dateTime);
-        $this->_setPersistentProperty(
+        $this->_upsertPersistentProperty(
+            JobInterface::FIELD_NAME_LAST_TRANSITION_DATETIME,
+            $dateTime->format(TimeInterface::MYSQL_DATETIME_FORMAT)
+        );
+        $this->_upsertPersistentProperty(
             JobInterface::FIELD_NAME_LAST_TRANSITION_MICRO_TIME,
             $dateTime->format(TimeInterface::MICRO_TIME)
         );
@@ -188,12 +206,16 @@ class Job extends Model implements JobInterface
 
     public function getLastTransitionInMicroTime(): \DateTime
     {
-        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_LAST_TRANSITION_MICRO_TIME);
+        $lastTransitionInMicroTimeString = $this->_getPersistentProperty(
+            JobInterface::FIELD_NAME_LAST_TRANSITION_MICRO_TIME
+        );
+
+        return new \DateTime($lastTransitionInMicroTimeString);
     }
 
     public function setTimesWorked(int $timesWorked): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_TIMES_WORKED, $timesWorked);
+        $this->_upsertPersistentProperty(JobInterface::FIELD_NAME_TIMES_WORKED, $timesWorked);
 
         return $this;
     }
@@ -205,7 +227,7 @@ class Job extends Model implements JobInterface
 
     public function setTimesRetried(int $timesRetried): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_TIMES_RETRIED, $timesRetried);
+        $this->_upsertPersistentProperty(JobInterface::FIELD_NAME_TIMES_RETRIED, $timesRetried);
 
         return $this;
     }
@@ -217,7 +239,7 @@ class Job extends Model implements JobInterface
 
     public function setTimesHeld(int $timesHeld): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_TIMES_HELD, $timesHeld);
+        $this->_upsertPersistentProperty(JobInterface::FIELD_NAME_TIMES_HELD, $timesHeld);
 
         return $this;
     }
@@ -229,7 +251,7 @@ class Job extends Model implements JobInterface
 
     public function setTimesCrashed(int $timesCrashed): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_TIMES_CRASHED, $timesCrashed);
+        $this->_upsertPersistentProperty(JobInterface::FIELD_NAME_TIMES_CRASHED, $timesCrashed);
 
         return $this;
     }
@@ -241,7 +263,7 @@ class Job extends Model implements JobInterface
 
     public function setTimesPanicked(int $timesPanicked): JobInterface
     {
-        $this->_setPersistentProperty(JobInterface::FIELD_NAME_TIMES_PANICKED, $timesPanicked);
+        $this->_upsertPersistentProperty(JobInterface::FIELD_NAME_TIMES_PANICKED, $timesPanicked);
 
         return $this;
     }

@@ -15,4 +15,6 @@ interface TimeInterface
     public function validateTimestamp(string $timestamp, string $format = TimeInterface::MYSQL_DATETIME_FORMAT): bool;
 
     public function getDateTimeZone(string $timezoneCode = self::DEFAULT_TIMEZONE_CODE): \DateTimeZone;
+
+    public function getNewDateInterval(string $intervalSpec): \DateInterval;
 }

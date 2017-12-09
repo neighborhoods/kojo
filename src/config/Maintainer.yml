@@ -1,0 +1,4 @@
+services:
+  nhds.jobs.maintainer:
+    class: NHDS\Jobs\Maintainer
+    shared: false

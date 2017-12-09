@@ -1,0 +1,11 @@
+services:
+  nhds.jobs.process.type.listener.command:
+    class: NHDS\Jobs\Process\Type\Listener\Command
+    calls:
+      - [setPool, ['@nhds.jobs.process.pool']]
+      - [setBrokerTypeCollection, ['@nhds.jobs.message.broker.type.collection-job']]
+      - [setLogger, ['@nhds.jobs.process.pool.logger']]
+      - [setBrokerTypeCode, ['job_broker']]
+      - [addProcessType, ['listener.message', '@nhds.jobs.process.type.listener.command']]
+      - [addProcessType, ['job', '@nhds.jobs.process.type.job']]
+      - [setExpressionLanguage, ['@symfony.component.expressionlanguage.expressionlanguage']]

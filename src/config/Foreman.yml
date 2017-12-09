@@ -1,0 +1,13 @@
+services:
+  nhds.jobs.foreman:
+    class: NHDS\Jobs\Foreman
+    shared: false
+    calls:
+      - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-job']]
+      - [setJob, ['@nhds.jobs.data.job']]
+      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [addSemaphoreResource, ['maintain', '@nhds.jobs.semaphore.resource-maintain']]
+      - [addSemaphoreResource, ['schedule', '@nhds.jobs.semaphore.resource-schedule']]
+      - [setSelector, ['@nhds.jobs.data.job.selector']]
+      - [setMaintainer, ['@nhds.jobs.maintainer']]
+      - [setScheduler, ['@nhds.jobs.scheduler']]
