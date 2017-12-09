@@ -24,6 +24,7 @@ class Job extends Model implements JobInterface
 
     public function getAssignedState(): string
     {
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_ASSIGNED_STATE);
     }
 
     public function setNextStateRequest(string $nextStateRequest): JobInterface
@@ -35,6 +36,7 @@ class Job extends Model implements JobInterface
 
     public function getNextStateRequest(): string
     {
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_NEXT_STATE_REQUEST);
     }
 
     public function setTypeCode(string $typeCode): JobInterface
@@ -82,7 +84,7 @@ class Job extends Model implements JobInterface
 
     public function getImportance(): int
     {
-        // TODO: Implement getImportance() method.
+        return $this->_getPersistentProperty(JobInterface::FIELD_NAME_IMPORTANCE);
     }
 
     public function setStatusId(int $statusId): JobInterface
