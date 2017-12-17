@@ -7,6 +7,7 @@ use NHDS\Jobs\Db;
 use NHDS\Jobs\Message;
 use NHDS\Jobs\Data\Job;
 use NHDS\Jobs\Data\Job\Selector;
+use NHDS\Jobs\Worker\Locator;
 
 class Foreman implements ForemanInterface
 {
@@ -19,6 +20,7 @@ class Foreman implements ForemanInterface
     use Message\Broker\AwareTrait;
     use Db\Connection\Container\AwareTrait;
     use Selector\AwareTrait;
+    use Locator\AwareTrait;
     const PROP_JOB = 'job';
 
     public function work(): ForemanInterface
@@ -35,6 +37,13 @@ class Foreman implements ForemanInterface
     protected function _workWorker(): ForemanInterface
     {
         $job = $this->_getSelector()->getNextJobToWork();
+        $job->load();
+        $this->_getLocator()->setJob($job);
+        if(is_callable($this->_getLocator()->getCallable())){
+            call_user_func($this->_getLocator()->getCallable());
+        }else{
+
+        }
 
         return $this;
     }

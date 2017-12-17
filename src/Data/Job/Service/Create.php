@@ -18,6 +18,7 @@ class Create implements CreateInterface
     const PROP_WORK_AT_DATE_TIME = 'work_at_date_time';
     const PROP_SAVED             = 'saved';
     const PROP_JOB_TYPE_CODE     = 'job_type_code';
+    const PROP_JOB_PREPARED      = 'job_prepared';
 
     public function setImportance(int $importance): CreateInterface
     {
@@ -36,6 +37,22 @@ class Create implements CreateInterface
     public function save(): CreateInterface
     {
         try{
+            if($this->_getJobType()->getScheduleLimit() > 0){
+
+            }
+            $this->_prepareJob();
+            $this->_getJob()->save();
+            $this->_create(self::PROP_SAVED, true);
+        }catch(\Exception $exception){
+            throw $exception;
+        }
+
+        return $this;
+    }
+
+    protected function _prepareJob(): Create
+    {
+        if (!$this->_exists(self::PROP_JOB_PREPARED)) {
             $jobType = $this->_getJobType();
             $jobType->load(Job\TypeInterface::FIELD_NAME_TYPE_CODE, $this->_getJobTypeCode());
             if ($jobType->getIsEnabled()) {
@@ -64,10 +81,7 @@ class Create implements CreateInterface
             $this->_getJobStateService()->setJob($job);
             $this->_getJobStateService()->requestWork();
             $this->_getJobStateService()->applyRequest();
-            $job->save();
-            $this->_create(self::PROP_SAVED, true);
-        }catch(\Exception $exception){
-            throw $exception;
+            $this->_create(self::PROP_JOB_PREPARED, true);
         }
 
         return $this;

@@ -11,3 +11,4 @@ services:
       - [setSelector, ['@nhds.jobs.data.job.selector']]
       - [setMaintainer, ['@nhds.jobs.maintainer']]
       - [setScheduler, ['@nhds.jobs.scheduler']]
+      - [setLocator, ['@nhds.jobs.worker.locator']]
