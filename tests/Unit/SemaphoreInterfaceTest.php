@@ -2,7 +2,7 @@
 
 namespace NHDS\Jobs\Test\Unit;
 
-
+use NHDS\Jobs\Semaphore\Resource\Owner;
 use NHDS\Watch\AbstractTest;
 
 class SemaphoreInterfaceTest extends AbstractTest
@@ -15,7 +15,10 @@ class SemaphoreInterfaceTest extends AbstractTest
         $job->setId(15);
         $job->setTypeCode('type_code');
         $job->setCanWorkInParallel(true);
-        $resource->getResourceOwner()->setJob($job);
+        $resourceOwner = $resource->getResourceOwner();
+        if ($resourceOwner instanceof Owner\Job) {
+            $resourceOwner->setJob($job);
+        }
         $semaphore->testAndSetLock($resource);
 
         return $this;

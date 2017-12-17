@@ -5,11 +5,9 @@ namespace NHDS\Jobs\Data\Job;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Data\Job;
 use NHDS\Toolkit\Data\Property\Crud;
-use NHDS\Jobs\Semaphore\ResourceInterface;
-use NHDS\Jobs\Data\Job\State\ServiceInterface;
-use Zend\Db\Sql\Select;
 use NHDS\Jobs\Message\Broker;
 use NHDS\Jobs\Semaphore;
+use NHDS\Jobs\Semaphore\Resource\Owner;
 
 class Selector implements SelectorInterface
 {
@@ -19,10 +17,10 @@ class Selector implements SelectorInterface
     use Semaphore\AwareTrait;
     use Semaphore\Resource\AwareTrait;
     use Collection\AwareTrait;
-    const PROP_PREPARED_COLLECTION = 'prepared_collection';
-    const PROP_PAGE_SIZE           = 'page_size';
-    const PROP_OFFSET              = 'offset';
-    const PROP_NEXT_JOB_TO_WORK    = 'next_job_to_work';
+    use Collection\Selector\AwareTrait;
+    const PROP_PAGE_SIZE        = 'page_size';
+    const PROP_OFFSET           = 'offset';
+    const PROP_NEXT_JOB_TO_WORK = 'next_job_to_work';
     protected $_pickingCycles = 0;
 
     public function getNextJobToWork(): JobInterface
@@ -39,58 +37,36 @@ class Selector implements SelectorInterface
 
     public function pick(): SelectorInterface
     {
-        $select = $this->_getPreparedCollection()->getSelect();
+        $select = $this->_getSelectorJobCollection()->getSelect();
         $select->offset($this->_pickingCycles * $this->_getPageSize());
-        $jobCandidateRecords = $this->_getPreparedCollection()->getRecords();
-
-        if (count($jobCandidateRecords) > 1) {
-            $this->_getBroker()->publishMessage(count($jobCandidateRecords));
+        $select->limit($this->_getPageSize());
+        $jobCandidates = $this->_getSelectorJobCollection()->getModelsArray();
+        if (count($jobCandidates) > 1) {
+            $this->_getBroker()->publishMessage(count($jobCandidates));
         }
 
-        while (!empty($jobCandidateRecords)) {
-            // Find and obtain a job mutex.
-            foreach ($jobCandidateRecords as $jobCandidateRecord) {
-                $jobSemaphoreResource = $this->_getJobSemaphoreResource();
-                $resourceName = ($jobCandidateRecord[JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL] == 1)
-                    ? $jobCandidateRecord[JobInterface::FIELD_NAME_ID]
-                    : 'job';
-                $jobSemaphoreResource->setResourceName($resourceName);
-                $jobSemaphoreResource->setResourcePath($jobCandidateRecord[JobInterface::FIELD_NAME_TYPE_CODE]);
+        while (!empty($jobCandidates)) {
+            foreach ($this->_getSelectorJobCollection()->getIterator() as $jobCandidate) {
+                $jobSemaphoreResource = $this->_getSemaphoreResourceClone('job');
+                $resourceOwner = $jobSemaphoreResource->getResourceOwner();
+                if ($resourceOwner instanceof Owner\Job) {
+                    $resourceOwner->setJob($jobCandidate);
+                }else {
+                    throw new \UnexpectedValueException('Resource owner is an unexpected type.');
+                }
                 if ($this->_getSemaphore()->testAndSetLock($jobSemaphoreResource)) {
                     $job = $this->_getJobClone();
-                    $job->setIdPropertyName(JobInterface::FIELD_NAME_ID);
-                    $job->setId($jobCandidateRecord[JobInterface::FIELD_NAME_ID]);
+                    $job->setId($jobCandidate->getId());
                     $this->_create(self::PROP_NEXT_JOB_TO_WORK, $job);
                     break 2;
                 }
-                continue;
             }
             ++$this->_pickingCycles;
             $select->offset($this->_pickingCycles * $this->_getPageSize());
-            $jobCandidateRecords = $this->_getPreparedCollection()->getRecords();
+            $jobCandidates = $this->_getSelectorJobCollection()->getRecords();
         }
 
         return $this;
-    }
-
-    protected function _getPreparedCollection(): Collection
-    {
-        if (!$this->_exists(self::PROP_PREPARED_COLLECTION)) {
-            $select = $this->_getCollection()->getSelect();
-            $select->where([JobInterface::FIELD_NAME_ASSIGNED_STATE => ServiceInterface::STATE_WAITING]);
-            $select->columns(
-                [
-                    JobInterface::FIELD_NAME_ID,
-                    JobInterface::FIELD_NAME_TYPE_CODE,
-                    JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
-                ]
-            );
-            $select->order(JobInterface::FIELD_NAME_PRIORITY . ' DESC');
-            $select->where(JobInterface::FIELD_NAME_WORK_AT_DATETIME . ' <= utc_timestamp()');
-            $this->_create(self::PROP_PREPARED_COLLECTION, $this->_getCollection());
-        }
-
-        return $this->_read(self::PROP_PREPARED_COLLECTION);
     }
 
     protected function _getPageSize(): int
@@ -115,10 +91,5 @@ class Selector implements SelectorInterface
         $this->_create(self::PROP_OFFSET, $offset);
 
         return $this;
-    }
-
-    protected function _getJobSemaphoreResource(): ResourceInterface
-    {
-        return $this->_getSemaphoreResourceClone('job');
     }
 }

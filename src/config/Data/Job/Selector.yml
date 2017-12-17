@@ -7,3 +7,7 @@ services:
       - [setOffset, [50]]
       - [addSemaphoreResource, ['job', '@nhds.jobs.semaphore.resource-job']]
       - [setCollection, ['@nhds.jobs.data.job.collection']]
+      - [setBroker, ['@nhds.jobs.message.broker.redis']]
+      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [setSelectorJobCollection, ['@nhds.jobs.data.job.collection.selector']]
+      - [setJob, ['@nhds.jobs.data.job']]
