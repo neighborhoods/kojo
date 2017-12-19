@@ -14,6 +14,7 @@ class Create implements CreateInterface
     use Job\Type\AwareTrait;
     use Job\AwareTrait;
     use Semaphore\AwareTrait;
+    use Job\Collection\ScheduleLimit\AwareTrait;
     const PROP_IMPORTANCE        = 'importance';
     const PROP_WORK_AT_DATE_TIME = 'work_at_date_time';
     const PROP_SAVED             = 'saved';
@@ -36,16 +37,26 @@ class Create implements CreateInterface
 
     public function save(): CreateInterface
     {
-        try{
-            if($this->_getJobType()->getScheduleLimit() > 0){
-
+        $this->_prepareJob();
+        if ($this->_getJobType()->getScheduleLimit() > 0) {
+            $numberOfScheduledJobs = $this->_getScheduleLimitJobCollection()->getNumberOfCurrentlyScheduledJobs();
+            if ($numberOfScheduledJobs < $this->_getJobType()->getScheduleLimit()) {
+                $this->_getJobStateService()->requestPendingLimitCheck();
+                $this->_save();
             }
-            $this->_prepareJob();
-            $this->_getJob()->save();
-            $this->_create(self::PROP_SAVED, true);
-        }catch(\Exception $exception){
-            throw $exception;
+        }else {
+            $this->_getJobStateService()->requestWaitForWork();
+            $this->_save();
         }
+
+        return $this;
+    }
+
+    protected function _save(): Create
+    {
+        $this->_getJobStateService()->applyRequest();
+        $this->_getJob()->save();
+        $this->_create(self::PROP_SAVED, true);
 
         return $this;
     }
@@ -75,12 +86,9 @@ class Create implements CreateInterface
             $job->setPersistentProperties($persistentJobTypeProperties);
             $job->setImportance($importance);
             $job->setWorkAtDateTime($this->_read(self::PROP_WORK_AT_DATE_TIME));
+            $job->setTimesWorked(0);
             $job->setNextStateRequest(State\Service::STATE_NONE);
             $job->setAssignedState(State\Service::STATE_NEW);
-            $job->setTimesWorked(0);
-            $this->_getJobStateService()->setJob($job);
-            $this->_getJobStateService()->requestWork();
-            $this->_getJobStateService()->applyRequest();
             $this->_create(self::PROP_JOB_PREPARED, true);
         }
 

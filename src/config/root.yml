@@ -37,3 +37,4 @@ imports:
    - { resource: Data/Job/Collection.yml }
    - { resource: Process/Pool.yml }
    - { resource: Data/Job/Collection/Selector.yml }
+   - { resource: Data/Job/Collection/ScheduleLimit.yml }

@@ -8,7 +8,6 @@ class SelectorInterfaceTest extends Fixture\AbstractTest
 {
     public function testPick()
     {
-
         $selector = $this->_getTestContainerBuilder()->get('nhds.jobs.data.job.selector');
         $selector->pick();
 

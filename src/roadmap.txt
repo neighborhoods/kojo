@@ -1,4 +1,6 @@
-@bwilson - add auoto-complete to job type as an option
-@bwilson - add auto-schedule as a job type type option
-@bwilson - implement redis mutex
-@bwilson - impleemt zookpeer mutex
+@bwilson - add auto_complete to job type as an option.
+@bwilson - add auto_schedule as a job type type option.
+@bwilson - implement redis mutex.
+@bwilson - implement zookpeer mutex.
+@bwilson - add auto_delete_after_datetime as a job type option.
+@bwilson - check indexes against selects.

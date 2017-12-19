@@ -17,7 +17,23 @@ class Service implements ServiceInterface
     protected $_updateExpression;
     protected $_retryDateTime;
 
-    public function requestWork(): ServiceInterface
+    public function requestNew(): ServiceInterface
+    {
+        $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
+        $this->_assignedStateUpdate = ServiceInterface::STATE_NEW;
+
+        return $this;
+    }
+
+    public function requestPendingLimitCheck(): ServiceInterface
+    {
+        $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
+        $this->_assignedStateUpdate = ServiceInterface::PENDING_LIMIT_CHECK;
+
+        return $this;
+    }
+
+    public function requestWaitForWork(): ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
         $this->_assignedStateUpdate = ServiceInterface::STATE_WAITING;
