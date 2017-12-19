@@ -28,7 +28,15 @@ class Service implements ServiceInterface
     public function requestPendingLimitCheck(): ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
-        $this->_assignedStateUpdate = ServiceInterface::PENDING_LIMIT_CHECK;
+        $this->_assignedStateUpdate = ServiceInterface::STATE_PENDING_LIMIT_CHECK;
+
+        return $this;
+    }
+
+    public function requestCancelledFailedLimitCheck(): ServiceInterface
+    {
+        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->_assignedStateUpdate = ServiceInterface::STATE_CANCELLED_FAILED_LIMIT_CHECK;
 
         return $this;
     }

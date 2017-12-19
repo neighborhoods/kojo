@@ -3,17 +3,31 @@
 namespace NHDS\Jobs\Data\Job\Collection\ScheduleLimit;
 
 use NHDS\Jobs\Data\Job\Collection\ScheduleLimitInterface;
+use NHDS\Jobs\Data\Job\TypeInterface;
 
 trait AwareTrait
 {
-    public function setScheduleLimitJobCollection(ScheduleLimitInterface $scheduleLimitJobCollection)
+    protected $_jobCollectionScheduleLimits = [];
+
+    public function setJobCollectionScheduleLimit(ScheduleLimitInterface $jobCollectionScheduleLimit)
     {
-        $this->_create(ScheduleLimitInterface::class, $scheduleLimitJobCollection);
+        $this->_create(ScheduleLimitInterface::class, $jobCollectionScheduleLimit);
 
         return $this;
     }
 
-    protected function _getScheduleLimitJobCollection(): ScheduleLimitInterface
+    protected function _getJobCollectionScheduleLimitByJobType(TypeInterface $jobType): ScheduleLimitInterface
+    {
+        if (!isset($this->_jobCollectionScheduleLimits[$jobType->getCode()])) {
+            $scheduleLimit = $this->_getJobCollectionScheduleLimitClone();
+            $scheduleLimit->setJobType($jobType);
+            $this->_jobCollectionScheduleLimits[$jobType->getCode()] = $scheduleLimit;
+        }
+
+        return $this->_jobCollectionScheduleLimits[$jobType->getCode()];
+    }
+
+    protected function _getJobCollectionScheduleLimit(): ScheduleLimitInterface
     {
         if (!$this->_exists(ScheduleLimitInterface::class . '_INITIALIZED')) {
             /** @var ScheduleLimitInterface $scheduleLimitJobCollection */
@@ -25,8 +39,8 @@ trait AwareTrait
         return $this->_read(ScheduleLimitInterface::class);
     }
 
-    protected function _getScheduleLimitJobCollectionClone(): ScheduleLimitInterface
+    protected function _getJobCollectionScheduleLimitClone(): ScheduleLimitInterface
     {
-        return clone $this->_getScheduleLimitJobCollection();
+        return clone $this->_getJobCollectionScheduleLimit();
     }
 }

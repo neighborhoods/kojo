@@ -74,6 +74,7 @@ abstract class AbstractCollection implements CollectionInterface
     protected function &_getRecords(): array
     {
         if (!$this->_exists(self::PROP_RECORDS)) {
+            $this->_prepareCollection();
             $select = $this->getSelect();
             $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($select);
             /** @var \PDOStatement $pdoStatement */
@@ -89,4 +90,6 @@ abstract class AbstractCollection implements CollectionInterface
 
         return $this->_read(self::PROP_RECORDS);
     }
+
+    abstract protected function _prepareCollection(): AbstractCollection;
 }

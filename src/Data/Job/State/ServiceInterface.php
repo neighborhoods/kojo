@@ -8,7 +8,7 @@ interface ServiceInterface
 {
     const STATE_NONE                         = 'none';
     const STATE_NEW                          = 'new';
-    const PENDING_LIMIT_CHECK                = 'pending_limit_check';
+    const STATE_PENDING_LIMIT_CHECK          = 'pending_limit_check';
     const STATE_WORKING                      = 'working';
     const STATE_WAITING                      = 'waiting';
     const STATE_HOLD                         = 'hold';
@@ -22,6 +22,8 @@ interface ServiceInterface
     public function setJob(JobInterface $job);
 
     public function requestPendingLimitCheck(): ServiceInterface;
+
+    public function requestCancelledFailedLimitCheck(): ServiceInterface;
 
     public function requestWaitForWork(): ServiceInterface;
 

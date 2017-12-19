@@ -6,6 +6,7 @@ use NHDS\Jobs\Data\Job\Collection;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Db\Connection\ContainerInterface;
 use NHDS\Jobs\Data\Job\State;
+use NHDS\Jobs\Db\Model\AbstractCollection;
 
 class Selector extends Collection implements SelectorInterface
 {
@@ -43,7 +44,7 @@ class Selector extends Collection implements SelectorInterface
         return $this->_read(self::PROP_RECORDS);
     }
 
-    protected function _prepareCollection(): Collection
+    protected function _prepareCollection(): AbstractCollection
     {
         $select = $this->getSelect();
         $select->where(
