@@ -25,7 +25,7 @@ class Selector extends Collection implements SelectorInterface
     protected function &_getRecords(): array
     {
         if (!$this->_exists(self::PROP_RECORDS)) {
-            $this->_preparedCollection();
+            $this->_prepareCollection();
             $this->_create(self::PROP_RECORDS, []);
         }
         $select = $this->getSelect();
@@ -43,7 +43,7 @@ class Selector extends Collection implements SelectorInterface
         return $this->_read(self::PROP_RECORDS);
     }
 
-    protected function _preparedCollection(): Collection
+    protected function _prepareCollection(): Collection
     {
         $select = $this->getSelect();
         $select->where(

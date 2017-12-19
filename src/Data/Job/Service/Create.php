@@ -3,21 +3,14 @@
 namespace NHDS\Jobs\Data\Job\Service;
 
 use NHDS\Jobs\Data\Job;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Jobs\Data\Job\AbstractService;
 use NHDS\Jobs\Data\Job\State;
-use NHDS\Jobs\Semaphore;
 
-class Create implements CreateInterface
+class Create extends AbstractService implements CreateInterface
 {
-    use State\Service\AwareTrait;
-    use Crud\AwareTrait;
-    use Job\Type\AwareTrait;
-    use Job\AwareTrait;
-    use Semaphore\AwareTrait;
     use Job\Collection\ScheduleLimit\AwareTrait;
     const PROP_IMPORTANCE        = 'importance';
     const PROP_WORK_AT_DATE_TIME = 'work_at_date_time';
-    const PROP_SAVED             = 'saved';
     const PROP_JOB_TYPE_CODE     = 'job_type_code';
     const PROP_JOB_PREPARED      = 'job_prepared';
 

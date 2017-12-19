@@ -50,9 +50,7 @@ class Scheduler implements SchedulerInterface
         if (empty($this->_scheduleMinutesNotInCache)) {
             $nexReferenceMinuteDateTime = $this->_getNextReferenceMinuteDateTime();
             while ($this->_getReferenceDistanceDateTime() >= $nexReferenceMinuteDateTime) {
-                if ($this->_isMinuteScheduledInCache($nexReferenceMinuteDateTime)) {
-                    continue;
-                }else {
+                if (!$this->_isMinuteScheduledInCache($nexReferenceMinuteDateTime)) {
                     $scheduleMinute = $nexReferenceMinuteDateTime;
                     $this->_scheduleMinutesNotInCache[] = $scheduleMinute;
                 }

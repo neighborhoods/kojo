@@ -33,6 +33,15 @@ class Service implements ServiceInterface
         return $this;
     }
 
+    public function requestWork(): ServiceInterface
+    {
+        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->_assignedStateUpdate = ServiceInterface::STATE_WORKING;
+        $this->_updateExpression = 'job.setTimesWorked(job.getTimesWorked()+1)';
+
+        return $this;
+    }
+
     public function requestWaitForWork(): ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
@@ -49,10 +58,10 @@ class Service implements ServiceInterface
         return $this;
     }
 
-    public function requestCompleteQuit(): ServiceInterface
+    public function requestCompleteTerminated(): ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_QUIT;
+        $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_TERMINATED;
 
         return $this;
     }
@@ -67,7 +76,7 @@ class Service implements ServiceInterface
 
     public function requestCrashed(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
         $this->_assignedStateUpdate = ServiceInterface::STATE_CRASHED;
         $this->_updateExpression = 'job.setTimesCrashed(job.getTimesCrashed()+1)';
 
@@ -163,7 +172,7 @@ class Service implements ServiceInterface
                 }
                 break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_HOLD:
-            case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_QUIT:
+            case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_TERMINATED:
                 switch ($assignedState) {
                     case ServiceInterface::STATE_WAITING:
                     case ServiceInterface::STATE_WORKING:
@@ -174,7 +183,7 @@ class Service implements ServiceInterface
                 break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_SUCCESS:
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_FAILED:
-            case ServiceInterface::STATE_NONE . ServiceInterface::STATE_CRASHED:
+            case ServiceInterface::STATE_WORKING . ServiceInterface::STATE_CRASHED:
                 switch ($assignedState) {
                     case
                     ServiceInterface::STATE_WORKING:

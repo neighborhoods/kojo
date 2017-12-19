@@ -18,6 +18,7 @@ class Selector implements SelectorInterface
     use Semaphore\Resource\AwareTrait;
     use Collection\AwareTrait;
     use Collection\Selector\AwareTrait;
+    use Owner\Job\AwareTrait;
     const PROP_PAGE_SIZE        = 'page_size';
     const PROP_OFFSET           = 'offset';
     const PROP_NEXT_JOB_TO_WORK = 'next_job_to_work';
@@ -47,13 +48,7 @@ class Selector implements SelectorInterface
 
         while (!empty($jobCandidates)) {
             foreach ($this->_getSelectorJobCollection()->getIterator() as $jobCandidate) {
-                $jobSemaphoreResource = $this->_getSemaphoreResourceClone('job');
-                $resourceOwner = $jobSemaphoreResource->getResourceOwner();
-                if ($resourceOwner instanceof Owner\Job) {
-                    $resourceOwner->setJob($jobCandidate);
-                }else {
-                    throw new \UnexpectedValueException('Resource owner is an unexpected type.');
-                }
+                $jobSemaphoreResource = $this->_getNewJobOwnerResource($jobCandidate);
                 if ($this->_getSemaphore()->testAndSetLock($jobSemaphoreResource)) {
                     $job = $this->_getJobClone();
                     $job->setId($jobCandidate->getId());
