@@ -2,12 +2,13 @@
 
 namespace NHDS\Jobs\Data\Job\Collection;
 
-use NHDS\Jobs\Data\Job\Collection;
+use NHDS\Jobs\Data\Job\AbstractCollection;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Db\Connection\ContainerInterface;
+use NHDS\Jobs\Db;
 use NHDS\Toolkit\TimeInterface;
 
-class Scheduler extends Collection implements SchedulerInterface
+class Scheduler extends AbstractCollection implements SchedulerInterface
 {
     const PROP_DATE_TIME = 'date_time';
 
@@ -26,10 +27,8 @@ class Scheduler extends Collection implements SchedulerInterface
     protected function &_getRecords(): array
     {
         if (!$this->_exists(self::PROP_RECORDS)) {
+            $this->_prepareCollection();
             $select = $this->getSelect();
-            $select->columns([JobInterface::FIELD_NAME_TYPE_CODE, JobInterface::FIELD_NAME_WORK_AT_DATETIME]);
-            $workAtDateTime = $this->_getReferenceDateTime()->format(TimeInterface::MYSQL_DATETIME_FORMAT);
-            $select->where(JobInterface::FIELD_NAME_WORK_AT_DATETIME . '>= "' . $workAtDateTime . '"');
             $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($select);
             /** @var \PDOStatement $pdoStatement */
             $pdoStatement = $statement->execute()->getResource();
@@ -46,5 +45,14 @@ class Scheduler extends Collection implements SchedulerInterface
         }
 
         return $this->_read(self::PROP_RECORDS);
+    }
+
+    protected function _prepareCollection(): Db\Model\AbstractCollection
+    {
+        $this->getSelect()->columns([JobInterface::FIELD_NAME_TYPE_CODE, JobInterface::FIELD_NAME_WORK_AT_DATETIME]);
+        $workAtDateTime = $this->_getReferenceDateTime()->format(TimeInterface::MYSQL_DATETIME_FORMAT);
+        $this->getSelect()->where(JobInterface::FIELD_NAME_WORK_AT_DATETIME . '>= "' . $workAtDateTime . '"');
+
+        return $this;
     }
 }

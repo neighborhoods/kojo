@@ -2,12 +2,12 @@
 
 namespace NHDS\Jobs\Data\Job\Collection\Pending;
 
-use NHDS\Jobs\Data\Job\Collection;
+use NHDS\Jobs\Data\Job\AbstractCollection;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Data\Job\State;
 use NHDS\Jobs\Db\Model\AbstractCollection;
 
-class LimitCheck extends Collection implements LimitCheckInterface
+class LimitCheck extends AbstractCollection implements LimitCheckInterface
 {
     protected function _prepareCollection(): AbstractCollection
     {
