@@ -5,11 +5,11 @@ namespace NHDS\Jobs\Data\Job\Collection\Pending;
 use NHDS\Jobs\Data\Job\AbstractCollection;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Data\Job\State;
-use NHDS\Jobs\Db\Model\AbstractCollection;
+use NHDS\Jobs\Db;
 
 class LimitCheck extends AbstractCollection implements LimitCheckInterface
 {
-    protected function _prepareCollection(): AbstractCollection
+    protected function _prepareCollection(): Db\Model\AbstractCollection
     {
         $select = $this->getSelect();
         $select->where(
