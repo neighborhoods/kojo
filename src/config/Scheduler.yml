@@ -7,4 +7,5 @@ services:
       - [setCacheItemPool, ['@symfony.component.cache.adpater.redisadapter']]
       - [setSchedulerJobCollection, ['@nhds.jobs.data.job.collection.scheduler']]
       - [setSchedulerJobTypeCollection, ['@nhds.jobs.data.job.type.collection.scheduler']]
-      - [setJobServiceCreate, ['@nhds.jobs.data.job.service.create']]
+      - [setJobServiceCreateFactory, ['@nhds.jobs.data.job.service.create.factory']]
+      - [setMinutesToScheduleAheadFor, [5]]

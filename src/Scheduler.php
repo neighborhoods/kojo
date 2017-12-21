@@ -18,7 +18,7 @@ class Scheduler implements SchedulerInterface
     use Db\Connection\Container\AwareTrait;
     use Time\AwareTrait;
     use Crud\AwareTrait;
-    use Create\AwareTrait;
+    use Create\Factory\AwareTrait;
     const DATE_TIME_FORMAT_CACHE_MINUTE        = 'Y_m_d_H_i';
     const DATE_TIME_FORMAT_MYSQL_MINUTE        = 'Y-m-d H:i:0';
     const CACHE_SCHEDULED_AHEAD_VALUE          = 'scheduled';
@@ -81,20 +81,20 @@ class Scheduler implements SchedulerInterface
             $cronExpressionString = $jobType->getCronExpression();
             $typeCode = $jobType->getCode();
             $cron = CronExpression::factory($cronExpressionString);
-            $nextRunDateTime = $cron->getNextRunDate();
             foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $unscheduledDateTime) {
-                if ($nextRunDateTime == $unscheduledDateTime) {
+                if ($cron->isDue($unscheduledDateTime)) {
                     if (!isset($this->_getSchedulerJobCollection()->getRecords()[$typeCode][$unscheduledMinute])) {
-                        $this->_getJobServiceCreate()->setJobTypeCode($typeCode);
-                        $this->_getJobServiceCreate()->setWorkAtDateTime($unscheduledDateTime);
-                        $this->_getJobServiceCreate()->save();
+                        $create = $this->_getJobServiceCreateFactory()->create();
+                        $create->setJobTypeCode($typeCode);
+                        $create->setWorkAtDateTime($unscheduledDateTime);
+                        $create->save();
                     }
                 }
             }
         }
 
         foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $unscheduledDateTime) {
-            $this->_cacheScheduledMinutes($unscheduledMinute);
+            $this->_cacheScheduledMinutes($unscheduledDateTime);
         }
 
         return $this;
@@ -102,7 +102,7 @@ class Scheduler implements SchedulerInterface
 
     protected function _getScheduledKeyLifetime(): \DateTime
     {
-        if ($this->_exists(self::PROP_SCHEDULED_KEY_LIFETIME)) {
+        if (!$this->_exists(self::PROP_SCHEDULED_KEY_LIFETIME)) {
             $now = $this->_getTime()->getNow();
             $lifetimeSeconds = 5 * 60 + $this->_getMinutesToScheduleAheadFor();
             $dateInterval = new \DateInterval('PT' . $lifetimeSeconds . 'S');
@@ -112,10 +112,11 @@ class Scheduler implements SchedulerInterface
         return $this->_read(self::PROP_SCHEDULED_KEY_LIFETIME);
     }
 
-    protected function _cacheScheduledMinutes(string $time): SchedulerInterface
+    protected function _cacheScheduledMinutes(\DateTime $scheduledMinute): SchedulerInterface
     {
         $cacheItemPool = $this->_getCacheItemPool();
-        $cacheItem = $cacheItemPool->getItem(self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $time);
+        $cachedMinuteDateTimeString = $scheduledMinute->format(self::DATE_TIME_FORMAT_CACHE_MINUTE);
+        $cacheItem = $cacheItemPool->getItem(self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $cachedMinuteDateTimeString);
         $cacheItem->set(self::CACHE_SCHEDULED_AHEAD_VALUE);
         $cacheItem->expiresAt($this->_getScheduledKeyLifetime());
         $cacheItemPool->save($cacheItem);

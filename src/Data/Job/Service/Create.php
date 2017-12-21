@@ -47,6 +47,7 @@ class Create extends AbstractService implements CreateInterface
 
     protected function _save(): Create
     {
+        $this->_getJobStateService()->setJob($this->_getJob());
         $this->_getJobStateService()->applyRequest();
         $this->_getJob()->save();
         $this->_create(self::PROP_SAVED, true);

@@ -41,6 +41,6 @@ trait AwareTrait
 
     protected function _getJobCollectionScheduleLimitClone(): ScheduleLimitInterface
     {
-        return clone $this->_getJobCollectionScheduleLimit();
+        return clone $this->_read(ScheduleLimitInterface::class);
     }
 }

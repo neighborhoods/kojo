@@ -179,6 +179,14 @@ class Service implements ServiceInterface
                         $invalidTransition = true;
                 }
                 break;
+            case ServiceInterface::STATE_WORKING . ServiceInterface::STATE_PENDING_LIMIT_CHECK:
+                switch ($assignedState) {
+                    case ServiceInterface::STATE_NEW:
+                        break;
+                    default:
+                        $invalidTransition = true;
+                }
+                break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_HOLD:
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_TERMINATED:
                 switch ($assignedState) {
