@@ -5,8 +5,7 @@ services:
     calls:
       - [setPageSize, [50]]
       - [setOffset, [50]]
-      - [addSemaphoreResource, ['job', '@nhds.jobs.semaphore.resource-job']]
-      - [setCollection, ['@nhds.jobs.data.job.collection']]
+      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-job']]
       - [setBroker, ['@nhds.jobs.message.broker.redis']]
       - [setSemaphore, ['@nhds.jobs.semaphore']]
       - [setSelectorJobCollection, ['@nhds.jobs.data.job.collection.selector']]

@@ -14,10 +14,10 @@ class Server implements ServerInterface
     use Time\AwareTrait;
     use Pool\AwareTrait;
     use Semaphore\AwareTrait;
-    use Semaphore\Resource\AwareTrait;
+    use Semaphore\Resource\Factory\AwareTrait;
     const SERVER_SEMAPHORE_RESOURCE_NAME = 'server';
 
-    public function start(): Server
+    public function start(): ServerInterface
     {
         $this->_getPool()->initialize();
         $this->_getLogger()->info("Starting ProcessPool server...");
@@ -38,7 +38,7 @@ class Server implements ServerInterface
 
     protected function _getServerSemaphoreResource(): Semaphore\ResourceInterface
     {
-        return $this->_getSemaphoreResource(self::SERVER_SEMAPHORE_RESOURCE_NAME);
+        return $this->_getCachedSemaphoreResource(self::SERVER_SEMAPHORE_RESOURCE_NAME);
     }
 
     protected function _exit(int $exitCode)

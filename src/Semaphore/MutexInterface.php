@@ -1,8 +1,6 @@
 <?php
 
-namespace NHDS\Jobs\Semaphore\Mutex;
-
-use NHDS\Jobs\Semaphore\ResourceInterface;
+namespace NHDS\Jobs\Semaphore;
 
 interface MutexInterface
 {

@@ -2,7 +2,6 @@
 
 namespace NHDS\Jobs\Semaphore;
 
-use NHDS\Jobs\Semaphore\Mutex\MutexInterface;
 use NHDS\Jobs\Semaphore\Resource\OwnerInterface;
 use NHDS\Toolkit\Data\Property\Crud;
 

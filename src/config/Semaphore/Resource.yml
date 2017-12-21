@@ -1,4 +1,8 @@
 services:
+  nhds.jobs.semaphore.resource-job:
+    class: NHDS\Jobs\Semaphore\Resource
+    shared: false
+      - [setIsBlocking, [false]]
   nhds.jobs.semaphore.resource-maintain:
     class: NHDS\Jobs\Semaphore\Resource
     shared: false
@@ -6,21 +10,13 @@ services:
       - [setResourceName, ['maintain.lock']]
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
-      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
   nhds.jobs.semaphore.resource-schedule:
     class: NHDS\Jobs\Semaphore\Resource
     calls:
       - [setResourceName, ['schedule.lock']]
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
-      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
     shared: false
-  nhds.jobs.semaphore.resource-job:
-    class: NHDS\Jobs\Semaphore\Resource
-    shared: false
-    calls:
-      - [setResourceOwner, ['@nhds.semaphore.resource.owner.job']]
-      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
   nhds.jobs.semaphore.resource-server:
     class: NHDS\Jobs\Semaphore\Resource
     shared: false
@@ -28,4 +24,3 @@ services:
       - [setResourceName, ['server.lock']]
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
-      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]

@@ -11,7 +11,7 @@ trait AwareTrait
     protected function _getNewJobOwnerResource(JobInterface $job): ResourceInterface
     {
         /** @var ResourceInterface $jobSemaphoreResource */
-        $jobSemaphoreResource = $this->_getSemaphoreResourceClone('job');
+        $jobSemaphoreResource = $this->_getNewSemaphoreResource('job');
         $resourceOwner = $jobSemaphoreResource->getResourceOwner();
         if ($resourceOwner instanceof Job) {
             $resourceOwner->setJob($job);

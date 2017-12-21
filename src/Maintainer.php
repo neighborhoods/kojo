@@ -18,6 +18,8 @@ class Maintainer implements MaintainerInterface
     use CrashDetection\AwareTrait;
     use Resource\Owner\Job\AwareTrait;
     use Semaphore\AwareTrait;
+    use Semaphore\Resource\AwareTrait;
+    use Semaphore\Resource\Factory\AwareTrait;
     use Crash\AwareTrait;
     use LimitCheck\AwareTrait;
     use ScheduleLimit\AwareTrait;

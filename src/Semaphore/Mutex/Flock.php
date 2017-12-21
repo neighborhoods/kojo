@@ -4,6 +4,8 @@ namespace NHDS\Jobs\Semaphore\Mutex;
 
 use NHDS\Jobs\Exception\Runtime;
 use NHDS\Jobs\Filesystem;
+use NHDS\Jobs\Semaphore\AbstractMutex;
+use NHDS\Jobs\Semaphore\MutexInterface;
 use NHDS\Toolkit\Data\Property\Crud;
 
 class Flock extends AbstractMutex

@@ -37,7 +37,6 @@ class Pool implements PoolInterface
         $this->_getLogger()->debug('Received terminate request.');
         if (!empty($this->_processPool)) {
             $this->_getLogger()->debug('Sending SIGTERM to child processes...');
-            $this->_getLogger()->debug('POOL: ' . var_export(array_keys($this->_processPool), true));
             /** @var ProcessInterface $process */
             foreach ($this->_processPool as $process) {
                 posix_kill($process->getProcessId(), SIGKILL);

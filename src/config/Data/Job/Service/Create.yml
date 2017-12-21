@@ -6,4 +6,3 @@ services:
       - [setJobStateService, ['@nhds.jobs.data.job.state.service']]
       - [setJobType, ['@nhds.jobs.data.job.type']]
       - [setJob, ['@nhds.jobs.data.job']]
-      - [setScheduleLimitJobCollection, ['@nhds.jobs.data.job.collection.schedulelimit']]

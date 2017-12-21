@@ -15,7 +15,7 @@ class Selector implements SelectorInterface
     use Broker\AwareTrait;
     use Job\AwareTrait;
     use Semaphore\AwareTrait;
-    use Semaphore\Resource\AwareTrait;
+    use Semaphore\Resource\Factory\AwareTrait;
     use Collection\AwareTrait;
     use Collection\Selector\AwareTrait;
     use Owner\Job\AwareTrait;

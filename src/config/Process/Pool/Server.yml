@@ -5,5 +5,5 @@ services:
       - [setLogger, ['@nhds.jobs.process.pool.logger']]
       - [setTime, ['@nhds.toolkit.time']]
       - [setPool, ['@nhds.jobs.process.pool']]
-      - [addSemaphoreResource, ['server', '@nhds.jobs.semaphore.resource-server']]
+      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-server']]
       - [setSemaphore, ['@nhds.jobs.semaphore']]

@@ -1,0 +1,76 @@
+- go over day 1 implementation
+    - simple example
+    - checkout codebase
+- if we have time go over day (n)
+- goal is that leads are Jobs knowledgeable for day 1
+- give sufficient working knowledge to play at home before we release in Q1
+    - get feedback
+- UserManager
+- versions of Looper
+    v1 - (most things, UserManager(tackle first)),
+    v2 - (MlsManager (largest surface area)),
+    v3 - (AreaManager, ?IdxManager)
+- testing
+- terminology
+    - job
+        - type_code
+        - name
+        - priority
+        - importance
+        - status_id
+        - work_at_datetime
+        - next_state_request
+        - assigned_state
+        - previous_state
+        - worker_uri
+        - worker_method
+        - can_work_in_parallel
+        - metrics:
+            - times_worked
+            - times_retried
+            - times_held
+            - times_crashed
+            - times_panicked
+            - last_transition_datetime
+            - last_transition_micro_time
+    - job type
+        - type_code
+        - name
+        - worker_uri
+        - worker_method
+        - can_work_in_parallel
+        - default_importance
+        - cron_expression
+        - schedule_limit
+            - there is at most SL number of workers that can be worked in the
+                job table.
+        - is_enabled
+    - scheduling patterns
+        - static
+        - dynamic
+        - auto
+    - selector
+        - some amount of randomness
+            - prevent starvation
+    - crash
+    - states?
+    - messages
+    - REST API
+    - auto-complete
+- if there is a need to swap out a component we should talk about it first
+    - day (n) talk about process for extending / replacing components
+- explain fixture expressions
+- dependency injection
+    - architecture is meant to be flexible
+- data layer
+- pool
+- traits:
+    - crud
+    - aware
+        - enforces strict typing
+        - symbolic token-ization
+- patterns - jobs is a suite of components and options
+    from which you can build patterns.
+    - The Multiplexor pattern
+        - The Singelton pattern
+    - The Stampede

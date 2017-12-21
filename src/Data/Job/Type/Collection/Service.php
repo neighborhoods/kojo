@@ -2,7 +2,7 @@
 
 namespace NHDS\Jobs\Data\Job\Type\Collection;
 
-use NHDS\Jobs\Data\Job\Type\Collection;
+use NHDS\Jobs\Data\Job\Type\AbstractCollection;
 use NHDS\Toolkit\Data\Property\Crud;
 
 class Service implements ServiceInterface
@@ -11,7 +11,7 @@ class Service implements ServiceInterface
     use Crud\AwareTrait;
     protected $_namedCollections = [];
 
-    public function getNamedCollection(string $collectionName): Collection
+    public function getNamedCollection(string $collectionName): AbstractCollection
     {
         if (isset($this->_namedCollections[$collectionName])) {
             $namedCollection = $this->_namedCollections[$collectionName];

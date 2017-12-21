@@ -1,9 +1,8 @@
 <?php
 
-namespace NHDS\Jobs\Semaphore\Mutex;
+namespace NHDS\Jobs\Semaphore;
 
 use NHDS\Jobs\Exception;
-use NHDS\Jobs\Semaphore\ResourceInterface;
 
 abstract class AbstractMutex implements MutexInterface
 {

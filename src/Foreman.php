@@ -17,7 +17,7 @@ class Foreman implements ForemanInterface
     use Scheduler\AwareTrait;
     use Job\AwareTrait;
     use Semaphore\AwareTrait;
-    use Semaphore\Resource\AwareTrait;
+    use Semaphore\Resource\Factory\AwareTrait;
     use Message\Broker\AwareTrait;
     use Db\Connection\Container\AwareTrait;
     use Selector\AwareTrait;
@@ -52,7 +52,6 @@ class Foreman implements ForemanInterface
             }
             try{
                 call_user_func($this->_getLocator()->getCallable());
-
             }catch(\Exception $e){
 
             }
@@ -96,11 +95,11 @@ class Foreman implements ForemanInterface
 
     protected function _getMaintainSemaphoreResource(): Semaphore\ResourceInterface
     {
-        return $this->_getSemaphoreResource(self::MAINTAIN_SEMAPHORE_RESOURCE_NAME);
+        return $this->_getCachedSemaphoreResource(self::MAINTAIN_SEMAPHORE_RESOURCE_NAME);
     }
 
     protected function _getScheduleSemaphoreResource(): Semaphore\ResourceInterface
     {
-        return $this->_getSemaphoreResource(self::SCHEDULE_SEMAPHORE_RESOURCE_NAME);
+        return $this->_getCachedSemaphoreResource(self::SCHEDULE_SEMAPHORE_RESOURCE_NAME);
     }
 }

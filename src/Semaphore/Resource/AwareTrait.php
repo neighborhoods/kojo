@@ -6,34 +6,20 @@ use NHDS\Jobs\Semaphore\ResourceInterface;
 
 trait AwareTrait
 {
-    protected $_semaphoreResources = [];
-
-    public function addSemaphoreResource(string $resourceName, ResourceInterface $resource)
+    public function setSemaphoreResource(ResourceInterface $resource)
     {
-        if (!isset($this->_semaphoreResources[$resourceName])) {
-            $this->_semaphoreResources[$resourceName] = $resource;
-        }else {
-            throw new \LogicException('Semaphore resource "' . $resourceName . ' is already set.');
-        }
+        $this->_create(ResourceInterface::class, $resource);
 
         return $this;
     }
 
-    protected function _getSemaphoreResource($resourceName): ResourceInterface
+    protected function _getSemaphoreResource(): ResourceInterface
     {
-        if (!isset($this->_semaphoreResources[$resourceName])) {
-            throw new \LogicException('Semaphore resource "' . $resourceName . '" is not set.');
-        }
-
-        return $this->_semaphoreResources[$resourceName];
+        return $this->_read(ResourceInterface::class);
     }
 
-    protected function _getSemaphoreResourceClone($resourceName): ResourceInterface
+    protected function _getSemaphoreResourceClone(): ResourceInterface
     {
-        if (!isset($this->_semaphoreResources[$resourceName])) {
-            throw new \LogicException('Semaphore resource "' . $resourceName . '" is not set.');
-        }
-
-        return clone $this->_semaphoreResources[$resourceName];
+        return clone $this->_read(ResourceInterface::class);
     }
 }
