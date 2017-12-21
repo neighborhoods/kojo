@@ -3,7 +3,12 @@ services:
     class: NHDS\Jobs\Maintainer
     shared: false
     calls:
-      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-job']]
       - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-job']]
+      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-update_pending_jobs']]
+      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-reschedule_jobs']]
       - [setJobCollectionCrashDetection, ['@nhds.jobs.data.job.collection.crashdetection']]
+      - [setJobCollectionPendingLimitCheck, ['@nhds.jobs.data.job.collection.pending.limitcheck']]
       - [setJobServiceUpdateCrashFactory, ['@nhds.jobs.data.job.service.update.crash.factory']]
+      - [setJobServiceUpdateWorkFactory, ['@nhds.jobs.data.job.service.update.work.factory']]
+      - [setJobServiceUpdateCancelledFailedLimitCheckFactory, ['@nhds.jobs.data.job.service.update.cancelled.failedlimitcheck.factory']]

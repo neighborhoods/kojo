@@ -2,12 +2,20 @@ services:
   nhds.jobs.semaphore.resource-job:
     class: NHDS\Jobs\Semaphore\Resource
     shared: false
+    calls:
       - [setIsBlocking, [false]]
-  nhds.jobs.semaphore.resource-maintain:
+  nhds.jobs.semaphore.resource-reschedule_jobs:
     class: NHDS\Jobs\Semaphore\Resource
     shared: false
     calls:
-      - [setResourceName, ['maintain.lock']]
+      - [setResourceName, ['reschedule_jobs.lock']]
+      - [setResourcePath, ['nhds/jobs']]
+      - [setIsBlocking, [false]]
+  nhds.jobs.semaphore.resource-update_pending_jobs:
+    class: NHDS\Jobs\Semaphore\Resource
+    shared: false
+    calls:
+      - [setResourceName, ['update_pending_jobs.lock']]
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
   nhds.jobs.semaphore.resource-schedule:

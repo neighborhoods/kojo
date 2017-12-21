@@ -6,20 +6,20 @@ use NHDS\Jobs\Data\Job\Service\Update\Cancelled\FailedLimitCheckInterface;
 
 trait AwareTrait
 {
-    public function setJobServiceUpdateFailedLimitCheck(FailedLimitCheckInterface $jobServiceUpdateFailedLimitCheck)
+    public function setJobServiceUpdateCancelledFailedLimitCheck(FailedLimitCheckInterface $jobServiceUpdateFailedLimitCheck)
     {
         $this->_create(FailedLimitCheckInterface::class, $jobServiceUpdateFailedLimitCheck);
 
         return $this;
     }
 
-    protected function _getJobServiceUpdateFailedLimitCheck(): FailedLimitCheckInterface
+    protected function _getJobServiceUpdateCancelledFailedLimitCheck(): FailedLimitCheckInterface
     {
         return $this->_read(FailedLimitCheckInterface::class);
     }
 
-    protected function _getJobServiceUpdateFailedLimitCheckClone(): FailedLimitCheckInterface
+    protected function _getJobServiceUpdateCancelledFailedLimitCheckClone(): FailedLimitCheckInterface
     {
-        return clone $this->_getJobServiceUpdateFailedLimitCheck();
+        return clone $this->_getJobServiceUpdateCancelledFailedLimitCheck();
     }
 }

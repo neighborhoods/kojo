@@ -11,7 +11,6 @@ imports:
    - { resource: Scheduler.yml }
    - { resource: Data/Job/Type/Collection.yml }
    - { resource: Data/Job/Type/Collection/Iterator.yml}
-   - { resource: Data/Job/Type/Collection/Service.yml }
    - { resource: Data/Job/Type.yml }
    - { resource: Data/Job/Collection/Scheduler.yml }
    - { resource: Data/Job/Type/Collection/Scheduler.yml }
@@ -42,3 +41,8 @@ imports:
    - { resource: Semaphore/Resource/Factory.yml }
    - { resource: Worker/Locator.yml }
    - { resource: Data/Job/Service/Update/Crash/Factory.yml }
+   - { resource: Data/Job/Service/Update/Work/Factory.yml }
+   - { resource: Data/Job/Service/Update/Work.yml }
+   - { resource: Data/Job/Service/Update/Cancelled/FailedLimitCheck/Factory.yml }
+   - { resource: Data/Job/Service/Update/Cancelled/FailedLimitCheck.yml }
+   - { resource: Data/Job/Collection/Pending/LimitCheck.yml }

@@ -13,13 +13,7 @@ class Semaphore implements SemaphoreInterface
     {
         $resourceId = $resource->getResourceId();
         if ($this->_hasResource($resourceId)) {
-            if ($this->_getLockCount($resourceId) === 1) {
-                if ($this->_getResource($resourceId)->getMutex()->testAndSetLock() === true) {
-                    $this->_incrementLockCount($resourceId);
-                }
-            }else {
-                $this->_incrementLockCount($resourceId);
-            }
+            $this->_incrementLockCount($resourceId);
         }else {
             $this->_resources[$resourceId] = $resource;
             if ($this->_getResource($resourceId)->getMutex()->testAndSetLock() === true) {
@@ -35,10 +29,38 @@ class Semaphore implements SemaphoreInterface
         $resourceId = $resource->getResourceId();
         if ($this->_getLockCount($resourceId) === 1) {
             $this->_getResource($resourceId)->getMutex()->releaseLock();
-            $this->_decrementLockCount($resourceId);
+            $this->_unsetLockCount($resourceId);
+            $this->_unsetResource($resourceId);
         }else {
             $this->_decrementLockCount($resourceId);
         }
+
+        return $this;
+    }
+
+    public function hasLock(ResourceInterface $resource): bool
+    {
+        $resourceId = $resource->getResourceId();
+
+        return ($this->_hasResource($resourceId) && $this->_hasLockCount($resourceId));
+    }
+
+    protected function _unsetLockCount(string $resourceId): Semaphore
+    {
+        if ($this->_lockCounts[$resourceId] !== 1) {
+            throw new \LogicException('Lock count is not 1.');
+        }
+        unset($this->_lockCounts[$resourceId]);
+
+        return $this;
+    }
+
+    protected function _unsetResource(string $resourceId): Semaphore
+    {
+        if (!$this->_hasResource($resourceId)) {
+            throw new \LogicException('Resource is not set.');
+        }
+        unset($this->_resources[$resourceId]);
 
         return $this;
     }
@@ -89,10 +111,10 @@ class Semaphore implements SemaphoreInterface
     protected function _decrementLockCount(string $resourceId): SemaphoreInterface
     {
         if ($this->_hasResource($resourceId)) {
-            if ($this->_getLockCount($resourceId) < 0) {
+            if ($this->_getLockCount($resourceId) > 1) {
                 --$this->_lockCounts[$resourceId];
             }else {
-                throw new \LogicException('Lock count is less than zero.');
+                throw new \LogicException('Lock count is less than one.');
             }
         }else {
             throw new \LogicException('Resource is not set.');

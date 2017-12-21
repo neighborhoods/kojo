@@ -82,7 +82,8 @@ class Foreman implements ForemanInterface
     {
         if ($this->_getSemaphore()->testAndSetLock($this->_getMaintainSemaphoreResource())) {
             try{
-                $this->_getMaintainer()->maintain();
+                $this->_getMaintainer()->updatePendingJobs();
+                $this->_getMaintainer()->rescheduleCrashedJobs();
             }catch(\Exception $exception){
                 $this->_getSemaphore()->releaseLock($this->_getMaintainSemaphoreResource());
                 throw $exception;
@@ -95,11 +96,11 @@ class Foreman implements ForemanInterface
 
     protected function _getMaintainSemaphoreResource(): Semaphore\ResourceInterface
     {
-        return $this->_getCachedSemaphoreResource(self::MAINTAIN_SEMAPHORE_RESOURCE_NAME);
+        return $this->_getSemaphoreResource(self::MAINTAIN_SEMAPHORE_RESOURCE_NAME);
     }
 
     protected function _getScheduleSemaphoreResource(): Semaphore\ResourceInterface
     {
-        return $this->_getCachedSemaphoreResource(self::SCHEDULE_SEMAPHORE_RESOURCE_NAME);
+        return $this->_getSemaphoreResource(self::SCHEDULE_SEMAPHORE_RESOURCE_NAME);
     }
 }

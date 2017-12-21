@@ -9,7 +9,8 @@ class MaintainerInterfaceTest extends Fixture\AbstractTest
     public function testMaintain()
     {
         $maintainer = $this->_getTestContainerBuilder()->get('nhds.jobs.maintainer');
-        $maintainer->maintain();
+        $maintainer->updatePendingJobs();
+        $maintainer->rescheduleCrashedJobs();
 
         return $this;
     }

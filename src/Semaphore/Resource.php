@@ -3,6 +3,7 @@
 namespace NHDS\Jobs\Semaphore;
 
 use NHDS\Jobs\Semaphore\Resource\OwnerInterface;
+use NHDS\Jobs\SemaphoreInterface;
 use NHDS\Toolkit\Data\Property\Crud;
 
 class Resource implements ResourceInterface
@@ -14,6 +15,35 @@ class Resource implements ResourceInterface
     const PROP_IS_BLOCKING    = 'is_blocking';
     protected $_mutex;
     protected $_resourceId;
+
+    public function setSemaphore(SemaphoreInterface $semaphore): ResourceInterface
+    {
+        $this->_create(SemaphoreInterface::class, $semaphore);
+
+        return $this;
+    }
+
+    protected function _getSemaphore(): SemaphoreInterface
+    {
+        return $this->_read(SemaphoreInterface::class);
+    }
+
+    public function testAndSetLock(): bool
+    {
+        return $this->_getSemaphore()->testAndSetLock($this);
+    }
+
+    public function releaseLock(): ResourceInterface
+    {
+        $this->_getSemaphore()->releaseLock($this);
+
+        return $this;
+    }
+
+    public function hasLock(): bool
+    {
+        return $this->_getSemaphore()->hasLock($this);
+    }
 
     public function setResourceOwner(OwnerInterface $resourceOwner): ResourceInterface
     {
@@ -83,6 +113,7 @@ class Resource implements ResourceInterface
                 throw new \LogicException('Is blocking is not set.');
             }
         }
+
         return $this->_read(self::PROP_IS_BLOCKING);
     }
 

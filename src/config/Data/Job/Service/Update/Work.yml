@@ -1,0 +1,4 @@
+services:
+  nhds.jobs.data.job.service.update.work:
+    class: NHDS\Jobs\Data\Job\Service\Update\Work
+    shared: false

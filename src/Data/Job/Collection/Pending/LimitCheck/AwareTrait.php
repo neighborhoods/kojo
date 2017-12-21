@@ -6,20 +6,20 @@ use NHDS\Jobs\Data\Job\Collection\Pending\LimitCheckInterface;
 
 trait AwareTrait
 {
-    public function setJobCollectionLimitCheck(LimitCheckInterface $jobCollectionLimitCheck)
+    public function setJobCollectionPendingLimitCheck(LimitCheckInterface $jobCollectionPendingLimitCheck)
     {
-        $this->_create(LimitCheckInterface::class, $jobCollectionLimitCheck);
+        $this->_create(LimitCheckInterface::class, $jobCollectionPendingLimitCheck);
 
         return $this;
     }
 
-    protected function _getJobCollectionLimitCheck(): LimitCheckInterface
+    protected function _getJobCollectionPendingLimitCheck(): LimitCheckInterface
     {
         return $this->_read(LimitCheckInterface::class);
     }
 
-    protected function _getJobCollectionLimitCheckClone(): LimitCheckInterface
+    protected function _getJobCollectionPendingLimitCheckClone(): LimitCheckInterface
     {
-        return clone $this->_getJobCollectionLimitCheck();
+        return clone $this->_getJobCollectionPendingLimitCheck();
     }
 }

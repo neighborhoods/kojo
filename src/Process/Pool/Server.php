@@ -38,7 +38,7 @@ class Server implements ServerInterface
 
     protected function _getServerSemaphoreResource(): Semaphore\ResourceInterface
     {
-        return $this->_getCachedSemaphoreResource(self::SERVER_SEMAPHORE_RESOURCE_NAME);
+        return $this->_getSemaphoreResource(self::SERVER_SEMAPHORE_RESOURCE_NAME);
     }
 
     protected function _exit(int $exitCode)

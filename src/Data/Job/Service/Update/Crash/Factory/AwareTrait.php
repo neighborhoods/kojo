@@ -17,9 +17,4 @@ trait AwareTrait
     {
         return $this->_read(FactoryInterface::class);
     }
-
-    protected function _getJobServiceUpdateCrashFactoryClone(): FactoryInterface
-    {
-        return clone $this->_getJobServiceUpdateCrashFactory();
-    }
 }

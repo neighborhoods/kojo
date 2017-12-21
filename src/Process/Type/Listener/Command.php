@@ -8,7 +8,7 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Command extends Type\AbstractListener
 {
-    const PROP_EXPRESSION_LANGAUGE = 'expression_language';
+    const PROP_EXPRESSION_LANGUAGE = 'expression_language';
 
     public function hasMessages(): bool
     {
@@ -39,14 +39,14 @@ class Command extends Type\AbstractListener
 
     public function setExpressionLanguage(ExpressionLanguage $expressionLanguage): Command
     {
-        $this->_create(self::PROP_EXPRESSION_LANGAUGE, $expressionLanguage);
+        $this->_create(self::PROP_EXPRESSION_LANGUAGE, $expressionLanguage);
 
         return $this;
     }
 
     protected function _getExpressionLanguage(): ExpressionLanguage
     {
-        return $this->_read(self::PROP_EXPRESSION_LANGAUGE);
+        return $this->_read(self::PROP_EXPRESSION_LANGUAGE);
     }
 
     protected function _run(): AbstractProcess

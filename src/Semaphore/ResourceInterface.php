@@ -3,9 +3,18 @@
 namespace NHDS\Jobs\Semaphore;
 
 use NHDS\Jobs\Semaphore\Resource\OwnerInterface;
+use NHDS\Jobs\SemaphoreInterface;
 
 interface ResourceInterface
 {
+    public function setSemaphore(SemaphoreInterface $semaphore): ResourceInterface;
+
+    public function testAndSetLock(): bool;
+
+    public function hasLock(): bool;
+
+    public function releaseLock(): ResourceInterface;
+
     public function setResourceName(string $resourceName): ResourceInterface;
 
     public function setResourcePath(string $resourcePath): ResourceInterface;

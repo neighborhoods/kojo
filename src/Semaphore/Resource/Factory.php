@@ -7,6 +7,7 @@ use NHDS\Toolkit\Data\Property\Crud;
 
 class Factory implements FactoryInterface
 {
+    use Semaphore\AwareTrait;
     use Semaphore\Resource\AwareTrait;
     use Semaphore\Mutex\AwareTrait;
     use Semaphore\Resource\Owner\AwareTrait;
@@ -17,6 +18,7 @@ class Factory implements FactoryInterface
     {
         $semaphoreResource = $this->_getSemaphoreResourceClone();
         $semaphoreResource->setMutex($this->_getMutexClone());
+        $semaphoreResource->setSemaphore($this->_getSemaphore());
         if ($this->_hasSemaphoreResourceOwner()) {
             $semaphoreResource->setResourceOwner($this->_getSemaphoreResourceOwnerClone());
         }
