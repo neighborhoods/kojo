@@ -3,6 +3,7 @@
 namespace NHDS\Jobs\Semaphore\Resource\Owner\Job;
 
 use NHDS\Jobs\Data\JobInterface;
+use NHDS\Jobs\Semaphore\Resource\FactoryInterface;
 use NHDS\Jobs\Semaphore\Resource\Owner\Job;
 use NHDS\Jobs\Semaphore\ResourceInterface;
 
@@ -10,8 +11,9 @@ trait AwareTrait
 {
     protected function _getNewJobOwnerResource(JobInterface $job): ResourceInterface
     {
-        /** @var ResourceInterface $jobSemaphoreResource */
-        $jobSemaphoreResource = $this->_getNewSemaphoreResource('job');
+        /** @var FactoryInterface $jobSemaphoreResourceFactory */
+        $jobSemaphoreResourceFactory = $this->_getSemaphoreResourceFactory('job');
+        $jobSemaphoreResource = $jobSemaphoreResourceFactory->create();
         $resourceOwner = $jobSemaphoreResource->getResourceOwner();
         if ($resourceOwner instanceof Job) {
             $resourceOwner->setJob($job);

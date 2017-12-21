@@ -41,3 +41,4 @@ imports:
    - { resource: Data/Job/Service/Update/Crash.yml }
    - { resource: Semaphore/Resource/Factory.yml }
    - { resource: Worker/Locator.yml }
+   - { resource: Data/Job/Service/Update/Crash/Factory.yml }

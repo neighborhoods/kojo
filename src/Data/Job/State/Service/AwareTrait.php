@@ -15,13 +15,6 @@ trait AwareTrait
 
     protected function _getJobStateService(): ServiceInterface
     {
-        if (!$this->_exists(ServiceInterface::class . '_INITIALIZED')) {
-            /** @var ServiceInterface $stateService */
-            $stateService = $this->_read(ServiceInterface::class);
-            $stateService->setJob($this->_getJob());
-            $this->_create(ServiceInterface::class . '_INITIALIZED', true);
-        }
-
         return $this->_read(ServiceInterface::class);
     }
 

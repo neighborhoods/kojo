@@ -3,7 +3,7 @@ services:
     class: NHDS\Jobs\Maintainer
     shared: false
     calls:
-      - [setJobCollectionCrashDetection, ['@nhds.jobs.data.job.collection.crashdetection']]
       - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-job']]
       - [setSemaphore, ['@nhds.jobs.semaphore']]
-      - [setJobServiceUpdateCrash, ['@nhds.jobs.data.job.service.update.crash']]
+      - [setJobCollectionCrashDetection, ['@nhds.jobs.data.job.collection.crashdetection']]
+      - [setJobServiceUpdateCrashFactory, ['@nhds.jobs.data.job.service.update.crash.factory']]

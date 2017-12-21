@@ -3,8 +3,8 @@
 namespace NHDS\Jobs;
 
 use NHDS\Jobs\Data\Job\Collection\CrashDetection;
+use NHDS\Jobs\Data\Job\Service\Update;
 use NHDS\Jobs\Semaphore\Resource;
-use NHDS\Jobs\Data\Job\Service\Update\Crash;
 use NHDS\Jobs\Data\Job\Collection\Pending\LimitCheck;
 use NHDS\Jobs\Data\Job\Collection\ScheduleLimit;
 use NHDS\Jobs\Data\Job\Type\Repository;
@@ -20,12 +20,12 @@ class Maintainer implements MaintainerInterface
     use Semaphore\AwareTrait;
     use Semaphore\Resource\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
-    use Crash\AwareTrait;
     use LimitCheck\AwareTrait;
     use ScheduleLimit\AwareTrait;
     use Repository\AwareTrait;
     use Work\AwareTrait;
     use FailedLimitCheck\AwareTrait;
+    use Update\Crash\Factory\AwareTrait;
 
     public function maintain(): MaintainerInterface
     {
@@ -40,7 +40,7 @@ class Maintainer implements MaintainerInterface
         foreach ($this->_getJobCollectionCrashDetection()->getIterator() as $job) {
             $jobSemaphoreResource = $this->_getNewJobOwnerResource($job);
             if ($this->_getSemaphore()->testAndSetLock($jobSemaphoreResource)) {
-                $crashUpdate = $this->_getJobServiceUpdateCrashClone();
+                $crashUpdate = $this->_getJobServiceUpdateCrashFactory()->create();
                 $crashUpdate->setJob($job);
                 $crashUpdate->save();
             }
