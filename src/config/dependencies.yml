@@ -14,3 +14,7 @@ services:
     class: \Redis
     calls:
       - [connect, ['redis', '6379']]
+  symfony.component.console.application:
+    class: Symfony\Component\Console\Application
+    calls:
+      - [add, ['@nhds.jobs.console.command.process.pool.server.start']]

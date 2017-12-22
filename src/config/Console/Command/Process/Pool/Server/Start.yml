@@ -1,0 +1,3 @@
+services:
+  nhds.jobs.console.command.process.pool.server.start:
+    class: NHDS\Jobs\Console\Command\Process\Pool\Server\Start

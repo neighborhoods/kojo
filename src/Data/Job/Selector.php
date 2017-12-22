@@ -7,7 +7,6 @@ use NHDS\Jobs\Data\Job;
 use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Message\Broker;
 use NHDS\Jobs\Semaphore;
-use NHDS\Jobs\Semaphore\Resource\Owner;
 
 class Selector implements SelectorInterface
 {
@@ -18,7 +17,6 @@ class Selector implements SelectorInterface
     use Semaphore\Resource\Factory\AwareTrait;
     use Collection\AwareTrait;
     use Collection\Selector\AwareTrait;
-    use Owner\Job\AwareTrait;
     const PROP_PAGE_SIZE        = 'page_size';
     const PROP_OFFSET           = 'offset';
     const PROP_NEXT_JOB_TO_WORK = 'next_job_to_work';

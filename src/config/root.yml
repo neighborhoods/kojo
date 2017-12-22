@@ -47,3 +47,4 @@ imports:
    - { resource: Data/Job/Service/Update/Cancelled/FailedLimitCheck.yml }
    - { resource: Data/Job/Collection/Pending/LimitCheck.yml }
    - { resource: Data/Job/Service/Create/Factory.yml }
+   - { resource: Console/Command/Process/Pool/Server/Start.yml }

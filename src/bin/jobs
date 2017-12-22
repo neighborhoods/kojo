@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+if (PHP_SAPI !== 'cli') {
+    echo 'bin/jobs must be run as a CLI application';
+    exit(1);
+}
+
+try{
+    require __DIR__ . '/../../vendor/autoload.php';
+}catch(\Exception $e){
+    echo 'Autoload error: ' . $e->getMessage();
+    exit(1);
+}
+$serviceContainer = new \NHDS\Jobs\Service\Container();
+$yamlServiceFilePath = __DIR__ . '/../config/root.yml';
+$serviceContainer->setServicesYamlFilePath($yamlServiceFilePath);
+$consoleApplication = $serviceContainer->getContainerBuilder()->get('symfony.component.console.application');
+
+$consoleApplication->run();

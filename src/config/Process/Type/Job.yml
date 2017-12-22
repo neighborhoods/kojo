@@ -7,4 +7,6 @@ services:
       - [setBrokerTypeCollection, ['@nhds.jobs.message.broker.type.collection-job']]
       - [setBrokerTypeCode, ['job_broker']]
       - [setForeman, ['@nhds.jobs.foreman']]
+      - [setMaintainer, ['@nhds.jobs.maintainer']]
+      - [setScheduler, ['@nhds.jobs.scheduler']]
 #            - [setBootstrap, ['@bootstrap_example']]
