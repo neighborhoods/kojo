@@ -17,11 +17,10 @@ class Job extends AbstractProcess implements JobInterface
 
     protected function _run(): AbstractProcess
     {
+        $this->_getBootstrap()->instantiate();
         $this->_getMaintainer()->updatePendingJobs();
         $this->_getMaintainer()->rescheduleCrashedJobs();
         $this->_getScheduler()->schedule();
-        sleep(30);
-        $this->_getBootstrap()->instantiate();
         $this->_getForeman()->work();
 
         return $this;

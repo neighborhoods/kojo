@@ -2,6 +2,8 @@
 
 namespace NHDS\Jobs;
 
+use NHDS\Jobs\Data\Job\Collection\ScheduleLimitInterface;
+
 interface MaintainerInterface
 {
     const SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS     = 'reschedule_jobs';
@@ -10,4 +12,6 @@ interface MaintainerInterface
     public function rescheduleCrashedJobs(): MaintainerInterface;
 
     public function updatePendingJobs(): MaintainerInterface;
+
+    public function setJobCollectionScheduleLimit(ScheduleLimitInterface $jobCollectionScheduleLimit);
 }

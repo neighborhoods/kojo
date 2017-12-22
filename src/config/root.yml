@@ -48,3 +48,4 @@ imports:
    - { resource: Data/Job/Collection/Pending/LimitCheck.yml }
    - { resource: Data/Job/Service/Create/Factory.yml }
    - { resource: Console/Command/Process/Pool/Server/Start.yml }
+   - { resource: Data/Job/Type/Repository.yml }

@@ -1,0 +1,3 @@
+rpush job_queue "{  
+   \"command\":\"commandProcess.addProcess('job')\"
+}"

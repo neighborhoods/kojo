@@ -2,7 +2,7 @@
 
 namespace NHDS\Jobs\Process\Type\Job;
 
-use NHDS\Jobs\Db\Connection\Container\ContainerInterface;
+use NHDS\Jobs\Db\Connection\ContainerInterface;
 
 interface BootstrapInterface
 {

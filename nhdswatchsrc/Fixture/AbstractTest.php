@@ -27,7 +27,7 @@ abstract class AbstractTest extends DbUnit\TestCase
     public function setUp()
     {
         $yamlServiceFilePath = dirname(dirname(__FILE__)) . '/config/root.yml';
-        $this->setServicesYamlFilePath($yamlServiceFilePath);
+        $this->addServicesYmlFilePath($yamlServiceFilePath);
         $testCaseService = $this->getContainerBuilder()->get('nhds.watch.testcase.service');
         $this->setTestCaseService($testCaseService);
         $tearDown = $this->_getTestContainerBuilder()->get('nhds.jobs.db.teardown');

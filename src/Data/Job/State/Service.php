@@ -208,6 +208,15 @@ class Service implements ServiceInterface
                         $invalidTransition = true;
                 }
                 break;
+            case ServiceInterface::STATE_NONE . ServiceInterface::STATE_CANCELLED_FAILED_LIMIT_CHECK:
+                switch ($assignedState) {
+                    case
+                    ServiceInterface::STATE_PENDING_LIMIT_CHECK:
+                        break;
+                    default:
+                        $invalidTransition = true;
+                }
+                break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_PANICKED:
                 break;
             default:

@@ -14,7 +14,13 @@ try{
 }
 $serviceContainer = new \NHDS\Jobs\Service\Container();
 $yamlServiceFilePath = __DIR__ . '/../config/root.yml';
-$serviceContainer->setServicesYamlFilePath($yamlServiceFilePath);
+$serviceContainer->addServicesYmlFilePath($yamlServiceFilePath);
+foreach ($argv as $argument) {
+    if (strstr($argument, 'ysfp:') !== false) {
+        $ymlServicesFilePath = explode('ysfp:', $argument);
+        $serviceContainer->addServicesYmlFilePath($ymlServicesFilePath[1]);
+    }
+}
 $server = $serviceContainer->getContainerBuilder()->get('nhds.jobs.process.pool.server');
 
 $server->start();

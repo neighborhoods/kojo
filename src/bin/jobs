@@ -15,7 +15,7 @@ try{
 }
 $serviceContainer = new \NHDS\Jobs\Service\Container();
 $yamlServiceFilePath = __DIR__ . '/../config/root.yml';
-$serviceContainer->setServicesYamlFilePath($yamlServiceFilePath);
+$serviceContainer->addServicesYmlFilePath($yamlServiceFilePath);
 $consoleApplication = $serviceContainer->getContainerBuilder()->get('symfony.component.console.application');
 
 $consoleApplication->run();

@@ -80,6 +80,7 @@ class Strategy extends AbstractStrategy
 
     public function initializePool(): StrategyInterface
     {
+        $this->_getPool()->setAlarm();
         $this->_getPool()->addProcess($this->_getProcessTypeClone('listener.message'));
         $this->_getPool()->addProcess($this->_getProcessTypeClone('job'));
 

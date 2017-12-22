@@ -125,7 +125,7 @@ class Model implements ModelInterface
         $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->beginTransaction();
         try{
             $delete = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->delete($this->getTableName());
-            $delete->where([$this->getIdPropertyName(), $this->getId()]);
+            $delete->where([$this->getIdPropertyName() => $this->getId()]);
             $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($delete);
             $statement->execute();
             $this->_unsetPersistentProperties();
@@ -154,7 +154,11 @@ class Model implements ModelInterface
     protected function update(): ModelInterface
     {
         $changedPersistentProperties = $this->_getChangedPersistentProperties();
-        $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->update($changedPersistentProperties);
+        $update = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->update($this->getTableName());
+        $update->where([$this->getIdPropertyName() => $this->getId()]);
+        $update->set($changedPersistentProperties);
+        $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($update);
+        $statement->execute();
         $this->_unsetChangedPersistentProperties();
 
         return $this;

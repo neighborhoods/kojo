@@ -8,7 +8,9 @@ class FailedLimitCheck extends AbstractService implements FailedLimitCheckInterf
 {
     public function save(): FailedLimitCheckInterface
     {
+        $this->_getJobStateService()->setJob($this->_getJob());
         $this->_getJobStateService()->requestCancelledFailedLimitCheck();
+        $this->_getJobStateService()->applyRequest();
         $this->_getJob()->save();
 
         return $this;

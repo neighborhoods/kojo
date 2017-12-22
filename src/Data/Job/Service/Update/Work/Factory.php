@@ -16,11 +16,11 @@ class Factory implements FactoryInterface
 
     public function create(): WorkInterface
     {
-        $updateCrash = $this->_getJobServiceUpdateWorkClone();
+        $updateWork = $this->_getJobServiceUpdateWorkClone();
         $stateService = $this->_getJobStateServiceClone();
-        $updateCrash->setJobStateService($stateService);
+        $updateWork->setJobStateService($stateService);
 
-        return $updateCrash;
+        return $updateWork;
     }
 
     public function setName(string $factoryName): FactoryInterface

@@ -27,6 +27,10 @@
         "phpunit/dbunit": "^3.0",
         "symfony/finder": "^4.0"
     },
+    "bin": [
+        "src/bin/jobs",
+        "src/bin/server"
+    ],
     "autoload": {
         "psr-4": {
             "NHDS\\Jobs\\": "src",
@@ -36,7 +40,8 @@
     "autoload-dev": {
         "psr-4": {
             "NHDS\\Jobs\\Test\\": "tests",
-            "NHDS\\Watch\\": "nhdswatchsrc"
+            "NHDS\\Watch\\": "nhdswatchsrc",
+            "NHDS\\Jobs\\Example\\": "example"
         }
     }
 }

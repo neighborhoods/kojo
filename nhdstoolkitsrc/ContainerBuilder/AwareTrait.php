@@ -11,28 +11,28 @@ use Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass;
 
 trait AwareTrait
 {
-    protected $_servicesYamlFilePath;
+    protected $_servicesYamlFilePaths = [];
     protected $_containerBuilder;
 
-    public function setServicesYamlFilePath(string $servicesYamlFilePath)
+    public function addServicesYmlFilePath(string $servicesYamlFilePath)
     {
-        if ($this->_servicesYamlFilePath === null) {
-            $this->_servicesYamlFilePath = $servicesYamlFilePath;
+        if (!isset($this->_servicesYamlFilePaths[$servicesYamlFilePath])) {
+            $this->_servicesYamlFilePaths[$servicesYamlFilePath] = $servicesYamlFilePath;
         }else {
 
-            throw new \LogicException('Services yaml file path is already set.');
+            throw new \LogicException('Services YML file path "' . $servicesYamlFilePath . '" is already set.');
         }
 
         return $this;
     }
 
-    protected function _getServicesYamlFilePath(): string
+    protected function _getServicesYmlFilePaths(): array
     {
-        if ($this->_servicesYamlFilePath === null) {
-            throw new \LogicException('Services yaml file path is not set.');
+        if (empty($this->_servicesYamlFilePaths)) {
+            throw new \LogicException('Services YML file paths is empty.');
         }
 
-        return $this->_servicesYamlFilePath;
+        return $this->_servicesYamlFilePaths;
     }
 
     public function getContainerBuilder(): ContainerBuilder
@@ -40,7 +40,9 @@ trait AwareTrait
         if ($this->_containerBuilder === null) {
             $containerBuilder = new ContainerBuilder();
             $loader = new YamlFileLoader($containerBuilder, new FileLocator(__DIR__));
-            $loader->load($this->_getServicesYamlFilePath());
+            foreach ($this->_getServicesYmlFilePaths() as $servicesYmlFilePath) {
+                $loader->import($servicesYmlFilePath);
+            }
             $passes = [new AnalyzeServiceReferencesPass(), new InlineServiceDefinitionsPass()];
             $repeatedPass = new RepeatedPass($passes);
             $repeatedPass->process($containerBuilder);

@@ -2,11 +2,14 @@
 
 namespace NHDS\Jobs\Data\Job\Type;
 
+use NHDS\Jobs\Data\Job;
+use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Data\Job\TypeInterface;
 
 class Repository implements RepositoryInterface
 {
-    use AwareTrait;
+    use Crud\AwareTrait;
+    use Job\Type\AwareTrait;
     protected $_jobTypes = [];
 
     public function getJobType(string $typeCode): TypeInterface
