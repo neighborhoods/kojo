@@ -20,8 +20,9 @@ class Foreman implements ForemanInterface
     use Db\Connection\Container\AwareTrait;
     use Selector\AwareTrait;
     use Locator\AwareTrait;
-    use Update\Work\AwareTrait;
-    use Update\Panic\AwareTrait;
+    use Update\Work\Factory\AwareTrait;
+    use Update\Panic\Factory\AwareTrait;
+    use Update\Crash\Factory\AwareTrait;
     const PROP_JOB = 'job';
 
     public function work(): ForemanInterface
@@ -40,20 +41,25 @@ class Foreman implements ForemanInterface
         $this->_getLocator()->setJob($job);
         if (is_callable($this->_getLocator()->getCallable())) {
             try{
-                $this->_getJobServiceUpdateWork()->setJob($job);
-                $this->_getJobServiceUpdateWork()->save();
+                $updateWork = $this->_getJobServiceUpdateWorkFactory()->create();
+                $updateWork->setJob($job);
+                $updateWork->save();
             }catch(\Exception $exception){
-                $this->_getJobServiceUpdatePanic()->setJob($job);
-                $this->_getJobServiceUpdatePanic()->save();
+                $updatePanic = $this->_getJobServiceUpdatePanicFactory()->create();
+                $updatePanic->setJob($job);
+                $updatePanic->save();
             }
             try{
                 call_user_func($this->_getLocator()->getCallable());
             }catch(\Exception $e){
-
+                $updateCrash = $this->_getJobServiceUpdateCrashFactory()->create();
+                $updateCrash->setJob($job);
+                $updateCrash->save();
             }
         }else {
-            $this->_getJobServiceUpdatePanic()->setJob($job);
-            $this->_getJobServiceUpdatePanic()->save();
+            $updatePanic = $this->_getJobServiceUpdatePanicFactory()->create();
+            $updatePanic->setJob($job);
+            $updatePanic->save();
         }
 
         return $this;

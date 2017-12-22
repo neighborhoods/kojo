@@ -2,10 +2,13 @@
 
 namespace NHDS\Jobs;
 
+use NHDS\Jobs\Data\Job\Service\Update;
+
 interface ForemanInterface
 {
-    const MAINTAIN_SEMAPHORE_RESOURCE_NAME = 'maintain';
-    const SCHEDULE_SEMAPHORE_RESOURCE_NAME = 'schedule';
-
     public function work(): ForemanInterface;
+
+    public function setJobServiceUpdateWorkFactory(Update\Work\FactoryInterface $updateWorkFactory);
+
+    public function setJobServiceUpdateCrashFactory(Update\Crash\FactoryInterface $updateCrashFactory);
 }

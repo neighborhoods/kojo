@@ -217,6 +217,15 @@ class Service implements ServiceInterface
                         $invalidTransition = true;
                 }
                 break;
+            case ServiceInterface::STATE_NONE . ServiceInterface::STATE_WORKING:
+                switch ($assignedState) {
+                    case
+                    ServiceInterface::STATE_WAITING:
+                        break;
+                    default:
+                        $invalidTransition = true;
+                }
+                break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_PANICKED:
                 break;
             default:

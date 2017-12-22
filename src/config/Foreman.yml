@@ -8,3 +8,6 @@ services:
       - [setSemaphore, ['@nhds.jobs.semaphore']]
       - [setSelector, ['@nhds.jobs.data.job.selector']]
       - [setLocator, ['@nhds.jobs.worker.locator']]
+      - [setJobServiceUpdateWorkFactory, ['@nhds.jobs.data.job.service.update.work.factory']]
+      - [setJobServiceUpdatePanicFactory, ['@nhds.jobs.data.job.service.update.panic.factory']]
+      - [setJobServiceUpdateCrashFactory, ['@nhds.jobs.data.job.service.update.crash.factory']]
