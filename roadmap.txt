@@ -4,3 +4,4 @@
 @bwilson - implement redis mutex.
 @bwilson - implement zookpeer mutex.
 @bwilson - check indexes against selects.
+@bwilson - fix changed persistent properties.

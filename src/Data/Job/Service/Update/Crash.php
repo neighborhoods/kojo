@@ -10,6 +10,7 @@ class Crash extends AbstractService implements CrashInterface
     {
         $this->_getJobStateService()->setJob($this->_getJob());
         $this->_getJobStateService()->requestCrashed();
+        $this->_getJobStateService()->applyRequest();
         $this->_getJob()->save();
 
         return $this;
