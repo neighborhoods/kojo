@@ -19,6 +19,7 @@ class Scheduler implements SchedulerInterface
     use Time\AwareTrait;
     use Crud\AwareTrait;
     use Create\Factory\AwareTrait;
+    use Semaphore\Resource\Factory\AwareTrait;
     const DATE_TIME_FORMAT_CACHE_MINUTE        = 'Y_m_d_H_i';
     const DATE_TIME_FORMAT_MYSQL_MINUTE        = 'Y-m-d H:i:0';
     const CACHE_SCHEDULED_AHEAD_VALUE          = 'scheduled';
@@ -32,14 +33,22 @@ class Scheduler implements SchedulerInterface
     const PROP_REFERENCE_DISTANCE_DATE_TIME    = 'reference_distance_date_time';
     const PROP_NEXT_REFERENCE_MINUTE_DATE_TIME = 'next_reference_minute_date_time';
     const SCHEDULER_COLLECTION_NAME            = 'scheduler_collection';
-    protected $_scheduledKeyLifetime;
     protected $_scheduleMinutesNotInCache = [];
-    protected $_existingJobs;
 
     public function schedule(): SchedulerInterface
     {
-        if (!empty($this->_getScheduledMinutesNotInCache())) {
-            $this->_scheduleJobs();
+        if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->testAndSetLock()) {
+            try{
+                if (!empty($this->_getScheduledMinutesNotInCache())) {
+                    $this->_scheduleJobs();
+                }
+                $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->releaseLock();
+            }catch(\Exception $exception){
+                if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->hasLock()) {
+                    $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->releaseLock();
+                }
+                throw $exception;
+            }
         }
 
         return $this;

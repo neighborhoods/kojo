@@ -189,6 +189,7 @@ class Service implements ServiceInterface
                     case ServiceInterface::STATE_HOLD:
                     case ServiceInterface::STATE_CRASHED:
                     case ServiceInterface::STATE_NEW:
+                    case ServiceInterface::STATE_PENDING_LIMIT_CHECK:
                         break;
                     default:
                         $isValidTransition = false;
@@ -234,6 +235,7 @@ class Service implements ServiceInterface
                 switch ($assignedState) {
                     case ServiceInterface::STATE_WAITING:
                     case ServiceInterface::STATE_CRASHED:
+                    case ServiceInterface::STATE_PENDING_LIMIT_CHECK:
                         break;
                     default:
                         $isValidTransition = false;

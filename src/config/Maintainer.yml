@@ -10,7 +10,7 @@ services:
       - [setJobCollectionCrashDetection, ['@nhds.jobs.data.job.collection.crashdetection']]
       - [setJobCollectionPendingLimitCheck, ['@nhds.jobs.data.job.collection.pending.limitcheck']]
       - [setJobServiceUpdateCrashFactory, ['@nhds.jobs.data.job.service.update.crash.factory']]
-      - [setJobServiceUpdateWorkFactory, ['@nhds.jobs.data.job.service.update.work.factory']]
+      - [setJobServiceUpdateWaitFactory, ['@nhds.jobs.data.job.service.update.wait.factory']]
       - [setJobServiceUpdateCancelledFailedLimitCheckFactory, ['@nhds.jobs.data.job.service.update.cancelled.failedlimitcheck.factory']]
       - [setJobTypeRepository, ['@nhds.jobs.data.job.type.repository']]
       - [setJobCollectionScheduleLimit, ['@nhds.jobs.data.job.collection.schedulelimit']]

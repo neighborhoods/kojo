@@ -19,5 +19,5 @@ nhds_job_type:
     can_work_in_parallel: 0
     default_importance: 10
     cron_expression: "* * * * *"
-    schedule_limit: 1
+    schedule_limit: 10
     is_enabled: 1

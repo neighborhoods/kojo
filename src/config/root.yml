@@ -51,3 +51,5 @@ imports:
    - { resource: Data/Job/Type/Repository.yml }
    - { resource: Data/Job/Service/Update/Panic/Factory.yml }
    - { resource: Data/Job/Service/Update/Panic.yml }
+   - { resource: Data/Job/Service/Update/Wait.yml }
+   - { resource: Data/Job/Service/Update/Wait/Factory.yml }

@@ -9,3 +9,4 @@ services:
       - [setSchedulerJobTypeCollection, ['@nhds.jobs.data.job.type.collection.scheduler']]
       - [setJobServiceCreateFactory, ['@nhds.jobs.data.job.service.create.factory']]
       - [setMinutesToScheduleAheadFor, [5]]
+      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-schedule']]

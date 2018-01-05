@@ -7,7 +7,6 @@ use NHDS\Jobs\Data\Job\Service\Update;
 use NHDS\Jobs\Data\Job\Collection\Pending\LimitCheck;
 use NHDS\Jobs\Data\Job\Collection\ScheduleLimit;
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Data\Job\Service\Update\Work;
 use NHDS\Toolkit\Data\Property\Crud;
 use NHDS\Jobs\Data\Job\Service\Update\Cancelled\FailedLimitCheck;
 
@@ -20,9 +19,10 @@ class Maintainer implements MaintainerInterface
     use LimitCheck\AwareTrait;
     use ScheduleLimit\AwareTrait;
     use Job\Type\Repository\AwareTrait;
-    use Work\Factory\AwareTrait;
     use FailedLimitCheck\Factory\AwareTrait;
+    use Update\Wait\Factory\AwareTrait;
     use Update\Crash\Factory\AwareTrait;
+    use Update\Panic\Factory\AwareTrait;
 
     public function rescheduleCrashedJobs(): MaintainerInterface
     {
@@ -32,7 +32,7 @@ class Maintainer implements MaintainerInterface
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
             }catch(\Exception $exception){
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->hasLock()) {
-                    $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->releaseLock();
+                    $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
                 }
                 throw $exception;
             }
@@ -86,15 +86,21 @@ class Maintainer implements MaintainerInterface
             $jobType = $this->_getJobTypeRepository()->getJobType($job->getTypeCode());
             $scheduleLimit = $this->_getJobCollectionScheduleLimitByJobType($jobType);
             $numberOfScheduledJobs = $scheduleLimit->getNumberOfCurrentlyScheduledJobs();
-            if ($numberOfScheduledJobs < $jobType->getScheduleLimit()) {
-                $workUpdate = $this->_getJobServiceUpdateWorkFactory()->create();
-                $workUpdate->setJob($job);
-                $workUpdate->save();
-            }else {
-                $failedLimitCheckUpdate = $this->_getJobServiceUpdateCancelledFailedLimitCheckFactory()->create();
-                $failedLimitCheckUpdate->setJob($job);
-                $failedLimitCheckUpdate->save();
-            }
+//            try{
+                if ($numberOfScheduledJobs < $jobType->getScheduleLimit()) {
+                    $workUpdate = $this->_getJobServiceUpdateWaitFactory()->create();
+                    $workUpdate->setJob($job);
+                    $workUpdate->save();
+                }else {
+                    $failedLimitCheckUpdate = $this->_getJobServiceUpdateCancelledFailedLimitCheckFactory()->create();
+                    $failedLimitCheckUpdate->setJob($job);
+                    $failedLimitCheckUpdate->save();
+                }
+//            }catch(\Exception $exception){
+//                $updatePanic = $this->_getJobServiceUpdatePanicFactory()->create();
+//                $updatePanic->setJob($job);
+//                $updatePanic->save();
+//            }
         }
 
         return $this;

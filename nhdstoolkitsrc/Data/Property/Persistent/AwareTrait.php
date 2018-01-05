@@ -42,7 +42,7 @@ trait AwareTrait
     protected function _setPersistentProperty(string $persistentPropertyName, $persistentPropertyValue)
     {
         if ($this->_hasPersistentProperty($persistentPropertyName)) {
-            throw new \LogicException('Persistent property is already set.');
+            throw new \LogicException('Persistent property ' . $persistentPropertyName . ' is already set.');
         }else {
             $this->_persistentProperties[$persistentPropertyName] = $persistentPropertyValue;
             $this->_changedPersistentProperties[$persistentPropertyName] = $persistentPropertyValue;
@@ -54,7 +54,7 @@ trait AwareTrait
     protected function _getPersistentProperty(string $persistentPropertyName)
     {
         if (!isset($this->_persistentProperties[$persistentPropertyName])) {
-            throw new \LogicException('Persistent property is not set');
+            throw new \LogicException('Persistent property ' . $persistentPropertyName . ' is not set');
         }
 
         return $this->_persistentProperties[$persistentPropertyName];

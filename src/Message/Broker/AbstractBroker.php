@@ -19,7 +19,7 @@ abstract class AbstractBroker implements BrokerInterface
         if ($this->_port === null) {
             $this->_port = $port;
         }else {
-            throw new \LogicException('Portr is already set.');
+            throw new \LogicException('Port is already set.');
         }
 
         return $this;
@@ -56,7 +56,7 @@ abstract class AbstractBroker implements BrokerInterface
         return $this;
     }
 
-    protected function _getHost()
+    protected function _getHost(): string
     {
         if ($this->_host === null) {
             throw new \LogicException('Host is not set.');
