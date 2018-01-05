@@ -10,3 +10,4 @@ services:
       - [setSemaphore, ['@nhds.jobs.semaphore']]
       - [setSelectorJobCollection, ['@nhds.jobs.data.job.collection.selector']]
       - [setJob, ['@nhds.jobs.data.job']]
+      - [setJobStateService, ['@nhds.jobs.data.job.state.service']]

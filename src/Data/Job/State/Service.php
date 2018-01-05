@@ -162,7 +162,22 @@ class Service implements ServiceInterface
 
     protected function _assertValidTransition(): ServiceInterface
     {
-        $invalidTransition = false;
+        $nextStateRequestUpdate = $this->_getNextStateRequestUpdate();
+        $assignedStateUpdate = $this->_getAssignedStateUpdate();
+        $assignedState = $this->_getJob()->getAssignedState();
+        $isValidTransition = $this->isValidTransition();
+        if (!$isValidTransition) {
+            $invalidTransitionMessage = 'Invalid state transition [' . $nextStateRequestUpdate . ']';
+            $invalidTransitionMessage .= '[' . $assignedStateUpdate . '][' . $assignedState . '].';
+            throw new \LogicException($invalidTransitionMessage);
+        }
+
+        return $this;
+    }
+
+    public function isValidTransition(): bool
+    {
+        $isValidTransition = true;
         $nextStateRequestUpdate = $this->_getNextStateRequestUpdate();
         $assignedStateUpdate = $this->_getAssignedStateUpdate();
         $assignedState = $this->_getJob()->getAssignedState();
@@ -176,7 +191,7 @@ class Service implements ServiceInterface
                     case ServiceInterface::STATE_NEW:
                         break;
                     default:
-                        $invalidTransition = true;
+                        $isValidTransition = false;
                 }
                 break;
             case ServiceInterface::STATE_WORKING . ServiceInterface::STATE_PENDING_LIMIT_CHECK:
@@ -184,7 +199,7 @@ class Service implements ServiceInterface
                     case ServiceInterface::STATE_NEW:
                         break;
                     default:
-                        $invalidTransition = true;
+                        $isValidTransition = false;
                 }
                 break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_HOLD:
@@ -194,7 +209,7 @@ class Service implements ServiceInterface
                     case ServiceInterface::STATE_WORKING:
                         break;
                     default:
-                        $invalidTransition = true;
+                        $isValidTransition = false;
                 }
                 break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_SUCCESS:
@@ -204,7 +219,7 @@ class Service implements ServiceInterface
                     case ServiceInterface::STATE_WORKING:
                         break;
                     default:
-                        $invalidTransition = true;
+                        $isValidTransition = false;
                 }
                 break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_CANCELLED_FAILED_LIMIT_CHECK:
@@ -212,7 +227,7 @@ class Service implements ServiceInterface
                     case ServiceInterface::STATE_PENDING_LIMIT_CHECK:
                         break;
                     default:
-                        $invalidTransition = true;
+                        $isValidTransition = false;
                 }
                 break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_WORKING:
@@ -221,20 +236,15 @@ class Service implements ServiceInterface
                     case ServiceInterface::STATE_CRASHED:
                         break;
                     default:
-                        $invalidTransition = true;
+                        $isValidTransition = false;
                 }
                 break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_PANICKED:
                 break;
             default:
-                $invalidTransition = true;
-        }
-        if ($invalidTransition) {
-            $invalidTransitionMessage = 'Invalid state transition [' . $nextStateRequestUpdate . ']';
-            $invalidTransitionMessage .= '[' . $assignedStateUpdate . '][' . $assignedState . '].';
-            throw new \LogicException($invalidTransitionMessage);
+                $isValidTransition = false;
         }
 
-        return $this;
+        return $isValidTransition;
     }
 }

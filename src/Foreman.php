@@ -9,6 +9,7 @@ use NHDS\Jobs\Data\Job;
 use NHDS\Jobs\Data\Job\Selector;
 use NHDS\Jobs\Worker\Locator;
 use NHDS\Jobs\Data\Job\Service\Update;
+use NHDS\Jobs\Process\Pool\Logger;
 
 class Foreman implements ForemanInterface
 {
@@ -23,6 +24,7 @@ class Foreman implements ForemanInterface
     use Update\Work\Factory\AwareTrait;
     use Update\Panic\Factory\AwareTrait;
     use Update\Crash\Factory\AwareTrait;
+    use Logger\AwareTrait;
 
     public function work(): ForemanInterface
     {
@@ -36,7 +38,6 @@ class Foreman implements ForemanInterface
     protected function _workWorker(): ForemanInterface
     {
         $job = $this->_getSelector()->getNextJobToWork();
-        $job->load();
         $this->_getLocator()->setJob($job);
         if (is_callable($this->_getLocator()->getCallable())) {
             try{
@@ -47,8 +48,10 @@ class Foreman implements ForemanInterface
                 $updatePanic = $this->_getJobServiceUpdatePanicFactory()->create();
                 $updatePanic->setJob($job);
                 $updatePanic->save();
+                throw $exception;
             }
             try{
+                $this->_getLogger()->debug('Instantiating Worker for Job[' . $job->getId() . '].');
                 call_user_func($this->_getLocator()->getCallable());
             }catch(\Exception $e){
                 $updateCrash = $this->_getJobServiceUpdateCrashFactory()->create();

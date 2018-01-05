@@ -46,4 +46,6 @@ interface ServiceInterface
     public function requestNew(): ServiceInterface;
 
     public function requestWork(): ServiceInterface;
+
+    public function isValidTransition(): bool;
 }

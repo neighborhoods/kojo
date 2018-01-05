@@ -1,5 +1,6 @@
 imports:
   - { resource: ../../../../../src/config/root.yml }
+  - { resource: ../../../../../example/config/example.yml }
 services:
   nhds.jobs.db.connection.container-schema:
     class: NHDS\Jobs\Db\Connection\Container

@@ -17,6 +17,7 @@ class Selector implements SelectorInterface
     use Semaphore\Resource\Factory\AwareTrait;
     use Collection\AwareTrait;
     use Collection\Selector\AwareTrait;
+    use Job\State\Service\AwareTrait;
     const PROP_PAGE_SIZE        = 'page_size';
     const PROP_OFFSET           = 'offset';
     const PROP_NEXT_JOB_TO_WORK = 'next_job_to_work';
@@ -54,8 +55,16 @@ class Selector implements SelectorInterface
                     if ($this->_getSemaphore()->testAndSetLock($jobSemaphoreResource)) {
                         $job = $this->_getJobClone();
                         $job->setId($jobCandidate->getId());
-                        $this->_create(self::PROP_NEXT_JOB_TO_WORK, $job);
-                        break 2;
+                        $job->load();
+                        $stateService = $this->_getJobStateServiceClone();
+                        $stateService->setJob($job);
+                        $stateService->requestWork();
+                        if ($stateService->isValidTransition()) {
+                            $this->_create(self::PROP_NEXT_JOB_TO_WORK, $job);
+                            break 2;
+                        }else {
+                            $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
+                        }
                     }
                 }
             }

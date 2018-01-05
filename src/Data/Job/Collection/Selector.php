@@ -52,6 +52,7 @@ class Selector extends AbstractCollection implements SelectorInterface
                 JobInterface::FIELD_NAME_ASSIGNED_STATE     => [
                     State\ServiceInterface::STATE_WAITING,
                     State\Service::STATE_CRASHED,
+                    State\Service::STATE_NEW,
                 ],
                 JobInterface::FIELD_NAME_NEXT_STATE_REQUEST => State\ServiceInterface::STATE_WORKING,
             ]
