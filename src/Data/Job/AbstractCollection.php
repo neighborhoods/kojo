@@ -17,6 +17,11 @@ abstract class AbstractCollection extends Db\Model\AbstractCollection
 
     public function getIterator(): IteratorInterface
     {
+        return $this->_getIterator()->initialize();
+    }
+
+    protected function _getIterator(): IteratorInterface
+    {
         return $this->_read(IteratorInterface::class);
     }
 }

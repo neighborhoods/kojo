@@ -4,7 +4,7 @@ namespace NHDS\Jobs\Process\Type;
 
 use NHDS\Jobs\AbstractProcess;
 use NHDS\Jobs\Foreman;
-use NHDS\Jobs\Process\Type\Job\Bootstrap;
+use NHDS\Jobs\Worker\Bootstrap;
 use NHDS\Jobs\Scheduler;
 use NHDS\Jobs\Maintainer;
 

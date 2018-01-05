@@ -40,18 +40,23 @@ class Selector implements SelectorInterface
         $select->offset($this->_pickingCycles * $this->_getPageSize());
         $select->limit($this->_getPageSize());
         $jobCandidates = $this->_getSelectorJobCollection()->getModelsArray();
-        if (count($jobCandidates) > 1) {
-            $this->_getBroker()->publishMessage(count($jobCandidates));
+        $publishedMessages = $this->_getBroker()->getPublishChannelLength();
+        while ($publishedMessages < count($jobCandidates)) {
+            $message = json_encode(['command' => "commandProcess.addProcess('job')"]);
+            $this->_getBroker()->publishMessage($message);
+            ++$publishedMessages;
         }
 
         while (!empty($jobCandidates)) {
             foreach ($this->_getSelectorJobCollection()->getIterator() as $jobCandidate) {
                 $jobSemaphoreResource = $this->_getNewJobOwnerResource($jobCandidate);
-                if ($this->_getSemaphore()->testAndSetLock($jobSemaphoreResource)) {
-                    $job = $this->_getJobClone();
-                    $job->setId($jobCandidate->getId());
-                    $this->_create(self::PROP_NEXT_JOB_TO_WORK, $job);
-                    break 2;
+                if (random_int(0, 10) !== 10) {
+                    if ($this->_getSemaphore()->testAndSetLock($jobSemaphoreResource)) {
+                        $job = $this->_getJobClone();
+                        $job->setId($jobCandidate->getId());
+                        $this->_create(self::PROP_NEXT_JOB_TO_WORK, $job);
+                        break 2;
+                    }
                 }
             }
             ++$this->_pickingCycles;

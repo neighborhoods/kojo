@@ -18,4 +18,6 @@ interface IteratorInterface extends \Iterator
     function next();
 
     function valid(): bool;
+
+    public function initialize(): IteratorInterface;
 }

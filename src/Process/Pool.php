@@ -34,17 +34,15 @@ class Pool implements PoolInterface
 
     public function terminateChildProcesses()
     {
-        $this->_getLogger()->debug('Received terminate request.');
         if (!empty($this->_processPool)) {
             $this->_getLogger()->debug('Sending SIGTERM to child processes...');
             /** @var ProcessInterface $process */
             foreach ($this->_processPool as $process) {
                 posix_kill($process->getProcessId(), SIGKILL);
-                $this->_getLogger()->debug('Sent SIGTERM to Process[' . $process->getProcessId() . ']');
+                $this->_getLogger()->debug('Sent SIGTERM to Process[' . $process->getProcessId() . '].');
             }
-
-            exit(0);
         }
+        $this->_getLogger()->debug('Terminating.');
 
         return $this;
     }
@@ -83,7 +81,7 @@ class Pool implements PoolInterface
     {
         while ($processId = pcntl_wait($extra, WNOHANG)) {
             if ($processId == -1) {
-                $this->_getLogger()->emergency("Received wait error.");
+                $this->_getLogger()->emergency('Received wait error.');
                 throw new \RuntimeException('Invalid ProcessPool state.');
             }
             $processExitCode = pcntl_wexitstatus($extra);
@@ -117,8 +115,9 @@ class Pool implements PoolInterface
 
     public function setAlarm(): PoolInterface
     {
-        $this->_getLogger()->debug("Setting alarm.");
-        pcntl_alarm($this->_getStrategy()->getMaxAlarmTime());
+        $maxAlarmTime = $this->_getStrategy()->getMaxAlarmTime();
+        $this->_getLogger()->debug('Setting alarm for ' . $maxAlarmTime . ' seconds.');
+        pcntl_alarm($maxAlarmTime);
 
         return $this;
     }

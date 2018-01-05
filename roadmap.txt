@@ -5,3 +5,22 @@
 @bwilson - implement zookpeer mutex.
 @bwilson - check indexes against selects.
 @bwilson - fix changed persistent properties.
+@bwilson - standardize commands:
+Fatal error: Uncaught Symfony\Component\ExpressionLanguage\SyntaxError: Unexpected token "end of expression" of value "" around position 1. in /var/www/html/jobs.neighborhoods.com/vendor/symfony/expression-language/Parser.php on line 230
+
+Symfony\Component\ExpressionLanguage\SyntaxError: Unexpected token "end of expression" of value "" around position 1. in /var/www/html/jobs.neighborhoods.com/vendor/symfony/expression-language/Parser.php on line 230
+
+Call Stack:
+    0.0012     371584   1. {main}() /var/www/html/jobs.neighborhoods.com/src/bin/server:0
+    1.4365    4692776   2. NHDS\Jobs\Process\Pool\Server->start() /var/www/html/jobs.neighborhoods.com/src/bin/server:26
+    1.4424    4703672   3. NHDS\Jobs\Process\Pool->swim() /var/www/html/jobs.neighborhoods.com/src/Process/Pool/Server.php:30
+    1.8896    4705944   4. NHDS\Jobs\Process\Pool->_handleChildExitSignal() /var/www/html/jobs.neighborhoods.com/src/Process/Pool.php:67
+    1.8897    4705968   5. NHDS\Jobs\Process\Pool\Strategy->handleProcessExit() /var/www/html/jobs.neighborhoods.com/src/Process/Pool.php:94
+    1.8897    4705968   6. NHDS\Jobs\Process\Pool\Strategy->_handleListenerExit() /var/www/html/jobs.neighborhoods.com/src/Process/Pool/Strategy.php:18
+    1.8908    4715008   7. NHDS\Jobs\Process\Type\Listener\Command->processMessages() /var/www/html/jobs.neighborhoods.com/src/Process/Pool/Strategy.php:32
+    1.8912    4715816   8. Symfony\Component\ExpressionLanguage\ExpressionLanguage->evaluate() /var/www/html/jobs.neighborhoods.com/src/Process/Type/Listener/Command.php:25
+    1.8912    4716192   9. Symfony\Component\ExpressionLanguage\ExpressionLanguage->parse() /var/www/html/jobs.neighborhoods.com/vendor/symfony/expression-language/ExpressionLanguage.php:81
+    1.8915    4729072  10. Symfony\Component\ExpressionLanguage\Parser->parse() /var/www/html/jobs.neighborhoods.com/vendor/symfony/expression-language/ExpressionLanguage.php:108
+    1.8915    4729072  11. Symfony\Component\ExpressionLanguage\Parser->parseExpression() /var/www/html/jobs.neighborhoods.com/vendor/symfony/expression-language/Parser.php:100
+    1.8915    4729072  12. Symfony\Component\ExpressionLanguage\Parser->getPrimary() /var/www/html/jobs.neighborhoods.com/vendor/symfony/expression-language/Parser.php:110
+    1.8915    4729072  13. Symfony\Component\ExpressionLanguage\Parser->parsePrimaryExpression() /var/www/html/jobs.neighborhoods.com/vendor/symfony/expression-language/Parser.php:149

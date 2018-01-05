@@ -1,8 +1,8 @@
 <?php
 
-namespace NHDS\Jobs\Process\Type\Job\Bootstrap;
+namespace NHDS\Jobs\Worker\Bootstrap;
 
-use NHDS\Jobs\Process\Type\Job\BootstrapInterface;
+use NHDS\Jobs\Worker\BootstrapInterface;
 
 trait AwareTrait
 {

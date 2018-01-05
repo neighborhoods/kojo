@@ -18,6 +18,7 @@ class Redis extends AbstractBroker
             }
         }catch(\Exception $exception){
             $this->_getLogger()->warning($exception->getMessage());
+            throw $exception;
         }
 
         return $this;
@@ -59,12 +60,25 @@ class Redis extends AbstractBroker
         return $messages;
     }
 
+    public function getPublishChannelLength(): int
+    {
+        try{
+            $publishChannelLength = $this->_getRedisClient()->lLen($this->_getPublishChannelName());
+        }catch(\Exception $exception){
+            $this->_getLogger()->warning($exception->getMessage());
+            throw $exception;
+        }
+
+        return $publishChannelLength;
+    }
+
     public function publishMessage($message): BrokerInterface
     {
         try{
             $this->_getRedisClient()->rPush($this->_getPublishChannelName(), $message);
         }catch(\Exception $exception){
             $this->_getLogger()->warning($exception->getMessage());
+            throw $exception;
         }
 
         return $this;

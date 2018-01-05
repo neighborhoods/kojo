@@ -23,7 +23,6 @@ class Foreman implements ForemanInterface
     use Update\Work\Factory\AwareTrait;
     use Update\Panic\Factory\AwareTrait;
     use Update\Crash\Factory\AwareTrait;
-    const PROP_JOB = 'job';
 
     public function work(): ForemanInterface
     {

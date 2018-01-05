@@ -1,11 +1,11 @@
 <?php
 
-namespace NHDS\Jobs\Example\Process\Pool\Type\Job;
+namespace NHDS\Jobs\Example\Worker;
 
-use NHDS\Jobs\Process\Type\Job\BootstrapAbstract;
-use NHDS\Jobs\Process\Type\Job\BootstrapInterface;
+use NHDS\Jobs\Worker\BootstrapAbstract;
+use NHDS\Jobs\Worker\BootstrapInterface;
 
-class BootstrapExample extends BootstrapAbstract
+class Bootstrap extends BootstrapAbstract
 {
     public function instantiate(): BootstrapInterface
     {

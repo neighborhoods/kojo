@@ -50,8 +50,8 @@ class Scheduler extends AbstractCollection implements SchedulerInterface
     protected function _prepareCollection(): Db\Model\AbstractCollection
     {
         $this->getSelect()->columns([JobInterface::FIELD_NAME_TYPE_CODE, JobInterface::FIELD_NAME_WORK_AT_DATETIME]);
-        $workAtDateTime = $this->_getReferenceDateTime()->format(TimeInterface::MYSQL_DATETIME_FORMAT);
-        $this->getSelect()->where(JobInterface::FIELD_NAME_WORK_AT_DATETIME . '>= "' . $workAtDateTime . '"');
+        $workAtDateTime = $this->_getReferenceDateTime()->format('Y-m-d H:i:0');
+        $this->getSelect()->where(JobInterface::FIELD_NAME_WORK_AT_DATETIME . ' >= "' . $workAtDateTime . '"');
 
         return $this;
     }

@@ -1,7 +1,7 @@
 parameters:
   process_pool_strategy.max_processes: 30
   process_pool_strategy.process_wait_throttle: 1
-  process_pool_strategy.max_alarm_time: 3
+  process_pool_strategy.max_alarm_time: 3600
 services:
   nhds.toolkit.time:
     class: NHDS\Toolkit\Time

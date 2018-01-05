@@ -9,4 +9,4 @@ services:
       - [setForeman, ['@nhds.jobs.foreman']]
       - [setMaintainer, ['@nhds.jobs.maintainer']]
       - [setScheduler, ['@nhds.jobs.scheduler']]
-#      - [setBootstrap, ['@bootstrap_example']]
+      - [setBootstrap, ['@bootstrap']]

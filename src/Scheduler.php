@@ -52,7 +52,7 @@ class Scheduler implements SchedulerInterface
             while ($this->_getReferenceDistanceDateTime() >= $nexReferenceMinuteDateTime) {
                 if (!$this->_isMinuteScheduledInCache($nexReferenceMinuteDateTime)) {
                     $scheduleMinute = $nexReferenceMinuteDateTime;
-                    $this->_scheduleMinutesNotInCache[] = $scheduleMinute;
+                    $this->_scheduleMinutesNotInCache[$scheduleMinute->format(self::DATE_TIME_FORMAT_MYSQL_MINUTE)] = $scheduleMinute;
                 }
                 $nexReferenceMinuteDateTime = $this->_getNextReferenceMinuteDateTime();
             }
@@ -76,7 +76,7 @@ class Scheduler implements SchedulerInterface
 
     protected function _scheduleJobs(): SchedulerInterface
     {
-        $this->_getSchedulerJobCollection()->setReferenceDateTime($this->_getReferenceDateTimeClone());
+        $this->_getSchedulerJobCollection()->setReferenceDateTime($this->_getTime()->getNow());
         foreach ($this->_getSchedulerJobTypeCollection()->getIterator() as $jobType) {
             $cronExpressionString = $jobType->getCronExpression();
             $typeCode = $jobType->getCode();

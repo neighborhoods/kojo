@@ -10,39 +10,37 @@ class Iterator implements IteratorInterface
 {
     use Crud\AwareTrait;
     use Collection\AwareTrait;
+    protected $_models = [];
+
+    public function initialize(): IteratorInterface
+    {
+        $this->_models = &$this->_getCollection()->getModelsArray();
+
+        return $this;
+    }
 
     function rewind()
     {
-        $modelsArray = &$this->_getCollection()->getModelsArray();
-
-        return reset($modelsArray);
+        return reset($this->_models);
     }
 
     function current(): JobInterface
     {
-        $modelsArray = &$this->_getCollection()->getModelsArray();
-
-        return current($modelsArray);
+        return current($this->_models);
     }
 
     function key(): int
     {
-        $modelsArray = &$this->_getCollection()->getModelsArray();
-
-        return key($modelsArray);
+        return key($this->_models);
     }
 
     function next()
     {
-        $modelsArray = &$this->_getCollection()->getModelsArray();
-
-        return next($modelsArray);
+        return next($this->_models);
     }
 
     function valid(): bool
     {
-        $modelsArray = &$this->_getCollection()->getModelsArray();
-
-        return key($modelsArray) !== null;
+        return key($this->_models) !== null;
     }
 }

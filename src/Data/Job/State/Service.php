@@ -201,8 +201,7 @@ class Service implements ServiceInterface
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_FAILED:
             case ServiceInterface::STATE_WORKING . ServiceInterface::STATE_CRASHED:
                 switch ($assignedState) {
-                    case
-                    ServiceInterface::STATE_WORKING:
+                    case ServiceInterface::STATE_WORKING:
                         break;
                     default:
                         $invalidTransition = true;
@@ -210,8 +209,7 @@ class Service implements ServiceInterface
                 break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_CANCELLED_FAILED_LIMIT_CHECK:
                 switch ($assignedState) {
-                    case
-                    ServiceInterface::STATE_PENDING_LIMIT_CHECK:
+                    case ServiceInterface::STATE_PENDING_LIMIT_CHECK:
                         break;
                     default:
                         $invalidTransition = true;
@@ -219,8 +217,8 @@ class Service implements ServiceInterface
                 break;
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_WORKING:
                 switch ($assignedState) {
-                    case
-                    ServiceInterface::STATE_WAITING:
+                    case ServiceInterface::STATE_WAITING:
+                    case ServiceInterface::STATE_CRASHED:
                         break;
                     default:
                         $invalidTransition = true;

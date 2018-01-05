@@ -49,7 +49,10 @@ class Selector extends AbstractCollection implements SelectorInterface
         $select = $this->getSelect();
         $select->where(
             [
-                JobInterface::FIELD_NAME_ASSIGNED_STATE     => State\ServiceInterface::STATE_WAITING,
+                JobInterface::FIELD_NAME_ASSIGNED_STATE     => [
+                    State\ServiceInterface::STATE_WAITING,
+                    State\Service::STATE_CRASHED,
+                ],
                 JobInterface::FIELD_NAME_NEXT_STATE_REQUEST => State\ServiceInterface::STATE_WORKING,
             ]
         );
