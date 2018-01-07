@@ -52,14 +52,14 @@ abstract class AbstractLogger extends Log\AbstractLogger implements LoggerInterf
         if ($this->_isEnabled === true) {
             if ($this->_processId === null) {
                 $indicator = "< pool    ";
-                $processId = $this->_getProcessPoolProcessId();
+                $processId = str_pad('[' . $this->_getProcessPoolProcessId() . ']', 12, ' ');
             }else {
                 $indicator = "> process ";
-                $processId = $this->_processId;
+                $processId = str_pad('[' . $this->_processId . ']', 12, ' ');;
             }
 
             $paddedLevel = str_pad('[' . $level . ']', 12, ' ');
-            $format = "{$indicator}[%s] - " . $this->_getTime()->getUnixReferenceTimeNow() . $paddedLevel . ": %s\n";
+            $format = "{$indicator}%s - " . $this->_getTime()->getUnixReferenceTimeNow() . $paddedLevel . ": %s\n";
             fwrite(STDOUT, sprintf($format, $processId, $message));
         }
 
