@@ -37,6 +37,30 @@ class Flock extends AbstractMutex
         return $this->_hasLock;
     }
 
+    public function releaseLock(): MutexInterface
+    {
+        if ($this->_hasLock === true) {
+            if (flock($this->_getLockFilePointer(), LOCK_UN) === false) {
+                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_UNLOCK_FAILED);
+            }
+            $this->_getLogger()->debug('Released lock for file "' . $this->_getFilePath() . '".');
+            $this->_hasLock = false;
+            if (fclose($this->_getLockFilePointer()) === false) {
+                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FCLOSE_FAILED);
+                $this->_filePointer = null;
+            }
+        }else {
+            throw new \LogicException('The mutex has not obtained a lock.');
+        }
+
+        return $this;
+    }
+
+    public function hasLock(): bool
+    {
+        return $this->_hasLock;
+    }
+
     protected function _getLockFilePointer()
     {
         if ($this->_filePointer === null) {
@@ -61,25 +85,6 @@ class Flock extends AbstractMutex
         }
 
         return $this->_filePath;
-    }
-
-    public function releaseLock(): MutexInterface
-    {
-        if ($this->_hasLock === true) {
-            if (flock($this->_getLockFilePointer(), LOCK_UN) === false) {
-                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_UNLOCK_FAILED);
-            }
-            $this->_getLogger()->debug('Released lock for file "' . $this->_getFilePath() . '".');
-            $this->_hasLock = false;
-            if (fclose($this->_getLockFilePointer()) === false) {
-                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FCLOSE_FAILED);
-                $this->_filePointer = null;
-            }
-        }else {
-            throw new \LogicException('The mutex has not obtained a lock.');
-        }
-
-        return $this;
     }
 
     public function setDirectoryPathPrefix(string $directoryPathPrefix): Flock

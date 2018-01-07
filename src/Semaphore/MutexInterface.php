@@ -11,4 +11,6 @@ interface MutexInterface
     public function releaseLock(): MutexInterface;
 
     public function setResource(ResourceInterface $resource): MutexInterface;
+
+    public function hasLock(): bool;
 }
