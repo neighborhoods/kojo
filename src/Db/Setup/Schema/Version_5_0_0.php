@@ -46,7 +46,7 @@ class Version_5_0_0 extends AbstractVersion
             new Integer(
                 JobInterface::FIELD_NAME_PRIORITY, false, null,
                 [
-                    'comment'  => 'COMMENT',
+                    'comment' => 'COMMENT',
                 ]));
         $createTable->addColumn(
             new Integer(
@@ -156,14 +156,42 @@ class Version_5_0_0 extends AbstractVersion
         $createTable->addConstraint(
             new Index(
                 [
-                    JobInterface::FIELD_NAME_ASSIGNED_STATE,
-                    JobInterface::FIELD_NAME_PRIORITY,
-                    JobInterface::FIELD_NAME_WORK_AT_DATETIME,
                     JobInterface::FIELD_NAME_ID,
                     JobInterface::FIELD_NAME_TYPE_CODE,
+                    JobInterface::FIELD_NAME_ASSIGNED_STATE,
+                    JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
+                    JobInterface::FIELD_NAME_PRIORITY,
+                    JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
+                    JobInterface::FIELD_NAME_PREVIOUS_STATE,
+                    JobInterface::FIELD_NAME_TIMES_CRASHED,
+                ],
+                JobInterface::INDEX_NAME_CRASHED
+            )
+        );
+        $createTable->addConstraint(
+            new Index(
+                [
+                    JobInterface::FIELD_NAME_ID,
+                    JobInterface::FIELD_NAME_TYPE_CODE,
+                    JobInterface::FIELD_NAME_ASSIGNED_STATE,
+                    JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
+                    JobInterface::FIELD_NAME_PRIORITY,
+                    JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
+                    JobInterface::FIELD_NAME_PREVIOUS_STATE,
+                ],
+                JobInterface::INDEX_NAME_PENDING
+            )
+        );
+        $createTable->addConstraint(
+            new Index(
+                [
+                    JobInterface::FIELD_NAME_ID,
+                    JobInterface::FIELD_NAME_TYPE_CODE,
+                    JobInterface::FIELD_NAME_ASSIGNED_STATE,
+                    JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
                     JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
                 ],
-                JobInterface::INDEX_NAME_PICK_AND_MAINTAIN
+                JobInterface::INDEX_NAME_SELECTOR
             )
         );
         $createTable->addConstraint(
@@ -171,9 +199,8 @@ class Version_5_0_0 extends AbstractVersion
                 [
                     JobInterface::FIELD_NAME_TYPE_CODE,
                     JobInterface::FIELD_NAME_WORK_AT_DATETIME,
-                    JobInterface::FIELD_NAME_ID,
                 ],
-                JobInterface::INDEX_NAME_SCHEDULE_JOBS_AHEAD
+                JobInterface::INDEX_NAME_SCHEDULER
             )
         );
         $createTable->addConstraint(

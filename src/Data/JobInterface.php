@@ -28,8 +28,10 @@ interface JobInterface extends ModelInterface
     const FIELD_NAME_TIMES_CRASHED              = 'times_crashed';
     const FIELD_NAME_TIMES_PANICKED             = 'times_panicked';
     const FOREIGN_KEY_NAME_JOB_TYPE_CODE        = 'JOB_TYPE_CODE';
-    const INDEX_NAME_SCHEDULE_JOBS_AHEAD        = 'SCHEDULE_JOBS_AHEAD';
-    const INDEX_NAME_PICK_AND_MAINTAIN          = 'PICK_AND_MAINTAIN';
+    const INDEX_NAME_SCHEDULER                  = 'SCHEDULER';
+    const INDEX_NAME_PENDING                    = 'PENDING';
+    const INDEX_NAME_SELECTOR                   = 'SELECTOR';
+    const INDEX_NAME_CRASHED                    = 'CRASHED';
 
     public function setTypeCode(string $typeCode): JobInterface;
 
