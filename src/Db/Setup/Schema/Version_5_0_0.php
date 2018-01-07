@@ -47,7 +47,6 @@ class Version_5_0_0 extends AbstractVersion
                 JobInterface::FIELD_NAME_PRIORITY, false, null,
                 [
                     'comment'  => 'COMMENT',
-                    'unsigned' => true,
                 ]));
         $createTable->addColumn(
             new Integer(

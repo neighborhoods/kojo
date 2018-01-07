@@ -86,7 +86,8 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
         $this->_assignedStateUpdate = ServiceInterface::STATE_CRASHED;
-        $this->_updateExpression = 'job.setTimesCrashed(job.getTimesCrashed()+1)';
+        $this->_updateExpression = 'job.setTimesCrashed(job.getTimesCrashed()+1) 
+            && job.setPriority(job.getPriority()-1)';
 
         return $this;
     }
@@ -95,7 +96,8 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
         $this->_assignedStateUpdate = ServiceInterface::STATE_PANICKED;
-        $this->_updateExpression = 'job.setTimesPanicked(job.getTimesPanicked()+1)';
+        $this->_updateExpression = 'job.setTimesPanicked(job.getTimesPanicked()+1) 
+            && job.setPriority(job.getPriority()-1)';
 
         return $this;
     }
