@@ -6,3 +6,4 @@ services:
       - [setFileMode, ['c']]
       - [setDirectoryMode, ['0777']]
       - [setDirectoryPathPrefix, ['/tmp/']]
+      - [setLogger, ['@nhds.jobs.process.pool.logger']]

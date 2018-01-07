@@ -18,6 +18,8 @@ class Semaphore implements SemaphoreInterface
             $this->_resources[$resourceId] = $resource;
             if ($this->_getResource($resourceId)->getMutex()->testAndSetLock() === true) {
                 $this->_incrementLockCount($resourceId);
+            }else{
+                $this->_unsetResource($resourceId);
             }
         }
 

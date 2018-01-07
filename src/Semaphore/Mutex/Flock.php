@@ -7,11 +7,13 @@ use NHDS\Jobs\Filesystem;
 use NHDS\Jobs\Semaphore\AbstractMutex;
 use NHDS\Jobs\Semaphore\MutexInterface;
 use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Jobs\Process\Pool\Logger;
 
 class Flock extends AbstractMutex
 {
     use Crud\AwareTrait;
     use Filesystem\AwareTrait;
+    use Logger\AwareTrait;
     const PROP_DIRECTORY_PATH_PREFIX = 'directory_path_prefix';
     protected $_fileName;
     protected $_directoryPath;
@@ -25,6 +27,7 @@ class Flock extends AbstractMutex
     {
         if ($this->_hasLock === false) {
             if (flock($this->_getLockFilePointer(), $this->_getFlockLockOperation()) === true) {
+                $this->_getLogger()->debug('Obtained lock for file "' . $this->_getFilePath() . '".');
                 $this->_hasLock = true;
             }
         }else {
@@ -63,12 +66,10 @@ class Flock extends AbstractMutex
     public function releaseLock(): MutexInterface
     {
         if ($this->_hasLock === true) {
-            if (unlink($this->_getFilePath()) === false) {
-                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_UNLINK_FAILED);
-            }
             if (flock($this->_getLockFilePointer(), LOCK_UN) === false) {
                 $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_UNLOCK_FAILED);
             }
+            $this->_getLogger()->debug('Released lock for file "' . $this->_getFilePath() . '".');
             $this->_hasLock = false;
             if (fclose($this->_getLockFilePointer()) === false) {
                 $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FCLOSE_FAILED);

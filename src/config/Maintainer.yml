@@ -14,3 +14,4 @@ services:
       - [setJobServiceUpdateCancelledFailedLimitCheckFactory, ['@nhds.jobs.data.job.service.update.cancelled.failedlimitcheck.factory']]
       - [setJobTypeRepository, ['@nhds.jobs.data.job.type.repository']]
       - [setJobCollectionScheduleLimit, ['@nhds.jobs.data.job.collection.schedulelimit']]
+      - [setLogger, ['@nhds.jobs.process.pool.logger']]
