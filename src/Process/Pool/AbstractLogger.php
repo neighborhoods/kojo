@@ -59,7 +59,7 @@ abstract class AbstractLogger extends Log\AbstractLogger implements LoggerInterf
             }
 
             $paddedLevel = str_pad('[' . $level . ']', 12, ' ');
-            $format = "{$indicator}%s - " . $this->_getTime()->getUnixReferenceTimeNow() . $paddedLevel . ": %s\n";
+            $format = "{$indicator}%s : " . $this->_getTime()->getUnixReferenceTimeNow() . $paddedLevel . ": %s\n";
             fwrite(STDOUT, sprintf($format, $processId, $message));
         }
 
