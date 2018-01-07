@@ -52,10 +52,10 @@ abstract class AbstractLogger extends Log\AbstractLogger implements LoggerInterf
         if ($this->_isEnabled === true) {
             if ($this->_processId === null) {
                 $indicator = "pool   ";
-                $processId = str_pad($this->_getProcessPoolProcessId(), 12, ' ');
+                $processId = str_pad($this->_getProcessPoolProcessId(), 12, ' ', STR_PAD_LEFT);
             }else {
                 $indicator = "process";
-                $processId = str_pad($this->_processId, 12, ' ');;
+                $processId = str_pad($this->_processId, 12, ' ', STR_PAD_LEFT);;
             }
 
             $paddedLevel = str_pad($level, 12, ' ');
