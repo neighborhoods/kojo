@@ -1,6 +1,6 @@
 <?php
 
-namespace NHDS\Jobs\Data\Job\Collection\Pending;
+namespace NHDS\Jobs\Data\Job\Collection\Schedule;
 
 use NHDS\Jobs\Data\Job\CollectionInterface;
 

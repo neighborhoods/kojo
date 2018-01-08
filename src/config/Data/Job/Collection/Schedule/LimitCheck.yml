@@ -1,6 +1,6 @@
 services:
-  nhds.jobs.data.job.collection.pending.limitcheck:
-    class: NHDS\Jobs\Data\Job\Collection\Pending\LimitCheck
+  nhds.jobs.data.job.collection.schedule.limitcheck:
+    class: NHDS\Jobs\Data\Job\Collection\Schedule\LimitCheck
     shared: false
     calls:
       - [setModel, ['@nhds.jobs.data.job']]

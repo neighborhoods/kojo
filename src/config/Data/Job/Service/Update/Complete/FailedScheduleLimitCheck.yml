@@ -1,0 +1,4 @@
+services:
+  nhds.jobs.data.job.service.update.complete.failedschedulelimitcheck:
+    class: NHDS\Jobs\Data\Job\Service\Update\Complete\FailedScheduleLimitCheck
+    shared: false

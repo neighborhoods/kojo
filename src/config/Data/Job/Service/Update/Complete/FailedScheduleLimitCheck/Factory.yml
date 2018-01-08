@@ -1,0 +1,6 @@
+services:
+  nhds.jobs.data.job.service.update.complete.failedschedulelimitcheck.factory:
+    class: NHDS\Jobs\Data\Job\Service\Update\Complete\FailedScheduleLimitCheck\Factory
+    calls:
+      - [setJobStateService, ['@nhds.jobs.data.job.state.service']]
+      - [setUpdateCompleteFailedScheduleLimitCheck, ['@nhds.jobs.data.job.service.update.complete.failedschedulelimitcheck']]

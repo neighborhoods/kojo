@@ -1,0 +1,13 @@
+@bwilson - add auto_complete to job type as an option.
+@bwilson - add auto_schedule as a job type type option.
+@bwilson - add auto_delete_after_datetime as a job type option.
+@bwilson - created_at_date_time
+@bwilson - process_id
+@bwilson - pool_id
+@bwilson - implement redis mutex.
+@bwilson - implement zookpeer mutex.
+@bwilson - check indexes against selects.
+@bwilson - fix changed persistent properties.
+@bwilson - standardize commands:
+@bwilson - maintainer deletes
+@bwilson - new relic integration

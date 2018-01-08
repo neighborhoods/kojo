@@ -1,6 +1,0 @@
-services:
-  nhds.jobs.data.job.service.update.cancelled.failedlimitcheck.factory:
-    class: NHDS\Jobs\Data\Job\Service\Update\Cancelled\FailedLimitCheck\Factory
-    calls:
-      - [setJobStateService, ['@nhds.jobs.data.job.state.service']]
-      - [setJobServiceUpdateCancelledFailedLimitCheck, ['@nhds.jobs.data.job.service.update.cancelled.failedlimitcheck']]

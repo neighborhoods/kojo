@@ -6,24 +6,24 @@ use NHDS\Jobs\Data\JobInterface;
 
 interface ServiceInterface
 {
-    const STATE_NONE                         = 'none';
-    const STATE_NEW                          = 'new';
-    const STATE_PENDING_LIMIT_CHECK          = 'pending_limit_check';
-    const STATE_WORKING                      = 'working';
-    const STATE_WAITING                      = 'waiting';
-    const STATE_HOLD                         = 'hold';
-    const STATE_PANICKED                     = 'panicked';
-    const STATE_CRASHED                      = 'crashed';
-    const STATE_COMPLETE_SUCCESS             = 'complete_success';
-    const STATE_COMPLETE_TERMINATED          = 'complete_terminated';
-    const STATE_COMPLETE_FAILED              = 'complete_failed';
-    const STATE_CANCELLED_FAILED_LIMIT_CHECK = 'cancelled_failed_limit_check';
+    const STATE_NONE                                 = 'none';
+    const STATE_NEW                                  = 'new';
+    const STATE_SCHEDULE_LIMIT_CHECK                 = 'schedule_limit_check';
+    const STATE_WORKING                              = 'working';
+    const STATE_WAITING                              = 'waiting';
+    const STATE_HOLD                                 = 'hold';
+    const STATE_PANICKED                             = 'panicked';
+    const STATE_CRASHED                              = 'crashed';
+    const STATE_COMPLETE_SUCCESS                     = 'complete_success';
+    const STATE_COMPLETE_TERMINATED                  = 'complete_terminated';
+    const STATE_COMPLETE_FAILED                      = 'complete_failed';
+    const STATE_COMPLETE_FAILED_SCHEDULE_LIMIT_CHECK = 'complete_failed_schedule_limit_check';
 
     public function setJob(JobInterface $job);
 
-    public function requestPendingLimitCheck(): ServiceInterface;
+    public function requestScheduleLimitCheck(): ServiceInterface;
 
-    public function requestCancelledFailedLimitCheck(): ServiceInterface;
+    public function requestCompleteFailedScheduleLimitCheck(): ServiceInterface;
 
     public function requestWaitForWork(): ServiceInterface;
 

@@ -25,18 +25,18 @@ class Service implements ServiceInterface
         return $this;
     }
 
-    public function requestPendingLimitCheck(): ServiceInterface
+    public function requestScheduleLimitCheck(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_PENDING_LIMIT_CHECK;
+        $this->_nextStateRequestUpdate = ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK;
+        $this->_assignedStateUpdate = ServiceInterface::STATE_WAITING;
 
         return $this;
     }
 
-    public function requestCancelledFailedLimitCheck(): ServiceInterface
+    public function requestCompleteFailedScheduleLimitCheck(): ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_CANCELLED_FAILED_LIMIT_CHECK;
+        $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_FAILED_SCHEDULE_LIMIT_CHECK;
 
         return $this;
     }
@@ -184,27 +184,28 @@ class Service implements ServiceInterface
         $assignedStateUpdate = $this->_getAssignedStateUpdate();
         $assignedState = $this->_getJob()->getAssignedState();
         switch ($nextStateRequestUpdate . $assignedStateUpdate) {
+            // Waiting for work.
             case ServiceInterface::STATE_WORKING . ServiceInterface::STATE_WAITING:
                 switch ($assignedState) {
+                    case ServiceInterface::STATE_WAITING:
+                        switch ($this->_getJob()->getNextStateRequest()) {
+                            case Service::STATE_SCHEDULE_LIMIT_CHECK:
+                                break;
+                            default:
+                                $isValidTransition = false;
+                        }
+                        break;
                     case ServiceInterface::STATE_WORKING:
                     case ServiceInterface::STATE_PANICKED:
                     case ServiceInterface::STATE_HOLD:
                     case ServiceInterface::STATE_CRASHED:
                     case ServiceInterface::STATE_NEW:
-                    case ServiceInterface::STATE_PENDING_LIMIT_CHECK:
                         break;
                     default:
                         $isValidTransition = false;
                 }
                 break;
-            case ServiceInterface::STATE_WORKING . ServiceInterface::STATE_PENDING_LIMIT_CHECK:
-                switch ($assignedState) {
-                    case ServiceInterface::STATE_NEW:
-                        break;
-                    default:
-                        $isValidTransition = false;
-                }
-                break;
+            // Hold or terminated.
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_HOLD:
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_TERMINATED:
                 switch ($assignedState) {
@@ -215,6 +216,16 @@ class Service implements ServiceInterface
                         $isValidTransition = false;
                 }
                 break;
+            // Complete failed schedule limit check.
+            case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_FAILED_SCHEDULE_LIMIT_CHECK:
+                switch ($assignedState) {
+                    case ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK:
+                        break;
+                    default:
+                        $isValidTransition = false;
+                }
+                break;
+            // Complete success, complete failed, or crashed.
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_SUCCESS:
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_FAILED:
             case ServiceInterface::STATE_WORKING . ServiceInterface::STATE_CRASHED:
@@ -225,24 +236,26 @@ class Service implements ServiceInterface
                         $isValidTransition = false;
                 }
                 break;
-            case ServiceInterface::STATE_NONE . ServiceInterface::STATE_CANCELLED_FAILED_LIMIT_CHECK:
+            // Schedule limit check.
+            case ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK . ServiceInterface::STATE_WAITING:
                 switch ($assignedState) {
-                    case ServiceInterface::STATE_PENDING_LIMIT_CHECK:
+                    case ServiceInterface::STATE_NEW:
                         break;
                     default:
                         $isValidTransition = false;
                 }
                 break;
+            // Working.
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_WORKING:
                 switch ($assignedState) {
                     case ServiceInterface::STATE_WAITING:
                     case ServiceInterface::STATE_CRASHED:
-                    case ServiceInterface::STATE_PENDING_LIMIT_CHECK:
                         break;
                     default:
                         $isValidTransition = false;
                 }
                 break;
+            // Panicked.
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_PANICKED:
                 break;
             default:

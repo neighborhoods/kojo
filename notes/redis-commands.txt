@@ -1,3 +1,5 @@
+// request for a new job process to be run. 
 rpush job_queue "{  
    \"command\":\"commandProcess.addProcess('job')\"
 }"
+

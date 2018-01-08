@@ -43,9 +43,9 @@ imports:
    - { resource: Data/Job/Service/Update/Crash/Factory.yml }
    - { resource: Data/Job/Service/Update/Work/Factory.yml }
    - { resource: Data/Job/Service/Update/Work.yml }
-   - { resource: Data/Job/Service/Update/Cancelled/FailedLimitCheck/Factory.yml }
-   - { resource: Data/Job/Service/Update/Cancelled/FailedLimitCheck.yml }
-   - { resource: Data/Job/Collection/Pending/LimitCheck.yml }
+   - { resource: Data/Job/Service/Update/Complete/FailedScheduleLimitCheck/Factory.yml }
+   - { resource: Data/Job/Service/Update/Complete/FailedScheduleLimitCheck.yml }
+   - { resource: Data/Job/Collection/Schedule/LimitCheck.yml }
    - { resource: Data/Job/Service/Create/Factory.yml }
    - { resource: Console/Command/Process/Pool/Server/Start.yml }
    - { resource: Data/Job/Type/Repository.yml }

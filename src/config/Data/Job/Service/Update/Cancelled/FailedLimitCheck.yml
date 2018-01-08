@@ -1,4 +1,0 @@
-services:
-  nhds.jobs.data.job.service.update.cancelled.failedlimitcheck:
-    class: NHDS\Jobs\Data\Job\Service\Update\Cancelled\FailedLimitCheck
-    shared: false

@@ -6,31 +6,31 @@ use NHDS\Jobs\Db\ModelInterface;
 
 interface JobInterface extends ModelInterface
 {
-    const TABLE_NAME                            = 'nhds_job';
-    const FIELD_NAME_ID                         = 'nhds_job_id';
-    const FIELD_NAME_TYPE_CODE                  = 'type_code';
-    const FIELD_NAME_NAME                       = 'name';
-    const FIELD_NAME_PRIORITY                   = 'priority';
-    const FIELD_NAME_IMPORTANCE                 = 'importance';
-    const FIELD_NAME_STATUS_ID                  = 'status_id';
-    const FIELD_NAME_WORK_AT_DATETIME           = 'work_at_datetime';
-    const FIELD_NAME_NEXT_STATE_REQUEST         = 'next_state_request';
-    const FIELD_NAME_ASSIGNED_STATE             = 'assigned_state';
-    const FIELD_NAME_PREVIOUS_STATE             = 'previous_state';
-    const FIELD_NAME_WORKER_URI                 = 'worker_uri';
-    const FIELD_NAME_WORKER_METHOD              = 'worker_method';
-    const FIELD_NAME_CAN_WORK_IN_PARALLEL       = 'can_work_in_parallel';
-    const FIELD_NAME_LAST_TRANSITION_DATETIME   = 'last_transition_datetime';
-    const FIELD_NAME_LAST_TRANSITION_MICRO_TIME = 'last_transition_micro_time';
-    const FIELD_NAME_TIMES_WORKED               = 'times_worked';
-    const FIELD_NAME_TIMES_RETRIED              = 'times_retried';
-    const FIELD_NAME_TIMES_HELD                 = 'times_held';
-    const FIELD_NAME_TIMES_CRASHED              = 'times_crashed';
-    const FIELD_NAME_TIMES_PANICKED             = 'times_panicked';
-    const FOREIGN_KEY_NAME_JOB_TYPE_CODE        = 'JOB_TYPE_CODE';
-    const INDEX_NAME_SCHEDULER                  = 'SCHEDULER';
-    const INDEX_NAME_PENDING                    = 'PENDING';
-    const INDEX_NAME_CRASHED_AND_SELECTION      = 'CRASHED_AND_SELECTION';
+    const TABLE_NAME                                       = 'nhds_job';
+    const FIELD_NAME_ID                                    = 'nhds_job_id';
+    const FIELD_NAME_TYPE_CODE                             = 'type_code';
+    const FIELD_NAME_NAME                                  = 'name';
+    const FIELD_NAME_PRIORITY                              = 'priority';
+    const FIELD_NAME_IMPORTANCE                            = 'importance';
+    const FIELD_NAME_STATUS_ID                             = 'status_id';
+    const FIELD_NAME_WORK_AT_DATETIME                      = 'work_at_datetime';
+    const FIELD_NAME_NEXT_STATE_REQUEST                    = 'next_state_request';
+    const FIELD_NAME_ASSIGNED_STATE                        = 'assigned_state';
+    const FIELD_NAME_PREVIOUS_STATE                        = 'previous_state';
+    const FIELD_NAME_WORKER_URI                            = 'worker_uri';
+    const FIELD_NAME_WORKER_METHOD                         = 'worker_method';
+    const FIELD_NAME_CAN_WORK_IN_PARALLEL                  = 'can_work_in_parallel';
+    const FIELD_NAME_LAST_TRANSITION_DATETIME              = 'last_transition_datetime';
+    const FIELD_NAME_LAST_TRANSITION_MICRO_TIME            = 'last_transition_micro_time';
+    const FIELD_NAME_TIMES_WORKED                          = 'times_worked';
+    const FIELD_NAME_TIMES_RETRIED                         = 'times_retried';
+    const FIELD_NAME_TIMES_HELD                            = 'times_held';
+    const FIELD_NAME_TIMES_CRASHED                         = 'times_crashed';
+    const FIELD_NAME_TIMES_PANICKED                        = 'times_panicked';
+    const FOREIGN_KEY_NAME_JOB_TYPE_CODE                   = 'JOB_TYPE_CODE';
+    const INDEX_NAME_SCHEDULER                             = 'SCHEDULER';
+    const INDEX_NAME_PENDING                               = 'PENDING';
+    const INDEX_NAME_CRASHED_AND_SELECTION_AND_LIMIT_CHECK = 'CRASHED_AND_SELECTION_AND_LIMIT_CHECK';
 
     public function setTypeCode(string $typeCode): JobInterface;
 

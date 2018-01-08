@@ -4,11 +4,11 @@ namespace NHDS\Jobs;
 
 use NHDS\Jobs\Data\Job\Collection\CrashDetection;
 use NHDS\Jobs\Data\Job\Service\Update;
-use NHDS\Jobs\Data\Job\Collection\Pending\LimitCheck;
+use NHDS\Jobs\Data\Job\Collection\Schedule\LimitCheck;
 use NHDS\Jobs\Data\Job\Collection\ScheduleLimit;
 use NHDS\Jobs\Data\Job;
 use NHDS\Toolkit\Data\Property\Crud;
-use NHDS\Jobs\Data\Job\Service\Update\Cancelled\FailedLimitCheck;
+use NHDS\Jobs\Data\Job\Service\Update\Complete\FailedScheduleLimitCheck;
 use NHDS\Jobs\Process\Pool\Logger;
 
 class Maintainer implements MaintainerInterface
@@ -20,7 +20,7 @@ class Maintainer implements MaintainerInterface
     use LimitCheck\AwareTrait;
     use ScheduleLimit\AwareTrait;
     use Job\Type\Repository\AwareTrait;
-    use FailedLimitCheck\Factory\AwareTrait;
+    use FailedSCheduleLimitCheck\Factory\AwareTrait;
     use Update\Wait\Factory\AwareTrait;
     use Update\Crash\Factory\AwareTrait;
     use Update\Panic\Factory\AwareTrait;
@@ -86,7 +86,7 @@ class Maintainer implements MaintainerInterface
 
     protected function _updatePendingJobs(): Maintainer
     {
-        foreach ($this->_getJobCollectionPendingLimitCheck()->getIterator() as $job) {
+        foreach ($this->_getJobCollectionScheduleLimitCheck()->getIterator() as $job) {
             $jobType = $this->_getJobTypeRepository()->getJobType($job->getTypeCode());
             $scheduleLimit = $this->_getJobCollectionScheduleLimitByJobType($jobType);
             $numberOfScheduledJobs = $scheduleLimit->getNumberOfCurrentlyScheduledJobs();
@@ -96,7 +96,7 @@ class Maintainer implements MaintainerInterface
                     $waitUpdate->setJob($job);
                     $waitUpdate->save();
                 }else {
-                    $failedLimitCheckUpdate = $this->_getJobServiceUpdateCancelledFailedLimitCheckFactory()->create();
+                    $failedLimitCheckUpdate = $this->_getUpdateCompleteFailedScheduleLimitCheckFactory()->create();
                     $failedLimitCheckUpdate->setJob($job);
                     $failedLimitCheckUpdate->save();
                 }

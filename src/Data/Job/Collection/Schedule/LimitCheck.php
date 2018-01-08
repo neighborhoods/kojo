@@ -1,6 +1,6 @@
 <?php
 
-namespace NHDS\Jobs\Data\Job\Collection\Pending;
+namespace NHDS\Jobs\Data\Job\Collection\Schedule;
 
 use NHDS\Jobs\Data\Job\AbstractCollection;
 use NHDS\Jobs\Data\JobInterface;
@@ -14,7 +14,8 @@ class LimitCheck extends AbstractCollection implements LimitCheckInterface
         $select = $this->getSelect();
         $select->where(
             [
-                JobInterface::FIELD_NAME_ASSIGNED_STATE => State\ServiceInterface::STATE_PENDING_LIMIT_CHECK,
+                JobInterface::FIELD_NAME_ASSIGNED_STATE     => State\ServiceInterface::STATE_WAITING,
+                JobInterface::FIELD_NAME_NEXT_STATE_REQUEST => State\ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK,
             ]
         );
         $select->columns(

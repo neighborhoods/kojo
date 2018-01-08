@@ -34,7 +34,7 @@ class Create extends AbstractService implements CreateInterface
         if ($this->_getJobType()->getScheduleLimit() > 0) {
             $numberOfScheduledJobs = $this->_getJobCollectionScheduleLimit()->getNumberOfCurrentlyScheduledJobs();
             if ($numberOfScheduledJobs < $this->_getJobType()->getScheduleLimit()) {
-                $this->_getJobStateService()->requestPendingLimitCheck();
+                $this->_getJobStateService()->requestScheduleLimitCheck();
                 $this->_save();
             }
         }else {

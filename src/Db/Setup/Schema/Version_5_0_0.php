@@ -166,7 +166,7 @@ class Version_5_0_0 extends AbstractVersion
                     JobInterface::FIELD_NAME_TIMES_CRASHED,
 
                 ],
-                JobInterface::INDEX_NAME_CRASHED_AND_SELECTION
+                JobInterface::INDEX_NAME_CRASHED_AND_SELECTION_AND_LIMIT_CHECK
             )
         );
         $createTable->addConstraint(
