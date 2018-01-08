@@ -18,12 +18,16 @@ class Command extends Type\AbstractListener
     public function processMessages(): Type\ListenerInterface
     {
         $message = $this->_getMessageBroker()->getNextMessage();
-        $this->_getExpressionLanguage()->evaluate(
-            json_decode($message, true)['command'],
-            [
-                'commandProcess' => $this,
-            ]
-        );
+        if (json_decode($message) !== null) {
+            $this->_getExpressionLanguage()->evaluate(
+                json_decode($message, true)['command'],
+                [
+                    'commandProcess' => $this,
+                ]
+            );
+        }else {
+            $this->_getLogger()->debug('The message is not a JSON: "' . $message . '".');
+        }
 
         return $this;
     }

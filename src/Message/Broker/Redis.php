@@ -62,7 +62,7 @@ class Redis extends AbstractBroker
             throw $exception;
         }
 
-        return $message;
+        return (string)$message;
     }
 
     public function getPublishChannelLength(): int
