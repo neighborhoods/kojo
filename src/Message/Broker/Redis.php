@@ -40,25 +40,29 @@ class Redis extends AbstractBroker
     public function hasMessage(): bool
     {
         try{
-            $listenerStackLength = $this->_getRedisClient()->lLen($this->_getSubscriptionChannelName());
+            $publishChannelLength = $this->getPublishChannelLength();
+            $subscriptionChannelLength = $this->getSubscriptionChannelLength();
         }catch(\Exception $exception){
             $this->_getLogger()->warning($exception->getMessage());
             throw $exception;
         }
 
-        return $listenerStackLength > 0 ? true : false;
+        return $publishChannelLength + $subscriptionChannelLength > 0 ? true : false;
     }
 
     public function getNextMessage(): string
     {
         try{
-            $messages = $this->_getRedisClient()->rPop($this->_getSubscriptionChannelName());
+            $message = $this->_getRedisClient()->lPop($this->_getSubscriptionChannelName());
+            if ($message === false) {
+                $message = $this->_getRedisClient()->rPop($this->_getPublishChannelName());
+            }
         }catch(\Exception $exception){
             $this->_getLogger()->warning($exception->getMessage());
             throw $exception;
         }
 
-        return $messages;
+        return $message;
     }
 
     public function getPublishChannelLength(): int
@@ -71,6 +75,18 @@ class Redis extends AbstractBroker
         }
 
         return $publishChannelLength;
+    }
+
+    public function getSubscriptionChannelLength(): int
+    {
+        try{
+            $subscriptionChannelLength = $this->_getRedisClient()->lLen($this->_getSubscriptionChannelName());
+        }catch(\Exception $exception){
+            $this->_getLogger()->warning($exception->getMessage());
+            throw $exception;
+        }
+
+        return $subscriptionChannelLength;
     }
 
     public function publishMessage($message): BrokerInterface

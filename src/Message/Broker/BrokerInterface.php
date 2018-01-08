@@ -13,4 +13,6 @@ interface BrokerInterface
     public function getNextMessage(): string;
 
     public function getPublishChannelLength(): int;
+
+    public function getSubscriptionChannelLength(): int;
 }
