@@ -10,7 +10,7 @@ interface BrokerInterface
 
     public function hasMessage(): bool;
 
-    public function getNextMessage(): array;
+    public function getNextMessage(): string;
 
     public function getPublishChannelLength(): int;
 }

@@ -12,3 +12,4 @@ services:
       - [setJobServiceUpdatePanicFactory, ['@nhds.jobs.data.job.service.update.panic.factory']]
       - [setJobServiceUpdateCrashFactory, ['@nhds.jobs.data.job.service.update.crash.factory']]
       - [setLogger, ['@nhds.jobs.process.pool.logger']]
+      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-job']]

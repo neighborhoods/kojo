@@ -17,15 +17,13 @@ class Command extends Type\AbstractListener
 
     public function processMessages(): Type\ListenerInterface
     {
-        foreach ($this->_getMessageBroker()->getNextMessage() as $message) {
-            $this->_getLogger()->debug('Received message: ' . var_export($message, true));
-            $this->_getExpressionLanguage()->evaluate(
-                json_decode($message, true)['command'],
-                [
-                    'commandProcess' => $this,
-                ]
-            );
-        }
+        $message = $this->_getMessageBroker()->getNextMessage();
+        $this->_getExpressionLanguage()->evaluate(
+            json_decode($message, true)['command'],
+            [
+                'commandProcess' => $this,
+            ]
+        );
 
         return $this;
     }
@@ -51,7 +49,9 @@ class Command extends Type\AbstractListener
 
     protected function _run(): AbstractProcess
     {
-        $this->_getMessageBroker()->waitForNewMessage();
+        if (!$this->_getMessageBroker()->hasMessage()) {
+            $this->_getMessageBroker()->waitForNewMessage();
+        }
 
         return $this;
     }

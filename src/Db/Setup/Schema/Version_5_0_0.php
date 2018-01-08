@@ -156,22 +156,22 @@ class Version_5_0_0 extends AbstractVersion
         $createTable->addConstraint(
             new Index(
                 [
-                    JobInterface::FIELD_NAME_ID,
-                    JobInterface::FIELD_NAME_TYPE_CODE,
                     JobInterface::FIELD_NAME_ASSIGNED_STATE,
                     JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
+                    JobInterface::FIELD_NAME_WORK_AT_DATETIME,
                     JobInterface::FIELD_NAME_PRIORITY,
+                    JobInterface::FIELD_NAME_TYPE_CODE,
                     JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
                     JobInterface::FIELD_NAME_PREVIOUS_STATE,
                     JobInterface::FIELD_NAME_TIMES_CRASHED,
+
                 ],
-                JobInterface::INDEX_NAME_CRASHED
+                JobInterface::INDEX_NAME_CRASHED_AND_SELECTION
             )
         );
         $createTable->addConstraint(
             new Index(
                 [
-                    JobInterface::FIELD_NAME_ID,
                     JobInterface::FIELD_NAME_TYPE_CODE,
                     JobInterface::FIELD_NAME_ASSIGNED_STATE,
                     JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
@@ -185,20 +185,8 @@ class Version_5_0_0 extends AbstractVersion
         $createTable->addConstraint(
             new Index(
                 [
-                    JobInterface::FIELD_NAME_ID,
-                    JobInterface::FIELD_NAME_TYPE_CODE,
-                    JobInterface::FIELD_NAME_ASSIGNED_STATE,
-                    JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
-                    JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
-                ],
-                JobInterface::INDEX_NAME_SELECTOR
-            )
-        );
-        $createTable->addConstraint(
-            new Index(
-                [
-                    JobInterface::FIELD_NAME_TYPE_CODE,
                     JobInterface::FIELD_NAME_WORK_AT_DATETIME,
+                    JobInterface::FIELD_NAME_TYPE_CODE,
                 ],
                 JobInterface::INDEX_NAME_SCHEDULER
             )

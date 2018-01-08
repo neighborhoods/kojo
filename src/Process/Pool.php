@@ -81,7 +81,8 @@ class Pool implements PoolInterface
     {
         while ($processId = pcntl_wait($extra, WNOHANG)) {
             if ($processId == -1) {
-                $this->_getLogger()->emergency('Received wait error.');
+                $waitErrorString = var_export(pcntl_strerror(pcntl_get_last_error()), true);
+                $this->_getLogger()->emergency('Received wait error, error string: "' . $waitErrorString . '".');
                 throw new \RuntimeException('Invalid ProcessPool state.');
             }
             $processExitCode = pcntl_wexitstatus($extra);

@@ -2,20 +2,21 @@
 
 namespace NHDS\Jobs\Message\Broker;
 
+use NHDS\Jobs\Process\Pool\Logger;
+
 class Redis extends AbstractBroker
 {
+    use Logger\AwareTrait;
     protected $_redisClient;
 
     public function waitForNewMessage(): BrokerInterface
     {
         try{
-            if (!$this->hasMessage()) {
-                $this->_getRedisClient()->brpoplpush(
-                    $this->_getSubscriptionChannelName(),
-                    'channel_listener_PID_messages',
-                    0
-                );
-            }
+            $this->_getRedisClient()->brpoplpush(
+                $this->_getPublishChannelName(),
+                $this->_getSubscriptionChannelName(),
+                0
+            );
         }catch(\Exception $exception){
             $this->_getLogger()->warning($exception->getMessage());
             throw $exception;
@@ -39,19 +40,19 @@ class Redis extends AbstractBroker
     public function hasMessage(): bool
     {
         try{
-            $hasMessage = $this->_getRedisClient()->lLen('channel_listener_PID_messages');
+            $listenerStackLength = $this->_getRedisClient()->lLen($this->_getSubscriptionChannelName());
         }catch(\Exception $exception){
             $this->_getLogger()->warning($exception->getMessage());
             throw $exception;
         }
 
-        return (bool)$hasMessage;
+        return $listenerStackLength > 0 ? true : false;
     }
 
-    public function getNextMessage(): array
+    public function getNextMessage(): string
     {
         try{
-            $messages = [$this->_getRedisClient()->rPop('channel_listener_PID_messages')];
+            $messages = $this->_getRedisClient()->rPop($this->_getSubscriptionChannelName());
         }catch(\Exception $exception){
             $this->_getLogger()->warning($exception->getMessage());
             throw $exception;
@@ -75,7 +76,7 @@ class Redis extends AbstractBroker
     public function publishMessage($message): BrokerInterface
     {
         try{
-            $this->_getRedisClient()->rPush($this->_getPublishChannelName(), $message);
+            $this->_getRedisClient()->lPush($this->_getPublishChannelName(), $message);
         }catch(\Exception $exception){
             $this->_getLogger()->warning($exception->getMessage());
             throw $exception;

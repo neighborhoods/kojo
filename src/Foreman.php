@@ -48,11 +48,16 @@ class Foreman implements ForemanInterface
                 $updatePanic = $this->_getJobServiceUpdatePanicFactory()->create();
                 $updatePanic->setJob($job);
                 $updatePanic->save();
+                $jobSemaphoreResource = $this->_getNewJobOwnerResource($job);
+                $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
                 throw $exception;
             }
             try{
                 $this->_getLogger()->debug('Instantiating Worker for Job[' . $job->getId() . '].');
                 call_user_func($this->_getLocator()->getCallable());
+                $updateCrash = $this->_getJobServiceUpdateCrashFactory()->create();
+                $updateCrash->setJob($job);
+                $updateCrash->save();
             }catch(\Exception $e){
                 $updateCrash = $this->_getJobServiceUpdateCrashFactory()->create();
                 $updateCrash->setJob($job);
@@ -63,6 +68,8 @@ class Foreman implements ForemanInterface
             $updatePanic->setJob($job);
             $updatePanic->save();
         }
+        $jobSemaphoreResource = $this->_getNewJobOwnerResource($job);
+        $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
 
         return $this;
     }
