@@ -205,21 +205,13 @@ class Service implements ServiceInterface
                         $isValidTransition = false;
                 }
                 break;
-            // Hold or terminated.
+            // Hold, terminated, or complete failed schedule limit check.
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_HOLD:
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_TERMINATED:
+            case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_FAILED_SCHEDULE_LIMIT_CHECK:
                 switch ($assignedState) {
                     case ServiceInterface::STATE_WAITING:
                     case ServiceInterface::STATE_WORKING:
-                        break;
-                    default:
-                        $isValidTransition = false;
-                }
-                break;
-            // Complete failed schedule limit check.
-            case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_FAILED_SCHEDULE_LIMIT_CHECK:
-                switch ($assignedState) {
-                    case ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK:
                         break;
                     default:
                         $isValidTransition = false;

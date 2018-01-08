@@ -26,7 +26,7 @@ class Command extends Type\AbstractListener
                 ]
             );
         }else {
-            $this->_getLogger()->debug('The message is not a JSON: "' . $message . '".');
+            $this->_getLogger()->warning('The message is not a JSON: "' . $message . '".');
         }
 
         return $this;

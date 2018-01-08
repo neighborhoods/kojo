@@ -22,4 +22,6 @@ interface CreateInterface extends ServiceInterface
     public function setImportance(int $importance): CreateInterface;
 
     public function setWorkAtDateTime(\DateTime $workAtDateTime): CreateInterface;
+
+    public function getJobId(): int;
 }

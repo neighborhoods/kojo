@@ -8,6 +8,6 @@
 @bwilson - implement zookpeer mutex.
 @bwilson - check indexes against selects.
 @bwilson - fix changed persistent properties.
-@bwilson - standardize commands:
+@bwilson - standardize commands
 @bwilson - maintainer deletes
 @bwilson - new relic integration

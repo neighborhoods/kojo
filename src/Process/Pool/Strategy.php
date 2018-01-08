@@ -59,6 +59,8 @@ class Strategy extends AbstractStrategy
         }else {
             if ($this->_hasPausedListenerProcess()) {
                 $this->_unPauseListenerProcesses();
+            }else {
+                $this->_getPool()->setAlarm();
             }
         }
 
@@ -68,14 +70,15 @@ class Strategy extends AbstractStrategy
     public function handleAlarm(): StrategyInterface
     {
         $this->_getLogger()->debug("Received alarm.");
-        if ($this->_hasPausedListenerProcess()) {
-            $this->_unPauseListenerProcesses();
-        }
         if ($this->_getPool()->isFull()) {
             $this->_getLogger()->notice("ProcessPool is full.");
             $this->_getLogger()->notice("Could not allocate Process for alarm request.");
         }else {
-            $this->_getPool()->addProcess($this->_getProcessTypeClone('job'));
+            if ($this->_hasPausedListenerProcess()) {
+                $this->_unPauseListenerProcesses();
+            }else {
+                $this->_getPool()->addProcess($this->_getProcessTypeClone('job'));
+            }
         }
         $this->_getLogger()->debug("Resetting the alarm.");
         $this->_getPool()->setAlarm();
@@ -115,6 +118,7 @@ class Strategy extends AbstractStrategy
     {
         if ($this->_hasPausedListenerProcess()) {
             foreach ($this->_pausedListenerProcesses as $processId) {
+                $this->_getLogger()->debug('Un-pausing Listener[' . $processId . '].');
                 $newListenerProcess = $this->_getProcessTypeClone('listener.message');
                 unset($this->_pausedListenerProcesses[$processId]);
                 $this->_getPool()->addProcess($newListenerProcess);

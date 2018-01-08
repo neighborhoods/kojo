@@ -164,6 +164,7 @@ class Version_5_0_0 extends AbstractVersion
                     JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
                     JobInterface::FIELD_NAME_PREVIOUS_STATE,
                     JobInterface::FIELD_NAME_TIMES_CRASHED,
+                    JobInterface::FIELD_NAME_TIMES_PANICKED,
 
                 ],
                 JobInterface::INDEX_NAME_CRASHED_AND_SELECTION_AND_LIMIT_CHECK
@@ -178,6 +179,7 @@ class Version_5_0_0 extends AbstractVersion
                     JobInterface::FIELD_NAME_PRIORITY,
                     JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
                     JobInterface::FIELD_NAME_PREVIOUS_STATE,
+                    JobInterface::FIELD_NAME_TIMES_PANICKED,
                 ],
                 JobInterface::INDEX_NAME_PENDING
             )

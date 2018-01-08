@@ -32,11 +32,8 @@ class Create extends AbstractService implements CreateInterface
     {
         $this->_prepareJob();
         if ($this->_getJobType()->getScheduleLimit() > 0) {
-            $numberOfScheduledJobs = $this->_getJobCollectionScheduleLimit()->getNumberOfCurrentlyScheduledJobs();
-            if ($numberOfScheduledJobs < $this->_getJobType()->getScheduleLimit()) {
-                $this->_getJobStateService()->requestScheduleLimitCheck();
-                $this->_save();
-            }
+            $this->_getJobStateService()->requestScheduleLimitCheck();
+            $this->_save();
         }else {
             $this->_getJobStateService()->requestWaitForWork();
             $this->_save();
@@ -79,6 +76,7 @@ class Create extends AbstractService implements CreateInterface
             $job = $this->_getJob();
             $job->setPersistentProperties($persistentJobTypeProperties);
             $job->setImportance($importance);
+            $job->setPriority($importance);
             $job->setWorkAtDateTime($this->_read(self::PROP_WORK_AT_DATE_TIME));
             $job->setTimesWorked(0);
             $job->setNextStateRequest(State\Service::STATE_NONE);
@@ -87,6 +85,11 @@ class Create extends AbstractService implements CreateInterface
         }
 
         return $this;
+    }
+
+    public function getJobId(): int
+    {
+        return $this->_getJob()->getId();
     }
 
     public function setJobTypeCode(string $jobTypeCode): CreateInterface
