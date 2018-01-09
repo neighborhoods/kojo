@@ -34,6 +34,7 @@ class Command extends Type\AbstractListener
 
     public function addProcess($processTypeCode): Command
     {
+        $this->_getLogger()->debug('Adding Process with type code "' . $processTypeCode . '".');
         $this->_getPool()->addProcess($this->_getProcessTypeClone($processTypeCode));
 
         return $this;

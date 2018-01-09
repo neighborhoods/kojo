@@ -2,6 +2,7 @@
 
 namespace NHDS\Jobs\Process\Pool;
 
+use NHDS\Jobs\ProcessInterface;
 use Psr\Log;
 use NHDS\Toolkit\Time;
 use NHDS\Toolkit\Data\Property\Crud;
@@ -12,8 +13,9 @@ abstract class AbstractLogger extends Log\AbstractLogger implements LoggerInterf
     use Time\AwareTrait;
     use Crud\AwareTrait;
     use Pool\AwareTrait;
+    const PAD_PID       = 6;
+    const PAD_TYPE_CODE = 18;
     protected $_isEnabled;
-    protected $_processId;
     protected $_processPoolProcessId;
 
     public function setProcessPoolProcessId(int $processPoolProcessId): LoggerInterface
@@ -36,32 +38,33 @@ abstract class AbstractLogger extends Log\AbstractLogger implements LoggerInterf
         return $this->_processPoolProcessId;
     }
 
-    public function setProcessId(int $processId): LoggerInterface
+    public function setProcess(ProcessInterface $process): LoggerInterface
     {
-        if ($this->_processId === null) {
-            $this->_processId = $processId;
-        }else {
-            throw new \LogicException('Process ID is already set.');
-        }
+        $this->_create(ProcessInterface::class, $process);
 
         return $this;
+    }
+
+    protected function _getProcess(): ProcessInterface
+    {
+        return $this->_read(ProcessInterface::class);
     }
 
     public function log($level, $message, array $context = [])
     {
         if ($this->_isEnabled === true) {
-            if ($this->_processId === null) {
-                $indicator = "pool   ";
-                $processId = str_pad($this->_getProcessPoolProcessId(), 12, ' ', STR_PAD_LEFT);
+            if (!$this->_exists(ProcessInterface::class)) {
+                $processId = str_pad($this->_getProcessPoolProcessId(), self::PAD_PID, ' ', STR_PAD_LEFT);
+                $typeCode = str_pad('pool', self::PAD_TYPE_CODE, ' ');
             }else {
-                $indicator = "process";
-                $processId = str_pad($this->_processId, 12, ' ', STR_PAD_LEFT);;
+                $processId = str_pad($this->_getProcess()->getProcessId(), self::PAD_PID, ' ', STR_PAD_LEFT);
+                $typeCode = str_pad($this->_getProcess()->getTypeCode(), self::PAD_TYPE_CODE, ' ');
             }
 
-            $paddedLevel = str_pad($level, 12, ' ');
+            $level = str_pad($level, 12, ' ');
             $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
-            $format = "| " . $indicator . " | " . "%s" . " | " . $referenceTime . " | " . $paddedLevel . "| %s\n";
-            fwrite(STDOUT, sprintf($format, $processId, $message));
+            $format = "%s | %s | %s | %s | %s\n";
+            fwrite(STDOUT, sprintf($format, $referenceTime, $level, $processId, $typeCode, $message));
         }
 
         return;

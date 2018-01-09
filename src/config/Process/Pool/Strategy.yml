@@ -7,5 +7,7 @@ services:
       - [setMaxAlarmTime, ['%process_pool_strategy.max_alarm_time%']]
       - [setLogger, ['@nhds.jobs.process.pool.logger']]
       - [setPool, ['@nhds.jobs.process.pool']]
-      - [addProcessType, ['listener.message', '@nhds.jobs.process.type.listener.command']]
-      - [addProcessType, ['job', '@nhds.jobs.process.type.job']]
+      - [addProcessType, ['@nhds.jobs.process.type.listener.command']]
+      - [addProcessType, ['@nhds.jobs.process.type.job']]
+  strategy:
+    alias: nhds.jobs.process.pool.strategy

@@ -13,6 +13,7 @@ abstract class AbstractProcess implements ProcessInterface
     use Crud\AwareTrait;
     use Logger\AwareTrait;
     use Broker\Type\Collection\AwareTrait;
+    const PROP_TYPE_CODE = 'type_code';
     protected $_processId;
     protected $_parentProcessId;
     protected $_throttle;
@@ -24,10 +25,22 @@ abstract class AbstractProcess implements ProcessInterface
         if ($processId === null) {
             $this->_setParentProcessId(posix_getppid());
             $this->_setProcessId(posix_getpid());
-            $this->_getLogger()->setProcessId($this->getProcessId());
+            $this->_getLogger()->setProcess($this);
         }else {
             $this->_setProcessId($processId);
         }
+
+        return $this;
+    }
+
+    public function getTypeCode(): string
+    {
+        return $this->_read(self::PROP_TYPE_CODE);
+    }
+
+    public function setTypeCode(string $typeCode): ProcessInterface
+    {
+        $this->_create(self::PROP_TYPE_CODE, $typeCode);
 
         return $this;
     }
@@ -40,14 +53,14 @@ abstract class AbstractProcess implements ProcessInterface
         }elseif ($processId > 0) {
             // This is executed in the ProcessPool.
             $this->_init($processId);
-            $this->_getLogger()->debug("Forked Process[{$this->getProcessId()}].");
+            $this->_getLogger()->debug("Forked Process[{$this->getProcessId()}][{$this->getTypeCode()}].");
         }else {
             // This is executed in the Process.
             $this->_init();
             $this->_getPool()->resetPool();
-            $this->_getLogger()->debug("Running Process[{$this->getProcessId()}]...");
+            $this->_getLogger()->debug("Running Process...");
             $this->_run();
-            $this->_getLogger()->debug("Process[{$this->getProcessId()}] finished.");
+            $this->_getLogger()->debug("Process finished running.");
             $this->_exit(0);
         }
 
@@ -129,7 +142,7 @@ abstract class AbstractProcess implements ProcessInterface
 
     protected function _exit(int $exitCode)
     {
-        $this->_getLogger()->debug("Exiting Process[{$this->getProcessId()}].");
+        $this->_getLogger()->debug("Exiting Process.");
         exit($exitCode);
     }
 }

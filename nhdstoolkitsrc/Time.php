@@ -18,7 +18,7 @@ class Time implements TimeInterface
 
     public function getUnixReferenceTimeNow(): string
     {
-        return sprintf('%.16f', microtime(true));
+        return sprintf('%.06f', microtime(true));
     }
 
     public function validateTimestamp(string $timestamp, string $format = TimeInterface::MYSQL_DATETIME_FORMAT): bool

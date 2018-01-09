@@ -13,6 +13,7 @@ class Pool implements PoolInterface
     use Logger\AwareTrait;
     use Strategy\AwareTrait;
     const SIGNAL_NUMBER = 'signo';
+    const PROP_SWIMMING = 'swimming';
     protected $_info        = [];
     protected $_processId;
     protected $_processPool = [];
@@ -49,6 +50,7 @@ class Pool implements PoolInterface
 
     public function swim(): PoolInterface
     {
+        $this->_create(self::PROP_SWIMMING, true);
         $this->_getLogger()->info("ProcessPool started.");
         // Register signals to be handled.
         pcntl_sigprocmask(SIG_BLOCK, $this->_waitSignals);
@@ -157,7 +159,8 @@ class Pool implements PoolInterface
     public function freeProcess(int $processId): PoolInterface
     {
         if (isset($this->_processPool[$processId]) && $this->_processPool[$processId] instanceof ProcessInterface) {
-            $this->_getLogger()->debug("Freeing Process related to Process[$processId] from ProcessPool.");
+            $typeCode = $this->_processPool[$processId]->getTypeCode();
+            $this->_getLogger()->debug("Freeing Process related to Process[$processId][$typeCode] from ProcessPool.");
             unset($this->_processPool[$processId]);
         }else {
             throw new \LogicException("Process associated to Process[$processId] is not in the ProcessPool.");
@@ -188,7 +191,6 @@ class Pool implements PoolInterface
 
     public function resetPool(): PoolInterface
     {
-        $this->_getLogger()->debug('Resetting pool.');
         $this->_processPool = [];
 
         return $this;

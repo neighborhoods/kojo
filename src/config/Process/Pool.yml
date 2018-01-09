@@ -3,4 +3,4 @@ services:
     class: NHDS\Jobs\Process\Pool
     calls:
       - [setLogger, ['@nhds.jobs.process.pool.logger']]
-      - [setStrategy, ['@nhds.jobs.process.pool.strategy']]
+      - [setStrategy, ['@strategy']]

@@ -8,8 +8,9 @@ trait  AwareTrait
 {
     protected $_types = [];
 
-    public function addProcessType(string $typeCode, ProcessInterface $process)
+    public function addProcessType(ProcessInterface $process)
     {
+        $typeCode = $process->getTypeCode();
         if (isset($this->_types[$typeCode])) {
             throw new \LogicException('Process type is already set.');
         }

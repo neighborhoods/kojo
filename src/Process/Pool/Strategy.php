@@ -28,15 +28,17 @@ class Strategy extends AbstractStrategy
         if ($listenerProcess->getExitCode() !== 0) {
             $this->_pauseListenerProcess($listenerProcess);
         }else {
+            $this->_getLogger()->debug('Processing listener messages...');
             while (!$this->_getPool()->isFull() && $listenerProcess->hasMessages()) {
                 $listenerProcess->processMessages();
             }
+            $this->_getLogger()->debug('Finished processing listener messages.');
 
             if ($this->_getPool()->isFull()) {
                 $this->_pauseListenerProcess($listenerProcess);
             }else {
                 $this->_getPool()->freeProcess($listenerProcess->getProcessId());
-                $this->_getPool()->addProcess($this->_getProcessTypeClone('listener.message'));
+                $this->_getPool()->addProcess($this->_getProcessTypeClone('listener.command'));
             }
         }
 
@@ -89,7 +91,7 @@ class Strategy extends AbstractStrategy
     public function initializePool(): StrategyInterface
     {
         $this->_getPool()->setAlarm();
-        $this->_getPool()->addProcess($this->_getProcessTypeClone('listener.message'));
+        $this->_getPool()->addProcess($this->_getProcessTypeClone('listener.command'));
         $this->_getPool()->addProcess($this->_getProcessTypeClone('job'));
 
         return $this;
@@ -119,7 +121,7 @@ class Strategy extends AbstractStrategy
         if ($this->_hasPausedListenerProcess()) {
             foreach ($this->_pausedListenerProcesses as $processId) {
                 $this->_getLogger()->debug('Un-pausing Listener[' . $processId . '].');
-                $newListenerProcess = $this->_getProcessTypeClone('listener.message');
+                $newListenerProcess = $this->_getProcessTypeClone('listener.command');
                 unset($this->_pausedListenerProcesses[$processId]);
                 $this->_getPool()->addProcess($newListenerProcess);
             }

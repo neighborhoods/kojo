@@ -19,4 +19,8 @@ interface ProcessInterface
     public function getExitCode(): int;
 
     public function getParentProcessId(): int;
+
+    public function getTypeCode(): string;
+
+    public function setTypeCode(string $typeCode): ProcessInterface;
 }

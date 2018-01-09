@@ -10,3 +10,4 @@ services:
       - [setMaintainer, ['@nhds.jobs.maintainer']]
       - [setScheduler, ['@nhds.jobs.scheduler']]
       - [setBootstrap, ['@bootstrap']]
+      - [setTypeCode, ['job']]
