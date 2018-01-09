@@ -81,15 +81,17 @@ class Pool implements PoolInterface
 
     protected function _handleChildExitSignal(): Pool
     {
-        while ($processId = pcntl_wait($extra, WNOHANG)) {
+        while ($processId = pcntl_wait($status, WNOHANG)) {
             if ($processId == -1) {
                 $waitErrorString = var_export(pcntl_strerror(pcntl_get_last_error()), true);
                 $this->_getLogger()->emergency('Received wait error, error string: "' . $waitErrorString . '".');
-                throw new \RuntimeException('Invalid ProcessPool state.');
+                $signalInformation = var_export($this->_info, true);
+                $this->_getLogger()->emergency('Received wait error, signal information: ' . $signalInformation);
+                throw new \RuntimeException('Unrecoverable process control wait error.');
             }
-            $processExitCode = pcntl_wexitstatus($extra);
+            $processExitCode = pcntl_wexitstatus($status);
             if ($processExitCode != 0) {
-                $this->_getLogger()->alert('Process[' . $processId . '] exited with code [' . $processExitCode . ']');
+                $this->_getLogger()->alert("Process[{$processId}] exited with code [{$processExitCode}]");
             }
             $process = $this->getProcess($processId)->setExitCode($processExitCode);
             $this->_getStrategy()->handleProcessExit($process);
@@ -103,7 +105,6 @@ class Pool implements PoolInterface
                     break;
                 }
             }
-            pcntl_alarm($alarmValue);
         }
 
         return $this;
@@ -150,7 +151,7 @@ class Pool implements PoolInterface
     public function getProcess(int $processId): ProcessInterface
     {
         if (!isset($this->_processPool[$processId])) {
-            throw new \LogicException('Process is not set.');
+            throw new \LogicException("Process is with process ID {$processId} not set.");
         }
 
         return $this->_processPool[$processId];

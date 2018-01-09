@@ -124,11 +124,15 @@ class Strategy extends AbstractStrategy
     {
         if ($this->_hasPausedListenerProcess()) {
             foreach ($this->_pausedListenerProcesses as $processId => $listenerProcess) {
-                $typeCode = $listenerProcess->getTypeCode();
-                $this->_getLogger()->debug('Un-pausing Listener[' . $processId . '][' . $typeCode . '].');
-                $newListenerProcess = $this->_getProcessTypeCollection()->getProcessTypeClone($typeCode);
-                unset($this->_pausedListenerProcesses[$processId]);
-                $this->_getPool()->addProcess($newListenerProcess);
+                if (!$this->_getPool()->isFull()) {
+                    $typeCode = $listenerProcess->getTypeCode();
+                    $this->_getLogger()->debug('Un-pausing Listener[' . $processId . '][' . $typeCode . '].');
+                    $newListenerProcess = $this->_getProcessTypeCollection()->getProcessTypeClone($typeCode);
+                    unset($this->_pausedListenerProcesses[$processId]);
+                    $this->_getPool()->addProcess($newListenerProcess);
+                }else {
+                    break;
+                }
             }
         }else {
             throw new \LogicException('There are no paused Listener Processes.');

@@ -1,5 +1,4 @@
-// request for a new job process to be run. 
-rpush job_queue "{  
-   \"command\":\"commandProcess.addProcess('job')\"
+// request for a new job process to be run.
+lpush job_listener_publish "{
+   \"command\":\"commandProcess.addProcess('listener.command')\"
 }"
-
