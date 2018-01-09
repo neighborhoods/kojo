@@ -1,0 +1,3 @@
+services:
+  nhds.jobs.process.type.collection.iterator:
+    class: NHDS\Jobs\Process\Type\Collection\Iterator

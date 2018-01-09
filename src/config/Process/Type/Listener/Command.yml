@@ -7,6 +7,5 @@ services:
       - [setBrokerTypeCollection, ['@nhds.jobs.message.broker.type.collection-job']]
       - [setLogger, ['@nhds.jobs.process.pool.logger']]
       - [setBrokerTypeCode, ['job_broker']]
-      - [addProcessType, ['@nhds.jobs.process.type.listener.command']]
-      - [addProcessType, ['@nhds.jobs.process.type.job']]
       - [setExpressionLanguage, ['@symfony.component.expressionlanguage.expressionlanguage']]
+      - [setProcessTypeCollection, ['@nhds.jbs.process.type.collection']]

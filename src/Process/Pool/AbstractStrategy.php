@@ -2,15 +2,15 @@
 
 namespace NHDS\Jobs\Process\Pool;
 
-use NHDS\Jobs\Process;
 use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Jobs\Process\Type\Collection;
 
 abstract class AbstractStrategy implements StrategyInterface
 {
     use Crud\AwareTrait;
     use AwareTrait;
     use Logger\AwareTrait;
-    use Process\Type\AwareTrait;
+    use Collection\AwareTrait;
     protected $_maxAlarmTime;
     protected $_processWaitThrottle;
     protected $_maxProcesses;

@@ -38,7 +38,8 @@ class Strategy extends AbstractStrategy
                 $this->_pauseListenerProcess($listenerProcess);
             }else {
                 $this->_getPool()->freeProcess($listenerProcess->getProcessId());
-                $this->_getPool()->addProcess($this->_getProcessTypeClone('listener.command'));
+                $typeCode = $listenerProcess->getTypeCode();
+                $this->_getPool()->addProcess($this->_getProcessTypeCollection()->getProcessTypeClone($typeCode));
             }
         }
 
@@ -54,7 +55,8 @@ class Strategy extends AbstractStrategy
             $processId = $jobProcess->getProcessId();
             $this->_getLogger()->debug("Replacing Process for exit error from Process[$processId].");
             $this->_getLogger()->debug("Throttling replacement Process for Process[$processId]].");
-            $replacementProcess = $this->_getProcessTypeClone('job');
+            $typeCode = $jobProcess->getTypeCode();
+            $replacementProcess = $this->_getProcessTypeCollection()->getProcessTypeClone($typeCode);
             $replacementProcess->setThrottle($this->getProcessWaitThrottle());
             $this->_getPool()->addProcess($replacementProcess);
             $this->_getPool()->setAlarm();
@@ -79,7 +81,7 @@ class Strategy extends AbstractStrategy
             if ($this->_hasPausedListenerProcess()) {
                 $this->_unPauseListenerProcesses();
             }else {
-                $this->_getPool()->addProcess($this->_getProcessTypeClone('job'));
+                $this->_getPool()->addProcess($this->_getProcessTypeCollection()->getProcessTypeClone('job'));
             }
         }
         $this->_getLogger()->debug("Resetting the alarm.");
@@ -91,8 +93,10 @@ class Strategy extends AbstractStrategy
     public function initializePool(): StrategyInterface
     {
         $this->_getPool()->setAlarm();
-        $this->_getPool()->addProcess($this->_getProcessTypeClone('listener.command'));
-        $this->_getPool()->addProcess($this->_getProcessTypeClone('job'));
+        foreach ($this->_getProcessTypeCollection()->getIterator() as $process) {
+            $typeCode = $process->getTypeCode();
+            $this->_getPool()->addProcess($this->_getProcessTypeCollection()->getProcessTypeClone($typeCode));
+        }
 
         return $this;
     }
@@ -103,7 +107,7 @@ class Strategy extends AbstractStrategy
         if (!isset($this->_pausedListenerProcesses[$listenerProcessId])) {
             $this->_getLogger()->debug('Pausing Listener[' . $listenerProcessId . '].');
             $this->_getPool()->freeProcess($listenerProcessId);
-            $this->_pausedListenerProcesses[$listenerProcessId] = $listenerProcessId;
+            $this->_pausedListenerProcesses[$listenerProcessId] = $listenerProcess;
         }else {
             throw new \LogicException('Listener Process is already paused.');
         }
@@ -119,9 +123,10 @@ class Strategy extends AbstractStrategy
     protected function _unPauseListenerProcesses(): Strategy
     {
         if ($this->_hasPausedListenerProcess()) {
-            foreach ($this->_pausedListenerProcesses as $processId) {
-                $this->_getLogger()->debug('Un-pausing Listener[' . $processId . '].');
-                $newListenerProcess = $this->_getProcessTypeClone('listener.command');
+            foreach ($this->_pausedListenerProcesses as $processId => $listenerProcess) {
+                $typeCode = $listenerProcess->getTypeCode();
+                $this->_getLogger()->debug('Un-pausing Listener[' . $processId . '][' . $typeCode . '].');
+                $newListenerProcess = $this->_getProcessTypeCollection()->getProcessTypeClone($typeCode);
                 unset($this->_pausedListenerProcesses[$processId]);
                 $this->_getPool()->addProcess($newListenerProcess);
             }
