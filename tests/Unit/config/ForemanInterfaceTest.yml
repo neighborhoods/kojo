@@ -15,3 +15,7 @@ services:
   pdo:
     class: \Pdo
     arguments: ['mysql:dbname=jobs;host=mysql', 'root', 'nhdsroot']
+  nhds.jobs.process.pool.logger:
+    class: NHDS\Jobs\Process\Pool\Logger
+    calls:
+      - [setIsEnabled, [false]]

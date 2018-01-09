@@ -1,9 +1,10 @@
 @bwilson - add auto_complete to job type as an option.
 @bwilson - add auto_schedule as a job type type option.
-@bwilson - add auto_delete_after_datetime as a job type option.
-@bwilson - created_at_date_time
-@bwilson - process_id
-@bwilson - pool_id
+@bwilson - add auto_delete_date_interval_specification as a job type option.
+@bwilson - created_at_date_time as a job field.
+@bwilson - completed_at_date_time as a job field.
+@bwilson - process_id as a job field.
+@bwilson - process_pool_id as a job field.
 @bwilson - implement redis mutex.
 @bwilson - implement zookpeer mutex.
 @bwilson - check indexes against selects.

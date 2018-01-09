@@ -4165,8 +4165,8 @@ nhds_job:
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
     work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    next_state_request: "working"
-    assigned_state: "pending_limit_check"
+    next_state_request: "schedule_limit_check"
+    assigned_state: "waiting"
     previous_state: "new"
     worker_uri: '\NHDS\Jobs\Example\Worker'
     worker_method: "work"
