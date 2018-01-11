@@ -16,7 +16,7 @@ try{
 $serviceContainer = new \NHDS\Jobs\Service\Container();
 $ymlServiceFilePath = __DIR__ . '/../config/root.yml';
 $serviceContainer->addServicesYmlFilePath($ymlServiceFilePath);
-if (is_file($argv[2])) {
+if (isset($argv[2]) && is_string($argv[2]) && is_file($argv[2])) {
     $serviceContainer->addServicesYmlFilePath($argv[2]);
 }
 $consoleApplication = $serviceContainer->getContainerBuilder()->get('symfony.component.console.application');

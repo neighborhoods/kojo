@@ -14,7 +14,7 @@ class Install extends CommandAbstract
     protected function _configure(): CommandAbstract
     {
         $this->setName('db:setup:install');
-        $this->setDescription('Installs Jobs to persistent a storage engine.');
+        $this->setDescription('Installs Jobs to a persistent storage engine.');
         $this->setHelp($this->_getHelp());
 
         return $this;

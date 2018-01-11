@@ -4,6 +4,7 @@ namespace NHDS\Jobs\Db;
 
 use NHDS\Jobs\Db\Schema;
 use NHDS\Jobs\Db\Schema\Version;
+use Zend\Db\Adapter\Exception\InvalidQueryException;
 
 class Setup implements SetupInterface
 {
@@ -16,8 +17,12 @@ class Setup implements SetupInterface
             try{
                 $version->assembleSchemaChanges();
                 $version->applySchemaChanges();
-            }catch(\Exception $exception){
-                echo $exception->getMessage();
+            }catch(InvalidQueryException $invalidQueryException){
+                $message = $invalidQueryException->getMessage();
+                if (strpos($message, 'already exists') === false) {
+                    throw $invalidQueryException;
+                }
+                echo $message . "\n";
             }
         }
 

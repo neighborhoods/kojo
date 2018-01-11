@@ -4,6 +4,7 @@ namespace NHDS\Jobs\Db;
 
 use NHDS\Jobs\Db\Schema;
 use NHDS\Jobs\Db\Schema\Version;
+use Zend\Db\Adapter\Exception\InvalidQueryException;
 
 class TearDown implements TearDownInterface
 {
@@ -16,8 +17,12 @@ class TearDown implements TearDownInterface
             try{
                 $version->assembleSchemaChanges();
                 $version->applySchemaChanges();
-            }catch(\Exception $exception){
-                echo $exception->getMessage();
+            }catch(InvalidQueryException $invalidQueryException){
+                $message = $invalidQueryException->getMessage();
+                if (strpos($message, 'Unknown table') === false) {
+                    throw $invalidQueryException;
+                }
+                echo $message . "\n";
             }
         }
 

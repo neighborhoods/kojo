@@ -1,0 +1,10 @@
+services:
+  nhds.jobs.db.teardown:
+    class: NHDS\Jobs\Db\TearDown
+    calls:
+      - [addVersion, ["@nhds.jobs.db.teardown.schema.version.5_0_0"]]
+      - [addVersion, ["@nhds.jobs.db.teardown.schema.version.4_0_0"]]
+      - [addVersion, ["@nhds.jobs.db.teardown.schema.version.3_0_0"]]
+      - [addVersion, ["@nhds.jobs.db.teardown.schema.version.2_0_0"]]
+      - [addVersion, ["@nhds.jobs.db.teardown.schema.version.1_0_0"]]
+      - [addVersion, ["@nhds.jobs.db.teardown.schema.version.0_0_0"]]

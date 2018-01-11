@@ -4,10 +4,18 @@ services:
     autoconfigure: false
     public: false
 imports:
+   # Parameters.
+   - { resource: parameters.yml }
+
+   # External dependencies.
    - { resource: dependencies.yml }
+
+  # Manager.
    - { resource: Foreman.yml }
-   - { resource: tearDown.yml }
    - { resource: Scheduler.yml }
+   - { resource: Maintainer.yml }
+
+  # Data.
    - { resource: Data/Job/Type/Collection.yml }
    - { resource: Data/Job/Type/Collection/Iterator.yml}
    - { resource: Data/Job/Type.yml }
@@ -17,28 +25,12 @@ imports:
    - { resource: Data/Job/Service/Create.yml }
    - { resource: Data/Job.yml }
    - { resource: Data/Job/Selector.yml }
-   - { resource: Semaphore/Resource.yml }
-   - { resource: Maintainer.yml }
    - { resource: Data/Job/Type/Collection.yml }
-   - { resource: Process/Type/Listener/Command.yml }
-   - { resource: Process/Type/Job.yml }
-   - { resource: Semaphore/Mutex/Flock.yml }
-   - { resource: Db/Connection/Container.yml }
-   - { resource: Semaphore.yml }
-   - { resource: Message/Broker/Redis.yml }
-   - { resource: Process/Pool/Logger.yml }
-   - { resource: Message/Broker/Type/Collection.yml }
-   - { resource: Process/Pool/Server.yml }
-   - { resource: Process/Pool/Strategy.yml }
    - { resource: Data/Job/Collection/Iterator.yml }
-   - { resource: Semaphore/Resource/Owner/Job.yml }
-   - { resource: Process/Pool.yml }
    - { resource: Data/Job/Collection/Selector.yml }
    - { resource: Data/Job/Collection/ScheduleLimit.yml }
    - { resource: Data/Job/Collection/CrashDetection.yml }
    - { resource: Data/Job/Service/Update/Crash.yml }
-   - { resource: Semaphore/Resource/Factory.yml }
-   - { resource: Worker/Locator.yml }
    - { resource: Data/Job/Service/Update/Crash/Factory.yml }
    - { resource: Data/Job/Service/Update/Work/Factory.yml }
    - { resource: Data/Job/Service/Update/Work.yml }
@@ -51,11 +43,26 @@ imports:
    - { resource: Data/Job/Service/Update/Panic.yml }
    - { resource: Data/Job/Service/Update/Wait.yml }
    - { resource: Data/Job/Service/Update/Wait/Factory.yml }
+
+  # Semaphore.
+   - { resource: Semaphore/Resource.yml }
+   - { resource: Semaphore/Resource/Owner/Job.yml }
+   - { resource: Semaphore/Resource/Factory.yml }
+   - { resource: Semaphore/Mutex/Flock.yml }
+   - { resource: Semaphore.yml }
+
+  # Process.
+   - { resource: Process/Type/Listener/Command.yml }
+   - { resource: Process/Type/Job.yml }
+   - { resource: Process/Pool/Logger.yml }
+   - { resource: Process/Pool/Server.yml }
+   - { resource: Process/Pool/Strategy.yml }
+   - { resource: Process/Pool.yml }
    - { resource: Process/Type/Collection.yml }
    - { resource: Process/Type/Collection/Iterator.yml }
-   - { resource: Console/Command/Process/Pool/Server/Start.yml }
 
-   - { resource: Console/Command/Db/Setup/Install.yml }
+   # Database.
+   - { resource: Db/Connection/Container.yml }
    - { resource: Db/Setup.yml }
    - { resource: Db/Setup/Schema/Version_0_0_0.yml }
    - { resource: Db/Setup/Schema/Version_1_0_0.yml }
@@ -63,3 +70,23 @@ imports:
    - { resource: Db/Setup/Schema/Version_3_0_0.yml }
    - { resource: Db/Setup/Schema/Version_4_0_0.yml }
    - { resource: Db/Setup/Schema/Version_5_0_0.yml }
+   - { resource: Db/TearDown.yml }
+   - { resource: Db/TearDown/Schema/Version_0_0_0.yml }
+   - { resource: Db/TearDown/Schema/Version_1_0_0.yml }
+   - { resource: Db/TearDown/Schema/Version_2_0_0.yml }
+   - { resource: Db/TearDown/Schema/Version_3_0_0.yml }
+   - { resource: Db/TearDown/Schema/Version_4_0_0.yml }
+   - { resource: Db/TearDown/Schema/Version_5_0_0.yml }
+
+  # Message Broker.
+   - { resource: Message/Broker/Redis.yml }
+   - { resource: Message/Broker/Type/Collection.yml }
+
+  # Worker.
+   - { resource: Worker/Locator.yml }
+   - { resource: Worker/Bootstrap.yml }
+
+  # Console.
+   - { resource: Console/Command/Process/Pool/Server/Start.yml }
+   - { resource: Console/Command/Db/Setup/Install.yml }
+   - { resource: Console/Command/Db/TearDown/Uninstall.yml }
