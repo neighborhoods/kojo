@@ -11,17 +11,6 @@ services:
     class: NHDS\Jobs\Example\Worker\Bootstrap
     calls:
       - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-job']]
-  nhds.jobs.example.process.pool.strategy:
-    class: NHDS\Jobs\Process\Pool\Strategy
-    calls:
-      - [setMaxProcesses, ['%process_pool_strategy.max_processes%']]
-      - [setProcessWaitThrottle, ['%process_pool_strategy.process_wait_throttle%']]
-      - [setMaxAlarmTime, ['%process_pool_strategy.max_alarm_time%']]
-      - [setLogger, ['@nhds.jobs.process.pool.logger']]
-      - [setPool, ['@nhds.jobs.process.pool']]
-      - [addProcessType, ['@nhds.jobs.process.type.listener.command']]
-      - [addProcessType, ['@nhds.jobs.process.type.job']]
+      - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-schema']]
   bootstrap:
     alias: nhds.jobs.example.worker.bootstrap
-#  strategy:
-#    alias: nhds.jobs.example.process.pool.strategy

@@ -14,8 +14,11 @@ try{
     exit(1);
 }
 $serviceContainer = new \NHDS\Jobs\Service\Container();
-$yamlServiceFilePath = __DIR__ . '/../config/root.yml';
-$serviceContainer->addServicesYmlFilePath($yamlServiceFilePath);
+$ymlServiceFilePath = __DIR__ . '/../config/root.yml';
+$serviceContainer->addServicesYmlFilePath($ymlServiceFilePath);
+if (is_file($argv[2])) {
+    $serviceContainer->addServicesYmlFilePath($argv[2]);
+}
 $consoleApplication = $serviceContainer->getContainerBuilder()->get('symfony.component.console.application');
 
 $consoleApplication->run();

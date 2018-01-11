@@ -21,7 +21,7 @@ class Selector implements SelectorInterface
     const PROP_PAGE_SIZE        = 'page_size';
     const PROP_OFFSET           = 'offset';
     const PROP_NEXT_JOB_TO_WORK = 'next_job_to_work';
-    protected $_pickingCycles = 0;
+    protected $_collectionIterations = 0;
 
     public function getNextJobToWork(): JobInterface
     {
@@ -38,7 +38,7 @@ class Selector implements SelectorInterface
     public function pick(): SelectorInterface
     {
         $select = $this->_getSelectorJobCollection()->getSelect();
-        $select->offset($this->_pickingCycles * $this->_getPageSize());
+        $select->offset($this->_collectionIterations * $this->_getPageSize());
         $select->limit($this->_getPageSize());
         $jobCandidates = $this->_getSelectorJobCollection()->getModelsArray();
         $publishedMessages = $this->_getBroker()->getPublishChannelLength();
@@ -68,8 +68,8 @@ class Selector implements SelectorInterface
                     }
                 }
             }
-            ++$this->_pickingCycles;
-            $select->offset($this->_pickingCycles * $this->_getPageSize());
+            ++$this->_collectionIterations;
+            $select->offset($this->_collectionIterations * $this->_getPageSize());
             $jobCandidates = $this->_getSelectorJobCollection()->getRecords();
         }
 

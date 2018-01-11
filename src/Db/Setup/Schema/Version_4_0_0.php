@@ -83,6 +83,19 @@ class Version_4_0_0 extends AbstractVersion
                 [
                     'comment' => 'COMMENT',
                 ]));
+        $createTable->addColumn(
+            new Boolean(
+                Type::FIELD_NAME_AUTO_COMPLETE_SUCCESS, false, null,
+                [
+                    'comment' => 'COMMENT',
+                ]));
+        $createTable->addColumn(
+            new Varchar(
+                Type::FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION, 255, true, null,
+                [
+                    'comment' => 'A ISO 8601 interval duration that describes duration of time past a Job\'s'
+                        . ' completed_at_date_time that a Job record of this Job Type should be deleted from storage.',
+                ]));
         $createTable->addConstraint(new PrimaryKey(Type::FIELD_NAME_ID, Type::FIELD_NAME_ID));
         $createTable->addConstraint(new UniqueKey(Type::FIELD_NAME_TYPE_CODE, Type::FIELD_NAME_TYPE_CODE));
         $createTable->addConstraint(
@@ -95,6 +108,23 @@ class Version_4_0_0 extends AbstractVersion
                     Type::FIELD_NAME_SCHEDULE_LIMIT,
                 ],
                 Type::INDEX_NAME_SCHEDULER_COVERING
+            )
+        );
+        $createTable->addConstraint(
+            new Index(
+                [
+                    Type::FIELD_NAME_IS_ENABLED,
+                    Type::FIELD_NAME_TYPE_CODE,
+                    Type::FIELD_NAME_CRON_EXPRESSION,
+                    Type::FIELD_NAME_WORKER_URI,
+                    Type::FIELD_NAME_WORKER_METHOD,
+                    Type::FIELD_NAME_CAN_WORK_IN_PARALLEL,
+                    Type::FIELD_NAME_DEFAULT_IMPORTANCE,
+                    Type::FIELD_NAME_SCHEDULE_LIMIT,
+                    Type::FIELD_NAME_AUTO_COMPLETE_SUCCESS,
+                    Type::FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION,
+                ],
+                Type::INDEX_NAME_COVERING
             )
         );
 

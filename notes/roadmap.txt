@@ -1,6 +1,6 @@
-@bwilson - add auto_complete to job type as an option.
+    @bwilson - add auto_complete to job type as an option.
+    @bwilson - add auto_delete_date_interval_specification as a job type option.
 @bwilson - add auto_schedule as a job type type option.
-@bwilson - add auto_delete_date_interval_specification as a job type option.
 @bwilson - created_at_date_time as a job field.
 @bwilson - completed_at_date_time as a job field.
 @bwilson - process_id as a job field.
@@ -9,6 +9,10 @@
 @bwilson - implement zookpeer mutex.
 @bwilson - check indexes against selects.
 @bwilson - fix changed persistent properties.
-@bwilson - standardize commands
-@bwilson - maintainer deletes
-@bwilson - new relic integration
+@bwilson - standardize commands.
+@bwilson - maintainer deletes.
+@bwilson - new relic integration.
+@bwilson - SIGTERM Console command.
+@bwilson - Selector entropy as a DI property.
+@bwilson - Install Console command.
+@bwilson - Tear down Console command.

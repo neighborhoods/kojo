@@ -18,3 +18,4 @@ services:
     class: Symfony\Component\Console\Application
     calls:
       - [add, ['@nhds.jobs.console.command.process.pool.server.start']]
+      - [add, ['@nhds.jobs.console.command.db.setup.install']]

@@ -1,0 +1,5 @@
+services:
+  nhds.jobs.jobs.db.setup.schema.version.0_0_0:
+    class: NHDS\Jobs\Db\Setup\Schema\Version_0_0_0
+    calls:
+      - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]

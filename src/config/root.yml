@@ -7,7 +7,6 @@ imports:
    - { resource: dependencies.yml }
    - { resource: Foreman.yml }
    - { resource: tearDown.yml }
-   - { resource: setup.yml }
    - { resource: Scheduler.yml }
    - { resource: Data/Job/Type/Collection.yml }
    - { resource: Data/Job/Type/Collection/Iterator.yml}
@@ -47,7 +46,6 @@ imports:
    - { resource: Data/Job/Service/Update/Complete/FailedScheduleLimitCheck.yml }
    - { resource: Data/Job/Collection/Schedule/LimitCheck.yml }
    - { resource: Data/Job/Service/Create/Factory.yml }
-   - { resource: Console/Command/Process/Pool/Server/Start.yml }
    - { resource: Data/Job/Type/Repository.yml }
    - { resource: Data/Job/Service/Update/Panic/Factory.yml }
    - { resource: Data/Job/Service/Update/Panic.yml }
@@ -55,3 +53,13 @@ imports:
    - { resource: Data/Job/Service/Update/Wait/Factory.yml }
    - { resource: Process/Type/Collection.yml }
    - { resource: Process/Type/Collection/Iterator.yml }
+   - { resource: Console/Command/Process/Pool/Server/Start.yml }
+
+   - { resource: Console/Command/Db/Setup/Install.yml }
+   - { resource: Db/Setup.yml }
+   - { resource: Db/Setup/Schema/Version_0_0_0.yml }
+   - { resource: Db/Setup/Schema/Version_1_0_0.yml }
+   - { resource: Db/Setup/Schema/Version_2_0_0.yml }
+   - { resource: Db/Setup/Schema/Version_3_0_0.yml }
+   - { resource: Db/Setup/Schema/Version_4_0_0.yml }
+   - { resource: Db/Setup/Schema/Version_5_0_0.yml }
