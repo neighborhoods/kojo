@@ -6,12 +6,12 @@ use NHDS\Jobs\Exception\Runtime;
 use NHDS\Jobs\Filesystem;
 use NHDS\Jobs\Semaphore\AbstractMutex;
 use NHDS\Jobs\Semaphore\MutexInterface;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Process\Pool\Logger;
 
 class Flock extends AbstractMutex
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Filesystem\AwareTrait;
     use Logger\AwareTrait;
     const PROP_DIRECTORY_PATH_PREFIX = 'directory_path_prefix';

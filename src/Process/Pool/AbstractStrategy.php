@@ -2,12 +2,12 @@
 
 namespace NHDS\Jobs\Process\Pool;
 
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Process\Type\Collection;
 
 abstract class AbstractStrategy implements StrategyInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use AwareTrait;
     use Logger\AwareTrait;
     use Collection\AwareTrait;

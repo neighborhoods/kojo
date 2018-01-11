@@ -3,11 +3,11 @@
 namespace NHDS\Jobs\Message\Broker;
 
 use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 
 abstract class AbstractBroker implements BrokerInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Logger\AwareTrait;
     protected $_publishChannelName;
     protected $_subscriptionChannelName;

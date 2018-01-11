@@ -11,8 +11,6 @@ interface CreateInterface extends ServiceInterface
 {
     public function setJob(JobInterface $job);
 
-    public function setJobType(TypeInterface $job);
-
     public function setJobCollectionScheduleLimit(ScheduleLimitInterface $jobCollectionScheduleLimit);
 
     public function setJobTypeCode(string $jobTypeCode): CreateInterface;

@@ -4,12 +4,12 @@ namespace NHDS\Jobs\Process;
 
 use NHDS\Jobs\Process\Pool\Logger;
 use NHDS\Jobs\Process\Pool\Strategy;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\ProcessInterface;
 
 class Pool implements PoolInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Logger\AwareTrait;
     use Strategy\AwareTrait;
     const SIGNAL_NUMBER = 'signo';
@@ -39,7 +39,7 @@ class Pool implements PoolInterface
             $this->_getLogger()->debug('Sending SIGTERM to child processes...');
             /** @var ProcessInterface $process */
             foreach ($this->_processPool as $process) {
-                posix_kill($process->getProcessId(), SIGKILL);
+                posix_kill($process->getProcessId(), SIGTERM);
                 $this->_getLogger()->debug('Sent SIGTERM to Process[' . $process->getProcessId() . '].');
             }
         }
@@ -94,7 +94,7 @@ class Pool implements PoolInterface
                 $this->_getLogger()->alert("Process[{$processId}] exited with code [{$processExitCode}]");
             }
             $process = $this->getProcess($processId)->setExitCode($processExitCode);
-            $this->_getStrategy()->handleProcessExit($process);
+            $this->_getStrategy()->processExited($process);
             $alarmValue = pcntl_alarm(0);
             if ($this->isEmpty()) {
                 if ($alarmValue == 0) {
@@ -105,14 +105,16 @@ class Pool implements PoolInterface
                     break;
                 }
             }
+            pcntl_alarm($alarmValue);
         }
+        $this->_getStrategy()->currentPendingChildExitsComplete();
 
         return $this;
     }
 
     protected function _handleAlarmSignal(): Pool
     {
-        $this->_getStrategy()->handleAlarm();
+        $this->_getStrategy()->receivedAlarm();
 
         return $this;
     }

@@ -6,7 +6,7 @@ use NHDS\Jobs\Db;
 use NHDS\Toolkit\Time;
 use Cron\CronExpression;
 use NHDS\Jobs\CacheItemPool;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Data\Job;
 use NHDS\Jobs\Data\Job\Service\Create;
 
@@ -17,7 +17,7 @@ class Scheduler implements SchedulerInterface
     use CacheItemPool\AwareTrait;
     use Db\Connection\Container\AwareTrait;
     use Time\AwareTrait;
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Create\Factory\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
     const DATE_TIME_FORMAT_CACHE_MINUTE        = 'Y_m_d_H_i';

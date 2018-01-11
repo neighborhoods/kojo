@@ -1,0 +1,10 @@
+services:
+  nhds.jobs.worker.job.service:
+    class: NHDS\Jobs\Worker\Job\Service
+    shared: false
+    calls:
+      - [setJobServiceCreateFactory, ['@nhds.jobs.data.job.service.create.factory']]
+      - [setUpdateCompleteFailedFactory, ['@nhds.jobs.data.job.service.update.complete.failed.factory']]
+      - [setUpdateCompleteSuccessFactory, ['@nhds.jobs.data.job.service.update.complete.success.factory']]
+      - [setUpdateHoldFactory, ['@nhds.jobs.data.job.service.update.hold.factory']]
+      - [setUpdateRetryFactory, ['@nhds.jobs.data.job.service.update.retry.factory']]

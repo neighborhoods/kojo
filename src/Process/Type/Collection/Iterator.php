@@ -3,12 +3,12 @@
 namespace NHDS\Jobs\Process\Type\Collection;
 
 use NHDS\Jobs\ProcessInterface;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Process\Type\Collection;
 
 class Iterator implements IteratorInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Collection\AwareTrait;
     protected $processPrototypes = [];
 

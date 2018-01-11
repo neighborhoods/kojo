@@ -121,4 +121,31 @@ class Type extends Model implements TypeInterface
     {
         return $this->_getPersistentProperty(TypeInterface::FIELD_NAME_IS_ENABLED);
     }
+
+    public function setAutoCompleteSuccess(bool $autoCompleteSuccess): TypeInterface
+    {
+        $this->_setPersistentProperty(TypeInterface::FIELD_NAME_AUTO_COMPLETE_SUCCESS, $autoCompleteSuccess);
+
+        return $this;
+    }
+
+    public function getAutoCompleteSuccess(): bool
+    {
+        return $this->_getPersistentProperty(TypeInterface::FIELD_NAME_AUTO_COMPLETE_SUCCESS);
+    }
+
+    public function setAutoDeleteIntervalDuration(string $autoDeleteIntervalDuration): TypeInterface
+    {
+        $this->_setPersistentProperty(
+            TypeInterface::FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION,
+            $autoDeleteIntervalDuration
+        );
+
+        return $this;
+    }
+
+    public function getAutoDeleteIntervalDuration(): string
+    {
+        return $this->_getPersistentProperty(TypeInterface::FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION);
+    }
 }

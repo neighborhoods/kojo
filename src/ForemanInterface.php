@@ -3,6 +3,7 @@
 namespace NHDS\Jobs;
 
 use NHDS\Jobs\Data\Job\Service\Update;
+use NHDS\Jobs\Worker;
 
 interface ForemanInterface
 {
@@ -11,4 +12,6 @@ interface ForemanInterface
     public function setJobServiceUpdateWorkFactory(Update\Work\FactoryInterface $updateWorkFactory);
 
     public function setJobServiceUpdateCrashFactory(Update\Crash\FactoryInterface $updateCrashFactory);
+
+    public function setWorkerJobService(Worker\Job\ServiceInterface $workerJobService);
 }

@@ -4,11 +4,11 @@ namespace NHDS\Jobs\Semaphore;
 
 use NHDS\Jobs\Semaphore\Resource\OwnerInterface;
 use NHDS\Jobs\SemaphoreInterface;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 
 class Resource implements ResourceInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     const PROP_RESOURCE_OWNER = 'resource_owner';
     const PROP_RESOURCE_NAME  = 'resource_name';
     const PROP_RESOURCE_PATH  = 'resource_path';

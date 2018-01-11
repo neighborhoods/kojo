@@ -1,0 +1,6 @@
+services:
+  nhds.jobs.data.job.service.update.hold.factory:
+    class: NHDS\Jobs\Data\Job\Service\Update\Hold\Factory
+    calls:
+      - [setJobStateService, ['@nhds.jobs.data.job.state.service']]
+      - [setUpdateHold, ['@nhds.jobs.data.job.service.update.hold']]

@@ -3,13 +3,13 @@
 namespace NHDS\Jobs\Data\Job\Service\Update\Panic;
 
 use NHDS\Jobs\Data\Job\State\Service;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use  NHDS\Jobs\Data\Job\Service\Update\Panic;
 use NHDS\Jobs\Data\Job\Service\Update\PanicInterface;
 
 class Factory implements FactoryInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Panic\AwareTrait;
     use Service\AwareTrait;
     const PROP_FACTORY_NAME = 'factory_name';

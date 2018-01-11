@@ -3,13 +3,14 @@ services:
     class: NHDS\Jobs\Foreman
     shared: false
     calls:
-      - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-job']]
       - [setJob, ['@nhds.jobs.data.job']]
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [setJobTypeRepository, ['@nhds.jobs.data.job.type.repository']]
       - [setSelector, ['@nhds.jobs.data.job.selector']]
       - [setLocator, ['@nhds.jobs.worker.locator']]
+      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-job']]
       - [setJobServiceUpdateWorkFactory, ['@nhds.jobs.data.job.service.update.work.factory']]
       - [setJobServiceUpdatePanicFactory, ['@nhds.jobs.data.job.service.update.panic.factory']]
       - [setJobServiceUpdateCrashFactory, ['@nhds.jobs.data.job.service.update.crash.factory']]
       - [setLogger, ['@nhds.jobs.process.pool.logger']]
-      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-job']]
+      - [setWorkerJobService, ['@nhds.jobs.worker.job.service']]

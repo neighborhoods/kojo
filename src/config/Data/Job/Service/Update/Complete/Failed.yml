@@ -1,0 +1,4 @@
+services:
+  nhds.jobs.data.job.service.update.complete.failed:
+    class: NHDS\Jobs\Data\Job\Service\Update\Complete\Failed
+    shared: false

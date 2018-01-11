@@ -4,12 +4,12 @@ namespace NHDS\Jobs\Process\Pool;
 
 use NHDS\Jobs\Process\Pool;
 use NHDS\Toolkit\Time;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Semaphore;
 
 class Server implements ServerInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Logger\AwareTrait;
     use Time\AwareTrait;
     use Pool\AwareTrait;

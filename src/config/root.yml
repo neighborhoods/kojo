@@ -43,6 +43,14 @@ imports:
    - { resource: Data/Job/Service/Update/Panic.yml }
    - { resource: Data/Job/Service/Update/Wait.yml }
    - { resource: Data/Job/Service/Update/Wait/Factory.yml }
+   - { resource: Data/Job/Service/Update/Hold.yml }
+   - { resource: Data/Job/Service/Update/Hold/Factory.yml }
+   - { resource: Data/Job/Service/Update/Retry.yml }
+   - { resource: Data/Job/Service/Update/Retry/Factory.yml }
+   - { resource: Data/Job/Service/Update/Complete/Failed.yml }
+   - { resource: Data/Job/Service/Update/Complete/Failed/Factory.yml.yml }
+   - { resource: Data/Job/Service/Update/Complete/Success.yml }
+   - { resource: Data/Job/Service/Update/Complete/Success/Factory.yml.yml }
 
   # Semaphore.
    - { resource: Semaphore/Resource.yml }
@@ -85,6 +93,7 @@ imports:
   # Worker.
    - { resource: Worker/Locator.yml }
    - { resource: Worker/Bootstrap.yml }
+   - { resource: Worker/Job/Service.yml }
 
   # Console.
    - { resource: Console/Command/Process/Pool/Server/Start.yml }

@@ -4,12 +4,12 @@ namespace NHDS\Jobs\Data\Job\Service\Update\Wait;
 
 use NHDS\Jobs\Data\Job\Service\Update\WaitInterface;
 use NHDS\Jobs\Data\Job\State\Service;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Data\Job\Service\Update\Wait;
 
 class Factory implements FactoryInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Wait\AwareTrait;
     use Service\AwareTrait;
     const PROP_FACTORY_NAME = 'factory_name';

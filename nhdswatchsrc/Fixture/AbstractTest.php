@@ -9,7 +9,7 @@ use NHDS\Toolkit\TimeInterface;
 use PHPUnit\DbUnit\DataSet\DefaultTable;
 use PHPUnit\DbUnit\DataSet\DefaultTableIterator;
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use Symfony\Component\Finder\Finder;
 use NHDS\Watch\TestCase\Service;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -18,7 +18,7 @@ abstract class AbstractTest extends DbUnit\TestCase
 {
     use ContainerBuilder\AwareTrait;
     use Service\AwareTrait;
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     const YAML_SIGIL_PREFIX_FIXTURE_EXPRESSION = '!fixture/expression:';
     const PROP_DATA_SET                        = 'data_set';
     const PROP_EXPRESSION_VALUES               = 'expression_values';

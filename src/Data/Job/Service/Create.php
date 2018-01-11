@@ -8,6 +8,7 @@ use NHDS\Jobs\Data\Job\State;
 
 class Create extends AbstractService implements CreateInterface
 {
+    use Job\Type\Repository\AwareTrait;
     use Job\Collection\ScheduleLimit\AwareTrait;
     const PROP_IMPORTANCE        = 'importance';
     const PROP_WORK_AT_DATE_TIME = 'work_at_date_time';
@@ -56,7 +57,6 @@ class Create extends AbstractService implements CreateInterface
     {
         if (!$this->_exists(self::PROP_JOB_PREPARED)) {
             $jobType = $this->_getJobType();
-            $jobType->load(Job\TypeInterface::FIELD_NAME_TYPE_CODE, $this->_getJobTypeCode());
             if ($jobType->getIsEnabled()) {
                 $persistentJobTypeProperties = $jobType->getPersistentProperties();
                 unset($persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_ID]);
@@ -85,6 +85,16 @@ class Create extends AbstractService implements CreateInterface
         }
 
         return $this;
+    }
+
+    protected function _getJobType(): Job\TypeInterface
+    {
+        if (!$this->_exists(Job\TypeInterface::class)) {
+            $jobType = $this->_getJobTypeRepository()->getJobTypeClone($this->_getJobTypeCode());
+            $this->_create(Job\TypeInterface::class, $jobType);
+        }
+
+        return $this->_read(Job\TypeInterface::class);
     }
 
     public function getJobId(): int

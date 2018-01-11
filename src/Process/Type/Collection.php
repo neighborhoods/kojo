@@ -4,11 +4,11 @@ namespace NHDS\Jobs\Process\Type;
 
 use NHDS\Jobs\Process\Type\Collection\IteratorInterface;
 use NHDS\Jobs\ProcessInterface;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 
 class Collection implements CollectionInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     protected $_processTypes = [];
 
     public function addProcessPrototype(ProcessInterface $process)

@@ -3,12 +3,12 @@
 namespace NHDS\Jobs\Data\Job\Type\Collection;
 
 use NHDS\Jobs\Data\Job\TypeInterface;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Db\Model\Collection;
 
 class Iterator implements IteratorInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Collection\AwareTrait;
 
     function rewind()

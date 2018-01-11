@@ -57,4 +57,12 @@ interface TypeInterface extends ModelInterface
     public function setIsEnabled(bool $isEnabled): TypeInterface;
 
     public function getIsEnabled(): bool;
+
+    public function setAutoCompleteSuccess(bool $autoCompleteSuccess): TypeInterface;
+
+    public function getAutoCompleteSuccess(): bool;
+
+    public function setAutoDeleteIntervalDuration(string $autoDeleteIntervalDuration): TypeInterface;
+
+    public function getAutoDeleteIntervalDuration(): string;
 }

@@ -8,9 +8,9 @@ interface StrategyInterface
 {
     public function initializePool(): StrategyInterface;
 
-    public function handleProcessExit(ProcessInterface $process): StrategyInterface;
+    public function processExited(ProcessInterface $process): StrategyInterface;
 
-    public function handleAlarm(): StrategyInterface;
+    public function receivedAlarm(): StrategyInterface;
 
     public function setMaxAlarmTime(int $seconds): StrategyInterface;
 
@@ -23,4 +23,6 @@ interface StrategyInterface
     public function getProcessWaitThrottle(): int;
 
     public function getMaxProcesses(): int;
+
+    public function currentPendingChildExitsComplete(): StrategyInterface;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace NHDS\Toolkit\Data\Property\Crud;
+namespace NHDS\Toolkit\Data\Property\Strict;
 
 trait AwareTrait
 {
@@ -30,6 +30,13 @@ trait AwareTrait
         if (!$this->_exists($propertyName)) {
             throw new \LogicException($propertyName . ' is not created.');
         }
+        $this->_crudProperties[$propertyName] = $propertyValue;
+
+        return $this;
+    }
+
+    protected function _updateOrInsert(string $propertyName, $propertyValue)
+    {
         $this->_crudProperties[$propertyName] = $propertyValue;
 
         return $this;

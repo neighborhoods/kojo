@@ -3,13 +3,13 @@
 namespace NHDS\Jobs\Data\Job\State;
 
 use NHDS\Jobs\Data\Job;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Toolkit\Time;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Service implements ServiceInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Job\AwareTrait;
     use Time\AwareTrait;
     protected $_nextStateRequestUpdate;

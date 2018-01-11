@@ -5,13 +5,13 @@ namespace NHDS\Jobs\Process\Pool;
 use NHDS\Jobs\ProcessInterface;
 use Psr\Log;
 use NHDS\Toolkit\Time;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Process\Pool;
 
 abstract class AbstractLogger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Pool\AwareTrait;
     const PAD_PID       = 6;
     const PAD_TYPE_CODE = 18;

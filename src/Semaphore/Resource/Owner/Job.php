@@ -3,12 +3,12 @@
 namespace NHDS\Jobs\Semaphore\Resource\Owner;
 
 use NHDS\Jobs\Data;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 
 class Job implements JobInterface
 {
     use Data\Job\AwareTrait;
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     const PROP_RESOURCE_NAME = 'resource_name';
     const PROP_RESOURCE_PATH = 'resource_path';
 

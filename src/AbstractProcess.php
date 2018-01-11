@@ -5,12 +5,12 @@ namespace NHDS\Jobs;
 use NHDS\Jobs\Process\Pool;
 use NHDS\Jobs\Message\Broker;
 use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 
 abstract class AbstractProcess implements ProcessInterface
 {
     use Pool\AwareTrait;
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Logger\AwareTrait;
     use Broker\Type\Collection\AwareTrait;
     const PROP_TYPE_CODE = 'type_code';

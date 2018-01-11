@@ -4,13 +4,13 @@ namespace NHDS\Jobs\Db\Model;
 
 use NHDS\Jobs\Db\Connection\ContainerInterface;
 use NHDS\Jobs\Db\Model;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Db;
 use Zend\Db\Sql\Select;
 
 abstract class AbstractCollection implements CollectionInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Model\AwareTrait;
     use Db\Connection\Container\AwareTrait;
     const PROP_SELECT     = 'select';

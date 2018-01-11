@@ -5,12 +5,12 @@ namespace NHDS\Jobs\Console;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use Symfony\Component\Console\Input\InputArgument;
 
 abstract class CommandAbstract extends Command
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     const ARG_SERVICES_YML_FILE_PATH = 'services_yml_file_path';
 
     public function configure()

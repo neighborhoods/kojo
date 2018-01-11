@@ -5,11 +5,11 @@ namespace NHDS\Jobs\Data\Job\Service\Update\Complete\FailedScheduleLimitCheck;
 use NHDS\Jobs\Data\Job\Service\Update\Complete\FailedScheduleLimitCheckInterface;
 use NHDS\Jobs\Data\Job\Service\Update\Complete\FailedScheduleLimitCheck;
 use NHDS\Jobs\Data\Job\State\Service;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 
 class Factory implements FactoryInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use FailedScheduleLimitCheck\AwareTrait;
     use Service\AwareTrait;
     const PROP_FACTORY_NAME = 'factory_name';

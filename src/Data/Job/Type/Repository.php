@@ -3,12 +3,12 @@
 namespace NHDS\Jobs\Data\Job\Type;
 
 use NHDS\Jobs\Data\Job;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Data\Job\TypeInterface;
 
 class Repository implements RepositoryInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Job\Type\AwareTrait;
     protected $_jobTypes = [];
 

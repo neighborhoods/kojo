@@ -3,10 +3,10 @@
 namespace NHDS\Watch\TestCase;
 
 use NHDS\Watch\Fixture\Expression\Value;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 
 class Service implements ServiceInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Value\AwareTrait;
 }

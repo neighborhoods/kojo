@@ -1,5 +1,3 @@
-    @bwilson - add auto_complete to job type as an option.
-    @bwilson - add auto_delete_date_interval_specification as a job type option.
 @bwilson - add auto_schedule as a job type type option.
 @bwilson - created_at_date_time as a job field.
 @bwilson - completed_at_date_time as a job field.
@@ -16,3 +14,4 @@
 @bwilson - Selector entropy as a DI property.
 @bwilson - Install Console command.
 @bwilson - Tear down Console command.
+@bwilson - clean up remaining aware traits and add factories / repositories as necessary.

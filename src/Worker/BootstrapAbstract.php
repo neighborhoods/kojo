@@ -2,7 +2,7 @@
 
 namespace NHDS\Jobs\Worker;
 
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Db\Connection\Container;
 use NHDS\Jobs\Foreman;
 
@@ -10,7 +10,7 @@ abstract class BootstrapAbstract implements BootstrapInterface
 {
     use Container\AwareTrait;
     use Foreman\AwareTrait;
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     const PROP_PDO = 'pdo';
 
     abstract public function instantiate(): BootstrapInterface;

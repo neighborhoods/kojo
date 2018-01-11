@@ -7,13 +7,13 @@ use NHDS\Jobs\Data\Job\Service\Update;
 use NHDS\Jobs\Data\Job\Collection\Schedule\LimitCheck;
 use NHDS\Jobs\Data\Job\Collection\ScheduleLimit;
 use NHDS\Jobs\Data\Job;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Data\Job\Service\Update\Complete\FailedScheduleLimitCheck;
 use NHDS\Jobs\Process\Pool\Logger;
 
 class Maintainer implements MaintainerInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use CrashDetection\AwareTrait;
     use Semaphore\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;

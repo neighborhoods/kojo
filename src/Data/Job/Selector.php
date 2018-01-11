@@ -4,13 +4,13 @@ namespace NHDS\Jobs\Data\Job;
 
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Data\Job;
-use NHDS\Toolkit\Data\Property\Crud;
+use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Message\Broker;
 use NHDS\Jobs\Semaphore;
 
 class Selector implements SelectorInterface
 {
-    use Crud\AwareTrait;
+    use Strict\AwareTrait;
     use Broker\AwareTrait;
     use Job\AwareTrait;
     use Semaphore\AwareTrait;
