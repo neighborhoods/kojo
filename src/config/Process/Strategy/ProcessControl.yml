@@ -1,0 +1,3 @@
+services:
+ nhds.jobs.process.strategy.process_control:
+    class: NHDS\Jobs\Process\Strategy\ProcessControl

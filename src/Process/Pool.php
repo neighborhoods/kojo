@@ -43,7 +43,6 @@ class Pool implements PoolInterface
                 $this->_getLogger()->debug('Sent SIGTERM to Process[' . $process->getProcessId() . '].');
             }
         }
-        $this->_getLogger()->debug('Terminating.');
 
         return $this;
     }
@@ -70,7 +69,7 @@ class Pool implements PoolInterface
                     $this->_handleAlarmSignal();
                     break;
                 default:
-                    throw new \LogicException('Unhandled signal.');
+                    throw new \UnexpectedValueException('Unexpected blocked signal.');
             }
         }
 
@@ -83,31 +82,41 @@ class Pool implements PoolInterface
     {
         while ($processId = pcntl_wait($status, WNOHANG)) {
             if ($processId == -1) {
-                $waitErrorString = var_export(pcntl_strerror(pcntl_get_last_error()), true);
-                $this->_getLogger()->emergency('Received wait error, error string: "' . $waitErrorString . '".');
-                $signalInformation = var_export($this->_info, true);
-                $this->_getLogger()->emergency('Received wait error, signal information: ' . $signalInformation);
-                throw new \RuntimeException('Unrecoverable process control wait error.');
+                $this->_processControlWaitError();
             }
             $processExitCode = pcntl_wexitstatus($status);
-            if ($processExitCode != 0) {
-                $this->_getLogger()->alert("Process[{$processId}] exited with code [{$processExitCode}]");
-            }
+            $this->_getLogger()->debug("Process[{$processId}] exited with code [{$processExitCode}]");
             $process = $this->getProcess($processId)->setExitCode($processExitCode);
             $this->_getStrategy()->processExited($process);
-            $alarmValue = pcntl_alarm(0);
-            if ($this->isEmpty()) {
-                if ($alarmValue == 0) {
-                    $this->_getLogger()->emergency('ProcessPool has no alarms and no processes.');
-                    throw new \LogicException('Invalid ProcessPool state.');
-                }else {
-                    $this->_getLogger()->notice('ProcessPool only has a set alarm.');
-                    break;
-                }
-            }
-            pcntl_alarm($alarmValue);
+            $this->_validateAlarm();
         }
+        $this->_getLogger()->debug('Number of processes in Pool: ' . count($this->_processPool));
         $this->_getStrategy()->currentPendingChildExitsComplete();
+
+        return $this;
+    }
+
+    protected function _processControlWaitError()
+    {
+        $waitErrorString = var_export(pcntl_strerror(pcntl_get_last_error()), true);
+        $this->_getLogger()->emergency('Received wait error, error string: "' . $waitErrorString . '".');
+        $signalInformation = var_export($this->_info, true);
+        $this->_getLogger()->emergency('Received wait error, signal information: ' . $signalInformation);
+        throw new \RuntimeException('Unrecoverable process control wait error.');
+    }
+
+    protected function _validateAlarm(): Pool
+    {
+        $alarmValue = pcntl_alarm(0);
+        if ($this->isEmpty()) {
+            if ($alarmValue == 0) {
+                $this->_getLogger()->emergency('ProcessPool has no alarms and no processes.');
+                throw new \LogicException('Invalid ProcessPool state.');
+            }else {
+                $this->_getLogger()->notice('ProcessPool only has a set alarm.');
+            }
+        }
+        pcntl_alarm($alarmValue);
 
         return $this;
     }

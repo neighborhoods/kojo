@@ -11,3 +11,4 @@ services:
       - [setScheduler, ['@nhds.jobs.scheduler']]
       - [setBootstrap, ['@bootstrap']]
       - [setTypeCode, ['job']]
+      - [setProcessStrategy, ['@nhds.jobs.process.strategy.process_control']]

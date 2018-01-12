@@ -2,14 +2,15 @@
 
 namespace NHDS\Jobs;
 
-use NHDS\Jobs\Process\Pool;
+use NHDS\Jobs\Process;
 use NHDS\Jobs\Message\Broker;
 use NHDS\Jobs\Process\Pool\Logger;
 use NHDS\Toolkit\Data\Property\Strict;
 
 abstract class ProcessAbstract implements ProcessInterface
 {
-    use Pool\AwareTrait;
+    use Process\Pool\AwareTrait;
+    use Process\Strategy\AwareTrait;
     use Strict\AwareTrait;
     use Logger\AwareTrait;
     use Broker\Type\Collection\AwareTrait;
@@ -47,11 +48,11 @@ abstract class ProcessAbstract implements ProcessInterface
 
     public function fork(int $parentProcessId): ProcessInterface
     {
-        $processId = pcntl_fork();
+        $processId = $this->_getProcessStrategy()->fork();
         if ($processId === -1) {
-            throw new \Exception('Failed to fork new Process.');
+            throw new \RuntimeException('Failed to fork new Process.');
         }elseif ($processId > 0) {
-            // This is executed in the ProcessPool.
+            // This is executed in the Process Pool.
             $this->_init($processId);
             $this->_getLogger()->debug("Forked Process[{$this->getProcessId()}][{$this->getTypeCode()}].");
         }else {

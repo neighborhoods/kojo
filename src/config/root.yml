@@ -68,6 +68,7 @@ imports:
    - { resource: Process/Pool.yml }
    - { resource: Process/Type/Collection.yml }
    - { resource: Process/Type/Collection/Iterator.yml }
+   - { resource: Process/Strategy/ProcessControl.yml }
 
    # Database.
    - { resource: Db/Connection/Container.yml }
