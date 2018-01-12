@@ -1,5 +1,5 @@
 services:
   nhds.jobs.worker.bootstrap:
     class: NHDS\Jobs\Worker\Bootstrap
-  bootstrap:
+  worker.bootstrap:
     alias: nhds.jobs.worker.bootstrap

@@ -1,3 +1,5 @@
 services:
- nhds.jobs.process.strategy.process_control:
+  nhds.jobs.process.strategy.process_control:
     class: NHDS\Jobs\Process\Strategy\ProcessControl
+  process.strategy:
+    alias: nhds.jobs.process.strategy.process_control

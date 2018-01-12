@@ -1,20 +1,62 @@
 nhds_job:
-  -
-    nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
-    type_code: "type_code_1"
-    name: "Name 1"
-    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
-    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
-    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:0')
-    next_state_request: "working"
-    assigned_state: "waiting"
-    previous_state: "new"
-    worker_uri: '\NHDS\Jobs\Example\Worker'
-    worker_method: "work"
-    can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
-    last_transition_micro_time: 1511915506563849
+-
+    nhds_job_id: 2
+    type_code: type_code_2
+    name: 'Name 2'
+    priority: 10
+    importance: 10
+    status_id: null
+    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('PT3M')).format('Y-m-d H:i:s')
+    next_state_request: schedule_limit_check
+    assigned_state: waiting
+    previous_state: new
+    worker_uri: \NHDS\Jobs\Test\Worker\Mock
+    worker_method: work
+    can_work_in_parallel: 0
+    last_transition_datetime: '2018-01-12 20:54:49'
+    last_transition_micro_time: 1515790489896748
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+-
+    nhds_job_id: 3
+    type_code: type_code_2
+    name: 'Name 2'
+    priority: 10
+    importance: 10
+    status_id: null
+    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('PT2M')).format('Y-m-d H:i:s')
+    next_state_request: schedule_limit_check
+    assigned_state: waiting
+    previous_state: new
+    worker_uri: \NHDS\Jobs\Test\Worker\Mock
+    worker_method: work
+    can_work_in_parallel: 0
+    last_transition_datetime: '2018-01-12 20:54:49'
+    last_transition_micro_time: 1515790489908615
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+-
+    nhds_job_id: 4
+    type_code: type_code_2
+    name: 'Name 2'
+    priority: 10
+    importance: 10
+    status_id: null
+    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('PT1M')).format('Y-m-d H:i:s')
+    next_state_request: schedule_limit_check
+    assigned_state: waiting
+    previous_state: new
+    worker_uri: \NHDS\Jobs\Test\Worker\Mock
+    worker_method: work
+    can_work_in_parallel: 0
+    last_transition_datetime: '2018-01-12 20:54:49'
+    last_transition_micro_time: 1515790489914568
     times_worked: 0
     times_retried: 0
     times_held: 0

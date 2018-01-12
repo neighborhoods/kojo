@@ -9,6 +9,6 @@ services:
       - [setForeman, ['@nhds.jobs.foreman']]
       - [setMaintainer, ['@nhds.jobs.maintainer']]
       - [setScheduler, ['@nhds.jobs.scheduler']]
-      - [setBootstrap, ['@bootstrap']]
+      - [setBootstrap, ['@worker.bootstrap']]
       - [setTypeCode, ['job']]
-      - [setProcessStrategy, ['@nhds.jobs.process.strategy.process_control']]
+      - [setProcessStrategy, ['@process.strategy']]

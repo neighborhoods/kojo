@@ -2,5 +2,5 @@ services:
   nhds.jobs.console.command.db.setup.install:
     class: NHDS\Jobs\Console\Command\Db\Setup\Install
     calls:
-      - [setBootstrap, ['@bootstrap']]
+      - [setBootstrap, ['@worker.bootstrap']]
       - [setDbSetup, ['@nhds.jobs.db.setup']]

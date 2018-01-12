@@ -63,6 +63,8 @@ class Create extends ServiceAbstract implements CreateInterface
                 unset($persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_CRON_EXPRESSION]);
                 unset($persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_SCHEDULE_LIMIT]);
                 unset($persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_IS_ENABLED]);
+                unset($persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_AUTO_COMPLETE_SUCCESS]);
+                unset($persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION]);
                 if ($this->_exists(self::PROP_IMPORTANCE)) {
                     $importance = $this->_read(self::PROP_IMPORTANCE);
                 }else {

@@ -112,9 +112,9 @@ class Model implements ModelInterface
                 $this->insert();
             }
             $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->commit();
-        }catch(\Exception $e){
+        }catch(\Exception $exception){
             $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->rollBack();
-            throw $e;
+            throw $exception;
         }
 
         return $this;

@@ -9,4 +9,4 @@ services:
       - [setBrokerTypeCode, ['job_broker']]
       - [setExpressionLanguage, ['@symfony.component.expressionlanguage.expressionlanguage']]
       - [setProcessTypeCollection, ['@nhds.jbs.process.type.collection']]
-      - [setProcessStrategy, ['@nhds.jobs.process.strategy.process_control']]
+      - [setProcessStrategy, ['@process.strategy']]

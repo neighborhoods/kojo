@@ -34,6 +34,8 @@ abstract class AbstractTest extends DbUnit\TestCase
         $tearDown->uninstall();
         $setup = $this->_getTestContainerBuilder()->get('nhds.jobs.db.setup');
         $setup->install();
+        $redis = $this->_getTestContainerBuilder()->get('redis');
+        $redis->flushAll();
 
         parent::setUp();
     }

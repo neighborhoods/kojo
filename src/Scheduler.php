@@ -153,7 +153,7 @@ class Scheduler implements SchedulerInterface
             $this->_create(self::PROP_REFERENCE_DATE_TIME_CLONE, $this->_getTime()->getNow());
         }
 
-        return $this->_read(self::PROP_REFERENCE_DATE_TIME_CLONE);
+        return clone $this->_read(self::PROP_REFERENCE_DATE_TIME_CLONE);
     }
 
     protected function _getNextReferenceMinuteDateTime(): \DateTime

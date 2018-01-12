@@ -1,0 +1,3 @@
+services:
+  nhds.jobs.test.process.strategy.mock:
+    class: NHDS\Jobs\Test\Process\Strategy\Mock
