@@ -2,7 +2,7 @@
 
 namespace NHDS\Jobs\Db\Setup\Schema;
 
-use NHDS\Jobs\Db\Schema\AbstractVersion;
+use NHDS\Jobs\Db\Schema\VersionAbstract;
 use NHDS\Jobs\Db\Schema\VersionInterface;
 use NHDS\Jobs\Data\Job\Type;
 use NHDS\Jobs\Data\JobInterface;
@@ -17,7 +17,7 @@ use Zend\Db\Sql\Ddl\Constraint\PrimaryKey;
 use Zend\Db\Sql\Ddl\CreateTable;
 use Zend\Db\Sql\Ddl\Index\Index;
 
-class Version_5_0_0 extends AbstractVersion
+class Version_5_0_0 extends VersionAbstract
 {
     public function assembleSchemaChanges(): VersionInterface
     {

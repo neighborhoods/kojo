@@ -6,7 +6,7 @@ use NHDS\Jobs\ProcessInterface;
 use NHDS\Jobs\Process\Type\JobInterface;
 use NHDS\Jobs\Process\Type\ListenerInterface;
 
-class Strategy extends AbstractStrategy
+class Strategy extends StrategyAbstract
 {
     protected $_pausedListenerProcesses = [];
 

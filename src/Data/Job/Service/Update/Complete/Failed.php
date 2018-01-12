@@ -2,9 +2,9 @@
 
 namespace NHDS\Jobs\Data\Job\Service\Update\Complete;
 
-use NHDS\Jobs\Data\Job\AbstractService;
+use NHDS\Jobs\Data\Job\ServiceAbstract;
 
-class Failed extends AbstractService implements FailedInterface
+class Failed extends ServiceAbstract implements FailedInterface
 {
     public function save(): FailedInterface
     {

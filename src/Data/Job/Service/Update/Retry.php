@@ -2,9 +2,9 @@
 
 namespace NHDS\Jobs\Data\Job\Service\Update;
 
-use NHDS\Jobs\Data\Job\AbstractService;
+use NHDS\Jobs\Data\Job\ServiceAbstract;
 
-class Retry extends AbstractService implements RetryInterface
+class Retry extends ServiceAbstract implements RetryInterface
 {
     const PROP_DATE_TIME = 'date_time';
 

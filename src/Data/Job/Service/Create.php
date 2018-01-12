@@ -3,10 +3,10 @@
 namespace NHDS\Jobs\Data\Job\Service;
 
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Data\Job\AbstractService;
+use NHDS\Jobs\Data\Job\ServiceAbstract;
 use NHDS\Jobs\Data\Job\State;
 
-class Create extends AbstractService implements CreateInterface
+class Create extends ServiceAbstract implements CreateInterface
 {
     use Job\Type\Repository\AwareTrait;
     use Job\Collection\ScheduleLimit\AwareTrait;

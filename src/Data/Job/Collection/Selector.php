@@ -2,13 +2,13 @@
 
 namespace NHDS\Jobs\Data\Job\Collection;
 
-use NHDS\Jobs\Data\Job\AbstractCollection;
+use NHDS\Jobs\Data\Job\CollectionAbstract;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Db\Connection\ContainerInterface;
 use NHDS\Jobs\Data\Job\State;
 use NHDS\Jobs\Db;
 
-class Selector extends AbstractCollection implements SelectorInterface
+class Selector extends CollectionAbstract implements SelectorInterface
 {
     protected function &_getModelsArray(): array
     {
@@ -44,7 +44,7 @@ class Selector extends AbstractCollection implements SelectorInterface
         return $this->_read(self::PROP_RECORDS);
     }
 
-    protected function _prepareCollection(): Db\Model\AbstractCollection
+    protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
         $select = $this->getSelect();
         $select->where(

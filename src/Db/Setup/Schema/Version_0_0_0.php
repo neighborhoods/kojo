@@ -2,12 +2,12 @@
 
 namespace NHDS\Jobs\Db\Setup\Schema;
 
-use NHDS\Jobs\Db\Schema\AbstractVersion;
+use NHDS\Jobs\Db\Schema\VersionAbstract;
 use NHDS\Jobs\Db\Schema\VersionInterface;
 use Zend\Db\Sql\Ddl\Column\Varchar;
 use Zend\Db\Sql\Ddl\CreateTable;
 
-class Version_0_0_0 extends AbstractVersion
+class Version_0_0_0 extends VersionAbstract
 {
     public function assembleSchemaChanges(): VersionInterface
     {

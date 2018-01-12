@@ -8,7 +8,7 @@ use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Db;
 use Zend\Db\Sql\Select;
 
-abstract class AbstractCollection implements CollectionInterface
+abstract class CollectionAbstract implements CollectionInterface
 {
     use Strict\AwareTrait;
     use Model\AwareTrait;
@@ -29,7 +29,7 @@ abstract class AbstractCollection implements CollectionInterface
         return $this->_read(self::PROP_SELECT);
     }
 
-    protected function _setFetchMode(int $fetchMode): AbstractCollection
+    protected function _setFetchMode(int $fetchMode): CollectionAbstract
     {
         $this->_create(self::PROP_FETCH_MODE, $fetchMode);
 
@@ -91,5 +91,5 @@ abstract class AbstractCollection implements CollectionInterface
         return $this->_read(self::PROP_RECORDS);
     }
 
-    abstract protected function _prepareCollection(): AbstractCollection;
+    abstract protected function _prepareCollection(): CollectionAbstract;
 }

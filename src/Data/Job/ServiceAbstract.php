@@ -5,7 +5,7 @@ namespace NHDS\Jobs\Data\Job;
 use NHDS\Jobs\Data\Job;
 use NHDS\Toolkit\Data\Property\Strict;
 
-abstract class AbstractService implements ServiceInterface
+abstract class ServiceAbstract implements ServiceInterface
 {
     use Strict\AwareTrait;
     use Job\AwareTrait;

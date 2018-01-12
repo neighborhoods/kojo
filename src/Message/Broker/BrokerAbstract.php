@@ -5,7 +5,7 @@ namespace NHDS\Jobs\Message\Broker;
 use NHDS\Jobs\Process\Pool\Logger;
 use NHDS\Toolkit\Data\Property\Strict;
 
-abstract class AbstractBroker implements BrokerInterface
+abstract class BrokerAbstract implements BrokerInterface
 {
     use Strict\AwareTrait;
     use Logger\AwareTrait;

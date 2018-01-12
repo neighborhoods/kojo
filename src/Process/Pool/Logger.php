@@ -3,6 +3,6 @@
 namespace NHDS\Jobs\Process\Pool;
 
 
-class Logger extends AbstractLogger
+class Logger extends LoggerAbstract
 {
 }

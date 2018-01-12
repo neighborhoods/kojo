@@ -2,9 +2,9 @@
 
 namespace NHDS\Jobs\Data\Job\Service\Update;
 
-use NHDS\Jobs\Data\Job\AbstractService;
+use NHDS\Jobs\Data\Job\ServiceAbstract;
 
-class Hold extends AbstractService implements HoldInterface
+class Hold extends ServiceAbstract implements HoldInterface
 {
     public function save(): HoldInterface
     {

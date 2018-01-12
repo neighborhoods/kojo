@@ -2,11 +2,11 @@
 
 namespace NHDS\Jobs\Process\Type\Listener;
 
-use NHDS\Jobs\AbstractProcess;
+use NHDS\Jobs\ProcessAbstract;
 use NHDS\Jobs\Process\Type;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-class Command extends Type\AbstractListener
+class Command extends Type\ListenerAbstract
 {
     const PROP_EXPRESSION_LANGUAGE = 'expression_language';
 
@@ -52,7 +52,7 @@ class Command extends Type\AbstractListener
         return $this->_read(self::PROP_EXPRESSION_LANGUAGE);
     }
 
-    protected function _run(): AbstractProcess
+    protected function _run(): ProcessAbstract
     {
         if (!$this->_getMessageBroker()->hasMessage()) {
             $this->_getMessageBroker()->waitForNewMessage();

@@ -4,12 +4,12 @@ namespace NHDS\Jobs\Semaphore\Mutex;
 
 use NHDS\Jobs\Exception\Runtime;
 use NHDS\Jobs\Filesystem;
-use NHDS\Jobs\Semaphore\AbstractMutex;
+use NHDS\Jobs\Semaphore\MutexAbstract;
 use NHDS\Jobs\Semaphore\MutexInterface;
 use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Process\Pool\Logger;
 
-class Flock extends AbstractMutex
+class Flock extends MutexAbstract
 {
     use Strict\AwareTrait;
     use Filesystem\AwareTrait;

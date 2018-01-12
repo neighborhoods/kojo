@@ -2,9 +2,9 @@
 
 namespace NHDS\Jobs\Data\Job\Service\Update;
 
-use NHDS\Jobs\Data\Job\AbstractService;
+use NHDS\Jobs\Data\Job\ServiceAbstract;
 
-class Wait extends AbstractService implements WaitInterface
+class Wait extends ServiceAbstract implements WaitInterface
 {
     public function save(): WaitInterface
     {

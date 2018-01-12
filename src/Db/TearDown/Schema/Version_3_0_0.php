@@ -2,12 +2,12 @@
 
 namespace NHDS\Jobs\Db\TearDown\Schema;
 
-use NHDS\Jobs\Db\Schema\AbstractVersion;
+use NHDS\Jobs\Db\Schema\VersionAbstract;
 use NHDS\Jobs\Db\Schema\VersionInterface;
 use NHDS\Jobs\Data\Status\Message;
 use Zend\Db\Sql\Ddl\DropTable;
 
-class Version_3_0_0 extends AbstractVersion
+class Version_3_0_0 extends VersionAbstract
 {
     public function assembleSchemaChanges(): VersionInterface
     {

@@ -7,7 +7,7 @@ use NHDS\Jobs\Message\Broker;
 use NHDS\Jobs\Process\Pool\Logger;
 use NHDS\Toolkit\Data\Property\Strict;
 
-abstract class AbstractProcess implements ProcessInterface
+abstract class ProcessAbstract implements ProcessInterface
 {
     use Pool\AwareTrait;
     use Strict\AwareTrait;
@@ -20,7 +20,7 @@ abstract class AbstractProcess implements ProcessInterface
     protected $_exitCode;
     protected $_messageBroker;
 
-    protected function _init(int $processId = null): AbstractProcess
+    protected function _init(int $processId = null): ProcessAbstract
     {
         if ($processId === null) {
             $this->_setParentProcessId(posix_getppid());
@@ -67,7 +67,7 @@ abstract class AbstractProcess implements ProcessInterface
         return $this;
     }
 
-    abstract protected function _run(): AbstractProcess;
+    abstract protected function _run(): ProcessAbstract;
 
     public function setThrottle(int $seconds = 0): ProcessInterface
     {
@@ -80,7 +80,7 @@ abstract class AbstractProcess implements ProcessInterface
         return $this;
     }
 
-    protected function _setProcessId(int $processId): AbstractProcess
+    protected function _setProcessId(int $processId): ProcessAbstract
     {
         if ($this->_processId === null) {
             $this->_processId = $processId;
@@ -100,7 +100,7 @@ abstract class AbstractProcess implements ProcessInterface
         return $this->_processId;
     }
 
-    protected function _setParentProcessId(int $parentProcessId): AbstractProcess
+    protected function _setParentProcessId(int $parentProcessId): ProcessAbstract
     {
         if ($this->_parentProcessId === null) {
             $this->_parentProcessId = $parentProcessId;

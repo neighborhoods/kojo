@@ -2,13 +2,12 @@
 
 namespace NHDS\Jobs\Data\Job\Collection;
 
-use NHDS\Jobs\Data\Job\AbstractCollection;
+use NHDS\Jobs\Data\Job\CollectionAbstract;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Db\Connection\ContainerInterface;
 use NHDS\Jobs\Db;
-use NHDS\Toolkit\TimeInterface;
 
-class Scheduler extends AbstractCollection implements SchedulerInterface
+class Scheduler extends CollectionAbstract implements SchedulerInterface
 {
     const PROP_DATE_TIME = 'date_time';
 
@@ -47,7 +46,7 @@ class Scheduler extends AbstractCollection implements SchedulerInterface
         return $this->_read(self::PROP_RECORDS);
     }
 
-    protected function _prepareCollection(): Db\Model\AbstractCollection
+    protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
         $this->getSelect()->columns([JobInterface::FIELD_NAME_TYPE_CODE, JobInterface::FIELD_NAME_WORK_AT_DATETIME]);
         $workAtDateTime = $this->_getReferenceDateTime()->format('Y-m-d H:i:0');

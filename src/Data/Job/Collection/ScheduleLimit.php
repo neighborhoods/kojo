@@ -3,13 +3,13 @@
 namespace NHDS\Jobs\Data\Job\Collection;
 
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Data\Job\AbstractCollection;
+use NHDS\Jobs\Data\Job\CollectionAbstract;
 use NHDS\Jobs\Data\Job\Type;
 use NHDS\Jobs\Db\Connection\ContainerInterface;
 use NHDS\Jobs\Db;
 use Zend\Db\Sql\Expression;
 
-class ScheduleLimit extends AbstractCollection implements ScheduleLimitInterface
+class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
 {
     use Type\AwareTrait;
     const ALIAS_NUMBER_OF_SCHEDULED_JOBS = 'number_of_scheduled_jobs';
@@ -39,7 +39,7 @@ class ScheduleLimit extends AbstractCollection implements ScheduleLimitInterface
         return $this->_read(self::PROP_RECORDS);
     }
 
-    protected function _prepareCollection(): Db\Model\AbstractCollection
+    protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
         $this->getSelect()->columns(
             [

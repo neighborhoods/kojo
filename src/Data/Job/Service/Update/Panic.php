@@ -2,9 +2,9 @@
 
 namespace NHDS\Jobs\Data\Job\Service\Update;
 
-use NHDS\Jobs\Data\Job\AbstractService;
+use NHDS\Jobs\Data\Job\ServiceAbstract;
 
-class Panic extends AbstractService implements PanicInterface
+class Panic extends ServiceAbstract implements PanicInterface
 {
     public function save(): PanicInterface
     {

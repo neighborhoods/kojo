@@ -2,9 +2,9 @@
 
 namespace NHDS\Jobs\Data\Job\Service\Update\Complete;
 
-use NHDS\Jobs\Data\Job\AbstractService;
+use NHDS\Jobs\Data\Job\ServiceAbstract;
 
-class FailedScheduleLimitCheck extends AbstractService implements FailedScheduleLimitCheckInterface
+class FailedScheduleLimitCheck extends ServiceAbstract implements FailedScheduleLimitCheckInterface
 {
     public function save(): FailedScheduleLimitCheckInterface
     {

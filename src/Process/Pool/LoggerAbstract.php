@@ -8,7 +8,7 @@ use NHDS\Toolkit\Time;
 use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Process\Pool;
 
-abstract class AbstractLogger extends Log\AbstractLogger implements LoggerInterface
+abstract class LoggerAbstract extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
     use Strict\AwareTrait;

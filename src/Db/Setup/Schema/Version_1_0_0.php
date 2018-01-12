@@ -3,7 +3,7 @@
 namespace NHDS\Jobs\Db\Setup\Schema;
 
 use NHDS\Jobs\Data\Status\Type;
-use NHDS\Jobs\Db\Schema\AbstractVersion;
+use NHDS\Jobs\Db\Schema\VersionAbstract;
 use NHDS\Jobs\Db\Schema\VersionInterface;
 use Zend\Db\Sql\Ddl\Column\BigInteger;
 use Zend\Db\Sql\Ddl\Column\Varchar;
@@ -11,7 +11,7 @@ use Zend\Db\Sql\Ddl\Constraint\PrimaryKey;
 use Zend\Db\Sql\Ddl\CreateTable;
 use Zend\Db\Sql\Ddl\Index\Index;
 
-class Version_1_0_0 extends AbstractVersion
+class Version_1_0_0 extends VersionAbstract
 {
     public function assembleSchemaChanges(): VersionInterface
     {

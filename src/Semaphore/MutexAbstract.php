@@ -4,7 +4,7 @@ namespace NHDS\Jobs\Semaphore;
 
 use NHDS\Jobs\Exception;
 
-abstract class AbstractMutex implements MutexInterface
+abstract class MutexAbstract implements MutexInterface
 {
     use Exception\Runtime\Filesystem\AwareTrait;
     protected $_isBlocking;

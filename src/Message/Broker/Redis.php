@@ -4,7 +4,7 @@ namespace NHDS\Jobs\Message\Broker;
 
 use NHDS\Jobs\Process\Pool\Logger;
 
-class Redis extends AbstractBroker
+class Redis extends BrokerAbstract
 {
     use Logger\AwareTrait;
     protected $_redisClient;

@@ -2,14 +2,14 @@
 
 namespace NHDS\Jobs\Data\Job\Collection\Schedule;
 
-use NHDS\Jobs\Data\Job\AbstractCollection;
+use NHDS\Jobs\Data\Job\CollectionAbstract;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Data\Job\State;
 use NHDS\Jobs\Db;
 
-class LimitCheck extends AbstractCollection implements LimitCheckInterface
+class LimitCheck extends CollectionAbstract implements LimitCheckInterface
 {
-    protected function _prepareCollection(): Db\Model\AbstractCollection
+    protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
         $select = $this->getSelect();
         $select->where(

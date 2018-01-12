@@ -10,6 +10,7 @@ nhds_job_type:
     cron_expression:
     schedule_limit: 0
     is_enabled: 1
+    auto_complete_success: 1
   -
     nhds_job_type_id: 2
     type_code: "type_code_2"
@@ -21,3 +22,4 @@ nhds_job_type:
     cron_expression: "* * * * *"
     schedule_limit: 10
     is_enabled: 1
+    auto_complete_success: 1

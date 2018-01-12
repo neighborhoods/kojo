@@ -7,7 +7,7 @@ use NHDS\Jobs\Db\Connection\ContainerInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\SqlInterface;
 
-abstract class AbstractVersion implements VersionInterface
+abstract class VersionAbstract implements VersionInterface
 {
     use Db\Connection\Container\AwareTrait;
     protected $_schemaChanges;
@@ -24,7 +24,7 @@ abstract class AbstractVersion implements VersionInterface
         return $this;
     }
 
-    protected function _setSchemaChanges(SqlInterface $schemaChanges): AbstractVersion
+    protected function _setSchemaChanges(SqlInterface $schemaChanges): VersionAbstract
     {
         if (!$this->_hasSchemaChanges()) {
             $this->_schemaChanges = $schemaChanges;

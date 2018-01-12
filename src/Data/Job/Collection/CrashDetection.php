@@ -2,14 +2,14 @@
 
 namespace NHDS\Jobs\Data\Job\Collection;
 
-use NHDS\Jobs\Data\Job\AbstractCollection;
+use NHDS\Jobs\Data\Job\CollectionAbstract;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Data\Job\State;
 use NHDS\Jobs\Db;
 
-class CrashDetection extends AbstractCollection implements CrashDetectionInterface
+class CrashDetection extends CollectionAbstract implements CrashDetectionInterface
 {
-    protected function _prepareCollection(): Db\Model\AbstractCollection
+    protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
         $select = $this->getSelect();
         $select->where(

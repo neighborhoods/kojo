@@ -2,9 +2,9 @@
 
 namespace NHDS\Jobs\Data\Job\Service\Update;
 
-use NHDS\Jobs\Data\Job\AbstractService;
+use NHDS\Jobs\Data\Job\ServiceAbstract;
 
-class Crash extends AbstractService implements CrashInterface
+class Crash extends ServiceAbstract implements CrashInterface
 {
     public function save(): CrashInterface
     {
