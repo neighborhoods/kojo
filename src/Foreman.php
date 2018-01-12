@@ -98,7 +98,6 @@ class Foreman implements ForemanInterface
 
     protected function _publishMessage()
     {
-        $this->_getLogger()->debug('============================================');
         $message = json_encode(['command' => "commandProcess.addProcess('job')"]);
         $this->_getMessageBroker()->publishMessage($message);
     }
