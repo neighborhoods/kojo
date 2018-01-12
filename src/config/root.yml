@@ -48,9 +48,9 @@ imports:
    - { resource: Data/Job/Service/Update/Retry.yml }
    - { resource: Data/Job/Service/Update/Retry/Factory.yml }
    - { resource: Data/Job/Service/Update/Complete/Failed.yml }
-   - { resource: Data/Job/Service/Update/Complete/Failed/Factory.yml.yml }
+   - { resource: Data/Job/Service/Update/Complete/Failed/Factory.yml }
    - { resource: Data/Job/Service/Update/Complete/Success.yml }
-   - { resource: Data/Job/Service/Update/Complete/Success/Factory.yml.yml }
+   - { resource: Data/Job/Service/Update/Complete/Success/Factory.yml }
 
   # Semaphore.
    - { resource: Semaphore/Resource.yml }

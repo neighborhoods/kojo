@@ -25,7 +25,6 @@ class Factory implements FactoryInterface
         $create->setJobStateService($stateService);
         $create->setJobCollectionScheduleLimit($this->_getJobCollectionScheduleLimitClone());
         $create->setJob($this->_getJobClone());
-        $create->setJobType($this->_getJobTypeClone());
 
         return $create;
     }

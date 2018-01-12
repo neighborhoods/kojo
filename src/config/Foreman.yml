@@ -14,3 +14,4 @@ services:
       - [setJobServiceUpdateCrashFactory, ['@nhds.jobs.data.job.service.update.crash.factory']]
       - [setLogger, ['@nhds.jobs.process.pool.logger']]
       - [setWorkerJobService, ['@nhds.jobs.worker.job.service']]
+      - [setJobStateService, ['@nhds.jobs.data.job.state.service']]
