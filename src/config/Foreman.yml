@@ -3,7 +3,6 @@ services:
     class: NHDS\Jobs\Foreman
     shared: false
     calls:
-      - [setJob, ['@nhds.jobs.data.job']]
       - [setJobTypeRepository, ['@nhds.jobs.data.job.type.repository']]
       - [setSelector, ['@nhds.jobs.data.job.selector']]
       - [setLocator, ['@nhds.jobs.worker.locator']]
@@ -16,3 +15,4 @@ services:
       - [setLogger, ['@nhds.jobs.process.pool.logger']]
       - [setWorkerJobService, ['@nhds.jobs.worker.job.service']]
       - [setJobStateService, ['@nhds.jobs.data.job.state.service']]
+      - [setMessageBroker, ['@nhds.jobs.message.broker.redis']]

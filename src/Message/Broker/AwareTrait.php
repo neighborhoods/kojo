@@ -4,20 +4,20 @@ namespace NHDS\Jobs\Message\Broker;
 
 trait AwareTrait
 {
-    public function setBroker(BrokerInterface $broker)
+    public function setMessageBroker(BrokerInterface $broker)
     {
         $this->_create(BrokerInterface::class, $broker);
 
         return $this;
     }
 
-    protected function _getBroker(): BrokerInterface
+    protected function _getMessageBroker(): BrokerInterface
     {
         return $this->_read(BrokerInterface::class);
     }
 
-    protected function _getBrokerClone(): BrokerInterface
+    protected function _getMessageBrokerClone(): BrokerInterface
     {
-        return clone $this->_getBroker();
+        return clone $this->_getMessageBroker();
     }
 }

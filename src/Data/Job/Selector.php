@@ -41,10 +41,10 @@ class Selector implements SelectorInterface
         $select->offset($this->_collectionIterations * $this->_getPageSize());
         $select->limit($this->_getPageSize());
         $jobCandidates = $this->_getSelectorJobCollection()->getModelsArray();
-        $publishedMessages = $this->_getBroker()->getPublishChannelLength();
+        $publishedMessages = $this->_getMessageBroker()->getPublishChannelLength();
         while ($publishedMessages < count($jobCandidates)) {
             $message = json_encode(['command' => "commandProcess.addProcess('job')"]);
-            $this->_getBroker()->publishMessage($message);
+            $this->_getMessageBroker()->publishMessage($message);
             ++$publishedMessages;
         }
 

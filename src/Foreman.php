@@ -3,6 +3,7 @@
 namespace NHDS\Jobs;
 
 use NHDS\Jobs\Data\Job;
+use NHDS\Jobs\Message;
 use NHDS\Jobs\Data\Job\Service\Update;
 use NHDS\Jobs\Worker\Locator;
 use NHDS\Jobs\Process\Pool\Logger;
@@ -12,6 +13,7 @@ use NHDS\Jobs\Worker;
 class Foreman implements ForemanInterface
 {
     use Job\AwareTrait;
+    use Message\Broker\AwareTrait;
     use Job\Type\Repository\AwareTrait;
     use Job\State\Service\AwareTrait;
     use Worker\Job\Service\AwareTrait;
@@ -38,6 +40,7 @@ class Foreman implements ForemanInterface
     protected function _workWorker(): ForemanInterface
     {
         $job = $this->_getSelector()->getNextJobToWork();
+        $this->setJob($job);
         $this->_getLocator()->setJob($job);
         if (is_callable($this->_getLocator()->getCallable())) {
             try{
@@ -61,7 +64,7 @@ class Foreman implements ForemanInterface
                 $updateCrash->save();
                 throw new $exception;
             }
-            if ($this->_getJobTypeRepository()->getJobType($job->getTypeCode())->getAutoCompleteSuccess()) {
+            if ($this->_getJobType()->getAutoCompleteSuccess()) {
                 $updateCompleteSuccess = $this->_getUpdateCompleteSuccessFactory()->create();
                 $updateCompleteSuccess->setJob($job);
                 $updateCompleteSuccess->save();
@@ -86,6 +89,22 @@ class Foreman implements ForemanInterface
         $jobSemaphoreResource = $this->_getNewJobOwnerResource($job);
         $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
 
+        if (!$this->_getJobType()->getCanWorkInParallel()) {
+            $this->_publishMessage();
+        }
+
         return $this;
+    }
+
+    protected function _publishMessage()
+    {
+        $this->_getLogger()->debug('============================================');
+        $message = json_encode(['command' => "commandProcess.addProcess('job')"]);
+        $this->_getMessageBroker()->publishMessage($message);
+    }
+
+    protected function _getJobType()
+    {
+        return $this->_getJobTypeRepository()->getJobType($this->_getJob()->getTypeCode());
     }
 }
