@@ -8,7 +8,7 @@ interface PoolInterface
 {
     public function swim(): PoolInterface;
 
-    public function setAlarm(): PoolInterface;
+    public function setAlarm(int $seconds): PoolInterface;
 
     public function isFull(): bool;
 
@@ -27,4 +27,6 @@ interface PoolInterface
     public function resetPool(): PoolInterface;
 
     public function initialize(): PoolInterface;
+
+    public function hasAlarm();
 }

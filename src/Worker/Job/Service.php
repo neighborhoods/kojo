@@ -24,14 +24,14 @@ class Service implements ServiceInterface
 
     public function requestRetry(\DateTime $retryDateTime): ServiceInterface
     {
-        $this->_updateOrInsert(self::PROP_REQUEST, self::REQUEST_RETRY);
+        $this->_createOrUpdate(self::PROP_REQUEST, self::REQUEST_RETRY);
 
         return $this;
     }
 
     protected function _updateOrInsertDateTime(\DateTime $dateTime): Service
     {
-        $this->_updateOrInsert(self::PROP_RETRY_DATE_TIME, $dateTime);
+        $this->_createOrUpdate(self::PROP_RETRY_DATE_TIME, $dateTime);
     }
 
     protected function _getDateTime(): \DateTime
@@ -41,21 +41,21 @@ class Service implements ServiceInterface
 
     public function requestHold(): ServiceInterface
     {
-        $this->_updateOrInsert(self::PROP_REQUEST, self::REQUEST_HOLD);
+        $this->_createOrUpdate(self::PROP_REQUEST, self::REQUEST_HOLD);
 
         return $this;
     }
 
     public function requestCompleteSuccess(): ServiceInterface
     {
-        $this->_updateOrInsert(self::PROP_REQUEST, self::REQUEST_COMPLETE_SUCCESS);
+        $this->_createOrUpdate(self::PROP_REQUEST, self::REQUEST_COMPLETE_SUCCESS);
 
         return $this;
     }
 
     public function requestCompleteFailed(): ServiceInterface
     {
-        $this->_updateOrInsert(self::PROP_REQUEST, self::REQUEST_COMPLETE_FAILED);
+        $this->_createOrUpdate(self::PROP_REQUEST, self::REQUEST_COMPLETE_FAILED);
 
         return $this;
     }

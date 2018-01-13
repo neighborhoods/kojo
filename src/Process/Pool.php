@@ -121,6 +121,17 @@ class Pool implements PoolInterface
         return $this;
     }
 
+    public function hasAlarm()
+    {
+        $hasAlarm = false;
+        if (($seconds = pcntl_alarm(0)) > 0) {
+            $hasAlarm = true;
+        }
+        pcntl_alarm($seconds);
+
+        return $hasAlarm;
+    }
+
     protected function _handleAlarmSignal(): Pool
     {
         $this->_getStrategy()->receivedAlarm();
@@ -128,11 +139,10 @@ class Pool implements PoolInterface
         return $this;
     }
 
-    public function setAlarm(): PoolInterface
+    public function setAlarm(int $seconds): PoolInterface
     {
-        $maxAlarmTime = $this->_getStrategy()->getMaxAlarmTime();
-        $this->_getLogger()->debug('Setting alarm for ' . $maxAlarmTime . ' seconds.');
-        pcntl_alarm($maxAlarmTime);
+        $this->_getLogger()->debug('Setting alarm for ' . $seconds . ' seconds.');
+        pcntl_alarm($seconds);
 
         return $this;
     }

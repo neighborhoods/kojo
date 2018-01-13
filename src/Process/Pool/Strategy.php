@@ -43,7 +43,9 @@ class Strategy extends StrategyAbstract
             }
         }
 
-        $this->_getPool()->setAlarm();
+        if (!$this->_getPool()->hasAlarm()) {
+            $this->_getPool()->setAlarm($this->getMaxAlarmTime());
+        }
 
         return $this;
     }
@@ -53,7 +55,9 @@ class Strategy extends StrategyAbstract
         if ($this->_hasPausedListenerProcess()) {
             $this->_unPauseListenerProcesses();
         }else {
-            $this->_getPool()->setAlarm();
+            if (!$this->_getPool()->hasAlarm()) {
+                $this->_getPool()->setAlarm($this->getMaxAlarmTime());
+            }
         }
 
         return $this;
@@ -70,7 +74,9 @@ class Strategy extends StrategyAbstract
             $replacementProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
             $replacementProcess->setThrottle($this->getProcessWaitThrottle());
             $this->_getPool()->addProcess($replacementProcess);
-            $this->_getPool()->setAlarm();
+            if (!$this->_getPool()->hasAlarm()) {
+                $this->_getPool()->setAlarm($this->getMaxAlarmTime());
+            }
         }
 
         return $this;
@@ -89,15 +95,16 @@ class Strategy extends StrategyAbstract
                 $this->_getPool()->addProcess($this->_getProcessCollection()->getProcessPrototypeClone('job'));
             }
         }
-        $this->_getLogger()->debug("Resetting the alarm.");
-        $this->_getPool()->setAlarm();
+        if (!$this->_getPool()->hasAlarm()) {
+            $this->_getPool()->setAlarm($this->getMaxAlarmTime());
+        }
 
         return $this;
     }
 
     public function initializePool(): StrategyInterface
     {
-        $this->_getPool()->setAlarm();
+        $this->_getPool()->setAlarm($this->getMaxAlarmTime());
         foreach ($this->_getProcessCollection()->getIterator() as $process) {
             $typeCode = $process->getTypeCode();
             $this->_getPool()->addProcess($this->_getProcessCollection()->getProcessPrototypeClone($typeCode));

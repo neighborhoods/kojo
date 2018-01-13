@@ -7,7 +7,7 @@ use NHDS\Jobs\Process\ListenerAbstract;
 use NHDS\Jobs\ProcessAbstract;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-class Command extends ListenerAbstract
+class Command extends ListenerAbstract implements CommandInterface
 {
     const PROP_EXPRESSION_LANGUAGE = 'expression_language';
 
@@ -37,6 +37,13 @@ class Command extends ListenerAbstract
     {
         $this->_getLogger()->debug('Adding Process with type code "' . $processTypeCode . '".');
         $this->_getPool()->addProcess($this->_getProcessCollection()->getProcessPrototypeClone($processTypeCode));
+
+        return $this;
+    }
+
+    public function setAlarm(int $seconds): Command
+    {
+        $this->_getPool()->setAlarm($seconds);
 
         return $this;
     }

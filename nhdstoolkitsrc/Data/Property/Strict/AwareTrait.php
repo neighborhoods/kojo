@@ -4,14 +4,14 @@ namespace NHDS\Toolkit\Data\Property\Strict;
 
 trait AwareTrait
 {
-    protected $_crudProperties = [];
+    protected $_strictProperties = [];
 
     protected function _create(string $propertyName, $propertyValue)
     {
         if ($this->_exists($propertyName)) {
             throw new \LogicException($propertyName . ' is already created.');
         }
-        $this->_crudProperties[$propertyName] = $propertyValue;
+        $this->_strictProperties[$propertyName] = $propertyValue;
 
         return $this;
     }
@@ -22,7 +22,7 @@ trait AwareTrait
             throw new \LogicException($propertyName . ' is not created.');
         }
 
-        return $this->_crudProperties[$propertyName];
+        return $this->_strictProperties[$propertyName];
     }
 
     protected function _update(string $propertyName, $propertyValue)
@@ -30,14 +30,14 @@ trait AwareTrait
         if (!$this->_exists($propertyName)) {
             throw new \LogicException($propertyName . ' is not created.');
         }
-        $this->_crudProperties[$propertyName] = $propertyValue;
+        $this->_strictProperties[$propertyName] = $propertyValue;
 
         return $this;
     }
 
-    protected function _updateOrInsert(string $propertyName, $propertyValue)
+    protected function _createOrUpdate(string $propertyName, $propertyValue)
     {
-        $this->_crudProperties[$propertyName] = $propertyValue;
+        $this->_strictProperties[$propertyName] = $propertyValue;
 
         return $this;
     }
@@ -47,13 +47,13 @@ trait AwareTrait
         if (!$this->_exists($propertyName)) {
             throw new \LogicException($propertyName . ' is not created.');
         }
-        unset($this->_crudProperties[$propertyName]);
+        unset($this->_strictProperties[$propertyName]);
 
         return $this;
     }
 
     protected function _exists(string $propertyName): bool
     {
-        return isset($this->_crudProperties[$propertyName]) ? true : false;
+        return isset($this->_strictProperties[$propertyName]) ? true : false;
     }
 }
