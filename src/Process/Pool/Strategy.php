@@ -3,8 +3,8 @@
 namespace NHDS\Jobs\Process\Pool;
 
 use NHDS\Jobs\ProcessInterface;
-use NHDS\Jobs\Process\Type\JobInterface;
-use NHDS\Jobs\Process\Type\ListenerInterface;
+use NHDS\Jobs\Process\JobInterface;
+use NHDS\Jobs\Process\ListenerInterface;
 
 class Strategy extends StrategyAbstract
 {
@@ -39,7 +39,7 @@ class Strategy extends StrategyAbstract
             }else {
                 $this->_getPool()->freeProcess($listenerProcess->getProcessId());
                 $typeCode = $listenerProcess->getTypeCode();
-                $this->_getPool()->addProcess($this->_getProcessTypeCollection()->getProcessTypeClone($typeCode));
+                $this->_getPool()->addProcess($this->_getProcessCollection()->getProcessPrototypeClone($typeCode));
             }
         }
 
@@ -67,7 +67,7 @@ class Strategy extends StrategyAbstract
             $this->_getLogger()->debug("Replacing Process for exit error from Process[$processId].");
             $this->_getLogger()->debug("Throttling replacement Process for Process[$processId]].");
             $typeCode = $jobProcess->getTypeCode();
-            $replacementProcess = $this->_getProcessTypeCollection()->getProcessTypeClone($typeCode);
+            $replacementProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
             $replacementProcess->setThrottle($this->getProcessWaitThrottle());
             $this->_getPool()->addProcess($replacementProcess);
             $this->_getPool()->setAlarm();
@@ -86,7 +86,7 @@ class Strategy extends StrategyAbstract
             if ($this->_hasPausedListenerProcess()) {
                 $this->_unPauseListenerProcesses();
             }else {
-                $this->_getPool()->addProcess($this->_getProcessTypeCollection()->getProcessTypeClone('job'));
+                $this->_getPool()->addProcess($this->_getProcessCollection()->getProcessPrototypeClone('job'));
             }
         }
         $this->_getLogger()->debug("Resetting the alarm.");
@@ -98,9 +98,9 @@ class Strategy extends StrategyAbstract
     public function initializePool(): StrategyInterface
     {
         $this->_getPool()->setAlarm();
-        foreach ($this->_getProcessTypeCollection()->getIterator() as $process) {
+        foreach ($this->_getProcessCollection()->getIterator() as $process) {
             $typeCode = $process->getTypeCode();
-            $this->_getPool()->addProcess($this->_getProcessTypeCollection()->getProcessTypeClone($typeCode));
+            $this->_getPool()->addProcess($this->_getProcessCollection()->getProcessPrototypeClone($typeCode));
         }
 
         return $this;
@@ -132,7 +132,7 @@ class Strategy extends StrategyAbstract
                 if (!$this->_getPool()->isFull()) {
                     $typeCode = $listenerProcess->getTypeCode();
                     $this->_getLogger()->debug('Un-pausing Listener[' . $processId . '][' . $typeCode . '].');
-                    $newListenerProcess = $this->_getProcessTypeCollection()->getProcessTypeClone($typeCode);
+                    $newListenerProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
                     while (!$this->_getPool()->isFull() && $listenerProcess->hasMessages()) {
                         $listenerProcess->processMessages();
                     }

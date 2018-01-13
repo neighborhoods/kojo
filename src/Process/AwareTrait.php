@@ -1,28 +1,28 @@
 <?php
 
-namespace NHDS\Jobs\Process\Type;
+namespace NHDS\Jobs\Process;
 
 use NHDS\Jobs\ProcessInterface;
 
-trait  AwareTrait
+trait AwareTrait
 {
     protected $_types = [];
 
-    public function addProcessType(ProcessInterface $process)
+    public function addProcessPrototype(ProcessInterface $process)
     {
         $typeCode = $process->getTypeCode();
         if (isset($this->_types[$typeCode])) {
-            throw new \LogicException('Process type is already set.');
+            throw new \LogicException('Process prototype is already set.');
         }
         $this->_types[$typeCode] = $process;
 
         return $this;
     }
 
-    protected function _getProcessTypeClone(string $typeCode): ProcessInterface
+    protected function _getProcessPrototypeClone(string $typeCode): ProcessInterface
     {
         if (!isset($this->_types[$typeCode])) {
-            throw new \LogicException('Process type is not set.');
+            throw new \LogicException('Process prototype is not set.');
         }
 
         return clone $this->_types[$typeCode];

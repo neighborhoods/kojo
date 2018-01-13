@@ -1,10 +1,10 @@
 <?php
 
-namespace NHDS\Jobs\Process\Type\Collection;
+namespace NHDS\Jobs\Process\Collection;
 
 use NHDS\Jobs\ProcessInterface;
 use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Process\Type\Collection;
+use NHDS\Jobs\Process\Collection;
 
 class Iterator implements IteratorInterface
 {
@@ -14,7 +14,7 @@ class Iterator implements IteratorInterface
 
     public function initialize(): IteratorInterface
     {
-        $this->processPrototypes = &$this->_getProcessTypeCollection()->getProcessPrototypes();
+        $this->processPrototypes = &$this->_getProcessCollection()->getProcessPrototypes();
 
         return $this;
     }

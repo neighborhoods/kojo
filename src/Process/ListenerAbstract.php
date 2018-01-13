@@ -1,6 +1,6 @@
 <?php
 
-namespace NHDS\Jobs\Process\Type;
+namespace NHDS\Jobs\Process;
 
 use NHDS\Jobs\ProcessAbstract;
 

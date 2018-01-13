@@ -1,7 +1,0 @@
-services:
-  nhds.jbs.process.type.collection:
-    class: NHDS\Jobs\Process\Type\Collection
-    calls:
-      - [setIterator, ['@nhds.jobs.process.type.collection.iterator']]
-      - [addProcessPrototype, ['@nhds.jobs.process.type.listener.command']]
-      - [addProcessPrototype, ['@nhds.jobs.process.type.job']]

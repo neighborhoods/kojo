@@ -3,7 +3,7 @@
 namespace NHDS\Jobs\Process\Pool;
 
 use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Process\Type\Collection;
+use NHDS\Jobs\Process\Collection;
 
 abstract class StrategyAbstract implements StrategyInterface
 {

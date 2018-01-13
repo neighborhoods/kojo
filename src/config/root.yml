@@ -60,14 +60,14 @@ imports:
    - { resource: Semaphore.yml }
 
   # Process.
-   - { resource: Process/Type/Listener/Command.yml }
-   - { resource: Process/Type/Job.yml }
+   - { resource: Process/Listener/Command.yml }
+   - { resource: Process/Job.yml }
    - { resource: Process/Pool/Logger.yml }
    - { resource: Process/Pool/Server.yml }
    - { resource: Process/Pool/Strategy.yml }
    - { resource: Process/Pool.yml }
-   - { resource: Process/Type/Collection.yml }
-   - { resource: Process/Type/Collection/Iterator.yml }
+   - { resource: Process/Collection.yml }
+   - { resource: Process/Collection/Iterator.yml }
    - { resource: Process/Strategy/ProcessControl.yml }
 
    # Database.

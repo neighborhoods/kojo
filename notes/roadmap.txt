@@ -12,6 +12,4 @@
 @bwilson - new relic integration.
 @bwilson - SIGTERM Console command.
 @bwilson - Selector entropy as a DI property.
-@bwilson - Install Console command.
-@bwilson - Tear down Console command.
 @bwilson - clean up remaining aware traits and add factories / repositories as necessary.

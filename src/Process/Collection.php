@@ -1,8 +1,8 @@
 <?php
 
-namespace NHDS\Jobs\Process\Type;
+namespace NHDS\Jobs\Process;
 
-use NHDS\Jobs\Process\Type\Collection\IteratorInterface;
+use NHDS\Jobs\Process\Collection\IteratorInterface;
 use NHDS\Jobs\ProcessInterface;
 use NHDS\Toolkit\Data\Property\Strict;
 
@@ -27,7 +27,7 @@ class Collection implements CollectionInterface
         return $this->_processTypes;
     }
 
-    public function getProcessTypeClone(string $typeCode): ProcessInterface
+    public function getProcessPrototypeClone(string $typeCode): ProcessInterface
     {
         if (!isset($this->_processTypes[$typeCode])) {
             throw new \LogicException('Process type with code "' . $typeCode . '" is not set.');
@@ -38,7 +38,7 @@ class Collection implements CollectionInterface
 
     public function setIterator(IteratorInterface $iterator)
     {
-        $iterator->setProcessTypeCollection($this);
+        $iterator->setProcessCollection($this);
         $this->_create(IteratorInterface::class, $iterator);
 
         return $this;

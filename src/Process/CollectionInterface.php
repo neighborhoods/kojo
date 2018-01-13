@@ -1,8 +1,8 @@
 <?php
 
-namespace NHDS\Jobs\Process\Type;
+namespace NHDS\Jobs\Process;
 
-use NHDS\Jobs\Process\Type\Collection\IteratorInterface;
+use NHDS\Jobs\Process\Collection\IteratorInterface;
 use NHDS\Jobs\ProcessInterface;
 
 interface CollectionInterface extends \IteratorAggregate
@@ -15,5 +15,5 @@ interface CollectionInterface extends \IteratorAggregate
 
     public function getIterator(): IteratorInterface;
 
-    public function getProcessTypeClone(string $typeCode): ProcessInterface;
+    public function getProcessPrototypeClone(string $typeCode): ProcessInterface;
 }

@@ -1,6 +1,6 @@
 services:
-  nhds.jobs.process.type.job:
-    class: NHDS\Jobs\Process\Type\Job
+  nhds.jobs.process.job:
+    class: NHDS\Jobs\Process\Job
     calls:
       - [setPool, ['@nhds.jobs.process.pool']]
       - [setLogger, ['@nhds.jobs.process.pool.logger']]

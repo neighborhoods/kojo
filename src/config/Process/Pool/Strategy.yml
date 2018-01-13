@@ -7,6 +7,6 @@ services:
       - [setMaxAlarmTime, ['%process_pool_strategy.max_alarm_time%']]
       - [setLogger, ['@nhds.jobs.process.pool.logger']]
       - [setPool, ['@nhds.jobs.process.pool']]
-      - [setProcessTypeCollection, ['@nhds.jbs.process.type.collection']]
+      - [setProcessCollection, ['@nhds.jbs.process.collection']]
   strategy:
     alias: nhds.jobs.process.pool.strategy
