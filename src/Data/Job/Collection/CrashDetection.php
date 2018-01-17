@@ -29,6 +29,7 @@ class CrashDetection extends CollectionAbstract implements CrashDetectionInterfa
                 JobInterface::FIELD_NAME_TIMES_CRASHED,
             ]
         );
+        $select->order(JobInterface::FIELD_NAME_PRIORITY . ' DESC');
 
         return $this;
     }

@@ -33,10 +33,7 @@ class Server extends ProcessAbstract implements ServerInterface
             $this->_getLogger()->alert('Cannot obtain process pool server mutex.');
             $this->_exit(0);
         }
-        $this->_getLogger()->debug((string )pcntl_async_signals(true));
-        $this->_getLogger()->debug((string )pcntl_async_signals(true));
         $this->_getLogger()->info("Process pool server started.");
-        $this->_getLogger()->info("Forking root processes...");
         $this->setProcessPool($this->_getProcessPoolFactory()->create());
         $this->_getProcessPool()->start();
         $this->_getProcessPool()->emptyProcesses();
