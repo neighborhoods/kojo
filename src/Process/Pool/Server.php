@@ -30,17 +30,17 @@ class Server extends ProcessAbstract implements ServerInterface
         $this->_initialize();
         $this->_getLogger()->info("Starting process pool server...");
         if (!$this->_getSemaphore()->testAndSetLock($this->_getServerSemaphoreResource())) {
-            $this->_getLogger()->alert('Cannot obtain process pool server mutex.');
-            $this->_exit(0);
+            $this->_getLogger()->info('Cannot obtain process pool server mutex. Quitting.');
+        }else {
+            $this->_getLogger()->info("Process pool server started.");
+            $this->setProcessPool($this->_getProcessPoolFactory()->create());
+            $this->_getProcessPool()->start();
+            $this->_getProcessPool()->emptyProcesses();
+            $this->_deleteProcessPool();
+            $this->_getLogger()->info("Stopping process pool server.");
+            $this->_getSemaphore()->releaseLock($this->_getServerSemaphoreResource());
+            $this->_getLogger()->info('Process pool server stopped.');
         }
-        $this->_getLogger()->info("Process pool server started.");
-        $this->setProcessPool($this->_getProcessPoolFactory()->create());
-        $this->_getProcessPool()->start();
-        $this->_getProcessPool()->emptyProcesses();
-        $this->_deleteProcessPool();
-        $this->_getLogger()->info("Stopping process pool server.");
-        $this->_getSemaphore()->releaseLock($this->_getServerSemaphoreResource());
-        $this->_getLogger()->info('Process pool server stopped.');
 
         return $this;
     }
