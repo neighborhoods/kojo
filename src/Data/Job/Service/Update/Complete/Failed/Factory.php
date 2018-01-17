@@ -5,14 +5,12 @@ namespace NHDS\Jobs\Data\Job\Service\Update\Complete\Failed;
 use NHDS\Jobs\Data\Job\Service\Update\Complete\FailedInterface;
 use NHDS\Jobs\Data\Job\Service\Update\Complete\Failed;
 use NHDS\Jobs\Data\Job\State\Service;
-use NHDS\Toolkit\Data\Property\Strict;
+use NHDS\Jobs\Service\FactoryAbstract;
 
-class Factory implements FactoryInterface
+class Factory extends FactoryAbstract implements FactoryInterface
 {
-    use Strict\AwareTrait;
     use Failed\AwareTrait;
     use Service\AwareTrait;
-    const PROP_FACTORY_NAME = 'factory_name';
 
     public function create(): FailedInterface
     {
@@ -21,17 +19,5 @@ class Factory implements FactoryInterface
         $updateCompleteFailed->setJobStateService($stateService);
 
         return $updateCompleteFailed;
-    }
-
-    public function setName(string $factoryName): FactoryInterface
-    {
-        $this->_create(self::PROP_FACTORY_NAME, $factoryName);
-
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->_read(self::PROP_FACTORY_NAME);
     }
 }

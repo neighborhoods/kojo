@@ -14,14 +14,13 @@ abstract class ProcessAbstract implements ProcessInterface
     use Strict\AwareTrait;
     use Logger\AwareTrait;
     use Broker\Type\Collection\AwareTrait;
-    const PROP_TYPE_CODE = 'type_code';
+    const PROP_TYPE_CODE  = 'type_code';
     protected $_processId;
     protected $_parentProcessId;
     protected $_throttle;
     protected $_exitCode;
-    protected $_messageBroker;
 
-    protected function _init(int $processId = null): ProcessAbstract
+    protected function _initialize(int $processId = null): ProcessAbstract
     {
         if ($processId === null) {
             $this->_setParentProcessId(posix_getppid());
@@ -46,29 +45,7 @@ abstract class ProcessAbstract implements ProcessInterface
         return $this;
     }
 
-    public function fork(int $parentProcessId): ProcessInterface
-    {
-        $processId = $this->_getProcessStrategy()->fork();
-        if ($processId === -1) {
-            throw new \RuntimeException('Failed to fork new Process.');
-        }elseif ($processId > 0) {
-            // This is executed in the Process Pool.
-            $this->_init($processId);
-            $this->_getLogger()->debug("Forked Process[{$this->getProcessId()}][{$this->getTypeCode()}].");
-        }else {
-            // This is executed in the Process.
-            $this->_init();
-            $this->_getPool()->resetPool();
-            $this->_getLogger()->debug("Running Process...");
-            $this->_run();
-            $this->_getLogger()->debug("Process finished running.");
-            $this->_exit(0);
-        }
-
-        return $this;
-    }
-
-    abstract protected function _run(): ProcessAbstract;
+    abstract public function start(): ProcessInterface;
 
     public function setThrottle(int $seconds = 0): ProcessInterface
     {

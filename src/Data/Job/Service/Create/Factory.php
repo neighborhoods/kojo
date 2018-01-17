@@ -4,19 +4,17 @@ namespace NHDS\Jobs\Data\Job\Service\Create;
 
 use NHDS\Jobs\Data\Job\Service\CreateInterface;
 use NHDS\Jobs\Data\Job\State\Service;
-use NHDS\Toolkit\Data\Property\Strict;
+use NHDS\Jobs\Service\FactoryAbstract;
 use NHDS\Jobs\Data\Job\Service\Create;
 use NHDS\Jobs\Data\Job;
 
-class Factory implements FactoryInterface
+class Factory extends FactoryAbstract implements FactoryInterface
 {
-    use Strict\AwareTrait;
     use Create\AwareTrait;
     use Service\AwareTrait;
     use Job\Type\AwareTrait;
     use Job\AwareTrait;
     use Job\Collection\ScheduleLimit\AwareTrait;
-    const PROP_FACTORY_NAME = 'factory_name';
 
     public function create(): CreateInterface
     {
@@ -27,17 +25,5 @@ class Factory implements FactoryInterface
         $create->setJob($this->_getJobClone());
 
         return $create;
-    }
-
-    public function setName(string $factoryName): FactoryInterface
-    {
-        $this->_create(self::PROP_FACTORY_NAME, $factoryName);
-
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->_read(self::PROP_FACTORY_NAME);
     }
 }

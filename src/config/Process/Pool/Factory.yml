@@ -1,0 +1,25 @@
+services:
+  nhds.jobs.process.pool.factory:
+    class: NHDS\Jobs\Process\Pool\Factory
+    sahred: false
+    calls:
+      - [setMaxProcesses, ['%process_pool_strategy.max_processes%']]
+      - [setProcessWaitThrottle, ['%process_pool_strategy.process_wait_throttle%']]
+      - [setMaxAlarmTime, ['%process_pool_strategy.max_alarm_time%']]
+      - [setProcessPool, ['@process.pool']]
+      - [setProcessPoolStrategy, ['@process.pool.strategy']]
+      - [setProcessCollection, ['@nhds.jobs.process.collection']]
+  nhds.jobs.process.pool.factory-server:
+    class: NHDS\Jobs\Process\Pool\Factory
+    shared: false
+    calls:
+      - [setMaxProcesses, ['%process_pool_strategy-server.max_processes%']]
+      - [setProcessWaitThrottle, ['%process_pool_strategy-server.process_wait_throttle%']]
+      - [setMaxAlarmTime, ['%process_pool_strategy-server.max_alarm_time%']]
+      - [setProcessPool, ['@process.pool']]
+      - [setProcessPoolStrategy, ['@process.pool.strategy-server']]
+      - [setProcessCollection, ['@nhds.jobs.process.collection-server']]
+  process.pool.factory:
+    alias: nhds.jobs.process.pool.factory
+  process.pool.factory-server:
+    alias: nhds.jobs.process.pool.factory-server

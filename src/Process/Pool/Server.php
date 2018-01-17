@@ -2,36 +2,48 @@
 
 namespace NHDS\Jobs\Process\Pool;
 
-use NHDS\Jobs\Process\Pool;
-use NHDS\Toolkit\Time;
-use NHDS\Toolkit\Data\Property\Strict;
+use NHDS\Jobs\ProcessAbstract;
+use NHDS\Jobs\ProcessInterface;
 use NHDS\Jobs\Semaphore;
+use NHDS\Toolkit\Data\Property;
+use NHDS\Jobs\Process;
 
-class Server implements ServerInterface
+class Server extends ProcessAbstract implements ServerInterface
 {
-    use Strict\AwareTrait;
+    use Process\Pool\Factory\AwareTrait;
+    use Property\Strict\AwareTrait;
     use Logger\AwareTrait;
-    use Time\AwareTrait;
-    use Pool\AwareTrait;
     use Semaphore\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
     const SERVER_SEMAPHORE_RESOURCE_NAME = 'server';
+    const TYPE_CODE                      = 'server';
 
-    public function start(): ServerInterface
+    public function __construct()
     {
-        $this->_getPool()->initialize();
-        $this->_getLogger()->info("Starting ProcessPool server...");
+        $this->setTypeCode(self::TYPE_CODE);
+
+        return $this;
+    }
+
+    public function start(): ProcessInterface
+    {
+        $this->_initialize();
+        $this->_getLogger()->info("Starting process pool server...");
         if (!$this->_getSemaphore()->testAndSetLock($this->_getServerSemaphoreResource())) {
-            $this->_getLogger()->alert('Cannot obtain service mutex.');
+            $this->_getLogger()->alert('Cannot obtain process pool server mutex.');
             $this->_exit(0);
         }
-        $this->_getLogger()->info("ProcessPool server started.");
-        $this->_getLogger()->info("Starting ProcessPool...");
-        $this->_getPool()->swim();
-        $this->_getLogger()->info("ProcessPool stopped.");
-        $this->_getLogger()->info("Stopping ProcessPool server.");
+        $this->_getLogger()->debug((string )pcntl_async_signals(true));
+        $this->_getLogger()->debug((string )pcntl_async_signals(true));
+        $this->_getLogger()->info("Process pool server started.");
+        $this->_getLogger()->info("Forking root processes...");
+        $this->setProcessPool($this->_getProcessPoolFactory()->create());
+        $this->_getProcessPool()->start();
+        $this->_getProcessPool()->emptyProcesses();
+        $this->_deleteProcessPool();
+        $this->_getLogger()->info("Stopping process pool server.");
         $this->_getSemaphore()->releaseLock($this->_getServerSemaphoreResource());
-        $this->_getLogger()->info('ProcessPool server stopped.');
+        $this->_getLogger()->info('Process pool server stopped.');
 
         return $this;
     }
@@ -43,7 +55,7 @@ class Server implements ServerInterface
 
     protected function _exit(int $exitCode)
     {
-        $this->_getLogger()->info('Exiting Server.');
+        $this->_getLogger()->info('Exiting process pool server.');
         exit($exitCode);
     }
 }

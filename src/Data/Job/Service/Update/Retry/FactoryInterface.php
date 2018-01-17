@@ -12,7 +12,7 @@ interface FactoryInterface extends Service\FactoryInterface
 
     public function setUpdateRetry(RetryInterface $updateRetry);
 
-    public function setName(string $factoryName): FactoryInterface;
+    public function setName(string $factoryName): Service\FactoryInterface;
 
     public function create(): RetryInterface;
 }

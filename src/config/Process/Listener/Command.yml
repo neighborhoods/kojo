@@ -3,10 +3,9 @@ services:
     class: NHDS\Jobs\Process\Listener\Command
     calls:
       - [setTypeCode, ['listener.command']]
-      - [setPool, ['@nhds.jobs.process.pool']]
       - [setBrokerTypeCollection, ['@nhds.jobs.message.broker.type.collection-job']]
-      - [setLogger, ['@nhds.jobs.process.pool.logger']]
+      - [setLogger, ['@process.pool.logger']]
       - [setBrokerTypeCode, ['job_broker']]
       - [setExpressionLanguage, ['@symfony.component.expressionlanguage.expressionlanguage']]
-      - [setProcessCollection, ['@nhds.jbs.process.collection']]
+      - [setProcessCollection, ['@nhds.jobs.process.collection']]
       - [setProcessStrategy, ['@process.strategy']]

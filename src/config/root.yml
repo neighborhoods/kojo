@@ -62,9 +62,11 @@ imports:
   # Process.
    - { resource: Process/Listener/Command.yml }
    - { resource: Process/Job.yml }
+   - { resource: Process/Root.yml }
    - { resource: Process/Pool/Logger.yml }
    - { resource: Process/Pool/Server.yml }
    - { resource: Process/Pool/Strategy.yml }
+   - { resource: Process/Pool/Factory.yml }
    - { resource: Process/Pool.yml }
    - { resource: Process/Collection.yml }
    - { resource: Process/Collection/Iterator.yml }

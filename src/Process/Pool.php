@@ -13,49 +13,56 @@ class Pool implements PoolInterface
     use Logger\AwareTrait;
     use Strategy\AwareTrait;
     const SIGNAL_NUMBER = 'signo';
-    const PROP_SWIMMING = 'swimming';
+    const PROP_STARTED  = 'started';
     protected $_info        = [];
-    protected $_processId;
-    protected $_processPool = [];
-    protected $_configuration;
+    protected $_processes   = [];
     protected $_waitSignals = [
         SIGCHLD,
         SIGALRM,
+        SIGINT,
     ];
-    protected $_strategy;
 
-    public function initialize(): PoolInterface
+    protected function _initialize(): PoolInterface
     {
-        $this->setProcessId(posix_getpid());
         register_shutdown_function([$this, 'terminateChildProcesses']);
         pcntl_signal(SIGTERM, [$this, 'terminateChildProcesses']);
+        pcntl_signal(SIGINT, [$this, 'terminateChildProcesses']);
 
         return $this;
     }
 
     public function terminateChildProcesses()
     {
-        if (!empty($this->_processPool)) {
-            $this->_getLogger()->debug('Sending SIGTERM to child processes...');
+        if (!empty($this->_processes)) {
+            $this->_getLogger()->debug('Sending SIGTERM to ' . count($this->_processes) . ' child processes...');
             /** @var ProcessInterface $process */
-            foreach ($this->_processPool as $process) {
-                posix_kill($process->getProcessId(), SIGTERM);
-                $this->_getLogger()->debug('Sent SIGTERM to Process[' . $process->getProcessId() . '].');
+            foreach ($this->_processes as $process) {
+                $processId = $process->getProcessId();
+                $processTypeCode = $process->getTypeCode();
+                if ($process instanceof ListenerInterface) {
+                    posix_kill($processId, SIGKILL);
+                    $this->_getLogger()->debug("Sent SIGKILL to Process[{$processId}][{$processTypeCode}].");
+                }else {
+                    posix_kill($processId, SIGTERM);
+                    $this->_getLogger()->debug("Sent SIGTERM to Process[{$processId}][{$processTypeCode}].");
+                }
+                unset($this->_processes[$processId]);
             }
         }
 
         return $this;
     }
 
-    public function swim(): PoolInterface
+    public function start(): PoolInterface
     {
-        $this->_create(self::PROP_SWIMMING, true);
-        $this->_getLogger()->info("ProcessPool started.");
+        $this->_create(self::PROP_STARTED, true);
+        $this->_initialize();
+        $this->_getLogger()->info("Process pool started.");
         // Register signals to be handled.
         pcntl_sigprocmask(SIG_BLOCK, $this->_waitSignals);
 
         // Initialize pool.
-        $this->_getStrategy()->initializePool();
+        $this->_getProcessPoolStrategy()->initializePool();
         while (true) {
             $this->_getLogger()->debug("Waiting for signal...");
             $this->_info = [];
@@ -68,12 +75,17 @@ class Pool implements PoolInterface
                 case SIGALRM:
                     $this->_handleAlarmSignal();
                     break;
+                case SIGINT:
+                case SIGTERM:
+                    $this->_getLogger()->debug('Handling termination signal...');
+                    $this->terminateChildProcesses();
+                    break 2;
                 default:
                     throw new \UnexpectedValueException('Unexpected blocked signal.');
             }
         }
 
-        $this->_getLogger()->info('ProcessPool is empty.');
+        $this->_getLogger()->info('Exiting process pool.');
 
         return $this;
     }
@@ -87,11 +99,11 @@ class Pool implements PoolInterface
             $processExitCode = pcntl_wexitstatus($status);
             $this->_getLogger()->debug("Process[{$processId}] exited with code [{$processExitCode}]");
             $process = $this->getProcess($processId)->setExitCode($processExitCode);
-            $this->_getStrategy()->processExited($process);
+            $this->_getProcessPoolStrategy()->processExited($process);
             $this->_validateAlarm();
         }
-        $this->_getLogger()->debug('Number of processes in Pool: ' . count($this->_processPool));
-        $this->_getStrategy()->currentPendingChildExitsComplete();
+        $this->_getLogger()->debug('Number of processes in pool: ' . count($this->_processes));
+        $this->_getProcessPoolStrategy()->currentPendingChildExitsComplete();
 
         return $this;
     }
@@ -110,10 +122,10 @@ class Pool implements PoolInterface
         $alarmValue = pcntl_alarm(0);
         if ($this->isEmpty()) {
             if ($alarmValue == 0) {
-                $this->_getLogger()->emergency('ProcessPool has no alarms and no processes.');
-                throw new \LogicException('Invalid ProcessPool state.');
+                $this->_getLogger()->emergency('Process pool has no alarms and no processes.');
+                throw new \LogicException('Invalid Process pool state.');
             }else {
-                $this->_getLogger()->notice('ProcessPool only has a set alarm.');
+                $this->_getLogger()->notice('Process pool only has a set alarm.');
             }
         }
         pcntl_alarm($alarmValue);
@@ -134,7 +146,7 @@ class Pool implements PoolInterface
 
     protected function _handleAlarmSignal(): Pool
     {
-        $this->_getStrategy()->receivedAlarm();
+        $this->_getProcessPoolStrategy()->receivedAlarm();
 
         return $this;
     }
@@ -149,21 +161,21 @@ class Pool implements PoolInterface
 
     public function isFull(): bool
     {
-        return (bool)(count($this->_processPool) >= $this->_getStrategy()->getMaxProcesses());
+        return (bool)(count($this->_processes) >= $this->_getProcessPoolStrategy()->getMaxProcesses());
     }
 
     public function isEmpty(): bool
     {
-        return (bool)(count($this->_processPool) == 0);
+        return (bool)(count($this->_processes) == 0);
     }
 
     public function addProcess(ProcessInterface $process): PoolInterface
     {
         if ($this->isFull()) {
-            throw new \LogicException('ProcessPool is full.');
+            throw new \LogicException('Process pool is full.');
         }else {
-            $process->fork($this->_processId);
-            $this->_processPool[$process->getProcessId()] = $process;
+            $process->start();
+            $this->_processes[$process->getProcessId()] = $process;
         }
 
         return $this;
@@ -171,49 +183,29 @@ class Pool implements PoolInterface
 
     public function getProcess(int $processId): ProcessInterface
     {
-        if (!isset($this->_processPool[$processId])) {
+        if (!isset($this->_processes[$processId])) {
             throw new \LogicException("Process is with process ID {$processId} not set.");
         }
 
-        return $this->_processPool[$processId];
+        return $this->_processes[$processId];
     }
 
     public function freeProcess(int $processId): PoolInterface
     {
-        if (isset($this->_processPool[$processId]) && $this->_processPool[$processId] instanceof ProcessInterface) {
-            $typeCode = $this->_processPool[$processId]->getTypeCode();
-            $this->_getLogger()->debug("Freeing Process related to Process[$processId][$typeCode] from ProcessPool.");
-            unset($this->_processPool[$processId]);
+        if (isset($this->_processes[$processId]) && $this->_processes[$processId] instanceof ProcessInterface) {
+            $typeCode = $this->_processes[$processId]->getTypeCode();
+            $this->_getLogger()->debug("Freeing Process related to Process[$processId][$typeCode] from Process pool.");
+            unset($this->_processes[$processId]);
         }else {
-            throw new \LogicException("Process associated to Process[$processId] is not in the ProcessPool.");
+            throw new \LogicException("Process associated to Process[$processId] is not in the Process pool.");
         }
 
         return $this;
     }
 
-    public function getProcessId(): int
+    public function emptyProcesses(): PoolInterface
     {
-        if ($this->_processId === null) {
-            throw new \LogicException('Process ID is not set.');
-        }
-
-        return $this->_processId;
-    }
-
-    public function setProcessId(int $processId): PoolInterface
-    {
-        if ($this->_processId === null) {
-            $this->_processId = $processId;
-        }else {
-            throw new \LogicException('Process ID is already set.');
-        }
-
-        return $this;
-    }
-
-    public function resetPool(): PoolInterface
-    {
-        $this->_processPool = [];
+        $this->_processes = [];
 
         return $this;
     }

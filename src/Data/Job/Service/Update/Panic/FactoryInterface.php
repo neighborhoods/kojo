@@ -12,7 +12,7 @@ interface FactoryInterface extends Service\FactoryInterface
 
     public function setJobServiceUpdatePanic(PanicInterface $jobServiceUpdatePanic);
 
-    public function setName(string $factoryName): FactoryInterface;
+    public function setName(string $factoryName): Service\FactoryInterface;
 
     public function create(): PanicInterface;
 }

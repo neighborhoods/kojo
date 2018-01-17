@@ -2,7 +2,8 @@
 
 namespace NHDS\Jobs\Process\Pool;
 
-interface ServerInterface
+use NHDS\Jobs\ProcessInterface;
+
+interface ServerInterface extends ProcessInterface
 {
-    public function start(): ServerInterface;
 }

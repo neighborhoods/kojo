@@ -2,8 +2,7 @@ services:
   nhds.jobs.process.job:
     class: NHDS\Jobs\Process\Job
     calls:
-      - [setPool, ['@nhds.jobs.process.pool']]
-      - [setLogger, ['@nhds.jobs.process.pool.logger']]
+      - [setLogger, ['@process.pool.logger']]
       - [setBrokerTypeCollection, ['@nhds.jobs.message.broker.type.collection-job']]
       - [setBrokerTypeCode, ['job_broker']]
       - [setForeman, ['@nhds.jobs.foreman']]

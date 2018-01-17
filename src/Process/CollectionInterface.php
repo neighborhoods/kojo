@@ -7,7 +7,7 @@ use NHDS\Jobs\ProcessInterface;
 
 interface CollectionInterface extends \IteratorAggregate
 {
-    public function addProcessPrototype(ProcessInterface $process);
+    public function addProcessPrototype(ProcessInterface $process): CollectionInterface;
 
     public function getProcessPrototypes(): array;
 
@@ -16,4 +16,6 @@ interface CollectionInterface extends \IteratorAggregate
     public function getIterator(): IteratorInterface;
 
     public function getProcessPrototypeClone(string $typeCode): ProcessInterface;
+
+    public function applyProcessPool(PoolInterface $pool): CollectionInterface;
 }

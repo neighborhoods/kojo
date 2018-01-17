@@ -5,14 +5,12 @@ namespace NHDS\Jobs\Data\Job\Service\Update\Retry;
 use NHDS\Jobs\Data\Job\Service\Update\RetryInterface;
 use NHDS\Jobs\Data\Job\Service\Update\Retry;
 use NHDS\Jobs\Data\Job\State\Service;
-use NHDS\Toolkit\Data\Property\Strict;
+use NHDS\Jobs\Service\FactoryAbstract;
 
-class Factory implements FactoryInterface
+class Factory extends FactoryAbstract implements FactoryInterface
 {
-    use Strict\AwareTrait;
     use Retry\AwareTrait;
     use Service\AwareTrait;
-    const PROP_FACTORY_NAME = 'factory_name';
 
     public function create(): RetryInterface
     {
@@ -21,17 +19,5 @@ class Factory implements FactoryInterface
         $updateCompleteRetry->setJobStateService($stateService);
 
         return $updateCompleteRetry;
-    }
-
-    public function setName(string $factoryName): FactoryInterface
-    {
-        $this->_create(self::PROP_FACTORY_NAME, $factoryName);
-
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->_read(self::PROP_FACTORY_NAME);
     }
 }

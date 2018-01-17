@@ -17,7 +17,7 @@ class Strategy extends StrategyAbstract
         }elseif ($process instanceof ListenerInterface) {
             $this->_handleListenerExit($process);
         }else {
-            throw new \LogicException('Unhandled Process class.');
+            throw new \UnexpectedValueException('Unexpected process class.');
         }
 
         return $this;
@@ -29,22 +29,23 @@ class Strategy extends StrategyAbstract
             $this->_pauseListenerProcess($listenerProcess);
         }else {
             $this->_getLogger()->debug('Processing listener messages...');
-            while (!$this->_getPool()->isFull() && $listenerProcess->hasMessages()) {
+            while (!$this->_getProcessPool()->isFull() && $listenerProcess->hasMessages()) {
                 $listenerProcess->processMessages();
             }
             $this->_getLogger()->debug('Finished processing listener messages.');
 
-            if ($this->_getPool()->isFull()) {
+            if ($this->_getProcessPool()->isFull()) {
                 $this->_pauseListenerProcess($listenerProcess);
             }else {
-                $this->_getPool()->freeProcess($listenerProcess->getProcessId());
+                $this->_getProcessPool()->freeProcess($listenerProcess->getProcessId());
                 $typeCode = $listenerProcess->getTypeCode();
-                $this->_getPool()->addProcess($this->_getProcessCollection()->getProcessPrototypeClone($typeCode));
+                $replacementListenerProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
+                $this->_getProcessPool()->addProcess($replacementListenerProcess);
             }
         }
 
-        if (!$this->_getPool()->hasAlarm()) {
-            $this->_getPool()->setAlarm($this->getMaxAlarmTime());
+        if (!$this->_getProcessPool()->hasAlarm()) {
+            $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
         }
 
         return $this;
@@ -55,8 +56,8 @@ class Strategy extends StrategyAbstract
         if ($this->_hasPausedListenerProcess()) {
             $this->_unPauseListenerProcesses();
         }else {
-            if (!$this->_getPool()->hasAlarm()) {
-                $this->_getPool()->setAlarm($this->getMaxAlarmTime());
+            if (!$this->_getProcessPool()->hasAlarm()) {
+                $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
             }
         }
 
@@ -65,17 +66,17 @@ class Strategy extends StrategyAbstract
 
     protected function _handleJobProcessExit(JobInterface $jobProcess): Strategy
     {
-        $this->_getPool()->freeProcess($jobProcess->getProcessId());
+        $this->_getProcessPool()->freeProcess($jobProcess->getProcessId());
         if ($jobProcess->getExitCode() !== 0) {
             $processId = $jobProcess->getProcessId();
-            $this->_getLogger()->debug("Replacing Process for exit error from Process[$processId].");
-            $this->_getLogger()->debug("Throttling replacement Process for Process[$processId]].");
+            $this->_getLogger()->debug("Replacing process for exit error from Process[$processId].");
+            $this->_getLogger()->debug("Throttling replacement process for Process[$processId]].");
             $typeCode = $jobProcess->getTypeCode();
             $replacementProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
             $replacementProcess->setThrottle($this->getProcessWaitThrottle());
-            $this->_getPool()->addProcess($replacementProcess);
-            if (!$this->_getPool()->hasAlarm()) {
-                $this->_getPool()->setAlarm($this->getMaxAlarmTime());
+            $this->_getProcessPool()->addProcess($replacementProcess);
+            if (!$this->_getProcessPool()->hasAlarm()) {
+                $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
             }
         }
 
@@ -85,18 +86,20 @@ class Strategy extends StrategyAbstract
     public function receivedAlarm(): StrategyInterface
     {
         $this->_getLogger()->debug("Received alarm.");
-        if ($this->_getPool()->isFull()) {
-            $this->_getLogger()->notice("ProcessPool is full.");
-            $this->_getLogger()->notice("Could not allocate Process for alarm request.");
+        if ($this->_getProcessPool()->isFull()) {
+            $this->_getLogger()->notice("Process pool is full.");
+            $this->_getLogger()->notice("Could not allocate process for alarm request.");
         }else {
             if ($this->_hasPausedListenerProcess()) {
                 $this->_unPauseListenerProcesses();
             }else {
-                $this->_getPool()->addProcess($this->_getProcessCollection()->getProcessPrototypeClone('job'));
+                $alarmProcessTypeCode = $this->_getAlarmProcessTypeCode();
+                $alarmProcess = $this->_getProcessCollection()->getProcessPrototypeClone($alarmProcessTypeCode);
+                $this->_getProcessPool()->addProcess($alarmProcess);
             }
         }
-        if (!$this->_getPool()->hasAlarm()) {
-            $this->_getPool()->setAlarm($this->getMaxAlarmTime());
+        if (!$this->_getProcessPool()->hasAlarm()) {
+            $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
         }
 
         return $this;
@@ -104,10 +107,17 @@ class Strategy extends StrategyAbstract
 
     public function initializePool(): StrategyInterface
     {
-        $this->_getPool()->setAlarm($this->getMaxAlarmTime());
+        $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
+        $this->_getProcessCollection()->applyProcessPool($this->_getProcessPool());
         foreach ($this->_getProcessCollection()->getIterator() as $process) {
-            $typeCode = $process->getTypeCode();
-            $this->_getPool()->addProcess($this->_getProcessCollection()->getProcessPrototypeClone($typeCode));
+            $this->_getProcessPool()->addProcess($process);
+        }
+        if ($this->_hasFillProcessTypeCode()) {
+            while (!$this->_getProcessPool()->isFull()) {
+                $fillProcessTypeCode = $this->_getFillProcessTypeCode();
+                $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);
+                $this->_getProcessPool()->addProcess($fillProcess);
+            }
         }
 
         return $this;
@@ -118,10 +128,10 @@ class Strategy extends StrategyAbstract
         $listenerProcessId = $listenerProcess->getProcessId();
         if (!isset($this->_pausedListenerProcesses[$listenerProcessId])) {
             $this->_getLogger()->debug('Pausing Listener[' . $listenerProcessId . '].');
-            $this->_getPool()->freeProcess($listenerProcessId);
+            $this->_getProcessPool()->freeProcess($listenerProcessId);
             $this->_pausedListenerProcesses[$listenerProcessId] = $listenerProcess;
         }else {
-            throw new \LogicException('Listener Process is already paused.');
+            throw new \LogicException('Listener process is already paused.');
         }
 
         return $this;
@@ -136,23 +146,23 @@ class Strategy extends StrategyAbstract
     {
         if ($this->_hasPausedListenerProcess()) {
             foreach ($this->_pausedListenerProcesses as $processId => $listenerProcess) {
-                if (!$this->_getPool()->isFull()) {
+                if (!$this->_getProcessPool()->isFull()) {
                     $typeCode = $listenerProcess->getTypeCode();
                     $this->_getLogger()->debug('Un-pausing Listener[' . $processId . '][' . $typeCode . '].');
                     $newListenerProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
-                    while (!$this->_getPool()->isFull() && $listenerProcess->hasMessages()) {
+                    while (!$this->_getProcessPool()->isFull() && $listenerProcess->hasMessages()) {
                         $listenerProcess->processMessages();
                     }
-                    if (!$this->_getPool()->isFull()) {
+                    if (!$this->_getProcessPool()->isFull()) {
                         unset($this->_pausedListenerProcesses[$processId]);
-                        $this->_getPool()->addProcess($newListenerProcess);
+                        $this->_getProcessPool()->addProcess($newListenerProcess);
                     }
                 }else {
                     break;
                 }
             }
         }else {
-            throw new \LogicException('There are no paused Listener Processes.');
+            throw new \LogicException('There are no paused listener processes.');
         }
 
         return $this;

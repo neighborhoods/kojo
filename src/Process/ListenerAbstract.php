@@ -2,9 +2,7 @@
 
 namespace NHDS\Jobs\Process;
 
-use NHDS\Jobs\ProcessAbstract;
-
-abstract class ListenerAbstract extends ProcessAbstract implements ListenerInterface
+abstract class ListenerAbstract extends Forkable implements ListenerInterface
 {
     use Collection\AwareTrait;
 }

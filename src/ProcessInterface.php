@@ -3,10 +3,11 @@
 namespace NHDS\Jobs;
 
 use NHDS\Jobs\Process\Pool\LoggerInterface;
+use NHDS\Jobs\Process\PoolInterface;
 
 interface ProcessInterface
 {
-    public function fork(int $parentPid): ProcessInterface;
+    public function start(): ProcessInterface;
 
     public function getProcessId(): int;
 
@@ -23,4 +24,6 @@ interface ProcessInterface
     public function getTypeCode(): string;
 
     public function setTypeCode(string $typeCode): ProcessInterface;
+
+    public function setProcessPool(PoolInterface $pool);
 }

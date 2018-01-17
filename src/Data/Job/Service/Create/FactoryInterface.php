@@ -15,7 +15,7 @@ interface FactoryInterface extends Service\FactoryInterface
 
     public function setJobServiceCreate(CreateInterface $jobServiceUpdateCrash);
 
-    public function setName(string $factoryName): FactoryInterface;
+    public function setName(string $factoryName): Service\FactoryInterface;
 
     public function create(): CreateInterface;
 }

@@ -14,7 +14,7 @@ interface FactoryInterface extends Service\FactoryInterface
         FailedScheduleLimitCheckInterface $updateCompleteFailedScheduleLimitCheck
     );
 
-    public function setName(string $factoryName): FactoryInterface;
+    public function setName(string $factoryName): Service\FactoryInterface;
 
     public function create(): FailedScheduleLimitCheckInterface;
 }

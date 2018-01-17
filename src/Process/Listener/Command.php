@@ -2,9 +2,9 @@
 
 namespace NHDS\Jobs\Process\Listener;
 
-use \NHDS\Jobs\Process\ListenerInterface;
+use NHDS\Jobs\Process\Forkable;
+use NHDS\Jobs\Process\ListenerInterface;
 use NHDS\Jobs\Process\ListenerAbstract;
-use NHDS\Jobs\ProcessAbstract;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Command extends ListenerAbstract implements CommandInterface
@@ -36,14 +36,15 @@ class Command extends ListenerAbstract implements CommandInterface
     public function addProcess(string $processTypeCode): Command
     {
         $this->_getLogger()->debug('Adding Process with type code "' . $processTypeCode . '".');
-        $this->_getPool()->addProcess($this->_getProcessCollection()->getProcessPrototypeClone($processTypeCode));
+        $process = $this->_getProcessCollection()->getProcessPrototypeClone($processTypeCode);
+        $this->_getProcessPool()->addProcess($process);
 
         return $this;
     }
 
     public function setAlarm(int $seconds): Command
     {
-        $this->_getPool()->setAlarm($seconds);
+        $this->_getProcessPool()->setAlarm($seconds);
 
         return $this;
     }
@@ -60,7 +61,7 @@ class Command extends ListenerAbstract implements CommandInterface
         return $this->_read(self::PROP_EXPRESSION_LANGUAGE);
     }
 
-    protected function _run(): ProcessAbstract
+    protected function _run(): Forkable
     {
         if (!$this->_getMessageBroker()->hasMessage()) {
             $this->_getMessageBroker()->waitForNewMessage();

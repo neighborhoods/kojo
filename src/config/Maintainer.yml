@@ -15,4 +15,4 @@ services:
       - [setJobServiceUpdatePanicFactory, ['@nhds.jobs.data.job.service.update.panic.factory']]
       - [setJobTypeRepository, ['@nhds.jobs.data.job.type.repository']]
       - [setJobCollectionScheduleLimit, ['@nhds.jobs.data.job.collection.schedulelimit']]
-      - [setLogger, ['@nhds.jobs.process.pool.logger']]
+      - [setLogger, ['@process.pool.logger']]

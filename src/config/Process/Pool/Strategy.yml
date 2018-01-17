@@ -1,12 +1,18 @@
 services:
   nhds.jobs.process.pool.strategy:
+    shared: false
     class: NHDS\Jobs\Process\Pool\Strategy
     calls:
-      - [setMaxProcesses, ['%process_pool_strategy.max_processes%']]
-      - [setProcessWaitThrottle, ['%process_pool_strategy.process_wait_throttle%']]
-      - [setMaxAlarmTime, ['%process_pool_strategy.max_alarm_time%']]
-      - [setLogger, ['@nhds.jobs.process.pool.logger']]
-      - [setPool, ['@nhds.jobs.process.pool']]
-      - [setProcessCollection, ['@nhds.jbs.process.collection']]
-  strategy:
+      - [setAlarmProcessTypeCode, ['job']]
+      - [setLogger, ['@process.pool.logger']]
+  nhds.jobs.process.pool.strategy-server:
+    shared: false
+    class: NHDS\Jobs\Process\Pool\Strategy
+    calls:
+      - [setAlarmProcessTypeCode, ['root']]
+      - [setFillProcessTypeCode, ['root']]
+      - [setLogger, ['@process.pool.logger']]
+  process.pool.strategy:
     alias: nhds.jobs.process.pool.strategy
+  process.pool.strategy-server:
+    alias: nhds.jobs.process.pool.strategy-server

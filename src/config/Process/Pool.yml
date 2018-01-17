@@ -1,6 +1,8 @@
 services:
   nhds.jobs.process.pool:
     class: NHDS\Jobs\Process\Pool
+    shared: false
     calls:
-      - [setLogger, ['@nhds.jobs.process.pool.logger']]
-      - [setStrategy, ['@strategy']]
+      - [setLogger, ['@process.pool.logger']]
+  process.pool:
+    alias: nhds.jobs.process.pool

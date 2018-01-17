@@ -3,16 +3,14 @@
 namespace NHDS\Jobs\Data\Job\Service\Update\Panic;
 
 use NHDS\Jobs\Data\Job\State\Service;
-use NHDS\Toolkit\Data\Property\Strict;
-use  NHDS\Jobs\Data\Job\Service\Update\Panic;
+use NHDS\Jobs\Service\FactoryAbstract;
+use NHDS\Jobs\Data\Job\Service\Update\Panic;
 use NHDS\Jobs\Data\Job\Service\Update\PanicInterface;
 
-class Factory implements FactoryInterface
+class Factory extends FactoryAbstract implements FactoryInterface
 {
-    use Strict\AwareTrait;
     use Panic\AwareTrait;
     use Service\AwareTrait;
-    const PROP_FACTORY_NAME = 'factory_name';
 
     public function create(): PanicInterface
     {
@@ -21,17 +19,5 @@ class Factory implements FactoryInterface
         $updatePanic->setJobStateService($stateService);
 
         return $updatePanic;
-    }
-
-    public function setName(string $factoryName): FactoryInterface
-    {
-        $this->_create(self::PROP_FACTORY_NAME, $factoryName);
-
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->_read(self::PROP_FACTORY_NAME);
     }
 }

@@ -6,30 +6,32 @@ use NHDS\Jobs\Process\PoolInterface;
 
 trait AwareTrait
 {
-    protected $_pool;
-
-    public function setPool(PoolInterface $pool)
+    public function setProcessPool(PoolInterface $pool)
     {
-        if (!$this->_hasPool()) {
-            $this->_pool = $pool;
-        }else {
-            throw new \Exception('Pool is already set.');
-        }
+        $this->_create(PoolInterface::class, $pool);
 
         return $this;
     }
 
-    protected function _getPool(): PoolInterface
+    protected function _getProcessPool(): PoolInterface
     {
-        if (!$this->_hasPool()) {
-            throw new \LogicException('Pool is not set.');
-        }
-
-        return $this->_pool;
+        return $this->_read(PoolInterface::class);
     }
 
-    protected function _hasPool(): bool
+    protected function _getProcessPoolClone(): PoolInterface
     {
-        return $this->_pool === null ? false : true;
+        return clone $this->_getProcessPool();
+    }
+
+    protected function _hasProcessPool(): bool
+    {
+        return $this->_exists(PoolInterface::class);
+    }
+
+    protected function _deleteProcessPool()
+    {
+        $this->_delete(PoolInterface::class);
+
+        return $this;
     }
 }

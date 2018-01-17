@@ -2,8 +2,7 @@ services:
   nhds.jobs.process.pool.server:
     class: NHDS\Jobs\Process\Pool\Server
     calls:
-      - [setLogger, ['@nhds.jobs.process.pool.logger']]
-      - [setTime, ['@nhds.toolkit.time']]
-      - [setPool, ['@nhds.jobs.process.pool']]
-      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-server']]
+      - [setLogger, ['@process.pool.logger']]
       - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-server']]
+      - [setProcessPoolFactory, ['@process.pool.factory-server']]
