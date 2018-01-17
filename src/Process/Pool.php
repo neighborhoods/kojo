@@ -34,7 +34,8 @@ class Pool implements PoolInterface
     public function terminateChildProcesses()
     {
         if (!empty($this->_processes)) {
-            $this->_getLogger()->debug('Sending SIGTERM to ' . count($this->_processes) . ' child processes...');
+            $numberOfProcesses = $this->getNumberOfProcesses();
+            $this->_getLogger()->debug("Sending termination signal to {$numberOfProcesses} child processes...");
             /** @var ProcessInterface $process */
             foreach ($this->_processes as $process) {
                 $processId = $process->getProcessId();
@@ -102,10 +103,15 @@ class Pool implements PoolInterface
             $this->_getProcessPoolStrategy()->processExited($process);
             $this->_validateAlarm();
         }
-        $this->_getLogger()->debug('Number of processes in pool: ' . count($this->_processes));
+        $this->_getLogger()->debug('Number of processes in pool: ' . $this->getNumberOfProcesses());
         $this->_getProcessPoolStrategy()->currentPendingChildExitsComplete();
 
         return $this;
+    }
+
+    public function getNumberOfProcesses(): int
+    {
+        return count($this->_processes);
     }
 
     protected function _processControlWaitError()
@@ -161,12 +167,12 @@ class Pool implements PoolInterface
 
     public function isFull(): bool
     {
-        return (bool)(count($this->_processes) >= $this->_getProcessPoolStrategy()->getMaxProcesses());
+        return (bool)($this->getNumberOfProcesses() >= $this->_getProcessPoolStrategy()->getMaxProcesses());
     }
 
     public function isEmpty(): bool
     {
-        return (bool)(count($this->_processes) == 0);
+        return (bool)($this->getNumberOfProcesses() === 0);
     }
 
     public function addProcess(ProcessInterface $process): PoolInterface

@@ -28,4 +28,6 @@ interface PoolInterface
     public function hasAlarm();
 
     public function terminateChildProcesses();
+
+    public function getNumberOfProcesses(): int;
 }
