@@ -6,7 +6,7 @@ use NHDS\Jobs\Data\Job\ServiceAbstract;
 
 class FailedScheduleLimitCheck extends ServiceAbstract implements FailedScheduleLimitCheckInterface
 {
-    public function save(): FailedScheduleLimitCheckInterface
+    public function _save(): FailedScheduleLimitCheckInterface
     {
         $this->_getJobStateService()->setJob($this->_getJob());
         $this->_getJobStateService()->requestCompleteFailedScheduleLimitCheck();

@@ -6,7 +6,7 @@ use NHDS\Jobs\Data\Job\ServiceAbstract;
 
 class Failed extends ServiceAbstract implements FailedInterface
 {
-    public function save(): FailedInterface
+    public function _save(): FailedInterface
     {
         $this->_getJobStateService()->setJob($this->_getJob());
         $this->_getJobStateService()->requestCompleteFailed();

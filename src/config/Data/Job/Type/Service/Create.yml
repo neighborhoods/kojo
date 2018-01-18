@@ -1,0 +1,5 @@
+services:
+  nhds.jobs.data.job.type.service.create:
+    class: NHDS\Jobs\Data\Job\Type\Service\Create
+    calls:
+      - [setJobType, ['@nhds.jobs.data.job.type']]

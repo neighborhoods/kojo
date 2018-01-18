@@ -8,7 +8,7 @@ class Retry extends ServiceAbstract implements RetryInterface
 {
     const PROP_DATE_TIME = 'date_time';
 
-    public function save(): RetryInterface
+    public function _save(): RetryInterface
     {
         $this->_getJobStateService()->setJob($this->_getJob());
         $this->_getJobStateService()->requestRetry($this->_getDateTime());

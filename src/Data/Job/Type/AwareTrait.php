@@ -22,4 +22,16 @@ trait AwareTrait
     {
         return clone $this->_getJobType();
     }
+
+    public function hasJobType(): bool
+    {
+        return $this->_exists(TypeInterface::class);
+    }
+
+    protected function _deleteJobType()
+    {
+        $this->_delete(TypeInterface::class);
+
+        return $this;
+    }
 }

@@ -200,10 +200,10 @@ class Pool implements PoolInterface
     {
         if (isset($this->_processes[$processId]) && $this->_processes[$processId] instanceof ProcessInterface) {
             $typeCode = $this->_processes[$processId]->getTypeCode();
-            $this->_getLogger()->debug("Freeing Process related to Process[$processId][$typeCode] from Process pool.");
+            $this->_getLogger()->debug("Freeing process related to Process[$processId][$typeCode] from process pool.");
             unset($this->_processes[$processId]);
         }else {
-            throw new \LogicException("Process associated to Process[$processId] is not in the Process pool.");
+            throw new \LogicException("Process associated to Process[$processId] is not in the process pool.");
         }
 
         return $this;

@@ -38,13 +38,13 @@ class Version_3_0_0 extends VersionAbstract
                 ]));
         $createTable->addColumn(
             new Datetime(
-                Message::FIELD_NAME_DATETIME, false, null,
+                Message::FIELD_NAME_DATE_TIME, false, null,
                 [
                     'comment' => 'COMMENT',
                 ]));
         $createTable->addColumn(
             new BigInteger(
-                Message::FIELD_NAME_MICROTIME, false, null,
+                Message::FIELD_NAME_MICRO_TIME, false, null,
                 [
                     'comment'  => 'COMMENT',
                     'unsigned' => true,

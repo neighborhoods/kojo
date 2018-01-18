@@ -31,26 +31,26 @@ class Version_2_0_0 extends VersionAbstract
                 ]));
         $createTable->addColumn(
             new Datetime(
-                Status::FIELD_NAME_STARTED_AT_DATETIME, false, null,
+                Status::FIELD_NAME_STARTED_AT_DATE_TIME, false, null,
                 [
                     'comment' => 'COMMENT',
                 ]));
         $createTable->addColumn(
             new BigInteger(
-                Status::FIELD_NAME_STARTED_AT_MICROTIME, false, null,
+                Status::FIELD_NAME_STARTED_AT_MICRO_TIME, false, null,
                 [
                     'comment'  => 'COMMENT',
                     'unsigned' => true,
                 ]));
         $createTable->addColumn(
             new Datetime(
-                Status::FIELD_NAME_FINALIZED_AT_DATETIME, true, null,
+                Status::FIELD_NAME_FINALIZED_AT_DATE_TIME, true, null,
                 [
                     'comment' => 'COMMENT',
                 ]));
         $createTable->addColumn(
             new BigInteger(
-                Status::FIELD_NAME_FINALIZED_AT_MICROTIME, true, null,
+                Status::FIELD_NAME_FINALIZED_AT_MICRO_TIME, true, null,
                 [
                     'comment'  => 'COMMENT',
                     'unsigned' => true,

@@ -6,5 +6,4 @@ use NHDS\Jobs\Data\Job\ServiceInterface;
 
 interface PanicInterface extends ServiceInterface
 {
-    public function save(): PanicInterface;
 }

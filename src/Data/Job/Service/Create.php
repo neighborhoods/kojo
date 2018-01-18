@@ -5,11 +5,13 @@ namespace NHDS\Jobs\Data\Job\Service;
 use NHDS\Jobs\Data\Job;
 use NHDS\Jobs\Data\Job\ServiceAbstract;
 use NHDS\Jobs\Data\Job\State;
+use NHDS\Toolkit\Time;
 
 class Create extends ServiceAbstract implements CreateInterface
 {
     use Job\Type\Repository\AwareTrait;
     use Job\Collection\ScheduleLimit\AwareTrait;
+    use Time\AwareTrait;
     const PROP_IMPORTANCE        = 'importance';
     const PROP_WORK_AT_DATE_TIME = 'work_at_date_time';
     const PROP_JOB_TYPE_CODE     = 'job_type_code';
@@ -29,15 +31,13 @@ class Create extends ServiceAbstract implements CreateInterface
         return $this;
     }
 
-    public function save(): CreateInterface
+    protected function _prepareSave(): Create
     {
         $this->_prepareJob();
         if ($this->_getJobType()->getScheduleLimit() > 0) {
             $this->_getJobStateService()->requestScheduleLimitCheck();
-            $this->_save();
         }else {
             $this->_getJobStateService()->requestWaitForWork();
-            $this->_save();
         }
 
         return $this;
@@ -45,10 +45,10 @@ class Create extends ServiceAbstract implements CreateInterface
 
     protected function _save(): Create
     {
+        $this->_prepareSave();
         $this->_getJobStateService()->setJob($this->_getJob());
         $this->_getJobStateService()->applyRequest();
         $this->_getJob()->save();
-        $this->_create(self::PROP_SAVED, true);
 
         return $this;
     }
@@ -58,7 +58,7 @@ class Create extends ServiceAbstract implements CreateInterface
         if (!$this->_exists(self::PROP_JOB_PREPARED)) {
             $jobType = $this->_getJobType();
             if ($jobType->getIsEnabled()) {
-                $persistentJobTypeProperties = $jobType->getPersistentProperties();
+                $persistentJobTypeProperties = $jobType->readPersistentProperties();
                 unset($persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_ID]);
                 unset($persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_CRON_EXPRESSION]);
                 unset($persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_SCHEDULE_LIMIT]);
@@ -76,10 +76,11 @@ class Create extends ServiceAbstract implements CreateInterface
             }
 
             $job = $this->_getJob();
-            $job->setPersistentProperties($persistentJobTypeProperties);
+            $job->createPersistentProperties($persistentJobTypeProperties);
             $job->setImportance($importance);
             $job->setPriority($importance);
             $job->setWorkAtDateTime($this->_read(self::PROP_WORK_AT_DATE_TIME));
+            $job->setCreatedAtDateTime($this->_getTime()->getNow());
             $job->setTimesWorked(0);
             $job->setNextStateRequest(State\Service::STATE_NONE);
             $job->setAssignedState(State\Service::STATE_NEW);

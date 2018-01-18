@@ -64,7 +64,7 @@ class Version_5_0_0 extends VersionAbstract
                 ]));
         $createTable->addColumn(
             new Datetime(
-                JobInterface::FIELD_NAME_WORK_AT_DATETIME, false, null,
+                JobInterface::FIELD_NAME_WORK_AT_DATE_TIME, false, null,
                 [
                     'comment' => 'COMMENT',
                 ]));
@@ -106,7 +106,7 @@ class Version_5_0_0 extends VersionAbstract
                 ]));
         $createTable->addColumn(
             new Datetime(
-                JobInterface::FIELD_NAME_LAST_TRANSITION_DATETIME, true, null,
+                JobInterface::FIELD_NAME_LAST_TRANSITION_DATE_TIME, true, null,
                 [
                     'comment' => 'COMMENT',
                 ]));
@@ -152,13 +152,31 @@ class Version_5_0_0 extends VersionAbstract
                     'comment'  => 'COMMENT',
                     'unsigned' => true,
                 ]));
+        $createTable->addColumn(
+            new Datetime(
+                JobInterface::FIELD_NAME_CREATED_AT_DATE_TIME, false, null,
+                [
+                    'comment' => 'COMMENT',
+                ]));
+        $createTable->addColumn(
+            new Datetime(
+                JobInterface::FIELD_NAME_COMPLETED_AT_DATE_TIME, true, null,
+                [
+                    'comment' => 'COMMENT',
+                ]));
+        $createTable->addColumn(
+            new Datetime(
+                JobInterface::FIELD_NAME_DELETE_AFTER_DATE_TIME, true, null,
+                [
+                    'comment' => 'COMMENT',
+                ]));
         $createTable->addConstraint(new PrimaryKey(JobInterface::FIELD_NAME_ID));
         $createTable->addConstraint(
             new Index(
                 [
                     JobInterface::FIELD_NAME_ASSIGNED_STATE,
                     JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
-                    JobInterface::FIELD_NAME_WORK_AT_DATETIME,
+                    JobInterface::FIELD_NAME_WORK_AT_DATE_TIME,
                     JobInterface::FIELD_NAME_PRIORITY,
                     JobInterface::FIELD_NAME_TYPE_CODE,
                     JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
@@ -187,10 +205,18 @@ class Version_5_0_0 extends VersionAbstract
         $createTable->addConstraint(
             new Index(
                 [
-                    JobInterface::FIELD_NAME_WORK_AT_DATETIME,
+                    JobInterface::FIELD_NAME_WORK_AT_DATE_TIME,
                     JobInterface::FIELD_NAME_TYPE_CODE,
                 ],
                 JobInterface::INDEX_NAME_SCHEDULER
+            )
+        );
+        $createTable->addConstraint(
+            new Index(
+                [
+                    JobInterface::FIELD_NAME_DELETE_AFTER_DATE_TIME,
+                ],
+                JobInterface::INDEX_NAME_AUTO_DELETE
             )
         );
         $createTable->addConstraint(

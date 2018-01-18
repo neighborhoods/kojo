@@ -16,7 +16,7 @@ class Selector extends CollectionAbstract implements SelectorInterface
         $records = &$this->getRecords();
         foreach ($records as $record) {
             $model = $this->_getModelClone();
-            $model->setPersistentProperties($record);
+            $model->createPersistentProperties($record);
             $models[] = $model;
         }
 
@@ -65,7 +65,7 @@ class Selector extends CollectionAbstract implements SelectorInterface
             ]
         );
         $select->order(JobInterface::FIELD_NAME_PRIORITY . ' DESC');
-        $select->where(JobInterface::FIELD_NAME_WORK_AT_DATETIME . ' <= utc_timestamp()');
+        $select->where(JobInterface::FIELD_NAME_WORK_AT_DATE_TIME . ' <= utc_timestamp()');
 
         return $this;
     }

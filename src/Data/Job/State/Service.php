@@ -12,6 +12,7 @@ class Service implements ServiceInterface
     use Strict\AwareTrait;
     use Job\AwareTrait;
     use Time\AwareTrait;
+    use Job\Type\Repository\AwareTrait;
     protected $_nextStateRequestUpdate;
     protected $_assignedStateUpdate;
     protected $_updateExpression;
@@ -62,6 +63,8 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
         $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_SUCCESS;
+        $this->_updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
+            && job.setDeleteAfterDateTime(referenceDateTime.add(autoDeleteDateInterval))';
 
         return $this;
     }
@@ -70,6 +73,8 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
         $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_TERMINATED;
+        $this->_updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
+            && job.setDeleteAfterDateTime(referenceDateTime.add(autoDeleteDateInterval))';
 
         return $this;
     }
@@ -78,6 +83,8 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
         $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_FAILED;
+        $this->_updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
+            && job.setDeleteAfterDateTime(referenceDateTime.add(autoDeleteDateInterval))';
 
         return $this;
     }
@@ -127,13 +134,16 @@ class Service implements ServiceInterface
         $this->_assertValidTransition();
         $referenceTime = $this->_getTime()->getNow();
         $this->_getJob()->setPreviousState($this->_getJob()->getAssignedState());
+        $jobType = $this->_getJobTypeRepository()->getJobTypeClone($this->_getJob()->getTypeCode());
         if ($this->_updateExpression !== null) {
             $expressionLanguage = new ExpressionLanguage();
             $expressionLanguage->evaluate(
                 $this->_updateExpression,
                 [
-                    'job'           => $this->_getJob(),
-                    'retryDateTime' => $this->_retryDateTime,
+                    'job'                    => $this->_getJob(),
+                    'retryDateTime'          => $this->_retryDateTime,
+                    'referenceDateTime'      => $referenceTime,
+                    'autoDeleteDateInterval' => new \DateInterval($jobType->getAutoDeleteIntervalDuration()),
                 ]
             );
         }

@@ -6,5 +6,4 @@ use NHDS\Jobs\Data\Job\ServiceInterface;
 
 interface FailedScheduleLimitCheckInterface extends ServiceInterface
 {
-    public function save(): FailedScheduleLimitCheckInterface;
 }

@@ -8,8 +8,8 @@ if (PHP_SAPI !== 'cli') {
 }
 try{
     require __DIR__ . '/../../vendor/autoload.php';
-}catch(\Exception $e){
-    echo 'Autoload error: ' . $e->getMessage();
+}catch(\Exception $exception){
+    echo 'Autoload error: ' . $exception->getMessage();
     exit(1);
 }
 $serviceContainer = new \NHDS\Jobs\Service\Container();

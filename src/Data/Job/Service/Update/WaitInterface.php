@@ -6,5 +6,4 @@ use NHDS\Jobs\Data\Job\ServiceInterface;
 
 interface WaitInterface extends ServiceInterface
 {
-    public function save(): WaitInterface;
 }

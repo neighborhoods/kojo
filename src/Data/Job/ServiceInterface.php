@@ -11,5 +11,5 @@ interface ServiceInterface
 
     public function setJob(JobInterface $job);
 
-    public function save();
+    public function save(): ServiceInterface;
 }

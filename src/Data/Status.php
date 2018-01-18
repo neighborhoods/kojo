@@ -6,17 +6,17 @@ use NHDS\Jobs\Db\Model;
 
 class Status extends Model implements StatusInterface
 {
-    const TABLE_NAME                        = 'nhds_status';
-    const FIELD_NAME_ID                     = 'nhds_status_id';
-    const FIELD_NAME_STARTED_AT_DATETIME    = 'started_at_datetime';
-    const FIELD_NAME_STARTED_AT_MICROTIME   = 'started_at_microtime';
-    const FIELD_NAME_FINALIZED_AT_DATETIME  = 'finalized_at_datetime';
-    const FIELD_NAME_FINALIZED_AT_MICROTIME = 'finalized_at_microtime';
-    const FIELD_NAME_TYPE_CODE              = 'type_code';
-    const FIELD_NAME_STATE                  = 'state';
-    const FIELD_NAME_MESSAGE_COUNT          = 'message_count';
-    const FIELD_NAME_ERROR_COUNT            = 'error_count';
-    const FIELD_NAME_MAX_ERROR_LEVEL        = 'max_error_level';
-    const INDEX_NAME_TYPE_CODE              = 'TYPE_CODE';
-    const FOREIGN_KEY_NAME                  = 'TYPE_CODE';
+    const TABLE_NAME                         = 'nhds_status';
+    const FIELD_NAME_ID                      = 'nhds_status_id';
+    const FIELD_NAME_STARTED_AT_DATE_TIME    = 'started_at_date_time';
+    const FIELD_NAME_STARTED_AT_MICRO_TIME   = 'started_at_micro_time';
+    const FIELD_NAME_FINALIZED_AT_DATE_TIME  = 'finalized_at_date_time';
+    const FIELD_NAME_FINALIZED_AT_MICRO_TIME = 'finalized_at_micro_time';
+    const FIELD_NAME_TYPE_CODE               = 'type_code';
+    const FIELD_NAME_STATE                   = 'state';
+    const FIELD_NAME_MESSAGE_COUNT           = 'message_count';
+    const FIELD_NAME_ERROR_COUNT             = 'error_count';
+    const FIELD_NAME_MAX_ERROR_LEVEL         = 'max_error_level';
+    const INDEX_NAME_TYPE_CODE               = 'TYPE_CODE';
+    const FOREIGN_KEY_NAME                   = 'TYPE_CODE';
 }

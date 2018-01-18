@@ -7,7 +7,7 @@ trait AwareTrait
     protected $_persistentProperties        = [];
     protected $_changedPersistentProperties = [];
 
-    public function setPersistentProperties(array $persistentProperties)
+    public function createPersistentProperties(array $persistentProperties)
     {
         if (!$this->_hasPersistentProperties()) {
             $this->_persistentProperties = $persistentProperties;
@@ -19,7 +19,7 @@ trait AwareTrait
         return $this;
     }
 
-    protected function _unsetPersistentProperties()
+    protected function _emptyPersistentProperties()
     {
         if ($this->_hasPersistentProperties()) {
             $this->_persistentProperties = [];
@@ -39,7 +39,7 @@ trait AwareTrait
         return $this;
     }
 
-    protected function _setPersistentProperty(string $persistentPropertyName, $persistentPropertyValue)
+    protected function _createPersistentProperty(string $persistentPropertyName, $persistentPropertyValue)
     {
         if ($this->_hasPersistentProperty($persistentPropertyName)) {
             throw new \LogicException('Persistent property ' . $persistentPropertyName . ' is already set.');
@@ -51,7 +51,7 @@ trait AwareTrait
         return $this;
     }
 
-    protected function _getPersistentProperty(string $persistentPropertyName)
+    protected function _readPersistentProperty(string $persistentPropertyName)
     {
         if (!isset($this->_persistentProperties[$persistentPropertyName])) {
             throw new \LogicException('Persistent property ' . $persistentPropertyName . ' is not set');
@@ -72,7 +72,7 @@ trait AwareTrait
         return $this;
     }
 
-    public function getPersistentProperties(): array
+    public function readPersistentProperties(): array
     {
         if (!$this->_hasPersistentProperties()) {
             throw new \LogicException('Persistent properties is not set.');
@@ -81,7 +81,7 @@ trait AwareTrait
         return $this->_persistentProperties;
     }
 
-    protected function _upsertPersistentProperty(string $persistentPropertyName, $persistentPropertyValue)
+    protected function _createOrUpdatePersistentProperty(string $persistentPropertyName, $persistentPropertyValue)
     {
         $this->_persistentProperties[$persistentPropertyName] = $persistentPropertyValue;
         $this->_changedPersistentProperties[$persistentPropertyName] = $persistentPropertyValue;
@@ -104,7 +104,7 @@ trait AwareTrait
         return empty($this->_changedPersistentProperties) ? false : true;
     }
 
-    protected function _getChangedPersistentProperties(): array
+    protected function _readChangedPersistentProperties(): array
     {
         if (!$this->hasChangedPersistentProperties()) {
             throw new \LogicException('Changed persistent properties is not set.');
@@ -113,7 +113,7 @@ trait AwareTrait
         return $this->_changedPersistentProperties;
     }
 
-    protected function _unsetChangedPersistentProperties()
+    protected function _emptyChangedPersistentProperties()
     {
         if ($this->hasChangedPersistentProperties()) {
             $this->_changedPersistentProperties = [];

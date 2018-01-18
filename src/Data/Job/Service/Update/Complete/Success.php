@@ -6,7 +6,7 @@ use NHDS\Jobs\Data\Job\ServiceAbstract;
 
 class Success extends ServiceAbstract implements SuccessInterface
 {
-    public function save(): SuccessInterface
+    public function _save(): SuccessInterface
     {
         $this->_getJobStateService()->setJob($this->_getJob());
         $this->_getJobStateService()->requestCompleteSuccess();

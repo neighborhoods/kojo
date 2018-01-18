@@ -57,7 +57,7 @@ abstract class CollectionAbstract implements CollectionInterface
             $records = &$this->getRecords();
             foreach ($records as $record) {
                 $model = $this->_getModelClone();
-                $model->setPersistentProperties($record);
+                $model->createPersistentProperties($record);
                 $models[] = $model;
             }
             $this->_create(self::PROP_MODELS, $models);

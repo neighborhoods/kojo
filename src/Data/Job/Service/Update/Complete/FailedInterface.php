@@ -6,5 +6,4 @@ use NHDS\Jobs\Data\Job\ServiceInterface;
 
 interface FailedInterface extends ServiceInterface
 {
-    public function save(): FailedInterface;
 }

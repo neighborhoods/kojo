@@ -1,15 +1,14 @@
 <?php
 
-namespace NHDS\Jobs\Data\Job;
+namespace NHDS\Jobs\Data\Job\Type;
 
 use NHDS\Jobs\Data\Job;
 use NHDS\Toolkit\Data\Property\Strict;
 
-abstract class ServiceAbstract implements ServiceInterface
+abstract class ServiceAbstract implements Job\Type\ServiceInterface
 {
+    use Job\Type\AwareTrait;
     use Strict\AwareTrait;
-    use Job\AwareTrait;
-    use State\Service\AwareTrait;
     const PROP_SAVED = 'saved';
 
     public function save(): ServiceInterface

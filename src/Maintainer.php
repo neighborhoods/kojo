@@ -104,6 +104,7 @@ class Maintainer implements MaintainerInterface
                 $updatePanic = $this->_getJobServiceUpdatePanicFactory()->create();
                 $updatePanic->setJob($job);
                 $updatePanic->save();
+                $this->_getLogger()->alert('Panicking Job[' . $job->getId() . '].');
             }
         }
 

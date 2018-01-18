@@ -6,7 +6,7 @@ use NHDS\Jobs\Data\Job\ServiceAbstract;
 
 class Panic extends ServiceAbstract implements PanicInterface
 {
-    public function save(): PanicInterface
+    public function _save(): PanicInterface
     {
         $this->_getJobStateService()->setJob($this->_getJob());
         $this->_getJobStateService()->requestPanicked();

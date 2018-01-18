@@ -4,3 +4,4 @@ services:
     shared: false
     calls:
       - [setTime, ['@nhds.toolkit.time']]
+      - [setJobTypeRepository, ['@nhds.jobs.data.job.type.repository']]

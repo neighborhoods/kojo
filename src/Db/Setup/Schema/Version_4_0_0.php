@@ -91,7 +91,7 @@ class Version_4_0_0 extends VersionAbstract
                 ]));
         $createTable->addColumn(
             new Varchar(
-                Type::FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION, 255, true, null,
+                Type::FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION, 255, false, null,
                 [
                     'comment' => 'A ISO 8601 interval duration that describes duration of time past a Job\'s'
                         . ' completed_at_date_time that a Job record of this Job Type should be deleted from storage.',

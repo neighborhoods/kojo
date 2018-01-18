@@ -6,14 +6,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -27,14 +27,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -48,14 +48,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().add(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().add(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -69,14 +69,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -90,14 +90,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -111,14 +111,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -132,14 +132,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -153,14 +153,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -174,14 +174,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -195,14 +195,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -216,14 +216,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -237,14 +237,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -258,14 +258,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -279,14 +279,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -300,14 +300,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -321,14 +321,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -342,14 +342,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -363,14 +363,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -384,14 +384,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -405,14 +405,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -426,14 +426,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -447,14 +447,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -468,14 +468,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -489,14 +489,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -510,14 +510,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -531,14 +531,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -552,14 +552,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -573,14 +573,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -594,14 +594,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -615,14 +615,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -636,14 +636,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -657,14 +657,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -678,14 +678,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -699,14 +699,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -720,14 +720,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -741,14 +741,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -762,14 +762,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -783,14 +783,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -804,14 +804,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -825,14 +825,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -846,14 +846,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -867,14 +867,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -888,14 +888,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -909,14 +909,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -930,14 +930,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -951,14 +951,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -972,14 +972,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -993,14 +993,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1014,14 +1014,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1035,14 +1035,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1056,14 +1056,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1077,14 +1077,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1098,14 +1098,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1119,14 +1119,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1140,14 +1140,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1161,14 +1161,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1182,14 +1182,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1203,14 +1203,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1224,14 +1224,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1245,14 +1245,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0
@@ -1266,14 +1266,14 @@ nhds_job:
     priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
     status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('P1D')).format('Y-m-d H:i:s')
     next_state_request: "working"
     assigned_state: "new"
     previous_state: "empty"
     worker_uri: ""
     worker_method: "work"
     can_work_in_parallel: 1
-    last_transition_datetime: "2010-04-26 12:14:20"
+    last_transition_date_time: "2010-04-26 12:14:20"
     last_transition_micro_time: 1511915506563849
     times_worked: 0
     times_retried: 0

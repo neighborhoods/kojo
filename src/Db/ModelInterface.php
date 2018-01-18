@@ -26,9 +26,9 @@ interface ModelInterface
 
     public function delete(): ModelInterface;
 
-    public function setPersistentProperties(array $persistentProperties);
+    public function createPersistentProperties(array $persistentProperties);
 
-    public function getPersistentProperties(): array;
+    public function readPersistentProperties(): array;
 
     public function addDbConnectionContainer(ContainerInterface $container);
 }

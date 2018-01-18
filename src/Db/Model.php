@@ -56,7 +56,7 @@ class Model implements ModelInterface
 
     public function setId(string $id): ModelInterface
     {
-        $this->_setPersistentProperty($this->getIdPropertyName(), $id);
+        $this->_createPersistentProperty($this->getIdPropertyName(), $id);
 
         return $this;
     }
@@ -67,7 +67,7 @@ class Model implements ModelInterface
             $propertyName = $this->getIdPropertyName();
         }
         if ($propertyValue === null) {
-            $propertyValue = $this->_getPersistentProperty($propertyName);
+            $propertyValue = $this->_readPersistentProperty($propertyName);
         }
 
         $select = $this->_getLoadSelect($propertyName, $propertyValue);
@@ -85,7 +85,7 @@ class Model implements ModelInterface
 
     public function getId(): string
     {
-        return $this->_getPersistentProperty($this->getIdPropertyName());
+        return $this->_readPersistentProperty($this->getIdPropertyName());
     }
 
     public function hasId(): bool
@@ -128,11 +128,11 @@ class Model implements ModelInterface
             $delete->where([$this->getIdPropertyName() => $this->getId()]);
             $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($delete);
             $statement->execute();
-            $this->_unsetPersistentProperties();
+            $this->_emptyPersistentProperties();
             $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->commit();
-        }catch(\Exception $e){
+        }catch(\Exception $exception){
             $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->rollBack();
-            throw $e;
+            throw $exception;
         }
 
         return $this;
@@ -141,25 +141,25 @@ class Model implements ModelInterface
     protected function insert(): ModelInterface
     {
         $insert = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->insert($this->getTableName());
-        $insert->values($this->_getChangedPersistentProperties());
+        $insert->values($this->_readChangedPersistentProperties());
         $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($insert);
         $statement->execute();
         $id = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getDriver()->getLastGeneratedValue();
         $this->setId($id);
-        $this->_unsetChangedPersistentProperties();
+        $this->_emptyChangedPersistentProperties();
 
         return $this;
     }
 
     protected function update(): ModelInterface
     {
-        $changedPersistentProperties = $this->_getChangedPersistentProperties();
+        $changedPersistentProperties = $this->_readChangedPersistentProperties();
         $update = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->update($this->getTableName());
         $update->where([$this->getIdPropertyName() => $this->getId()]);
         $update->set($changedPersistentProperties);
         $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($update);
         $statement->execute();
-        $this->_unsetChangedPersistentProperties();
+        $this->_emptyChangedPersistentProperties();
 
         return $this;
     }

@@ -6,14 +6,14 @@ nhds_job:
     priority: 10
     importance: 10
     status_id: null
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('PT3M')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('PT3M')).format('Y-m-d H:i:s')
     next_state_request: schedule_limit_check
     assigned_state: waiting
     previous_state: new
     worker_uri: \NHDS\Jobs\Test\Worker\Mock
     worker_method: work
     can_work_in_parallel: 0
-    last_transition_datetime: '2018-01-12 20:54:49'
+    last_transition_date_time: '2018-01-12 20:54:49'
     last_transition_micro_time: 1515790489896748
     times_worked: 0
     times_retried: 0
@@ -27,14 +27,14 @@ nhds_job:
     priority: 10
     importance: 10
     status_id: null
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('PT2M')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('PT2M')).format('Y-m-d H:i:s')
     next_state_request: schedule_limit_check
     assigned_state: waiting
     previous_state: new
     worker_uri: \NHDS\Jobs\Test\Worker\Mock
     worker_method: work
     can_work_in_parallel: 0
-    last_transition_datetime: '2018-01-12 20:54:49'
+    last_transition_date_time: '2018-01-12 20:54:49'
     last_transition_micro_time: 1515790489908615
     times_worked: 0
     times_retried: 0
@@ -48,14 +48,14 @@ nhds_job:
     priority: 10
     importance: 10
     status_id: null
-    work_at_datetime: !fixture/expression: time.getNow().sub(time.getNewDateInterval('PT1M')).format('Y-m-d H:i:s')
+    work_at_date_time: !fixture/expression: time.getNow().sub(time.getNewDateInterval('PT1M')).format('Y-m-d H:i:s')
     next_state_request: schedule_limit_check
     assigned_state: waiting
     previous_state: new
     worker_uri: \NHDS\Jobs\Test\Worker\Mock
     worker_method: work
     can_work_in_parallel: 0
-    last_transition_datetime: '2018-01-12 20:54:49'
+    last_transition_date_time: '2018-01-12 20:54:49'
     last_transition_micro_time: 1515790489914568
     times_worked: 0
     times_retried: 0

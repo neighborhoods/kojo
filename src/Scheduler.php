@@ -61,7 +61,8 @@ class Scheduler implements SchedulerInterface
             while ($this->_getReferenceDistanceDateTime() >= $nexReferenceMinuteDateTime) {
                 if (!$this->_isMinuteScheduledInCache($nexReferenceMinuteDateTime)) {
                     $scheduleMinute = $nexReferenceMinuteDateTime;
-                    $this->_scheduleMinutesNotInCache[$scheduleMinute->format(self::DATE_TIME_FORMAT_MYSQL_MINUTE)] = $scheduleMinute;
+                    $scheduleMinuteIndex = $scheduleMinute->format(self::DATE_TIME_FORMAT_MYSQL_MINUTE);
+                    $this->_scheduleMinutesNotInCache[$scheduleMinuteIndex] = $scheduleMinute;
                 }
                 $nexReferenceMinuteDateTime = $this->_getNextReferenceMinuteDateTime();
             }
@@ -89,9 +90,9 @@ class Scheduler implements SchedulerInterface
         foreach ($this->_getSchedulerJobTypeCollection()->getIterator() as $jobType) {
             $cronExpressionString = $jobType->getCronExpression();
             $typeCode = $jobType->getCode();
-            $cron = CronExpression::factory($cronExpressionString);
+            $cronExpression = CronExpression::factory($cronExpressionString);
             foreach ($this->_scheduleMinutesNotInCache as $unscheduledMinute => $unscheduledDateTime) {
-                if ($cron->isDue($unscheduledDateTime)) {
+                if ($cronExpression->isDue($unscheduledDateTime)) {
                     if (!isset($this->_getSchedulerJobCollection()->getRecords()[$typeCode][$unscheduledMinute])) {
                         $create = $this->_getJobServiceCreateFactory()->create();
                         $create->setJobTypeCode($typeCode);
