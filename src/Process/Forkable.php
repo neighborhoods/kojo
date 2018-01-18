@@ -8,14 +8,15 @@ use NHDS\Jobs\ProcessInterface;
 
 abstract class Forkable extends ProcessAbstract implements ProcessInterface
 {
-    const PROP_HAS_FORKED = 'has_forked';
+    const FORK_FAILURE_CODE = -1;
+    const PROP_HAS_FORKED   = 'has_forked';
 
     public function start(): ProcessInterface
     {
         $this->_create(self::PROP_HAS_FORKED, true);
         $processId = $this->_getProcessStrategy()->fork();
-        if ($processId === -1) {
-            throw new \RuntimeException('Failed to fork new Process.');
+        if ($processId === self::FORK_FAILURE_CODE) {
+            throw new \RuntimeException('Failed to fork new process.');
         }elseif ($processId > 0) {
             // This is executed in the Process Pool.
             $this->_initialize($processId);
@@ -28,7 +29,7 @@ abstract class Forkable extends ProcessAbstract implements ProcessInterface
                 $this->_deleteProcessPool();
             }
 
-            $this->_getLogger()->debug("Running Process...");
+            $this->_getLogger()->debug("Running rocess...");
             $this->_run();
             $this->_getLogger()->debug("Process finished running.");
             $this->_exit(0);
