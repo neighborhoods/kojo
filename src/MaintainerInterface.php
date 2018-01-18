@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs;
 
@@ -14,4 +15,6 @@ interface MaintainerInterface
     public function updatePendingJobs(): MaintainerInterface;
 
     public function setJobCollectionScheduleLimit(ScheduleLimitInterface $jobCollectionScheduleLimit);
+
+    public function delete(): MaintainerInterface;
 }

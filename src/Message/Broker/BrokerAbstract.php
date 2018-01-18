@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs\Message\Broker;
 
@@ -13,17 +14,6 @@ abstract class BrokerAbstract implements BrokerInterface
     protected $_subscriptionChannelName;
     protected $_host;
     protected $_port;
-
-    public function setPort(string $port): BrokerInterface
-    {
-        if ($this->_port === null) {
-            $this->_port = $port;
-        }else {
-            throw new \LogicException('Port is already set.');
-        }
-
-        return $this;
-    }
 
     public function setHost(string $host): BrokerInterface
     {
@@ -83,7 +73,18 @@ abstract class BrokerAbstract implements BrokerInterface
         return $this->_publishChannelName;
     }
 
-    protected function _getPort(): string
+    public function setPort(int $port): BrokerInterface
+    {
+        if ($this->_port === null) {
+            $this->_port = $port;
+        }else {
+            throw new \LogicException('Port is already set.');
+        }
+
+        return $this;
+    }
+
+    protected function _getPort(): int
     {
         if ($this->_port === null) {
             throw new \LogicException('Port is not set.');

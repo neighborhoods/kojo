@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs\Data\Job\Type\Collection\Scheduler;
 

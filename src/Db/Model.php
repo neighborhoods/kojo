@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs\Db;
 
+use NHDS\Jobs\Exception\Runtime\Db\Model\LoadException;
 use NHDS\Toolkit\Data\Property;
 use NHDS\Jobs\Db;
 use NHDS\Jobs\Db\Connection\ContainerInterface;
@@ -77,7 +79,7 @@ class Model implements ModelInterface
         if ($data) {
             $this->_hydrate($data);
         }else {
-            throw new \UnexpectedValueException('No data was loaded.');
+            throw (new LoadException())->setCode(LoadException::CODE_NO_DATA_LOADED);
         }
 
         return $this;
@@ -103,18 +105,10 @@ class Model implements ModelInterface
 
     public function save(): ModelInterface
     {
-        $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->beginTransaction();
-
-        try{
-            if ($this->hasId()) {
-                $this->update();
-            }else {
-                $this->insert();
-            }
-            $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->commit();
-        }catch(\Exception $exception){
-            $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->rollBack();
-            throw $exception;
+        if ($this->hasId()) {
+            $this->update();
+        }else {
+            $this->insert();
         }
 
         return $this;
@@ -122,18 +116,11 @@ class Model implements ModelInterface
 
     public function delete(): ModelInterface
     {
-        $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->beginTransaction();
-        try{
-            $delete = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->delete($this->getTableName());
-            $delete->where([$this->getIdPropertyName() => $this->getId()]);
-            $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($delete);
-            $statement->execute();
-            $this->_emptyPersistentProperties();
-            $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->commit();
-        }catch(\Exception $exception){
-            $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->rollBack();
-            throw $exception;
-        }
+        $delete = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->delete($this->getTableName());
+        $delete->where([$this->getIdPropertyName() => $this->getId()]);
+        $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($delete);
+        $statement->execute();
+        $this->_emptyPersistentProperties();
 
         return $this;
     }

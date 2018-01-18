@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs\Process\Pool;
 
@@ -31,7 +32,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     {
         if ($this->_isEnabled() === true) {
             if ($this->_exists(ProcessInterface::class)) {
-                $processId = str_pad($this->_getProcess()->getProcessId(), self::PAD_PID, ' ', STR_PAD_LEFT);
+                $processId = str_pad((string)$this->_getProcess()->getProcessId(), self::PAD_PID, ' ', STR_PAD_LEFT);
                 $typeCode = str_pad($this->_getProcess()->getTypeCode(), self::PAD_TYPE_CODE, ' ');
             }else {
                 $processId = str_pad('', self::PAD_PID, '?', STR_PAD_LEFT);

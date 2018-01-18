@@ -16,3 +16,4 @@ services:
       - [setJobTypeRepository, ['@nhds.jobs.data.job.type.repository']]
       - [setJobCollectionScheduleLimit, ['@nhds.jobs.data.job.collection.schedulelimit']]
       - [setLogger, ['@process.pool.logger']]
+      - [setMaintainerDelete, ['@nhds.jobs.maintainer.delete']]

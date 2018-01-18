@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs\Exception\Runtime;
 
@@ -6,7 +7,7 @@ use NHDS\Jobs\Exception\ExceptionTrait;
 
 class Exception extends \RuntimeException
 {
-    const CODE_PREFIX    = '_NHDS_Jobs_Exception_Runtime_Exception_';
+    const CODE_PREFIX    = self::class;
     const CODE_ANONYMOUS = self::CODE_PREFIX . 'anonymous';
     use ExceptionTrait;
 

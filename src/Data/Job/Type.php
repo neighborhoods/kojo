@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs\Data\Job;
 
@@ -85,7 +86,7 @@ class Type extends Model implements TypeInterface
 
     public function getCanWorkInParallel(): bool
     {
-        return $this->_readPersistentProperty(TypeInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL);
+        return (bool)$this->_readPersistentProperty(TypeInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL);
     }
 
     public function setDefaultImportance(int $defaultImportance): TypeInterface
@@ -97,7 +98,7 @@ class Type extends Model implements TypeInterface
 
     public function getDefaultImportance(): int
     {
-        return $this->_readPersistentProperty(TypeInterface::FIELD_NAME_DEFAULT_IMPORTANCE);
+        return (int)$this->_readPersistentProperty(TypeInterface::FIELD_NAME_DEFAULT_IMPORTANCE);
     }
 
     public function setScheduleLimit(int $scheduleLimit): TypeInterface
@@ -112,7 +113,7 @@ class Type extends Model implements TypeInterface
 
     public function getScheduleLimit(): int
     {
-        return $this->_readPersistentProperty(TypeInterface::FIELD_NAME_SCHEDULE_LIMIT);
+        return (int)$this->_readPersistentProperty(TypeInterface::FIELD_NAME_SCHEDULE_LIMIT);
     }
 
     public function setIsEnabled(bool $isEnabled): TypeInterface
@@ -124,7 +125,7 @@ class Type extends Model implements TypeInterface
 
     public function getIsEnabled(): bool
     {
-        return $this->_readPersistentProperty(TypeInterface::FIELD_NAME_IS_ENABLED);
+        return (bool)$this->_readPersistentProperty(TypeInterface::FIELD_NAME_IS_ENABLED);
     }
 
     public function setAutoCompleteSuccess(bool $autoCompleteSuccess): TypeInterface
@@ -136,7 +137,7 @@ class Type extends Model implements TypeInterface
 
     public function getAutoCompleteSuccess(): bool
     {
-        return $this->_readPersistentProperty(TypeInterface::FIELD_NAME_AUTO_COMPLETE_SUCCESS);
+        return (bool)$this->_readPersistentProperty(TypeInterface::FIELD_NAME_AUTO_COMPLETE_SUCCESS);
     }
 
     public function setAutoDeleteIntervalDuration(string $autoDeleteIntervalDuration): TypeInterface

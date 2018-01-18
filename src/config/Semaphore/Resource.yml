@@ -4,11 +4,11 @@ services:
     shared: false
     calls:
       - [setIsBlocking, [false]]
-  nhds.jobs.semaphore.resource-reschedule_jobs:
+  nhds.jobs.semaphore.resource-maintainer_delete:
     class: NHDS\Jobs\Semaphore\Resource
     shared: false
     calls:
-      - [setResourceName, ['reschedule_jobs.lock']]
+      - [setResourceName, ['maintainer_delete.lock']]
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
   nhds.jobs.semaphore.resource-update_pending_jobs:
@@ -16,6 +16,13 @@ services:
     shared: false
     calls:
       - [setResourceName, ['update_pending_jobs.lock']]
+      - [setResourcePath, ['nhds/jobs']]
+      - [setIsBlocking, [false]]
+  nhds.jobs.semaphore.resource-reschedule_jobs:
+    class: NHDS\Jobs\Semaphore\Resource
+    shared: false
+    calls:
+      - [setResourceName, ['reschedule_jobs.lock']]
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
   nhds.jobs.semaphore.resource-schedule:

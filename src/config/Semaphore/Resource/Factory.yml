@@ -7,6 +7,13 @@ services:
       - [setSemaphoreResourceOwner, ['@nhds.semaphore.resource.owner.job']]
       - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
       - [setSemaphore, ['@nhds.jobs.semaphore']]
+  nhds.jobs.semaphore.resource.factory-maintainer_delete:
+    class: NHDS\Jobs\Semaphore\Resource\Factory
+    calls:
+      - [setName, ['maintainer_delete']]
+      - [setSemaphoreResource, ['@nhds.jobs.semaphore.resource-maintainer_delete']]
+      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
+      - [setSemaphore, ['@nhds.jobs.semaphore']]
   nhds.jobs.semaphore.resource.factory-update_pending_jobs:
     class: NHDS\Jobs\Semaphore\Resource\Factory
     calls:

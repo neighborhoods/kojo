@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs\Process;
 
@@ -19,6 +20,7 @@ class Job extends Forkable implements JobInterface
         $this->_getBootstrap()->instantiate();
         $this->_getMaintainer()->updatePendingJobs();
         $this->_getMaintainer()->rescheduleCrashedJobs();
+        $this->_getMaintainer()->delete();
         $this->_getScheduler()->schedule();
         $this->_getForeman()->work();
 

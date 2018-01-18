@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs\Data\Job\Service;
 
@@ -68,7 +69,7 @@ class Create extends ServiceAbstract implements CreateInterface
                 if ($this->_exists(self::PROP_IMPORTANCE)) {
                     $importance = $this->_read(self::PROP_IMPORTANCE);
                 }else {
-                    $importance = $persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_DEFAULT_IMPORTANCE];
+                    $importance = (int) $persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_DEFAULT_IMPORTANCE];
                 }
                 unset($persistentJobTypeProperties[Job\TypeInterface::FIELD_NAME_DEFAULT_IMPORTANCE]);
             }else {

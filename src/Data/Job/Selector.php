@@ -1,9 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs\Data\Job;
 
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Data\Job;
+use NHDS\Jobs\Exception\Runtime\Db\Model\LoadException;
 use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Message\Broker;
 use NHDS\Jobs\Semaphore;
@@ -55,15 +57,21 @@ class Selector implements SelectorInterface
                     if ($this->_getSemaphore()->testAndSetLock($jobSemaphoreResource)) {
                         $job = $this->_getJobClone();
                         $job->setId($jobCandidate->getId());
-                        $job->load();
-                        $stateService = $this->_getJobStateServiceClone();
-                        $stateService->setJob($job);
-                        $stateService->requestWork();
-                        if ($stateService->isValidTransition()) {
-                            $this->_create(self::PROP_NEXT_JOB_TO_WORK, $job);
-                            break 2;
-                        }else {
-                            $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
+                        try{
+                            $job->load();
+                            $stateService = $this->_getJobStateServiceClone();
+                            $stateService->setJob($job);
+                            $stateService->requestWork();
+                            if ($stateService->isValidTransition()) {
+                                $this->_create(self::PROP_NEXT_JOB_TO_WORK, $job);
+                                break 2;
+                            }else {
+                                $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
+                            }
+                        }catch(LoadException $loadException){
+                            if ($this->_getSemaphore()->hasLock($jobSemaphoreResource)) {
+                                $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
+                            }
                         }
                     }
                 }

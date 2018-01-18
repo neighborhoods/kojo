@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs;
 
@@ -15,6 +16,7 @@ class Maintainer implements MaintainerInterface
 {
     use Strict\AwareTrait;
     use CrashDetection\AwareTrait;
+    use Maintainer\Delete\AwareTrait;
     use Semaphore\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
     use LimitCheck\AwareTrait;
@@ -25,6 +27,13 @@ class Maintainer implements MaintainerInterface
     use Update\Crash\Factory\AwareTrait;
     use Update\Panic\Factory\AwareTrait;
     use Logger\AwareTrait;
+
+    public function delete(): MaintainerInterface
+    {
+        $this->_getMaintainerDelete()->deleteCompletedJobs();
+
+        return $this;
+    }
 
     public function rescheduleCrashedJobs(): MaintainerInterface
     {

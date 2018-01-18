@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Toolkit;
 
@@ -9,7 +10,7 @@ class Time implements TimeInterface
     public function getNow(string $timezoneCode = self::DEFAULT_TIMEZONE_CODE): \DateTime
     {
         $microTime = explode('.', sprintf('%.06f', microtime(true)));
-        $time = gmdate(self::MYSQL_DATE_TIME_FORMAT . '.' . $microTime[1], $microTime[0]);
+        $time = gmdate(self::MYSQL_DATE_TIME_FORMAT . '.' . $microTime[1], (int) $microTime[0]);
         $now = new \DateTime($time, new \DateTimeZone('GMT'));
         $now->setTimezone($this->getDateTimeZone($timezoneCode));
 

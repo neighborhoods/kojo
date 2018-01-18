@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NHDS\Jobs\Data;
 
@@ -75,7 +76,7 @@ class Job extends Model implements JobInterface
 
     public function getPriority(): int
     {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_PRIORITY);
+        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_PRIORITY);
     }
 
     public function setImportance(int $importance): JobInterface
@@ -87,7 +88,7 @@ class Job extends Model implements JobInterface
 
     public function getImportance(): int
     {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_IMPORTANCE);
+        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_IMPORTANCE);
     }
 
     public function setStatusId(int $statusId): JobInterface
@@ -99,7 +100,7 @@ class Job extends Model implements JobInterface
 
     public function getStatusId(): int
     {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_STATUS_ID);
+        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_STATUS_ID);
     }
 
     public function setWorkAtDateTime(\DateTime $workAtDateTime): JobInterface
@@ -164,7 +165,7 @@ class Job extends Model implements JobInterface
 
     public function getCanWorkInParallel(): bool
     {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL);
+        return (bool)$this->_readPersistentProperty(JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL);
     }
 
     public function setLastTransitionInDateTime(\DateTime $dateTime): JobInterface
@@ -225,7 +226,7 @@ class Job extends Model implements JobInterface
 
     public function getTimesWorked(): int
     {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_TIMES_WORKED);
+        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_TIMES_WORKED);
     }
 
     public function setTimesRetried(int $timesRetried): JobInterface
@@ -240,7 +241,7 @@ class Job extends Model implements JobInterface
 
     public function getTimesRetried(): int
     {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_TIMES_RETRIED);
+        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_TIMES_RETRIED);
     }
 
     public function setTimesHeld(int $timesHeld): JobInterface
@@ -255,7 +256,7 @@ class Job extends Model implements JobInterface
 
     public function getTimesHeld(): int
     {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_TIMES_HELD);
+        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_TIMES_HELD);
     }
 
     public function setTimesCrashed(int $timesCrashed): JobInterface
@@ -270,7 +271,7 @@ class Job extends Model implements JobInterface
 
     public function getTimesCrashed(): int
     {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_TIMES_CRASHED);
+        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_TIMES_CRASHED);
     }
 
     public function setTimesPanicked(int $timesPanicked): JobInterface
@@ -285,7 +286,7 @@ class Job extends Model implements JobInterface
 
     public function getTimesPanicked(): int
     {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_TIMES_PANICKED);
+        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_TIMES_PANICKED);
     }
 
     public function setCreatedAtDateTime(\DateTime $createdAtDateTime): JobInterface

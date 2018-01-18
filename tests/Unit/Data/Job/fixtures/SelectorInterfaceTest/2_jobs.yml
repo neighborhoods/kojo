@@ -20,6 +20,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -41,6 +42,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_2"
@@ -62,6 +64,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_2"
@@ -83,6 +86,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -104,6 +108,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -125,6 +130,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -146,6 +152,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -167,6 +174,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -188,6 +196,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -209,6 +218,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -230,6 +240,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -251,6 +262,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -272,6 +284,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -293,6 +306,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -314,6 +328,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -335,6 +350,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -356,6 +372,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -377,6 +394,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -398,6 +416,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -419,6 +438,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -440,6 +460,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -461,6 +482,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -482,6 +504,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -503,6 +526,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -524,6 +548,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -545,6 +570,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -566,6 +592,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -587,6 +614,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -608,6 +636,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -629,6 +658,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -650,6 +680,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -671,6 +702,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -692,6 +724,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -713,6 +746,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -734,6 +768,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -755,6 +790,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -776,6 +812,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -797,6 +834,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -818,6 +856,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -839,6 +878,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -860,6 +900,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -881,6 +922,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -902,6 +944,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -923,6 +966,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -944,6 +988,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -965,6 +1010,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -986,6 +1032,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1007,6 +1054,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1028,6 +1076,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1049,6 +1098,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1070,6 +1120,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1091,6 +1142,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1112,6 +1164,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1133,6 +1186,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1154,6 +1208,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1175,6 +1230,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1196,6 +1252,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1217,6 +1274,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1238,6 +1296,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1259,6 +1318,7 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
   -
     nhds_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1280,3 +1340,4 @@ nhds_job:
     times_held: 0
     times_crashed: 0
     times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
