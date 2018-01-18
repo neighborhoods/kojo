@@ -26,22 +26,6 @@ class Service implements ServiceInterface
         return $this;
     }
 
-    public function requestScheduleLimitCheck(): ServiceInterface
-    {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_WAITING;
-
-        return $this;
-    }
-
-    public function requestCompleteFailedScheduleLimitCheck(): ServiceInterface
-    {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_FAILED_SCHEDULE_LIMIT_CHECK;
-
-        return $this;
-    }
-
     public function requestWork(): ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
@@ -55,6 +39,24 @@ class Service implements ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
         $this->_assignedStateUpdate = ServiceInterface::STATE_WAITING;
+
+        return $this;
+    }
+
+    public function requestScheduleLimitCheck(): ServiceInterface
+    {
+        $this->_nextStateRequestUpdate = ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK;
+        $this->_assignedStateUpdate = ServiceInterface::STATE_WAITING;
+
+        return $this;
+    }
+
+    public function requestCompleteFailedScheduleLimitCheck(): ServiceInterface
+    {
+        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_FAILED_SCHEDULE_LIMIT_CHECK;
+        $this->_updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
+            && job.setDeleteAfterDateTime(referenceDateTime.add(autoDeleteDateInterval))';
 
         return $this;
     }
