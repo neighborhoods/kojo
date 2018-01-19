@@ -8,27 +8,19 @@ use NHDS\Jobs\Message\Broker\Type\Collection;
 
 trait AwareTrait
 {
-    protected $_brokerTypeCollection;
     protected $_brokerTypeCode;
+    protected $_messageBroker;
 
     public function setBrokerTypeCollection(Collection $brokerTypeCollection)
     {
-        if ($this->_brokerTypeCollection === null) {
-            $this->_brokerTypeCollection = $brokerTypeCollection;
-        }else {
-            throw new \Exception('Broker type collection is already set.');
-        }
+        $this->_create(CollectionInterface::class, $brokerTypeCollection);
 
         return $this;
     }
 
     protected function _getBrokerTypeCollection(): Collection
     {
-        if ($this->_brokerTypeCollection === null) {
-            throw new \LogicException('Broker type collection is not set.');
-        }
-
-        return $this->_brokerTypeCollection;
+        return $this->_read(CollectionInterface::class);
     }
 
     public function setBrokerTypeCode(string $brokerTypeCode)
