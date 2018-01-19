@@ -1,15 +1,13 @@
-@bwilson - add auto_schedule as a job type type option.
-@bwilson - created_at_date_time as a job field.
-@bwilson - completed_at_date_time as a job field.
+@bwilson - auto-scheduling components.
+@bwilson - implement redis mutex.
+@bwilson - Selector entropy as a DI property.
+@bwilson - clean up remaining aware traits and add factories / repositories as necessary.
+@bwilson - create NHDS independent aliases for all services.
 @bwilson - process_id as a job field.
 @bwilson - process_pool_id as a job field.
-@bwilson - implement redis mutex.
 @bwilson - implement zookpeer mutex.
 @bwilson - check indexes against selects.
 @bwilson - fix changed persistent properties.
 @bwilson - standardize commands.
-@bwilson - maintainer deletes.
 @bwilson - new relic integration.
 @bwilson - SIGTERM Console command.
-@bwilson - Selector entropy as a DI property.
-@bwilson - clean up remaining aware traits and add factories / repositories as necessary.

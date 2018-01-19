@@ -11,17 +11,17 @@ class Factory extends FactoryAbstract implements FactoryInterface
     use Process\Pool\AwareTrait;
     use Process\Pool\Strategy\AwareTrait;
     use Process\Collection\AwareTrait;
-    const PROP_MAX_PROCESSES         = 'max_processes';
-    const PROP_PROCESS_WAIT_THROTTLE = 'process_wait_throttle';
-    const PROP_MAX_ALARM_TIME        = 'max_alarm_time';
+    const PROP_MAX_CHILD_PROCESSES         = 'max_child_processes';
+    const PROP_CHILD_PROCESS_WAIT_THROTTLE = 'child_process_wait_throttle';
+    const PROP_MAX_ALARM_TIME              = 'max_alarm_time';
 
     public function create()
     {
         $processPool = $this->_getProcessPoolClone();
         $processPoolStrategy = $this->_getProcessPoolStrategyClone();
         $processPoolStrategy->setProcessCollection($this->_getProcessCollection());
-        $processPoolStrategy->setMaxProcesses($this->_getMaxProcesses());
-        $processPoolStrategy->setProcessWaitThrottle($this->_getProcessWaitThrottle());
+        $processPoolStrategy->setMaxChildProcesses($this->_getMaxChildProcesses());
+        $processPoolStrategy->setChildProcessWaitThrottle($this->_getChildProcessWaitThrottle());
         $processPoolStrategy->setMaxAlarmTime($this->_getMaxAlarmTime());
         $processPool->setProcessPoolStrategy($processPoolStrategy);
         $processPoolStrategy->setProcessPool($processPool);
@@ -29,28 +29,28 @@ class Factory extends FactoryAbstract implements FactoryInterface
         return $processPool;
     }
 
-    public function setMaxProcesses(int $maxProcesses): FactoryInterface
+    public function setMaxChildProcesses(int $maxChildProcesses): FactoryInterface
     {
-        $this->_create(self::PROP_MAX_PROCESSES, $maxProcesses);
+        $this->_create(self::PROP_MAX_CHILD_PROCESSES, $maxChildProcesses);
 
         return $this;
     }
 
-    protected function _getMaxProcesses(): int
+    protected function _getMaxChildProcesses(): int
     {
-        return $this->_read(self::PROP_MAX_PROCESSES);
+        return $this->_read(self::PROP_MAX_CHILD_PROCESSES);
     }
 
-    public function setProcessWaitThrottle(int $seconds): FactoryInterface
+    public function setChildProcessWaitThrottle(int $seconds): FactoryInterface
     {
-        $this->_create(self::PROP_PROCESS_WAIT_THROTTLE, $seconds);
+        $this->_create(self::PROP_CHILD_PROCESS_WAIT_THROTTLE, $seconds);
 
         return $this;
     }
 
-    protected function _getProcessWaitThrottle(): int
+    protected function _getChildProcessWaitThrottle(): int
     {
-        return $this->_read(self::PROP_PROCESS_WAIT_THROTTLE);
+        return $this->_read(self::PROP_CHILD_PROCESS_WAIT_THROTTLE);
     }
 
     public function setMaxAlarmTime(int $seconds): FactoryInterface

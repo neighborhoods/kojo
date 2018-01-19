@@ -3,57 +3,20 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Process;
 
-use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Jobs\Process\Pool\Strategy;
-use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\ProcessInterface;
 
-class Pool implements PoolInterface
+class Pool extends PoolAbstract implements PoolInterface
 {
-    use Strict\AwareTrait;
-    use Logger\AwareTrait;
-    use Strategy\AwareTrait;
     const SIGNAL_NUMBER = 'signo';
     const PROP_STARTED  = 'started';
-    protected $_info        = [];
-    protected $_processes   = [];
-    protected $_waitSignals = [
+    protected $_signalInformation = [];
+    protected $_childProcesses    = [];
+    protected $_waitSignals       = [
         SIGCHLD,
         SIGALRM,
         SIGINT,
+        SIGTERM,
     ];
-
-    protected function _initialize(): PoolInterface
-    {
-        register_shutdown_function([$this, 'terminateChildProcesses']);
-        pcntl_signal(SIGTERM, [$this, 'terminateChildProcesses']);
-        pcntl_signal(SIGINT, [$this, 'terminateChildProcesses']);
-
-        return $this;
-    }
-
-    public function terminateChildProcesses()
-    {
-        if (!empty($this->_processes)) {
-            $numberOfProcesses = $this->getNumberOfProcesses();
-            $this->_getLogger()->debug("Sending termination signal to {$numberOfProcesses} child processes...");
-            /** @var ProcessInterface $process */
-            foreach ($this->_processes as $process) {
-                $processId = $process->getProcessId();
-                $processTypeCode = $process->getTypeCode();
-                if ($process instanceof ListenerInterface) {
-                    posix_kill($processId, SIGKILL);
-                    $this->_getLogger()->debug("Sent SIGKILL to Process[{$processId}][{$processTypeCode}].");
-                }else {
-                    posix_kill($processId, SIGTERM);
-                    $this->_getLogger()->debug("Sent SIGTERM to Process[{$processId}][{$processTypeCode}].");
-                }
-                unset($this->_processes[$processId]);
-            }
-        }
-
-        return $this;
-    }
 
     public function start(): PoolInterface
     {
@@ -62,20 +25,17 @@ class Pool implements PoolInterface
         $this->_getLogger()->info("Process pool started.");
         // Register signals to be handled.
         pcntl_sigprocmask(SIG_BLOCK, $this->_waitSignals);
-
-        // Initialize pool.
-        $this->_getProcessPoolStrategy()->initializePool();
         while (true) {
             $this->_getLogger()->debug("Waiting for signal...");
-            $this->_info = [];
-            pcntl_sigwaitinfo($this->_waitSignals, $this->_info);
+            $this->_signalInformation = [];
+            pcntl_sigwaitinfo($this->_waitSignals, $this->_signalInformation);
 
-            switch ($this->_info[self::SIGNAL_NUMBER]) {
+            switch ($this->_signalInformation[self::SIGNAL_NUMBER]) {
                 case SIGCHLD:
-                    $this->_handleChildExitSignal();
+                    $this->_childExitSignal();
                     break;
                 case SIGALRM:
-                    $this->_handleAlarmSignal();
+                    $this->_alarmSignal();
                     break;
                 case SIGINT:
                 case SIGTERM:
@@ -92,127 +52,103 @@ class Pool implements PoolInterface
         return $this;
     }
 
-    protected function _handleChildExitSignal(): Pool
+    protected function _childExitSignal(): PoolInterface
     {
-        while ($processId = pcntl_wait($status, WNOHANG)) {
-            if ($processId == -1) {
+        while ($childProcessId = pcntl_wait($status, WNOHANG)) {
+            if ($childProcessId == -1) {
                 $this->_processControlWaitError();
             }
-            $processExitCode = pcntl_wexitstatus($status);
-            $this->_getLogger()->debug("Process[{$processId}] exited with code [{$processExitCode}]");
-            $process = $this->getProcess($processId)->setExitCode($processExitCode);
-            $this->_getProcessPoolStrategy()->processExited($process);
+            $childProcessExitCode = pcntl_wexitstatus($status);
+            $this->_getLogger()->debug("Process[{$childProcessId}] exited with code [{$childProcessExitCode}]");
+            $childProcess = $this->getChildProcess($childProcessId)->setExitCode($childProcessExitCode);
+            $this->_getProcessPoolStrategy()->childProcessExited($childProcess);
             $this->_validateAlarm();
         }
-        $this->_getLogger()->debug('Number of processes in pool: ' . $this->getNumberOfProcesses());
-        $this->_getProcessPoolStrategy()->currentPendingChildExitsComplete();
+        $this->_getLogger()->debug('Number of child processes in pool: ' . $this->getCountOfChildProcesses());
+        $this->_getProcessPoolStrategy()->currentPendingChildExitsCompleted();
 
         return $this;
     }
 
-    public function getNumberOfProcesses(): int
+    public function getCountOfChildProcesses(): int
     {
-        return count($this->_processes);
+        return count($this->_childProcesses);
     }
 
     protected function _processControlWaitError()
     {
         $waitErrorString = var_export(pcntl_strerror(pcntl_get_last_error()), true);
         $this->_getLogger()->emergency('Received wait error, error string: "' . $waitErrorString . '".');
-        $signalInformation = var_export($this->_info, true);
+        $signalInformation = var_export($this->_signalInformation, true);
         $this->_getLogger()->emergency('Received wait error, signal information: ' . $signalInformation);
         throw new \RuntimeException('Unrecoverable process control wait error.');
     }
 
-    protected function _validateAlarm(): Pool
-    {
-        $alarmValue = pcntl_alarm(0);
-        if ($this->isEmpty()) {
-            if ($alarmValue == 0) {
-                $this->_getLogger()->emergency('Process pool has no alarms and no processes.');
-                throw new \LogicException('Invalid Process pool state.');
-            }else {
-                $this->_getLogger()->notice('Process pool only has a set alarm.');
-            }
-        }
-        pcntl_alarm($alarmValue);
-
-        return $this;
-    }
-
-    public function hasAlarm()
-    {
-        $hasAlarm = false;
-        if (($seconds = pcntl_alarm(0)) > 0) {
-            $hasAlarm = true;
-        }
-        pcntl_alarm($seconds);
-
-        return $hasAlarm;
-    }
-
-    protected function _handleAlarmSignal(): Pool
-    {
-        $this->_getProcessPoolStrategy()->receivedAlarm();
-
-        return $this;
-    }
-
-    public function setAlarm(int $seconds): PoolInterface
-    {
-        $this->_getLogger()->debug('Setting alarm for ' . $seconds . ' seconds.');
-        pcntl_alarm($seconds);
-
-        return $this;
-    }
-
-    public function isFull(): bool
-    {
-        return (bool)($this->getNumberOfProcesses() >= $this->_getProcessPoolStrategy()->getMaxProcesses());
-    }
-
-    public function isEmpty(): bool
-    {
-        return (bool)($this->getNumberOfProcesses() === 0);
-    }
-
-    public function addProcess(ProcessInterface $process): PoolInterface
+    public function addChildProcess(ProcessInterface $childProcess): PoolInterface
     {
         if ($this->isFull()) {
             throw new \LogicException('Process pool is full.');
         }else {
-            $process->start();
-            $this->_processes[$process->getProcessId()] = $process;
+            $childProcess->start();
+            $this->_childProcesses[$childProcess->getProcessId()] = $childProcess;
         }
 
         return $this;
     }
 
-    public function getProcess(int $processId): ProcessInterface
+    public function getChildProcess(int $childProcessId): ProcessInterface
     {
-        if (!isset($this->_processes[$processId])) {
-            throw new \LogicException("Process is with process ID {$processId} not set.");
+        if (!isset($this->_childProcesses[$childProcessId])) {
+            throw new \LogicException("Process is with process ID {$childProcessId} not set.");
         }
 
-        return $this->_processes[$processId];
+        return $this->_childProcesses[$childProcessId];
     }
 
-    public function freeProcess(int $processId): PoolInterface
+    public function freeChildProcess(int $childProcessId): PoolInterface
     {
-        if (isset($this->_processes[$processId]) && $this->_processes[$processId] instanceof ProcessInterface) {
-            $typeCode = $this->_processes[$processId]->getTypeCode();
-            $this->_getLogger()->debug("Freeing process related to Process[$processId][$typeCode] from process pool.");
-            unset($this->_processes[$processId]);
+        if (isset($this->_childProcesses[$childProcessId])) {
+            if ($this->_childProcesses[$childProcessId] instanceof ProcessInterface) {
+                $typeCode = $this->_childProcesses[$childProcessId]->getTypeCode();
+                $this->_getLogger()->debug("Freeing child process related to Process[$childProcessId][$typeCode].");
+                unset($this->_childProcesses[$childProcessId]);
+            }else {
+                $message = "Process associated to Process[$childProcessId] is not an expected type.";
+                throw new \UnexpectedValueException($message);
+            }
         }else {
-            throw new \LogicException("Process associated to Process[$processId] is not in the process pool.");
+            throw new \LogicException("Process associated to Process[$childProcessId] is not in the process pool.");
         }
 
         return $this;
     }
 
-    public function emptyProcesses(): PoolInterface
+    public function terminateChildProcesses(): PoolInterface
     {
-        $this->_processes = [];
+        if (!empty($this->_childProcesses)) {
+            $numberOfProcesses = $this->getCountOfChildProcesses();
+            $this->_getLogger()->debug("Sending termination signal to {$numberOfProcesses} child processes...");
+            /** @var ProcessInterface $process */
+            foreach ($this->_childProcesses as $process) {
+                $processId = $process->getProcessId();
+                $processTypeCode = $process->getTypeCode();
+                if ($process instanceof ListenerInterface) {
+                    posix_kill($processId, SIGKILL);
+                    $this->_getLogger()->debug("Sent SIGKILL to Process[{$processId}][{$processTypeCode}].");
+                }else {
+                    posix_kill($processId, SIGTERM);
+                    $this->_getLogger()->debug("Sent SIGTERM to Process[{$processId}][{$processTypeCode}].");
+                }
+                unset($this->_childProcesses[$processId]);
+            }
+        }
+
+        return $this;
+    }
+
+    public function emptyChildProcesses(): PoolInterface
+    {
+        $this->_childProcesses = [];
 
         return $this;
     }

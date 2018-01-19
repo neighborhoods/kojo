@@ -12,11 +12,11 @@ abstract class StrategyAbstract implements StrategyInterface
     use Strict\AwareTrait;
     use Logger\AwareTrait;
     use Collection\AwareTrait;
-    const PROP_MAX_ALARM_TIME          = 'max_alarm_time';
-    const PROP_PROCESS_WAIT_THROTTLE   = 'process_wait_throttle';
-    const PROP_MAX_PROCESSES           = 'max_processes';
-    const PROP_ALARM_PROCESS_TYPE_CODE = 'alarm_process_type_code';
-    const PROP_FILL_PROCESS_TYPE_CODE  = 'fill_process_type_code';
+    const PROP_MAX_ALARM_TIME              = 'max_alarm_time';
+    const PROP_CHILD_PROCESS_WAIT_THROTTLE = 'child_process_wait_throttle';
+    const PROP_MAX_CHILD_PROCESSES         = 'max_child_processes';
+    const PROP_ALARM_PROCESS_TYPE_CODE     = 'alarm_process_type_code';
+    const PROP_FILL_PROCESS_TYPE_CODE      = 'fill_process_type_code';
 
     public function setMaxAlarmTime(int $seconds): StrategyInterface
     {
@@ -30,28 +30,28 @@ abstract class StrategyAbstract implements StrategyInterface
         return $this->_read(self::PROP_MAX_ALARM_TIME);
     }
 
-    public function setProcessWaitThrottle(int $seconds): StrategyInterface
+    public function setChildProcessWaitThrottle(int $seconds): StrategyInterface
     {
-        $this->_create(self::PROP_PROCESS_WAIT_THROTTLE, $seconds);
+        $this->_create(self::PROP_CHILD_PROCESS_WAIT_THROTTLE, $seconds);
 
         return $this;
     }
 
-    public function getProcessWaitThrottle(): int
+    public function getChildProcessWaitThrottle(): int
     {
-        return $this->_read(self::PROP_PROCESS_WAIT_THROTTLE);
+        return $this->_read(self::PROP_CHILD_PROCESS_WAIT_THROTTLE);
     }
 
-    public function setMaxProcesses(int $maxProcesses): StrategyInterface
+    public function setMaxChildProcesses(int $maxChildProcesses): StrategyInterface
     {
-        $this->_create(self::PROP_MAX_PROCESSES, $maxProcesses);
+        $this->_create(self::PROP_MAX_CHILD_PROCESSES, $maxChildProcesses);
 
         return $this;
     }
 
-    public function getMaxProcesses(): int
+    public function getMaxChildProcesses(): int
     {
-        return $this->_read(self::PROP_MAX_PROCESSES);
+        return $this->_read(self::PROP_MAX_CHILD_PROCESSES);
     }
 
     public function setAlarmProcessTypeCode(string $alarmProcessTypeCode): StrategyInterface

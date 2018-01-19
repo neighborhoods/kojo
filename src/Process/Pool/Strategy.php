@@ -11,12 +11,12 @@ class Strategy extends StrategyAbstract
 {
     protected $_pausedListenerProcesses = [];
 
-    public function processExited(ProcessInterface $process): StrategyInterface
+    public function childProcessExited(ProcessInterface $process): StrategyInterface
     {
         if ($process instanceof JobInterface) {
-            $this->_handleJobProcessExit($process);
+            $this->_jobProcessExited($process);
         }elseif ($process instanceof ListenerInterface) {
-            $this->_handleListenerExit($process);
+            $this->_listenerProcessExited($process);
         }else {
             throw new \UnexpectedValueException('Unexpected process class.');
         }
@@ -24,7 +24,7 @@ class Strategy extends StrategyAbstract
         return $this;
     }
 
-    protected function _handleListenerExit(ListenerInterface $listenerProcess): Strategy
+    protected function _listenerProcessExited(ListenerInterface $listenerProcess): Strategy
     {
         if ($listenerProcess->getExitCode() !== 0) {
             $this->_pauseListenerProcess($listenerProcess);
@@ -38,10 +38,10 @@ class Strategy extends StrategyAbstract
             if ($this->_getProcessPool()->isFull()) {
                 $this->_pauseListenerProcess($listenerProcess);
             }else {
-                $this->_getProcessPool()->freeProcess($listenerProcess->getProcessId());
+                $this->_getProcessPool()->freeChildProcess($listenerProcess->getProcessId());
                 $typeCode = $listenerProcess->getTypeCode();
                 $replacementListenerProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
-                $this->_getProcessPool()->addProcess($replacementListenerProcess);
+                $this->_getProcessPool()->addChildProcess($replacementListenerProcess);
             }
         }
 
@@ -52,7 +52,7 @@ class Strategy extends StrategyAbstract
         return $this;
     }
 
-    public function currentPendingChildExitsComplete(): StrategyInterface
+    public function currentPendingChildExitsCompleted(): StrategyInterface
     {
         if ($this->_hasPausedListenerProcess()) {
             $this->_unPauseListenerProcesses();
@@ -65,17 +65,17 @@ class Strategy extends StrategyAbstract
         return $this;
     }
 
-    protected function _handleJobProcessExit(JobInterface $jobProcess): Strategy
+    protected function _jobProcessExited(JobInterface $jobProcess): Strategy
     {
-        $this->_getProcessPool()->freeProcess($jobProcess->getProcessId());
+        $this->_getProcessPool()->freeChildProcess($jobProcess->getProcessId());
         if ($jobProcess->getExitCode() !== 0) {
             $processId = $jobProcess->getProcessId();
             $this->_getLogger()->debug("Replacing process for exit error from Process[$processId].");
             $this->_getLogger()->debug("Throttling replacement process for Process[$processId]].");
             $typeCode = $jobProcess->getTypeCode();
             $replacementProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
-            $replacementProcess->setThrottle($this->getProcessWaitThrottle());
-            $this->_getProcessPool()->addProcess($replacementProcess);
+            $replacementProcess->setThrottle($this->getChildProcessWaitThrottle());
+            $this->_getProcessPool()->addChildProcess($replacementProcess);
             if (!$this->_getProcessPool()->hasAlarm()) {
                 $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
             }
@@ -96,7 +96,7 @@ class Strategy extends StrategyAbstract
             }else {
                 $alarmProcessTypeCode = $this->_getAlarmProcessTypeCode();
                 $alarmProcess = $this->_getProcessCollection()->getProcessPrototypeClone($alarmProcessTypeCode);
-                $this->_getProcessPool()->addProcess($alarmProcess);
+                $this->_getProcessPool()->addChildProcess($alarmProcess);
             }
         }
         if (!$this->_getProcessPool()->hasAlarm()) {
@@ -111,13 +111,13 @@ class Strategy extends StrategyAbstract
         $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
         $this->_getProcessCollection()->applyProcessPool($this->_getProcessPool());
         foreach ($this->_getProcessCollection()->getIterator() as $process) {
-            $this->_getProcessPool()->addProcess($process);
+            $this->_getProcessPool()->addChildProcess($process);
         }
         if ($this->_hasFillProcessTypeCode()) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();
                 $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);
-                $this->_getProcessPool()->addProcess($fillProcess);
+                $this->_getProcessPool()->addChildProcess($fillProcess);
             }
         }
 
@@ -129,7 +129,7 @@ class Strategy extends StrategyAbstract
         $listenerProcessId = $listenerProcess->getProcessId();
         if (!isset($this->_pausedListenerProcesses[$listenerProcessId])) {
             $this->_getLogger()->debug('Pausing Listener[' . $listenerProcessId . '].');
-            $this->_getProcessPool()->freeProcess($listenerProcessId);
+            $this->_getProcessPool()->freeChildProcess($listenerProcessId);
             $this->_pausedListenerProcesses[$listenerProcessId] = $listenerProcess;
         }else {
             throw new \LogicException('Listener process is already paused.');
@@ -156,7 +156,7 @@ class Strategy extends StrategyAbstract
                     }
                     if (!$this->_getProcessPool()->isFull()) {
                         unset($this->_pausedListenerProcesses[$processId]);
-                        $this->_getProcessPool()->addProcess($newListenerProcess);
+                        $this->_getProcessPool()->addChildProcess($newListenerProcess);
                     }
                 }else {
                     break;

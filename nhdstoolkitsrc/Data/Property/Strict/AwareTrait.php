@@ -9,9 +9,7 @@ trait AwareTrait
 
     protected function _create(string $propertyName, $propertyValue)
     {
-        if ($this->_exists($propertyName)) {
-            throw new \LogicException($propertyName . ' is already created.');
-        }
+        assert(!$this->_exists($propertyName), new \LogicException($propertyName . ' is already created.'));
         $this->_strictProperties[$propertyName] = $propertyValue;
 
         return $this;
@@ -19,18 +17,14 @@ trait AwareTrait
 
     protected function &_read(string $propertyName)
     {
-        if (!$this->_exists($propertyName)) {
-            throw new \LogicException($propertyName . ' is not created.');
-        }
+        assert($this->_exists($propertyName), new \LogicException($propertyName . ' is not created.'));
 
         return $this->_strictProperties[$propertyName];
     }
 
     protected function _update(string $propertyName, $propertyValue)
     {
-        if (!$this->_exists($propertyName)) {
-            throw new \LogicException($propertyName . ' is not created.');
-        }
+        assert($this->_exists($propertyName), new \LogicException($propertyName . ' is not created.'));
         $this->_strictProperties[$propertyName] = $propertyValue;
 
         return $this;
@@ -45,9 +39,7 @@ trait AwareTrait
 
     protected function _delete(string $propertyName)
     {
-        if (!$this->_exists($propertyName)) {
-            throw new \LogicException($propertyName . ' is not created.');
-        }
+        assert($this->_exists($propertyName), new \LogicException($propertyName . ' is not created.'));
         unset($this->_strictProperties[$propertyName]);
 
         return $this;

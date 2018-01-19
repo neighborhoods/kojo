@@ -27,4 +27,10 @@ interface ProcessInterface
     public function setTypeCode(string $typeCode): ProcessInterface;
 
     public function setProcessPool(PoolInterface $pool);
+
+    public function receivedSignal();
+
+    public function setParentProcessPath(string $parentProcessPath): ProcessInterface;
+
+    public function getPath(): string;
 }

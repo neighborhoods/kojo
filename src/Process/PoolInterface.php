@@ -18,17 +18,21 @@ interface PoolInterface
 
     public function isEmpty(): bool;
 
-    public function addProcess(ProcessInterface $process): PoolInterface;
+    public function addChildProcess(ProcessInterface $childProcess): PoolInterface;
 
-    public function getProcess(int $processId): ProcessInterface;
+    public function getChildProcess(int $childProcessId): ProcessInterface;
 
-    public function freeProcess(int $processId): PoolInterface;
+    public function freeChildProcess(int $childProcessId): PoolInterface;
 
-    public function emptyProcesses(): PoolInterface;
+    public function emptyChildProcesses(): PoolInterface;
 
-    public function hasAlarm();
+    public function hasAlarm(): bool;
 
-    public function terminateChildProcesses();
+    public function terminateChildProcesses(): PoolInterface;
 
-    public function getNumberOfProcesses(): int;
+    public function getCountOfChildProcesses(): int;
+
+    public function setProcess(ProcessInterface $process);
+
+    public function getProcessPath(): string;
 }

@@ -16,5 +16,5 @@ interface MaintainerInterface
 
     public function setJobCollectionScheduleLimit(ScheduleLimitInterface $jobCollectionScheduleLimit);
 
-    public function delete(): MaintainerInterface;
+    public function deleteCompletedJobs(): MaintainerInterface;
 }

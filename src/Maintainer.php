@@ -28,7 +28,7 @@ class Maintainer implements MaintainerInterface
     use Update\Panic\Factory\AwareTrait;
     use Logger\AwareTrait;
 
-    public function delete(): MaintainerInterface
+    public function deleteCompletedJobs(): MaintainerInterface
     {
         $this->_getMaintainerDelete()->deleteCompletedJobs();
 

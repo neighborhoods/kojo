@@ -26,6 +26,11 @@ class Server extends ProcessAbstract implements ServerInterface
         return $this;
     }
 
+    protected function _getParentProcessPath(): string
+    {
+        return '';
+    }
+
     public function start(): ProcessInterface
     {
         $this->_initialize();
@@ -35,8 +40,9 @@ class Server extends ProcessAbstract implements ServerInterface
         }else {
             $this->_getLogger()->info("Process pool server started.");
             $this->setProcessPool($this->_getProcessPoolFactory()->create());
+            $this->_getProcessPool()->setProcess($this);
             $this->_getProcessPool()->start();
-            $this->_getProcessPool()->emptyProcesses();
+            $this->_getProcessPool()->emptyChildProcesses();
             $this->_deleteProcessPool();
             $this->_getLogger()->info("Stopping process pool server.");
             $this->_getSemaphore()->releaseLock($this->_getServerSemaphoreResource());

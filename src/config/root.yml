@@ -4,9 +4,6 @@ services:
     autoconfigure: false
     public: false
 imports:
-   # Parameters.
-   - { resource: parameters.yml }
-
    # External dependencies.
    - { resource: dependencies.yml }
 

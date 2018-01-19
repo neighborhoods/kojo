@@ -15,23 +15,23 @@ interface StrategyInterface
 
     public function initializePool(): StrategyInterface;
 
-    public function processExited(ProcessInterface $process): StrategyInterface;
+    public function childProcessExited(ProcessInterface $process): StrategyInterface;
 
     public function receivedAlarm(): StrategyInterface;
 
     public function setMaxAlarmTime(int $seconds): StrategyInterface;
 
-    public function setProcessWaitThrottle(int $seconds): StrategyInterface;
+    public function setChildProcessWaitThrottle(int $seconds): StrategyInterface;
 
-    public function setMaxProcesses(int $maxProcesses): StrategyInterface;
+    public function setMaxChildProcesses(int $maxChildProcesses): StrategyInterface;
 
     public function getMaxAlarmTime(): int;
 
-    public function getProcessWaitThrottle(): int;
+    public function getChildProcessWaitThrottle(): int;
 
-    public function getMaxProcesses(): int;
+    public function getMaxChildProcesses(): int;
 
-    public function currentPendingChildExitsComplete(): StrategyInterface;
+    public function currentPendingChildExitsCompleted(): StrategyInterface;
 
     public function setAlarmProcessTypeCode(string $alarmProcessTypeCode): StrategyInterface;
 

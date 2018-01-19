@@ -36,7 +36,7 @@ class Scheduler implements SchedulerInterface
     const SCHEDULER_COLLECTION_NAME            = 'scheduler_collection';
     protected $_scheduleMinutesNotInCache = [];
 
-    public function schedule(): SchedulerInterface
+    public function scheduleStaticJobs(): SchedulerInterface
     {
         if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->testAndSetLock()) {
             try{

@@ -6,9 +6,12 @@ namespace NHDS\Jobs\Process\Listener;
 use NHDS\Jobs\Process\Forkable;
 use NHDS\Jobs\Process\ListenerAbstract;
 use NHDS\Jobs\Process\ListenerInterface;
+use NHDS\Jobs\Worker\Bootstrap;
 
 class Sqs extends ListenerAbstract implements CommandInterface
 {
+    use Bootstrap\AwareTrait;
+
     public function processMessages(): ListenerInterface
     {
         // TODO: Implement processMessages() method.
@@ -21,6 +24,8 @@ class Sqs extends ListenerAbstract implements CommandInterface
 
     protected function _run(): Forkable
     {
-        // TODO: Implement _run() method.
+        $this->_getBootstrap()->instantiate();
+
+        return $this;
     }
 }

@@ -25,7 +25,7 @@ abstract class Forkable extends ProcessAbstract implements ProcessInterface
             // This is executed in the Process.
             $this->_initialize();
             if ($this->_hasProcessPool()) {
-                $this->_getProcessPool()->emptyProcesses();
+                $this->_getProcessPool()->emptyChildProcesses();
                 $this->_deleteProcessPool();
             }
 

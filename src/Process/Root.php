@@ -18,6 +18,7 @@ class Root extends Forkable
     protected function _run(): Forkable
     {
         $this->setProcessPool($this->_getProcessPoolFactory()->create());
+        $this->_getProcessPool()->setProcess($this);
         $this->_getProcessPool()->start();
 
         return $this;

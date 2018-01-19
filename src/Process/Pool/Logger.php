@@ -13,7 +13,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     use Time\AwareTrait;
     use Strict\AwareTrait;
     const PAD_PID         = 6;
-    const PAD_TYPE_CODE   = 18;
+    const PAD_PATH        = 50;
     const PROP_IS_ENABLED = 'is_enabled';
 
     public function setProcess(ProcessInterface $process): LoggerInterface
@@ -33,10 +33,10 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
         if ($this->_isEnabled() === true) {
             if ($this->_exists(ProcessInterface::class)) {
                 $processId = str_pad((string)$this->_getProcess()->getProcessId(), self::PAD_PID, ' ', STR_PAD_LEFT);
-                $typeCode = str_pad($this->_getProcess()->getTypeCode(), self::PAD_TYPE_CODE, ' ');
+                $typeCode = str_pad($this->_getProcess()->getPath(), self::PAD_PATH, ' ');
             }else {
                 $processId = str_pad('', self::PAD_PID, '?', STR_PAD_LEFT);
-                $typeCode = str_pad('', self::PAD_TYPE_CODE, '?');
+                $typeCode = str_pad('', self::PAD_PATH, '?');
             }
 
             $level = str_pad($level, 12, ' ');
