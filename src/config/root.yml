@@ -12,7 +12,11 @@ imports:
    - { resource: Scheduler.yml }
    - { resource: Maintainer.yml }
    - { resource: Data/Job/Selector.yml }
+
+   # Manger delegate.
    - { resource: Maintainer/Delete.yml }
+   - { resource: Scheduler/Time.yml }
+   - { resource: Scheduler/Cache.yml }
 
   # Data.
    - { resource: Data/Job/Type.yml }

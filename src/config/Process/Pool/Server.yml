@@ -6,3 +6,4 @@ services:
       - [setSemaphore, ['@nhds.jobs.semaphore']]
       - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-server']]
       - [setProcessPoolFactory, ['@process.pool.factory-server']]
+      - [setTypeCode, ['server']]

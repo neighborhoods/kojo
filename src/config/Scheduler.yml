@@ -4,9 +4,10 @@ services:
     shared: false
     calls:
       - [setTime, ['@nhds.toolkit.time']]
-      - [setCacheItemPool, ['@symfony.component.cache.adpater.redisadapter']]
       - [setSchedulerJobCollection, ['@nhds.jobs.data.job.collection.scheduler']]
       - [setSchedulerJobTypeCollection, ['@nhds.jobs.data.job.type.collection.scheduler']]
       - [setJobServiceCreateFactory, ['@nhds.jobs.data.job.service.create.factory']]
-      - [setMinutesToScheduleAheadFor, [5]]
       - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-schedule']]
+      - [setSchedulerTime, ['@nhds.jobs.scheduler.time']]
+      - [setSchedulerCache, ['@nhds.jobs.scheduler.cache']]
+      - [setMessageBroker, ['@nhds.jobs.message.broker.redis']]

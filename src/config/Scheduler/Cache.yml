@@ -1,0 +1,8 @@
+services:
+  nhds.jobs.scheduler.cache:
+    class: NHDS\Jobs\Scheduler\Cache
+    shared: true
+    calls:
+      - [setSchedulerTime, ['@nhds.jobs.scheduler.time']]
+      - [setCacheItemPool, ['@symfony.component.cache.adpater.redisadapter']]
+      - [setTime, ['@nhds.toolkit.time']]

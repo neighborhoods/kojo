@@ -86,10 +86,10 @@ class Strategy extends StrategyAbstract
 
     public function receivedAlarm(): StrategyInterface
     {
-        $this->_getLogger()->debug("Received alarm.");
+        $this->_getLogger()->debug("Received alarm signal.");
         if ($this->_getProcessPool()->isFull()) {
             $this->_getLogger()->notice("Process pool is full.");
-            $this->_getLogger()->notice("Could not allocate process for alarm request.");
+            $this->_getLogger()->notice("Could not allocate process for alarm signal.");
         }else {
             if ($this->_hasPausedListenerProcess()) {
                 $this->_unPauseListenerProcesses();

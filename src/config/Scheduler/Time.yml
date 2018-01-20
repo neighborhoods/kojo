@@ -1,0 +1,7 @@
+services:
+  nhds.jobs.scheduler.time:
+    class: NHDS\Jobs\Scheduler\Time
+    shared: true
+    calls:
+      - [setMinutesToScheduleAheadFor, [5]]
+      - [setTime, ['@nhds.toolkit.time']]

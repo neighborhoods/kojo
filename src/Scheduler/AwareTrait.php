@@ -18,4 +18,21 @@ trait AwareTrait
     {
         return $this->_read(SchedulerInterface::class);
     }
+
+    protected function _getSchedulerClone(): SchedulerInterface
+    {
+        return clone $this->_getScheduler();
+    }
+
+    protected function _hasScheduler(): bool
+    {
+        return $this->_exists(SchedulerInterface::class);
+    }
+
+    protected function _deleteScheduler()
+    {
+        $this->_delete(SchedulerInterface::class);
+
+        return $this;
+    }
 }
