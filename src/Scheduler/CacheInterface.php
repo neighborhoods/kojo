@@ -15,13 +15,7 @@ interface CacheInterface
 
     public function setCacheItemPool(CacheItemPoolInterface $cacheItemPool);
 
-    public function getScheduledMinutesNotInCache();
-
-    public function isMinuteScheduledInCache(\DateTime $referenceMinuteDateTime): bool;
-
-    public function getScheduledKeyLifetime(): \DateTime;
+    public function getMinutesNotInCache(): array;
 
     public function cacheScheduledMinutes(\DateTime $scheduledMinute): CacheInterface;
-
-    public function getMinutesNotInCache(): array;
 }

@@ -8,6 +8,4 @@ services:
       - [setSchedulerJobTypeCollection, ['@nhds.jobs.data.job.type.collection.scheduler']]
       - [setJobServiceCreateFactory, ['@nhds.jobs.data.job.service.create.factory']]
       - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-schedule']]
-      - [setSchedulerTime, ['@nhds.jobs.scheduler.time']]
       - [setSchedulerCache, ['@nhds.jobs.scheduler.cache']]
-      - [setMessageBroker, ['@nhds.jobs.message.broker.redis']]
