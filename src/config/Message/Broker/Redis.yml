@@ -8,3 +8,5 @@ services:
       - [setHost, ['redis']]
       - [setSubscriptionChannelName, ['job_listener_subscribe']]
       - [setPublishChannelName, ['job_listener_publish']]
+  message.broker.redis:
+    alias: nhds.jobs.message.broker.redis

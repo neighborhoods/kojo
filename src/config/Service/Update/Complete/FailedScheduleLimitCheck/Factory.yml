@@ -1,0 +1,8 @@
+services:
+  nhds.jobs.service.update.complete.failedschedulelimitcheck.factory:
+    class: NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheck\Factory
+    calls:
+      - [setStateService, ['@state.service']]
+      - [setServiceUpdateCompleteFailedScheduleLimitCheck, ['@service.update.complete.failedschedulelimitcheck']]
+  service.update.complete.failedschedulelimitcheck.factory:
+    alias: nhds.jobs.service.update.complete.failedschedulelimitcheck.factory

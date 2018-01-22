@@ -1,3 +1,5 @@
 services:
   nhds.jobs.console.command.process.pool.server.start:
     class: NHDS\Jobs\Console\Command\Process\Pool\Server\Start
+  console.command.process.pool.server.start:
+    alias: nhds.jobs.console.command.process.pool.server.start

@@ -1,0 +1,7 @@
+services:
+  nhds.jobs.type.service.create:
+    class: NHDS\Jobs\Type\Service\Create
+    calls:
+      - [setJobType, ['@data.job.type']]
+  type.service.create:
+    alias: nhds.jobs.type.service.create

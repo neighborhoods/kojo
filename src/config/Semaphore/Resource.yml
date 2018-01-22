@@ -4,6 +4,8 @@ services:
     shared: false
     calls:
       - [setIsBlocking, [false]]
+  semaphore.resource-job:
+    alias: nhds.jobs.semaphore.resource-job
   nhds.jobs.semaphore.resource-maintainer_delete:
     class: NHDS\Jobs\Semaphore\Resource
     shared: false
@@ -11,6 +13,8 @@ services:
       - [setResourceName, ['maintainer_delete.lock']]
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
+  semaphore.resource-maintainer_delete:
+    alias: nhds.jobs.semaphore.resource-maintainer_delete
   nhds.jobs.semaphore.resource-update_pending_jobs:
     class: NHDS\Jobs\Semaphore\Resource
     shared: false
@@ -18,6 +22,8 @@ services:
       - [setResourceName, ['update_pending_jobs.lock']]
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
+  semaphore.resource-update_pending_jobs:
+    alias: nhds.jobs.semaphore.resource-update_pending_jobs
   nhds.jobs.semaphore.resource-reschedule_jobs:
     class: NHDS\Jobs\Semaphore\Resource
     shared: false
@@ -25,6 +31,8 @@ services:
       - [setResourceName, ['reschedule_jobs.lock']]
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
+  semaphore.resource-reschedule_jobs:
+    alias: nhds.jobs.semaphore.resource-reschedule_jobs
   nhds.jobs.semaphore.resource-schedule:
     class: NHDS\Jobs\Semaphore\Resource
     calls:
@@ -32,6 +40,8 @@ services:
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
     shared: false
+  semaphore.resource-schedule:
+    alias: nhds.jobs.semaphore.resource-schedule
   nhds.jobs.semaphore.resource-server:
     class: NHDS\Jobs\Semaphore\Resource
     shared: false
@@ -39,3 +49,5 @@ services:
       - [setResourceName, ['server.lock']]
       - [setResourcePath, ['nhds/jobs']]
       - [setIsBlocking, [false]]
+  semaphore.resource-server:
+    alias: nhds.jobs.semaphore.resource-server

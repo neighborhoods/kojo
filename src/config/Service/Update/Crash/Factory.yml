@@ -1,0 +1,8 @@
+services:
+  nhds.jobs.service.update.crash.factory:
+    class: NHDS\Jobs\Service\Update\Crash\Factory
+    calls:
+      - [setStateService, ['@state.service']]
+      - [setServiceUpdateCrash, ['@service.update.crash']]
+  service.update.crash.factory:
+    alias: nhds.jobs.service.update.crash.factory

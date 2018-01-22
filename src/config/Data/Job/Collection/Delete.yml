@@ -2,6 +2,8 @@ services:
   nhds.jobs.data.job.collection.delete:
     class: NHDS\Jobs\Data\Job\Collection\Delete
     calls:
-      - [setModel, ['@nhds.jobs.data.job']]
-      - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-job']]
-      - [setIterator, ['@nhds.jobs.data.job.collection.iterator']]
+      - [setModel, ['@data.job']]
+      - [addDbConnectionContainer, ['@db.connection.container-job']]
+      - [setIterator, ['@data.job.collection.iterator']]
+  data.job.collection.delete:
+    alias: nhds.jobs.data.job.collection.delete

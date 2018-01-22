@@ -3,7 +3,11 @@ services:
     class: NHDS\Jobs\Db\Connection\Container
     calls:
       - [setName, ["@=constant('NHDS\\\\Jobs\\\\Db\\\\Connection\\\\ContainerInterface::NAME_JOB')"]]
+  db.connection.container-job:
+    alias: nhds.jobs.db.connection.container-job
   nhds.jobs.db.connection.container-schema:
     class: NHDS\Jobs\Db\Connection\Container
     calls:
       - [setName, ["@=constant('NHDS\\\\Jobs\\\\Db\\\\Connection\\\\ContainerInterface::NAME_SCHEMA')"]]
+  db.connection.container-schema:
+    alias: nhds.jobs.db.connection.container-schema

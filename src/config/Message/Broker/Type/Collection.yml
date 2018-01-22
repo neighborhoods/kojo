@@ -2,4 +2,6 @@ services:
   nhds.jobs.message.broker.type.collection-job:
     class: NHDS\Jobs\Message\Broker\Type\Collection
     calls:
-      - [addBrokerType, ['job_broker', '@nhds.jobs.message.broker.redis']]
+      - [addBrokerType, ['job_broker', '@message.broker.redis']]
+  message.broker.type.collection-job:
+    alias: nhds.jobs.message.broker.type.collection-job

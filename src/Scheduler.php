@@ -7,7 +7,7 @@ use NHDS\Toolkit\Time;
 use Cron\CronExpression;
 use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Data\Job\Service\Create;
+use NHDS\Jobs\Service\Create;
 
 class Scheduler implements SchedulerInterface
 {
@@ -49,7 +49,7 @@ class Scheduler implements SchedulerInterface
             foreach ($schedulerCache->getMinutesNotInCache() as $unscheduledMinute => $unscheduledDateTime) {
                 if ($cronExpression->isDue($unscheduledDateTime)) {
                     if (!isset($this->_getSchedulerJobCollection()->getRecords()[$typeCode][$unscheduledMinute])) {
-                        $create = $this->_getJobServiceCreateFactory()->create();
+                        $create = $this->_getServiceCreateFactory()->create();
                         $create->setJobTypeCode($typeCode);
                         $create->setWorkAtDateTime($unscheduledDateTime);
                         $create->save();

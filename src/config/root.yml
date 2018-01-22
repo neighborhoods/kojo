@@ -11,7 +11,7 @@ imports:
    - { resource: Foreman.yml }
    - { resource: Scheduler.yml }
    - { resource: Maintainer.yml }
-   - { resource: Data/Job/Selector.yml }
+   - { resource: Selector.yml }
 
    # Manger delegate.
    - { resource: Maintainer/Delete.yml }
@@ -20,13 +20,9 @@ imports:
 
   # Data.
    - { resource: Data/Job/Type.yml }
-   - { resource: Data/Job/Type/Repository.yml }
-   - { resource: Data/Job/Type/Service/Create.yml }
-   - { resource: Data/Job/Type/Collection.yml }
    - { resource: Data/Job/Type/Collection/Iterator.yml}
    - { resource: Data/Job/Type/Collection/Scheduler.yml }
    - { resource: Data/Job.yml }
-   - { resource: Data/Job/State/Service.yml }
    - { resource: Data/Job/Collection/Scheduler.yml }
    - { resource: Data/Job/Collection/Selector.yml }
    - { resource: Data/Job/Collection/Iterator.yml }
@@ -34,31 +30,41 @@ imports:
    - { resource: Data/Job/Collection/CrashDetection.yml }
    - { resource: Data/Job/Collection/Delete.yml }
    - { resource: Data/Job/Collection/Schedule/LimitCheck.yml }
-   - { resource: Data/Job/Service/Create.yml }
-   - { resource: Data/Job/Service/Create/Factory.yml }
-   - { resource: Data/Job/Service/Update/Crash.yml }
-   - { resource: Data/Job/Service/Update/Crash/Factory.yml }
-   - { resource: Data/Job/Service/Update/Work.yml }
-   - { resource: Data/Job/Service/Update/Work/Factory.yml }
-   - { resource: Data/Job/Service/Update/Complete/FailedScheduleLimitCheck.yml }
-   - { resource: Data/Job/Service/Update/Complete/FailedScheduleLimitCheck/Factory.yml }
-   - { resource: Data/Job/Service/Update/Panic.yml }
-   - { resource: Data/Job/Service/Update/Panic/Factory.yml }
-   - { resource: Data/Job/Service/Update/Wait.yml }
-   - { resource: Data/Job/Service/Update/Wait/Factory.yml }
-   - { resource: Data/Job/Service/Update/Hold.yml }
-   - { resource: Data/Job/Service/Update/Hold/Factory.yml }
-   - { resource: Data/Job/Service/Update/Retry.yml }
-   - { resource: Data/Job/Service/Update/Retry/Factory.yml }
-   - { resource: Data/Job/Service/Update/Complete/Failed.yml }
-   - { resource: Data/Job/Service/Update/Complete/Failed/Factory.yml }
-   - { resource: Data/Job/Service/Update/Complete/Success.yml }
-   - { resource: Data/Job/Service/Update/Complete/Success/Factory.yml }
+
+  # Repository.
+   - { resource: Type/Repository.yml }
+   - { resource: Type/Service/Create.yml }
+
+  # Factory.
+   - { resource: Service/Update/Crash/Factory.yml }
+   - { resource: Service/Create/Factory.yml }
+   - { resource: Service/Update/Work/Factory.yml }
+   - { resource: Service/Update/Complete/FailedScheduleLimitCheck/Factory.yml }
+   - { resource: Service/Update/Panic/Factory.yml }
+   - { resource: Service/Update/Wait/Factory.yml }
+   - { resource: Service/Update/Hold/Factory.yml }
+   - { resource: Service/Update/Retry/Factory.yml }
+   - { resource: Service/Update/Complete/Failed/Factory.yml }
+   - { resource: Service/Update/Complete/Success/Factory.yml }
+   - { resource: Semaphore/Resource/Factory.yml }
+   - { resource: Process/Pool/Factory.yml }
+
+  # Services.
+   - { resource: State/Service.yml }
+   - { resource: Service/Create.yml }
+   - { resource: Service/Update/Crash.yml }
+   - { resource: Service/Update/Work.yml }
+   - { resource: Service/Update/Complete/FailedScheduleLimitCheck.yml }
+   - { resource: Service/Update/Panic.yml }
+   - { resource: Service/Update/Wait.yml }
+   - { resource: Service/Update/Hold.yml }
+   - { resource: Service/Update/Retry.yml }
+   - { resource: Service/Update/Complete/Failed.yml }
+   - { resource: Service/Update/Complete/Success.yml }
 
   # Semaphore.
    - { resource: Semaphore/Resource.yml }
    - { resource: Semaphore/Resource/Owner/Job.yml }
-   - { resource: Semaphore/Resource/Factory.yml }
    - { resource: Semaphore/Mutex/Flock.yml }
    - { resource: Semaphore.yml }
 
@@ -69,7 +75,6 @@ imports:
    - { resource: Process/Pool/Logger.yml }
    - { resource: Process/Pool/Server.yml }
    - { resource: Process/Pool/Strategy.yml }
-   - { resource: Process/Pool/Factory.yml }
    - { resource: Process/Pool.yml }
    - { resource: Process/Collection.yml }
    - { resource: Process/Collection/Iterator.yml }

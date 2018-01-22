@@ -1,0 +1,6 @@
+services:
+  nhds.jobs.service.update.complete.success:
+    class: NHDS\Jobs\Service\Update\Complete\Success
+    shared: false
+  service.update.complete.success:
+    alias: nhds.jobs.service.update.complete.success

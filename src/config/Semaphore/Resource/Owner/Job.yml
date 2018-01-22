@@ -1,3 +1,5 @@
 services:
-  nhds.semaphore.resource.owner.job:
+  nhds.jobs.semaphore.resource.owner.job:
     class: NHDS\Jobs\Semaphore\Resource\Owner\Job
+  semaphore.resource.owner.job:
+    alias: nhds.jobs.semaphore.resource.owner.job

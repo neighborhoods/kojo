@@ -2,9 +2,11 @@ services:
   nhds.jobs.maintainer.delete:
     class: NHDS\Jobs\Maintainer\Delete
     calls:
-      - [setLogger, ['@nhds.jobs.process.pool.logger']]
-      - [setJobCollectionDelete, ['@nhds.jobs.data.job.collection.delete']]
-      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-maintainer_delete']]
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [setLogger, ['@process.pool.logger']]
+      - [setJobCollectionDelete, ['@data.job.collection.delete']]
+      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-maintainer_delete']]
+      - [setSemaphore, ['@semaphore']]
       - [setPageSize, [50]]
       - [setOffset, [50]]
+  maintainer.delete:
+    alias: nhds.jobs.maintainer.delete

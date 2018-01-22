@@ -15,7 +15,9 @@ services:
       - [setMaxAlarmTime, ['%process_pool_strategy.max_alarm_time%']]
       - [setProcessPool, ['@process.pool']]
       - [setProcessPoolStrategy, ['@process.pool.strategy']]
-      - [setProcessCollection, ['@nhds.jobs.process.collection']]
+      - [setProcessCollection, ['@process.collection']]
+  process.pool.factory:
+    alias: nhds.jobs.process.pool.factory
   nhds.jobs.process.pool.factory-server:
     class: NHDS\Jobs\Process\Pool\Factory
     shared: false
@@ -25,8 +27,6 @@ services:
       - [setMaxAlarmTime, ['%process_pool_strategy-server.max_alarm_time%']]
       - [setProcessPool, ['@process.pool']]
       - [setProcessPoolStrategy, ['@process.pool.strategy-server']]
-      - [setProcessCollection, ['@nhds.jobs.process.collection-server']]
-  process.pool.factory:
-    alias: nhds.jobs.process.pool.factory
+      - [setProcessCollection, ['@process.collection-server']]
   process.pool.factory-server:
     alias: nhds.jobs.process.pool.factory-server

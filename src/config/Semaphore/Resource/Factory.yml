@@ -3,42 +3,54 @@ services:
     class: NHDS\Jobs\Semaphore\Resource\Factory
     calls:
       - [setName, ['job']]
-      - [setSemaphoreResource, ['@nhds.jobs.semaphore.resource-job']]
-      - [setSemaphoreResourceOwner, ['@nhds.semaphore.resource.owner.job']]
-      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [setSemaphoreResource, ['@semaphore.resource-job']]
+      - [setSemaphoreResourceOwner, ['@semaphore.resource.owner.job']]
+      - [setMutex, ['@semaphore.mutex.flock']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-job:
+    alias: nhds.jobs.semaphore.resource.factory-job
   nhds.jobs.semaphore.resource.factory-maintainer_delete:
     class: NHDS\Jobs\Semaphore\Resource\Factory
     calls:
       - [setName, ['maintainer_delete']]
-      - [setSemaphoreResource, ['@nhds.jobs.semaphore.resource-maintainer_delete']]
-      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [setSemaphoreResource, ['@semaphore.resource-maintainer_delete']]
+      - [setMutex, ['@semaphore.mutex.flock']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-maintainer_delete:
+    alias: nhds.jobs.semaphore.resource.factory-maintainer_delete
   nhds.jobs.semaphore.resource.factory-update_pending_jobs:
     class: NHDS\Jobs\Semaphore\Resource\Factory
     calls:
       - [setName, ['update_pending_jobs']]
-      - [setSemaphoreResource, ['@nhds.jobs.semaphore.resource-update_pending_jobs']]
-      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [setSemaphoreResource, ['@semaphore.resource-update_pending_jobs']]
+      - [setMutex, ['@semaphore.mutex.flock']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-update_pending_jobs:
+    alias: nhds.jobs.semaphore.resource.factory-update_pending_jobs
   nhds.jobs.semaphore.resource.factory-reschedule_jobs:
     class: NHDS\Jobs\Semaphore\Resource\Factory
     calls:
       - [setName, ['reschedule_jobs']]
-      - [setSemaphoreResource, ['@nhds.jobs.semaphore.resource-reschedule_jobs']]
-      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [setSemaphoreResource, ['@semaphore.resource-reschedule_jobs']]
+      - [setMutex, ['@semaphore.mutex.flock']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-reschedule_jobs:
+    alias: nhds.jobs.semaphore.resource.factory-reschedule_jobs
   nhds.jobs.semaphore.resource.factory-schedule:
     class: NHDS\Jobs\Semaphore\Resource\Factory
     calls:
       - [setName, ['schedule']]
-      - [setSemaphoreResource, ['@nhds.jobs.semaphore.resource-schedule']]
-      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [setSemaphoreResource, ['@semaphore.resource-schedule']]
+      - [setMutex, ['@semaphore.mutex.flock']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-schedule:
+    alias: nhds.jobs.semaphore.resource.factory-schedule
   nhds.jobs.semaphore.resource.factory-server:
     class: NHDS\Jobs\Semaphore\Resource\Factory
     calls:
       - [setName, ['server']]
-      - [setSemaphoreResource, ['@nhds.jobs.semaphore.resource-server']]
-      - [setMutex, ['@nhds.jobs.semaphore.mutex.flock']]
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
+      - [setSemaphoreResource, ['@semaphore.resource-server']]
+      - [setMutex, ['@semaphore.mutex.flock']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-server:
+    alias: nhds.jobs.semaphore.resource.factory-server

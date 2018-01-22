@@ -1,9 +1,0 @@
-services:
-  nhds.jobs.data.job.service.create.factory:
-    class: NHDS\Jobs\Data\Job\Service\Create\Factory
-    calls:
-      - [setJobStateService, ['@nhds.jobs.data.job.state.service']]
-      - [setJobServiceCreate, ['@nhds.jobs.data.job.service.create']]
-      - [setJobCollectionScheduleLimit, ['@nhds.jobs.data.job.collection.schedulelimit']]
-      - [setJobType, ['@nhds.jobs.data.job.type']]
-      - [setJob, ['@nhds.jobs.data.job']]

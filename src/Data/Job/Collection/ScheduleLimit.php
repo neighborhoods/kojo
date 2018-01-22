@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Data\Job\Collection;
 
+use NHDS\Jobs\State;
 use NHDS\Jobs\Data\Job;
 use NHDS\Jobs\Data\Job\CollectionAbstract;
 use NHDS\Jobs\Data\Job\Type;
@@ -50,9 +51,9 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
         $this->getSelect()->where->equalTo(Job::FIELD_NAME_TYPE_CODE, $this->_getJobType()->getCode());
         $this->getSelect()->where
             ->nest()
-            ->equalTo(Job::FIELD_NAME_ASSIGNED_STATE, Job\State\Service::STATE_WORKING)
+            ->equalTo(Job::FIELD_NAME_ASSIGNED_STATE, State\Service::STATE_WORKING)
             ->or
-            ->equalTo(Job::FIELD_NAME_NEXT_STATE_REQUEST, Job\State\Service::STATE_WORKING);
+            ->equalTo(Job::FIELD_NAME_NEXT_STATE_REQUEST, State\Service::STATE_WORKING);
 
         return $this;
     }

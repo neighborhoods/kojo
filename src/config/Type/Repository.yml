@@ -1,0 +1,7 @@
+services:
+  nhds.jobs.type.repository:
+      class: NHDS\Jobs\Type\Repository
+      calls:
+          - [setJobType, ['@data.job.type']]
+  type.repository:
+    alias: nhds.jobs.type.repository

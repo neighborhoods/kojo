@@ -1,6 +1,0 @@
-services:
-  nhds.jobs.data.job.service.update.crash.factory:
-    class: NHDS\Jobs\Data\Job\Service\Update\Crash\Factory
-    calls:
-      - [setJobStateService, ['@nhds.jobs.data.job.state.service']]
-      - [setJobServiceUpdateCrash, ['@nhds.jobs.data.job.service.update.crash']]

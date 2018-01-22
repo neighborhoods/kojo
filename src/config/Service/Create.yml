@@ -1,0 +1,9 @@
+services:
+  nhds.jobs.service.create:
+    class: NHDS\Jobs\Service\Create
+    shared: false
+    calls:
+      - [setTypeRepository, ['@type.repository']]
+      - [setTime, ['@nhds.toolkit.time']]
+  service.create:
+    alias: nhds.jobs.service.create

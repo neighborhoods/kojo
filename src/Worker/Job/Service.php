@@ -4,16 +4,19 @@ declare(strict_types=1);
 namespace NHDS\Jobs\Worker\Job;
 
 use NHDS\Jobs\Data\Job;
+use NHDS\Jobs\Service\CreateInterface;
+use NHDS\Jobs\Service\Update;
+use NHDS\Jobs\Service\Create;
 use NHDS\Toolkit\Data\Property\Strict;
 
 class Service implements ServiceInterface
 {
     use Job\AwareTrait;
-    use Job\Service\Update\Hold\Factory\AwareTrait;
-    use Job\Service\Update\Retry\Factory\AwareTrait;
-    use Job\Service\Update\Complete\Success\Factory\AwareTrait;
-    use Job\Service\Update\Complete\Failed\Factory\AwareTrait;
-    use Job\Service\Create\Factory\AwareTrait;
+    use Update\Hold\Factory\AwareTrait;
+    use Update\Retry\Factory\AwareTrait;
+    use Update\Complete\Success\Factory\AwareTrait;
+    use Update\Complete\Failed\Factory\AwareTrait;
+    use Create\Factory\AwareTrait;
     use Strict\AwareTrait;
     const PROP_REQUEST             = 'request';
     const PROP_RETRY_DATE_TIME     = 'retry_date_time';
@@ -66,23 +69,23 @@ class Service implements ServiceInterface
         if (!$this->_exists(self::PROP_REQUEST_APPPLIED)) {
             switch ($this->_read(self::PROP_REQUEST)) {
                 case self::REQUEST_RETRY:
-                    $updateRetry = $this->_getUpdateRetryFactory()->create();
+                    $updateRetry = $this->_getServiceUpdateRetryFactory()->create();
                     $updateRetry->setDateTime($this->_getDateTime());
                     $updateRetry->setJob($this->_getJob());
                     $updateRetry->save();
                     break;
                 case self::REQUEST_HOLD:
-                    $updateHold = $this->_getUpdateHoldFactory()->create();
+                    $updateHold = $this->_getServiceUpdateHoldFactory()->create();
                     $updateHold->setJob($this->_getJob());
                     $updateHold->save();
                     break;
                 case self::REQUEST_COMPLETE_SUCCESS:
-                    $updateCompleteSuccess = $this->_getUpdateCompleteSuccessFactory()->create();
+                    $updateCompleteSuccess = $this->_getServiceUpdateCompleteSuccessFactory()->create();
                     $updateCompleteSuccess->setJob($this->_getJob());
                     $updateCompleteSuccess->save();
                     break;
                 case self::REQUEST_COMPLETE_FAILED:
-                    $updateCompleteFailed = $this->_getUpdateCompleteFailedFactory()->create();
+                    $updateCompleteFailed = $this->_getServiceUpdateCompleteFailedFactory()->create();
                     $updateCompleteFailed->setJob($this->_getJob());
                     $updateCompleteFailed->save();
                     break;
@@ -100,8 +103,8 @@ class Service implements ServiceInterface
         return $this->_exists(self::PROP_REQUEST_APPPLIED);
     }
 
-    public function getNewJobServiceCreate(): Job\Service\CreateInterface
+    public function getNewJobServiceCreate(): CreateInterface
     {
-        return $this->_getJobServiceCreateFactory()->create();
+        return $this->_getServiceCreateFactory()->create();
     }
 }

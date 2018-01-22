@@ -4,4 +4,6 @@ services:
     calls:
       - [setProcessPoolFactory, ['@process.pool.factory']]
       - [setLogger, ['@process.pool.logger']]
-      - [setProcessStrategy, ['@nhds.jobs.process.strategy.process_control']]
+      - [setProcessStrategy, ['@process.strategy.process_control']]
+  process.root:
+    alias: nhds.jobs.process.root

@@ -1,4 +1,0 @@
-services:
-  nhds.jobs.data.job.service.update.crash:
-    class: NHDS\Jobs\Data\Job\Service\Update\Crash
-    shared: false

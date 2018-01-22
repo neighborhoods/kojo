@@ -1,4 +1,0 @@
-services:
-  nhds.jobs.data.job.service.update.wait:
-    class: NHDS\Jobs\Data\Job\Service\Update\Wait
-    shared: false

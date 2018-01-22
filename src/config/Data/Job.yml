@@ -3,4 +3,6 @@ services:
     class: NHDS\Jobs\Data\Job
     shared: false
     calls:
-      - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-job']]
+      - [addDbConnectionContainer, ['@db.connection.container-job']]
+  data.job:
+    alias: nhds.jobs.data.job

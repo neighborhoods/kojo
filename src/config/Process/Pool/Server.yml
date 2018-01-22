@@ -3,7 +3,9 @@ services:
     class: NHDS\Jobs\Process\Pool\Server
     calls:
       - [setLogger, ['@process.pool.logger']]
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
-      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-server']]
+      - [setSemaphore, ['@semaphore']]
+      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-server']]
       - [setProcessPoolFactory, ['@process.pool.factory-server']]
       - [setTypeCode, ['server']]
+  process.pool.server:
+    alias: nhds.jobs.process.pool.server

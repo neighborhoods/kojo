@@ -7,5 +7,7 @@ services:
       - [setLogger, ['@process.pool.logger']]
       - [setBrokerTypeCode, ['job_broker']]
       - [setExpressionLanguage, ['@symfony.component.expressionlanguage.expressionlanguage']]
-      - [setProcessCollection, ['@nhds.jobs.process.collection']]
-      - [setProcessStrategy, ['@process.strategy']]
+      - [setProcessCollection, ['@process.collection']]
+      - [setProcessStrategy, ['@process.strategy.process_control']]
+  process.listener.command:
+    alias: nhds.jobs.process.listener.command

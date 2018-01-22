@@ -1,3 +1,5 @@
 services:
   nhds.jobs.semaphore:
     class: NHDS\Jobs\Semaphore
+  semaphore:
+    alias: nhds.jobs.semaphore

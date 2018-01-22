@@ -5,3 +5,5 @@ services:
     calls:
       - [setMinutesToScheduleAheadFor, [5]]
       - [setTime, ['@nhds.toolkit.time']]
+  scheduler.time:
+    alias: nhds.jobs.scheduler.time

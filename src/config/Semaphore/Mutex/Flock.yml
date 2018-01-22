@@ -7,3 +7,5 @@ services:
       - [setDirectoryMode, ['0777']]
       - [setDirectoryPathPrefix, ['/tmp/']]
       - [setLogger, ['@process.pool.logger']]
+  semaphore.mutex.flock:
+    alias: nhds.jobs.semaphore.mutex.flock

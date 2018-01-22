@@ -3,4 +3,6 @@ services:
     class: NHDS\Jobs\Console\Command\Db\TearDown\Uninstall
     calls:
       - [setBootstrap, ['@worker.bootstrap']]
-      - [setDbTearDown, ['@nhds.jobs.db.teardown']]
+      - [setDbTearDown, ['@db.teardown']]
+  console.command.db.teardown.uninstall:
+    alias: nhds.jobs.console.command.db.teardown.uninstall

@@ -1,4 +1,0 @@
-services:
-  nhds.jobs.data.job.service.update.complete.success:
-    class: NHDS\Jobs\Data\Job\Service\Update\Complete\Success
-    shared: false

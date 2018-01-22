@@ -1,7 +1,0 @@
-services:
-  nhds.jobs.data.job.service.create:
-    class: NHDS\Jobs\Data\Job\Service\Create
-    shared: false
-    calls:
-      - [setJobTypeRepository, ['@nhds.jobs.data.job.type.repository']]
-      - [setTime, ['@nhds.toolkit.time']]

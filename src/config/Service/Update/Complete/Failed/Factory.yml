@@ -1,0 +1,8 @@
+services:
+  nhds.jobs.service.update.complete.failed.factory:
+    class: NHDS\Jobs\Service\Update\Complete\Failed\Factory
+    calls:
+      - [setStateService, ['@state.service']]
+      - [setServiceUpdateCompleteFailed, ['@service.update.complete.failed']]
+  service.update.complete.failed.factory:
+    alias: nhds.jobs.service.update.complete.failed.factory

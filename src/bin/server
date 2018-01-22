@@ -23,6 +23,6 @@ foreach ($argv as $argument) {
         $serviceContainer->addServicesYmlFilePath($ymlServicesFilePath[1]);
     }
 }
-$server = $serviceContainer->getContainerBuilder()->get('nhds.jobs.process.pool.server');
+$server = $serviceContainer->getContainerBuilder()->get('process.pool.server');
 $server->setParentProcessPath('');
 $server->start();

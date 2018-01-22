@@ -56,7 +56,7 @@ class Model implements ModelInterface
         return $this;
     }
 
-    public function setId(string $id): ModelInterface
+    public function setId(int $id): ModelInterface
     {
         $this->_createPersistentProperty($this->getIdPropertyName(), $id);
 
@@ -85,9 +85,9 @@ class Model implements ModelInterface
         return $this;
     }
 
-    public function getId(): string
+    public function getId(): int
     {
-        return $this->_readPersistentProperty($this->getIdPropertyName());
+        return (int)$this->_readPersistentProperty($this->getIdPropertyName());
     }
 
     public function hasId(): bool
@@ -132,7 +132,7 @@ class Model implements ModelInterface
         $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($insert);
         $statement->execute();
         $id = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getDriver()->getLastGeneratedValue();
-        $this->setId($id);
+        $this->setId((int)$id);
         $this->_emptyChangedPersistentProperties();
 
         return $this;

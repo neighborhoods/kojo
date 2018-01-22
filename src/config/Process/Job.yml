@@ -3,9 +3,11 @@ services:
     class: NHDS\Jobs\Process\Job
     calls:
       - [setLogger, ['@process.pool.logger']]
-      - [setForeman, ['@nhds.jobs.foreman']]
-      - [setMaintainer, ['@nhds.jobs.maintainer']]
-      - [setScheduler, ['@nhds.jobs.scheduler']]
+      - [setForeman, ['@foreman']]
+      - [setMaintainer, ['@maintainer']]
+      - [setScheduler, ['@scheduler']]
       - [setBootstrap, ['@worker.bootstrap']]
       - [setTypeCode, ['job']]
-      - [setProcessStrategy, ['@process.strategy']]
+      - [setProcessStrategy, ['@process.strategy.process_control']]
+  process.job:
+    alias: nhds.jobs.process.job

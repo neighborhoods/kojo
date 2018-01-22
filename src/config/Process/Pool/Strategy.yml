@@ -5,6 +5,8 @@ services:
     calls:
       - [setAlarmProcessTypeCode, ['job']]
       - [setLogger, ['@process.pool.logger']]
+  process.pool.strategy:
+    alias: nhds.jobs.process.pool.strategy
   nhds.jobs.process.pool.strategy-server:
     shared: false
     class: NHDS\Jobs\Process\Pool\Strategy
@@ -12,7 +14,5 @@ services:
       - [setAlarmProcessTypeCode, ['root']]
       - [setFillProcessTypeCode, ['root']]
       - [setLogger, ['@process.pool.logger']]
-  process.pool.strategy:
-    alias: nhds.jobs.process.pool.strategy
   process.pool.strategy-server:
     alias: nhds.jobs.process.pool.strategy-server

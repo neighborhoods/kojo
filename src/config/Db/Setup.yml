@@ -2,9 +2,11 @@ services:
   nhds.jobs.db.setup:
     class: NHDS\Jobs\Db\Setup
     calls:
-      - [addVersion, ["@nhds.jobs.db.setup.schema.version.0_0_0"]]
-      - [addVersion, ["@nhds.jobs.db.setup.schema.version.1_0_0"]]
-      - [addVersion, ["@nhds.jobs.db.setup.schema.version.2_0_0"]]
-      - [addVersion, ["@nhds.jobs.db.setup.schema.version.3_0_0"]]
-      - [addVersion, ["@nhds.jobs.db.setup.schema.version.4_0_0"]]
-      - [addVersion, ["@nhds.jobs.db.setup.schema.version.5_0_0"]]
+      - [addVersion, ["@db.setup.schema.version.0_0_0"]]
+      - [addVersion, ["@db.setup.schema.version.1_0_0"]]
+      - [addVersion, ["@db.setup.schema.version.2_0_0"]]
+      - [addVersion, ["@db.setup.schema.version.3_0_0"]]
+      - [addVersion, ["@db.setup.schema.version.4_0_0"]]
+      - [addVersion, ["@db.setup.schema.version.5_0_0"]]
+  db.setup:
+    alias: nhds.jobs.db.setup

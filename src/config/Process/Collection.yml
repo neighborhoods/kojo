@@ -1,14 +1,18 @@
 services:
   nhds.jobs.process.collection:
     class: NHDS\Jobs\Process\Collection
-    shared: false
+    shared: true
     calls:
-      - [setIterator, ['@nhds.jobs.process.collection.iterator']]
-      - [addProcessPrototype, ['@nhds.jobs.process.listener.command']]
-      - [addProcessPrototype, ['@nhds.jobs.process.job']]
+      - [setIterator, ['@process.collection.iterator']]
+      - [addProcessPrototype, ['@process.listener.command']]
+      - [addProcessPrototype, ['@process.job']]
+  process.collection:
+    alias: nhds.jobs.process.collection
   nhds.jobs.process.collection-server:
     class: NHDS\Jobs\Process\Collection
-    shared: false
+    shared: true
     calls:
-      - [setIterator, ['@nhds.jobs.process.collection.iterator']]
-      - [addProcessPrototype, ['@nhds.jobs.process.root']]
+      - [setIterator, ['@process.collection.iterator']]
+      - [addProcessPrototype, ['@process.root']]
+  process.collection-server:
+    alias: nhds.jobs.process.collection-server

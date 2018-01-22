@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Worker\Job;
 
-use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Data\Job\Service\Update\Hold;
-use NHDS\Jobs\Data\Job\Service\Update\Retry;
-use NHDS\Jobs\Data\Job\Service\Update\Complete\Success;
-use NHDS\Jobs\Data\Job\Service\Update\Complete\Failed;
-use NHDS\Jobs\Data\Job\Service\Create;
+use NHDS\Jobs\Service\CreateInterface;
+use NHDS\Jobs\Service\Update\Hold;
+use NHDS\Jobs\Service\Update\Retry;
+use NHDS\Jobs\Service\Update\Complete\Success;
+use NHDS\Jobs\Service\Update\Complete\Failed;
+use NHDS\Jobs\Service\Create;
 
 interface ServiceInterface
 {
@@ -22,17 +22,17 @@ interface ServiceInterface
 
     public function applyRequest(): ServiceInterface;
 
-    public function getNewJobServiceCreate(): Job\Service\CreateInterface;
+    public function getNewJobServiceCreate(): CreateInterface;
 
-    public function setUpdateHoldFactory(Hold\FactoryInterface $updateHoldFactory);
+    public function setServiceUpdateHoldFactory(Hold\FactoryInterface $updateHoldFactory);
 
-    public function setUpdateRetryFactory(Retry\FactoryInterface $updateRetryFactory);
+    public function setServiceUpdateRetryFactory(Retry\FactoryInterface $updateRetryFactory);
 
-    public function setUpdateCompleteSuccessFactory(Success\FactoryInterface $updateCompleteSuccessFactory);
+    public function setServiceUpdateCompleteSuccessFactory(Success\FactoryInterface $updateCompleteSuccessFactory);
 
-    public function setUpdateCompleteFailedFactory(Failed\FactoryInterface $updateCompleteFailedFactory);
+    public function setServiceUpdateCompleteFailedFactory(Failed\FactoryInterface $updateCompleteFailedFactory);
 
-    public function setJobServiceCreateFactory(Create\FactoryInterface $updateCrashFactory);
+    public function setServiceCreateFactory(Create\FactoryInterface $updateCrashFactory);
 
     public function isRequestApplied(): bool;
 }

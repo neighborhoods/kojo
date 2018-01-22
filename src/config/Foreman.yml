@@ -3,16 +3,18 @@ services:
     class: NHDS\Jobs\Foreman
     shared: false
     calls:
-      - [setJobTypeRepository, ['@nhds.jobs.data.job.type.repository']]
-      - [setSelector, ['@nhds.jobs.data.job.selector']]
-      - [setLocator, ['@nhds.jobs.worker.locator']]
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
-      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-job']]
-      - [setJobServiceUpdateWorkFactory, ['@nhds.jobs.data.job.service.update.work.factory']]
-      - [setJobServiceUpdatePanicFactory, ['@nhds.jobs.data.job.service.update.panic.factory']]
-      - [setJobServiceUpdateCrashFactory, ['@nhds.jobs.data.job.service.update.crash.factory']]
-      - [setUpdateCompleteSuccessFactory, ['@nhds.jobs.data.job.service.update.complete.success.factory']]
+      - [setTypeRepository, ['@type.repository']]
+      - [setSelector, ['@selector']]
+      - [setLocator, ['@worker.locator']]
+      - [setSemaphore, ['@semaphore']]
+      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job']]
+      - [setServiceUpdateWorkFactory, ['@service.update.work.factory']]
+      - [setServiceUpdatePanicFactory, ['@service.update.panic.factory']]
+      - [setServiceUpdateCrashFactory, ['@service.update.crash.factory']]
+      - [setServiceUpdateCompleteSuccessFactory, ['@service.update.complete.success.factory']]
       - [setLogger, ['@process.pool.logger']]
-      - [setWorkerJobService, ['@nhds.jobs.worker.job.service']]
-      - [setJobStateService, ['@nhds.jobs.data.job.state.service']]
-      - [setMessageBroker, ['@nhds.jobs.message.broker.redis']]
+      - [setWorkerJobService, ['@worker.job.service']]
+      - [setStateService, ['@state.service']]
+      - [setMessageBroker, ['@message.broker.redis']]
+  foreman:
+    alias: nhds.jobs.foreman

@@ -5,9 +5,13 @@
 @bwilson - create NHDS independent aliases for all services.
 @bwilson - process_id as a job field.
 @bwilson - process_pool_id as a job field.
-@bwilson - implement zookpeer mutex.
+@bwilson - implement zookeeper mutex.
 @bwilson - check indexes against selects.
 @bwilson - fix changed persistent properties.
 @bwilson - standardize commands.
 @bwilson - new relic integration.
 @bwilson - SIGTERM Console command.
+
+@bwilson - UserManager
+@bwilson - AreaManager
+@bwilson - MLSManager

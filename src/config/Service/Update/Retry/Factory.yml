@@ -1,0 +1,8 @@
+services:
+  nhds.jobs.service.update.retry.factory:
+    class: NHDS\Jobs\Service\Update\Retry\Factory
+    calls:
+      - [setStateService, ['@state.service']]
+      - [setServiceUpdateRetry, ['@service.update.retry']]
+  service.update.retry.factory:
+    alias: nhds.jobs.service.update.retry.factory

@@ -1,0 +1,6 @@
+services:
+  nhds.jobs.service.update.wait:
+    class: NHDS\Jobs\Service\Update\Wait
+    shared: false
+  service.update.wait:
+    alias: nhds.jobs.service.update.wait

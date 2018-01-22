@@ -4,8 +4,10 @@ services:
     shared: false
     calls:
       - [setTime, ['@nhds.toolkit.time']]
-      - [setSchedulerJobCollection, ['@nhds.jobs.data.job.collection.scheduler']]
-      - [setSchedulerJobTypeCollection, ['@nhds.jobs.data.job.type.collection.scheduler']]
-      - [setJobServiceCreateFactory, ['@nhds.jobs.data.job.service.create.factory']]
-      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-schedule']]
-      - [setSchedulerCache, ['@nhds.jobs.scheduler.cache']]
+      - [setSchedulerJobCollection, ['@data.job.collection.scheduler']]
+      - [setSchedulerJobTypeCollection, ['@data.job.type.collection.scheduler']]
+      - [setServiceCreateFactory, ['@service.create.factory']]
+      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-schedule']]
+      - [setSchedulerCache, ['@scheduler.cache']]
+  scheduler:
+    alias: nhds.jobs.scheduler

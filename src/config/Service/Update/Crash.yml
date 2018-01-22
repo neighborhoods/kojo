@@ -1,0 +1,6 @@
+services:
+  nhds.jobs.service.update.crash:
+    class: NHDS\Jobs\Service\Update\Crash
+    shared: false
+  service.update.crash:
+    alias: nhds.jobs.service.update.crash

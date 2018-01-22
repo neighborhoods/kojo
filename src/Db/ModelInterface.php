@@ -15,11 +15,11 @@ interface ModelInterface
 
     public function setIdPropertyName(string $idPropertyName): ModelInterface;
 
-    public function setId(string $id): ModelInterface;
+    public function setId(int $id): ModelInterface;
 
     public function load(string $propertyName = null, $propertyValue = null): ModelInterface;
 
-    public function getId(): string;
+    public function getId(): int;
 
     public function hasId(): bool;
 

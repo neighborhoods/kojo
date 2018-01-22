@@ -3,13 +3,12 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs;
 
+use NHDS\Jobs\Service\Update;
 use NHDS\Jobs\Data\Job\Collection\CrashDetection;
-use NHDS\Jobs\Data\Job\Service\Update;
 use NHDS\Jobs\Data\Job\Collection\Schedule\LimitCheck;
 use NHDS\Jobs\Data\Job\Collection\ScheduleLimit;
-use NHDS\Jobs\Data\Job;
 use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Data\Job\Service\Update\Complete\FailedScheduleLimitCheck;
+use NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheck;
 use NHDS\Jobs\Process\Pool\Logger;
 
 class Maintainer implements MaintainerInterface
@@ -21,7 +20,7 @@ class Maintainer implements MaintainerInterface
     use Semaphore\Resource\Factory\AwareTrait;
     use LimitCheck\AwareTrait;
     use ScheduleLimit\AwareTrait;
-    use Job\Type\Repository\AwareTrait;
+    use Type\Repository\AwareTrait;
     use FailedSCheduleLimitCheck\Factory\AwareTrait;
     use Update\Wait\Factory\AwareTrait;
     use Update\Crash\Factory\AwareTrait;
@@ -59,7 +58,7 @@ class Maintainer implements MaintainerInterface
             $jobSemaphoreResource = $this->_getNewJobOwnerResource($job);
             try{
                 if ($jobSemaphoreResource->testAndSetLock()) {
-                    $crashUpdate = $this->_getJobServiceUpdateCrashFactory()->create();
+                    $crashUpdate = $this->_getServiceUpdateCrashFactory()->create();
                     $crashUpdate->setJob($job);
                     $crashUpdate->save();
                     $jobSemaphoreResource->releaseLock();
@@ -96,21 +95,21 @@ class Maintainer implements MaintainerInterface
     protected function _updatePendingJobs(): Maintainer
     {
         foreach ($this->_getJobCollectionScheduleLimitCheck()->getIterator() as $job) {
-            $jobType = $this->_getJobTypeRepository()->getJobType($job->getTypeCode());
+            $jobType = $this->_getTypeRepository()->getJobType($job->getTypeCode());
             $scheduleLimit = $this->_getJobCollectionScheduleLimitByJobType($jobType);
             $numberOfScheduledJobs = $scheduleLimit->getNumberOfCurrentlyScheduledJobs();
             try{
                 if ($numberOfScheduledJobs < $jobType->getScheduleLimit()) {
-                    $waitUpdate = $this->_getJobServiceUpdateWaitFactory()->create();
+                    $waitUpdate = $this->_getServiceUpdateWaitFactory()->create();
                     $waitUpdate->setJob($job);
                     $waitUpdate->save();
                 }else {
-                    $failedLimitCheckUpdate = $this->_getUpdateCompleteFailedScheduleLimitCheckFactory()->create();
+                    $failedLimitCheckUpdate = $this->_getServiceUpdateCompleteFailedScheduleLimitCheckFactory()->create();
                     $failedLimitCheckUpdate->setJob($job);
                     $failedLimitCheckUpdate->save();
                 }
             }catch(\Exception $exception){
-                $updatePanic = $this->_getJobServiceUpdatePanicFactory()->create();
+                $updatePanic = $this->_getServiceUpdatePanicFactory()->create();
                 $updatePanic->setJob($job);
                 $updatePanic->save();
                 $this->_getLogger()->alert('Panicking Job[' . $job->getId() . '].');

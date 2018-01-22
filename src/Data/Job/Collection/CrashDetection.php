@@ -5,7 +5,7 @@ namespace NHDS\Jobs\Data\Job\Collection;
 
 use NHDS\Jobs\Data\Job\CollectionAbstract;
 use NHDS\Jobs\Data\JobInterface;
-use NHDS\Jobs\Data\Job\State;
+use NHDS\Jobs\State;
 use NHDS\Jobs\Db;
 
 class CrashDetection extends CollectionAbstract implements CrashDetectionInterface

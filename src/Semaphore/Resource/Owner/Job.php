@@ -16,7 +16,7 @@ class Job implements JobInterface
     public function getResourceName(): string
     {
         if (!$this->_exists(self::PROP_RESOURCE_NAME)) {
-            $resourceName = $this->_getJob()->getCanWorkInParallel() ? $this->_getJob()->getId() : 'job';
+            $resourceName = $this->_getJob()->getCanWorkInParallel() ? (string)$this->_getJob()->getId() : 'job';
             $this->_create(self::PROP_RESOURCE_NAME, $resourceName);
         }
 

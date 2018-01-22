@@ -3,17 +3,19 @@ services:
     class: NHDS\Jobs\Maintainer
     shared: false
     calls:
-      - [setSemaphore, ['@nhds.jobs.semaphore']]
-      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-job']]
-      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-update_pending_jobs']]
-      - [addSemaphoreResourceFactory, ['@nhds.jobs.semaphore.resource.factory-reschedule_jobs']]
-      - [setJobCollectionCrashDetection, ['@nhds.jobs.data.job.collection.crashdetection']]
-      - [setJobCollectionScheduleLimitCheck, ['@nhds.jobs.data.job.collection.schedule.limitcheck']]
-      - [setJobServiceUpdateCrashFactory, ['@nhds.jobs.data.job.service.update.crash.factory']]
-      - [setJobServiceUpdateWaitFactory, ['@nhds.jobs.data.job.service.update.wait.factory']]
-      - [setUpdateCompleteFailedScheduleLimitCheckFactory, ['@nhds.jobs.data.job.service.update.complete.failedschedulelimitcheck.factory']]
-      - [setJobServiceUpdatePanicFactory, ['@nhds.jobs.data.job.service.update.panic.factory']]
-      - [setJobTypeRepository, ['@nhds.jobs.data.job.type.repository']]
-      - [setJobCollectionScheduleLimit, ['@nhds.jobs.data.job.collection.schedulelimit']]
+      - [setSemaphore, ['@semaphore']]
+      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job']]
+      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-update_pending_jobs']]
+      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-reschedule_jobs']]
+      - [setJobCollectionCrashDetection, ['@data.job.collection.crashdetection']]
+      - [setJobCollectionScheduleLimitCheck, ['@data.job.collection.schedule.limitcheck']]
+      - [setServiceUpdateCrashFactory, ['@service.update.crash.factory']]
+      - [setServiceUpdateWaitFactory, ['@service.update.wait.factory']]
+      - [setServiceUpdateCompleteFailedScheduleLimitCheckFactory, ['@service.update.complete.failedschedulelimitcheck.factory']]
+      - [setServiceUpdatePanicFactory, ['@service.update.panic.factory']]
+      - [setTypeRepository, ['@type.repository']]
+      - [setJobCollectionScheduleLimit, ['@data.job.collection.schedulelimit']]
       - [setLogger, ['@process.pool.logger']]
-      - [setMaintainerDelete, ['@nhds.jobs.maintainer.delete']]
+      - [setMaintainerDelete, ['@maintainer.delete']]
+  maintainer:
+    alias: nhds.jobs.maintainer

@@ -2,3 +2,5 @@ services:
   nhds.jobs.worker.locator:
     class: NHDS\Jobs\Worker\Locator
     shared: false
+  worker.locator:
+    alias: nhds.jobs.worker.locator

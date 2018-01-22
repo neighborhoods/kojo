@@ -1,0 +1,6 @@
+services:
+  nhds.jobs.service.update.panic:
+    class: NHDS\Jobs\Service\Update\Panic
+    shared: false
+  service.update.panic:
+    alias: nhds.jobs.service.update.panic

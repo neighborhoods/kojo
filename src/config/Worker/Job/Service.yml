@@ -3,8 +3,10 @@ services:
     class: NHDS\Jobs\Worker\Job\Service
     shared: false
     calls:
-      - [setJobServiceCreateFactory, ['@nhds.jobs.data.job.service.create.factory']]
-      - [setUpdateCompleteFailedFactory, ['@nhds.jobs.data.job.service.update.complete.failed.factory']]
-      - [setUpdateCompleteSuccessFactory, ['@nhds.jobs.data.job.service.update.complete.success.factory']]
-      - [setUpdateHoldFactory, ['@nhds.jobs.data.job.service.update.hold.factory']]
-      - [setUpdateRetryFactory, ['@nhds.jobs.data.job.service.update.retry.factory']]
+      - [setServiceCreateFactory, ['@service.create.factory']]
+      - [setServiceUpdateCompleteFailedFactory, ['@service.update.complete.failed.factory']]
+      - [setServiceUpdateCompleteSuccessFactory, ['@service.update.complete.success.factory']]
+      - [setServiceUpdateHoldFactory, ['@service.update.hold.factory']]
+      - [setServiceUpdateRetryFactory, ['@service.update.retry.factory']]
+  worker.job.service:
+    alias: nhds.jobs.worker.job.service

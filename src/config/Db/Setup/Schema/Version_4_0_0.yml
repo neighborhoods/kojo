@@ -3,3 +3,5 @@ services:
     class: NHDS\Jobs\Db\Setup\Schema\Version_4_0_0
     calls:
       - [addDbConnectionContainer, ["@nhds.jobs.db.connection.container-schema"]]
+  db.setup.schema.version.4_0_0:
+    alias: nhds.jobs.db.setup.schema.version.4_0_0

@@ -3,6 +3,8 @@ services:
     class: NHDS\Jobs\Data\Job\Collection\Scheduler
     shared: false
     calls:
-      - [setModel, ['@nhds.jobs.data.job']]
-      - [setIterator, ['@nhds.jobs.data.job.collection.iterator']]
-      - [addDbConnectionContainer, ['@nhds.jobs.db.connection.container-job']]
+      - [setModel, ['@data.job']]
+      - [setIterator, ['@data.job.collection.iterator']]
+      - [addDbConnectionContainer, ['@db.connection.container-job']]
+  data.job.collection.scheduler:
+    alias: nhds.jobs.data.job.collection.scheduler

@@ -1,4 +1,0 @@
-services:
-  nhds.jobs.data.job.service.update.retry:
-    class: NHDS\Jobs\Data\Job\Service\Update\Retry
-    shared: false
