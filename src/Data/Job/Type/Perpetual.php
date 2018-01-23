@@ -12,14 +12,26 @@ class Perpetual extends Model implements PerpetualInterface
 
     public function setTypeCode(string $typeCode): PerpetualInterface
     {
-        $this->_create(self::FILED_NAME_TYPE_CODE, $typeCode);
+        $this->_create(self::FIELD_NAME_TYPE_CODE, $typeCode);
 
         return $this;
     }
 
     public function getTypeCode(): string
     {
-        return $this->_read(self::FILED_NAME_TYPE_CODE);
+        return $this->_read(self::FIELD_NAME_TYPE_CODE);
+    }
+
+    public function setName(string $name): PerpetualInterface
+    {
+        $this->_create(self::FIELD_NAME_NAME, $name);
+
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        return $this->_read(self::FIELD_NAME_NAME);
     }
 
     public function setWorkerUri(string $autoSchedulerUri): PerpetualInterface
@@ -44,5 +56,15 @@ class Perpetual extends Model implements PerpetualInterface
     public function getWorkerMethod(): string
     {
         return $this->_read(self::FIELD_NAME_WORKER_METHOD);
+    }
+
+    public function setIsEnabled(bool $isEnabled): PerpetualInterface
+    {
+        $this->_create(self::FIELD_NAME_IS_ENABLED, $isEnabled);
+    }
+
+    public function getIsEnabled(): bool
+    {
+        return (bool)$this->_read(self::FIELD_NAME_IS_ENABLED);
     }
 }

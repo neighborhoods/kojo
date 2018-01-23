@@ -13,6 +13,6 @@ services:
   symfony.component.console.application:
     class: Symfony\Component\Console\Application
     calls:
-      - [add, ['@nhds.jobs.console.command.process.pool.server.start']]
-      - [add, ['@nhds.jobs.console.command.db.setup.install']]
-      - [add, ['@nhds.jobs.console.command.db.teardown.uninstall']]
+      - [add, ['@console.command.process.pool.server.start']]
+      - [add, ['@console.command.db.setup.install']]
+      - [add, ['@console.command.db.tear_down.uninstall']]

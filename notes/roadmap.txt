@@ -11,6 +11,7 @@
 @bwilson - standardize commands.
 @bwilson - new relic integration.
 @bwilson - SIGTERM Console command.
+@bwilson - migrate to Doctrine DBAL.
 
 @bwilson - UserManager
 @bwilson - AreaManager

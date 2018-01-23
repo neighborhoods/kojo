@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Perpetual;
+namespace NHDS\Jobs\Type\Perpetual;
 
 class Manager implements ManagerInterface
 {

@@ -1,7 +1,7 @@
 services:
-  nhds.jobs.db.teardown.schema.version.1_0_0:
+  nhds.jobs.db.tear_down.schema.version.1_0_0:
     class: NHDS\Jobs\Db\TearDown\Schema\Version_1_0_0
     calls:
       - [addDbConnectionContainer, ["@db.connection.container-schema"]]
-  db.teardown.schema.version.1_0_0:
-    alias: nhds.jobs.db.teardown.schema.version.1_0_0
+  db.tear_down.schema.version.1_0_0:
+    alias: nhds.jobs.db.tear_down.schema.version.1_0_0

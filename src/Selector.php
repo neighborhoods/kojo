@@ -23,7 +23,7 @@ class Selector implements SelectorInterface
     const PROP_NEXT_JOB_TO_WORK = 'next_job_to_work';
     protected $_collectionIterations = 0;
 
-    public function getNextJobToWork(): JobInterface
+    public function getWorkableJob(): JobInterface
     {
         return $this->_read(self::PROP_NEXT_JOB_TO_WORK);
     }

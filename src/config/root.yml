@@ -89,6 +89,7 @@ imports:
    - { resource: Db/Setup/Schema/Version_3_0_0.yml }
    - { resource: Db/Setup/Schema/Version_4_0_0.yml }
    - { resource: Db/Setup/Schema/Version_5_0_0.yml }
+   - { resource: Db/Setup/Schema/Version_6_0_0.yml }
    - { resource: Db/TearDown.yml }
    - { resource: Db/TearDown/Schema/Version_0_0_0.yml }
    - { resource: Db/TearDown/Schema/Version_1_0_0.yml }
@@ -96,6 +97,7 @@ imports:
    - { resource: Db/TearDown/Schema/Version_3_0_0.yml }
    - { resource: Db/TearDown/Schema/Version_4_0_0.yml }
    - { resource: Db/TearDown/Schema/Version_5_0_0.yml }
+   - { resource: Db/TearDown/Schema/Version_6_0_0.yml }
 
   # Message Broker.
    - { resource: Message/Broker/Redis.yml }

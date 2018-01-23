@@ -7,7 +7,7 @@ use NHDS\Jobs\Data\JobInterface;
 
 interface SelectorInterface
 {
-    public function getNextJobToWork(): JobInterface;
+    public function getWorkableJob(): JobInterface;
 
     public function hasWorkableJob(): bool;
 

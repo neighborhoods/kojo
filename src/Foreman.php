@@ -40,7 +40,7 @@ class Foreman implements ForemanInterface
 
     protected function _workWorker(): ForemanInterface
     {
-        $job = $this->_getSelector()->getNextJobToWork();
+        $job = $this->_getSelector()->getWorkableJob();
         $this->setJob($job);
         $this->_getLocator()->setJob($job);
         if (is_callable($this->_getLocator()->getCallable())) {
