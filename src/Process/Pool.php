@@ -59,7 +59,7 @@ class Pool extends PoolAbstract implements PoolInterface
                 $this->_processControlWaitError();
             }
             $childProcessExitCode = pcntl_wexitstatus($status);
-            $this->_getLogger()->debug("Process[{$childProcessId}] exited with code [{$childProcessExitCode}]");
+            $this->_getLogger()->debug("Process[$childProcessId] exited with code [$childProcessExitCode]");
             $childProcess = $this->getChildProcess($childProcessId)->setExitCode($childProcessExitCode);
             $this->_getProcessPoolStrategy()->childProcessExited($childProcess);
             $this->_validateAlarm();
@@ -99,7 +99,7 @@ class Pool extends PoolAbstract implements PoolInterface
     public function getChildProcess(int $childProcessId): ProcessInterface
     {
         if (!isset($this->_childProcesses[$childProcessId])) {
-            throw new \LogicException("Process is with process ID {$childProcessId} not set.");
+            throw new \LogicException("Process is with process ID $childProcessId not set.");
         }
 
         return $this->_childProcesses[$childProcessId];
@@ -127,17 +127,17 @@ class Pool extends PoolAbstract implements PoolInterface
     {
         if (!empty($this->_childProcesses)) {
             $numberOfProcesses = $this->getCountOfChildProcesses();
-            $this->_getLogger()->debug("Sending termination signal to {$numberOfProcesses} child processes...");
+            $this->_getLogger()->debug("Sending termination signal to $numberOfProcesses child processes...");
             /** @var ProcessInterface $process */
             foreach ($this->_childProcesses as $process) {
                 $processId = $process->getProcessId();
                 $processTypeCode = $process->getTypeCode();
                 if ($process instanceof ListenerInterface) {
                     posix_kill($processId, SIGKILL);
-                    $this->_getLogger()->debug("Sent SIGKILL to Process[{$processId}][{$processTypeCode}].");
+                    $this->_getLogger()->debug("Sent SIGKILL to Process[$processId][$processTypeCode].");
                 }else {
                     posix_kill($processId, SIGTERM);
-                    $this->_getLogger()->debug("Sent SIGTERM to Process[{$processId}][{$processTypeCode}].");
+                    $this->_getLogger()->debug("Sent SIGTERM to Process[$processId][$processTypeCode].");
                 }
                 unset($this->_childProcesses[$processId]);
             }
