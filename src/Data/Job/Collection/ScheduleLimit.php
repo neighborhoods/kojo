@@ -31,6 +31,7 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
             $pdoStatement = $statement->execute()->getResource();
             $pdoStatement->setFetchMode($this->_getFetchMode());
             $records = $pdoStatement->fetchAll()[0];
+            $this->_logSelect();
             if ($records === false) {
                 $this->_create(self::PROP_RECORDS, []);
             }else {

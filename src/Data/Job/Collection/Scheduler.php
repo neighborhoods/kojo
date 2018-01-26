@@ -52,6 +52,7 @@ class Scheduler extends CollectionAbstract implements SchedulerInterface
         $this->getSelect()->columns([JobInterface::FIELD_NAME_TYPE_CODE, JobInterface::FIELD_NAME_WORK_AT_DATE_TIME]);
         $workAtDateTime = $this->_getReferenceDateTime()->format('Y-m-d H:i:0');
         $this->getSelect()->where(JobInterface::FIELD_NAME_WORK_AT_DATE_TIME . ' >= "' . $workAtDateTime . '"');
+        $this->_logSelect();
 
         return $this;
     }

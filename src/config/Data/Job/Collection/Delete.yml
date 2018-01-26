@@ -5,5 +5,6 @@ services:
       - [setModel, ['@data.job']]
       - [addDbConnectionContainer, ['@db.connection.container-job']]
       - [setIterator, ['@data.job.collection.iterator']]
+      - [setLogger, ['@process.pool.logger']]
   data.job.collection.delete:
     alias: nhds.jobs.data.job.collection.delete

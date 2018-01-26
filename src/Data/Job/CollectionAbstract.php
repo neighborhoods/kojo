@@ -33,7 +33,7 @@ abstract class CollectionAbstract extends Db\Model\CollectionAbstract
     {
         if ($this->_hasLogger()) {
             $sql = $this->_getDbConnectionContainer(Db\Connection\ContainerInterface::NAME_JOB)->getSql();
-            $this->_getLogger()->debug($sql->buildSqlString($this->getSelect()));
+            $this->_getLogger()->debug(get_called_class() . ': ' . $sql->buildSqlString($this->getSelect()));
         }
 
         return $this;

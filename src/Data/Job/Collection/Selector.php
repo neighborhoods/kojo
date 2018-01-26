@@ -36,6 +36,7 @@ class Selector extends CollectionAbstract implements SelectorInterface
         $pdoStatement = $statement->execute()->getResource();
         $pdoStatement->setFetchMode($this->_getFetchMode());
         $records = $pdoStatement->fetchAll();
+        $this->_logSelect();
         if ($records === false) {
             $this->_update(self::PROP_RECORDS, []);
         }else {
@@ -50,12 +51,12 @@ class Selector extends CollectionAbstract implements SelectorInterface
         $select = $this->getSelect();
         $select->where(
             [
+                JobInterface::FIELD_NAME_NEXT_STATE_REQUEST => State\ServiceInterface::STATE_WORKING,
                 JobInterface::FIELD_NAME_ASSIGNED_STATE     => [
                     State\ServiceInterface::STATE_WAITING,
                     State\Service::STATE_CRASHED,
                     State\Service::STATE_NEW,
                 ],
-                JobInterface::FIELD_NAME_NEXT_STATE_REQUEST => State\ServiceInterface::STATE_WORKING,
             ]
         );
         $select->columns(
@@ -68,7 +69,7 @@ class Selector extends CollectionAbstract implements SelectorInterface
         );
         $select->order(
             [
-                JobInterface::FIELD_NAME_PROCESS_TYPE_CODE => 'job.required',
+                JobInterface::FIELD_NAME_PROCESS_TYPE_CODE . ' DESC',
                 JobInterface::FIELD_NAME_PRIORITY . ' DESC',
             ]
         );

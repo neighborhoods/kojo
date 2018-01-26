@@ -7,6 +7,7 @@ use NHDS\Jobs\Data\Job\CollectionAbstract;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Db;
 use NHDS\Jobs\Db\Connection\ContainerInterface;
+use Zend\Db\Sql\Expression;
 
 class Delete extends CollectionAbstract implements DeleteInterface
 {
@@ -35,6 +36,7 @@ class Delete extends CollectionAbstract implements DeleteInterface
         $pdoStatement = $statement->execute()->getResource();
         $pdoStatement->setFetchMode($this->_getFetchMode());
         $records = $pdoStatement->fetchAll();
+        $this->_logSelect();
         if ($records === false) {
             $this->_update(self::PROP_RECORDS, []);
         }else {
@@ -52,7 +54,10 @@ class Delete extends CollectionAbstract implements DeleteInterface
                 JobInterface::FIELD_NAME_ID,
             ]
         );
-        $select->where->greaterThanOrEqualTo(JobInterface::FIELD_NAME_DELETE_AFTER_DATE_TIME, ' <= utc_timestamp()');
+        $select->where->lessThanOrEqualTo(
+            JobInterface::FIELD_NAME_DELETE_AFTER_DATE_TIME,
+            new Expression('utc_timestamp()')
+        );
 
         return $this;
     }

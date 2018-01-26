@@ -181,9 +181,10 @@ class Version_5_0_0 extends VersionAbstract
         $createTable->addConstraint(
             new Index(
                 [
-                    JobInterface::FIELD_NAME_ASSIGNED_STATE,
                     JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
+                    JobInterface::FIELD_NAME_ASSIGNED_STATE,
                     JobInterface::FIELD_NAME_WORK_AT_DATE_TIME,
+                    JobInterface::FIELD_NAME_PROCESS_TYPE_CODE,
                     JobInterface::FIELD_NAME_PRIORITY,
                     JobInterface::FIELD_NAME_TYPE_CODE,
                     JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,

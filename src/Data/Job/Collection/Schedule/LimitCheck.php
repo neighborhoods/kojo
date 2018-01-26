@@ -16,8 +16,8 @@ class LimitCheck extends CollectionAbstract implements LimitCheckInterface
         $select = $this->getSelect();
         $select->where(
             [
-                JobInterface::FIELD_NAME_ASSIGNED_STATE     => State\ServiceInterface::STATE_WAITING,
                 JobInterface::FIELD_NAME_NEXT_STATE_REQUEST => State\ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK,
+                JobInterface::FIELD_NAME_ASSIGNED_STATE     => State\ServiceInterface::STATE_WAITING,
             ]
         );
         $select->columns(
@@ -33,6 +33,11 @@ class LimitCheck extends CollectionAbstract implements LimitCheckInterface
         );
         $this->getSelect()->where->and->lessThanOrEqualTo(
             JobInterface::FIELD_NAME_WORK_AT_DATE_TIME, new Expression('utc_timestamp()')
+        );
+        $select->order(
+            [
+                JobInterface::FIELD_NAME_WORK_AT_DATE_TIME
+            ]
         );
         $this->_logSelect();
 
