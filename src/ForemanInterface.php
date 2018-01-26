@@ -8,7 +8,7 @@ use NHDS\Jobs\Worker;
 
 interface ForemanInterface
 {
-    public function work(): ForemanInterface;
+    public function workWorker(): ForemanInterface;
 
     public function setServiceUpdateWorkFactory(Update\Work\FactoryInterface $updateWorkFactory);
 

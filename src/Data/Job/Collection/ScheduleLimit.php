@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Data\Job\Collection;
 
+use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\State;
-use NHDS\Jobs\Data\Job;
 use NHDS\Jobs\Data\Job\CollectionAbstract;
 use NHDS\Jobs\Data\Job\Type;
 use NHDS\Jobs\Db\Connection\ContainerInterface;
@@ -45,15 +45,15 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
     {
         $this->getSelect()->columns(
             [
-                self::ALIAS_NUMBER_OF_SCHEDULED_JOBS => new Expression('COUNT(' . Job::FIELD_NAME_ID . ')'),
+                self::ALIAS_NUMBER_OF_SCHEDULED_JOBS => new Expression('COUNT(' . JobInterface::FIELD_NAME_ID . ')'),
             ]
         );
-        $this->getSelect()->where->equalTo(Job::FIELD_NAME_TYPE_CODE, $this->_getJobType()->getCode());
+        $this->getSelect()->where->equalTo(JobInterface::FIELD_NAME_TYPE_CODE, $this->_getJobType()->getCode());
         $this->getSelect()->where
             ->nest()
-            ->equalTo(Job::FIELD_NAME_ASSIGNED_STATE, State\Service::STATE_WORKING)
+            ->equalTo(JobInterface::FIELD_NAME_ASSIGNED_STATE, State\Service::STATE_WORKING)
             ->or
-            ->equalTo(Job::FIELD_NAME_NEXT_STATE_REQUEST, State\Service::STATE_WORKING);
+            ->equalTo(JobInterface::FIELD_NAME_NEXT_STATE_REQUEST, State\Service::STATE_WORKING);
 
         return $this;
     }

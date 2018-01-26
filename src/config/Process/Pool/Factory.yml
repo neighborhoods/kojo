@@ -8,7 +8,7 @@ parameters:
 services:
   nhds.jobs.process.pool.factory:
     class: NHDS\Jobs\Process\Pool\Factory
-    sahred: false
+    shared: false
     calls:
       - [setMaxChildProcesses, ['%process_pool_strategy.max_child_processes%']]
       - [setChildProcessWaitThrottle, ['%process_pool_strategy.child_process_wait_throttle%']]

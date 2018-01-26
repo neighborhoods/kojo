@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace NHDS\Watch\Fixture;
 
+use NHDS\Watch\PHPUnit\DbUnit\DataSet\SymfonyYamlParser;
 use PHPUnit\DbUnit;
 use ReflectionClass;
 use NHDS\Watch\TestCase\ContainerBuilder;
@@ -14,13 +15,15 @@ use NHDS\Toolkit\Data\Property\Strict;
 use Symfony\Component\Finder\Finder;
 use NHDS\Watch\TestCase\Service;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\Yaml\Tag\TaggedValue;
+use Symfony\Component\Yaml\Yaml;
 
 abstract class AbstractTest extends DbUnit\TestCase
 {
     use ContainerBuilder\AwareTrait;
     use Service\AwareTrait;
     use Strict\AwareTrait;
-    const YML_SIGIL_PREFIX_FIXTURE_EXPRESSION = '!fixture/expression:';
+    const YML_SIGIL_PREFIX_FIXTURE_EXPRESSION = 'fixture/expression:';
     const PROP_DATA_SET                       = 'data_set';
     const PROP_EXPRESSION_VALUES              = 'expression_values';
 
@@ -31,9 +34,9 @@ abstract class AbstractTest extends DbUnit\TestCase
         $this->addServicesYmlFilePath($ymlServiceFilePath);
         $testCaseService = $this->getContainerBuilder()->get('nhds.watch.testcase.service');
         $this->setTestCaseService($testCaseService);
-        $tearDown = $this->_getTestContainerBuilder()->get('nhds.jobs.db.tear_down');
+        $tearDown = $this->_getTestContainerBuilder()->get('db.tear_down');
         $tearDown->uninstall();
-        $setup = $this->_getTestContainerBuilder()->get('nhds.jobs.db.setup');
+        $setup = $this->_getTestContainerBuilder()->get('db.setup');
         $setup->install();
         $redis = $this->_getTestContainerBuilder()->get('redis');
         $redis->flushAll();
@@ -68,7 +71,9 @@ abstract class AbstractTest extends DbUnit\TestCase
     protected function _addFilePathToYmlDataSet(string $ymlDataSetFilePath): AbstractTest
     {
         if (!$this->_exists(YamlDataSet::class)) {
-            $this->_create(YamlDataSet::class, new YamlDataSet($ymlDataSetFilePath));
+            $ymlParser = new SymfonyYamlParser();
+            $ymlParser->setFlags(Yaml::PARSE_CUSTOM_TAGS);
+            $this->_create(YamlDataSet::class, new YamlDataSet($ymlDataSetFilePath, $ymlParser));
         }else {
             $this->_getYmlDataSet()->addYamlFile($ymlDataSetFilePath);
         }
@@ -87,11 +92,13 @@ abstract class AbstractTest extends DbUnit\TestCase
             $rowCount = $table->getRowCount();
             while (--$rowCount >= 0) {
                 $row = $table->getRow($rowCount);
-                foreach ($row as $columnName => $value) {
-                    if (is_string($value) && (0 === strpos($value, self::YML_SIGIL_PREFIX_FIXTURE_EXPRESSION))) {
-                        $expression = str_replace(self::YML_SIGIL_PREFIX_FIXTURE_EXPRESSION, '', $value);
-                        $expressedValue = $expressionLanguage->evaluate($expression, $expressionValues);
-                        $table->setValue($rowCount, $columnName, $expressedValue);
+                foreach ($row as $columnName => $columnValue) {
+                    if ($columnValue instanceof TaggedValue) {
+                        if ($columnValue->getTag() === self::YML_SIGIL_PREFIX_FIXTURE_EXPRESSION) {
+                            $expression = $columnValue->getValue();
+                            $expressedValue = $expressionLanguage->evaluate($expression, $expressionValues);
+                            $table->setValue($rowCount, $columnName, $expressedValue);
+                        }
                     }
                 }
             }

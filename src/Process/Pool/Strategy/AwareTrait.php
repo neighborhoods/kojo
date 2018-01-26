@@ -7,7 +7,7 @@ use NHDS\Jobs\Process\Pool\StrategyInterface;
 
 trait AwareTrait
 {
-    public function setProcessPoolStrategy(StrategyInterface $strategy)
+    public function setProcessPoolStrategy(StrategyInterface $strategy): self
     {
         $this->_create(StrategyInterface::class, $strategy);
 
@@ -29,7 +29,7 @@ trait AwareTrait
         return clone $this->_getProcessPoolStrategy();
     }
 
-    protected function deleteProcessPoolStrategy()
+    protected function _unsetProcessPoolStrategy(): self
     {
         $this->_delete(StrategyInterface::class);
 

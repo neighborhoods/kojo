@@ -19,3 +19,14 @@ services:
     class: NHDS\Jobs\Process\Pool\Logger
     calls:
       - [setIsEnabled, [false]]
+  db.tear_down:
+    public: true
+    alias: nhds.jobs.db.tear_down
+  db.setup:
+    public: true
+    alias: nhds.jobs.db.setup
+  redis:
+    public: true
+    class: \Redis
+    calls:
+      - [connect, ['redis', '6379']]

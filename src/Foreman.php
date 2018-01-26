@@ -29,7 +29,7 @@ class Foreman implements ForemanInterface
     use Strict\AwareTrait;
     use Logger\AwareTrait;
 
-    public function work(): ForemanInterface
+    public function workWorker(): ForemanInterface
     {
         if ($this->_getSelector()->hasWorkableJob()) {
             $this->_workWorker();
@@ -44,43 +44,9 @@ class Foreman implements ForemanInterface
         $this->setJob($job);
         $this->_getLocator()->setJob($job);
         if (is_callable($this->_getLocator()->getCallable())) {
-            try{
-                $updateWork = $this->_getServiceUpdateWorkFactory()->create();
-                $updateWork->setJob($job);
-                $updateWork->save();
-            }catch(\Exception $exception){
-                $updatePanic = $this->_getServiceUpdatePanicFactory()->create();
-                $updatePanic->setJob($job);
-                $updatePanic->save();
-                $jobSemaphoreResource = $this->_getNewJobOwnerResource($job);
-                $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
-                throw $exception;
-            }
-            try{
-                $this->_getLogger()->debug('Instantiating Worker for Job[' . $job->getId() . '].');
-                call_user_func($this->_getLocator()->getCallable());
-            }catch(\Exception $exception){
-                $updateCrash = $this->_getServiceUpdateCrashFactory()->create();
-                $updateCrash->setJob($job);
-                $updateCrash->save();
-                throw $exception;
-            }
-            if ($this->_getJobType()->getAutoCompleteSuccess()) {
-                $updateCompleteSuccess = $this->_getServiceUpdateCompleteSuccessFactory()->create();
-                $updateCompleteSuccess->setJob($job);
-                $updateCompleteSuccess->save();
-            }else {
-                $stateService = $this->_getStateServiceClone();
-                $job->load();
-                $stateService->setJob($job);
-                if (!$this->_getWorkerJobService()->isRequestApplied() || !$stateService->isValidTransition()) {
-                    $updateCrash = $this->_getServiceUpdateCrashFactory()->create();
-                    $updateCrash->setJob($job);
-                    $updateCrash->save();
-                    $message = 'Worker related to Job with ID[' . $job->getId() . '] did not request a next state.';
-                    throw new \LogicException($message);
-                }
-            }
+            $this->_updateJobAsWorking();
+            $this->_instantiateWorker();
+            $this->_updateJobAfterWork();
         }else {
             $updatePanic = $this->_getServiceUpdatePanicFactory()->create();
             $updatePanic->setJob($job);
@@ -97,13 +63,73 @@ class Foreman implements ForemanInterface
         return $this;
     }
 
-    protected function _publishMessage()
+    protected function _instantiateWorker(): ForemanInterface
+    {
+        $job = $this->_getJob();
+        try{
+            $this->_getLogger()->debug('Instantiating Worker for Job[' . $job->getId() . '].');
+            call_user_func($this->_getLocator()->getCallable());
+        }catch(\Exception $exception){
+            $updateCrash = $this->_getServiceUpdateCrashFactory()->create();
+            $updateCrash->setJob($job);
+            $updateCrash->save();
+            throw $exception;
+        }
+
+        return $this;
+    }
+
+    protected function _updateJobAsWorking(): ForemanInterface
+    {
+        $job = $this->_getJob();
+        try{
+            $updateWork = $this->_getServiceUpdateWorkFactory()->create();
+            $updateWork->setJob($job);
+            $updateWork->save();
+        }catch(\Exception $exception){
+            $updatePanic = $this->_getServiceUpdatePanicFactory()->create();
+            $updatePanic->setJob($job);
+            $updatePanic->save();
+            $jobSemaphoreResource = $this->_getNewJobOwnerResource($job);
+            $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
+            throw $exception;
+        }
+
+        return $this;
+    }
+
+    protected function _updateJobAfterWork(): ForemanInterface
+    {
+        $job = $this->_getJob();
+        if ($this->_getJobType()->getAutoCompleteSuccess()) {
+            $updateCompleteSuccess = $this->_getServiceUpdateCompleteSuccessFactory()->create();
+            $updateCompleteSuccess->setJob($job);
+            $updateCompleteSuccess->save();
+        }else {
+            $stateService = $this->_getStateServiceClone();
+            $job->load();
+            $stateService->setJob($job);
+            if (!$this->_getWorkerJobService()->isRequestApplied() || !$stateService->isValidTransition()) {
+                $updateCrash = $this->_getServiceUpdateCrashFactory()->create();
+                $updateCrash->setJob($job);
+                $updateCrash->save();
+                $message = 'Worker related to Job with ID[' . $job->getId() . '] did not request a next state.';
+                throw new \LogicException($message);
+            }
+        }
+
+        return $this;
+    }
+
+    protected function _publishMessage(): ForemanInterface
     {
         $message = json_encode(['command' => "commandProcess.addProcess('job')"]);
         $this->_getMessageBroker()->publishMessage($message);
+
+        return $this;
     }
 
-    protected function _getJobType()
+    protected function _getJobType(): Job\TypeInterface
     {
         return $this->_getTypeRepository()->getJobType($this->_getJob()->getTypeCode());
     }

@@ -7,6 +7,7 @@ use NHDS\Jobs\Data\Job\CollectionAbstract;
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\State;
 use NHDS\Jobs\Db;
+use Zend\Db\Sql\Expression;
 
 class LimitCheck extends CollectionAbstract implements LimitCheckInterface
 {
@@ -30,6 +31,10 @@ class LimitCheck extends CollectionAbstract implements LimitCheckInterface
                 JobInterface::FIELD_NAME_PREVIOUS_STATE,
             ]
         );
+        $this->getSelect()->where->and->lessThanOrEqualTo(
+            JobInterface::FIELD_NAME_WORK_AT_DATE_TIME, new Expression('utc_timestamp()')
+        );
+        $this->_logSelect();
 
         return $this;
     }

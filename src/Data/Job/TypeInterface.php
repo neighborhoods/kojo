@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace NHDS\Jobs\Data\Job;
 
 use NHDS\Jobs\Db\ModelInterface;
+use NHDS\Jobs\ProcessInterface;
 
 interface TypeInterface extends ModelInterface
 {
@@ -22,6 +23,7 @@ interface TypeInterface extends ModelInterface
     const FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION = 'auto_delete_interval_duration';
     const INDEX_NAME_SCHEDULER_COVERING            = 'SCHEDULER_COVERING';
     const INDEX_NAME_COVERING                      = 'COVERING';
+    const FIELD_NAME_PROCESS_TYPE_CODE             = 'process_type_code';
 
     public function setCode(string $code): TypeInterface;
 
@@ -66,4 +68,8 @@ interface TypeInterface extends ModelInterface
     public function setAutoDeleteIntervalDuration(string $autoDeleteIntervalDuration): TypeInterface;
 
     public function getAutoDeleteIntervalDuration(): string;
+
+    public function setProcessTypeCode(string $processTypeCode): TypeInterface;
+
+    public function getProcessTypeCode(): string;
 }

@@ -29,7 +29,7 @@ trait AwareTrait
         return $this->_read(DeleteInterface::class);
     }
 
-    protected function _deleteJobCollectionDelete()
+    protected function _unsetJobCollectionDelete()
     {
         $this->_delete(DeleteInterface::class);
 

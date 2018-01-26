@@ -28,7 +28,7 @@ class Server extends ProcessAbstract implements ServerInterface
             $this->_getProcessPool()->setProcess($this);
             $this->_getProcessPool()->start();
             $this->_getProcessPool()->emptyChildProcesses();
-            $this->_deleteProcessPool();
+            $this->_unsetProcessPool();
             $this->_getLogger()->info('Stopping process pool server.');
             $this->_getSemaphore()->releaseLock($this->_getServerSemaphoreResource());
             $this->_getLogger()->info('Process pool server stopped.');

@@ -29,7 +29,7 @@ trait AwareTrait
         return $this->_exists(PoolInterface::class);
     }
 
-    protected function _deleteProcessPool()
+    protected function _unsetProcessPool()
     {
         $this->_delete(PoolInterface::class);
 

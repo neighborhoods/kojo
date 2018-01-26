@@ -339,4 +339,16 @@ class Job extends Model implements JobInterface
 
         return new \DateTime($deleteAfterDateTimeString);
     }
+
+    public function setProcessTypeCode(string $processTypeCode): JobInterface
+    {
+        $this->_createPersistentProperty(self::FIELD_NAME_PROCESS_TYPE_CODE, $processTypeCode);
+
+        return $this;
+    }
+
+    public function getProcessTypeCode(): string
+    {
+        return $this->_readPersistentProperty(self::FIELD_NAME_PROCESS_TYPE_CODE);
+    }
 }

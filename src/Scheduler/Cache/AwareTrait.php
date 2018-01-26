@@ -29,7 +29,7 @@ trait AwareTrait
         return $this->_exists(CacheInterface::class);
     }
 
-    protected function _deleteSchedulerCache()
+    protected function _unsetSchedulerCache()
     {
         $this->_delete(CacheInterface::class);
 

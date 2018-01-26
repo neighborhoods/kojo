@@ -11,6 +11,7 @@ services:
     calls:
       - [connect, ['redis', '6379']]
   symfony.component.console.application:
+    public: true
     class: Symfony\Component\Console\Application
     calls:
       - [add, ['@console.command.process.pool.server.start']]

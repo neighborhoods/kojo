@@ -36,6 +36,7 @@ interface JobInterface extends ModelInterface
     const INDEX_NAME_PENDING                               = 'PENDING';
     const INDEX_NAME_CRASHED_AND_SELECTION_AND_LIMIT_CHECK = 'CRASHED_AND_SELECTION_AND_LIMIT_CHECK';
     const INDEX_NAME_AUTO_DELETE                           = 'DELETE_AFTER';
+    const FIELD_NAME_PROCESS_TYPE_CODE                     = 'process_type_code';
 
     public function setTypeCode(string $typeCode): JobInterface;
 
@@ -124,4 +125,8 @@ interface JobInterface extends ModelInterface
     public function setDeleteAfterDateTime(\DateTime $deleteAfterDateTime): JobInterface;
 
     public function getDeleteAfterDateTime(): \DateTime;
+
+    public function setProcessTypeCode(string $processTypeCode): JobInterface;
+
+    public function getProcessTypeCode(): string;
 }

@@ -29,7 +29,7 @@ trait AwareTrait
         return $this->_exists(TimeInterface::class);
     }
 
-    protected function _deleteSchedulerTime()
+    protected function _unsetSchedulerTime()
     {
         $this->_delete(TimeInterface::class);
 

@@ -8,6 +8,7 @@ use NHDS\Jobs\Data\Job;
 use NHDS\Jobs\Exception\Runtime\Db\Model\LoadException;
 use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Message\Broker;
+use NHDS\Jobs\Process;
 
 class Selector implements SelectorInterface
 {
@@ -18,9 +19,7 @@ class Selector implements SelectorInterface
     use Semaphore\Resource\Factory\AwareTrait;
     use Job\Collection\Selector\AwareTrait;
     use State\Service\AwareTrait;
-    const PROP_PAGE_SIZE        = 'page_size';
-    const PROP_OFFSET           = 'offset';
-    const PROP_NEXT_JOB_TO_WORK = 'next_job_to_work';
+    use Process\AwareTrait;
     protected $_collectionIterations = 0;
 
     public function getWorkableJob(): JobInterface
@@ -30,28 +29,33 @@ class Selector implements SelectorInterface
 
     public function hasWorkableJob(): bool
     {
-        $this->pick();
+        $this->_attemptSelect();
 
         return $this->_exists(self::PROP_NEXT_JOB_TO_WORK);
     }
 
-    public function pick(): SelectorInterface
+    protected function _attemptSelect(): SelectorInterface
     {
         $select = $this->_getSelectorJobCollection()->getSelect();
         $select->offset($this->_collectionIterations * $this->_getPageSize());
         $select->limit($this->_getPageSize());
         $jobCandidates = $this->_getSelectorJobCollection()->getModelsArray();
         $publishedMessages = $this->_getMessageBroker()->getPublishChannelLength();
-        while ($publishedMessages < count($jobCandidates)) {
-            $message = json_encode(['command' => "commandProcess.addProcess('job')"]);
+        foreach ($this->_getSelectorJobCollection()->getIterator() as $jobCandidate) {
+            $processTypeCode = $jobCandidate->getProcessTypeCode();
+            $message = json_encode(['command' => "commandProcess.addProcess('$processTypeCode')"]);
             $this->_getMessageBroker()->publishMessage($message);
             ++$publishedMessages;
+            if ($publishedMessages >= count($jobCandidates)) {
+                break;
+            }
         }
+        $select->where->and->equalTo(JobInterface::FIELD_NAME_PROCESS_TYPE_CODE, $this->_getProcess()->getTypeCode());
 
         while (!empty($jobCandidates)) {
             foreach ($this->_getSelectorJobCollection()->getIterator() as $jobCandidate) {
                 $jobSemaphoreResource = $this->_getNewJobOwnerResource($jobCandidate);
-                if (random_int(0, 10) !== 10) {
+                if (random_int(0, $this->_getRandomIntMax()) !== $this->_getRandomIntMax()) {
                     if ($this->_getSemaphore()->testAndSetLock($jobSemaphoreResource)) {
                         $job = $this->_getJobClone();
                         $job->setId($jobCandidate->getId());
@@ -104,5 +108,17 @@ class Selector implements SelectorInterface
         $this->_create(self::PROP_OFFSET, $offset);
 
         return $this;
+    }
+
+    public function setRandomIntMax(int $randomIntMax): SelectorInterface
+    {
+        $this->_create(self::PROP_RANDOM_INT_MAX, $randomIntMax);
+
+        return $this;
+    }
+
+    protected function _getRandomIntMax(): int
+    {
+        return $this->_read(self::PROP_RANDOM_INT_MAX);
     }
 }

@@ -1,16 +1,17 @@
 services:
   nhds.jobs.process.collection:
-    class: NHDS\Jobs\Process\Collection
     shared: true
+    class: NHDS\Jobs\Process\Collection
     calls:
       - [setIterator, ['@process.collection.iterator']]
       - [addProcessPrototype, ['@process.listener.command']]
+      - [addProcessPrototype, ['@process.job.required']]
       - [addProcessPrototype, ['@process.job']]
   process.collection:
     alias: nhds.jobs.process.collection
   nhds.jobs.process.collection-server:
-    class: NHDS\Jobs\Process\Collection
     shared: true
+    class: NHDS\Jobs\Process\Collection
     calls:
       - [setIterator, ['@process.collection.iterator']]
       - [addProcessPrototype, ['@process.root']]

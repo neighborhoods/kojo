@@ -12,6 +12,7 @@ abstract class PoolAbstract implements PoolInterface
     use Process\Pool\Logger\AwareTrait;
     use Process\Pool\Strategy\AwareTrait;
     use Process\AwareTrait;
+    const MAX_LOAD_AVERAGE = 10.0;
 
     public function hasAlarm(): bool
     {
@@ -39,13 +40,21 @@ abstract class PoolAbstract implements PoolInterface
 
     public function isFull(): bool
     {
-        return (bool)($this->getCountOfChildProcesses() >= $this->_getProcessPoolStrategy()->getMaxChildProcesses());
+        if ((float)current(sys_getloadavg()) > self::MAX_LOAD_AVERAGE) {
+            $isFull = true;
+        }else {
+            $maxChildProcesses = $this->_getProcessPoolStrategy()->getMaxChildProcesses();
+            $isFull = (bool)($this->getCountOfChildProcesses() >= $maxChildProcesses);
+        }
+
+        return $isFull;
     }
 
     protected function _initialize(): PoolInterface
     {
         register_shutdown_function([$this, 'terminateChildProcesses']);
         $this->_getProcessPoolStrategy()->initializePool();
+
         return $this;
     }
 

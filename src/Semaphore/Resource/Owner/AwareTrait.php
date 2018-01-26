@@ -7,9 +7,9 @@ use NHDS\Jobs\Semaphore\Resource\OwnerInterface;
 
 trait AwareTrait
 {
-    public function setSemaphoreResourceOwner(OwnerInterface $semaphoreReourceOwner)
+    public function setSemaphoreResourceOwner(OwnerInterface $semaphoreResourceOwner)
     {
-        $this->_create(OwnerInterface::class, $semaphoreReourceOwner);
+        $this->_create(OwnerInterface::class, $semaphoreResourceOwner);
 
         return $this;
     }

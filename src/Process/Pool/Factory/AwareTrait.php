@@ -19,17 +19,12 @@ trait AwareTrait
         return $this->_read(FactoryInterface::class);
     }
 
-    protected function _getProcessPoolFactoryClone(): FactoryInterface
-    {
-        return clone $this->_getProcessPool();
-    }
-
     protected function _hasProcessPoolFactory(): bool
     {
         return $this->_exists(FactoryInterface::class);
     }
 
-    protected function _deleteProcessPoolFactory()
+    protected function _unsetProcessPoolFactory()
     {
         $this->_delete(FactoryInterface::class);
 

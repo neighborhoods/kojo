@@ -29,7 +29,7 @@ trait AwareTrait
         return $this->_exists(TypeInterface::class);
     }
 
-    protected function _deleteJobType()
+    protected function _unsetJobType()
     {
         $this->_delete(TypeInterface::class);
 

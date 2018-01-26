@@ -1,15 +1,15 @@
 services:
-  nhds.jobs.process.job:
+  nhds.jobs.process.job.required:
     shared: false
-    class: NHDS\Jobs\Process\Job
+    class: NHDS\Jobs\Process\Job\Required
     calls:
       - [setLogger, ['@process.pool.logger']]
       - [setForeman, ['@foreman']]
       - [setMaintainer, ['@maintainer']]
       - [setScheduler, ['@scheduler']]
       - [setBootstrap, ['@worker.bootstrap']]
-      - [setTypeCode, ['job']]
-      - [setSelector, ['@selector']]
+      - [setTypeCode, ['job.required']]
       - [setProcessStrategy, ['@process.strategy.process_control']]
-  process.job:
-    alias: nhds.jobs.process.job
+      - [setSelector, ['@selector']]
+  process.job.required:
+    alias: nhds.jobs.process.job.required

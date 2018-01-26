@@ -171,6 +171,12 @@ class Version_5_0_0 extends VersionAbstract
                 [
                     'comment' => 'COMMENT',
                 ]));
+        $createTable->addColumn(
+            new Varchar(
+                JobInterface::FIELD_NAME_PROCESS_TYPE_CODE, 255, false, null,
+                [
+                    'comment' => 'The process type code used to run this job.',
+                ]));
         $createTable->addConstraint(new PrimaryKey(JobInterface::FIELD_NAME_ID));
         $createTable->addConstraint(
             new Index(

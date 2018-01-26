@@ -5,7 +5,7 @@ namespace NHDS\Jobs\Semaphore\Resource\Factory;
 
 use NHDS\Jobs\Data\JobInterface;
 use NHDS\Jobs\Semaphore\Resource\FactoryInterface;
-use NHDS\Jobs\Semaphore\Resource\Owner\Job;
+use NHDS\Jobs\Semaphore;
 use NHDS\Jobs\Semaphore\ResourceInterface;
 
 trait AwareTrait
@@ -53,7 +53,7 @@ trait AwareTrait
     {
         $jobSemaphoreResource = $this->_getSemaphoreResourceFactory('job')->create();
         $resourceOwner = $jobSemaphoreResource->getResourceOwner();
-        if ($resourceOwner instanceof Job) {
+        if ($resourceOwner instanceof Semaphore\Resource\Owner\JobInterface) {
             $resourceOwner->setJob($job);
         }else {
             throw new \UnexpectedValueException('Resource owner is an unexpected type.');

@@ -4,6 +4,7 @@ services:
     autoconfigure: false
     public: true
   nhds.toolkit.time:
+    public: true
     class: NHDS\Toolkit\Time
   nhds.watch.fixture.expression.numberpool:
     class: NHDS\Watch\Fixture\Expression\NumberPool

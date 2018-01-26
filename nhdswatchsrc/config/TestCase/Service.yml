@@ -1,5 +1,6 @@
 services:
   nhds.watch.testcase.service:
+    public: true
     class: NHDS\Watch\TestCase\Service
     calls:
       - [addExpressionValue, ['time', '@nhds.toolkit.time']]

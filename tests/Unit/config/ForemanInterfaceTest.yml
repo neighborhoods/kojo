@@ -1,2 +1,15 @@
 imports:
   - { resource: ../../config/root.yml }
+services:
+  foreman:
+    public: true
+    alias: nhds.jobs.foreman
+  selector:
+    public: true
+    alias: nhds.jobs.selector
+  process.job:
+    public: true
+    alias: nhds.jobs.process.job
+  process.job.required:
+    public: true
+    alias: nhds.jobs.process.job.required

@@ -12,6 +12,7 @@ nhds_job_type:
     is_enabled: 1
     auto_complete_success: 1
     auto_delete_interval_duration: 'PT0S'
+    process_type_code: 'job'
   -
     nhds_job_type_id: 2
     type_code: "type_code_2"
@@ -21,7 +22,8 @@ nhds_job_type:
     can_work_in_parallel: 0
     default_importance: 10
     cron_expression: "* * * * *"
-    schedule_limit: 10
+    schedule_limit: 3
     is_enabled: 1
     auto_complete_success: 1
     auto_delete_interval_duration: 'PT0S'
+    process_type_code: 'job.required'

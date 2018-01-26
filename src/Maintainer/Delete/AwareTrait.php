@@ -29,7 +29,7 @@ trait AwareTrait
         return $this->_read(DeleteInterface::class);
     }
 
-    protected function _deleteMaintainerDelete()
+    protected function _unsetMaintainerDelete()
     {
         $this->_delete(DeleteInterface::class);
 

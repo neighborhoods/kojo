@@ -1,6 +1,6 @@
 services:
   nhds.jobs.process.collection.iterator:
-    class: NHDS\Jobs\Process\Collection\Iterator
     shared: false
+    class: NHDS\Jobs\Process\Collection\Iterator
   process.collection.iterator:
     alias: nhds.jobs.process.collection.iterator

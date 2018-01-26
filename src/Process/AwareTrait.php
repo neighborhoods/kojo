@@ -7,7 +7,7 @@ use NHDS\Jobs\ProcessInterface;
 
 trait AwareTrait
 {
-    public function setProcess(ProcessInterface $process)
+    public function setProcess(ProcessInterface $process): self
     {
         $this->_create(ProcessInterface::class, $process);
 
@@ -29,7 +29,7 @@ trait AwareTrait
         return $this->_exists(ProcessInterface::class);
     }
 
-    protected function _deleteProcess()
+    protected function _unsetProcess(): self
     {
         $this->_delete(ProcessInterface::class);
 

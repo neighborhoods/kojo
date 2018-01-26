@@ -18,4 +18,16 @@ trait AwareTrait
     {
         return $this->_read(LoggerInterface::class);
     }
+
+    protected function _hasLogger(): bool
+    {
+        return $this->_exists(LoggerInterface::class);
+    }
+
+    protected function _unsetLogger()
+    {
+        $this->_delete(LoggerInterface::class);
+
+        return $this;
+    }
 }
