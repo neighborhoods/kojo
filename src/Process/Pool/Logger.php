@@ -12,9 +12,11 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
     use Strict\AwareTrait;
-    const PAD_PID         = 6;
-    const PAD_PATH        = 50;
-    const PROP_IS_ENABLED = 'is_enabled';
+    const PAD_PID                   = 6;
+    const PAD_PATH                  = 50;
+    const PROP_IS_ENABLED           = 'is_enabled';
+    const PROP_PROCESS_PATH_PADDING = 'process_path_padding';
+    const PROP_PROCESS_ID_PADDING   = 'process_id_padding';
 
     public function setProcess(ProcessInterface $process): LoggerInterface
     {
@@ -31,18 +33,21 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     public function log($level, $message, array $context = [])
     {
         if ($this->_isEnabled() === true) {
+            $processIdPadding = $this->_getProcessIdPadding();
+            $processPathPadding = $this->_getProcessPathPadding();
             if ($this->_exists(ProcessInterface::class)) {
-                $processId = str_pad((string)$this->_getProcess()->getProcessId(), self::PAD_PID, ' ', STR_PAD_LEFT);
-                $typeCode = str_pad($this->_getProcess()->getPath(), self::PAD_PATH, ' ');
+                $processId = (string)$this->_getProcess()->getProcessId();
+                $paddedProcessId = str_pad($processId, $processIdPadding, ' ', STR_PAD_LEFT);
+                $typeCode = str_pad($this->_getProcess()->getPath(), $processPathPadding, ' ');
             }else {
-                $processId = str_pad('', self::PAD_PID, '?', STR_PAD_LEFT);
-                $typeCode = str_pad('', self::PAD_PATH, '?');
+                $paddedProcessId = str_pad('', $processIdPadding, '?', STR_PAD_LEFT);
+                $typeCode = str_pad('', $processPathPadding, '?');
             }
 
             $level = str_pad($level, 12, ' ');
             $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
             $format = "%s | %s | %s | %s | %s\n";
-            fwrite(STDOUT, sprintf($format, $referenceTime, $level, $processId, $typeCode, $message));
+            fwrite(STDOUT, sprintf($format, $referenceTime, $level, $paddedProcessId, $typeCode, $message));
         }
 
         return;
@@ -58,5 +63,29 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
         $this->_create(self::PROP_IS_ENABLED, $isEnabled);
 
         return $this;
+    }
+
+    public function setProcessPathPadding(int $processPathPadding): LoggerInterface
+    {
+        $this->_create(self::PROP_PROCESS_PATH_PADDING, $processPathPadding);
+
+        return $this;
+    }
+
+    protected function _getProcessPathPadding(): int
+    {
+        return $this->_read(self::PROP_PROCESS_PATH_PADDING);
+    }
+
+    public function setProcessIdPadding(int $processIdPadding): LoggerInterface
+    {
+        $this->_create(self::PROP_PROCESS_ID_PADDING, $processIdPadding);
+
+        return $this;
+    }
+
+    protected function _getProcessIdPadding(): int
+    {
+        return $this->_read(self::PROP_PROCESS_ID_PADDING);
     }
 }

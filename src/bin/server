@@ -9,7 +9,15 @@ if (PHP_SAPI !== 'cli') {
     exit(1);
 }
 try{
-    require __DIR__ . '/../../vendor/autoload.php';
+    foreach (array(
+                 __DIR__ . '/../../../../autoload.php',
+                 __DIR__ . '/../../vendor/autoload.php',
+             ) as $autoLoaderFilePathCandidate) {
+        if (file_exists($autoLoaderFilePathCandidate)) {
+            require_once $autoLoaderFilePathCandidate;
+            break;
+        }
+    }
 }catch(\Exception $exception){
     echo 'Autoload error: ' . $exception->getMessage();
     exit(1);
