@@ -28,6 +28,6 @@ $serviceContainer->addServicesYmlFilePath($ymlServiceFilePath);
 if (isset($argv[2]) && is_string($argv[2]) && is_file($argv[2])) {
     $serviceContainer->addServicesYmlFilePath($argv[2]);
 }
-$consoleApplication = $serviceContainer->getContainerBuilder()->get('symfony.component.console.application');
+$consoleApplication = $serviceContainer->getContainerBuilder()->get('nhds.jobs.symfony.component.console.application');
 
 $consoleApplication->run();
