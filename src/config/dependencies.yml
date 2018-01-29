@@ -10,7 +10,7 @@ services:
     class: \Redis
     calls:
       - [connect, ['redis', '6379']]
-  symfony.component.console.application:
+  nhds.jobs.symfony.component.console.application:
     public: true
     class: Symfony\Component\Console\Application
     calls:
