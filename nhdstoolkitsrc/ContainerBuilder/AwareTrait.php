@@ -48,7 +48,7 @@ trait AwareTrait
             $repeatedPass = new RepeatedPass($passes);
             $repeatedPass->process($containerBuilder);
             $containerBuilder->set('container_builder', $containerBuilder);
-            $containerBuilder->compile();
+            $containerBuilder->compile(true);
             $this->_containerBuilder = $containerBuilder;
         }
 
