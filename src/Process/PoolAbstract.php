@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace NHDS\Jobs\Process;
 
 use NHDS\Jobs\Process;
+use NHDS\Jobs\ProcessInterface;
 use NHDS\Toolkit\Data\Property\Strict;
 
 abstract class PoolAbstract implements PoolInterface
@@ -12,7 +13,6 @@ abstract class PoolAbstract implements PoolInterface
     use Process\Pool\Logger\AwareTrait;
     use Process\Pool\Strategy\AwareTrait;
     use Process\AwareTrait;
-    const MAX_LOAD_AVERAGE = 10.0;
 
     public function hasAlarm(): bool
     {
@@ -40,7 +40,7 @@ abstract class PoolAbstract implements PoolInterface
 
     public function isFull(): bool
     {
-        if ((float)current(sys_getloadavg()) > self::MAX_LOAD_AVERAGE) {
+        if ((float)current(sys_getloadavg()) > $this->_getProcessPoolStrategy()->getMaximumLoadAverage()) {
             $isFull = true;
         }else {
             $maxChildProcesses = $this->_getProcessPoolStrategy()->getMaxChildProcesses();
@@ -81,8 +81,8 @@ abstract class PoolAbstract implements PoolInterface
         return $this;
     }
 
-    public function getProcessPath(): string
+    public function getProcess(): ProcessInterface
     {
-        return $this->_getProcess()->getPath();
+        return $this->_getProcess();
     }
 }

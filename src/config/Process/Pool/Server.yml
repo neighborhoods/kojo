@@ -8,6 +8,8 @@ services:
       - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-server']]
       - [setProcessPoolFactory, ['@process.pool.factory-server']]
       - [setTypeCode, ['server']]
+      - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
+      - [setUuidMaximumInteger, [9999999999]]
   process.pool.server:
     public: true
     alias: nhds.jobs.process.pool.server

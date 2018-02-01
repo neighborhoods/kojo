@@ -13,13 +13,6 @@ abstract class ProcessAbstract implements ProcessInterface
     use Process\Strategy\AwareTrait;
     use Strict\AwareTrait;
     use Logger\AwareTrait;
-    const PROP_TYPE_CODE           = 'type_code';
-    const PROP_THROTTLE            = 'throttle';
-    const PROP_PROCESS_ID          = 'process_id';
-    const PROP_PARENT_PROCESS_ID   = 'parent_process_id';
-    const PROP_EXIT_CODE           = 'exit_code';
-    const PROP_PATH                = 'path';
-    const PROP_PARENT_PROCESS_PATH = 'parent_process_path';
 
     protected function _initialize(int $processId = null): ProcessAbstract
     {
@@ -128,6 +121,58 @@ abstract class ProcessAbstract implements ProcessInterface
     public function receivedSignal()
     {
         $this->_exit(0);
+    }
+
+    public function setTerminationSignalNumber(int $terminationSignalNumber): ProcessInterface
+    {
+        $this->_create(self::PROP_TERMINATION_SIGNAL_NUMBER, $terminationSignalNumber);
+
+        return $this;
+    }
+
+    public function getTerminationSignalNumber(): int
+    {
+        return $this->_read(self::PROP_TERMINATION_SIGNAL_NUMBER);
+    }
+
+    public function setParentProcessUuid(string $parentProcessUuid): ProcessInterface
+    {
+        $this->_create(self::PROP_PARENT_PROCESS_UUID, $parentProcessUuid);
+
+        return $this;
+    }
+
+    public function getParentProcessUuid(): string
+    {
+        return $this->_read(self::PROP_PARENT_PROCESS_UUID);
+    }
+
+    public function getUuid(): string
+    {
+        if (!$this->_exists(self::PROP_UUID)) {
+            $hostname = gethostname();
+            $processUuid = $hostname
+                . '-' . gethostbyname($hostname)
+                . '-' . $this->getPath()
+                . '-' . sprintf('%f', microtime(true))
+                . '-' . random_int(0, $this->_getUuidMaximumInteger());
+            $this->_create(self::PROP_UUID, $processUuid);
+            $this->_getLogger()->debug("Generated UUID[$processUuid]");
+        }
+
+        return $this->_read(self::PROP_UUID);
+    }
+
+    public function setUuidMaximumInteger(int $uuidMaximumInteger): ProcessInterface
+    {
+        $this->_create(self::PROP_UUID_MAXIMUM_INTEGER, $uuidMaximumInteger);
+
+        return $this;
+    }
+
+    protected function _getUuidMaximumInteger(): int
+    {
+        return $this->_read(self::PROP_UUID_MAXIMUM_INTEGER);
     }
 
     protected function _exit(int $exitCode)

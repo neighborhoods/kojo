@@ -9,5 +9,7 @@ services:
       - [setExpressionLanguage, ['@symfony.component.expressionlanguage.expressionlanguage']]
       - [setProcessCollection, ['@process.collection']]
       - [setProcessStrategy, ['@process.strategy.process_control']]
+      - [setTerminationSignalNumber, ['@=constant("SIGKILL")']]
+      - [setUuidMaximumInteger, [9999999999]]
   process.listener.command:
     alias: nhds.jobs.process.listener.command

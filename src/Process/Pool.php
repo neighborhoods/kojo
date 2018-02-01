@@ -99,7 +99,7 @@ class Pool extends PoolAbstract implements PoolInterface
     public function getChildProcess(int $childProcessId): ProcessInterface
     {
         if (!isset($this->_childProcesses[$childProcessId])) {
-            throw new \LogicException("Process is with process ID $childProcessId not set.");
+            throw new \LogicException("Process is with process ID [$childProcessId] not set.");
         }
 
         return $this->_childProcesses[$childProcessId];
@@ -131,14 +131,10 @@ class Pool extends PoolAbstract implements PoolInterface
             /** @var ProcessInterface $process */
             foreach ($this->_childProcesses as $process) {
                 $processId = $process->getProcessId();
+                $terminationSignalNumber = $process->getTerminationSignalNumber();
                 $processTypeCode = $process->getTypeCode();
-                if ($process instanceof ListenerInterface) {
-                    posix_kill($processId, SIGKILL);
-                    $this->_getLogger()->debug("Sent SIGKILL to Process[$processId][$processTypeCode].");
-                }else {
-                    posix_kill($processId, SIGTERM);
-                    $this->_getLogger()->debug("Sent SIGTERM to Process[$processId][$processTypeCode].");
-                }
+                posix_kill($processId, $terminationSignalNumber);
+                $this->_getLogger()->debug("Sent SIGKILL to Process[$processId][$processTypeCode].");
                 unset($this->_childProcesses[$processId]);
             }
         }

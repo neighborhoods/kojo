@@ -34,5 +34,5 @@ interface PoolInterface
 
     public function setProcess(ProcessInterface $process);
 
-    public function getProcessPath(): string;
+    public function getProcess(): ProcessInterface;
 }

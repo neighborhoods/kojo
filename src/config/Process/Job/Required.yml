@@ -11,5 +11,7 @@ services:
       - [setTypeCode, ['job.required']]
       - [setProcessStrategy, ['@process.strategy.process_control']]
       - [setSelector, ['@selector']]
+      - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
+      - [setUuidMaximumInteger, [9999999999]]
   process.job.required:
     alias: nhds.jobs.process.job.required

@@ -5,5 +5,7 @@ services:
       - [setProcessPoolFactory, ['@process.pool.factory']]
       - [setLogger, ['@process.pool.logger']]
       - [setProcessStrategy, ['@process.strategy.process_control']]
+      - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
+      - [setUuidMaximumInteger, [9999999999]]
   process.root:
     alias: nhds.jobs.process.root

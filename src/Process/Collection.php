@@ -52,7 +52,8 @@ class Collection implements CollectionInterface
         /** @var ProcessInterface $processPrototype */
         foreach ($this->_processPrototypes as $processPrototype) {
             $processPrototype->setProcessPool($pool);
-            $processPrototype->setParentProcessPath($pool->getProcessPath());
+            $processPrototype->setParentProcessPath($pool->getProcess()->getPath());
+            $processPrototype->setParentProcessUuid($pool->getProcess()->getUuid());
         }
 
         return $this;

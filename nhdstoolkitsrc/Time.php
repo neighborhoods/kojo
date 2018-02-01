@@ -9,7 +9,7 @@ class Time implements TimeInterface
 
     public function getNow(string $timezoneCode = self::DEFAULT_TIMEZONE_CODE): \DateTime
     {
-        $microTime = explode('.', sprintf('%.06f', microtime(true)));
+        $microTime = explode('.', sprintf('%f', microtime(true)));
         $time = gmdate(self::MYSQL_DATE_TIME_FORMAT . '.' . $microTime[1], (int) $microTime[0]);
         $now = new \DateTime($time, new \DateTimeZone('GMT'));
         $now->setTimezone($this->getDateTimeZone($timezoneCode));
@@ -19,7 +19,7 @@ class Time implements TimeInterface
 
     public function getUnixReferenceTimeNow(): string
     {
-        return sprintf('%.06f', microtime(true));
+        return sprintf('%f', microtime(true));
     }
 
     public function validateTimestamp(string $timestamp, string $format = TimeInterface::MYSQL_DATE_TIME_FORMAT): bool
