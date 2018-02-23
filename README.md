@@ -1,7 +1,7 @@
 # nhds/jobs
 A Distributed Task Manager
 
-* Including NHDS\Jobs with your project with composer
+* Including `NHDS\Jobs` with your project with composer
 ```bash
 $ composer require nhds/jobs
 ```
