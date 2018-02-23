@@ -1,25 +1,18 @@
 # nhds/jobs
-A distributed job system.
+A Distributed Task Manager
 
-Example usage:
-```php
-<?php
-declare(strict_types=1);
-
-require __DIR__ . '/vendor/autoload.php';
-
-use \NHDS\Jobs\Container;
-
-$jobsContainer = new Container();
-$server = $jobsContainer->getContainerBuilder()->get('server');
-
-$server->start();
+* Including NHDS\Jobs with your project with composer
+```bash
+$ composer require nhds/jobs
 ```
 
-**OR**
+* Running the `NHDS\Jobs` service
+```bash
+$ vendor/bin/jobs process:pool:server:start $PWD/PATH/TO/services.yaml
+```
 
-Anything that is good is from sitting on the shoulder of one giant or another.  Anything that is bad is mine, the only comfort I have to offer is the following from yet another giant:
-
-* https://xkcd.com/1513/
-* https://xkcd.com/1695/
-* https://xkcd.com/1833/
+* Running an exmaple
+```bash
+$ vendor/bin/phpunit --filter Foreman
+$ vendor/bin/jobs process:pool:server:start $PWD/example/config/root.yaml
+```
