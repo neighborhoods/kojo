@@ -20,7 +20,7 @@ class Server extends ProcessAbstract implements ServerInterface
 
     public function start(): ProcessInterface
     {
-        $this->_initialize();
+        $this->_initialize(0);
         $this->_getLogger()->info('Starting process pool server...');
         if ($this->_getSemaphore()->testAndSetLock($this->_getServerSemaphoreResource())) {
             $this->_getLogger()->info('Process pool server started.');
@@ -42,5 +42,10 @@ class Server extends ProcessAbstract implements ServerInterface
     protected function _getServerSemaphoreResource(): Semaphore\ResourceInterface
     {
         return $this->_getSemaphoreResource(self::SERVER_SEMAPHORE_RESOURCE_NAME);
+    }
+
+    public function processPoolStarted(): ProcessInterface
+    {
+        return $this;
     }
 }

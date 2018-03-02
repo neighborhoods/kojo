@@ -10,6 +10,7 @@ services:
       - [setTypeCode, ['server']]
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
+      - [setProcessRegistry, ['@process.registry']]
   process.pool.server:
     public: true
     alias: nhds.jobs.process.pool.server

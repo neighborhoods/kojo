@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Test\Unit\Process\Pool;
 
-use NHDS\Watch\Fixture\AbstractTest;
+use Neighborhoods\Scaffolding\Fixture\AbstractTest;
 
 class ServerInterfaceTest extends AbstractTest
 {

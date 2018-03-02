@@ -4,12 +4,14 @@ services:
     calls:
       - [setTypeCode, ['listener.command']]
       - [setBrokerTypeCollection, ['@nhds.jobs.message.broker.type.collection-job']]
-      - [setLogger, ['@process.pool.logger']]
       - [setBrokerTypeCode, ['job_broker']]
+      - [setLogger, ['@process.pool.logger']]
       - [setExpressionLanguage, ['@symfony.component.expressionlanguage.expressionlanguage']]
       - [setProcessCollection, ['@process.collection']]
       - [setProcessStrategy, ['@process.strategy.process_control']]
+      - [setProcessRegistry, ['@process.registry']]
       - [setTerminationSignalNumber, ['@=constant("SIGKILL")']]
       - [setUuidMaximumInteger, [9999999999]]
+      - [setProcessPoolFactory, ['@process.pool.factory-empty']]
   process.listener.command:
     alias: nhds.jobs.process.listener.command

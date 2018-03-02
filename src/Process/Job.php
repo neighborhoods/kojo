@@ -8,16 +8,18 @@ use NHDS\Jobs\Worker\Bootstrap;
 use NHDS\Jobs\Scheduler;
 use NHDS\Jobs\Maintainer;
 use NHDS\Jobs\Selector;
+use NHDS\Jobs\Process;
 
-class Job extends Forkable implements JobInterface
+class Job extends Forked implements JobInterface
 {
     use Bootstrap\AwareTrait;
     use Foreman\AwareTrait;
     use Maintainer\AwareTrait;
     use Scheduler\AwareTrait;
     use Selector\AwareTrait;
+    use Process\Pool\Factory\AwareTrait;
 
-    protected function _run(): Forkable
+    protected function _run(): Forked
     {
         $this->_getSelector()->setProcess($this);
         $this->_getBootstrap()->instantiate();

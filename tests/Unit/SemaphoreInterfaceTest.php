@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace NHDS\Jobs\Test\Unit;
 
 use NHDS\Jobs\Semaphore\Resource\Owner;
-use NHDS\Watch\AbstractTest;
+use Neighborhoods\Scaffolding\AbstractTest;
 
 class SemaphoreInterfaceTest extends AbstractTest
 {

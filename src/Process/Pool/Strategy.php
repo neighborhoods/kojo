@@ -110,7 +110,7 @@ class Strategy extends StrategyAbstract
     {
         $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
         $this->_getProcessCollection()->applyProcessPool($this->_getProcessPool());
-        foreach ($this->_getProcessCollection()->getIterator() as $process) {
+        foreach ($this->_getProcessCollection() as $process) {
             $this->_getProcessPool()->addChildProcess($process);
         }
         if ($this->_hasFillProcessTypeCode()) {

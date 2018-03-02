@@ -7,5 +7,6 @@ services:
       - [setProcessStrategy, ['@process.strategy.process_control']]
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
+      - [setProcessRegistry, ['@process.registry']]
   process.root:
     alias: nhds.jobs.process.root

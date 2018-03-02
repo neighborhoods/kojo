@@ -8,17 +8,18 @@ use NHDS\Jobs\Process\PoolInterface;
 
 interface ProcessInterface
 {
-    const PROP_THROTTLE                  = 'throttle';
-    const PROP_EXIT_CODE                 = 'exit_code';
-    const PROP_PATH                      = 'path';
-    const PROP_TERMINATION_SIGNAL_NUMBER = 'termination_signal_number';
-    const PROP_PROCESS_ID                = 'process_id';
-    const PROP_PARENT_PROCESS_ID         = 'parent_process_id';
-    const PROP_TYPE_CODE                 = 'type_code';
-    const PROP_PARENT_PROCESS_PATH       = 'parent_process_path';
-    const PROP_UUID                      = 'uuid';
-    const PROP_UUID_MAXIMUM_INTEGER      = 'uuid_maximum_integer';
-    const PROP_PARENT_PROCESS_UUID       = 'parent_process_uuid';
+    const PROP_THROTTLE                                 = 'throttle';
+    const PROP_EXIT_CODE                                = 'exit_code';
+    const PROP_PATH                                     = 'path';
+    const PROP_TERMINATION_SIGNAL_NUMBER                = 'termination_signal_number';
+    const PROP_PROCESS_ID                               = 'process_id';
+    const PROP_TYPE_CODE                                = 'type_code';
+    const PROP_UUID                                     = 'uuid';
+    const PROP_UUID_MAXIMUM_INTEGER                     = 'uuid_maximum_integer';
+    const PROP_PARENT_PROCESS_ID                        = 'parent_process_id';
+    const PROP_PARENT_PROCESS_PATH                      = 'parent_process_path';
+    const PROP_PARENT_PROCESS_UUID                      = 'parent_process_uuid';
+    const PROP_PARENT_PROCESS_TERMINATION_SIGNAL_NUMBER = 'parent_process_termination_signal_number';
 
     public function start(): ProcessInterface;
 
@@ -57,4 +58,10 @@ interface ProcessInterface
     public function setParentProcessUuid(string $parentProcessUuid): ProcessInterface;
 
     public function getParentProcessUuid(): string;
+
+    public function getParentProcessTerminationSignalNumber();
+
+    public function setParentProcessTerminationSignalNumber(int $parentProcessTerminationSignalNumber);
+
+    public function processPoolStarted(): ProcessInterface;
 }

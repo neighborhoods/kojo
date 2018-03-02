@@ -48,6 +48,7 @@ imports:
    - { resource: Service/Update/Complete/Success/Factory.yml }
    - { resource: Semaphore/Resource/Factory.yml }
    - { resource: Process/Pool/Factory.yml }
+   - { resource: Redis/Factory.yml }
 
   # Services.
    - { resource: State/Service.yml }
@@ -66,14 +67,16 @@ imports:
    - { resource: Semaphore/Resource.yml }
    - { resource: Semaphore/Resource/Owner/Job.yml }
    - { resource: Semaphore/Mutex/Flock.yml }
+   - { resource: Semaphore/Mutex/Redis.yml }
    - { resource: Semaphore.yml }
 
   # Process.
-   - { resource: Process/Listener/Command.yml }
+   - { resource: Process/Root.yml }
+   - { resource: Process/Registry.yml }
    - { resource: Process/Job.yml }
    - { resource: Process/Job/Required.yml }
-   - { resource: Process/Root.yml }
-   - { resource: Process/Pool/Logger.yml }
+   - { resource: Process/Listener/Command.yml }
+   - { resource: Process/Listener/Mutex/Redis.yml }
    - { resource: Process/Pool/Server.yml }
    - { resource: Process/Pool/Strategy.yml }
    - { resource: Process/Pool.yml }
@@ -113,3 +116,6 @@ imports:
    - { resource: Console/Command/Process/Pool/Server/Start.yml }
    - { resource: Console/Command/Db/Setup/Install.yml }
    - { resource: Console/Command/Db/TearDown/Uninstall.yml }
+
+  # Logging.
+   - { resource: Process/Pool/Logger.yml }

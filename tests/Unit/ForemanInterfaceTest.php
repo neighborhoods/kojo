@@ -6,7 +6,7 @@ namespace NHDS\Jobs\Test\Unit;
 use NHDS\Jobs\ForemanInterface;
 use NHDS\Jobs\Process\JobInterface;
 use NHDS\Jobs\SelectorInterface;
-use NHDS\Watch\Fixture\AbstractTest;
+use Neighborhoods\Scaffolding\Fixture\AbstractTest;
 
 class ForemanInterfaceTest extends AbstractTest
 {

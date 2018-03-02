@@ -101,11 +101,4 @@ class Redis extends BrokerAbstract
 
         return $this;
     }
-
-    public function __destruct()
-    {
-        $this->_getRedisClient()->close();
-
-        return $this;
-    }
 }

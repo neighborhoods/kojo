@@ -23,7 +23,7 @@ class Collection implements CollectionInterface
     public function getBrokerTypeClone(string $typeCode): BrokerInterface
     {
         if (!isset($this->_types[$typeCode])) {
-            throw new \LogicException('Process type is not set.');
+            throw new \LogicException('Broker type is not set.');
         }
 
         return clone $this->_types[$typeCode];

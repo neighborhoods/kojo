@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Test\Unit;
 
-use NHDS\Watch\Fixture;
+use Neighborhoods\Scaffolding\Fixture;
 
 class SchedulerInterfaceTest extends Fixture\AbstractTest
 {

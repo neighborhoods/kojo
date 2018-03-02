@@ -54,6 +54,8 @@ class Collection implements CollectionInterface
             $processPrototype->setProcessPool($pool);
             $processPrototype->setParentProcessPath($pool->getProcess()->getPath());
             $processPrototype->setParentProcessUuid($pool->getProcess()->getUuid());
+            $parentProcessTerminationSignalNumber = $pool->getProcess()->getTerminationSignalNumber();
+            $processPrototype->setParentProcessTerminationSignalNumber($parentProcessTerminationSignalNumber);
         }
 
         return $this;

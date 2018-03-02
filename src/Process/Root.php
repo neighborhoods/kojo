@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Process;
 
-use NHDS\Jobs\Process;
+use NHDS\Jobs\ProcessInterface;
 
-class Root extends Forkable
+class Root extends Forked implements ProcessInterface
 {
-    use Process\Pool\Factory\AwareTrait;
     const TYPE_CODE = 'root';
 
     public function __construct()
@@ -15,12 +14,13 @@ class Root extends Forkable
         $this->setTypeCode(self::TYPE_CODE);
     }
 
-    protected function _run(): Forkable
+    protected function _run(): Forked
     {
-        $this->setProcessPool($this->_getProcessPoolFactory()->create());
-        $this->_getProcessPool()->setProcess($this);
-        $this->_getProcessPool()->start();
+        return $this;
+    }
 
+    public function processPoolStarted(): ProcessInterface
+    {
         return $this;
     }
 }

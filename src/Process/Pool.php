@@ -20,17 +20,20 @@ class Pool extends PoolAbstract implements PoolInterface
 
     public function start(): PoolInterface
     {
+        $this->_getLogger()->debug("Starting process pool...");
         $this->_create(self::PROP_STARTED, true);
         $this->_initialize();
         $this->_getLogger()->info("Process pool started.");
         // Register signals to be handled.
         pcntl_sigprocmask(SIG_BLOCK, $this->_waitSignals);
         while (true) {
+            $this->getProcess()->processPoolStarted();
             $this->_getLogger()->debug("Waiting for signal...");
             $this->_signalInformation = [];
             pcntl_sigwaitinfo($this->_waitSignals, $this->_signalInformation);
-
-            switch ($this->_signalInformation[self::SIGNAL_NUMBER]) {
+            $signalNumber = $this->_signalInformation[self::SIGNAL_NUMBER];
+            $this->_getLogger()->debug("Received signal($signalNumber).");
+            switch ($signalNumber) {
                 case SIGCHLD:
                     $this->_childExitSignal();
                     break;
@@ -99,7 +102,7 @@ class Pool extends PoolAbstract implements PoolInterface
     public function getChildProcess(int $childProcessId): ProcessInterface
     {
         if (!isset($this->_childProcesses[$childProcessId])) {
-            throw new \LogicException("Process is with process ID [$childProcessId] not set.");
+            throw new \LogicException("Process with process ID [$childProcessId] not set.");
         }
 
         return $this->_childProcesses[$childProcessId];
@@ -134,7 +137,8 @@ class Pool extends PoolAbstract implements PoolInterface
                 $terminationSignalNumber = $process->getTerminationSignalNumber();
                 $processTypeCode = $process->getTypeCode();
                 posix_kill($processId, $terminationSignalNumber);
-                $this->_getLogger()->debug("Sent SIGKILL to Process[$processId][$processTypeCode].");
+                $message = "Sent kill($terminationSignalNumber) to Process[$processId][$processTypeCode].";
+                $this->_getLogger()->debug($message);
                 unset($this->_childProcesses[$processId]);
             }
         }

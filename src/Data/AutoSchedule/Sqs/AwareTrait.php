@@ -24,7 +24,7 @@ trait AwareTrait
         return clone $this->_getAutoScheduleSqs();
     }
 
-    protected function _hasAutoScheduleSqsClone(): bool
+    protected function _hasAutoScheduleSqs(): bool
     {
         return $this->_exists(SqsInterface::class);
     }

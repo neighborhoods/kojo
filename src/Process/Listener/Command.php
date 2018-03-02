@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Process\Listener;
 
-use NHDS\Jobs\Process\Forkable;
+use NHDS\Jobs\Process\Forked;
 use NHDS\Jobs\Process\ListenerInterface;
 use NHDS\Jobs\Process\ListenerAbstract;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -62,7 +62,7 @@ class Command extends ListenerAbstract implements CommandInterface
         return $this->_read(self::PROP_EXPRESSION_LANGUAGE);
     }
 
-    protected function _run(): Forkable
+    protected function _run(): Forked
     {
         if (!$this->_getMessageBroker()->hasMessage()) {
             $this->_getMessageBroker()->waitForNewMessage();

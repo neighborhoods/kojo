@@ -26,6 +26,15 @@ abstract class BrokerAbstract implements BrokerInterface
         return $this;
     }
 
+    protected function _getHost(): string
+    {
+        if ($this->_host === null) {
+            throw new \LogicException('Host is not set.');
+        }
+
+        return $this->_host;
+    }
+
     public function setSubscriptionChannelName(string $channelName): BrokerInterface
     {
         if ($this->_subscriptionChannelName === null) {
@@ -37,24 +46,6 @@ abstract class BrokerAbstract implements BrokerInterface
         return $this;
     }
 
-    public function setPublishChannelName(string $channelName): BrokerInterface
-    {
-        if ($this->_publishChannelName === null) {
-            $this->_publishChannelName = $channelName;
-        }
-
-        return $this;
-    }
-
-    protected function _getHost(): string
-    {
-        if ($this->_host === null) {
-            throw new \LogicException('Host is not set.');
-        }
-
-        return $this->_host;
-    }
-
     protected function _getSubscriptionChannelName(): string
     {
         if ($this->_subscriptionChannelName === null) {
@@ -62,6 +53,15 @@ abstract class BrokerAbstract implements BrokerInterface
         }
 
         return $this->_subscriptionChannelName;
+    }
+
+    public function setPublishChannelName(string $channelName): BrokerInterface
+    {
+        if ($this->_publishChannelName === null) {
+            $this->_publishChannelName = $channelName;
+        }
+
+        return $this;
     }
 
     protected function _getPublishChannelName(): string

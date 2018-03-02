@@ -1,6 +1,7 @@
 parameters:
   process.pool.strategy.maximum_load_average: 10.0
   process.pool.strategy-server.maximum_load_average: 10.0
+  process.pool.strategy-job.maximum_load_average: 10.0
 services:
   nhds.jobs.process.pool.strategy:
     shared: false
@@ -18,6 +19,14 @@ services:
       - [setAlarmProcessTypeCode, ['root']]
       - [setFillProcessTypeCode, ['root']]
       - [setLogger, ['@process.pool.logger']]
-      - [setMaximumLoadAverage, ['%process.pool.strategy.maximum_load_average%']]
+      - [setMaximumLoadAverage, ['%process.pool.strategy-server.maximum_load_average%']]
   process.pool.strategy-server:
     alias: nhds.jobs.process.pool.strategy-server
+  nhds.jobs.process.pool.strategy-job:
+    shared: false
+    class: NHDS\Jobs\Process\Pool\Strategy
+    calls:
+      - [setLogger, ['@process.pool.logger']]
+      - [setMaximumLoadAverage, ['%process.pool.strategy-job.maximum_load_average%']]
+  process.pool.strategy-job:
+    alias: nhds.jobs.process.pool.strategy-job

@@ -8,6 +8,8 @@ services:
     class: \Symfony\Component\ExpressionLanguage\ExpressionLanguage
   redis:
     class: \Redis
+    shared: false;
+    lazy: true
     calls:
       - [connect, ['redis', '6379']]
   nhds.jobs.symfony.component.console.application:

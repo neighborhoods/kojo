@@ -13,5 +13,7 @@ services:
       - [setSelector, ['@selector']]
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
+      - [setProcessRegistry, ['@process.registry']]
+      - [setProcessPoolFactory, ['@process.pool.factory-job']]
   process.job.required:
     alias: nhds.jobs.process.job.required

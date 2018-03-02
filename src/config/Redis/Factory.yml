@@ -1,0 +1,15 @@
+parameters:
+  redis.factory.host: 'redis'
+  redis.factory.port: 6379
+services:
+  nhds.jobs.redis.factory:
+    class: NHDS\Jobs\Redis\Factory
+    public: false
+    shared: true
+    calls:
+      - [addOption, [!php/const \Redis::OPT_READ_TIMEOUT, '-1']]
+      - [setHost, ['%redis.factory.host%']]
+      - [setPort, ['%redis.factory.port%']]
+  redis.factory:
+    alias: nhds.jobs.redis.factory
+    public: false

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Test\Unit\Data\Job;
 
-use NHDS\Watch\Fixture;
+use Neighborhoods\Scaffolding\Fixture;
 
 class SelectorInterfaceTest extends Fixture\AbstractTest
 {

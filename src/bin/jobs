@@ -9,10 +9,10 @@ if (PHP_SAPI !== 'cli') {
     exit(1);
 }
 try{
-    foreach (array(
+    foreach ([
                  __DIR__ . '/../../../../autoload.php',
                  __DIR__ . '/../../vendor/autoload.php',
-             ) as $autoLoaderFilePathCandidate) {
+             ] as $autoLoaderFilePathCandidate) {
         if (file_exists($autoLoaderFilePathCandidate)) {
             require_once $autoLoaderFilePathCandidate;
             break;

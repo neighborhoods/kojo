@@ -20,7 +20,8 @@
         "symfony/dependency-injection": "~4.0.3",
         "symfony/expression-language": "~4.0.3",
         "symfony/cache": "~4.0.3",
-        "symfony/console": "~4.0.3"
+        "symfony/console": "~4.0.3",
+        "ocramius/proxy-manager": "^2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.4",
@@ -40,7 +41,7 @@
     "autoload-dev": {
         "psr-4": {
             "NHDS\\Jobs\\Test\\": "tests",
-            "NHDS\\Watch\\": "nhdswatchsrc",
+            "Neighborhoods\\Scaffolding\\": "nhdswatchsrc",
             "NHDS\\Jobs\\Example\\": "example"
         }
     }
