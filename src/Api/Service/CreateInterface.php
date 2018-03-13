@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service;
+namespace NHDS\Jobs\Api\Service;
 
 use NHDS\Jobs\Data\Job\Collection\ScheduleLimitInterface;
 use NHDS\Jobs\ServiceInterface;

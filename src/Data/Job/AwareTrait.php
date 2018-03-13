@@ -24,6 +24,11 @@ trait AwareTrait
         return clone $this->_getJob();
     }
 
+    protected function _hasJob(): bool
+    {
+        return $this->_exists(JobInterface::class);
+    }
+
     protected function _unsetJob()
     {
         $this->_delete(JobInterface::class);

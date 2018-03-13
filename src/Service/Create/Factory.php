@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Service\Create;
 
-use NHDS\Jobs\Service\CreateInterface;
+use NHDS\Jobs\Api\Service\Create\FactoryInterface;
+use NHDS\Jobs\Api\Service\CreateInterface;
 use NHDS\Jobs\State\Service;
 use NHDS\Jobs\Service\FactoryAbstract;
 use NHDS\Jobs\Service\Create;

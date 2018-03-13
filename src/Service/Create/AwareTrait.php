@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Service\Create;
 
-use NHDS\Jobs\Service\CreateInterface;
+use NHDS\Jobs\Api\Service\CreateInterface;
 
 trait AwareTrait
 {

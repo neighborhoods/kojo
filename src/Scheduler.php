@@ -7,7 +7,7 @@ use NHDS\Toolkit\Time;
 use Cron\CronExpression;
 use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Service\Create;
+use NHDS\Jobs\Api\Service\Create;
 
 class Scheduler implements SchedulerInterface
 {

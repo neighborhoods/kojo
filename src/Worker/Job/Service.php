@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace NHDS\Jobs\Worker\Job;
 
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Service\CreateInterface;
+use NHDS\Jobs\Api\Service\CreateInterface;
 use NHDS\Jobs\Service\Update;
-use NHDS\Jobs\Service\Create;
+use NHDS\Jobs\Api\Service\Create;
 use NHDS\Toolkit\Data\Property\Strict;
 
 class Service implements ServiceInterface

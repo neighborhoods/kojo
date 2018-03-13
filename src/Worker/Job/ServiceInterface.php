@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Worker\Job;
 
-use NHDS\Jobs\Service\CreateInterface;
+use NHDS\Jobs\Api\Service\Create\FactoryInterface;
+use NHDS\Jobs\Api\Service\CreateInterface;
 use NHDS\Jobs\Service\Update\Hold;
 use NHDS\Jobs\Service\Update\Retry;
 use NHDS\Jobs\Service\Update\Complete\Success;
 use NHDS\Jobs\Service\Update\Complete\Failed;
-use NHDS\Jobs\Service\Create;
 
 interface ServiceInterface
 {
@@ -32,7 +32,7 @@ interface ServiceInterface
 
     public function setServiceUpdateCompleteFailedFactory(Failed\FactoryInterface $updateCompleteFailedFactory);
 
-    public function setServiceCreateFactory(Create\FactoryInterface $updateCrashFactory);
+    public function setServiceCreateFactory(FactoryInterface $updateCrashFactory);
 
     public function isRequestApplied(): bool;
 }

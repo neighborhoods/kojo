@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Service;
 
+use NHDS\Jobs\Api\Service\CreateInterface;
 use NHDS\Jobs\ServiceAbstract;
 use NHDS\Jobs\State;
 use NHDS\Jobs\Type;
