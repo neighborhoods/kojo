@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Watch\TestCase\Service;
+namespace Neighborhoods\Scaffolding\TestCase\Service;
 
-use NHDS\Watch\TestCase;
+use Neighborhoods\Scaffolding\TestCase;
 
 trait AwareTrait
 {

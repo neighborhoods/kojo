@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Watch;
+namespace Neighborhoods\Scaffolding;
 
 use PHPUnit\Framework\TestCase;
 use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Watch\TestCase\Service;
-use NHDS\Watch\TestCase\ContainerBuilder;
+use Neighborhoods\Scaffolding\TestCase\Service;
+use Neighborhoods\Scaffolding\TestCase\ContainerBuilder;
 
 abstract class AbstractTest extends TestCase
 {

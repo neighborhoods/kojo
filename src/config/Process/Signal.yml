@@ -1,0 +1,8 @@
+services:
+  nhds.jobs.process.signal:
+    class: NHDS\Jobs\Process\Signal
+    public: false
+    shared: true
+  process.signal:
+    alias: nhds.jobs.process.signal
+    public: false

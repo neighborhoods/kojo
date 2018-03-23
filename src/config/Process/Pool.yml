@@ -4,5 +4,6 @@ services:
     shared: false
     calls:
       - [setLogger, ['@process.pool.logger']]
+      - [setProcessSignal, ['@process.signal']]
   process.pool:
     alias: nhds.jobs.process.pool

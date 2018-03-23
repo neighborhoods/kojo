@@ -15,5 +15,7 @@ services:
       - [setUuidMaximumInteger, [9999999999]]
       - [setProcessRegistry, ['@process.registry']]
       - [setProcessPoolFactory, ['@process.pool.factory-job']]
+      - [setProcessSignal, ['@process.signal']]
+      - [setTitlePrefix, ['%process.title.prefix%']]
   process.job:
     alias: nhds.jobs.process.job

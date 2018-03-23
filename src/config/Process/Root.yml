@@ -8,5 +8,7 @@ services:
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
       - [setProcessRegistry, ['@process.registry']]
+      - [setProcessSignal, ['@process.signal']]
+      - [setTitlePrefix, ['%process.title.prefix%']]
   process.root:
     alias: nhds.jobs.process.root

@@ -7,6 +7,7 @@ use NHDS\Jobs\Data\JobInterface;
 
 interface ServiceInterface
 {
+    /** @injected:runtime */
     public function setJob(JobInterface $job): ServiceInterface;
 
     public function requestCompleteSuccess(): ServiceInterface;

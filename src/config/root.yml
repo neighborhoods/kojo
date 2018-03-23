@@ -71,6 +71,8 @@ imports:
    - { resource: Semaphore.yml }
 
   # Process.
+   - { resource: Process.yml }
+   - { resource: Process/Signal.yml }
    - { resource: Process/Root.yml }
    - { resource: Process/Registry.yml }
    - { resource: Process/Job.yml }

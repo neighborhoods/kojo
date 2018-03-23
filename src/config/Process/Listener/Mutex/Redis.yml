@@ -14,6 +14,8 @@ services:
       - [setBrokerTypeCode, ['process.listener.mutex.redis']]
       - [setProcessPoolFactory, ['@process.pool.factory-empty']]
       - [setRedisFactory, ['@redis.factory']]
+      - [setProcessSignal, ['@process.signal']]
+      - [setTitlePrefix, ['%process.title.prefix%']]
   process.listener.mutex.redis:
     alias: nhds.jobs.process.listener.mutex.redis
     public: false

@@ -1,0 +1,2 @@
+parameters:
+  process.title.prefix: 'nhds-jobs: '

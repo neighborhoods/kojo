@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Watch\Fixture;
+namespace Neighborhoods\Scaffolding\Fixture;
 
-use NHDS\Watch\PHPUnit\DbUnit\DataSet\SymfonyYamlParser;
+use Neighborhoods\Scaffolding\PHPUnit\DbUnit\DataSet\SymfonyYamlParser;
 use PHPUnit\DbUnit;
 use ReflectionClass;
-use NHDS\Watch\TestCase\ContainerBuilder;
+use Neighborhoods\Scaffolding\TestCase\ContainerBuilder;
 use NHDS\Toolkit\TimeInterface;
 use PHPUnit\DbUnit\DataSet\DefaultTable;
 use PHPUnit\DbUnit\DataSet\DefaultTableIterator;
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
 use NHDS\Toolkit\Data\Property\Strict;
 use Symfony\Component\Finder\Finder;
-use NHDS\Watch\TestCase\Service;
+use Neighborhoods\Scaffolding\TestCase\Service;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Yaml\Tag\TaggedValue;
 use Symfony\Component\Yaml\Yaml;

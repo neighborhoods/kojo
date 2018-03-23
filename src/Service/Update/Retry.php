@@ -22,6 +22,8 @@ class Retry extends ServiceAbstract implements RetryInterface
     public function setDateTime(\DateTime $dateTime): RetryInterface
     {
         $this->_create(self::PROP_DATE_TIME, $dateTime);
+
+        return $this;
     }
 
     protected function _getDateTime(): \DateTime

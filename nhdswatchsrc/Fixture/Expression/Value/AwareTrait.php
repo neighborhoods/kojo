@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Watch\Fixture\Expression\Value;
+namespace Neighborhoods\Scaffolding\Fixture\Expression\Value;
 
 trait AwareTrait
 {

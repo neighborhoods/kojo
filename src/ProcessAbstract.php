@@ -12,23 +12,20 @@ abstract class ProcessAbstract implements ProcessInterface
     use Process\Registry\AwareTrait;
     use Process\Pool\AwareTrait;
     use Process\Strategy\AwareTrait;
+    use Process\Signal\AwareTrait;
     use Strict\AwareTrait;
     use Logger\AwareTrait;
     const PROP_IS_PROCESS_TITLE_SET = 'is_process_title_set';
+    const PROP_TITLE_PREFIX         = 'title_prefix';
 
-    protected function _initialize(int $processId): ProcessAbstract
+    protected function _initialize(): ProcessAbstract
     {
-        if ($processId === 0) {
-            pcntl_async_signals(true);
-            $this->_setParentProcessId(posix_getppid());
-            $this->_setProcessId(posix_getpid());
-            $this->_getLogger()->setProcess($this);
-            $this->_registerSignalHandlers();
-            $this->_setProcessTitle();
-            $this->_getProcessRegistry()->pushProcess($this);
-        }else {
-            $this->_setProcessId($processId);
-        }
+        $this->_setParentProcessId(posix_getppid());
+        $this->_setProcessId(posix_getpid());
+        $this->_getLogger()->setProcess($this);
+        $this->_setProcessTitle();
+        $this->_getProcessRegistry()->pushProcess($this);
+        $this->_registerSignalHandlers();
 
         return $this;
     }
@@ -38,17 +35,53 @@ abstract class ProcessAbstract implements ProcessInterface
     protected function _setProcessTitle(): ProcessInterface
     {
         $this->_create(self::PROP_IS_PROCESS_TITLE_SET, true);
-        cli_set_process_title($this->getPath());
+        cli_set_process_title($this->_getTitlePrefix() . $this->getPath());
 
         return $this;
     }
 
-    protected function _registerSignalHandlers(): ProcessInterface
+    public function setTitlePrefix(string $titlePrefix): ProcessInterface
     {
-        pcntl_signal(SIGTERM, [$this, 'receivedSignal']);
-        pcntl_signal(SIGINT, [$this, 'receivedSignal']);
+        $this->_create(self::PROP_TITLE_PREFIX, $titlePrefix);
 
         return $this;
+    }
+
+    protected function _getTitlePrefix(): string
+    {
+        return $this->_read(self::PROP_TITLE_PREFIX);
+    }
+
+    protected function _registerSignalHandlers(): ProcessInterface
+    {
+        $this->_getProcessSignal()->addBlockedSignalNumber(SIGTERM);
+        $this->_getProcessSignal()->addBlockedSignalNumber(SIGINT);
+        $this->_getProcessSignal()->addBlockedSignalNumber(SIGHUP);
+        $this->_getProcessSignal()->addBlockedSignalNumber(SIGQUIT);
+        $this->_getProcessSignal()->addBlockedSignalNumber(SIGABRT);
+        $this->_getProcessSignal()->block();
+        $this->_getProcessSignal()->addSignalHandler(SIGTERM, [$this, 'receivedSignal']);
+        $this->_getProcessSignal()->addSignalHandler(SIGINT, [$this, 'receivedSignal']);
+        $this->_getProcessSignal()->addSignalHandler(SIGHUP, [$this, 'receivedSignal']);
+        $this->_getProcessSignal()->addSignalHandler(SIGQUIT, [$this, 'receivedSignal']);
+        $this->_getProcessSignal()->addSignalHandler(SIGABRT, [$this, 'receivedSignal']);
+
+        return $this;
+    }
+
+    public function receivedSignal(int $signalNumber, $signalInformation)
+    {
+        $this->_getProcessSignal()->block();
+        $this->_getLogger()->debug("Received signal number[$signalNumber].");
+        $this->exit($signalNumber);
+    }
+
+    public function exit(int $exitCode)
+    {
+        $this->_getProcessSignal()->block();
+        $this->_getProcessPool()->terminateChildProcesses();
+        $this->_getLogger()->debug("Exiting Process.");
+        exit($exitCode);
     }
 
     public function setParentProcessPath(string $parentProcessPath): ProcessInterface
@@ -132,12 +165,6 @@ abstract class ProcessAbstract implements ProcessInterface
         return $this->_read(self::PROP_EXIT_CODE);
     }
 
-    public function receivedSignal()
-    {
-        $this->_getLogger()->debug("Received signal.");
-        $this->_exit(0);
-    }
-
     public function setTerminationSignalNumber(int $terminationSignalNumber): ProcessInterface
     {
         $this->_create(self::PROP_TERMINATION_SIGNAL_NUMBER, $terminationSignalNumber);
@@ -200,11 +227,5 @@ abstract class ProcessAbstract implements ProcessInterface
     protected function _getUuidMaximumInteger(): int
     {
         return $this->_read(self::PROP_UUID_MAXIMUM_INTEGER);
-    }
-
-    protected function _exit(int $exitCode)
-    {
-        $this->_getLogger()->debug("Exiting Process.");
-        exit($exitCode);
     }
 }

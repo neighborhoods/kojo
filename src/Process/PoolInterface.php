@@ -35,4 +35,6 @@ interface PoolInterface
     public function setProcess(ProcessInterface $process);
 
     public function getProcess(): ProcessInterface;
+
+    public function waitForSignal(): PoolInterface;
 }

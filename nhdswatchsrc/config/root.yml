@@ -7,6 +7,6 @@ services:
     public: true
     class: NHDS\Toolkit\Time
   nhds.watch.fixture.expression.numberpool:
-    class: NHDS\Watch\Fixture\Expression\NumberPool
+    class: Neighborhoods\Scaffolding\Fixture\Expression\NumberPool
 imports:
    - { resource: TestCase/Service.yml }

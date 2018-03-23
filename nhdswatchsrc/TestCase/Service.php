@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Watch\TestCase;
+namespace Neighborhoods\Scaffolding\TestCase;
 
-use NHDS\Watch\Fixture\Expression\Value;
+use Neighborhoods\Scaffolding\Fixture\Expression\Value;
 use NHDS\Toolkit\Data\Property\Strict;
 
 class Service implements ServiceInterface

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace NHDS\Jobs\Data\Job;
 
 use NHDS\Jobs\Db\ModelInterface;
-use NHDS\Jobs\ProcessInterface;
 
 interface TypeInterface extends ModelInterface
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace NHDS\Jobs\Worker\Job;
 
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Api\Service\CreateInterface;
+use NHDS\Jobs\Service\CreateInterface;
 use NHDS\Jobs\Service\Update;
 use NHDS\Jobs\Api\Service\Create;
 use NHDS\Toolkit\Data\Property\Strict;
@@ -36,6 +36,8 @@ class Service implements ServiceInterface
     protected function _updateOrInsertDateTime(\DateTime $dateTime): Service
     {
         $this->_createOrUpdate(self::PROP_RETRY_DATE_TIME, $dateTime);
+
+        return $this;
     }
 
     protected function _getDateTime(): \DateTime

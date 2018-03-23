@@ -41,7 +41,7 @@ interface ProcessInterface
 
     public function setProcessPool(PoolInterface $pool);
 
-    public function receivedSignal();
+    public function receivedSignal(int $signalNumber, $signalInformation);
 
     public function setParentProcessPath(string $parentProcessPath): ProcessInterface;
 
@@ -64,4 +64,6 @@ interface ProcessInterface
     public function setParentProcessTerminationSignalNumber(int $parentProcessTerminationSignalNumber);
 
     public function processPoolStarted(): ProcessInterface;
+
+    public function exit(int $exitCode);
 }

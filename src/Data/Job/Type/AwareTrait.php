@@ -7,9 +7,9 @@ use NHDS\Jobs\Data\Job\TypeInterface;
 
 trait AwareTrait
 {
-    public function setJobType(TypeInterface $job)
+    public function setJobType(TypeInterface $jobType): self
     {
-        $this->_create(TypeInterface::class, $job);
+        $this->_create(TypeInterface::class, $jobType);
 
         return $this;
     }
@@ -29,7 +29,7 @@ trait AwareTrait
         return $this->_exists(TypeInterface::class);
     }
 
-    protected function _unsetJobType()
+    protected function _unsetJobType(): self
     {
         $this->_delete(TypeInterface::class);
 

@@ -16,11 +16,10 @@ class Root extends Forked implements ProcessInterface
 
     protected function _run(): Forked
     {
-        return $this;
-    }
+        while (true) {
+            $this->_getProcessPool()->waitForSignal();
+        }
 
-    public function processPoolStarted(): ProcessInterface
-    {
         return $this;
     }
 }

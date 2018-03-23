@@ -13,5 +13,7 @@ services:
       - [setTerminationSignalNumber, ['@=constant("SIGKILL")']]
       - [setUuidMaximumInteger, [9999999999]]
       - [setProcessPoolFactory, ['@process.pool.factory-empty']]
+      - [setProcessSignal, ['@process.signal']]
+      - [setTitlePrefix, ['%process.title.prefix%']]
   process.listener.command:
     alias: nhds.jobs.process.listener.command

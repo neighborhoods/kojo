@@ -13,6 +13,7 @@ abstract class PoolAbstract implements PoolInterface
     use Process\Pool\Logger\AwareTrait;
     use Process\Pool\Strategy\AwareTrait;
     use Process\AwareTrait;
+    use Process\Signal\AwareTrait;
 
     public function hasAlarm(): bool
     {
@@ -52,13 +53,12 @@ abstract class PoolAbstract implements PoolInterface
 
     protected function _initialize(): PoolInterface
     {
-        register_shutdown_function([$this, 'terminateChildProcesses']);
         $this->_getProcessPoolStrategy()->initializePool();
 
         return $this;
     }
 
-    protected function _alarmSignal(): PoolInterface
+    public function alarmSignal(): PoolInterface
     {
         $this->_getProcessPoolStrategy()->receivedAlarm();
 

@@ -20,18 +20,13 @@ class Server extends ProcessAbstract implements ServerInterface
 
     public function start(): ProcessInterface
     {
-        $this->_initialize(0);
+        $this->_initialize();
         $this->_getLogger()->info('Starting process pool server...');
         if ($this->_getSemaphore()->testAndSetLock($this->_getServerSemaphoreResource())) {
             $this->_getLogger()->info('Process pool server started.');
             $this->setProcessPool($this->_getProcessPoolFactory()->create());
             $this->_getProcessPool()->setProcess($this);
             $this->_getProcessPool()->start();
-            $this->_getProcessPool()->emptyChildProcesses();
-            $this->_unsetProcessPool();
-            $this->_getLogger()->info('Stopping process pool server.');
-            $this->_getSemaphore()->releaseLock($this->_getServerSemaphoreResource());
-            $this->_getLogger()->info('Process pool server stopped.');
         }else {
             $this->_getLogger()->info('Cannot obtain process pool server mutex. Quitting.');
         }
@@ -46,6 +41,10 @@ class Server extends ProcessAbstract implements ServerInterface
 
     public function processPoolStarted(): ProcessInterface
     {
+        while (true) {
+            $this->_getProcessPool()->waitForSignal();
+        }
+
         return $this;
     }
 }

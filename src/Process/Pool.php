@@ -14,8 +14,6 @@ class Pool extends PoolAbstract implements PoolInterface
     protected $_waitSignals       = [
         SIGCHLD,
         SIGALRM,
-        SIGINT,
-        SIGTERM,
     ];
 
     public function start(): PoolInterface
@@ -24,45 +22,40 @@ class Pool extends PoolAbstract implements PoolInterface
         $this->_create(self::PROP_STARTED, true);
         $this->_initialize();
         $this->_getLogger()->info("Process pool started.");
-        // Register signals to be handled.
-        pcntl_sigprocmask(SIG_BLOCK, $this->_waitSignals);
-        while (true) {
-            $this->getProcess()->processPoolStarted();
-            $this->_getLogger()->debug("Waiting for signal...");
-            $this->_signalInformation = [];
-            pcntl_sigwaitinfo($this->_waitSignals, $this->_signalInformation);
-            $signalNumber = $this->_signalInformation[self::SIGNAL_NUMBER];
-            $this->_getLogger()->debug("Received signal($signalNumber).");
-            switch ($signalNumber) {
-                case SIGCHLD:
-                    $this->_childExitSignal();
-                    break;
-                case SIGALRM:
-                    $this->_alarmSignal();
-                    break;
-                case SIGINT:
-                case SIGTERM:
-                    $this->_getLogger()->debug('Handling termination signal...');
-                    $this->terminateChildProcesses();
-                    break 2;
-                default:
-                    throw new \UnexpectedValueException('Unexpected blocked signal.');
-            }
-        }
-
-        $this->_getLogger()->info('Exiting process pool.');
+        $this->getProcess()->processPoolStarted();
 
         return $this;
     }
 
-    protected function _childExitSignal(): PoolInterface
+    public function waitForSignal(): PoolInterface
+    {
+        $this->_getLogger()->debug("Waiting for signal...");
+        $this->_signalInformation = [];
+        pcntl_sigwaitinfo($this->_waitSignals, $this->_signalInformation);
+        $signalNumber = $this->_signalInformation[self::SIGNAL_NUMBER];
+        $this->_getLogger()->debug("Received signal number[$signalNumber].");
+        switch ($signalNumber) {
+            case SIGCHLD:
+                $this->childExitSignal();
+                break;
+            case SIGALRM:
+                $this->alarmSignal();
+                break;
+            default:
+                throw new \UnexpectedValueException("Unexpected signal number [$signalNumber].");
+        }
+
+        return $this;
+    }
+
+    public function childExitSignal(): PoolInterface
     {
         while ($childProcessId = pcntl_wait($status, WNOHANG)) {
             if ($childProcessId == -1) {
                 $this->_processControlWaitError();
             }
             $childProcessExitCode = pcntl_wexitstatus($status);
-            $this->_getLogger()->debug("Process[$childProcessId] exited with code [$childProcessExitCode]");
+            $this->_getLogger()->debug("Process[$childProcessId] exited with code [$childProcessExitCode].");
             $childProcess = $this->getChildProcess($childProcessId)->setExitCode($childProcessExitCode);
             $this->_getProcessPoolStrategy()->childProcessExited($childProcess);
             $this->_validateAlarm();
@@ -89,12 +82,16 @@ class Pool extends PoolAbstract implements PoolInterface
 
     public function addChildProcess(ProcessInterface $childProcess): PoolInterface
     {
+        $this->_getProcessSignal()->block();
         if ($this->isFull()) {
             throw new \LogicException('Process pool is full.');
         }else {
             $childProcess->start();
             $this->_childProcesses[$childProcess->getProcessId()] = $childProcess;
+            $message = "Forked Process[{$childProcess->getProcessId()}][{$childProcess->getTypeCode()}].";
+            $this->_getLogger()->debug($message);
         }
+        $this->_getProcessSignal()->unBlock();
 
         return $this;
     }
@@ -128,6 +125,7 @@ class Pool extends PoolAbstract implements PoolInterface
 
     public function terminateChildProcesses(): PoolInterface
     {
+        $this->_getProcessSignal()->block();
         if (!empty($this->_childProcesses)) {
             $numberOfProcesses = $this->getCountOfChildProcesses();
             $this->_getLogger()->debug("Sending termination signal to $numberOfProcesses child processes...");
@@ -142,6 +140,7 @@ class Pool extends PoolAbstract implements PoolInterface
                 unset($this->_childProcesses[$processId]);
             }
         }
+        $this->_getProcessSignal()->unBlock();
 
         return $this;
     }

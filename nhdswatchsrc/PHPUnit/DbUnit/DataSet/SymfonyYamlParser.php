@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Watch\PHPUnit\DbUnit\DataSet;
+namespace Neighborhoods\Scaffolding\PHPUnit\DbUnit\DataSet;
 
 use PHPUnit\DbUnit\DataSet\IYamlParser;
 use Symfony\Component\Yaml\Yaml;

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Watch\TestCase\ContainerBuilder;
+namespace Neighborhoods\Scaffolding\TestCase\ContainerBuilder;
 
 use NHDS\Toolkit;
 use ReflectionClass;

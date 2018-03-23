@@ -18,14 +18,13 @@ abstract class Forked extends ProcessAbstract implements ProcessInterface
         $this->_create(self::PROP_HAS_FORKED, true);
         $processId = $this->_getProcessStrategy()->fork();
         if ($processId === self::FORK_FAILURE_CODE) {
-            throw new \RuntimeException('Failed to fork new process.');
+            throw new \RuntimeException('Failed to fork a new process.');
         }elseif ($processId > 0) {
             // This is executed in the parent process.
-            $this->_initialize($processId);
-            $this->_getLogger()->debug("Forked Process[{$this->getProcessId()}][{$this->getTypeCode()}].");
+            $this->_setProcessId($processId);
         }else {
             // This is executed in the child process.
-            $this->_initialize($processId);
+            $this->_initialize();
             $this->_removeParentProcessPool();
             $this->_startProcessPool();
         }
@@ -53,9 +52,10 @@ abstract class Forked extends ProcessAbstract implements ProcessInterface
     public function processPoolStarted(): ProcessInterface
     {
         $this->_getLogger()->debug("Running Process...");
+        $this->_getProcessSignal()->unBlock();
         $this->_run();
         $this->_getLogger()->debug("Process finished running.");
-        $this->_exit(0);
+        $this->exit(0);
 
         return $this;
     }

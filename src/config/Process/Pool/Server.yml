@@ -11,6 +11,8 @@ services:
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
       - [setProcessRegistry, ['@process.registry']]
+      - [setProcessSignal, ['@process.signal']]
+      - [setTitlePrefix, ['%process.title.prefix%']]
   process.pool.server:
     public: true
     alias: nhds.jobs.process.pool.server
