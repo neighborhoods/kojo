@@ -71,7 +71,9 @@ abstract class CommandAbstract extends Command
             [
                 '+------------------------------+',
                 '|   ⚡ Neighborhoods Kōjō ⚡   |',
-                '|  ==========================  |',
+                '|                              |',
+                '|             工場             |',
+                '|                              |',
                 '|  A distributed task manager  |',
                 '+------------------------------+',
             ]
