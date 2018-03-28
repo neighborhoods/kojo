@@ -69,10 +69,11 @@ abstract class CommandAbstract extends Command
     {
         $this->_getOutput()->writeln(
             [
-                'Neighborhoods Kōjō',
-                '===========================',
-                'A distributed task manager.',
-                '',
+                '+------------------------------+',
+                '|   ⚡ Neighborhoods Kōjō ⚡   |',
+                '|  ==========================  |',
+                '|  A distributed task manager  |',
+                '+------------------------------+',
             ]
         );
 
