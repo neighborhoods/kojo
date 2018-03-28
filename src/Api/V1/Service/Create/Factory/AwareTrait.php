@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Api\Service\Create\Factory;
+namespace NHDS\Jobs\Api\V1\Service\Create\Factory;
 
-use NHDS\Jobs\Api\Service\Create\FactoryInterface;
+use NHDS\Jobs\Api\V1\Service\Create\FactoryInterface;
 
 trait AwareTrait
 {

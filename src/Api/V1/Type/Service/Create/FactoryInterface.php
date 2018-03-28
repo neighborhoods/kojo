@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Api\Type\Service\Create;
+namespace NHDS\Jobs\Api\V1\Type\Service\Create;
 
 use NHDS\Jobs\Service;
 use NHDS\Jobs\Type\Service\CreateInterface;

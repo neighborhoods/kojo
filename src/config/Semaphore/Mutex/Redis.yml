@@ -5,7 +5,7 @@ services:
     public: false
     calls:
       - [setLogger, ['@process.pool.logger']]
-      - [setRedis, ['@redis']]
+      - [setRedisRepository, ['@redis.repository']]
       - [setProcessRegistry, ['@process.registry']]
   semaphore.mutex.redis:
     alias: nhds.jobs.semaphore.mutex.redis

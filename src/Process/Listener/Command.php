@@ -36,7 +36,6 @@ class Command extends ListenerAbstract implements CommandInterface
 
     public function addProcess(string $processTypeCode): Command
     {
-        $this->_getLogger()->debug('Adding Process with type code "' . $processTypeCode . '".');
         $process = $this->_getProcessCollection()->getProcessPrototypeClone($processTypeCode);
         $this->_getProcessPool()->addChildProcess($process);
 

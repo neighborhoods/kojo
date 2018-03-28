@@ -2,6 +2,7 @@ services:
   nhds.jobs.maintainer:
     class: NHDS\Jobs\Maintainer
     shared: false
+    public: false
     calls:
       - [setSemaphore, ['@semaphore']]
       - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job']]
@@ -19,3 +20,4 @@ services:
       - [setMaintainerDelete, ['@maintainer.delete']]
   maintainer:
     alias: nhds.jobs.maintainer
+    public: false

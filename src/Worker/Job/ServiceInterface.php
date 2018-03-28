@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Worker\Job;
 
-use NHDS\Jobs\Api\Service\Create\FactoryInterface;
+use NHDS\Jobs\Api\V1\Service\Create\FactoryInterface;
 use NHDS\Jobs\Service\CreateInterface;
 use NHDS\Jobs\Service\Update\Hold;
 use NHDS\Jobs\Service\Update\Retry;

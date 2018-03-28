@@ -6,7 +6,7 @@ namespace NHDS\Jobs\Worker\Job;
 use NHDS\Jobs\Data\Job;
 use NHDS\Jobs\Service\CreateInterface;
 use NHDS\Jobs\Service\Update;
-use NHDS\Jobs\Api\Service\Create;
+use NHDS\Jobs\Api;
 use NHDS\Toolkit\Data\Property\Strict;
 
 class Service implements ServiceInterface
@@ -16,7 +16,7 @@ class Service implements ServiceInterface
     use Update\Retry\Factory\AwareTrait;
     use Update\Complete\Success\Factory\AwareTrait;
     use Update\Complete\Failed\Factory\AwareTrait;
-    use Create\Factory\AwareTrait;
+    use Api\V1\Service\Create\Factory\AwareTrait;
     use Strict\AwareTrait;
     const PROP_REQUEST             = 'request';
     const PROP_RETRY_DATE_TIME     = 'retry_date_time';

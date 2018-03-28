@@ -2,6 +2,7 @@ services:
   nhds.jobs.foreman:
     class: NHDS\Jobs\Foreman
     shared: false
+    public: false
     calls:
       - [setTypeRepository, ['@type.repository']]
       - [setSelector, ['@selector']]
@@ -18,3 +19,4 @@ services:
       - [setMessageBroker, ['@message.broker.redis']]
   foreman:
     alias: nhds.jobs.foreman
+    public: false

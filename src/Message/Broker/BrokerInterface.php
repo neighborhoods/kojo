@@ -17,11 +17,7 @@ interface BrokerInterface
 
     public function getSubscriptionChannelLength(): int;
 
-    public function setHost(string $host): BrokerInterface;
-
     public function setSubscriptionChannelName(string $channelName): BrokerInterface;
 
     public function setPublishChannelName(string $channelName): BrokerInterface;
-
-    public function setPort(int $port): BrokerInterface;
 }

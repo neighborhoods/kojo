@@ -23,7 +23,6 @@ class Redis extends ListenerAbstract implements RedisInterface
 
     protected function _register(): ProcessInterface
     {
-        $this->_getLogger()->debug("CLIENT SETNAME {$this->getParentProcessUuid()}");
         $this->_getRedis()->client('SETNAME', $this->getParentProcessUuid());
         $this->_getMessageBroker()->setPublishChannelName($this->getParentProcessUuid());
         $this->_getMessageBroker()->setSubscriptionChannelName($this->getParentProcessUuid());

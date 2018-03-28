@@ -4,7 +4,7 @@ services:
     shared: true
     calls:
       - [setSchedulerTime, ['@scheduler.time']]
-      - [setCacheItemPool, ['@symfony.component.cache.adpater.redisadapter']]
+      - [setCacheItemPoolRepository, ['@cache_item_pool.repository']]
       - [setTime, ['@nhds.toolkit.time']]
   scheduler.cache:
     alias: nhds.jobs.scheduler.cache

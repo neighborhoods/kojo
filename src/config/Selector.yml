@@ -1,6 +1,7 @@
 services:
   nhds.jobs.selector:
     class: NHDS\Jobs\Selector
+    public: false
     shared: true
     calls:
       - [setPageSize, [50]]
@@ -14,3 +15,4 @@ services:
       - [setRandomIntMax, [10]]
   selector:
     alias: nhds.jobs.selector
+    public: false

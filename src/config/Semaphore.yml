@@ -1,5 +1,8 @@
 services:
   nhds.jobs.semaphore:
     class: NHDS\Jobs\Semaphore
+    public: false
+    shared: true
   semaphore:
     alias: nhds.jobs.semaphore
+    public: false

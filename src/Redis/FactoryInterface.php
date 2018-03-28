@@ -17,6 +17,4 @@ interface FactoryInterface extends Service\FactoryInterface
     public function setHost(string $host): FactoryInterface;
 
     public function addOption(int $optionName, string $optionValue): FactoryInterface;
-
-    public function setRedis(\Redis $redis);
 }

@@ -8,4 +8,6 @@ use Psr\Cache\CacheItemPoolInterface;
 interface RepositoryInterface
 {
     public function getById(string $id): CacheItemPoolInterface;
+
+    public function setCacheItemPoolFactory(FactoryInterface $cacheItemPoolFactory);
 }

@@ -4,12 +4,10 @@ declare(strict_types=1);
 namespace NHDS\Jobs\Redis;
 
 use NHDS\Jobs\Service\FactoryAbstract;
-use NHDS\Jobs\Redis;
 use NHDS\Toolkit\Data\Property\Strict;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {
-    use Redis\AwareTrait;
     use Strict\AwareTrait;
     protected $_options = [];
 

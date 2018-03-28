@@ -67,7 +67,6 @@ class Foreman implements ForemanInterface
     {
         $job = $this->_getJob();
         try{
-            $this->_getLogger()->debug('Instantiating Worker for Job[' . $job->getId() . '].');
             call_user_func($this->_getLocator()->getCallable());
         }catch(\Exception $exception){
             $updateCrash = $this->_getServiceUpdateCrashFactory()->create();

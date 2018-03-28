@@ -4,10 +4,12 @@ declare(strict_types=1);
 namespace NHDS\Jobs\Message\Broker;
 
 use NHDS\Jobs\Process\Pool\Logger;
+use NHDS\Jobs\Redis\Repository;
 
 class Redis extends BrokerAbstract
 {
     use Logger\AwareTrait;
+    use Repository\AwareTrait;
     protected $_redisClient;
 
     public function waitForNewMessage(): BrokerInterface
@@ -29,10 +31,7 @@ class Redis extends BrokerAbstract
     protected function _getRedisClient(): \Redis
     {
         if ($this->_redisClient === null) {
-            $this->_redisClient = new \Redis();
-            // Do not use pconnet.
-            $this->_redisClient->connect($this->_getHost(), $this->_getPort());
-            $this->_redisClient->setOption(\Redis::OPT_READ_TIMEOUT, '-1');
+            $this->_redisClient = $this->_getRedisRepository()->getById(BrokerInterface::class);
         }
 
         return $this->_redisClient;

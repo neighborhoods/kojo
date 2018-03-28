@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NHDS\Jobs\Scheduler;
 
-use Psr\Cache\CacheItemPoolInterface;
+use NHDS\Jobs\CacheItemPool\RepositoryInterface;
 
 interface CacheInterface
 {
@@ -12,8 +12,9 @@ interface CacheInterface
     const CACHE_SCHEDULED_AHEAD_KEY_PREFIX = 'schedule_';
     const DATE_TIME_FORMAT_CACHE_MINUTE    = 'Y_m_d_H_i';
     const PROP_SCHEDULED_KEY_LIFETIME      = 'scheduled_key_lifetime';
+    public const CACHE_ITEM_POOL_ID        = 'scheduler';
 
-    public function setCacheItemPool(CacheItemPoolInterface $cacheItemPool);
+    public function setCacheItemPoolRepository(RepositoryInterface $repository);
 
     public function getMinutesNotInCache(): array;
 

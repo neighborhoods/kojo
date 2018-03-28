@@ -1,0 +1,3 @@
+parameters:
+  env(REDIS_HOST): 'redis'
+  env(REDIS_PORT): 6379

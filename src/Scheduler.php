@@ -7,7 +7,7 @@ use NHDS\Toolkit\Time;
 use Cron\CronExpression;
 use NHDS\Toolkit\Data\Property\Strict;
 use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Api\Service\Create;
+use NHDS\Jobs\Api;
 
 class Scheduler implements SchedulerInterface
 {
@@ -16,7 +16,7 @@ class Scheduler implements SchedulerInterface
     use Job\Type\Collection\Scheduler\AwareTrait;
     use Time\AwareTrait;
     use Strict\AwareTrait;
-    use Create\Factory\AwareTrait;
+    use Api\V1\Service\Create\Factory\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
 
     public function scheduleStaticJobs(): SchedulerInterface

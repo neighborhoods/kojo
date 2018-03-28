@@ -26,7 +26,6 @@ class Delete implements DeleteInterface
                 $this->_deleteCompletedJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->releaseLock();
             }catch(\Exception $exception){
-                $this->_getLogger()->debug('Received Exception with message "' . $exception->getMessage() . '"');
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->releaseLock();
                 }

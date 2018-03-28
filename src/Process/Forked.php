@@ -51,10 +51,8 @@ abstract class Forked extends ProcessAbstract implements ProcessInterface
 
     public function processPoolStarted(): ProcessInterface
     {
-        $this->_getLogger()->debug("Running Process...");
         $this->_getProcessSignal()->unBlock();
         $this->_run();
-        $this->_getLogger()->debug("Process finished running.");
         $this->exit(0);
 
         return $this;

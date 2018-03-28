@@ -41,7 +41,6 @@ class Maintainer implements MaintainerInterface
                 $this->_rescheduleCrashedJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
             }catch(\Exception $exception){
-                $this->_getLogger()->debug('Received Exception with message "' . $exception->getMessage() . '"');
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
                 }
@@ -64,7 +63,6 @@ class Maintainer implements MaintainerInterface
                     $jobSemaphoreResource->releaseLock();
                 }
             }catch(\Exception $exception){
-                $this->_getLogger()->debug('Received Exception with message "' . $exception->getMessage() . '"');
                 if ($jobSemaphoreResource->hasLock()) {
                     $jobSemaphoreResource->releaseLock();
                 }

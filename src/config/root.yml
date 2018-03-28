@@ -6,6 +6,11 @@ services:
 imports:
    # External dependencies.
    - { resource: dependencies.yml }
+   - { resource: CacheItemPool/Factory.yml }
+   - { resource: CacheItemPool/Repository.yml }
+   - { resource: Redis/Factory.yml }
+   - { resource: Redis/Repository.yml }
+   - { resource: Redis.yml }
 
   # Manager.
    - { resource: Foreman.yml }

@@ -23,9 +23,9 @@ abstract class ProcessAbstract implements ProcessInterface
         $this->_setParentProcessId(posix_getppid());
         $this->_setProcessId(posix_getpid());
         $this->_getLogger()->setProcess($this);
+        $this->_registerSignalHandlers();
         $this->_setProcessTitle();
         $this->_getProcessRegistry()->pushProcess($this);
-        $this->_registerSignalHandlers();
 
         return $this;
     }
@@ -72,7 +72,6 @@ abstract class ProcessAbstract implements ProcessInterface
     public function receivedSignal(int $signalNumber, $signalInformation)
     {
         $this->_getProcessSignal()->block();
-        $this->_getLogger()->debug("Received signal number[$signalNumber].");
         $this->exit($signalNumber);
     }
 
@@ -80,7 +79,6 @@ abstract class ProcessAbstract implements ProcessInterface
     {
         $this->_getProcessSignal()->block();
         $this->_getProcessPool()->terminateChildProcesses();
-        $this->_getLogger()->debug("Exiting Process.");
         exit($exitCode);
     }
 
@@ -211,7 +209,6 @@ abstract class ProcessAbstract implements ProcessInterface
                 . '-' . sprintf('%f', microtime(true))
                 . '-' . random_int(0, $this->_getUuidMaximumInteger());
             $this->_create(self::PROP_UUID, $processUuid);
-            $this->_getLogger()->debug("Generated UUID[$processUuid]");
         }
 
         return $this->_read(self::PROP_UUID);

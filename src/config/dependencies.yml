@@ -1,17 +1,8 @@
 services:
   nhds.toolkit.time:
     class: NHDS\Toolkit\Time
-  symfony.component.cache.adpater.redisadapter:
-    class: Symfony\Component\Cache\Adapter\RedisAdapter
-    arguments: ['@redis']
   symfony.component.expressionlanguage.expressionlanguage:
     class: \Symfony\Component\ExpressionLanguage\ExpressionLanguage
-  redis:
-    class: \Redis
-#    shared: false;
-#    lazy: true
-    calls:
-      - [connect, ['redis', '6379']]
   nhds.jobs.symfony.component.console.application:
     public: true
     class: Symfony\Component\Console\Application

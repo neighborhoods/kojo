@@ -6,7 +6,7 @@ namespace NHDS\Jobs\Process;
 interface SignalInterface
 {
     public const DEFAULT_BLOCKED_SIGNAL_NUMBERS = [
-        SIGCHLD .
+        SIGCHLD,
         SIGALRM,
     ];
 

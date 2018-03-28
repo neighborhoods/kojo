@@ -2,6 +2,7 @@ services:
   nhds.jobs.scheduler:
     class: NHDS\Jobs\Scheduler
     shared: false
+    public: false
     calls:
       - [setTime, ['@nhds.toolkit.time']]
       - [setSchedulerJobCollection, ['@data.job.collection.scheduler']]
@@ -11,3 +12,4 @@ services:
       - [setSchedulerCache, ['@scheduler.cache']]
   scheduler:
     alias: nhds.jobs.scheduler
+    public: false

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Api\Worker\Job;
+namespace NHDS\Jobs\Api\V1\Worker\Job;
 
 use NHDS\Jobs\Data\JobInterface;
 

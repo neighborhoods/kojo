@@ -28,7 +28,6 @@ class Flock extends MutexAbstract
     {
         if ($this->_hasLock === false) {
             if (flock($this->_getLockFilePointer(), $this->_getFlockLockOperation()) === true) {
-                $this->_getLogger()->debug('Obtained lock for file "' . $this->_getFilePath() . '".');
                 $this->_hasLock = true;
             }
         }else {
@@ -44,7 +43,6 @@ class Flock extends MutexAbstract
             if (flock($this->_getLockFilePointer(), LOCK_UN) === false) {
                 $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_UNLOCK_FAILED);
             }
-            $this->_getLogger()->debug('Released lock for file "' . $this->_getFilePath() . '".');
             $this->_hasLock = false;
             if (fclose($this->_getLockFilePointer()) === false) {
                 $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FCLOSE_FAILED);
