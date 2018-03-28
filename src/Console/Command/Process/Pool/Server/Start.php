@@ -1,14 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Console\Command\Process\Pool\Server;
+namespace Neighborhoods\Kojo\Console\Command\Process\Pool\Server;
 
-use NHDS\Jobs\Console\CommandAbstract;
+use Neighborhoods\Kojo\Console\CommandAbstract;
 use Symfony\Component\Console\Input\InputOption;
 
 class Start extends CommandAbstract
 {
     const OPT_SERVICES_YML_FILE_PATH = 'services-yml-file-path';
+    const OPT_RUN_SERVER             = '--run-server';
 
     protected function _configure(): CommandAbstract
     {
@@ -27,11 +28,12 @@ class Start extends CommandAbstract
 
     public function _execute(): CommandAbstract
     {
-        $arguments = ['ysfp:' . $this->_getInput()->getArgument(self::ARG_SERVICES_YML_FILE_PATH)];
+        $arguments = [self::OPT_RUN_SERVER];
+        $arguments[] = 'ysfp:' . $this->_getInput()->getArgument(self::ARG_SERVICES_YML_FILE_PATH);
         foreach ($this->_getInput()->getOption(self::OPT_SERVICES_YML_FILE_PATH) as $servicesYmlFilePath) {
             $arguments[] = 'ysfp:' . $servicesYmlFilePath;
         }
-        pcntl_exec(__DIR__ . '/../../../../../bin/server', $arguments);
+        pcntl_exec(__DIR__ . '/../../../../../../bin/kojo', $arguments);
         $this->_getOutput()->writeln('An error occurred trying to start the process pool server.');
 
         return $this;

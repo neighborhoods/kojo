@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Service\Update;
-use NHDS\Jobs\Worker;
+use Neighborhoods\Kojo\Service\Update;
+use Neighborhoods\Kojo\Worker;
 
 interface ForemanInterface
 {

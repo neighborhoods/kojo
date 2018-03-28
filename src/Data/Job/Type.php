@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job;
+namespace Neighborhoods\Kojo\Data\Job;
 
 use Cron\CronExpression;
-use NHDS\Jobs\Db\Model;
+use Neighborhoods\Kojo\Db\Model;
 
 class Type extends Model implements TypeInterface
 {

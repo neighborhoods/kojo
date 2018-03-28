@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\CacheItemPool;
+namespace Neighborhoods\Kojo\CacheItemPool;
 
-use NHDS\Jobs\CacheItemPool;
+use Neighborhoods\Kojo\CacheItemPool;
 use Psr\Cache\CacheItemPoolInterface;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Process;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Process;
 
 class Repository implements RepositoryInterface
 {

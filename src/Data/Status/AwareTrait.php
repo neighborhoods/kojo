@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Status;
+namespace Neighborhoods\Kojo\Data\Status;
 
-use NHDS\Jobs\Data\StatusInterface;
+use Neighborhoods\Kojo\Data\StatusInterface;
 
 trait AwareTrait
 {

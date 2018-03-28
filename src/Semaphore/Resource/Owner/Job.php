@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Resource\Owner;
+namespace Neighborhoods\Kojo\Semaphore\Resource\Owner;
 
-use NHDS\Jobs\Data;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Data;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class Job implements JobInterface
 {

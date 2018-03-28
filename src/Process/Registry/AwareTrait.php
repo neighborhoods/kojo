@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Registry;
+namespace Neighborhoods\Kojo\Process\Registry;
 
-use NHDS\Jobs\Process\RegistryInterface;
+use Neighborhoods\Kojo\Process\RegistryInterface;
 
 trait AwareTrait
 {

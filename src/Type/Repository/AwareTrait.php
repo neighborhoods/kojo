@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Type\Repository;
+namespace Neighborhoods\Kojo\Type\Repository;
 
-use NHDS\Jobs\Type\RepositoryInterface;
+use Neighborhoods\Kojo\Type\RepositoryInterface;
 
 trait AwareTrait
 {

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data;
+namespace Neighborhoods\Kojo\Data;
 
-use NHDS\Jobs\Db\ModelInterface;
+use Neighborhoods\Kojo\Db\ModelInterface;
 
 interface StatusInterface extends ModelInterface
 {

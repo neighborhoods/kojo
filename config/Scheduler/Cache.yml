@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.scheduler.cache:
+    class: Neighborhoods\Kojo\Scheduler\Cache
+    shared: true
+    calls:
+      - [setSchedulerTime, ['@scheduler.time']]
+      - [setCacheItemPoolRepository, ['@cache_item_pool.repository']]
+      - [setTime, ['@nhds.toolkit.time']]
+  scheduler.cache:
+    alias: neighborhoods.kojo.scheduler.cache

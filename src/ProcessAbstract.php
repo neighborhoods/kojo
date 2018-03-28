@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Process;
-use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Process;
+use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 abstract class ProcessAbstract implements ProcessInterface
 {

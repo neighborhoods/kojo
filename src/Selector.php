@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Data\JobInterface;
-use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Exception\Runtime\Db\Model\LoadException;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Message\Broker;
-use NHDS\Jobs\Process;
+use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\Exception\Runtime\Db\Model\LoadException;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Message\Broker;
+use Neighborhoods\Kojo\Process;
 
 class Selector implements SelectorInterface
 {

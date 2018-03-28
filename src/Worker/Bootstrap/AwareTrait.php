@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Worker\Bootstrap;
+namespace Neighborhoods\Kojo\Worker\Bootstrap;
 
-use NHDS\Jobs\Worker\BootstrapInterface;
+use Neighborhoods\Kojo\Worker\BootstrapInterface;
 
 trait AwareTrait
 {

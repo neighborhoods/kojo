@@ -1,8 +1,0 @@
-services:
-  nhds.jobs.service.update.panic.factory:
-    class: NHDS\Jobs\Service\Update\Panic\Factory
-    calls:
-      - [setStateService, ['@state.service']]
-      - [setServiceUpdatePanic, ['@service.update.panic']]
-  service.update.panic.factory:
-    alias: nhds.jobs.service.update.panic.factory

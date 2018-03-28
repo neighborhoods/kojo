@@ -1,0 +1,6 @@
+services:
+  neighborhoods.kojo.service.update.hold:
+    class: Neighborhoods\Kojo\Service\Update\Hold
+    shared: false
+  service.update.hold:
+    alias: neighborhoods.kojo.service.update.hold

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Maintainer;
+namespace Neighborhoods\Kojo\Maintainer;
 
 interface DeleteInterface
 {

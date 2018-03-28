@@ -1,7 +1,7 @@
 {
-    "name": "nhds/jobs",
+    "name": "neighborhoods/kojo",
     "type": "library",
-    "description": "NHDS Jobs is meant to solve the problem of easily writing distributed, fast, fault tolerant tasks.",
+    "description": "Neighborhoods Kōjō is a distributed task manager.",
     "license": "proprietary",
     "keywords": [],
     "authors": [
@@ -29,20 +29,19 @@
         "symfony/finder": "^4.0"
     },
     "bin": [
-        "src/bin/jobs",
-        "src/bin/server"
+        "bin/kojo"
     ],
     "autoload": {
         "psr-4": {
-            "NHDS\\Jobs\\": "src",
-            "NHDS\\Toolkit\\": "nhdstoolkitsrc"
+            "Neighborhoods\\Kojo\\": "src",
+            "Neighborhoods\\Toolkit\\": "nhdstoolkitsrc"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NHDS\\Jobs\\Test\\": "tests",
+            "Neighborhoods\\Kojo\\Test\\": "tests",
             "Neighborhoods\\Scaffolding\\": "nhdswatchsrc",
-            "NHDS\\Jobs\\Example\\": "example"
+            "Neighborhoods\\Kojo\\Example\\": "example"
         }
     }
 }

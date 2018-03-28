@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job;
+namespace Neighborhoods\Kojo\Data\Job;
 
-use NHDS\Jobs\Data\Job\Collection\IteratorInterface;
-use NHDS\Jobs\Db;
-use NHDS\Jobs\Process;
+use Neighborhoods\Kojo\Data\Job\Collection\IteratorInterface;
+use Neighborhoods\Kojo\Db;
+use Neighborhoods\Kojo\Process;
 
 abstract class CollectionAbstract extends Db\Model\CollectionAbstract
 {

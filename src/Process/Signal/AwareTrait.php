@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Signal;
+namespace Neighborhoods\Kojo\Process\Signal;
 
-use NHDS\Jobs\Process\SignalInterface;
+use Neighborhoods\Kojo\Process\SignalInterface;
 
 trait AwareTrait
 {

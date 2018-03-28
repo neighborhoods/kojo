@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Data\Job;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 abstract class ServiceAbstract implements ServiceInterface
 {

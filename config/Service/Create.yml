@@ -1,0 +1,9 @@
+services:
+  neighborhoods.kojo.service.create:
+    class: Neighborhoods\Kojo\Service\Create
+    shared: false
+    calls:
+      - [setTypeRepository, ['@type.repository']]
+      - [setTime, ['@nhds.toolkit.time']]
+  service.create:
+    alias: neighborhoods.kojo.service.create

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Scaffolding\TestCase\ContainerBuilder;
 
-use NHDS\Toolkit;
+use Neighborhoods\Toolkit;
 use ReflectionClass;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;

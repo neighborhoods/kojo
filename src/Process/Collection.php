@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process;
+namespace Neighborhoods\Kojo\Process;
 
-use NHDS\Jobs\Process\Collection\IteratorInterface;
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Process\Collection\IteratorInterface;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class Collection implements CollectionInterface
 {

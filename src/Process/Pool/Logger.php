@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool;
 
 use Psr\Log;
-use NHDS\Toolkit\Time;
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Toolkit\Time;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class Logger extends Log\AbstractLogger implements LoggerInterface
 {

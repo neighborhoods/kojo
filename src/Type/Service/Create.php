@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Type\Service;
+namespace Neighborhoods\Kojo\Type\Service;
 
-use NHDS\Jobs\Type;
+use Neighborhoods\Kojo\Type;
 
 class Create extends Type\ServiceAbstract implements CreateInterface
 {

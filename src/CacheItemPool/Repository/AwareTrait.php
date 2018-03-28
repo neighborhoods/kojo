@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\CacheItemPool\Repository;
+namespace Neighborhoods\Kojo\CacheItemPool\Repository;
 
-use NHDS\Jobs\CacheItemPool\RepositoryInterface;
+use Neighborhoods\Kojo\CacheItemPool\RepositoryInterface;
 
 trait AwareTrait
 {

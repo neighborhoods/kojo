@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Test\Unit;
+namespace Neighborhoods\Kojo\Test\Unit;
 
 use Neighborhoods\Scaffolding\Fixture;
 
@@ -9,7 +9,7 @@ class MaintainerInterfaceTest extends Fixture\AbstractTest
 {
     public function testDelete()
     {
-        $maintainer = $this->_getTestContainerBuilder()->get('nhds.jobs.maintainer');
+        $maintainer = $this->_getTestContainerBuilder()->get('neighborhoods.kojo.maintainer');
         $maintainer->deleteCompletedJobs();
 
         return $this;
@@ -17,7 +17,7 @@ class MaintainerInterfaceTest extends Fixture\AbstractTest
 
     public function testUpdatePendingJobs()
     {
-        $maintainer = $this->_getTestContainerBuilder()->get('nhds.jobs.maintainer');
+        $maintainer = $this->_getTestContainerBuilder()->get('neighborhoods.kojo.maintainer');
         $maintainer->updatePendingJobs();
 
         return $this;
@@ -25,7 +25,7 @@ class MaintainerInterfaceTest extends Fixture\AbstractTest
 
     public function testRescheduleCrashedJobs()
     {
-        $maintainer = $this->_getTestContainerBuilder()->get('nhds.jobs.maintainer');
+        $maintainer = $this->_getTestContainerBuilder()->get('neighborhoods.kojo.maintainer');
         $maintainer->rescheduleCrashedJobs();
 
         return $this;

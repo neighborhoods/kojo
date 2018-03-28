@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\CacheItemPool;
+namespace Neighborhoods\Kojo\CacheItemPool;
 
 use Psr\Cache\CacheItemPoolInterface;
-use NHDS\Jobs\Service\FactoryAbstract;
-use NHDS\Jobs\Redis;
+use Neighborhoods\Kojo\Service\FactoryAbstract;
+use Neighborhoods\Kojo\Redis;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 
 class Factory extends FactoryAbstract implements FactoryInterface

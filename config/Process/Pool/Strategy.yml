@@ -1,0 +1,32 @@
+parameters:
+  process.pool.strategy.maximum_load_average: 10.0
+  process.pool.strategy-server.maximum_load_average: 10.0
+  process.pool.strategy-job.maximum_load_average: 10.0
+services:
+  neighborhoods.kojo.process.pool.strategy:
+    shared: false
+    class: Neighborhoods\Kojo\Process\Pool\Strategy
+    calls:
+      - [setAlarmProcessTypeCode, ['job']]
+      - [setLogger, ['@process.pool.logger']]
+      - [setMaximumLoadAverage, ['%process.pool.strategy.maximum_load_average%']]
+  process.pool.strategy:
+    alias: neighborhoods.kojo.process.pool.strategy
+  neighborhoods.kojo.process.pool.strategy-server:
+    shared: false
+    class: Neighborhoods\Kojo\Process\Pool\Strategy
+    calls:
+      - [setAlarmProcessTypeCode, ['root']]
+      - [setFillProcessTypeCode, ['root']]
+      - [setLogger, ['@process.pool.logger']]
+      - [setMaximumLoadAverage, ['%process.pool.strategy-server.maximum_load_average%']]
+  process.pool.strategy-server:
+    alias: neighborhoods.kojo.process.pool.strategy-server
+  neighborhoods.kojo.process.pool.strategy-job:
+    shared: false
+    class: Neighborhoods\Kojo\Process\Pool\Strategy
+    calls:
+      - [setLogger, ['@process.pool.logger']]
+      - [setMaximumLoadAverage, ['%process.pool.strategy-job.maximum_load_average%']]
+  process.pool.strategy-job:
+    alias: neighborhoods.kojo.process.pool.strategy-job

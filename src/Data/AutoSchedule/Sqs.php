@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\AutoSchedule;
+namespace Neighborhoods\Kojo\Data\AutoSchedule;
 
-use NHDS\Jobs\Db\Model;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Db\Model;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class Sqs extends Model implements SqsInterface
 {

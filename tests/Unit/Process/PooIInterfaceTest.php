@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Test\Unit\Process\Pool;
+namespace Neighborhoods\Kojo\Test\Unit\Process\Pool;
 
-use NHDS\Jobs\Process\PoolInterface;
+use Neighborhoods\Kojo\Process\PoolInterface;
 use Neighborhoods\Scaffolding\Fixture\AbstractTest;
 
 /** @covers PoolInterface */

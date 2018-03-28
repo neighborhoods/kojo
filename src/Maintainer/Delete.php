@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Maintainer;
+namespace Neighborhoods\Kojo\Maintainer;
 
-use NHDS\Jobs\Data\Job;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Semaphore;
-use NHDS\Jobs\Process\Pool\Logger;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Semaphore;
+use Neighborhoods\Kojo\Process\Pool\Logger;
 
 class Delete implements DeleteInterface
 {

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Worker\Job\Service;
+namespace Neighborhoods\Kojo\Worker\Job\Service;
 
-use NHDS\Jobs\Worker\Job\ServiceInterface;
+use Neighborhoods\Kojo\Worker\Job\ServiceInterface;
 
 trait AwareTrait
 {

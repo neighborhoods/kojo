@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Status;
+namespace Neighborhoods\Kojo\Data\Status;
 
 class Message
 {
-    const TABLE_NAME                 = 'nhds_status_message';
-    const FIELD_NAME_ID              = 'nhds_status_message_id';
-    const FIELD_NAME_STATUS_ID       = 'nhds_status_id';
+    const TABLE_NAME                 = 'kojo_status_message';
+    const FIELD_NAME_ID              = 'kojo_status_message_id';
+    const FIELD_NAME_STATUS_ID       = 'kojo_status_id';
     const FIELD_NAME_DATE_TIME       = 'date_time';
     const FIELD_NAME_MICRO_TIME      = 'micro_time';
     const FIELD_NAME_LEVEL           = 'level';

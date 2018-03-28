@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Retry;
+namespace Neighborhoods\Kojo\Service\Update\Retry;
 
-use NHDS\Jobs\Service\Update\RetryInterface;
-use NHDS\Jobs\Service\Update\Retry;
-use NHDS\Jobs\State\Service;
-use NHDS\Jobs\Service\FactoryAbstract;
+use Neighborhoods\Kojo\Service\Update\RetryInterface;
+use Neighborhoods\Kojo\Service\Update\Retry;
+use Neighborhoods\Kojo\State\Service;
+use Neighborhoods\Kojo\Service\FactoryAbstract;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {

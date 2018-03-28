@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Exception\Runtime\Filesystem;
+namespace Neighborhoods\Kojo\Exception\Runtime\Filesystem;
 
-use NHDS\Jobs\Exception\Runtime\Filesystem;
+use Neighborhoods\Kojo\Exception\Runtime\Filesystem;
 
 trait AwareTrait
 {

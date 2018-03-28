@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data;
+namespace Neighborhoods\Kojo\Data;
 
-use NHDS\Jobs\Db\Model;
-use NHDS\Toolkit\TimeInterface;
-use NHDS\Toolkit\Time;
+use Neighborhoods\Kojo\Db\Model;
+use Neighborhoods\Toolkit\TimeInterface;
+use Neighborhoods\Toolkit\Time;
 
 class Job extends Model implements JobInterface
 {

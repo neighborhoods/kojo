@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Schema;
+namespace Neighborhoods\Kojo\Db\Schema;
 
-use NHDS\Jobs\Db;
-use NHDS\Jobs\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\Db;
+use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\SqlInterface;
 

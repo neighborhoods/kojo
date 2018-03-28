@@ -1,0 +1,11 @@
+services:
+  neighborhoods.kojo.data.job.collection.crashdetection:
+    class: Neighborhoods\Kojo\Data\Job\Collection\CrashDetection
+    shared: false
+    calls:
+      - [setModel, ['@data.job']]
+      - [setIterator, ['@data.job.collection.iterator']]
+      - [addDbConnectionContainer, ['@db.connection.container-job']]
+      - [setLogger, ['@process.pool.logger']]
+  data.job.collection.crashdetection:
+    alias: neighborhoods.kojo.data.job.collection.crashdetection

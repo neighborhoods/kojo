@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Resource;
+namespace Neighborhoods\Kojo\Semaphore\Resource;
 
-use NHDS\Jobs\Semaphore;
-use NHDS\Jobs\Service\FactoryAbstract;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Semaphore;
+use Neighborhoods\Kojo\Service\FactoryAbstract;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {

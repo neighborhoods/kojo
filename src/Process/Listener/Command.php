@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Listener;
+namespace Neighborhoods\Kojo\Process\Listener;
 
-use NHDS\Jobs\Process\Forked;
-use NHDS\Jobs\Process\ListenerInterface;
-use NHDS\Jobs\Process\ListenerAbstract;
+use Neighborhoods\Kojo\Process\Forked;
+use Neighborhoods\Kojo\Process\ListenerInterface;
+use Neighborhoods\Kojo\Process\ListenerAbstract;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Command extends ListenerAbstract implements CommandInterface

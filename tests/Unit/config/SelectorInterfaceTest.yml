@@ -3,4 +3,4 @@ imports:
 services:
   selector:
     public: true
-    alias: nhds.jobs.selector
+    alias: neighborhoods.kojo.selector

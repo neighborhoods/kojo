@@ -1,0 +1,9 @@
+services:
+  neighborhoods.kojo.state.service:
+    class: Neighborhoods\Kojo\State\Service
+    shared: false
+    calls:
+      - [setTime, ['@nhds.toolkit.time']]
+      - [setTypeRepository, ['@type.repository']]
+  state.service:
+    alias: neighborhoods.kojo.state.service

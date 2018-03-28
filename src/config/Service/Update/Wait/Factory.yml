@@ -1,8 +1,0 @@
-services:
-  nhds.jobs.service.update.wait.factory:
-    class: NHDS\Jobs\Service\Update\Wait\Factory
-    calls:
-      - [setStateService, ['@state.service']]
-      - [setServiceUpdateWait, ['@service.update.wait']]
-  service.update.wait.factory:
-    alias: nhds.jobs.service.update.wait.factory

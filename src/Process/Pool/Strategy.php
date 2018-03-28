@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool;
 
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Jobs\Process\JobInterface;
-use NHDS\Jobs\Process\ListenerInterface;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Kojo\Process\JobInterface;
+use Neighborhoods\Kojo\Process\ListenerInterface;
 
 class Strategy extends StrategyAbstract
 {

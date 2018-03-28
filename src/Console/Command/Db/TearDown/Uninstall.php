@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Console\Command\Db\TearDown;
+namespace Neighborhoods\Kojo\Console\Command\Db\TearDown;
 
-use NHDS\Jobs\Console\CommandAbstract;
-use NHDS\Jobs\Worker\Bootstrap;
-use NHDS\Jobs\Db\TearDown;
+use Neighborhoods\Kojo\Console\CommandAbstract;
+use Neighborhoods\Kojo\Worker\Bootstrap;
+use Neighborhoods\Kojo\Db\TearDown;
 
 class Uninstall extends CommandAbstract
 {

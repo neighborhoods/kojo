@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore;
+namespace Neighborhoods\Kojo\Semaphore;
 
-use NHDS\Jobs\SemaphoreInterface;
+use Neighborhoods\Kojo\SemaphoreInterface;
 
 trait AwareTrait
 {

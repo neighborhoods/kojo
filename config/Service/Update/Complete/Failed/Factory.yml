@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.service.update.complete.failed.factory:
+    class: Neighborhoods\Kojo\Service\Update\Complete\Failed\Factory
+    calls:
+      - [setStateService, ['@state.service']]
+      - [setServiceUpdateCompleteFailed, ['@service.update.complete.failed']]
+  service.update.complete.failed.factory:
+    alias: neighborhoods.kojo.service.update.complete.failed.factory

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Toolkit\Data\Property\Strict;
+namespace Neighborhoods\Toolkit\Data\Property\Strict;
 
 trait AwareTrait
 {

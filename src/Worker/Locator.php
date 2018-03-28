@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Worker;
+namespace Neighborhoods\Kojo\Worker;
 
-use NHDS\Jobs\Data\Job;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class Locator implements LocatorInterface
 {

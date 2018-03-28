@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db;
+namespace Neighborhoods\Kojo\Db;
 
 interface TearDownInterface
 {

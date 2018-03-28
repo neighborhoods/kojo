@@ -1,0 +1,5 @@
+services:
+  neighborhoods.kojo.worker.bootstrap:
+    class: Neighborhoods\Kojo\Worker\Bootstrap
+  worker.bootstrap:
+    alias: neighborhoods.kojo.worker.bootstrap

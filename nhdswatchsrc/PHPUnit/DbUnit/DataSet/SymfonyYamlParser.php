@@ -5,7 +5,7 @@ namespace Neighborhoods\Scaffolding\PHPUnit\DbUnit\DataSet;
 
 use PHPUnit\DbUnit\DataSet\IYamlParser;
 use Symfony\Component\Yaml\Yaml;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class SymfonyYamlParser implements IYamlParser
 {

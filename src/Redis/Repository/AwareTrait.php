@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Redis\Repository;
+namespace Neighborhoods\Kojo\Redis\Repository;
 
-use NHDS\Jobs\Redis\RepositoryInterface;
+use Neighborhoods\Kojo\Redis\RepositoryInterface;
 
 trait AwareTrait
 {

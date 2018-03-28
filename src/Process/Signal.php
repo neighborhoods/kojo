@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process;
+namespace Neighborhoods\Kojo\Process;
 
 class Signal implements SignalInterface
 {

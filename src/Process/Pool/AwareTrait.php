@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool;
 
-use NHDS\Jobs\Process\PoolInterface;
+use Neighborhoods\Kojo\Process\PoolInterface;
 
 trait AwareTrait
 {

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Api\V1\Service\Create;
+namespace Neighborhoods\Kojo\Api\V1\Service\Create;
 
-use NHDS\Jobs\Data\Job\Collection\ScheduleLimitInterface;
-use NHDS\Jobs\Service\CreateInterface;
-use NHDS\Jobs\State\ServiceInterface;
-use NHDS\Jobs\Service;
+use Neighborhoods\Kojo\Data\Job\Collection\ScheduleLimitInterface;
+use Neighborhoods\Kojo\Service\CreateInterface;
+use Neighborhoods\Kojo\State\ServiceInterface;
+use Neighborhoods\Kojo\Service;
 
 interface FactoryInterface extends Service\FactoryInterface
 {

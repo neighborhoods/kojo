@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Setup\Schema;
+namespace Neighborhoods\Kojo\Db\Setup\Schema;
 
-use NHDS\Jobs\Db\Schema\VersionAbstract;
-use NHDS\Jobs\Db\Schema\VersionInterface;
-use NHDS\Jobs\Data\Job\Type;
-use NHDS\Jobs\Data\JobInterface;
+use Neighborhoods\Kojo\Db\Schema\VersionAbstract;
+use Neighborhoods\Kojo\Db\Schema\VersionInterface;
+use Neighborhoods\Kojo\Data\Job\Type;
+use Neighborhoods\Kojo\Data\JobInterface;
 use Zend\Db\Metadata\Object\ConstraintKeyObject;
 use Zend\Db\Sql\Ddl\Column\BigInteger;
 use Zend\Db\Sql\Ddl\Column\Boolean;

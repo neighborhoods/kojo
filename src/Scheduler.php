@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Toolkit\Time;
+use Neighborhoods\Toolkit\Time;
 use Cron\CronExpression;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Api;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\Api;
 
 class Scheduler implements SchedulerInterface
 {

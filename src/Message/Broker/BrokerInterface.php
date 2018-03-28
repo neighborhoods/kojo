@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Message\Broker;
+namespace Neighborhoods\Kojo\Message\Broker;
 
 interface BrokerInterface
 {

@@ -1,0 +1,47 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+use Neighborhoods\Kojo\Console\Command\Process\Pool\Server\Start;
+use Neighborhoods\Kojo\Service\Container;
+
+ini_set('assert.exception', '1');
+error_reporting(E_ALL);
+
+if (PHP_SAPI !== 'cli') {
+    echo 'bin/kojo must be run as a CLI application';
+    exit(1);
+}
+try{
+    foreach ([
+                 __DIR__ . '/../../../autoload.php',
+                 __DIR__ . '/../vendor/autoload.php',
+             ] as $autoLoaderFilePathCandidate) {
+        if (file_exists($autoLoaderFilePathCandidate)) {
+            require_once $autoLoaderFilePathCandidate;
+            break;
+        }
+    }
+}catch(\Exception $exception){
+    echo 'Autoload error: ' . $exception->getMessage();
+    exit(1);
+}
+$serviceContainer = new Container();
+$ymlServiceFilePath = __DIR__ . '/../config/root.yml';
+$serviceContainer->addServicesYmlFilePath($ymlServiceFilePath);
+if (isset($argv[2]) && is_string($argv[2]) && is_file($argv[2])) {
+    $serviceContainer->addServicesYmlFilePath($argv[2]);
+}elseif (isset($argv[1]) && is_string($argv[1]) && $argv[1] === Start::OPT_RUN_SERVER) {
+    foreach ($argv as $argument) {
+        if (strstr($argument, 'ysfp:') !== false) {
+            $ymlServicesFilePath = explode('ysfp:', $argument);
+            $serviceContainer->addServicesYmlFilePath($ymlServicesFilePath[1]);
+        }
+    }
+    $server = $serviceContainer->getContainerBuilder()->get('process.pool.server');
+    $server->setParentProcessPath('');
+    $server->start();
+    exit();
+}
+$consoleApplication = $serviceContainer->getContainerBuilder()->get('nhds.kojo.symfony.component.console.application');
+$consoleApplication->run();

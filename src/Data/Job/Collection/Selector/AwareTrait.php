@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job\Collection\Selector;
+namespace Neighborhoods\Kojo\Data\Job\Collection\Selector;
 
-use NHDS\Jobs\Data\Job\Collection\SelectorInterface;
+use Neighborhoods\Kojo\Data\Job\Collection\SelectorInterface;
 
 trait AwareTrait
 {

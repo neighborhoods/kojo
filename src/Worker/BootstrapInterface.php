@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Worker;
+namespace Neighborhoods\Kojo\Worker;
 
-use NHDS\Jobs\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 
 interface BootstrapInterface
 {

@@ -5,7 +5,7 @@ services:
     public: true
   nhds.toolkit.time:
     public: true
-    class: NHDS\Toolkit\Time
+    class: Neighborhoods\Toolkit\Time
   nhds.watch.fixture.expression.numberpool:
     class: Neighborhoods\Scaffolding\Fixture\Expression\NumberPool
 imports:

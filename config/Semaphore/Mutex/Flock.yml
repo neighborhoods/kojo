@@ -1,0 +1,11 @@
+services:
+  neighborhoods.kojo.semaphore.mutex.flock:
+    class: Neighborhoods\Kojo\Semaphore\Mutex\Flock
+    shared: false
+    calls:
+      - [setFileMode, ['c']]
+      - [setDirectoryMode, ['0777']]
+      - [setDirectoryPathPrefix, ['/tmp/']]
+      - [setLogger, ['@process.pool.logger']]
+  semaphore.mutex.flock:
+    alias: neighborhoods.kojo.semaphore.mutex.flock

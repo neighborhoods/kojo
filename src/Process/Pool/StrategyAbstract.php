@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool;
 
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Process\Collection;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Process\Collection;
 
 abstract class StrategyAbstract implements StrategyInterface
 {

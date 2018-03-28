@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Retry;
+namespace Neighborhoods\Kojo\Service\Update\Retry;
 
-use NHDS\Jobs\Service\Update\RetryInterface;
+use Neighborhoods\Kojo\Service\Update\RetryInterface;
 
 trait AwareTrait
 {

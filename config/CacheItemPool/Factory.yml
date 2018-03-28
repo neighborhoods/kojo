@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.cache_item_pool.factory:
+    class: Neighborhoods\Kojo\CacheItemPool\Factory
+    public: false
+    shared: true
+    calls:
+      - [setRedisRepository, ['@redis.repository']]
+  cache_item_pool.factory:
+    alias: neighborhoods.kojo.cache_item_pool.factory
+    public: false

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\CacheItemPool;
+namespace Neighborhoods\Kojo\CacheItemPool;
 
-use NHDS\Jobs\Redis\RepositoryInterface;
-use NHDS\Jobs\Service;
+use Neighborhoods\Kojo\Redis\RepositoryInterface;
+use Neighborhoods\Kojo\Service;
 use Psr\Cache\CacheItemPoolInterface;
 
 interface FactoryInterface extends Service\FactoryInterface

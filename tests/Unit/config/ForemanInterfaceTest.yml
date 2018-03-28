@@ -3,13 +3,13 @@ imports:
 services:
   foreman:
     public: true
-    alias: nhds.jobs.foreman
+    alias: neighborhoods.kojo.foreman
   selector:
     public: true
-    alias: nhds.jobs.selector
+    alias: neighborhoods.kojo.selector
   process.job:
     public: true
-    alias: nhds.jobs.process.job
+    alias: neighborhoods.kojo.process.job
   process.job.required:
     public: true
-    alias: nhds.jobs.process.job.required
+    alias: neighborhoods.kojo.process.job.required

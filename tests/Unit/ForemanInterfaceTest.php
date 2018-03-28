@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Test\Unit;
+namespace Neighborhoods\Kojo\Test\Unit;
 
-use NHDS\Jobs\ForemanInterface;
-use NHDS\Jobs\Process\JobInterface;
-use NHDS\Jobs\SelectorInterface;
+use Neighborhoods\Kojo\ForemanInterface;
+use Neighborhoods\Kojo\Process\JobInterface;
+use Neighborhoods\Kojo\SelectorInterface;
 use Neighborhoods\Scaffolding\Fixture\AbstractTest;
 
 class ForemanInterfaceTest extends AbstractTest

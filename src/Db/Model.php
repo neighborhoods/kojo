@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db;
+namespace Neighborhoods\Kojo\Db;
 
-use NHDS\Jobs\Exception\Runtime\Db\Model\LoadException;
-use NHDS\Toolkit\Data\Property;
-use NHDS\Jobs\Db;
-use NHDS\Jobs\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\Exception\Runtime\Db\Model\LoadException;
+use Neighborhoods\Toolkit\Data\Property;
+use Neighborhoods\Kojo\Db;
+use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 use Zend\Db\Sql\Select;
 
 class Model implements ModelInterface

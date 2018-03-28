@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Mutex;
+namespace Neighborhoods\Kojo\Semaphore\Mutex;
 
-use NHDS\Jobs\Semaphore\MutexAbstract;
-use NHDS\Jobs\Semaphore\MutexInterface;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Jobs\Process;
-use NHDS\Jobs\Redis\Repository;
+use Neighborhoods\Kojo\Semaphore\MutexAbstract;
+use Neighborhoods\Kojo\Semaphore\MutexInterface;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Kojo\Process;
+use Neighborhoods\Kojo\Redis\Repository;
 
 class Redis extends MutexAbstract implements RedisInterface
 {

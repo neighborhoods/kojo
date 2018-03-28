@@ -1,6 +1,6 @@
-nhds_job:
+kojo_job:
 -
-    nhds_job_id: 2
+    kojo_job_id: 2
     type_code: type_code_2
     name: 'Name 2'
     priority: 10
@@ -10,7 +10,7 @@ nhds_job:
     next_state_request: schedule_limit_check
     assigned_state: waiting
     previous_state: new
-    worker_uri: \NHDS\Jobs\Test\Worker\Mock
+    worker_uri: \Neighborhoods\Kojo\Test\Worker\Mock
     worker_method: work
     can_work_in_parallel: 0
     last_transition_date_time: '2018-01-12 20:54:49'
@@ -22,7 +22,7 @@ nhds_job:
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
 -
-    nhds_job_id: 3
+    kojo_job_id: 3
     type_code: type_code_2
     name: 'Name 2'
     priority: 10
@@ -32,7 +32,7 @@ nhds_job:
     next_state_request: schedule_limit_check
     assigned_state: waiting
     previous_state: new
-    worker_uri: \NHDS\Jobs\Test\Worker\Mock
+    worker_uri: \Neighborhoods\Kojo\Test\Worker\Mock
     worker_method: work
     can_work_in_parallel: 0
     last_transition_date_time: '2018-01-12 20:54:49'
@@ -44,7 +44,7 @@ nhds_job:
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
 -
-    nhds_job_id: 4
+    kojo_job_id: 4
     type_code: type_code_2
     name: 'Name 2'
     priority: 10
@@ -54,7 +54,7 @@ nhds_job:
     next_state_request: schedule_limit_check
     assigned_state: waiting
     previous_state: new
-    worker_uri: \NHDS\Jobs\Test\Worker\Mock
+    worker_uri: \Neighborhoods\Kojo\Test\Worker\Mock
     worker_method: work
     can_work_in_parallel: 0
     last_transition_date_time: '2018-01-12 20:54:49'

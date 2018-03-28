@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Mutex;
+namespace Neighborhoods\Kojo\Semaphore\Mutex;
 
-use NHDS\Jobs\Exception\Runtime;
-use NHDS\Jobs\Filesystem;
-use NHDS\Jobs\Semaphore\MutexAbstract;
-use NHDS\Jobs\Semaphore\MutexInterface;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Process\Pool\Logger;
+use Neighborhoods\Kojo\Exception\Runtime;
+use Neighborhoods\Kojo\Filesystem;
+use Neighborhoods\Kojo\Semaphore\MutexAbstract;
+use Neighborhoods\Kojo\Semaphore\MutexInterface;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Process\Pool\Logger;
 
 class Flock extends MutexAbstract
 {

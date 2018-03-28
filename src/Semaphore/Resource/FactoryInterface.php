@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Resource;
+namespace Neighborhoods\Kojo\Semaphore\Resource;
 
-use NHDS\Jobs\Semaphore\MutexInterface;
-use NHDS\Jobs\Semaphore\ResourceInterface;
-use NHDS\Jobs\Service;
+use Neighborhoods\Kojo\Semaphore\MutexInterface;
+use Neighborhoods\Kojo\Semaphore\ResourceInterface;
+use Neighborhoods\Kojo\Service;
 
 interface FactoryInterface extends Service\FactoryInterface
 {

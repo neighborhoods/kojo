@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Listener\Mutex;
+namespace Neighborhoods\Kojo\Process\Listener\Mutex;
 
-use NHDS\Jobs\Process\Forked;
-use NHDS\Jobs\Process\ListenerAbstract;
-use NHDS\Jobs\Process\ListenerInterface;
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Jobs\Redis\Factory;
+use Neighborhoods\Kojo\Process\Forked;
+use Neighborhoods\Kojo\Process\ListenerAbstract;
+use Neighborhoods\Kojo\Process\ListenerInterface;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Kojo\Redis\Factory;
 
 class Redis extends ListenerAbstract implements RedisInterface
 {

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Type\Service\Create;
+namespace Neighborhoods\Kojo\Type\Service\Create;
 
-use NHDS\Jobs\Api\V1\Type\Service\Create\FactoryInterface;
-use NHDS\Jobs\Service\FactoryAbstract;
-use NHDS\Jobs\Type\Service\Create;
-use NHDS\Jobs\Type\Service\CreateInterface;
+use Neighborhoods\Kojo\Api\V1\Type\Service\Create\FactoryInterface;
+use Neighborhoods\Kojo\Service\FactoryAbstract;
+use Neighborhoods\Kojo\Type\Service\Create;
+use Neighborhoods\Kojo\Type\Service\CreateInterface;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {

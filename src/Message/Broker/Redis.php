@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Message\Broker;
+namespace Neighborhoods\Kojo\Message\Broker;
 
-use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Jobs\Redis\Repository;
+use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Kojo\Redis\Repository;
 
 class Redis extends BrokerAbstract
 {

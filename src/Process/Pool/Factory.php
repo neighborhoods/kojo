@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool;
 
-use NHDS\Jobs\Service\FactoryAbstract;
-use NHDS\Jobs\Process;
+use Neighborhoods\Kojo\Service\FactoryAbstract;
+use Neighborhoods\Kojo\Process;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {

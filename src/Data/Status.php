@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data;
+namespace Neighborhoods\Kojo\Data;
 
-use NHDS\Jobs\Db\Model;
+use Neighborhoods\Kojo\Db\Model;
 
 class Status extends Model implements StatusInterface
 {
-    const TABLE_NAME                         = 'nhds_status';
-    const FIELD_NAME_ID                      = 'nhds_status_id';
+    const TABLE_NAME                         = 'kojo_status';
+    const FIELD_NAME_ID                      = 'kojo_status_id';
     const FIELD_NAME_STARTED_AT_DATE_TIME    = 'started_at_date_time';
     const FIELD_NAME_STARTED_AT_MICRO_TIME   = 'started_at_micro_time';
     const FIELD_NAME_FINALIZED_AT_DATE_TIME  = 'finalized_at_date_time';

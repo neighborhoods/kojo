@@ -1,0 +1,12 @@
+services:
+  neighborhoods.kojo.redis.factory:
+    class: Neighborhoods\Kojo\Redis\Factory
+    public: false
+    shared: true
+    calls:
+      - [addOption, [!php/const \Redis::OPT_READ_TIMEOUT, '-1']]
+      - [setHost, ['%env(REDIS_HOST)%']]
+      - [setPort, ['%env(REDIS_PORT)%']]
+  redis.factory:
+    alias: neighborhoods.kojo.redis.factory
+    public: false

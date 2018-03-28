@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool;
 
-use NHDS\Jobs\Process\CollectionInterface;
-use NHDS\Jobs\Process\PoolInterface;
-use NHDS\Jobs\ProcessInterface;
+use Neighborhoods\Kojo\Process\CollectionInterface;
+use Neighborhoods\Kojo\Process\PoolInterface;
+use Neighborhoods\Kojo\ProcessInterface;
 
 interface StrategyInterface
 {

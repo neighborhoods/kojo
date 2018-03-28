@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\AutoSchedule\Sqs;
+namespace Neighborhoods\Kojo\AutoSchedule\Sqs;
 
-use NHDS\Jobs\Data\AutoSchedule\Sqs;
+use Neighborhoods\Kojo\Data\AutoSchedule\Sqs;
 
 class Worker implements WorkerInterface
 {

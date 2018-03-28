@@ -1,0 +1,19 @@
+services:
+  neighborhoods.kojo.process.listener.command:
+    class: Neighborhoods\Kojo\Process\Listener\Command
+    calls:
+      - [setTypeCode, ['listener.command']]
+      - [setBrokerTypeCollection, ['@neighborhoods.kojo.message.broker.type.collection-job']]
+      - [setBrokerTypeCode, ['job_broker']]
+      - [setLogger, ['@process.pool.logger']]
+      - [setExpressionLanguage, ['@symfony.component.expressionlanguage.expressionlanguage']]
+      - [setProcessCollection, ['@process.collection']]
+      - [setProcessStrategy, ['@process.strategy.process_control']]
+      - [setProcessRegistry, ['@process.registry']]
+      - [setTerminationSignalNumber, ['@=constant("SIGKILL")']]
+      - [setUuidMaximumInteger, [9999999999]]
+      - [setProcessPoolFactory, ['@process.pool.factory-empty']]
+      - [setProcessSignal, ['@process.signal']]
+      - [setTitlePrefix, ['%process.title.prefix%']]
+  process.listener.command:
+    alias: neighborhoods.kojo.process.listener.command

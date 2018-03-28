@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Redis;
+namespace Neighborhoods\Kojo\Redis;
 
-use NHDS\Jobs\Redis;
-use NHDS\Jobs\Process;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Redis;
+use Neighborhoods\Kojo\Process;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class Repository implements RepositoryInterface
 {

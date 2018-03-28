@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Complete;
+namespace Neighborhoods\Kojo\Service\Update\Complete;
 
-use NHDS\Jobs\ServiceInterface;
+use Neighborhoods\Kojo\ServiceInterface;
 
 interface SuccessInterface extends ServiceInterface
 {

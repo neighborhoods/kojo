@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Scheduler;
+namespace Neighborhoods\Kojo\Scheduler;
 
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Scheduler;
-use NHDS\Toolkit\Time;
-use NHDS\Jobs\CacheItemPool;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Scheduler;
+use Neighborhoods\Toolkit\Time;
+use Neighborhoods\Kojo\CacheItemPool;
 
 class Cache implements CacheInterface
 {

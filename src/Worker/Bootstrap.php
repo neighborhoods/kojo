@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Worker;
+namespace Neighborhoods\Kojo\Worker;
 
 class Bootstrap extends BootstrapAbstract
 {

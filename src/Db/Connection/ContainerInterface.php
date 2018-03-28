@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Connection;
+namespace Neighborhoods\Kojo\Db\Connection;
 
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\DriverInterface;

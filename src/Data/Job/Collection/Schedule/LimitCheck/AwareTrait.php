@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job\Collection\Schedule\LimitCheck;
+namespace Neighborhoods\Kojo\Data\Job\Collection\Schedule\LimitCheck;
 
-use NHDS\Jobs\Data\Job\Collection\Schedule\LimitCheckInterface;
+use Neighborhoods\Kojo\Data\Job\Collection\Schedule\LimitCheckInterface;
 
 trait AwareTrait
 {

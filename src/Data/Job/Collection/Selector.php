@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job\Collection;
+namespace Neighborhoods\Kojo\Data\Job\Collection;
 
-use NHDS\Jobs\Data\Job\CollectionAbstract;
-use NHDS\Jobs\Data\JobInterface;
-use NHDS\Jobs\Db\Connection\ContainerInterface;
-use NHDS\Jobs\State;
-use NHDS\Jobs\Db;
+use Neighborhoods\Kojo\Data\Job\CollectionAbstract;
+use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\State;
+use Neighborhoods\Kojo\Db;
 
 class Selector extends CollectionAbstract implements SelectorInterface
 {

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Message\Broker;
+namespace Neighborhoods\Kojo\Message\Broker;
 
-use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 abstract class BrokerAbstract implements BrokerInterface
 {

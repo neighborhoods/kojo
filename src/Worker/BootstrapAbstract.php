@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Worker;
+namespace Neighborhoods\Kojo\Worker;
 
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Db\Connection\Container;
-use NHDS\Jobs\Foreman;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Db\Connection\Container;
+use Neighborhoods\Kojo\Foreman;
 
 abstract class BootstrapAbstract implements BootstrapInterface
 {

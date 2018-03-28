@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data;
+namespace Neighborhoods\Kojo\Data;
 
-use NHDS\Jobs\Db\ModelInterface;
+use Neighborhoods\Kojo\Db\ModelInterface;
 
 interface JobInterface extends ModelInterface
 {
-    const TABLE_NAME                                       = 'nhds_job';
-    const FIELD_NAME_ID                                    = 'nhds_job_id';
+    const TABLE_NAME                                       = 'kojo_job';
+    const FIELD_NAME_ID                                    = 'kojo_job_id';
     const FIELD_NAME_TYPE_CODE                             = 'type_code';
     const FIELD_NAME_NAME                                  = 'name';
     const FIELD_NAME_PRIORITY                              = 'priority';

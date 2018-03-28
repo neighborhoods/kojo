@@ -1,8 +1,0 @@
-services:
-  nhds.jobs.console.command.db.setup.install:
-    class: NHDS\Jobs\Console\Command\Db\Setup\Install
-    calls:
-      - [setBootstrap, ['@worker.bootstrap']]
-      - [setDbSetup, ['@db.setup']]
-  console.command.db.setup.install:
-    alias: nhds.jobs.console.command.db.setup.install

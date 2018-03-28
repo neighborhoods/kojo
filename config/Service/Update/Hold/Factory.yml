@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.service.update.hold.factory:
+    class: Neighborhoods\Kojo\Service\Update\Hold\Factory
+    calls:
+      - [setStateService, ['@state.service']]
+      - [setServiceUpdateHold, ['@service.update.hold']]
+  service.update.hold.factory:
+    alias: neighborhoods.kojo.service.update.hold.factory

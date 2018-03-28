@@ -1,0 +1,7 @@
+services:
+  neighborhoods.kojo.type.repository:
+      class: Neighborhoods\Kojo\Type\Repository
+      calls:
+          - [setJobType, ['@data.job.type']]
+  type.repository:
+    alias: neighborhoods.kojo.type.repository

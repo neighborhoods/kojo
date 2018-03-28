@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process;
+namespace Neighborhoods\Kojo\Process;
 
-use NHDS\Jobs\ProcessInterface;
+use Neighborhoods\Kojo\ProcessInterface;
 
 class Pool extends PoolAbstract implements PoolInterface
 {

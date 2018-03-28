@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job\Type\Collection;
+namespace Neighborhoods\Kojo\Data\Job\Type\Collection;
 
-use NHDS\Jobs\Data\Job\TypeInterface;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Db\Model\Collection;
+use Neighborhoods\Kojo\Data\Job\TypeInterface;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Db\Model\Collection;
 
 class Iterator implements IteratorInterface
 {

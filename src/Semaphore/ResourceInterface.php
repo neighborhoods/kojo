@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore;
+namespace Neighborhoods\Kojo\Semaphore;
 
-use NHDS\Jobs\Semaphore\Resource\OwnerInterface;
-use NHDS\Jobs\SemaphoreInterface;
+use Neighborhoods\Kojo\Semaphore\Resource\OwnerInterface;
+use Neighborhoods\Kojo\SemaphoreInterface;
 
 interface ResourceInterface
 {

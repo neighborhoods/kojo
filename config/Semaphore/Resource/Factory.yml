@@ -1,0 +1,56 @@
+services:
+  neighborhoods.kojo.semaphore.resource.factory-job:
+    class: Neighborhoods\Kojo\Semaphore\Resource\Factory
+    calls:
+      - [setName, ['job']]
+      - [setSemaphoreResource, ['@semaphore.resource-job']]
+      - [setSemaphoreResourceOwner, ['@semaphore.resource.owner.job']]
+      - [setMutex, ['@semaphore.mutex.redis']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-job:
+    alias: neighborhoods.kojo.semaphore.resource.factory-job
+  neighborhoods.kojo.semaphore.resource.factory-maintainer_delete:
+    class: Neighborhoods\Kojo\Semaphore\Resource\Factory
+    calls:
+      - [setName, ['maintainer_delete']]
+      - [setSemaphoreResource, ['@semaphore.resource-maintainer_delete']]
+      - [setMutex, ['@semaphore.mutex.redis']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-maintainer_delete:
+    alias: neighborhoods.kojo.semaphore.resource.factory-maintainer_delete
+  neighborhoods.kojo.semaphore.resource.factory-update_pending_jobs:
+    class: Neighborhoods\Kojo\Semaphore\Resource\Factory
+    calls:
+      - [setName, ['update_pending_jobs']]
+      - [setSemaphoreResource, ['@semaphore.resource-update_pending_jobs']]
+      - [setMutex, ['@semaphore.mutex.redis']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-update_pending_jobs:
+    alias: neighborhoods.kojo.semaphore.resource.factory-update_pending_jobs
+  neighborhoods.kojo.semaphore.resource.factory-reschedule_jobs:
+    class: Neighborhoods\Kojo\Semaphore\Resource\Factory
+    calls:
+      - [setName, ['reschedule_jobs']]
+      - [setSemaphoreResource, ['@semaphore.resource-reschedule_jobs']]
+      - [setMutex, ['@semaphore.mutex.redis']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-reschedule_jobs:
+    alias: neighborhoods.kojo.semaphore.resource.factory-reschedule_jobs
+  neighborhoods.kojo.semaphore.resource.factory-schedule:
+    class: Neighborhoods\Kojo\Semaphore\Resource\Factory
+    calls:
+      - [setName, ['schedule']]
+      - [setSemaphoreResource, ['@semaphore.resource-schedule']]
+      - [setMutex, ['@semaphore.mutex.redis']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-schedule:
+    alias: neighborhoods.kojo.semaphore.resource.factory-schedule
+  neighborhoods.kojo.semaphore.resource.factory-server:
+    class: Neighborhoods\Kojo\Semaphore\Resource\Factory
+    calls:
+      - [setName, ['server']]
+      - [setSemaphoreResource, ['@semaphore.resource-server']]
+      - [setMutex, ['@semaphore.mutex.flock']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-server:
+    alias: neighborhoods.kojo.semaphore.resource.factory-server

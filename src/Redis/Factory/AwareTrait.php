@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Redis\Factory;
+namespace Neighborhoods\Kojo\Redis\Factory;
 
-use NHDS\Jobs\Redis\FactoryInterface;
+use Neighborhoods\Kojo\Redis\FactoryInterface;
 
 trait AwareTrait
 {

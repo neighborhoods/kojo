@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Scheduler;
+namespace Neighborhoods\Kojo\Scheduler;
 
 interface TimeInterface
 {

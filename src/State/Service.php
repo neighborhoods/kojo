@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\State;
+namespace Neighborhoods\Kojo\State;
 
-use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Type;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Toolkit\Time;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\Type;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Toolkit\Time;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Service implements ServiceInterface

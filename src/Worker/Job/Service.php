@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Worker\Job;
+namespace Neighborhoods\Kojo\Worker\Job;
 
-use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Service\CreateInterface;
-use NHDS\Jobs\Service\Update;
-use NHDS\Jobs\Api;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\Service\CreateInterface;
+use Neighborhoods\Kojo\Service\Update;
+use Neighborhoods\Kojo\Api;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class Service implements ServiceInterface
 {

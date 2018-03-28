@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Redis;
+namespace Neighborhoods\Kojo\Redis;
 
-use NHDS\Jobs\Process\RegistryInterface;
+use Neighborhoods\Kojo\Process\RegistryInterface;
 
 interface RepositoryInterface
 {

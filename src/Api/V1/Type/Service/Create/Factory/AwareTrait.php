@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Api\V1\Type\Service\Create\Factory;
+namespace Neighborhoods\Kojo\Api\V1\Type\Service\Create\Factory;
 
-use NHDS\Jobs\Api\V1\Type\Service\Create\FactoryInterface;
+use Neighborhoods\Kojo\Api\V1\Type\Service\Create\FactoryInterface;
 
 trait AwareTrait
 {

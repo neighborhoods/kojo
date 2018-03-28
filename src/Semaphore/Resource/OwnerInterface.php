@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Resource;
+namespace Neighborhoods\Kojo\Semaphore\Resource;
 
 interface OwnerInterface
 {

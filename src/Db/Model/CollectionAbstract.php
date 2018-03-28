@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Model;
+namespace Neighborhoods\Kojo\Db\Model;
 
-use NHDS\Jobs\Db\Connection\ContainerInterface;
-use NHDS\Jobs\Db\Model;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Db;
+use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\Db\Model;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Db;
 use Zend\Db\Sql\Select;
 
 abstract class CollectionAbstract implements CollectionInterface

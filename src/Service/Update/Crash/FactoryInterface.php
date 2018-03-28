@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Crash;
+namespace Neighborhoods\Kojo\Service\Update\Crash;
 
-use NHDS\Jobs\Service\Update\CrashInterface;
-use NHDS\Jobs\State\ServiceInterface;
-use NHDS\Jobs\Service;
+use Neighborhoods\Kojo\Service\Update\CrashInterface;
+use Neighborhoods\Kojo\State\ServiceInterface;
+use Neighborhoods\Kojo\Service;
 
 interface FactoryInterface extends Service\FactoryInterface
 {

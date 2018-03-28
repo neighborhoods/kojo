@@ -1,0 +1,6 @@
+services:
+  neighborhoods.kojo.data.job.type.collection.iterator:
+    class: Neighborhoods\Kojo\Data\Job\Type\Collection\Iterator
+    shared: false
+  data.job.type.collection.iterator:
+    alias: neighborhoods.kojo.data.job.type.collection.iterator

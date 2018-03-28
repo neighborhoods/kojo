@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Message;
-use NHDS\Jobs\Service\Update;
-use NHDS\Jobs\Worker\Locator;
-use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Worker;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\Message;
+use Neighborhoods\Kojo\Service\Update;
+use Neighborhoods\Kojo\Worker\Locator;
+use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Worker;
 
 class Foreman implements ForemanInterface
 {

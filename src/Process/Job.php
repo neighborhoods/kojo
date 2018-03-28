@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process;
+namespace Neighborhoods\Kojo\Process;
 
-use NHDS\Jobs\Foreman;
-use NHDS\Jobs\Worker\Bootstrap;
-use NHDS\Jobs\Scheduler;
-use NHDS\Jobs\Maintainer;
-use NHDS\Jobs\Selector;
-use NHDS\Jobs\Process;
+use Neighborhoods\Kojo\Foreman;
+use Neighborhoods\Kojo\Worker\Bootstrap;
+use Neighborhoods\Kojo\Scheduler;
+use Neighborhoods\Kojo\Maintainer;
+use Neighborhoods\Kojo\Selector;
+use Neighborhoods\Kojo\Process;
 
 class Job extends Forked implements JobInterface
 {

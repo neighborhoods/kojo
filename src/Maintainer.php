@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Service\Update;
-use NHDS\Jobs\Data\Job\Collection\CrashDetection;
-use NHDS\Jobs\Data\Job\Collection\Schedule\LimitCheck;
-use NHDS\Jobs\Data\Job\Collection\ScheduleLimit;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheck;
-use NHDS\Jobs\Process\Pool\Logger;
+use Neighborhoods\Kojo\Service\Update;
+use Neighborhoods\Kojo\Data\Job\Collection\CrashDetection;
+use Neighborhoods\Kojo\Data\Job\Collection\Schedule\LimitCheck;
+use Neighborhoods\Kojo\Data\Job\Collection\ScheduleLimit;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
+use Neighborhoods\Kojo\Process\Pool\Logger;
 
 class Maintainer implements MaintainerInterface
 {

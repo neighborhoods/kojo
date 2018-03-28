@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Mutex;
+namespace Neighborhoods\Kojo\Semaphore\Mutex;
 
-use NHDS\Jobs\Semaphore\MutexInterface;
+use Neighborhoods\Kojo\Semaphore\MutexInterface;
 
 trait AwareTrait
 {

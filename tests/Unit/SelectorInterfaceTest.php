@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Test\Unit\Data\Job;
+namespace Neighborhoods\Kojo\Test\Unit\Data\Job;
 
 use Neighborhoods\Scaffolding\Fixture;
 

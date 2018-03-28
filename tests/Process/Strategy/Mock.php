@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Test\Process\Strategy;
+namespace Neighborhoods\Kojo\Test\Process\Strategy;
 
-use NHDS\Jobs\Process\StrategyInterface;
+use Neighborhoods\Kojo\Process\StrategyInterface;
 
 class Mock implements StrategyInterface
 {

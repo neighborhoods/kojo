@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process;
+namespace Neighborhoods\Kojo\Process;
 
-use NHDS\Jobs\ProcessAbstract;
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Jobs\Process;
+use Neighborhoods\Kojo\ProcessAbstract;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Kojo\Process;
 
 abstract class Forked extends ProcessAbstract implements ProcessInterface
 {

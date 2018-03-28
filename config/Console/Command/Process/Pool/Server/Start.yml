@@ -1,0 +1,5 @@
+services:
+  neighborhoods.kojo.console.command.process.pool.server.start:
+    class: Neighborhoods\Kojo\Console\Command\Process\Pool\Server\Start
+  console.command.process.pool.server.start:
+    alias: neighborhoods.kojo.console.command.process.pool.server.start

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Model\Collection;
+namespace Neighborhoods\Kojo\Db\Model\Collection;
 
-use NHDS\Jobs\Db\Model\CollectionInterface;
+use Neighborhoods\Kojo\Db\Model\CollectionInterface;
 
 trait AwareTrait
 {

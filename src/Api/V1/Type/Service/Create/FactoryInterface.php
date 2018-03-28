@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Api\V1\Type\Service\Create;
+namespace Neighborhoods\Kojo\Api\V1\Type\Service\Create;
 
-use NHDS\Jobs\Service;
-use NHDS\Jobs\Type\Service\CreateInterface;
+use Neighborhoods\Kojo\Service;
+use Neighborhoods\Kojo\Type\Service\CreateInterface;
 
 interface FactoryInterface extends Service\FactoryInterface
 {

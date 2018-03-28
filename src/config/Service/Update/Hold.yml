@@ -1,6 +1,0 @@
-services:
-  nhds.jobs.service.update.hold:
-    class: NHDS\Jobs\Service\Update\Hold
-    shared: false
-  service.update.hold:
-    alias: nhds.jobs.service.update.hold

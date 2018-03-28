@@ -1,0 +1,7 @@
+services:
+  neighborhoods.kojo.type.service.create:
+    class: Neighborhoods\Kojo\Type\Service\Create
+    calls:
+      - [setJobType, ['@data.job.type']]
+  type.service.create:
+    alias: neighborhoods.kojo.type.service.create

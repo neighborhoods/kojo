@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\AutoSchedule\Sqs;
+namespace Neighborhoods\Kojo\Data\AutoSchedule\Sqs;
 
-use NHDS\Jobs\Data\AutoSchedule\SqsInterface;
+use Neighborhoods\Kojo\Data\AutoSchedule\SqsInterface;
 
 trait AwareTrait
 {

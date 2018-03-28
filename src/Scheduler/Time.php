@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Scheduler;
+namespace Neighborhoods\Kojo\Scheduler;
 
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Toolkit;
+use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Toolkit;
 
 class Time implements TimeInterface
 {

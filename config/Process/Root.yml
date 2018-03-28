@@ -1,0 +1,14 @@
+services:
+  neighborhoods.kojo.process.root:
+    class: Neighborhoods\Kojo\Process\Root
+    calls:
+      - [setProcessPoolFactory, ['@process.pool.factory']]
+      - [setLogger, ['@process.pool.logger']]
+      - [setProcessStrategy, ['@process.strategy.process_control']]
+      - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
+      - [setUuidMaximumInteger, [9999999999]]
+      - [setProcessRegistry, ['@process.registry']]
+      - [setProcessSignal, ['@process.signal']]
+      - [setTitlePrefix, ['%process.title.prefix%']]
+  process.root:
+    alias: neighborhoods.kojo.process.root

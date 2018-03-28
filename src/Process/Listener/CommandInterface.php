@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Listener;
+namespace Neighborhoods\Kojo\Process\Listener;
 
-use NHDS\Jobs\Process\ListenerInterface;
+use Neighborhoods\Kojo\Process\ListenerInterface;
 
 interface CommandInterface extends ListenerInterface
 {

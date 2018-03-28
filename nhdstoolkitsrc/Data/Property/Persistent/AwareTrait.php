@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Toolkit\Data\Property\Persistent;
+namespace Neighborhoods\Toolkit\Data\Property\Persistent;
 
 trait AwareTrait
 {

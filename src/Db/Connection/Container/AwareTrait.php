@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Connection\Container;
+namespace Neighborhoods\Kojo\Db\Connection\Container;
 
-use NHDS\Jobs\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 
 trait AwareTrait
 {

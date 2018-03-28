@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Job;
+namespace Neighborhoods\Kojo\Process\Job;
 
-use NHDS\Jobs\Process\Job;
-use NHDS\Jobs\Process\JobInterface;
+use Neighborhoods\Kojo\Process\Job;
+use Neighborhoods\Kojo\Process\JobInterface;
 
 class Required extends Job implements JobInterface
 {

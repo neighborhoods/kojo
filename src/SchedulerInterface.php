@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Scheduler\CacheInterface;
+use Neighborhoods\Kojo\Scheduler\CacheInterface;
 
 interface SchedulerInterface
 {

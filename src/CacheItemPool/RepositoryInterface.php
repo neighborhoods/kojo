@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\CacheItemPool;
+namespace Neighborhoods\Kojo\CacheItemPool;
 
 use Psr\Cache\CacheItemPoolInterface;
 

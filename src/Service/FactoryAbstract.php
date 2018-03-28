@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service;
+namespace Neighborhoods\Kojo\Service;
 
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 abstract class FactoryAbstract implements FactoryInterface
 {

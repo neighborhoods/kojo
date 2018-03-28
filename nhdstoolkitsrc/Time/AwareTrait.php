@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Toolkit\Time;
+namespace Neighborhoods\Toolkit\Time;
 
-use NHDS\Toolkit\TimeInterface;
+use Neighborhoods\Toolkit\TimeInterface;
 
 trait AwareTrait
 {

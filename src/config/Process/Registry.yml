@@ -1,8 +1,0 @@
-services:
-  nhds.jobs.process.registry:
-    class: NHDS\Jobs\Process\Registry
-    public: false
-    shared: true
-  process.registry:
-    alias: nhds.jobs.process.registry
-    public: false

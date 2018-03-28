@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.service.update.complete.failedschedulelimitcheck.factory:
+    class: Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck\Factory
+    calls:
+      - [setStateService, ['@state.service']]
+      - [setServiceUpdateCompleteFailedScheduleLimitCheck, ['@service.update.complete.failedschedulelimitcheck']]
+  service.update.complete.failedschedulelimitcheck.factory:
+    alias: neighborhoods.kojo.service.update.complete.failedschedulelimitcheck.factory

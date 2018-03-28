@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Redis;
+namespace Neighborhoods\Kojo\Redis;
 
-use NHDS\Jobs\Service\FactoryAbstract;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Service\FactoryAbstract;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {

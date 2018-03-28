@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Worker\Job;
+namespace Neighborhoods\Kojo\Worker\Job;
 
-use NHDS\Jobs\Api\V1\Service\Create\FactoryInterface;
-use NHDS\Jobs\Service\CreateInterface;
-use NHDS\Jobs\Service\Update\Hold;
-use NHDS\Jobs\Service\Update\Retry;
-use NHDS\Jobs\Service\Update\Complete\Success;
-use NHDS\Jobs\Service\Update\Complete\Failed;
+use Neighborhoods\Kojo\Api\V1\Service\Create\FactoryInterface;
+use Neighborhoods\Kojo\Service\CreateInterface;
+use Neighborhoods\Kojo\Service\Update\Hold;
+use Neighborhoods\Kojo\Service\Update\Retry;
+use Neighborhoods\Kojo\Service\Update\Complete\Success;
+use Neighborhoods\Kojo\Service\Update\Complete\Failed;
 
 interface ServiceInterface
 {

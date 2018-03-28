@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Test\Worker;
+namespace Neighborhoods\Kojo\Test\Worker;
 
 class Mock
 {

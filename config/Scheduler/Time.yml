@@ -1,0 +1,9 @@
+services:
+  neighborhoods.kojo.scheduler.time:
+    class: Neighborhoods\Kojo\Scheduler\Time
+    shared: true
+    calls:
+      - [setMinutesToScheduleAheadFor, [5]]
+      - [setTime, ['@nhds.toolkit.time']]
+  scheduler.time:
+    alias: neighborhoods.kojo.scheduler.time

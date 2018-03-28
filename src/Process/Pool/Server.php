@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool;
 
-use NHDS\Jobs\ProcessAbstract;
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Jobs\Semaphore;
-use NHDS\Toolkit\Data\Property;
-use NHDS\Jobs\Process;
+use Neighborhoods\Kojo\ProcessAbstract;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Kojo\Semaphore;
+use Neighborhoods\Toolkit\Data\Property;
+use Neighborhoods\Kojo\Process;
 
 class Server extends ProcessAbstract implements ServerInterface
 {

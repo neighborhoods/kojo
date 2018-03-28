@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore;
+namespace Neighborhoods\Kojo\Semaphore;
 
-use NHDS\Jobs\Semaphore\Resource\OwnerInterface;
-use NHDS\Jobs\SemaphoreInterface;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Semaphore\Resource\OwnerInterface;
+use Neighborhoods\Kojo\SemaphoreInterface;
+use Neighborhoods\Toolkit\Data\Property\Strict;
 
 class Resource implements ResourceInterface
 {

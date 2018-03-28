@@ -1,6 +1,6 @@
-nhds_job_type:
+kojo_job_type:
   -
-    nhds_job_type_id: 1
+    kojo_job_type_id: 1
     type_code: "type_code_1"
     name: "Name 1"
     worker_uri: ""
@@ -11,7 +11,7 @@ nhds_job_type:
     schedule_limit: 0
     is_enabled: 1
   -
-    nhds_job_type_id: 2
+    kojo_job_type_id: 2
     type_code: "type_code_2"
     name: "Name 2"
     worker_uri: ""

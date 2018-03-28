@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool\Logger;
+namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
-use NHDS\Jobs\Process\Pool\LoggerInterface;
+use Neighborhoods\Kojo\Process\Pool\LoggerInterface;
 
 trait AwareTrait
 {

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Api\V1\Worker\Job;
+namespace Neighborhoods\Kojo\Api\V1\Worker\Job;
 
-use NHDS\Jobs\Data\JobInterface;
+use Neighborhoods\Kojo\Data\JobInterface;
 
 interface ServiceInterface
 {

@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Test\Unit;
+namespace Neighborhoods\Kojo\Test\Unit;
 
-use NHDS\Jobs\Semaphore\Resource\Owner;
+use Neighborhoods\Kojo\Semaphore\Resource\Owner;
 use Neighborhoods\Scaffolding\AbstractTest;
 
 class SemaphoreInterfaceTest extends AbstractTest
 {
     public function testTestAndSetLock()
     {
-        $semaphore = $this->_getTestContainerBuilder()->get('nhds.jobs.semaphore');
-        $resource = $this->_getTestContainerBuilder()->get('nhds.jobs.semaphore.resource-job');
-        $job = $this->_getTestContainerBuilder()->get('nhds.jobs.data.job');
+        $semaphore = $this->_getTestContainerBuilder()->get('neighborhoods.kojo.semaphore');
+        $resource = $this->_getTestContainerBuilder()->get('neighborhoods.kojo.semaphore.resource-job');
+        $job = $this->_getTestContainerBuilder()->get('neighborhoods.kojo.data.job');
         $job->setId(15);
         $job->setTypeCode('type_code');
         $job->setCanWorkInParallel(true);

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Exception\Runtime;
+namespace Neighborhoods\Kojo\Exception\Runtime;
 
-use NHDS\Jobs\Exception\ExceptionTrait;
+use Neighborhoods\Kojo\Exception\ExceptionTrait;
 
 class Exception extends \RuntimeException
 {
