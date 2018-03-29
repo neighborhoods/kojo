@@ -1,4 +1,5 @@
-# Neighborhoods Kōjō
+# ⚡ Neighborhoods Kōjō ⚡
+# 工場
 A distributed task manager.
 
 ### Example usage

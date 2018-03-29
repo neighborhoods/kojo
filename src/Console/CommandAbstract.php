@@ -13,6 +13,15 @@ abstract class CommandAbstract extends Command
 {
     use Strict\AwareTrait;
     const ARG_SERVICES_YML_FILE_PATH = 'services_yml_file_path';
+    const SPLASH_ART                 = [
+        '+------------------------------+',
+        '|   ⚡ Neighborhoods Kōjō ⚡   |',
+        '|                              |',
+        '|             工場             |',
+        '|                              |',
+        '|  A distributed task manager  |',
+        '+------------------------------+',
+    ];
 
     public function configure()
     {
@@ -33,7 +42,7 @@ abstract class CommandAbstract extends Command
     {
         $this->_setInput($input);
         $this->_setOutput($output);
-        $this->_writeSplash();
+        $this->_writeSplashArt();
         $this->_execute();
 
         return $this;
@@ -65,19 +74,9 @@ abstract class CommandAbstract extends Command
 
     abstract function _execute(): CommandAbstract;
 
-    protected function _writeSplash(): CommandAbstract
+    protected function _writeSplashArt(): CommandAbstract
     {
-        $this->_getOutput()->writeln(
-            [
-                '+------------------------------+',
-                '|   ⚡ Neighborhoods Kōjō ⚡   |',
-                '|                              |',
-                '|             工場             |',
-                '|                              |',
-                '|  A distributed task manager  |',
-                '+------------------------------+',
-            ]
-        );
+        $this->_getOutput()->writeln(self::SPLASH_ART);
 
         return $this;
     }
