@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\Process\Collection\IteratorInterface;
 use Neighborhoods\Kojo\ProcessInterface;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Collection implements CollectionInterface
 {

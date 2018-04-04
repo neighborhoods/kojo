@@ -7,7 +7,7 @@ use Neighborhoods\Kojo\Data\Job;
 use Neighborhoods\Kojo\Service\CreateInterface;
 use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Api;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Service implements ServiceInterface
 {

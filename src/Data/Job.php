@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Data;
 
 use Neighborhoods\Kojo\Db\Model;
-use Neighborhoods\Toolkit\TimeInterface;
-use Neighborhoods\Toolkit\Time;
+use Neighborhoods\Pylon\TimeInterface;
+use Neighborhoods\Pylon\Time;
 
 class Job extends Model implements JobInterface
 {

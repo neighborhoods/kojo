@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Scheduler;
 
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Scheduler;
-use Neighborhoods\Toolkit\Time;
+use Neighborhoods\Pylon\Time;
 use Neighborhoods\Kojo\CacheItemPool;
 
 class Cache implements CacheInterface

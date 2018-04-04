@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Data\AutoSchedule;
 
 use Neighborhoods\Kojo\Db\Model;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Sqs extends Model implements SqsInterface
 {

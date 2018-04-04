@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Worker;
 
 use Neighborhoods\Kojo\Data\Job;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Locator implements LocatorInterface
 {

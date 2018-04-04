@@ -8,7 +8,7 @@ use Neighborhoods\Kojo\Message;
 use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Worker\Locator;
 use Neighborhoods\Kojo\Process\Pool\Logger;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Worker;
 
 class Foreman implements ForemanInterface

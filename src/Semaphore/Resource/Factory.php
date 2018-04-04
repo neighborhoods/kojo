@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Semaphore\Resource;
 
 use Neighborhoods\Kojo\Semaphore;
 use Neighborhoods\Kojo\Service\FactoryAbstract;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {

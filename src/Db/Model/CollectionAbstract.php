@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Db\Model;
 
 use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 use Neighborhoods\Kojo\Db\Model;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Db;
 use Zend\Db\Sql\Select;
 

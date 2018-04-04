@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Semaphore\Resource\Owner;
 
 use Neighborhoods\Kojo\Data;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Job implements JobInterface
 {

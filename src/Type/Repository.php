@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Type;
 
 use Neighborhoods\Kojo\Data\Job;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Data\Job\TypeInterface;
 
 class Repository implements RepositoryInterface

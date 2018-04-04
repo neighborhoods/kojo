@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
+use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 
 class Pool extends PoolAbstract implements PoolInterface
 {
@@ -58,17 +60,36 @@ class Pool extends PoolAbstract implements PoolInterface
         return $this;
     }
 
-    public function childExitSignal(): PoolInterface
+    public function handleSignal(InformationInterface $signalInformation): HandlerInterface
     {
-        while ($childProcessId = pcntl_wait($status, WNOHANG)) {
-            if ($childProcessId == -1) {
-                $this->_processControlWaitError();
-            }
-            $childProcessExitCode = pcntl_wexitstatus($status);
-            $childProcess = $this->getChildProcess($childProcessId)->setExitCode($childProcessExitCode);
-            $this->_getProcessPoolStrategy()->childProcessExited($childProcess);
-            $this->_validateAlarm();
+        $this->_getLogger()->info("Received signal number[$signalNumber].");
+        switch ($signalNumber) {
+            case SIGCHLD:
+                $this->childExitSignal($signalInformation);
+                break;
+            case SIGALRM:
+                $this->alarmSignal();
+                break;
+            case SIGTERM:
+            case SIGINT:
+            case SIGHUP:
+            case SIGQUIT:
+            case SIGABRT:
+                $this->getProcess()->receivedSignal($signalNumber, $this->_signalInformation);
+                break;
+            default:
+                throw new \UnexpectedValueException("Unexpected signal number [$signalNumber].");
         }
+
+        return $this;
+    }
+
+    public function childExitSignal(InformationInterface $information): PoolInterface
+    {
+        $childProcessExitCode = pcntl_wexitstatus($status);
+        $childProcess = $this->getChildProcess($childProcessId)->setExitCode($childProcessExitCode);
+        $this->_getProcessPoolStrategy()->childProcessExited($childProcess);
+        $this->_validateAlarm();
         $this->_getProcessPoolStrategy()->currentPendingChildExitsCompleted();
 
         return $this;
@@ -90,7 +111,7 @@ class Pool extends PoolAbstract implements PoolInterface
 
     public function addChildProcess(ProcessInterface $childProcess): PoolInterface
     {
-        $this->_getProcessSignal()->block();
+        $this->_getProcessSignal()->incrementWaitCount();
         if ($this->isFull()) {
             throw new \LogicException('Process pool is full.');
         }else {
@@ -99,7 +120,7 @@ class Pool extends PoolAbstract implements PoolInterface
             $message = "Forked Process[{$childProcess->getProcessId()}][{$childProcess->getTypeCode()}].";
             $this->_getLogger()->info($message);
         }
-        $this->_getProcessSignal()->unBlock();
+        $this->_getProcessSignal()->decrementWaitCount();
 
         return $this;
     }
@@ -146,7 +167,6 @@ class Pool extends PoolAbstract implements PoolInterface
                 unset($this->_childProcesses[$processId]);
             }
         }
-        $this->_getProcessSignal()->unBlock();
 
         return $this;
     }

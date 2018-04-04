@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Data\Job\Collection;
 
 use Neighborhoods\Kojo\Data\JobInterface;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Db\Model\Collection;
 
 class Iterator implements IteratorInterface

@@ -7,7 +7,7 @@ use Neighborhoods\Kojo\Exception\Runtime;
 use Neighborhoods\Kojo\Filesystem;
 use Neighborhoods\Kojo\Semaphore\MutexAbstract;
 use Neighborhoods\Kojo\Semaphore\MutexInterface;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Process\Pool\Logger;
 
 class Flock extends MutexAbstract

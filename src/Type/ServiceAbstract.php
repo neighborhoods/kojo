@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Type;
 
 use Neighborhoods\Kojo\Type;
 use Neighborhoods\Kojo\Data\Job;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class ServiceAbstract implements Type\ServiceInterface
 {

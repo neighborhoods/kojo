@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Service;
 
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class FactoryAbstract implements FactoryInterface
 {

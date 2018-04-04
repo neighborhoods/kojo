@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\CacheItemPool;
 
 use Neighborhoods\Kojo\CacheItemPool;
 use Psr\Cache\CacheItemPoolInterface;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Process;
 
 class Repository implements RepositoryInterface

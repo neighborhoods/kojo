@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool;
 
 use Psr\Log;
-use Neighborhoods\Toolkit\Time;
+use Neighborhoods\Pylon\Time;
 use Neighborhoods\Kojo\ProcessInterface;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Logger extends Log\AbstractLogger implements LoggerInterface
 {

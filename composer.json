@@ -21,26 +21,26 @@
         "symfony/expression-language": "~4.0.3",
         "symfony/cache": "~4.0.3",
         "symfony/console": "~4.0.3",
-        "ocramius/proxy-manager": "^2.1"
+        "ocramius/proxy-manager": "^2.1",
+        "neighborhoods/pylon": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.4",
         "phpunit/dbunit": "^3.0",
-        "symfony/finder": "^4.0"
+        "symfony/finder": "^4.0",
+        "neighborhoods/scaffolding": "dev-master"
     },
     "bin": [
         "bin/kojo"
     ],
     "autoload": {
         "psr-4": {
-            "Neighborhoods\\Kojo\\": "src",
-            "Neighborhoods\\Toolkit\\": "nhdstoolkitsrc"
+            "Neighborhoods\\Kojo\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Neighborhoods\\Kojo\\Test\\": "tests",
-            "Neighborhoods\\Scaffolding\\": "nhdswatchsrc",
             "Neighborhoods\\Kojo\\Example\\": "example"
         }
     }

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Scheduler;
 
-use Neighborhoods\Toolkit\Data\Property\Strict;
-use Neighborhoods\Toolkit;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Pylon;
 
 class Time implements TimeInterface
 {

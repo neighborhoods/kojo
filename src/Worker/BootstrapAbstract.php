@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Worker;
 
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Db\Connection\Container;
 use Neighborhoods\Kojo\Foreman;
 

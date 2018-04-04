@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\Process;
 use Neighborhoods\Kojo\ProcessInterface;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class PoolAbstract implements PoolInterface
 {
@@ -14,6 +14,8 @@ abstract class PoolAbstract implements PoolInterface
     use Process\Pool\Strategy\AwareTrait;
     use Process\AwareTrait;
     use Process\Signal\AwareTrait;
+
+    abstract public function childExitSignal(): PoolInterface;
 
     public function hasAlarm(): bool
     {
@@ -53,6 +55,7 @@ abstract class PoolAbstract implements PoolInterface
 
     protected function _initialize(): PoolInterface
     {
+        $this->_getProcessSignal()->addSignalHandler(SIGCHLD, [$this, 'childExitSignal']);
         $this->_getProcessPoolStrategy()->initializePool();
 
         return $this;

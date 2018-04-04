@@ -6,13 +6,13 @@ namespace Neighborhoods\Kojo\Process\Pool;
 use Neighborhoods\Kojo\ProcessAbstract;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Kojo\Semaphore;
-use Neighborhoods\Toolkit\Data\Property;
+use Neighborhoods\Pylon\Data\Property;
 use Neighborhoods\Kojo\Process;
 
 class Server extends ProcessAbstract implements ServerInterface
 {
     use Process\Pool\Factory\AwareTrait;
-    use Property\Strict\AwareTrait;
+    use Property\Defensive\AwareTrait;
     use Logger\AwareTrait;
     use Semaphore\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;

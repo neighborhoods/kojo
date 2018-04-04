@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Redis;
 
 use Neighborhoods\Kojo\Redis;
 use Neighborhoods\Kojo\Process;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Repository implements RepositoryInterface
 {

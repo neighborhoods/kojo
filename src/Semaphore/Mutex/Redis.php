@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Semaphore\Mutex;
 
 use Neighborhoods\Kojo\Semaphore\MutexAbstract;
 use Neighborhoods\Kojo\Semaphore\MutexInterface;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Process\Pool\Logger;
 use Neighborhoods\Kojo\Process;
 use Neighborhoods\Kojo\Redis\Repository;

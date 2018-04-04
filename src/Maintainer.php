@@ -7,7 +7,7 @@ use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Data\Job\Collection\CrashDetection;
 use Neighborhoods\Kojo\Data\Job\Collection\Schedule\LimitCheck;
 use Neighborhoods\Kojo\Data\Job\Collection\ScheduleLimit;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
 use Neighborhoods\Kojo\Process\Pool\Logger;
 

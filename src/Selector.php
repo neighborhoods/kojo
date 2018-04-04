@@ -6,7 +6,7 @@ namespace Neighborhoods\Kojo;
 use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\Data\Job;
 use Neighborhoods\Kojo\Exception\Runtime\Db\Model\LoadException;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Message\Broker;
 use Neighborhoods\Kojo\Process;
 

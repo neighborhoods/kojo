@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Message\Broker;
 
 use Neighborhoods\Kojo\Process\Pool\Logger;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class BrokerAbstract implements BrokerInterface
 {

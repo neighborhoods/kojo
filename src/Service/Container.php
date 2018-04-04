@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Service;
 
-use Neighborhoods\Toolkit\ContainerBuilder;
+use Neighborhoods\Pylon\ContainerBuilder;
 
 class Container
 {

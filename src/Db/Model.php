@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Db;
 
 use Neighborhoods\Kojo\Exception\Runtime\Db\Model\LoadException;
-use Neighborhoods\Toolkit\Data\Property;
+use Neighborhoods\Pylon\Data\Property;
 use Neighborhoods\Kojo\Db;
 use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 use Zend\Db\Sql\Select;

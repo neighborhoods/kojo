@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Semaphore;
 
 use Neighborhoods\Kojo\Semaphore\Resource\OwnerInterface;
 use Neighborhoods\Kojo\SemaphoreInterface;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Resource implements ResourceInterface
 {

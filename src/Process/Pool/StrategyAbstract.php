@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Process\Collection;
 
 abstract class StrategyAbstract implements StrategyInterface

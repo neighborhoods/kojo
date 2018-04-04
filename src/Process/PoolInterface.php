@@ -5,8 +5,9 @@ namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\Process\Pool\StrategyInterface;
 use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Jobs\Process\Signal\HandlerInterface;
 
-interface PoolInterface
+interface PoolInterface extends HandlerInterface
 {
     public function start(): PoolInterface;
 
@@ -37,4 +38,8 @@ interface PoolInterface
     public function getProcess(): ProcessInterface;
 
     public function waitForSignal(): PoolInterface;
+
+    public function childExitSignal(): PoolInterface;
+
+    public function alarmSignal(): PoolInterface;
 }

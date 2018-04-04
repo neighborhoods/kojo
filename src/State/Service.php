@@ -5,8 +5,8 @@ namespace Neighborhoods\Kojo\State;
 
 use Neighborhoods\Kojo\Data\Job;
 use Neighborhoods\Kojo\Type;
-use Neighborhoods\Toolkit\Data\Property\Strict;
-use Neighborhoods\Toolkit\Time;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Pylon\Time;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Service implements ServiceInterface

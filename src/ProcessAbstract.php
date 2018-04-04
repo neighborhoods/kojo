@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo;
 
 use Neighborhoods\Kojo\Process;
 use Neighborhoods\Kojo\Process\Pool\Logger;
-use Neighborhoods\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class ProcessAbstract implements ProcessInterface
 {

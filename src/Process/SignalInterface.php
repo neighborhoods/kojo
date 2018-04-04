@@ -3,18 +3,20 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process;
 
+use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
+
 interface SignalInterface
 {
-    public const DEFAULT_BLOCKED_SIGNAL_NUMBERS = [
-        SIGCHLD,
-        SIGALRM,
-    ];
+    public function incrementWaitCount(): SignalInterface;
 
-    public function addSignalHandler(int $signalNumber, callable $signalHandler): SignalInterface;
+    public function decrementWaitCount(): SignalInterface;
+
+    /**
+     * Signals are blocked by PHP while the IRQ handling logic is executed.
+     */
+    public function handleSignal(int $signalNumber, $signalInformation): void;
+
+    public function addSignalHandler(int $signalNumber, HandlerInterface $signalHandler): SignalInterface;
 
     public function block(): SignalInterface;
-
-    public function unBlock(): SignalInterface;
-
-    public function addBlockedSignalNumber(int $signalNumber): SignalInterface;
 }
