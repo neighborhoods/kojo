@@ -9,7 +9,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Collection implements CollectionInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const PROP_APPLIED_POOL = 'applied_pool';
     protected $_processPrototypes = [];
 

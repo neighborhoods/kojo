@@ -8,7 +8,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Sqs extends Model implements SqsInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
 
     public function __construct()
     {

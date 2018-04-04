@@ -9,7 +9,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class PoolAbstract implements PoolInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Process\Pool\Logger\AwareTrait;
     use Process\Pool\Strategy\AwareTrait;
     use Process\AwareTrait;

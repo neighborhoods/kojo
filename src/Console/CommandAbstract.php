@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputArgument;
 
 abstract class CommandAbstract extends Command
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const ARG_SERVICES_YML_FILE_PATH = 'services_yml_file_path';
     const SPLASH_ART                 = [
         '+------------------------------+',

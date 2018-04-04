@@ -17,7 +17,7 @@ class Service implements ServiceInterface
     use Update\Complete\Success\Factory\AwareTrait;
     use Update\Complete\Failed\Factory\AwareTrait;
     use Api\V1\Service\Create\Factory\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const PROP_REQUEST             = 'request';
     const PROP_RETRY_DATE_TIME     = 'retry_date_time';
     const REQUEST_RETRY            = 'retry';

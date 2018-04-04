@@ -9,7 +9,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 class Locator implements LocatorInterface
 {
     use Job\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
 
     public function getCallable(): callable
     {

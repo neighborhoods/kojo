@@ -11,7 +11,7 @@ use Zend\Db\Sql\Select;
 
 abstract class CollectionAbstract implements CollectionInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Model\AwareTrait;
     use Db\Connection\Container\AwareTrait;
     const PROP_SELECT     = 'select';

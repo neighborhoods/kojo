@@ -8,7 +8,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class BrokerAbstract implements BrokerInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Logger\AwareTrait;
     protected $_publishChannelName;
     protected $_subscriptionChannelName;

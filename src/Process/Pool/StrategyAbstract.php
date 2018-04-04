@@ -9,7 +9,7 @@ use Neighborhoods\Kojo\Process\Collection;
 abstract class StrategyAbstract implements StrategyInterface
 {
     use AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Logger\AwareTrait;
     use Collection\AwareTrait;
 

@@ -12,7 +12,7 @@ use Neighborhoods\Kojo\Redis\Repository;
 
 class Redis extends MutexAbstract implements RedisInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Logger\AwareTrait;
     use Process\Registry\AwareTrait;
     use Repository\AwareTrait;

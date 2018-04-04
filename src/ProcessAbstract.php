@@ -13,7 +13,7 @@ abstract class ProcessAbstract implements ProcessInterface
     use Process\Pool\AwareTrait;
     use Process\Strategy\AwareTrait;
     use Process\Signal\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Logger\AwareTrait;
     const PROP_IS_PROCESS_TITLE_SET = 'is_process_title_set';
     const PROP_TITLE_PREFIX         = 'title_prefix';

@@ -9,7 +9,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Repository implements RepositoryInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Redis\Factory\AwareTrait;
     use Process\Registry\AwareTrait;
     protected $_redisCollection = [];

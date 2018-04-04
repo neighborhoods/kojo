@@ -11,7 +11,7 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Service implements ServiceInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Job\AwareTrait;
     use Time\AwareTrait;
     use Type\Repository\AwareTrait;

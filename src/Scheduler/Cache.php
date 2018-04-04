@@ -10,7 +10,7 @@ use Neighborhoods\Kojo\CacheItemPool;
 
 class Cache implements CacheInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Scheduler\Time\AwareTrait;
     use Time\AwareTrait;
     use CacheItemPool\Repository\AwareTrait;

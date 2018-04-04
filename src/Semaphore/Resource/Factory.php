@@ -13,7 +13,7 @@ class Factory extends FactoryAbstract implements FactoryInterface
     use Semaphore\Resource\AwareTrait;
     use Semaphore\Mutex\AwareTrait;
     use Semaphore\Resource\Owner\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
 
     public function create(): Semaphore\ResourceInterface
     {

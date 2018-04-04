@@ -10,7 +10,7 @@ use Neighborhoods\Kojo\Process;
 
 class Repository implements RepositoryInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Process\Registry\AwareTrait;
     use CacheItemPool\Factory\AwareTrait;
     protected $_cacheItemPoolCollection = [];

@@ -10,7 +10,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 abstract class ServiceAbstract implements Type\ServiceInterface
 {
     use Job\Type\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const PROP_SAVED = 'saved';
 
     public function save(): ServiceInterface

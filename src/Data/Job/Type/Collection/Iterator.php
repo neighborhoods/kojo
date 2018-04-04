@@ -9,7 +9,7 @@ use Neighborhoods\Kojo\Db\Model\Collection;
 
 class Iterator implements IteratorInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Collection\AwareTrait;
 
     function rewind()

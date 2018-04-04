@@ -9,7 +9,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 class Job implements JobInterface
 {
     use Data\Job\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const PROP_RESOURCE_NAME = 'resource_name';
     const PROP_RESOURCE_PATH = 'resource_path';
 

@@ -26,7 +26,7 @@ class Foreman implements ForemanInterface
     use Update\Panic\Factory\AwareTrait;
     use Update\Crash\Factory\AwareTrait;
     use Update\Complete\Success\Factory\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Logger\AwareTrait;
 
     public function workWorker(): ForemanInterface

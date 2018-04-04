@@ -7,7 +7,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class FactoryAbstract implements FactoryInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const PROP_FACTORY_NAME = 'factory_name';
 
     public function setName(string $factoryName): FactoryInterface

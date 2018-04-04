@@ -9,7 +9,7 @@ use Neighborhoods\Kojo\Process;
 
 class Signal implements SignalInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Process\Signal\Information\AwareTrait;
     protected $_waitCount       = 0;
     protected $_signalHandlers  = [];

@@ -9,7 +9,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Resource implements ResourceInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const PROP_RESOURCE_OWNER = 'resource_owner';
     const PROP_RESOURCE_NAME  = 'resource_name';
     const PROP_RESOURCE_PATH  = 'resource_path';

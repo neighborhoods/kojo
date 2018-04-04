@@ -13,7 +13,7 @@ use Neighborhoods\Kojo\Process\Pool\Logger;
 
 class Maintainer implements MaintainerInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use CrashDetection\AwareTrait;
     use Maintainer\Delete\AwareTrait;
     use Semaphore\AwareTrait;

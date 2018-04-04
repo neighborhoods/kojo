@@ -8,7 +8,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     protected $_options = [];
 
     public function create(): \Redis

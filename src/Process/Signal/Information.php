@@ -7,7 +7,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Information implements InformationInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     protected $_information;
 
     public function hydrate(array $information): InformationInterface

@@ -10,7 +10,7 @@ use Neighborhoods\Kojo\Process\Pool\Logger;
 
 class Delete implements DeleteInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Semaphore\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
     use Job\Collection\Delete\AwareTrait;

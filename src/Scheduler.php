@@ -15,7 +15,7 @@ class Scheduler implements SchedulerInterface
     use Job\Collection\Scheduler\AwareTrait;
     use Job\Type\Collection\Scheduler\AwareTrait;
     use Time\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Api\V1\Service\Create\Factory\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
 

@@ -11,7 +11,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const PAD_PID                   = 6;
     const PAD_PATH                  = 50;
     const PROP_IS_ENABLED           = 'is_enabled';

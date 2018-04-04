@@ -9,7 +9,7 @@ use Neighborhoods\Kojo\Data\Job\TypeInterface;
 
 class Repository implements RepositoryInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Job\Type\AwareTrait;
     protected $_jobTypes = [];
 

@@ -12,7 +12,7 @@ use Neighborhoods\Kojo\Process;
 
 class Selector implements SelectorInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Broker\AwareTrait;
     use Job\AwareTrait;
     use Semaphore\AwareTrait;

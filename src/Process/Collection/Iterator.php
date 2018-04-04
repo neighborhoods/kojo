@@ -9,7 +9,7 @@ use Neighborhoods\Kojo\Process\Collection;
 
 class Iterator implements IteratorInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Collection\AwareTrait;
     protected $processPrototypes = [];
 

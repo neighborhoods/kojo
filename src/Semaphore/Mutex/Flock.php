@@ -12,7 +12,7 @@ use Neighborhoods\Kojo\Process\Pool\Logger;
 
 class Flock extends MutexAbstract
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Filesystem\AwareTrait;
     use Logger\AwareTrait;
     const PROP_DIRECTORY_PATH_PREFIX = 'directory_path_prefix';
