@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\Process\Pool\StrategyInterface;
 use Neighborhoods\Kojo\ProcessInterface;
-use Neighborhoods\Jobs\Process\Signal\HandlerInterface;
+use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 
 interface PoolInterface extends HandlerInterface
 {

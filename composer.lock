@@ -1203,12 +1203,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:neighborhoods/Scaffolding.git",
-                "reference": "7284b70f88d47d03ef62d5310cd2484cf9a6418c"
+                "reference": "267db7e04a19b64b4261e3baedbc2dcb40311550"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neighborhoods/Scaffolding/zipball/7284b70f88d47d03ef62d5310cd2484cf9a6418c",
-                "reference": "7284b70f88d47d03ef62d5310cd2484cf9a6418c",
+                "url": "https://api.github.com/repos/neighborhoods/Scaffolding/zipball/267db7e04a19b64b4261e3baedbc2dcb40311550",
+                "reference": "267db7e04a19b64b4261e3baedbc2dcb40311550",
                 "shasum": ""
             },
             "require": {
@@ -1239,7 +1239,7 @@
                 }
             ],
             "description": "Neighborhoods Scaffolding is meant to make the creation of contract testing easy and fast.",
-            "time": "2018-04-04T19:32:37+00:00"
+            "time": "2018-04-04T19:54:12+00:00"
         },
         {
             "name": "phar-io/manifest",

@@ -9,7 +9,7 @@ use Neighborhoods\Pylon;
 class Time implements TimeInterface
 {
     use Defensive\AwareTrait;
-    use Toolkit\Time\AwareTrait;
+    use Pylon\Time\AwareTrait;
     const PROP_MINUTES_SCHEDULED_AHEAD_FOR  = 'minutes_scheduled_ahead_for';
     const PROP_REFERENCE_DISTANCE_DATE_TIME = 'reference_distance_date_time';
 

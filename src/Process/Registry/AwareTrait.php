@@ -16,7 +16,7 @@ trait AwareTrait
 
     public function hasProcessRegistry(): bool
     {
-        $this->_exists(RegistryInterface::class);
+        return $this->_exists(RegistryInterface::class);
     }
 
     protected function _getProcessRegistry(): RegistryInterface
