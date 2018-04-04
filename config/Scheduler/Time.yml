@@ -4,6 +4,6 @@ services:
     shared: true
     calls:
       - [setMinutesToScheduleAheadFor, [5]]
-      - [setTime, ['@nhds.toolkit.time']]
+      - [setTime, ['@neighborhoods.pylon.time']]
   scheduler.time:
     alias: neighborhoods.kojo.scheduler.time

@@ -10,6 +10,12 @@
             "email": "brad.wilson@neighborhoods.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://satis.neighborhoods.com"
+        }
+    ],
     "require": {
         "php": ">=7.1",
         "zendframework/zend-db": "^2.8",

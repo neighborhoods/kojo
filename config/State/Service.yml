@@ -3,7 +3,7 @@ services:
     class: Neighborhoods\Kojo\State\Service
     shared: false
     calls:
-      - [setTime, ['@nhds.toolkit.time']]
+      - [setTime, ['@neighborhoods.pylon.time']]
       - [setTypeRepository, ['@type.repository']]
   state.service:
     alias: neighborhoods.kojo.state.service

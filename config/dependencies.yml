@@ -1,9 +1,9 @@
 services:
-  nhds.toolkit.time:
+  neighborhoods.pylon.time:
     class: Neighborhoods\Toolkit\Time
   symfony.component.expressionlanguage.expressionlanguage:
     class: \Symfony\Component\ExpressionLanguage\ExpressionLanguage
-  nhds.kojo.symfony.component.console.application:
+  neighborhoods.kojo.symfony.component.console.application:
     public: true
     class: Symfony\Component\Console\Application
     calls:

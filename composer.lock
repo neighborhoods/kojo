@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e1e0f86ef76f67966fad84644596f1b",
+    "content-hash": "45be7c4d5e572fff74a1fa6af70e50bc",
     "packages": [
         {
             "name": "dragonmantank/cron-expression",
@@ -54,6 +54,43 @@
                 "schedule"
             ],
             "time": "2017-10-12T15:59:13+00:00"
+        },
+        {
+            "name": "neighborhoods/pylon",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:neighborhoods/pylon.git",
+                "reference": "c4670a6385b55c4b33d8bbd0b52f339d2ef201d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/neighborhoods/pylon/zipball/c4670a6385b55c4b33d8bbd0b52f339d2ef201d5",
+                "reference": "c4670a6385b55c4b33d8bbd0b52f339d2ef201d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "symfony/config": "~4.0.3",
+                "symfony/dependency-injection": "~4.0.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Neighborhoods\\Pylon\\": "src"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Brad Wilson",
+                    "email": "brad.wilson@neighborhoods.com"
+                }
+            ],
+            "description": "Neighborhoods Pylon is a collection of useful, but most importantly, generic objects.",
+            "time": "2018-04-04T19:29:46+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -1159,6 +1196,50 @@
                 "object graph"
             ],
             "time": "2017-10-19T19:58:43+00:00"
+        },
+        {
+            "name": "neighborhoods/scaffolding",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:neighborhoods/Scaffolding.git",
+                "reference": "7284b70f88d47d03ef62d5310cd2484cf9a6418c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/neighborhoods/Scaffolding/zipball/7284b70f88d47d03ef62d5310cd2484cf9a6418c",
+                "reference": "7284b70f88d47d03ef62d5310cd2484cf9a6418c",
+                "shasum": ""
+            },
+            "require": {
+                "neighborhoods/pylon": "dev-master",
+                "php": ">=7.1",
+                "phpunit/dbunit": "^3.0",
+                "phpunit/phpunit": "^6.4",
+                "symfony/config": "~4.0.3",
+                "symfony/dependency-injection": "~4.0.3",
+                "symfony/expression-language": "~4.0.3",
+                "symfony/filesystem": "~4.0.3",
+                "symfony/finder": "^4.0",
+                "symfony/yaml": "~4.0.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Neighborhoods\\Scaffolding\\": "src"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Neighborhoods.com",
+                    "email": "brad.wilson@neighborhoods.com"
+                }
+            ],
+            "description": "Neighborhoods Scaffolding is meant to make the creation of contract testing easy and fast.",
+            "time": "2018-04-04T19:32:37+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -2622,7 +2703,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "neighborhoods/pylon": 20,
+        "neighborhoods/scaffolding": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -4,7 +4,7 @@ services:
     shared: false
     public: false
     calls:
-      - [setTime, ['@nhds.toolkit.time']]
+      - [setTime, ['@neighborhoods.pylon.time']]
       - [setSchedulerJobCollection, ['@data.job.collection.scheduler']]
       - [setSchedulerJobTypeCollection, ['@data.job.type.collection.scheduler']]
       - [setServiceCreateFactory, ['@service.create.factory']]

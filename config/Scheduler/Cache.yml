@@ -5,6 +5,6 @@ services:
     calls:
       - [setSchedulerTime, ['@scheduler.time']]
       - [setCacheItemPoolRepository, ['@cache_item_pool.repository']]
-      - [setTime, ['@nhds.toolkit.time']]
+      - [setTime, ['@neighborhoods.pylon.time']]
   scheduler.cache:
     alias: neighborhoods.kojo.scheduler.cache

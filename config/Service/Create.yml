@@ -4,6 +4,6 @@ services:
     shared: false
     calls:
       - [setTypeRepository, ['@type.repository']]
-      - [setTime, ['@nhds.toolkit.time']]
+      - [setTime, ['@neighborhoods.pylon.time']]
   service.create:
     alias: neighborhoods.kojo.service.create
