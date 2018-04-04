@@ -9,7 +9,7 @@ class CreateInterfaceTest extends Fixture\AbstractTest
 {
     public function testPick()
     {
-        $time = $this->_getTestContainerBuilder()->get('nhds.toolkit.time');
+        $time = $this->_getTestContainerBuilder()->get('neighborhoods.pylon.time');
         $create = $this->_getTestContainerBuilder()->get('service.create');
         $create->setJobTypeCode('type_code_2');
         $create->setWorkAtDateTime($time->getNow());
