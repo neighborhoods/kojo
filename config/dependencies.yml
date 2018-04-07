@@ -1,6 +1,6 @@
 services:
   neighborhoods.pylon.time:
-    class: Neighborhoods\Toolkit\Time
+    class: Neighborhoods\Pylon\Time
   symfony.component.expressionlanguage.expressionlanguage:
     class: \Symfony\Component\ExpressionLanguage\ExpressionLanguage
   neighborhoods.kojo.symfony.component.console.application:

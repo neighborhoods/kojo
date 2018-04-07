@@ -53,6 +53,7 @@ imports:
    - { resource: Service/Update/Complete/Success/Factory.yml }
    - { resource: Semaphore/Resource/Factory.yml }
    - { resource: Process/Pool/Factory.yml }
+   - { resource: Process/Signal/Information/Factory.yml }
    - { resource: Redis/Factory.yml }
 
   # Services.
@@ -78,6 +79,7 @@ imports:
   # Process.
    - { resource: Process.yml }
    - { resource: Process/Signal.yml }
+   - { resource: Process/Signal/Information.yml }
    - { resource: Process/Root.yml }
    - { resource: Process/Registry.yml }
    - { resource: Process/Job.yml }

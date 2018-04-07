@@ -9,7 +9,6 @@ use Neighborhoods\Kojo\Process;
 
 abstract class Forked extends ProcessAbstract implements ProcessInterface
 {
-    use Process\Pool\Factory\AwareTrait;
     const FORK_FAILURE_CODE = -1;
     const PROP_HAS_FORKED   = 'has_forked';
 
@@ -25,35 +24,11 @@ abstract class Forked extends ProcessAbstract implements ProcessInterface
         }else {
             // This is executed in the child process.
             $this->_initialize();
-            $this->_removeParentProcessPool();
-            $this->_startProcessPool();
+            $this->_getProcessSignal()->decrementWaitCount();
+            $this->_getProcessPool()->start();
+            $this->_run();
+            $this->exit(0);
         }
-
-        return $this;
-    }
-
-    protected function _removeParentProcessPool(): Forked
-    {
-        $this->_getProcessPool()->emptyChildProcesses();
-        $this->_unsetProcessPool();
-
-        return $this;
-    }
-
-    protected function _startProcessPool(): Forked
-    {
-        $this->setProcessPool($this->_getProcessPoolFactory()->create());
-        $this->_getProcessPool()->setProcess($this);
-        $this->_getProcessPool()->start();
-
-        return $this;
-    }
-
-    public function processPoolStarted(): ProcessInterface
-    {
-        $this->_getProcessSignal()->unBlock();
-        $this->_run();
-        $this->exit(0);
 
         return $this;
     }

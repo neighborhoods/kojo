@@ -17,7 +17,7 @@ class Root extends Forked implements ProcessInterface
     protected function _run(): Forked
     {
         while (true) {
-            $this->_getProcessPool()->waitForSignal();
+            $this->_getProcessSignal()->waitForSignal();
         }
 
         return $this;

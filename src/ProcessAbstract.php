@@ -5,10 +5,13 @@ namespace Neighborhoods\Kojo;
 
 use Neighborhoods\Kojo\Process;
 use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
+use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class ProcessAbstract implements ProcessInterface
 {
+    use Process\Pool\Factory\AwareTrait;
     use Process\Registry\AwareTrait;
     use Process\Pool\AwareTrait;
     use Process\Strategy\AwareTrait;
@@ -20,17 +23,37 @@ abstract class ProcessAbstract implements ProcessInterface
 
     protected function _initialize(): ProcessAbstract
     {
+        $this->_getProcessSignal()->incrementWaitCount();
         $this->_setParentProcessId(posix_getppid());
         $this->_setProcessId(posix_getpid());
+
         $this->_getLogger()->setProcess($this);
+        if ($this->_hasProcessPool()) {
+            $this->_getProcessPool()->emptyChildProcesses();
+            $this->_unsetProcessPool();
+        }
+        $this->setProcessPool($this->_getProcessPoolFactory()->create());
+        $this->_getProcessPool()->setProcess($this);
         $this->_registerSignalHandlers();
-        $this->_setProcessTitle();
         $this->_getProcessRegistry()->pushProcess($this);
+        $this->_setProcessTitle();
+        $this->_getProcessSignal()->decrementWaitCount();
 
         return $this;
     }
 
-    abstract public function processPoolStarted(): ProcessInterface;
+    protected function _registerSignalHandlers(): ProcessInterface
+    {
+        $this->_getProcessSignal()->addSignalHandler(SIGCHLD, $this->_getProcessPool());
+        $this->_getProcessSignal()->addSignalHandler(SIGALRM, $this->_getProcessPool());
+        $this->_getProcessSignal()->addSignalHandler(SIGTERM, $this);
+        $this->_getProcessSignal()->addSignalHandler(SIGINT, $this);
+        $this->_getProcessSignal()->addSignalHandler(SIGHUP, $this);
+        $this->_getProcessSignal()->addSignalHandler(SIGQUIT, $this);
+        $this->_getProcessSignal()->addSignalHandler(SIGABRT, $this);
+
+        return $this;
+    }
 
     protected function _setProcessTitle(): ProcessInterface
     {
@@ -52,27 +75,10 @@ abstract class ProcessAbstract implements ProcessInterface
         return $this->_read(self::PROP_TITLE_PREFIX);
     }
 
-    protected function _registerSignalHandlers(): ProcessInterface
-    {
-        $this->_getProcessSignal()->addBlockedSignalNumber(SIGTERM);
-        $this->_getProcessSignal()->addBlockedSignalNumber(SIGINT);
-        $this->_getProcessSignal()->addBlockedSignalNumber(SIGHUP);
-        $this->_getProcessSignal()->addBlockedSignalNumber(SIGQUIT);
-        $this->_getProcessSignal()->addBlockedSignalNumber(SIGABRT);
-        $this->_getProcessSignal()->block();
-        $this->_getProcessSignal()->addSignalHandler(SIGTERM, [$this, 'receivedSignal']);
-        $this->_getProcessSignal()->addSignalHandler(SIGINT, [$this, 'receivedSignal']);
-        $this->_getProcessSignal()->addSignalHandler(SIGHUP, [$this, 'receivedSignal']);
-        $this->_getProcessSignal()->addSignalHandler(SIGQUIT, [$this, 'receivedSignal']);
-        $this->_getProcessSignal()->addSignalHandler(SIGABRT, [$this, 'receivedSignal']);
-
-        return $this;
-    }
-
-    public function receivedSignal(int $signalNumber, $signalInformation)
+    public function handleSignal(InformationInterface $information): HandlerInterface
     {
         $this->_getProcessSignal()->block();
-        $this->exit($signalNumber);
+        $this->exit(0);
     }
 
     public function exit(int $exitCode)

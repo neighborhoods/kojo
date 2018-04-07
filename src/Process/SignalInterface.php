@@ -19,4 +19,8 @@ interface SignalInterface
     public function addSignalHandler(int $signalNumber, HandlerInterface $signalHandler): SignalInterface;
 
     public function block(): SignalInterface;
+
+    public function waitForSignal(): SignalInterface;
+
+    public function unBlock(): SignalInterface;
 }

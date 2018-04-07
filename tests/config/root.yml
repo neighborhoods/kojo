@@ -1,5 +1,5 @@
 imports:
-  - { resource: ../../../config/root.yml }
+  - { resource: ../../config/root.yml }
   - { resource: Process/Strategy/Mock.yml }
 services:
   neighborhoods.kojo.db.connection.container-schema:

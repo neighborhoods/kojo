@@ -18,7 +18,8 @@ class Strategy extends StrategyAbstract
         }elseif ($process instanceof ListenerInterface) {
             $this->_listenerProcessExited($process);
         }else {
-            throw new \UnexpectedValueException('Unexpected process class.');
+            $className = get_class($process);
+            throw new \UnexpectedValueException("Unexpected process class[$className].");
         }
 
         return $this;

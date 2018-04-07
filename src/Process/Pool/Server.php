@@ -24,9 +24,10 @@ class Server extends ProcessAbstract implements ServerInterface
         $this->_getLogger()->info('Starting process pool server...');
         if ($this->_getSemaphore()->testAndSetLock($this->_getServerSemaphoreResource())) {
             $this->_getLogger()->info('Process pool server started.');
-            $this->setProcessPool($this->_getProcessPoolFactory()->create());
-            $this->_getProcessPool()->setProcess($this);
             $this->_getProcessPool()->start();
+            while (true) {
+                $this->_getProcessSignal()->waitForSignal();
+            }
         }else {
             $this->_getLogger()->info('Cannot obtain process pool server mutex. Quitting.');
         }
@@ -37,14 +38,5 @@ class Server extends ProcessAbstract implements ServerInterface
     protected function _getServerSemaphoreResource(): Semaphore\ResourceInterface
     {
         return $this->_getSemaphoreResource(self::SERVER_SEMAPHORE_RESOURCE_NAME);
-    }
-
-    public function processPoolStarted(): ProcessInterface
-    {
-        while (true) {
-            $this->_getProcessPool()->waitForSignal();
-        }
-
-        return $this;
     }
 }

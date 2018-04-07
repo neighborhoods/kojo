@@ -45,3 +45,4 @@ if (isset($argv[2]) && is_string($argv[2]) && is_file($argv[2])) {
 }
 $consoleApplication = $serviceContainer->getContainerBuilder()->get('neighborhoods.kojo.symfony.component.console.application');
 $consoleApplication->run();
+return;

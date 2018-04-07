@@ -36,10 +36,4 @@ interface PoolInterface extends HandlerInterface
     public function setProcess(ProcessInterface $process);
 
     public function getProcess(): ProcessInterface;
-
-    public function waitForSignal(): PoolInterface;
-
-    public function childExitSignal(): PoolInterface;
-
-    public function alarmSignal(): PoolInterface;
 }

@@ -5,8 +5,9 @@ namespace Neighborhoods\Kojo;
 
 use Neighborhoods\Kojo\Process\Pool\LoggerInterface;
 use Neighborhoods\Kojo\Process\PoolInterface;
+use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 
-interface ProcessInterface
+interface ProcessInterface extends HandlerInterface
 {
     const PROP_THROTTLE                                 = 'throttle';
     const PROP_EXIT_CODE                                = 'exit_code';
@@ -41,8 +42,6 @@ interface ProcessInterface
 
     public function setProcessPool(PoolInterface $pool);
 
-    public function receivedSignal(int $signalNumber, $signalInformation);
-
     public function setParentProcessPath(string $parentProcessPath): ProcessInterface;
 
     public function getPath(): string;
@@ -62,8 +61,6 @@ interface ProcessInterface
     public function getParentProcessTerminationSignalNumber();
 
     public function setParentProcessTerminationSignalNumber(int $parentProcessTerminationSignalNumber);
-
-    public function processPoolStarted(): ProcessInterface;
 
     public function exit(int $exitCode);
 }

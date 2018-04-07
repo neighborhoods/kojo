@@ -3,6 +3,9 @@ services:
     class: Neighborhoods\Kojo\Process\Signal
     public: false
     shared: true
+    calls:
+      - [setLogger, ['@process.pool.logger']]
+      - [setProcessSignalInformationFactory, ['@process.signal.information.factory']]
   process.signal:
     alias: neighborhoods.kojo.process.signal
     public: false

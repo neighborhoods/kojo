@@ -3,11 +3,8 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Signal;
 
-use Neighborhoods\Pylon\Data\Property\Defensive;
-
 class Information implements InformationInterface
 {
-    use Defensive\AwareTrait;
     protected $_information;
 
     public function hydrate(array $information): InformationInterface

@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.process.signal.information.factory:
+      class: Neighborhoods\Kojo\Process\Signal\Information\Factory
+      public: false
+      shared: false
+      calls:
+          - [setProcessSignalInformation, ['@process.signal.information']]
+  process.signal.information.factory:
+    public: false
+    alias: neighborhoods.kojo.process.signal.information.factory
