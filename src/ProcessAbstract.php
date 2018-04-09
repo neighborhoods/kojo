@@ -79,6 +79,8 @@ abstract class ProcessAbstract implements ProcessInterface
     {
         $this->_getProcessSignal()->block();
         $this->exit(0);
+
+        return $this;
     }
 
     public function exit(int $exitCode)

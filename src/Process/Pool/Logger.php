@@ -7,7 +7,6 @@ use Psr\Log;
 use Neighborhoods\Pylon\Time;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
-use Psr\Log\LogLevel;
 
 class Logger extends Log\AbstractLogger implements LoggerInterface
 {

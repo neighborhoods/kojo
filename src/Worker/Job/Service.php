@@ -24,7 +24,7 @@ class Service implements ServiceInterface
     const REQUEST_HOLD             = 'hold';
     const REQUEST_COMPLETE_SUCCESS = 'complete_success';
     const REQUEST_COMPLETE_FAILED  = 'complete_failed';
-    const PROP_REQUEST_APPPLIED    = 'request_applied';
+    const PROP_REQUEST_APPLIED     = 'request_applied';
 
     public function requestRetry(\DateTime $retryDateTime): ServiceInterface
     {
@@ -68,7 +68,7 @@ class Service implements ServiceInterface
 
     public function applyRequest(): ServiceInterface
     {
-        if (!$this->_exists(self::PROP_REQUEST_APPPLIED)) {
+        if (!$this->_exists(self::PROP_REQUEST_APPLIED)) {
             switch ($this->_read(self::PROP_REQUEST)) {
                 case self::REQUEST_RETRY:
                     $updateRetry = $this->_getServiceUpdateRetryFactory()->create();
@@ -94,7 +94,7 @@ class Service implements ServiceInterface
                 default:
                     throw new \UnexpectedValueException('Unexpected value "' . $this->_read(self::PROP_REQUEST) . '"');
             }
-            $this->_create(self::PROP_REQUEST_APPPLIED, true);
+            $this->_create(self::PROP_REQUEST_APPLIED, true);
         }
 
         return $this;
@@ -102,7 +102,7 @@ class Service implements ServiceInterface
 
     public function isRequestApplied(): bool
     {
-        return $this->_exists(self::PROP_REQUEST_APPPLIED);
+        return $this->_exists(self::PROP_REQUEST_APPLIED);
     }
 
     public function getNewJobServiceCreate(): CreateInterface

@@ -5,7 +5,6 @@ namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\ProcessAbstract;
 use Neighborhoods\Kojo\ProcessInterface;
-use Neighborhoods\Kojo\Process;
 
 abstract class Forked extends ProcessAbstract implements ProcessInterface
 {
