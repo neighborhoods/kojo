@@ -29,7 +29,7 @@ class Server extends ProcessAbstract implements ServerInterface
                 $this->_getProcessSignal()->waitForSignal();
             }
         }else {
-            $this->_getLogger()->info('Cannot obtain process pool server mutex. Quitting.');
+            $this->_getLogger()->info('Cannot obtain the process pool server mutex. Quitting.');
         }
 
         return $this;

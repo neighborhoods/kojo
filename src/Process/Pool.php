@@ -31,7 +31,7 @@ class Pool extends PoolAbstract implements PoolInterface
                 $this->_alarmSignal($signalInformation);
                 break;
             default:
-                throw new \UnexpectedValueException("Unexpected signal number [$signalNumber].");
+                throw new \UnexpectedValueException("Unexpected signal number[$signalNumber].");
         }
 
         return $this;
@@ -59,14 +59,14 @@ class Pool extends PoolAbstract implements PoolInterface
         if (isset($this->_childProcesses[$childProcessId])) {
             if ($this->_childProcesses[$childProcessId] instanceof ProcessInterface) {
                 $typeCode = $this->_childProcesses[$childProcessId]->getTypeCode();
-                $this->_getLogger()->info("Freeing child process related to Process[$childProcessId][$typeCode].");
+                $this->_getLogger()->info("Freeing child process related to process[$childProcessId][$typeCode].");
                 unset($this->_childProcesses[$childProcessId]);
             }else {
-                $message = "Process associated to Process[$childProcessId] is not an expected type.";
+                $message = "Process associated to process[$childProcessId] is not an expected type.";
                 throw new \UnexpectedValueException($message);
             }
         }else {
-            throw new \LogicException("Process associated to Process[$childProcessId] is not in the process pool.");
+            throw new \LogicException("Process associated to process[$childProcessId] is not in the process pool.");
         }
 
         return $this;
@@ -85,7 +85,7 @@ class Pool extends PoolAbstract implements PoolInterface
         }else {
             $childProcess->start();
             $this->_childProcesses[$childProcess->getProcessId()] = $childProcess;
-            $message = "Forked Process[{$childProcess->getProcessId()}][{$childProcess->getTypeCode()}].";
+            $message = "Forked process[{$childProcess->getProcessId()}][{$childProcess->getTypeCode()}].";
             $this->_getLogger()->info($message);
         }
         $this->_getProcessSignal()->decrementWaitCount();
@@ -96,7 +96,7 @@ class Pool extends PoolAbstract implements PoolInterface
     public function getChildProcess(int $childProcessId): ProcessInterface
     {
         if (!isset($this->_childProcesses[$childProcessId])) {
-            throw new \LogicException("Process with process ID [$childProcessId] not set.");
+            throw new \LogicException("Process with process ID[$childProcessId] not set.");
         }
 
         return $this->_childProcesses[$childProcessId];
@@ -112,7 +112,7 @@ class Pool extends PoolAbstract implements PoolInterface
                 $terminationSignalNumber = $process->getTerminationSignalNumber();
                 $processTypeCode = $process->getTypeCode();
                 posix_kill($processId, $terminationSignalNumber);
-                $message = "Sent kill($terminationSignalNumber) to Process[$processId][$processTypeCode].";
+                $message = "Sent kill($terminationSignalNumber) to process[$processId][$processTypeCode].";
                 $this->_getLogger()->info($message);
                 unset($this->_childProcesses[$processId]);
             }
