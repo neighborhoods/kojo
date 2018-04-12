@@ -1,8 +1,0 @@
-services:
-  neighborhoods.kojo.data.job:
-    class: Neighborhoods\Kojo\Data\Job
-    shared: false
-    calls:
-      - [addDbConnectionContainer, ['@db.connection.container-job']]
-  data.job:
-    alias: neighborhoods.kojo.data.job

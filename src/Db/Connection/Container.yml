@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.db.connection.container:
+    class: Neighborhoods\Kojo\Db\Connection\Container
+    public: true
+    shared: false
+  db.connection.container:
+    alias: neighborhoods.kojo.db.connection.container
+    public: true

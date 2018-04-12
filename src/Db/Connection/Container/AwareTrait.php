@@ -7,26 +7,32 @@ use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 
 trait AwareTrait
 {
-    protected $_dbConnectionContainers = [];
-
-    public function addDbConnectionContainer(ContainerInterface $container)
+    public function setDbConnectionContainer(ContainerInterface $dbConnectionContainer): self
     {
-        $containerName = $container->getName();
-        if (isset($this->_dbConnectionContainers[$containerName])) {
-            throw new \LogicException('The container [' . $containerName . '] is already set.');
-        }
-
-        $this->_dbConnectionContainers[$container->getName()] = $container;
+        $this->_create(ContainerInterface::class, $dbConnectionContainer);
 
         return $this;
     }
 
-    protected function _getDbConnectionContainer(string $containerName): ContainerInterface
+    protected function _getDbConnectionContainer(): ContainerInterface
     {
-        if (!isset($this->_dbConnectionContainers[$containerName])) {
-            throw new \LogicException('The container [' . $containerName . '] is not set.');
-        }
+        return $this->_read(ContainerInterface::class);
+    }
 
-        return $this->_dbConnectionContainers[$containerName];
+    protected function _getDbConnectionContainerClone(): ContainerInterface
+    {
+        return clone $this->_getDbConnectionContainer();
+    }
+
+    protected function _hasDbConnectionContainer(): bool
+    {
+        return $this->_exists(ContainerInterface::class);
+    }
+
+    protected function _unsetDbConnectionContainer(): self
+    {
+        $this->_delete(ContainerInterface::class);
+
+        return $this;
     }
 }

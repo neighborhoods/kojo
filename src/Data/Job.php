@@ -5,12 +5,9 @@ namespace Neighborhoods\Kojo\Data;
 
 use Neighborhoods\Kojo\Db\Model;
 use Neighborhoods\Pylon\TimeInterface;
-use Neighborhoods\Pylon\Time;
 
 class Job extends Model implements JobInterface
 {
-    use Time\AwareTrait;
-
     public function __construct()
     {
         $this->setTableName(JobInterface::TABLE_NAME);

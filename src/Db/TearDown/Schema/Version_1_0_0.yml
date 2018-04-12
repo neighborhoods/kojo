@@ -1,0 +1,7 @@
+services:
+  neighborhoods.kojo.db.tear_down.schema.version.1_0_0:
+    class: Neighborhoods\Kojo\Db\TearDown\Schema\Version_1_0_0
+    calls:
+      - [setDbConnectionContainerRepository, ["@db.connection.container.repository"]]
+  db.tear_down.schema.version.1_0_0:
+    alias: neighborhoods.kojo.db.tear_down.schema.version.1_0_0

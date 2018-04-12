@@ -1,0 +1,11 @@
+services:
+  neighborhoods.kojo.db.model:
+    class: Neighborhoods\Kojo\Db\Model
+    public: false
+    shared: false
+    abstract: true
+    calls:
+        - [setDbConnectionContainerRepository, ['@db.connection.container.repository']]
+  db.model:
+    alias: neighborhoods.kojo.db.model
+    public: false

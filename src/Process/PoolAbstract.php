@@ -31,7 +31,11 @@ abstract class PoolAbstract implements PoolInterface
 
     public function setAlarm(int $seconds): PoolInterface
     {
-        $this->_getLogger()->info('Setting alarm for [' . $seconds . '] seconds.');
+        if ($seconds === 0) {
+            $this->_getLogger()->info("Disabling any existing alarm.");
+        }else {
+            $this->_getLogger()->info("Setting alarm for $seconds seconds.");
+        }
         pcntl_alarm($seconds);
 
         return $this;

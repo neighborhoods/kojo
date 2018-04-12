@@ -29,7 +29,8 @@ class Scheduler extends CollectionAbstract implements SchedulerInterface
         if (!$this->_exists(self::PROP_RECORDS)) {
             $this->_prepareCollection();
             $select = $this->getSelect();
-            $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($select);
+            $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
+            $statement = $dbConnectionContainer->getStatement($select);
             /** @var \PDOStatement $pdoStatement */
             $pdoStatement = $statement->execute()->getResource();
             $pdoStatement->setFetchMode(\PDO::FETCH_NUM);

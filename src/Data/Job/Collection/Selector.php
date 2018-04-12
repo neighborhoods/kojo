@@ -31,7 +31,9 @@ class Selector extends CollectionAbstract implements SelectorInterface
             $this->_create(self::PROP_RECORDS, []);
         }
         $select = $this->getSelect();
-        $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($select);
+        $statement = $this->_getDbConnectionContainerRepository()
+                          ->get(ContainerInterface::ID_JOB)
+                          ->getStatement($select);
         /** @var \PDOStatement $pdoStatement */
         $pdoStatement = $statement->execute()->getResource();
         $pdoStatement->setFetchMode($this->_getFetchMode());

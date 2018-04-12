@@ -1,7 +1,0 @@
-services:
-  neighborhoods.kojo.db.setup.schema.version.0_0_0:
-    class: Neighborhoods\Kojo\Db\Setup\Schema\Version_0_0_0
-    calls:
-      - [addDbConnectionContainer, ["@db.connection.container-schema"]]
-  db.setup.schema.version.0_0_0:
-    alias: neighborhoods.kojo.db.setup.schema.version.0_0_0

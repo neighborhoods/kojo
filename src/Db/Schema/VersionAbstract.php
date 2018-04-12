@@ -7,18 +7,19 @@ use Neighborhoods\Kojo\Db;
 use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\SqlInterface;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class VersionAbstract implements VersionInterface
 {
-    use Db\Connection\Container\AwareTrait;
+    use Defensive\AwareTrait;
+    use Db\Connection\Container\Repository\AwareTrait;
     protected $_schemaChanges;
 
     public function applySchemaChanges(): VersionInterface
     {
-        $this->_getDbConnectionContainer(ContainerInterface::NAME_SCHEMA)->getAdapter()->query(
-            $this->_getDbConnectionContainer(ContainerInterface::NAME_SCHEMA)->getSql()->buildSqlString(
-                $this->_getSchemaChanges()
-            ),
+        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_SCHEMA);
+        $dbConnectionContainer->getAdapter()->query(
+            $dbConnectionContainer->getSql()->buildSqlString($this->_getSchemaChanges()),
             Adapter::QUERY_MODE_EXECUTE
         );
 

@@ -1,0 +1,12 @@
+services:
+  neighborhoods.kojo.data.job.type.collection.scheduler:
+    class: Neighborhoods\Kojo\Data\Job\Type\Collection\Scheduler
+    public: false
+    shared: false
+    parent: data.job.collection_abstract
+    calls:
+      - [setModel, ['@data.job.type']]
+      - [setIterator, ['@data.job.type.collection.iterator']]
+  data.job.type.collection.scheduler:
+    alias: neighborhoods.kojo.data.job.type.collection.scheduler
+    public: false

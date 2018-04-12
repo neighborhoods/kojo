@@ -18,7 +18,7 @@ use Zend\Db\Sql\Update;
 class Container implements ContainerInterface
 {
     protected $_connection;
-    protected $_name;
+    protected $_id;
     protected $_sql;
     protected $_adapter;
     protected $_pdo;
@@ -53,24 +53,24 @@ class Container implements ContainerInterface
         return $this->_connection;
     }
 
-    public function setName(string $name): ContainerInterface
+    public function setId(string $id): ContainerInterface
     {
-        if ($this->_name === null) {
-            $this->_name = $name;
+        if ($this->_id === null) {
+            $this->_id = $id;
         }else {
-            throw new \LogicException('Name is already set.');
+            throw new \LogicException('ID is already set.');
         }
 
         return $this;
     }
 
-    public function getName(): string
+    public function getId(): string
     {
-        if ($this->_name === null) {
-            throw new \LogicException('Name is not set.');
+        if ($this->_id === null) {
+            throw new \LogicException('ID is not set.');
         }
 
-        return $this->_name;
+        return $this->_id;
     }
 
     public function getSql(): Sql

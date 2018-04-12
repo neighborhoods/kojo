@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.db.connection.container.factory:
+    class: Neighborhoods\Kojo\Db\Connection\Container\Factory
+    public: true
+    shared: true
+    calls:
+      - [setDbConnectionContainer, ['@db.connection.container']]
+  db.connection.container.factory:
+    alias: neighborhoods.kojo.db.connection.container.factory
+    public: true

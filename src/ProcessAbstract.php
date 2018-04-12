@@ -18,8 +18,6 @@ abstract class ProcessAbstract implements ProcessInterface
     use Process\Signal\AwareTrait;
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
-    const PROP_IS_PROCESS_TITLE_SET = 'is_process_title_set';
-    const PROP_TITLE_PREFIX         = 'title_prefix';
 
     protected function _initialize(): ProcessAbstract
     {
@@ -30,11 +28,13 @@ abstract class ProcessAbstract implements ProcessInterface
         $this->_getLogger()->setProcess($this);
         if ($this->_hasProcessPool()) {
             $this->_getProcessPool()->emptyChildProcesses();
+            $this->_getProcessPool()->getProcess()->unregisterShutdownMethod();
             $this->_unsetProcessPool();
         }
         $this->setProcessPool($this->_getProcessPoolFactory()->create());
         $this->_getProcessPool()->setProcess($this);
         $this->_registerSignalHandlers();
+        $this->_registerShutdownMethod();
         $this->_getProcessRegistry()->pushProcess($this);
         $this->_setProcessTitle();
         $this->_getProcessSignal()->decrementWaitCount();
@@ -83,11 +83,37 @@ abstract class ProcessAbstract implements ProcessInterface
         return $this;
     }
 
-    public function exit(int $exitCode)
+    public function exit(int $exitCode): void
     {
         $this->_getProcessSignal()->block();
+        $this->unregisterShutdownMethod();
         $this->_getProcessPool()->terminateChildProcesses();
         exit($exitCode);
+    }
+
+    public function shutdown(): ProcessInterface
+    {
+        if ($this->_read(self::PROP_IS_SHUTDOWN_METHOD_ACTIVE)) {
+            $this->_getLogger()->critical("Shutdown method invoked.");
+            $this->exit(255);
+        }
+
+        return $this;
+    }
+
+    protected function _registerShutdownMethod(): ProcessInterface
+    {
+        $this->_create(self::PROP_IS_SHUTDOWN_METHOD_ACTIVE, true);
+        register_shutdown_function([$this, 'shutdown']);
+
+        return $this;
+    }
+
+    public function unregisterShutdownMethod(): ProcessInterface
+    {
+        $this->_update(self::PROP_IS_SHUTDOWN_METHOD_ACTIVE, false);
+
+        return $this;
     }
 
     public function setParentProcessPath(string $parentProcessPath): ProcessInterface

@@ -26,7 +26,8 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
         if (!$this->_exists(self::PROP_RECORDS)) {
             $this->_prepareCollection();
             $select = $this->getSelect();
-            $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($select);
+            $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
+            $statement = $dbConnectionContainer->getStatement($select);
             /** @var \PDOStatement $pdoStatement */
             $pdoStatement = $statement->execute()->getResource();
             $pdoStatement->setFetchMode($this->_getFetchMode());
@@ -50,7 +51,8 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
             ]
         );
         $this->getSelect()->where->equalTo(JobInterface::FIELD_NAME_TYPE_CODE, $this->_getJobType()->getCode());
-        $this->getSelect()->where
+        $this->getSelect()
+            ->where
             ->nest()
             ->equalTo(JobInterface::FIELD_NAME_ASSIGNED_STATE, State\Service::STATE_WORKING)
             ->or

@@ -27,15 +27,15 @@ try{
     exit(1);
 }
 $serviceContainer = new Container();
-$ymlServiceFilePath = __DIR__ . '/../config/root.yml';
-$serviceContainer->addServicesYmlFilePath($ymlServiceFilePath);
+$ymlServiceFilePath = __DIR__ . '/../src';
+$serviceContainer->addRootDirectoryPath($ymlServiceFilePath);
 if (isset($argv[2]) && is_string($argv[2]) && is_file($argv[2])) {
-    $serviceContainer->addServicesYmlFilePath($argv[2]);
+    $serviceContainer->addRootDirectoryPath($argv[2]);
 }elseif (isset($argv[1]) && is_string($argv[1]) && $argv[1] === Start::OPT_RUN_SERVER) {
     foreach ($argv as $argument) {
-        if (strstr($argument, 'ysfp:') !== false) {
-            $ymlServicesFilePath = explode('ysfp:', $argument);
-            $serviceContainer->addServicesYmlFilePath($ymlServicesFilePath[1]);
+        if (strstr($argument, Start::OPT_YSDP) !== false) {
+            $ymlServicesFilePath = explode(Start::OPT_YSDP, $argument);
+            $serviceContainer->addRootDirectoryPath($ymlServicesFilePath[1]);
         }
     }
     $server = $serviceContainer->getContainerBuilder()->get('process.pool.server');
@@ -43,6 +43,8 @@ if (isset($argv[2]) && is_string($argv[2]) && is_file($argv[2])) {
     $server->start();
     exit();
 }
-$consoleApplication = $serviceContainer->getContainerBuilder()->get('neighborhoods.kojo.symfony.component.console.application');
+$containerBuilder = $serviceContainer->getContainerBuilder();
+$consoleApplication = $containerBuilder->get('neighborhoods.kojo.symfony.component.console.application');
 $consoleApplication->run();
+
 return;

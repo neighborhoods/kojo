@@ -1,0 +1,9 @@
+services:
+  neighborhoods.kojo.example.worker.bootstrap:
+    class: Neighborhoods\Kojo\Example\Worker\Bootstrap
+    parent: worker.bootstrap_abstract
+    public: false
+    shared: false
+  worker.bootstrap:
+    alias: neighborhoods.kojo.example.worker.bootstrap
+    public: false

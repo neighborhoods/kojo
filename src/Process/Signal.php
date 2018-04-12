@@ -37,10 +37,12 @@ class Signal implements SignalInterface
 
     public function decrementWaitCount(): SignalInterface
     {
+        $this->block();
         if ($this->_waitCount === 1) {
             $this->_processBufferedSignals();
         }
         --$this->_waitCount;
+        $this->unBlock();
 
         return $this;
     }
@@ -74,10 +76,10 @@ class Signal implements SignalInterface
             while ($childProcessId = pcntl_wait($status, WNOHANG)) {
                 if ($childProcessId == -1) {
                     $errorMessage = var_export(pcntl_strerror(pcntl_get_last_error()), true);
-                    $this->_getLogger()->notice("Encountered a process control wait error with message[$errorMessage].");
+                    $this->_getLogger()->notice("Received a process control wait error with message[$errorMessage].");
                     break;
                 }else {
-                    $this->_getLogger()->info("Handling signal from child process ID[$childProcessId].");
+                    $this->_getLogger()->info("Child with process ID[$childProcessId] exited with status[$status].");
                     $childInformation[InformationInterface::SIGNAL_NUMBER] = SIGCHLD;
                     $childInformation[InformationInterface::PROCESS_ID] = $childProcessId;
                     $childInformation[InformationInterface::EXIT_VALUE] = $status;

@@ -8,12 +8,14 @@ use Neighborhoods\Kojo\Db\Model;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Db;
 use Zend\Db\Sql\Select;
+use Neighborhoods\Kojo\Process;
 
 abstract class CollectionAbstract implements CollectionInterface
 {
     use Defensive\AwareTrait;
     use Model\AwareTrait;
-    use Db\Connection\Container\AwareTrait;
+    use Process\Pool\Logger\AwareTrait;
+    use Db\Connection\Container\Repository\AwareTrait;
     const PROP_SELECT     = 'select';
     const PROP_MODELS     = 'models';
     const PROP_RECORDS    = 'records';
@@ -22,7 +24,7 @@ abstract class CollectionAbstract implements CollectionInterface
     public function getSelect(): Select
     {
         if (!$this->_exists(self::PROP_SELECT)) {
-            $dbConnectionContainer = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB);
+            $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
             $select = $dbConnectionContainer->select($this->_getModel()->getTableName());
             $this->_create(self::PROP_SELECT, $select);
         }
@@ -77,7 +79,8 @@ abstract class CollectionAbstract implements CollectionInterface
         if (!$this->_exists(self::PROP_RECORDS)) {
             $this->_prepareCollection();
             $select = $this->getSelect();
-            $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($select);
+            $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
+            $statement = $dbConnectionContainer->getStatement($select);
             /** @var \PDOStatement $pdoStatement */
             $pdoStatement = $statement->execute()->getResource();
             $pdoStatement->setFetchMode($this->_getFetchMode());
@@ -93,4 +96,14 @@ abstract class CollectionAbstract implements CollectionInterface
     }
 
     abstract protected function _prepareCollection(): CollectionAbstract;
+
+    protected function _logSelect(): CollectionInterface
+    {
+        if ($this->_hasLogger()) {
+            $sql = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB)->getSql();
+            $this->_getLogger()->debug(get_called_class() . ': ' . $sql->buildSqlString($this->getSelect()));
+        }
+
+        return $this;
+    }
 }

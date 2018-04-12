@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Db;
 
-use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\Db\Connection\Container\RepositoryInterface;
 
 interface ModelInterface
 {
@@ -31,5 +31,5 @@ interface ModelInterface
 
     public function readPersistentProperties(): array;
 
-    public function addDbConnectionContainer(ContainerInterface $container);
+    public function setDbConnectionContainerRepository(RepositoryInterface $repository);
 }
