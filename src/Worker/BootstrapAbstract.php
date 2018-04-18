@@ -13,14 +13,19 @@ abstract class BootstrapAbstract implements BootstrapInterface
     use Container\Repository\AwareTrait;
     use Foreman\AwareTrait;
     use Defensive\AwareTrait;
-    const PROP_PDO = 'pdo';
 
     abstract public function instantiate(): BootstrapInterface;
 
     protected function _setJobPdo(\PDO $pdo): BootstrapInterface
     {
-        $this->_create(self::PROP_PDO, $pdo);
         $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB)->setPdo($pdo);
+
+        return $this;
+    }
+
+    protected function _setSchemaPdo(\PDO $pdo): BootstrapInterface
+    {
+        $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_SCHEMA)->setPdo($pdo);
 
         return $this;
     }

@@ -1,3 +1,0 @@
-services:
-  neighborhoods.kojo.test.process.strategy.mock:
-    class: Neighborhoods\Kojo\Test\Process\Strategy\Mock

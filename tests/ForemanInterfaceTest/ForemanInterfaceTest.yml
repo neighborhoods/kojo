@@ -1,5 +1,3 @@
-imports:
-  - { resource: ../../config/root.yml }
 services:
   foreman:
     public: true

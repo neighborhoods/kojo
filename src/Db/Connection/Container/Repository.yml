@@ -4,10 +4,10 @@ services:
     public: false
     shared: true
     calls:
-      - [add, ["@=service('db.connection.container.factory').create().setId(constant(\"\\\\Neighborhoods\\\\Kojo\\\\Db\\\\Connection\\\\ContainerInterface::ID_JOB\"))"]]
-      - [add, ["@=service('db.connection.container.factory').create().setId(constant(\"\\\\Neighborhoods\\\\Kojo\\\\Db\\\\Connection\\\\ContainerInterface::ID_SCHEMA\"))"]]
-      - [add, ["@=service('db.connection.container.factory').create().setId(constant(\"\\\\Neighborhoods\\\\Kojo\\\\Db\\\\Connection\\\\ContainerInterface::ID_STATUS\"))"]]
       - [setDbConnectionContainerFactory, ['@db.connection.container.factory']]
+      - [create, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Db\\\\Connection\\\\ContainerInterface::ID_JOB\")"]]
+      - [create, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Db\\\\Connection\\\\ContainerInterface::ID_SCHEMA\")"]]
+      - [create, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Db\\\\Connection\\\\ContainerInterface::ID_STATUS\")"]]
   db.connection.container.repository:
     alias: neighborhoods.kojo.db.connection.container.repository
     public: false

@@ -22,21 +22,21 @@ class ForemanInterfaceTest extends AbstractTest
 
     protected function _getForeman(): ForemanInterface
     {
-        return $this->_getTestContainerBuilder()->get('foreman');
+        return $this->_getContainerBuilderFacade()->getContainerBuilder()->get('foreman');
     }
 
     protected function _getSelector(): SelectorInterface
     {
-        return $this->_getTestContainerBuilder()->get('selector');
+        return $this->_getContainerBuilderFacade()->getContainerBuilder()->get('selector');
     }
 
     protected function _getJobProcess(): JobInterface
     {
-        return $this->_getTestContainerBuilder()->get('process.job');
+        return $this->_getContainerBuilderFacade()->getContainerBuilder()->get('process.job');
     }
 
     protected function _getRequiredJobProcess(): JobInterface
     {
-        return $this->_getTestContainerBuilder()->get('process.job.required');
+        return $this->_getContainerBuilderFacade()->getContainerBuilder()->get('process.job.required');
     }
 }
