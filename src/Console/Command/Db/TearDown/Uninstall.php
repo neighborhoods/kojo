@@ -15,7 +15,7 @@ class Uninstall extends CommandAbstract
     protected function _configure(): CommandAbstract
     {
         $this->setName('db:teardown:uninstall');
-        $this->setDescription('Uninstalls Jobs from the persistent storage engine.');
+        $this->setDescription('Uninstalls Kōjō and ALL DATA from the persistent storage engine.');
         $this->setHelp($this->_getHelp());
 
         return $this;
@@ -25,6 +25,7 @@ class Uninstall extends CommandAbstract
     {
         $this->_getBootstrap()->instantiate();
         $this->_getDbTearDown()->uninstall();
+        $this->_getOutput()->writeln('Kōjō has been successfully uninstalled.');
 
         return $this;
     }
@@ -34,7 +35,7 @@ class Uninstall extends CommandAbstract
         return <<<'EOD'
 WARNING: THIS WILL DELETE ALL JOB DATA IN PERSISTENT STORAGE.
 
-This command UNINSTALLS a Jobs cluster from a persistent storage engine.
+This command UNINSTALLS a Kōjō cluster from a persistent storage engine.
 Currently only \PDO compatible storage engines are supported.
 The client's Bootstrap class will be called prior to setup, and that \PDO class will be used for setup. 
 EOD;

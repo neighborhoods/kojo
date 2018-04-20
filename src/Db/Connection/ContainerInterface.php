@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Db\Connection;
 
+use Neighborhoods\Kojo\Db\PDO\BuilderInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Driver\Pdo\Connection;
@@ -51,4 +52,6 @@ interface ContainerInterface
     public function rollback(): Connection;
 
     public function setPdo(\PDO $pdo): ContainerInterface;
+
+    public function setDbPDOBuilder(BuilderInterface $dbPDOBuilder);
 }

@@ -11,3 +11,15 @@ services:
   process.job.required:
     public: true
     alias: neighborhoods.kojo.process.job.required
+  db.setup:
+    public: true
+    alias: neighborhoods.kojo.db.setup
+  db.tear_down:
+    public: true
+    alias: neighborhoods.kojo.db.tear_down
+  redis.factory:
+    public: true
+    alias: neighborhoods.kojo.redis.factory
+  db.pdo.builder:
+    public: true
+    alias: neighborhoods.kojo.db.pdo.builder

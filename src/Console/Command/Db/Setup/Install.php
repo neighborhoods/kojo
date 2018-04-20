@@ -15,7 +15,7 @@ class Install extends CommandAbstract
     protected function _configure(): CommandAbstract
     {
         $this->setName('db:setup:install');
-        $this->setDescription('Installs Kojo to a persistent storage engine.');
+        $this->setDescription('Installs Kōjō to a persistent storage engine.');
         $this->setHelp($this->_getHelp());
 
         return $this;
@@ -25,7 +25,7 @@ class Install extends CommandAbstract
     {
         $this->_getBootstrap()->instantiate();
         $this->_getDbSetup()->install();
-        $this->_getOutput()->writeln('Kojo has been successfully installed.');
+        $this->_getOutput()->writeln('Kōjō has been successfully installed.');
 
         return $this;
     }
@@ -33,8 +33,8 @@ class Install extends CommandAbstract
     protected function _getHelp(): string
     {
         return <<<'EOD'
-This command installs a Kojo cluster on a persistent storage engine.
-Currently only \PDO compatible storage engines are supported.
+This command installs a Kōjō cluster on a persistent storage engine.
+Currently, only \PDO compatible storage engines are supported.
 The client's Bootstrap class will be called prior to setup, and that \PDO class will be used for setup. 
 EOD;
     }

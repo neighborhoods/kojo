@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Db\Connection;
 
+use Neighborhoods\Kojo\Db\PDO;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Driver\Pdo\Connection;
@@ -14,15 +15,19 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Adapter\Driver;
 use Zend\Db\Sql\Update;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Container implements ContainerInterface
 {
+    use Defensive\AwareTrait;
+    use PDO\Builder\AwareTrait;
     protected $_connection;
     protected $_id;
     protected $_sql;
     protected $_adapter;
     protected $_pdo;
     protected $_driver;
+    protected $_defaultPdo;
 
     public function setPdo(\PDO $pdo): ContainerInterface
     {
@@ -35,10 +40,10 @@ class Container implements ContainerInterface
         return $this;
     }
 
-    protected function _getPdo(): \Pdo
+    protected function _getPdo(): \PDO
     {
         if ($this->_pdo === null) {
-            throw new \LogicException('PDO is not set.');
+            $this->_pdo = $this->_getDbPDOBuilder()->getPdo();
         }
 
         return $this->_pdo;

@@ -1,6 +1,6 @@
 services:
   neighborhoods.kojo.db.tear_down:
-    public: true
+    public: false
     class: Neighborhoods\Kojo\Db\TearDown
     calls:
       - [addVersion, ["@db.tear_down.schema.version_6_0_0"]]
@@ -11,5 +11,5 @@ services:
       - [addVersion, ["@db.tear_down.schema.version.1_0_0"]]
       - [addVersion, ["@db.tear_down.schema.version.0_0_0"]]
   db.tear_down:
-    public: true
+    public: false
     alias: neighborhoods.kojo.db.tear_down

@@ -1,0 +1,12 @@
+services:
+  neighborhoods.kojo.db.pdo.builder:
+    class: Neighborhoods\Kojo\Db\PDO\Builder
+    public: false
+    shared: false
+    calls:
+      - [setPassword, ['%env(DATABASE_PASSWORD)%']]
+      - [setUserName, ['%env(DATABASE_USERNAME)%']]
+      - [setDataSourceName, ['%env(DATABASE_ADAPTER)%:dbname=%env(DATABASE_NAME)%;host=%env(DATABASE_HOST)%']]
+  db.pdo.builder:
+    alias: neighborhoods.kojo.db.pdo.builder
+    public: false
