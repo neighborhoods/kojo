@@ -28,4 +28,6 @@ interface CreateInterface extends Type\ServiceInterface
     public function setAutoCompleteSuccess(bool $autoCompleteSuccess): CreateInterface;
 
     public function setAutoDeleteIntervalDuration(string $autoDeleteIntervalDuration): CreateInterface;
+
+    public function setScheduleLimitAllowance(int $scheduleLimitAllowance): CreateInterface;
 }
