@@ -107,7 +107,7 @@ class Foreman implements ForemanInterface
             $stateService = $this->_getStateServiceClone();
             $this->_getJob()->load();
             $stateService->setJob($this->_getJob());
-            if (!$this->_getApiV1WorkerService()->isRequestApplied() || !$stateService->isValidTransition()) {
+            if (!$this->_getApiV1WorkerService()->isRequestApplied()) {
                 $this->_crashJob();
                 $jobId = $this->_getJob()->getId();
                 throw new \LogicException("Worker related to job with ID[$jobId] did not request a next state.");

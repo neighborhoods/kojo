@@ -13,6 +13,8 @@ class Worker
 
     public function work()
     {
+        $this->_getApiV1WorkerService()->requestCompleteSuccess()->applyRequest();
+
         return $this;
     }
 }

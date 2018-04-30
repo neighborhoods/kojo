@@ -15,7 +15,7 @@ class Factory extends FactoryAbstract implements FactoryInterface
 
     public function create(): SuccessInterface
     {
-        $updateCompleteSuccess = $this->_getServiceUpdateCompleteSuccess();
+        $updateCompleteSuccess = $this->_getServiceUpdateCompleteSuccessClone();
         $stateService = $this->_getStateServiceClone();
         $updateCompleteSuccess->setStateService($stateService);
 
