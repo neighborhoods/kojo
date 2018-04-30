@@ -114,6 +114,11 @@ class Service implements ServiceInterface
         return $this->_getApiV1Logger();
     }
 
+    public function reload(): ServiceInterface
+    {
+        return $this;
+    }
+
     public function getNewJobScheduler(): SchedulerInterface
     {
         return $this->_getApiV1JobSchedulerFactory()->create();
