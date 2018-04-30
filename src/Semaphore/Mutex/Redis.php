@@ -23,10 +23,12 @@ class Redis extends MutexAbstract implements RedisInterface
     public function testAndSetLock(): bool
     {
         if ($this->_hasLock === false) {
-            $this->_getRedisClient()->watch($this->_getKey());
+            $key = $this->_getKey();
+            $processUUID = $this->_getProcessUuid();
+            $this->_getRedisClient()->watch($key);
 
             // If the mutex resource ID is set, then check if the owning client is connected.
-            $mutexKeyValue = $this->_getRedisClient()->get($this->_getKey());
+            $mutexKeyValue = $this->_getRedisClient()->get($key);
             if (!empty($mutexKeyValue)) {
                 $mutexClientIsConnected = false;
 
@@ -43,7 +45,7 @@ class Redis extends MutexAbstract implements RedisInterface
                 if ($mutexClientIsConnected === false) {
                     // If not, try to obtain the lock by registering on the mutex resource ID.
                     $this->_getRedisClient()->multi();
-                    $this->_getRedisClient()->set($this->_getKey(), $this->_getParentProcessUuid());
+                    $this->_getRedisClient()->set($key, $processUUID);
                     $reply = $this->_getRedisClient()->exec();
 
                     // If the mutex resource ID was not set by another client, the mutex is obtained by this client.
@@ -54,7 +56,7 @@ class Redis extends MutexAbstract implements RedisInterface
             }else {
                 // If the mutex resource ID is not set, try to obtain the mutex.
                 $this->_getRedisClient()->multi();
-                $this->_getRedisClient()->set($this->_getKey(), $this->_getParentProcessUuid());
+                $this->_getRedisClient()->set($key, $processUUID);
                 $reply = $this->_getRedisClient()->exec();
                 if (is_array($reply) && $reply[0] === true) {
                     $this->_hasLock = true;
@@ -87,7 +89,7 @@ class Redis extends MutexAbstract implements RedisInterface
         return $this->_hasLock;
     }
 
-    protected function _getParentProcessUuid(): string
+    protected function _getProcessUuid(): string
     {
         return $this->_getProcessRegistry()->getLastRegisteredProcess()->getUuid();
     }
@@ -106,7 +108,7 @@ class Redis extends MutexAbstract implements RedisInterface
     {
         if (!$this->_exists(self::PROP_REDIS)) {
             $redis = $this->_getRedisRepository()->getById(RedisInterface::class);
-
+            $redis->client('SETNAME', $this->_getProcessUuid());
             $this->_create(self::PROP_REDIS, $redis);
         }
 
