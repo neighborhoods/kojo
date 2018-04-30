@@ -8,6 +8,7 @@ use Neighborhoods\Pylon\Data\Property\Defensive;
 class Builder implements BuilderInterface
 {
     use Defensive\AwareTrait;
+    public const    REGEX_DSN_URI         = '/([^:]+):/';
     protected const PROP_DATA_SOURCE_NAME = 'data_source_name';
     protected const PROP_USER_NAME        = 'user_name';
     protected const PROP_PASSWORD         = 'password';
@@ -33,7 +34,10 @@ class Builder implements BuilderInterface
 
     public function setDataSourceName(string $dataSourceName): BuilderInterface
     {
-        $this->_create(self::PROP_DATA_SOURCE_NAME, $dataSourceName);
+        $normalizedDataSourceName = preg_replace_callback(self::REGEX_DSN_URI, function ($matches){
+            return strtolower($matches[0]);
+        }, $dataSourceName, 1);
+        $this->_create(self::PROP_DATA_SOURCE_NAME, $normalizedDataSourceName);
 
         return $this;
     }
