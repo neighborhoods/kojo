@@ -64,7 +64,7 @@ class Foreman implements ForemanInterface
     {
         $worker = $this->_getLocator()->getClass();
         if (method_exists($worker, 'setApiV1WorkerService')) {
-            $worker->setApiV1WorkerService($this->_getApiV1WorkerService());
+            $worker->setApiV1WorkerService($this->_getApiV1WorkerService()->setJob($this->_getJob()));
         }
 
         return $this;
