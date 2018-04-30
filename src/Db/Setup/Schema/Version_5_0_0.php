@@ -173,13 +173,13 @@ class Version_5_0_0 extends VersionAbstract
                 ]));
         $createTable->addColumn(
             new Varchar(
-                JobInterface::FIELD_NAME_MOST_RECENT_HOST_NAME, 255, false, null,
+                JobInterface::FIELD_NAME_MOST_RECENT_HOST_NAME, 255, true, null,
                 [
                     'comment' => 'COMMENT',
                 ]));
         $createTable->addColumn(
             new Integer(
-                JobInterface::FIELD_NAME_MOST_RECENT_PROCESS_ID, false, null,
+                JobInterface::FIELD_NAME_MOST_RECENT_PROCESS_ID, true, null,
                 [
                     'comment'  => 'COMMENT',
                     'unsigned' => true,

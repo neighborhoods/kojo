@@ -12,4 +12,10 @@ class BehaviorSmokeTest extends AbstractTest
     {
         return $this;
     }
+
+    /** @test */
+    public function dataSet2(): BehaviorSmokeTest
+    {
+        return $this;
+    }
 }
