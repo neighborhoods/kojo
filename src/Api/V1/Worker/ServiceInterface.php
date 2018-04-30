@@ -5,6 +5,7 @@ namespace Neighborhoods\Kojo\Api\V1\Worker;
 
 use Neighborhoods\Kojo\Api\V1\Job\SchedulerInterface;
 use Neighborhoods\Kojo\Api\V1\LoggerInterface;
+use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\Service\Update\Hold;
 use Neighborhoods\Kojo\Service\Update\Retry;
 use Neighborhoods\Kojo\Service\Update\Complete\Success;
@@ -24,6 +25,12 @@ interface ServiceInterface
 
     public function isRequestApplied(): bool;
 
+    public function getLogger(): LoggerInterface;
+
+    public function getNewJobScheduler(): SchedulerInterface;
+
+    public function reload(): ServiceInterface;
+
     /** @injected:configuration */
     public function setServiceUpdateRetryFactory(Retry\FactoryInterface $updateRetryFactory);
 
@@ -36,9 +43,6 @@ interface ServiceInterface
     /** @injected:configuration */
     public function setServiceUpdateHoldFactory(Hold\FactoryInterface $updateHoldFactory);
 
-    public function getLogger(): LoggerInterface;
-
-    public function getNewJobScheduler(): SchedulerInterface;
-
-    public function reload(): ServiceInterface;
+    /** @injected:runtime */
+    public function setJob(JobInterface $job);
 }
