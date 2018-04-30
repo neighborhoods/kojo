@@ -21,7 +21,7 @@ class Redis extends BrokerAbstract
                 0
             );
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 
@@ -43,7 +43,7 @@ class Redis extends BrokerAbstract
             $publishChannelLength = $this->getPublishChannelLength();
             $subscriptionChannelLength = $this->getSubscriptionChannelLength();
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 
@@ -58,7 +58,7 @@ class Redis extends BrokerAbstract
                 $message = $this->_getRedisClient()->rPop($this->_getPublishChannelName());
             }
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 
@@ -70,7 +70,7 @@ class Redis extends BrokerAbstract
         try{
             $publishChannelLength = $this->_getRedisClient()->lLen($this->_getPublishChannelName());
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 
@@ -82,7 +82,7 @@ class Redis extends BrokerAbstract
         try{
             $subscriptionChannelLength = $this->_getRedisClient()->lLen($this->_getSubscriptionChannelName());
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 
@@ -94,7 +94,7 @@ class Redis extends BrokerAbstract
         try{
             $this->_getRedisClient()->lPush($this->_getPublishChannelName(), $message);
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 

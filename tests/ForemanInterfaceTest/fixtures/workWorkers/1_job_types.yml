@@ -9,10 +9,10 @@ kojo_job_type:
     default_importance: 10
     cron_expression:
     schedule_limit: 0
+    schedule_limit_allowance: 1
     is_enabled: 1
     auto_complete_success: 1
     auto_delete_interval_duration: 'PT0S'
-    process_type_code: 'job'
   -
     kojo_job_type_id: 2
     type_code: "type_code_2"
@@ -23,7 +23,7 @@ kojo_job_type:
     default_importance: 10
     cron_expression: "* * * * *"
     schedule_limit: 3
+    schedule_limit_allowance: 1
     is_enabled: 1
     auto_complete_success: 1
     auto_delete_interval_duration: 'PT0S'
-    process_type_code: 'job.required'

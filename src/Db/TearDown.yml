@@ -3,7 +3,6 @@ services:
     public: false
     class: Neighborhoods\Kojo\Db\TearDown
     calls:
-      - [addVersion, ["@db.tear_down.schema.version_6_0_0"]]
       - [addVersion, ["@db.tear_down.schema.version.5_0_0"]]
       - [addVersion, ["@db.tear_down.schema.version.4_0_0"]]
       - [addVersion, ["@db.tear_down.schema.version.3_0_0"]]

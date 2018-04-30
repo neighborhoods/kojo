@@ -18,6 +18,7 @@ abstract class ProcessAbstract implements ProcessInterface
     use Process\Signal\AwareTrait;
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
+    protected $_exitCode = 0;
 
     protected function _initialize(): ProcessAbstract
     {
@@ -78,24 +79,32 @@ abstract class ProcessAbstract implements ProcessInterface
     public function handleSignal(InformationInterface $information): HandlerInterface
     {
         $this->_getProcessSignal()->block();
-        $this->exit(0);
+        $this->exit();
 
         return $this;
     }
 
-    public function exit(int $exitCode): void
+    protected function _setOrReplaceExitCode(int $exitCode): ProcessInterface
+    {
+        $this->_exitCode = $exitCode;
+
+        return $this;
+    }
+
+    public function exit(): void
     {
         $this->_getProcessSignal()->block();
         $this->unregisterShutdownMethod();
         $this->_getProcessPool()->terminateChildProcesses();
-        exit($exitCode);
+        exit($this->_exitCode);
     }
 
     public function shutdown(): ProcessInterface
     {
         if ($this->_read(self::PROP_IS_SHUTDOWN_METHOD_ACTIVE)) {
             $this->_getLogger()->critical("Shutdown method invoked.");
-            $this->exit(255);
+            $this->_setOrReplaceExitCode(255);
+            $this->exit();
         }
 
         return $this;

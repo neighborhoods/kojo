@@ -10,4 +10,8 @@ interface LocatorInterface
     public function setJob(JobInterface $job);
 
     public function getCallable(): callable;
+
+    public function getClass();
+
+    public function getClassName(): string;
 }

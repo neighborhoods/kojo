@@ -9,7 +9,6 @@ use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Worker\Locator;
 use Neighborhoods\Kojo\Process\Pool\Logger;
 use Neighborhoods\Pylon\Data\Property\Defensive;
-use Neighborhoods\Kojo\Worker;
 
 class Foreman implements ForemanInterface
 {
@@ -17,7 +16,7 @@ class Foreman implements ForemanInterface
     use Message\Broker\AwareTrait;
     use Type\Repository\AwareTrait;
     use State\Service\AwareTrait;
-    use Worker\Job\Service\AwareTrait;
+    use Api\V1\Worker\Service\AwareTrait;
     use Semaphore\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
     use Selector\AwareTrait;
@@ -42,14 +41,15 @@ class Foreman implements ForemanInterface
     {
         $this->setJob($this->_getSelector()->getWorkableJob());
         $this->_getLocator()->setJob($this->_getJob());
-        if (is_callable($this->_getLocator()->getCallable())) {
+        try{
+            $this->_injectWorkerService();
             $this->_updateJobAsWorking();
-            $this->_instantiateWorker();
+            $this->_runWorker();
             $this->_updateJobAfterWork();
-        }else {
+        }catch(Locator\Exception | \Error $throwable){
             $this->_panicJob();
             $jobId = $this->_getJob()->getId();
-            throw new \RuntimeException("Panicking job[$jobId].");
+            throw new \RuntimeException("Panicking job with ID[$jobId].", 0, $throwable);
         }
         $this->_getSemaphore()->releaseLock($this->_getNewJobOwnerResource($this->_getJob()));
 
@@ -60,13 +60,23 @@ class Foreman implements ForemanInterface
         return $this;
     }
 
-    protected function _instantiateWorker(): ForemanInterface
+    protected function _injectWorkerService(): ForemanInterface
+    {
+        $worker = $this->_getLocator()->getClass();
+        if (method_exists($worker, 'setApiV1WorkerService')) {
+            $worker->setApiV1WorkerService($this->_getApiV1WorkerService());
+        }
+
+        return $this;
+    }
+
+    protected function _runWorker(): ForemanInterface
     {
         try{
             call_user_func($this->_getLocator()->getCallable());
-        }catch(\Exception $exception){
+        }catch(\Exception $throwable){
             $this->_crashJob();
-            throw $exception;
+            throw $throwable;
         }
 
         return $this;
@@ -97,7 +107,7 @@ class Foreman implements ForemanInterface
             $stateService = $this->_getStateServiceClone();
             $this->_getJob()->load();
             $stateService->setJob($this->_getJob());
-            if (!$this->_getWorkerJobService()->isRequestApplied() || !$stateService->isValidTransition()) {
+            if (!$this->_getApiV1WorkerService()->isRequestApplied() || !$stateService->isValidTransition()) {
                 $this->_crashJob();
                 $jobId = $this->_getJob()->getId();
                 throw new \LogicException("Worker related to job with ID[$jobId] did not request a next state.");

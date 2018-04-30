@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Service\Create;
 
-use Neighborhoods\Kojo\Api\V1\Service\Create\FactoryInterface;
 use Neighborhoods\Kojo\Service\CreateInterface;
 use Neighborhoods\Kojo\State\Service;
 use Neighborhoods\Kojo\Service\FactoryAbstract;

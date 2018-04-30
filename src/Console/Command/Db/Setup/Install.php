@@ -11,10 +11,11 @@ class Install extends CommandAbstract
 {
     use Bootstrap\AwareTrait;
     use Setup\AwareTrait;
+    public const COMMAND_NAME = 'db:setup:install';
 
     protected function _configure(): CommandAbstract
     {
-        $this->setName('db:setup:install');
+        $this->setName(self::COMMAND_NAME);
         $this->setDescription('Installs Kōjō to a persistent storage engine.');
         $this->setHelp($this->_getHelp());
 
@@ -25,7 +26,7 @@ class Install extends CommandAbstract
     {
         $this->_getBootstrap()->instantiate();
         $this->_getDbSetup()->install();
-        $this->_getOutput()->writeln('Kōjō has been successfully installed.');
+        $this->_getOutput()->writeln('Kōjō has been successfully installed!');
 
         return $this;
     }

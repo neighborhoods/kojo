@@ -70,6 +70,13 @@ class Create extends Type\ServiceAbstract implements CreateInterface
         return $this;
     }
 
+    public function setScheduleLimitAllowance(int $scheduleLimitAllowance): CreateInterface
+    {
+        $this->_getJobType()->setScheduleLimitAllowance($scheduleLimitAllowance);
+
+        return $this;
+    }
+
     public function setIsEnabled(bool $isEnabled): CreateInterface
     {
         $this->_getJobType()->setIsEnabled($isEnabled);

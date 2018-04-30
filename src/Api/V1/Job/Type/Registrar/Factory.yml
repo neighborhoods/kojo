@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.api.v1.job.type.registrar.factory:
+    class: Neighborhoods\Kojo\Api\V1\Job\Type\Registrar\Factory
+    public: false
+    shared: true
+    calls:
+      - [setApiV1JobTypeRegistrar, ['@api.v1.job.type.registrar']]
+  api.v1.job.type.registrar.factory:
+    alias: neighborhoods.kojo.api.v1.job.type.registrar.factory
+    public: true

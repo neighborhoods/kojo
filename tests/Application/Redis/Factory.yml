@@ -1,0 +1,4 @@
+services:
+  redis.factory:
+    public: true
+    alias: neighborhoods.kojo.redis.factory

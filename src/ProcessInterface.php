@@ -65,7 +65,7 @@ interface ProcessInterface extends HandlerInterface
 
     public function setParentProcessTerminationSignalNumber(int $parentProcessTerminationSignalNumber);
 
-    public function exit(int $exitCode): void;
+    public function exit(): void;
 
     public function shutdown(): ProcessInterface;
 

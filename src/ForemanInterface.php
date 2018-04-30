@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo;
 
 use Neighborhoods\Kojo\Service\Update;
-use Neighborhoods\Kojo\Worker;
+use Neighborhoods\Kojo\Api\V1\Worker\ServiceInterface;
 
 interface ForemanInterface
 {
@@ -14,5 +14,5 @@ interface ForemanInterface
 
     public function setServiceUpdateCrashFactory(Update\Crash\FactoryInterface $updateCrashFactory);
 
-    public function setWorkerJobService(Worker\Job\ServiceInterface $workerJobService);
+    public function setApiV1WorkerService(ServiceInterface $workerService);
 }

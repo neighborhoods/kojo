@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.api.v1.job.type.registrar:
+    class: Neighborhoods\Kojo\Api\V1\Job\Type\Registrar
+    public: false
+    shared: false
+    calls:
+      - [setTypeServiceCreate, ['@type.service.create']]
+  api.v1.job.type.registrar:
+    alias: neighborhoods.kojo.api.v1.job.type.registrar
+    public: true

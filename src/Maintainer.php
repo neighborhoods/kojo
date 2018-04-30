@@ -92,25 +92,27 @@ class Maintainer implements MaintainerInterface
 
     protected function _updatePendingJobs(): Maintainer
     {
-        foreach ($this->_getJobCollectionScheduleLimitCheck()->getIterator() as $job) {
+        foreach ($this->_getJobCollectionScheduleLimitCheck() as $job) {
             $jobType = $this->_getTypeRepository()->getJobType($job->getTypeCode());
-            $scheduleLimit = $this->_getJobCollectionScheduleLimitByJobType($jobType);
-            $numberOfScheduledJobs = $scheduleLimit->getNumberOfCurrentlyScheduledJobs();
+            $scheduleLimitCollection = $this->_getJobCollectionScheduleLimitByJobType($jobType);
+            $numberOfScheduledJobs = $scheduleLimitCollection->getNumberOfCurrentlyScheduledJobs();
+            $scheduleLimit = $jobType->getScheduleLimit();
             try{
-                if ($numberOfScheduledJobs < $jobType->getScheduleLimit()) {
+                if ($numberOfScheduledJobs <= $scheduleLimit) {
                     $waitUpdate = $this->_getServiceUpdateWaitFactory()->create();
                     $waitUpdate->setJob($job);
                     $waitUpdate->save();
-                }else {
+                }elseif ($numberOfScheduledJobs > $scheduleLimit + $jobType->getScheduleLimitAllowance()) {
                     $failedLimitCheckUpdate = $this->_getServiceUpdateCompleteFailedScheduleLimitCheckFactory()->create();
                     $failedLimitCheckUpdate->setJob($job);
                     $failedLimitCheckUpdate->save();
+                    $scheduleLimitCollection->decrementNumberOfCurrentlyScheduledJobs();
                 }
             }catch(\Exception $exception){
                 $updatePanic = $this->_getServiceUpdatePanicFactory()->create();
                 $updatePanic->setJob($job);
                 $updatePanic->save();
-                $this->_getLogger()->alert('Panicking job[' . $job->getId() . '].');
+                $this->_getLogger()->alert('Panicking job with ID[' . $job->getId() . '].');
             }
         }
 

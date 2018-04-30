@@ -66,12 +66,10 @@ class Selector extends CollectionAbstract implements SelectorInterface
                 JobInterface::FIELD_NAME_ID,
                 JobInterface::FIELD_NAME_TYPE_CODE,
                 JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
-                JobInterface::FIELD_NAME_PROCESS_TYPE_CODE,
             ]
         );
         $select->order(
             [
-                JobInterface::FIELD_NAME_PROCESS_TYPE_CODE . ' DESC',
                 JobInterface::FIELD_NAME_PRIORITY . ' DESC',
             ]
         );

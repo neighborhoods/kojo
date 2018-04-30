@@ -21,13 +21,17 @@ class Job extends Forked implements JobInterface
 
     protected function _run(): Forked
     {
-        $this->_getSelector()->setProcess($this);
-        $this->_getBootstrap()->instantiate();
-        $this->_getMaintainer()->rescheduleCrashedJobs();
-        $this->_getScheduler()->scheduleStaticJobs();
-        $this->_getMaintainer()->updatePendingJobs();
-        $this->_getMaintainer()->deleteCompletedJobs();
-        $this->_getForeman()->workWorker();
+        try{
+            $this->_getSelector()->setProcess($this);
+            $this->_getBootstrap()->instantiate();
+            $this->_getMaintainer()->rescheduleCrashedJobs();
+            $this->_getScheduler()->scheduleStaticJobs();
+            $this->_getMaintainer()->updatePendingJobs();
+            $this->_getMaintainer()->deleteCompletedJobs();
+            $this->_getForeman()->workWorker();
+        }catch(\Throwable $throwable){
+            $this->_setOrReplaceExitCode(255);
+        }
 
         return $this;
     }

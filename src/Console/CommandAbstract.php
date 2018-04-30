@@ -19,7 +19,7 @@ abstract class CommandAbstract extends Command
         '|                              |',
         '|             工場             |',
         '|                              |',
-        '|  A distributed task manager  |',
+        '|  a distributed task manager  |',
         '+------------------------------+',
     ];
 

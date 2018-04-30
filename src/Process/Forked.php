@@ -26,7 +26,7 @@ abstract class Forked extends ProcessAbstract implements ProcessInterface
             $this->_getProcessSignal()->decrementWaitCount();
             $this->_getProcessPool()->start();
             $this->_run();
-            $this->exit(0);
+            $this->exit();
         }
 
         return $this;

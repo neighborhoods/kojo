@@ -11,4 +11,6 @@ interface ScheduleLimitInterface extends CollectionInterface
     public function setJobType(TypeInterface $job);
 
     public function getNumberOfCurrentlyScheduledJobs(): int;
+
+    public function decrementNumberOfCurrentlyScheduledJobs(): ScheduleLimitInterface;
 }

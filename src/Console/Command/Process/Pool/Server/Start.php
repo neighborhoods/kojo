@@ -11,13 +11,13 @@ class Start extends CommandAbstract
     const OPT_SERVICES_YML_DIRECTORY_PATH = 'services-yml-directory-path';
     const OPT_YSDP                        = 'ysdp';
     const OPT_RUN_SERVER                  = '--run-server';
-    const NAME                            = 'process:pool:server:start';
-    const NAME_ALIASES                    = ['gō-gō'];
+    const COMMAND_NAME                    = 'process:pool:server:start';
+    const COMMAND_NAME_ALIASES            = ['gō-gō'];
 
     protected function _configure(): CommandAbstract
     {
-        $this->setName(self::NAME);
-        $this->setAliases(self::NAME_ALIASES);
+        $this->setName(self::COMMAND_NAME);
+        $this->setAliases(self::COMMAND_NAME_ALIASES);
         $this->setDescription('Starts a new process pool server.');
         $this->setHelp($this->_getHelp());
         $this->addOption(

@@ -16,7 +16,7 @@ class Scheduler implements SchedulerInterface
     use Job\Type\Collection\Scheduler\AwareTrait;
     use Time\AwareTrait;
     use Defensive\AwareTrait;
-    use Api\V1\Service\Create\Factory\AwareTrait;
+    use Service\Create\Factory\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
 
     public function scheduleStaticJobs(): SchedulerInterface

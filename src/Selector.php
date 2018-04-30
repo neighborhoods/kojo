@@ -40,17 +40,15 @@ class Selector implements SelectorInterface
         $select->offset($this->_collectionIterations * $this->_getPageSize());
         $select->limit($this->_getPageSize());
         $jobCandidates = $this->_getSelectorJobCollection()->getModelsArray();
-        $publishedMessages = $this->_getMessageBroker()->getPublishChannelLength();
-        foreach ($this->_getSelectorJobCollection()->getIterator() as $jobCandidate) {
-            $processTypeCode = $jobCandidate->getProcessTypeCode();
-            $message = json_encode(['command' => "commandProcess.addProcess('$processTypeCode')"]);
+        $numberOfJobCandidates = count($jobCandidates);
+        while (true) {
+            $message = json_encode(['command' => "commandProcess.addProcess('job')"]);
             $this->_getMessageBroker()->publishMessage($message);
-            ++$publishedMessages;
-            if ($publishedMessages >= count($jobCandidates)) {
+            $publishedMessages = $this->_getMessageBroker()->getPublishChannelLength();
+            if ($publishedMessages >= $numberOfJobCandidates) {
                 break;
             }
         }
-        $select->where->and->equalTo(JobInterface::FIELD_NAME_PROCESS_TYPE_CODE, $this->_getProcess()->getTypeCode());
 
         while (!empty($jobCandidates)) {
             foreach ($this->_getSelectorJobCollection()->getIterator() as $jobCandidate) {

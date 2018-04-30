@@ -18,7 +18,14 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
 
     public function getNumberOfCurrentlyScheduledJobs(): int
     {
-        return (int)$this->_getRecords()[self::ALIAS_NUMBER_OF_SCHEDULED_JOBS];
+        return $this->_getRecords()[self::ALIAS_NUMBER_OF_SCHEDULED_JOBS];
+    }
+
+    public function decrementNumberOfCurrentlyScheduledJobs(): ScheduleLimitInterface
+    {
+        --$this->_getRecords()[self::ALIAS_NUMBER_OF_SCHEDULED_JOBS];
+
+        return $this;
     }
 
     protected function &_getRecords(): array
@@ -38,6 +45,8 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
             }else {
                 $this->_create(self::PROP_RECORDS, $records);
             }
+            $numberOfScheduledJobs = (int)$this->_read(self::PROP_RECORDS)[self::ALIAS_NUMBER_OF_SCHEDULED_JOBS];
+            $this->_read(self::PROP_RECORDS)[self::ALIAS_NUMBER_OF_SCHEDULED_JOBS] = $numberOfScheduledJobs;
         }
 
         return $this->_read(self::PROP_RECORDS);

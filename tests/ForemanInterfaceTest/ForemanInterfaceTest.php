@@ -34,9 +34,4 @@ class ForemanInterfaceTest extends AbstractTest
     {
         return $this->_getContainerBuilderFacade()->getContainerBuilder()->get('process.job');
     }
-
-    protected function _getRequiredJobProcess(): JobInterface
-    {
-        return $this->_getContainerBuilderFacade()->getContainerBuilder()->get('process.job.required');
-    }
 }

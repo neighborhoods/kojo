@@ -173,9 +173,16 @@ class Version_5_0_0 extends VersionAbstract
                 ]));
         $createTable->addColumn(
             new Varchar(
-                JobInterface::FIELD_NAME_PROCESS_TYPE_CODE, 255, false, null,
+                JobInterface::FIELD_NAME_MOST_RECENT_HOST_NAME, 255, false, null,
                 [
-                    'comment' => 'The process type code used to run this job.',
+                    'comment' => 'COMMENT',
+                ]));
+        $createTable->addColumn(
+            new Integer(
+                JobInterface::FIELD_NAME_MOST_RECENT_PROCESS_ID, false, null,
+                [
+                    'comment'  => 'COMMENT',
+                    'unsigned' => true,
                 ]));
         $createTable->addConstraint(new PrimaryKey(JobInterface::FIELD_NAME_ID));
         $createTable->addConstraint(
@@ -184,7 +191,6 @@ class Version_5_0_0 extends VersionAbstract
                     JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
                     JobInterface::FIELD_NAME_ASSIGNED_STATE,
                     JobInterface::FIELD_NAME_WORK_AT_DATE_TIME,
-                    JobInterface::FIELD_NAME_PROCESS_TYPE_CODE,
                     JobInterface::FIELD_NAME_PRIORITY,
                     JobInterface::FIELD_NAME_TYPE_CODE,
                     JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,

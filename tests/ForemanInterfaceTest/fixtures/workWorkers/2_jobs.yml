@@ -21,7 +21,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job.required'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -44,7 +43,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -67,7 +65,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -90,7 +87,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -113,7 +109,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -136,7 +131,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -159,7 +153,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -182,7 +175,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -205,7 +197,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -228,7 +219,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -251,7 +241,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -274,7 +263,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -297,7 +285,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -320,7 +307,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -343,7 +329,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -366,7 +351,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -389,7 +373,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -412,7 +395,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -435,7 +417,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -458,7 +439,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -481,7 +461,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -504,7 +483,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -527,7 +505,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -550,7 +527,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -573,7 +549,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -596,7 +571,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -619,7 +593,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -642,7 +615,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -665,7 +637,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -688,7 +659,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -711,7 +681,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -734,7 +703,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -757,7 +725,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -780,7 +747,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -803,7 +769,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -826,7 +791,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -849,7 +813,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -872,7 +835,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -895,7 +857,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -918,7 +879,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -941,7 +901,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -964,7 +923,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -987,7 +945,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1010,7 +967,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1033,7 +989,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1056,7 +1011,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1079,7 +1033,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1102,7 +1055,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1125,7 +1077,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1148,7 +1099,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1171,7 +1121,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1194,7 +1143,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1217,7 +1165,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1240,7 +1187,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1263,7 +1209,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1286,7 +1231,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1309,7 +1253,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1332,7 +1275,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1355,7 +1297,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1378,7 +1319,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1401,7 +1341,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1424,7 +1363,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1447,7 +1385,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1470,7 +1407,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1493,7 +1429,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1516,7 +1451,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1539,7 +1473,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1562,7 +1495,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1585,7 +1517,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1608,7 +1539,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1631,7 +1561,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1654,7 +1583,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1677,7 +1605,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1700,7 +1627,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1723,7 +1649,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1746,7 +1671,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1769,7 +1693,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1792,7 +1715,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1815,7 +1737,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1838,7 +1759,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1861,7 +1781,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1884,7 +1803,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1907,7 +1825,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1930,7 +1847,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1953,7 +1869,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1976,7 +1891,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -1999,7 +1913,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2022,7 +1935,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2045,7 +1957,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2068,7 +1979,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2091,7 +2001,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2114,7 +2023,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2137,7 +2045,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2160,7 +2067,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2183,7 +2089,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2206,7 +2111,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2229,7 +2133,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2252,7 +2155,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2275,7 +2177,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2298,7 +2199,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2321,7 +2221,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2344,7 +2243,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2367,7 +2265,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2390,7 +2287,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2413,7 +2309,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2436,7 +2331,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2459,7 +2353,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2482,7 +2375,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2505,7 +2397,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2528,7 +2419,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2551,7 +2441,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2574,7 +2463,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2597,7 +2485,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2620,7 +2507,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2643,7 +2529,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2666,7 +2551,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2689,7 +2573,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2712,7 +2595,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2735,7 +2617,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2758,7 +2639,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2781,7 +2661,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2804,7 +2683,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2827,7 +2705,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2850,7 +2727,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2873,7 +2749,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2896,7 +2771,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2919,7 +2793,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2942,7 +2815,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2965,7 +2837,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -2988,7 +2859,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3011,7 +2881,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3034,7 +2903,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3057,7 +2925,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3080,7 +2947,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3103,7 +2969,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3126,7 +2991,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3149,7 +3013,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3172,7 +3035,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3195,7 +3057,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3218,7 +3079,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3241,7 +3101,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3264,7 +3123,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3287,7 +3145,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3310,7 +3167,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3333,7 +3189,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3356,7 +3211,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3379,7 +3233,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3402,7 +3255,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3425,7 +3277,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3448,7 +3299,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3471,7 +3321,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3494,7 +3343,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3517,7 +3365,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3540,7 +3387,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3563,7 +3409,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3586,7 +3431,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3609,7 +3453,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3632,7 +3475,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3655,7 +3497,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3678,7 +3519,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3701,7 +3541,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3724,7 +3563,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3747,7 +3585,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3770,7 +3607,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3793,7 +3629,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3816,7 +3651,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3839,7 +3673,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3862,7 +3695,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3885,7 +3717,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3908,7 +3739,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3931,7 +3761,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3954,7 +3783,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -3977,7 +3805,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4000,7 +3827,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4023,7 +3849,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4046,7 +3871,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4069,7 +3893,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4092,7 +3915,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4115,7 +3937,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4138,7 +3959,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4161,7 +3981,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4184,7 +4003,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4207,7 +4025,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4230,7 +4047,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4253,7 +4069,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4276,7 +4091,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4299,7 +4113,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4322,7 +4135,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4345,7 +4157,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4368,7 +4179,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4391,7 +4201,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4414,7 +4223,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4437,7 +4245,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4460,7 +4267,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4483,7 +4289,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4506,7 +4311,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4529,7 +4333,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_1"
@@ -4552,7 +4355,6 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job'
   -
     kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
     type_code: "type_code_2"
@@ -4575,4 +4377,3 @@ kojo_job:
     times_crashed: 0
     times_panicked: 0
     created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
-    process_type_code: 'job.required'

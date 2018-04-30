@@ -79,6 +79,13 @@ class Version_4_0_0 extends VersionAbstract
                     'unsigned' => true,
                 ]));
         $createTable->addColumn(
+            new Integer(
+                Type::FIELD_NAME_SCHEDULE_LIMIT_ALLOWANCE, true, null,
+                [
+                    'comment'  => 'COMMENT',
+                    'unsigned' => true,
+                ]));
+        $createTable->addColumn(
             new Boolean(
                 Type::FIELD_NAME_IS_ENABLED, false, null,
                 [
@@ -97,12 +104,6 @@ class Version_4_0_0 extends VersionAbstract
                     'comment' => 'A ISO 8601 interval duration that describes duration of time past a Job\'s'
                         . ' completed_at_date_time that a Job record of this Job Type should be deleted from storage.',
                 ]));
-        $createTable->addColumn(
-            new Varchar(
-                Type::FIELD_NAME_PROCESS_TYPE_CODE, 255, false, null,
-                [
-                    'comment' => 'The process type code used to run this job type.',
-                ]));
         $createTable->addConstraint(new PrimaryKey(Type::FIELD_NAME_ID, Type::FIELD_NAME_ID));
         $createTable->addConstraint(new UniqueKey(Type::FIELD_NAME_TYPE_CODE, Type::FIELD_NAME_TYPE_CODE));
         $createTable->addConstraint(
@@ -113,6 +114,7 @@ class Version_4_0_0 extends VersionAbstract
                     Type::FIELD_NAME_TYPE_CODE,
                     Type::FIELD_NAME_DEFAULT_IMPORTANCE,
                     Type::FIELD_NAME_SCHEDULE_LIMIT,
+                    Type::FIELD_NAME_SCHEDULE_LIMIT_ALLOWANCE,
                 ],
                 Type::INDEX_NAME_SCHEDULER_COVERING
             )
@@ -128,6 +130,7 @@ class Version_4_0_0 extends VersionAbstract
                     Type::FIELD_NAME_CAN_WORK_IN_PARALLEL,
                     Type::FIELD_NAME_DEFAULT_IMPORTANCE,
                     Type::FIELD_NAME_SCHEDULE_LIMIT,
+                    Type::FIELD_NAME_SCHEDULE_LIMIT_ALLOWANCE,
                     Type::FIELD_NAME_AUTO_COMPLETE_SUCCESS,
                     Type::FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION,
                 ],

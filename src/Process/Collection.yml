@@ -5,7 +5,6 @@ services:
     calls:
       - [setIterator, ['@process.collection.iterator']]
       - [addProcessPrototype, ['@process.listener.command']]
-      - [addProcessPrototype, ['@process.job.required']]
       - [addProcessPrototype, ['@process.job']]
   process.collection:
     alias: neighborhoods.kojo.process.collection

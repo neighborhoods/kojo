@@ -14,7 +14,7 @@ services:
       - [setServiceUpdateCrashFactory, ['@service.update.crash.factory']]
       - [setServiceUpdateCompleteSuccessFactory, ['@service.update.complete.success.factory']]
       - [setLogger, ['@process.pool.logger']]
-      - [setWorkerJobService, ['@worker.job.service']]
+      - [setApiV1WorkerService, ['@api.v1.worker.service']]
       - [setStateService, ['@state.service']]
       - [setMessageBroker, ['@message.broker.redis']]
   foreman:
