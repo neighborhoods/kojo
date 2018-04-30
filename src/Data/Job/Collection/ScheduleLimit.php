@@ -65,7 +65,9 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
             ->nest()
             ->equalTo(JobInterface::FIELD_NAME_ASSIGNED_STATE, State\Service::STATE_WORKING)
             ->or
-            ->equalTo(JobInterface::FIELD_NAME_NEXT_STATE_REQUEST, State\Service::STATE_WORKING);
+            ->equalTo(JobInterface::FIELD_NAME_NEXT_STATE_REQUEST, State\Service::STATE_WORKING)
+            ->or
+            ->equalTo(JobInterface::FIELD_NAME_NEXT_STATE_REQUEST, State\Service::STATE_SCHEDULE_LIMIT_CHECK);
 
         return $this;
     }
