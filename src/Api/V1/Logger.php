@@ -15,13 +15,22 @@ class Logger implements LoggerInterface
         $this->_getLogger()->emergency($message, $context);
     }
 
-    /** Action must be taken immediately. */
+    /**
+     * Action must be taken immediately.
+     *
+     * Example: Entire website down, database unavailable, etc. This should
+     * trigger the SMS alerts and wake you up.
+     */
     public function alert($message, array $context = array())
     {
         $this->_getLogger()->alert($message, $context);
     }
 
-    /** Critical conditions. */
+    /**
+     * Critical conditions.
+     *
+     * Example: Application component unavailable, unexpected exception.
+     */
     public function critical($message, array $context = array())
     {
         $this->_getLogger()->critical($message, $context);
@@ -33,7 +42,12 @@ class Logger implements LoggerInterface
         $this->_getLogger()->error($message, $context);
     }
 
-    /** Exceptional occurrences that are not errors. */
+    /**
+     * Exceptional occurrences that are not errors.
+     *
+     * Example: Use of deprecated APIs, poor use of an API, undesirable things
+     * that are not necessarily wrong.
+     */
     public function warning($message, array $context = array())
     {
         $this->_getLogger()->warning($message, $context);
@@ -45,7 +59,11 @@ class Logger implements LoggerInterface
         $this->_getLogger()->notice($message, $context);
     }
 
-    /** Interesting events. */
+    /**
+     * Interesting events.
+     *
+     * Example: User logs in, SQL logs.
+     */
     public function info($message, array $context = array())
     {
         $this->_getLogger()->info($message, $context);
