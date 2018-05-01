@@ -1,9 +1,10 @@
 services:
   neighborhoods.kojo.process.job:
-    shared: false
     class: Neighborhoods\Kojo\Process\Job
+    public: true
+    shared: false
+    parent: process_abstract
     calls:
-      - [setLogger, ['@process.pool.logger']]
       - [setForeman, ['@foreman']]
       - [setMaintainer, ['@maintainer']]
       - [setScheduler, ['@scheduler']]
@@ -13,9 +14,7 @@ services:
       - [setProcessStrategy, ['@process.strategy.process_control']]
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
-      - [setProcessRegistry, ['@process.registry']]
       - [setProcessPoolFactory, ['@process.pool.factory-job']]
-      - [setProcessSignal, ['@process.signal']]
       - [setTitlePrefix, ['%process.title.prefix%']]
   process.job:
     alias: neighborhoods.kojo.process.job

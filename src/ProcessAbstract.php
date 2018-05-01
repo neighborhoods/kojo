@@ -8,6 +8,7 @@ use Neighborhoods\Kojo\Process\Pool\Logger;
 use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Apm;
 
 abstract class ProcessAbstract implements ProcessInterface
 {
@@ -18,10 +19,13 @@ abstract class ProcessAbstract implements ProcessInterface
     use Process\Signal\AwareTrait;
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
+    use Apm\NewRelic\AwareTrait;
     protected $_exitCode = 0;
 
     protected function _initialize(): ProcessAbstract
     {
+        $this->_getApmNewRelic()->ignoreTransaction();
+        $this->_getApmNewRelic()->endTransaction();
         $this->_getProcessSignal()->incrementWaitCount();
         $this->_setParentProcessId(posix_getppid());
         $this->_setProcessId(posix_getpid());

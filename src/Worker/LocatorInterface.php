@@ -14,4 +14,6 @@ interface LocatorInterface
     public function getClass();
 
     public function getClassName(): string;
+
+    public function getMethodName(): string;
 }

@@ -1,17 +1,16 @@
 services:
   neighborhoods.kojo.process.pool.server:
-    public: true
     class: Neighborhoods\Kojo\Process\Pool\Server
+    public: true
+    shared: false
+    parent: process_abstract
     calls:
-      - [setLogger, ['@process.pool.logger']]
       - [setSemaphore, ['@semaphore']]
       - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-server']]
       - [setProcessPoolFactory, ['@process.pool.factory-server']]
       - [setTypeCode, ['server']]
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
-      - [setProcessRegistry, ['@process.registry']]
-      - [setProcessSignal, ['@process.signal']]
       - [setTitlePrefix, ['%process.title.prefix%']]
   process.pool.server:
     public: true

@@ -9,6 +9,7 @@ use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Worker\Locator;
 use Neighborhoods\Kojo\Process\Pool\Logger;
 use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Apm;
 
 class Foreman implements ForemanInterface
 {
@@ -27,6 +28,7 @@ class Foreman implements ForemanInterface
     use Update\Complete\Success\Factory\AwareTrait;
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
+    use Apm\NewRelic\AwareTrait;
 
     public function workWorker(): ForemanInterface
     {
@@ -73,7 +75,12 @@ class Foreman implements ForemanInterface
     protected function _runWorker(): ForemanInterface
     {
         try{
+            $this->_getApmNewRelic()->startTransaction();
+            $className = $this->_getLocator()->getClassName();
+            $methodName = $this->_getLocator()->getMethodName();
+            $this->_getApmNewRelic()->nameTransaction($className . '::' . $methodName);
             call_user_func($this->_getLocator()->getCallable());
+            $this->_getApmNewRelic()->endTransaction();
         }catch(\Exception $throwable){
             $this->_crashJob();
             throw $throwable;

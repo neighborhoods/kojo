@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.apm.new_relic:
+    class: Neighborhoods\Kojo\Apm\NewRelic
+    public: false
+    shared: true
+  apm.new_relic:
+    alias: neighborhoods.kojo.apm.new_relic
+    public: false

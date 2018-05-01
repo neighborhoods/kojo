@@ -11,17 +11,24 @@ class Locator implements LocatorInterface
 {
     use Job\AwareTrait;
     use Defensive\AwareTrait;
+    protected const PROP_METHOD_NAME = 'method_name';
+    protected const PROP_CLASS_NAME  = 'class_name';
     protected $_callable = [];
-    protected const PROP_CLASS_NAME = 'class_name';
+
+    public function getClass()
+    {
+        return $this->getCallable()[0];
+    }
 
     public function getCallable(): callable
     {
         if (empty($this->_callable)) {
             try{
                 $class = $this->_getJob()->getWorkerUri();
-                $this->_create(self::PROP_CLASS_NAME, $class);
-                $object = new $class;
                 $method = $this->_getJob()->getWorkerMethod();
+                $this->_create(self::PROP_CLASS_NAME, $class);
+                $this->_create(self::PROP_METHOD_NAME, $method);
+                $object = new $class;
                 $callable = [$object, $method];
                 if (is_callable($callable)) {
                     $this->_callable = $callable;
@@ -36,9 +43,9 @@ class Locator implements LocatorInterface
         return $this->_callable;
     }
 
-    public function getClass()
+    public function getMethodName(): string
     {
-        return $this->getCallable()[0];
+        return $this->_read(self::PROP_METHOD_NAME);
     }
 
     public function getClassName(): string
