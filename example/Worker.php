@@ -13,6 +13,11 @@ class Worker
 
     public function work()
     {
+//        $newJobScheduler = $this->_getApiV1WorkerService()->getNewJobScheduler();
+//        $newJobScheduler->setJobTypeCode('type_code_1')
+//                        ->setWorkAtDateTime(new \DateTime('now'))
+//                        ->save()
+//                        ->getJobId();
         $this->_getApiV1WorkerService()->requestCompleteSuccess()->applyRequest();
 
         return $this;

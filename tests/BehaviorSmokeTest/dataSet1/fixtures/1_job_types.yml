@@ -11,7 +11,7 @@ kojo_job_type:
     schedule_limit: 0
     schedule_limit_allowance: 1
     is_enabled: 1
-    auto_complete_success: 1
+    auto_complete_success: 0
     auto_delete_interval_duration: 'PT0S'
   -
     kojo_job_type_id: 2
@@ -25,5 +25,5 @@ kojo_job_type:
     schedule_limit: 3
     schedule_limit_allowance: 1
     is_enabled: 1
-    auto_complete_success: 1
+    auto_complete_success: 0
     auto_delete_interval_duration: 'PT0S'

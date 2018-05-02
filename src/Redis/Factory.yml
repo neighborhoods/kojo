@@ -5,8 +5,8 @@ services:
     shared: true
     calls:
       - [addOption, [!php/const \Redis::OPT_READ_TIMEOUT, '-1']]
-      - [setHost, ['%env(REDIS_HOST)%']]
-      - [setPort, ['%env(REDIS_PORT)%']]
+      - [setHost, ['%neighborhoods.kojo.environment.parameters.redis_host%']]
+      - [setPort, ['%neighborhoods.kojo.environment.parameters.redis_port%']]
   redis.factory:
     alias: neighborhoods.kojo.redis.factory
     public: false

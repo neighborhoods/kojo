@@ -36,4 +36,6 @@ interface PoolInterface extends HandlerInterface
     public function setProcess(ProcessInterface $process);
 
     public function getProcess(): ProcessInterface;
+
+    public function canEnvironmentSustainAdditionProcesses(): bool;
 }

@@ -1,7 +1,8 @@
 parameters:
-  env(REDIS_PORT): 6379
-  env(REDIS_HOST): 'redis'
-  env(DATABASE_USERNAME): ''
-  env(DATABASE_PASSWORD): ''
-  env(DATABASE_ADAPTER): ''
-  env(DATABASE_HOST): ''
+  neighborhoods.kojo.environment.parameters.redis_port:
+  neighborhoods.kojo.environment.parameters.redis_host:
+  neighborhoods.kojo.environment.parameters.database_user_name:
+  neighborhoods.kojo.environment.parameters.database_password:
+  neighborhoods.kojo.environment.parameters.database_adapter:
+  neighborhoods.kojo.environment.parameters.database_host:
+  neighborhoods.kojo.environment.parameters.database_name:

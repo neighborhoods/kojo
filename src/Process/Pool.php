@@ -79,16 +79,21 @@ class Pool extends PoolAbstract implements PoolInterface
 
     public function addChildProcess(ProcessInterface $childProcess): PoolInterface
     {
-        $this->_getProcessSignal()->incrementWaitCount();
-        if ($this->isFull()) {
-            throw new \LogicException('Process pool is full.');
-        }else {
-            $childProcess->start();
-            $this->_childProcesses[$childProcess->getProcessId()] = $childProcess;
-            $message = "Forked process[{$childProcess->getProcessId()}][{$childProcess->getTypeCode()}].";
-            $this->_getLogger()->info($message);
+        try{
+            $this->_getProcessSignal()->incrementWaitCount();
+            if ($this->isFull()) {
+                throw new \LogicException('Process pool is full.');
+            }else {
+                $childProcess->start();
+                $this->_childProcesses[$childProcess->getProcessId()] = $childProcess;
+                $message = "Forked process[{$childProcess->getProcessId()}][{$childProcess->getTypeCode()}].";
+                $this->_getLogger()->info($message);
+            }
+            $this->_getProcessSignal()->decrementWaitCount();
+        }catch(\Throwable $throwable){
+            $this->_getProcessSignal()->decrementWaitCount();
+            throw $throwable;
         }
-        $this->_getProcessSignal()->decrementWaitCount();
 
         return $this;
     }

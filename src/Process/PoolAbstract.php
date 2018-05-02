@@ -43,19 +43,17 @@ abstract class PoolAbstract implements PoolInterface
 
     public function isEmpty(): bool
     {
-        return (bool)($this->getCountOfChildProcesses() === 0);
+        return ($this->getCountOfChildProcesses() === 0);
     }
 
     public function isFull(): bool
     {
-        if ((float)current(sys_getloadavg()) > $this->_getProcessPoolStrategy()->getMaximumLoadAverage()) {
-            $isFull = true;
-        }else {
-            $maxChildProcesses = $this->_getProcessPoolStrategy()->getMaxChildProcesses();
-            $isFull = (bool)($this->getCountOfChildProcesses() >= $maxChildProcesses);
-        }
+        return ($this->getCountOfChildProcesses() >= $this->_getProcessPoolStrategy()->getMaxChildProcesses());
+    }
 
-        return $isFull;
+    public function canEnvironmentSustainAdditionProcesses(): bool
+    {
+        return ((float)current(sys_getloadavg()) <= $this->_getProcessPoolStrategy()->getMaximumLoadAverage());
     }
 
     protected function _initialize(): PoolInterface
