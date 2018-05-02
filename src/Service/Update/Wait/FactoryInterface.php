@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Wait;
+namespace Neighborhoods\Kojo\Service\Update\Wait;
 
-use NHDS\Jobs\Service\Update\WaitInterface;
-use NHDS\Jobs\State\ServiceInterface;
-use NHDS\Jobs\Service;
+use Neighborhoods\Kojo\Service\Update\WaitInterface;
+use Neighborhoods\Kojo\State\ServiceInterface;
+use Neighborhoods\Kojo\Service;
 
 interface FactoryInterface extends Service\FactoryInterface
 {

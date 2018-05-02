@@ -1,9 +1,0 @@
-services:
-  nhds.jobs.state.service:
-    class: NHDS\Jobs\State\Service
-    shared: false
-    calls:
-      - [setTime, ['@nhds.toolkit.time']]
-      - [setTypeRepository, ['@type.repository']]
-  state.service:
-    alias: nhds.jobs.state.service

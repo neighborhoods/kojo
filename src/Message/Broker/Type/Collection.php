@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Message\Broker\Type;
+namespace Neighborhoods\Kojo\Message\Broker\Type;
 
-use NHDS\Jobs\Message\Broker\BrokerInterface;
-use NHDS\Jobs\Message\Broker\Type\Collection\CollectionInterface;
+use Neighborhoods\Kojo\Message\Broker\BrokerInterface;
+use Neighborhoods\Kojo\Message\Broker\Type\Collection\CollectionInterface;
 
 class Collection implements CollectionInterface
 {
@@ -23,7 +23,7 @@ class Collection implements CollectionInterface
     public function getBrokerTypeClone(string $typeCode): BrokerInterface
     {
         if (!isset($this->_types[$typeCode])) {
-            throw new \LogicException('Process type is not set.');
+            throw new \LogicException('Broker type is not set.');
         }
 
         return clone $this->_types[$typeCode];

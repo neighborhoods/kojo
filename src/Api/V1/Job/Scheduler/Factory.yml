@@ -1,0 +1,11 @@
+services:
+  neighborhoods.kojo.api.v1.job.scheduler.factory:
+    class: Neighborhoods\Kojo\Api\V1\Job\Scheduler\Factory
+    public: false
+    shared: true
+    calls:
+      - [setServiceCreateFactory, ['@service.create.factory']]
+      - [setApiV1JobScheduler, ['@api.v1.job.scheduler']]
+  api.v1.job.scheduler.factory:
+    alias: neighborhoods.kojo.api.v1.job.scheduler.factory
+    public: false

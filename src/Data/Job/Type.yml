@@ -1,0 +1,9 @@
+services:
+  neighborhoods.kojo.data.job.type:
+    class: Neighborhoods\Kojo\Data\Job\Type
+    public: false
+    shared: false
+    parent: db.model
+  data.job.type:
+    alias: neighborhoods.kojo.data.job.type
+    public: false

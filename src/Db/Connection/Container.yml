@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.db.connection.container:
+    class: Neighborhoods\Kojo\Db\Connection\Container
+    public: true
+    shared: false
+    calls:
+      - [setDbPDOBuilder, ['@db.pdo.builder']]
+  db.connection.container:
+    alias: neighborhoods.kojo.db.connection.container
+    public: true

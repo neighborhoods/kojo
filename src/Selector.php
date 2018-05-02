@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Data\JobInterface;
-use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Exception\Runtime\Db\Model\LoadException;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Message\Broker;
-use NHDS\Jobs\Process;
+use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\Exception\Runtime\Db\Model\LoadException;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Message\Broker;
+use Neighborhoods\Kojo\Process;
 
 class Selector implements SelectorInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Broker\AwareTrait;
     use Job\AwareTrait;
     use Semaphore\AwareTrait;
@@ -40,17 +40,16 @@ class Selector implements SelectorInterface
         $select->offset($this->_collectionIterations * $this->_getPageSize());
         $select->limit($this->_getPageSize());
         $jobCandidates = $this->_getSelectorJobCollection()->getModelsArray();
+        $numberOfJobCandidates = count($jobCandidates);
         $publishedMessages = $this->_getMessageBroker()->getPublishChannelLength();
-        foreach ($this->_getSelectorJobCollection()->getIterator() as $jobCandidate) {
-            $processTypeCode = $jobCandidate->getProcessTypeCode();
-            $message = json_encode(['command' => "commandProcess.addProcess('$processTypeCode')"]);
-            $this->_getMessageBroker()->publishMessage($message);
-            ++$publishedMessages;
-            if ($publishedMessages >= count($jobCandidates)) {
+        while (true) {
+            $message = json_encode(['command' => "commandProcess.addProcess('job')"]);
+            if ($publishedMessages >= $numberOfJobCandidates) {
                 break;
             }
+            $this->_getMessageBroker()->publishMessage($message);
+            $publishedMessages = $this->_getMessageBroker()->getPublishChannelLength();
         }
-        $select->where->and->equalTo(JobInterface::FIELD_NAME_PROCESS_TYPE_CODE, $this->_getProcess()->getTypeCode());
 
         while (!empty($jobCandidates)) {
             foreach ($this->_getSelectorJobCollection()->getIterator() as $jobCandidate) {

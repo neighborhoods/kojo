@@ -1,0 +1,4 @@
+services:
+  process.job:
+    public: true
+    alias: neighborhoods.kojo.process.job

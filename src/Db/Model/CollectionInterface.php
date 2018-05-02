@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Model;
+namespace Neighborhoods\Kojo\Db\Model;
 
-use NHDS\Jobs\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\Db\Connection\Container\RepositoryInterface;
 use Zend\Db\Sql\Select;
 
 interface CollectionInterface extends \IteratorAggregate
 {
-    public function addDbConnectionContainer(ContainerInterface $container);
+    public function setDbConnectionContainerRepository(RepositoryInterface $dbConnectionContainerRepository);
 
     public function getSelect(): Select;
 

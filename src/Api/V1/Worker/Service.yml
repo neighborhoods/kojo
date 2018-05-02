@@ -1,0 +1,12 @@
+services:
+  neighborhoods.kojo.api.v1.worker.service:
+    class: Neighborhoods\Kojo\Api\V1\Worker\Service
+    shared: false
+    calls:
+      - [setServiceUpdateCompleteFailedFactory, ['@service.update.complete.failed.factory']]
+      - [setServiceUpdateCompleteSuccessFactory, ['@service.update.complete.success.factory']]
+      - [setServiceUpdateHoldFactory, ['@service.update.hold.factory']]
+      - [setServiceUpdateRetryFactory, ['@service.update.retry.factory']]
+      - [setApiV1JobSchedulerFactory, ['@api.v1.job.scheduler.factory']]
+  api.v1.worker.service:
+    alias: neighborhoods.kojo.api.v1.worker.service

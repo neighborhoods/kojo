@@ -1,25 +1,30 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Console\Command\Process\Pool\Server;
+namespace Neighborhoods\Kojo\Console\Command\Process\Pool\Server;
 
-use NHDS\Jobs\Console\CommandAbstract;
+use Neighborhoods\Kojo\Console\CommandAbstract;
 use Symfony\Component\Console\Input\InputOption;
 
 class Start extends CommandAbstract
 {
-    const OPT_SERVICES_YML_FILE_PATH = 'services-yml-file-path';
+    const OPT_SERVICES_YML_DIRECTORY_PATH = 'services-yml-directory-path';
+    const OPT_YSDP                        = 'ysdp';
+    const OPT_RUN_SERVER                  = '--run-server';
+    const COMMAND_NAME                    = 'process:pool:server:start';
+    const COMMAND_NAME_ALIASES            = ['gō-gō'];
 
     protected function _configure(): CommandAbstract
     {
-        $this->setName('process:pool:server:start');
+        $this->setName(self::COMMAND_NAME);
+        $this->setAliases(self::COMMAND_NAME_ALIASES);
         $this->setDescription('Starts a new process pool server.');
         $this->setHelp($this->_getHelp());
         $this->addOption(
-            self::OPT_SERVICES_YML_FILE_PATH,
-            'syfp',
+            self::OPT_SERVICES_YML_DIRECTORY_PATH,
+            self::OPT_YSDP,
             InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-            'Additional YML services file paths to load. These are loaded in the order provided.'
+            'Additional YML services directory paths to load. These are loaded in the order provided.'
         );
 
         return $this;
@@ -27,11 +32,12 @@ class Start extends CommandAbstract
 
     public function _execute(): CommandAbstract
     {
-        $arguments = ['ysfp:' . $this->_getInput()->getArgument(self::ARG_SERVICES_YML_FILE_PATH)];
-        foreach ($this->_getInput()->getOption(self::OPT_SERVICES_YML_FILE_PATH) as $servicesYmlFilePath) {
-            $arguments[] = 'ysfp:' . $servicesYmlFilePath;
+        $arguments = [self::OPT_RUN_SERVER];
+        $arguments[] = self::OPT_YSDP . $this->_getInput()->getArgument(self::ARG_SERVICES_YML_FILE_PATH);
+        foreach ($this->_getInput()->getOption(self::OPT_SERVICES_YML_DIRECTORY_PATH) as $servicesYmlFilePath) {
+            $arguments[] = self::OPT_YSDP . $servicesYmlFilePath;
         }
-        pcntl_exec(__DIR__ . '/../../../../../bin/server', $arguments);
+        pcntl_exec(__DIR__ . '/../../../../../../bin/kojo', $arguments);
         $this->_getOutput()->writeln('An error occurred trying to start the process pool server.');
 
         return $this;
@@ -40,10 +46,9 @@ class Start extends CommandAbstract
     protected function _getHelp()
     {
         return <<<'EOD'
-This command starts a new process pool server. 
-Currently only one server can be run at a time for a given machine.
-If a server is already running this command will return immediately.
-More than one server and named servers will be available in future releases.
+This command starts a new collection of process pool servers. 
+The number of process pool servers that are started is defined in the dependency injection YML files.
+The default number of servers started is one.
 EOD;
     }
 }

@@ -1,6 +1,0 @@
-imports:
-  - { resource: ../../config/root.yml }
-services:
-  selector:
-    public: true
-    alias: nhds.jobs.selector

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update;
+namespace Neighborhoods\Kojo\Service\Update;
 
-use NHDS\Jobs\ServiceInterface;
+use Neighborhoods\Kojo\ServiceInterface;
 
 interface PanicInterface extends ServiceInterface
 {

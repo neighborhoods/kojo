@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Type;
+namespace Neighborhoods\Kojo\Type;
 
-use NHDS\Jobs\Data\Job\TypeInterface;
+use Neighborhoods\Kojo\Data\Job\TypeInterface;
 
 interface RepositoryInterface
 {

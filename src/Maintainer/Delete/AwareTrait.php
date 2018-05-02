@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Maintainer\Delete;
+namespace Neighborhoods\Kojo\Maintainer\Delete;
 
-use NHDS\Jobs\Maintainer\DeleteInterface;
+use Neighborhoods\Kojo\Maintainer\DeleteInterface;
 
 trait AwareTrait
 {

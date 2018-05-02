@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool;
 
-use NHDS\Jobs\ProcessInterface;
+use Neighborhoods\Kojo\ProcessInterface;
 use Psr\Log;
 
 interface LoggerInterface extends Log\LoggerInterface

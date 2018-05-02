@@ -1,0 +1,9 @@
+services:
+  neighborhoods.kojo.process.pool:
+    class: Neighborhoods\Kojo\Process\Pool
+    shared: false
+    calls:
+      - [setLogger, ['@process.pool.logger']]
+      - [setProcessSignal, ['@process.signal']]
+  process.pool:
+    alias: neighborhoods.kojo.process.pool

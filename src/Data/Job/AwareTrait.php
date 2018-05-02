@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job;
+namespace Neighborhoods\Kojo\Data\Job;
 
-use NHDS\Jobs\Data\JobInterface;
+use Neighborhoods\Kojo\Data\JobInterface;
 
 trait AwareTrait
 {
@@ -22,6 +22,11 @@ trait AwareTrait
     protected function _getJobClone(): JobInterface
     {
         return clone $this->_getJob();
+    }
+
+    protected function _hasJob(): bool
+    {
+        return $this->_exists(JobInterface::class);
     }
 
     protected function _unsetJob()

@@ -1,18 +1,16 @@
-# nhds/jobs
-A Distributed Task Manager
+# ⚡ Neighborhoods Kōjō ⚡
+# 工場
+A distributed task manager.
 
-* Including `NHDS\Jobs` with your project with composer
-```bash
-$ composer require nhds/jobs
-```
+### `Kōjō` is a collection of the following components:
+* Distributed task management.
+* Distributed, cooperative, process-aware semaphores and mutex's.
+* Static cron scheduling.
+* Multi-process model.
+* Status system.
+* Distributed IPC.
 
-* Running the `NHDS\Jobs` service
+### Example usage
 ```bash
-$ vendor/bin/jobs process:pool:server:start $PWD/PATH/TO/services.yaml
-```
-
-* Running an exmaple
-```bash
-$ vendor/bin/phpunit --filter Foreman
-$ vendor/bin/jobs process:pool:server:start $PWD/example/config/root.yaml
+$ bin/kojo process:pool:server:start $PWD/example
 ```

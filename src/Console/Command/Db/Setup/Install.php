@@ -1,21 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Console\Command\Db\Setup;
+namespace Neighborhoods\Kojo\Console\Command\Db\Setup;
 
-use NHDS\Jobs\Console\CommandAbstract;
-use NHDS\Jobs\Worker\Bootstrap;
-use NHDS\Jobs\Db\Setup;
+use Neighborhoods\Kojo\Console\CommandAbstract;
+use Neighborhoods\Kojo\Worker\Bootstrap;
+use Neighborhoods\Kojo\Db\Setup;
 
 class Install extends CommandAbstract
 {
     use Bootstrap\AwareTrait;
     use Setup\AwareTrait;
+    public const COMMAND_NAME = 'db:setup:install';
 
     protected function _configure(): CommandAbstract
     {
-        $this->setName('db:setup:install');
-        $this->setDescription('Installs Jobs to a persistent storage engine.');
+        $this->setName(self::COMMAND_NAME);
+        $this->setDescription('Installs Kōjō to a persistent storage engine.');
         $this->setHelp($this->_getHelp());
 
         return $this;
@@ -25,6 +26,7 @@ class Install extends CommandAbstract
     {
         $this->_getBootstrap()->instantiate();
         $this->_getDbSetup()->install();
+        $this->_getOutput()->writeln('Kōjō has been successfully installed!');
 
         return $this;
     }
@@ -32,8 +34,8 @@ class Install extends CommandAbstract
     protected function _getHelp(): string
     {
         return <<<'EOD'
-This command installs a Jobs cluster on a persistent storage engine.
-Currently only \PDO compatible storage engines are supported.
+This command installs a Kōjō cluster on a persistent storage engine.
+Currently, only \PDO compatible storage engines are supported.
 The client's Bootstrap class will be called prior to setup, and that \PDO class will be used for setup. 
 EOD;
     }

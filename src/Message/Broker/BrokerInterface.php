@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Message\Broker;
+namespace Neighborhoods\Kojo\Message\Broker;
 
 interface BrokerInterface
 {
@@ -16,4 +16,8 @@ interface BrokerInterface
     public function getPublishChannelLength(): int;
 
     public function getSubscriptionChannelLength(): int;
+
+    public function setSubscriptionChannelName(string $channelName): BrokerInterface;
+
+    public function setPublishChannelName(string $channelName): BrokerInterface;
 }

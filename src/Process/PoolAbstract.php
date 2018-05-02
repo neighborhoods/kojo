@@ -1,18 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process;
+namespace Neighborhoods\Kojo\Process;
 
-use NHDS\Jobs\Process;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Process;
+use Neighborhoods\Kojo\Process\Signal\InformationInterface;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class PoolAbstract implements PoolInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Process\Pool\Logger\AwareTrait;
     use Process\Pool\Strategy\AwareTrait;
     use Process\AwareTrait;
-    const MAX_LOAD_AVERAGE = 10.0;
+    use Process\Signal\AwareTrait;
+
+    abstract protected function _childExitSignal(InformationInterface $information): PoolInterface;
 
     public function hasAlarm(): bool
     {
@@ -27,7 +31,11 @@ abstract class PoolAbstract implements PoolInterface
 
     public function setAlarm(int $seconds): PoolInterface
     {
-        $this->_getLogger()->debug('Setting alarm for ' . $seconds . ' seconds.');
+        if ($seconds === 0) {
+            $this->_getLogger()->info("Disabling any existing alarm.");
+        }else {
+            $this->_getLogger()->info("Setting alarm for $seconds seconds.");
+        }
         pcntl_alarm($seconds);
 
         return $this;
@@ -35,30 +43,27 @@ abstract class PoolAbstract implements PoolInterface
 
     public function isEmpty(): bool
     {
-        return (bool)($this->getCountOfChildProcesses() === 0);
+        return ($this->getCountOfChildProcesses() === 0);
     }
 
     public function isFull(): bool
     {
-        if ((float)current(sys_getloadavg()) > self::MAX_LOAD_AVERAGE) {
-            $isFull = true;
-        }else {
-            $maxChildProcesses = $this->_getProcessPoolStrategy()->getMaxChildProcesses();
-            $isFull = (bool)($this->getCountOfChildProcesses() >= $maxChildProcesses);
-        }
+        return ($this->getCountOfChildProcesses() >= $this->_getProcessPoolStrategy()->getMaxChildProcesses());
+    }
 
-        return $isFull;
+    public function canEnvironmentSustainAdditionProcesses(): bool
+    {
+        return ((float)current(sys_getloadavg()) <= $this->_getProcessPoolStrategy()->getMaximumLoadAverage());
     }
 
     protected function _initialize(): PoolInterface
     {
-        register_shutdown_function([$this, 'terminateChildProcesses']);
         $this->_getProcessPoolStrategy()->initializePool();
 
         return $this;
     }
 
-    protected function _alarmSignal(): PoolInterface
+    protected function _alarmSignal(InformationInterface $information): PoolInterface
     {
         $this->_getProcessPoolStrategy()->receivedAlarm();
 
@@ -81,8 +86,8 @@ abstract class PoolAbstract implements PoolInterface
         return $this;
     }
 
-    public function getProcessPath(): string
+    public function getProcess(): ProcessInterface
     {
-        return $this->_getProcess()->getPath();
+        return $this->_getProcess();
     }
 }

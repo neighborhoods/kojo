@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job\Collection\ScheduleLimit;
+namespace Neighborhoods\Kojo\Data\Job\Collection\ScheduleLimit;
 
-use NHDS\Jobs\Data\Job\Collection\ScheduleLimitInterface;
-use NHDS\Jobs\Data\Job\TypeInterface;
+use Neighborhoods\Kojo\Data\Job\Collection\ScheduleLimitInterface;
+use Neighborhoods\Kojo\Data\Job\TypeInterface;
 
 trait AwareTrait
 {

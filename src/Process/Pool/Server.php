@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool;
 
-use NHDS\Jobs\ProcessAbstract;
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Jobs\Semaphore;
-use NHDS\Toolkit\Data\Property;
-use NHDS\Jobs\Process;
+use Neighborhoods\Kojo\ProcessAbstract;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Kojo\Semaphore;
+use Neighborhoods\Pylon\Data\Property;
+use Neighborhoods\Kojo\Process;
 
 class Server extends ProcessAbstract implements ServerInterface
 {
     use Process\Pool\Factory\AwareTrait;
-    use Property\Strict\AwareTrait;
+    use Property\Defensive\AwareTrait;
     use Logger\AwareTrait;
     use Semaphore\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
@@ -24,16 +24,12 @@ class Server extends ProcessAbstract implements ServerInterface
         $this->_getLogger()->info('Starting process pool server...');
         if ($this->_getSemaphore()->testAndSetLock($this->_getServerSemaphoreResource())) {
             $this->_getLogger()->info('Process pool server started.');
-            $this->setProcessPool($this->_getProcessPoolFactory()->create());
-            $this->_getProcessPool()->setProcess($this);
             $this->_getProcessPool()->start();
-            $this->_getProcessPool()->emptyChildProcesses();
-            $this->_unsetProcessPool();
-            $this->_getLogger()->info('Stopping process pool server.');
-            $this->_getSemaphore()->releaseLock($this->_getServerSemaphoreResource());
-            $this->_getLogger()->info('Process pool server stopped.');
+            while (true) {
+                $this->_getProcessSignal()->waitForSignal();
+            }
         }else {
-            $this->_getLogger()->info('Cannot obtain process pool server mutex. Quitting.');
+            $this->_getLogger()->info('Cannot obtain the process pool server mutex. Quitting.');
         }
 
         return $this;

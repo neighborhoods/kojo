@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Service\Update;
-use NHDS\Jobs\Data\Job\Collection\CrashDetection;
-use NHDS\Jobs\Data\Job\Collection\Schedule\LimitCheck;
-use NHDS\Jobs\Data\Job\Collection\ScheduleLimit;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheck;
-use NHDS\Jobs\Process\Pool\Logger;
+use Neighborhoods\Kojo\Service\Update;
+use Neighborhoods\Kojo\Data\Job\Collection\CrashDetection;
+use Neighborhoods\Kojo\Data\Job\Collection\Schedule\LimitCheck;
+use Neighborhoods\Kojo\Data\Job\Collection\ScheduleLimit;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
+use Neighborhoods\Kojo\Process\Pool\Logger;
 
 class Maintainer implements MaintainerInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use CrashDetection\AwareTrait;
     use Maintainer\Delete\AwareTrait;
     use Semaphore\AwareTrait;
@@ -41,7 +41,6 @@ class Maintainer implements MaintainerInterface
                 $this->_rescheduleCrashedJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
             }catch(\Exception $exception){
-                $this->_getLogger()->debug('Received Exception with message "' . $exception->getMessage() . '"');
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
                 }
@@ -64,7 +63,6 @@ class Maintainer implements MaintainerInterface
                     $jobSemaphoreResource->releaseLock();
                 }
             }catch(\Exception $exception){
-                $this->_getLogger()->debug('Received Exception with message "' . $exception->getMessage() . '"');
                 if ($jobSemaphoreResource->hasLock()) {
                     $jobSemaphoreResource->releaseLock();
                 }
@@ -94,25 +92,27 @@ class Maintainer implements MaintainerInterface
 
     protected function _updatePendingJobs(): Maintainer
     {
-        foreach ($this->_getJobCollectionScheduleLimitCheck()->getIterator() as $job) {
+        foreach ($this->_getJobCollectionScheduleLimitCheck() as $job) {
             $jobType = $this->_getTypeRepository()->getJobType($job->getTypeCode());
-            $scheduleLimit = $this->_getJobCollectionScheduleLimitByJobType($jobType);
-            $numberOfScheduledJobs = $scheduleLimit->getNumberOfCurrentlyScheduledJobs();
+            $scheduleLimitCollection = $this->_getJobCollectionScheduleLimitByJobType($jobType);
+            $numberOfScheduledJobs = $scheduleLimitCollection->getNumberOfCurrentlyScheduledJobs();
+            $scheduleLimit = $jobType->getScheduleLimit();
             try{
-                if ($numberOfScheduledJobs < $jobType->getScheduleLimit()) {
+                if ($numberOfScheduledJobs <= $scheduleLimit) {
                     $waitUpdate = $this->_getServiceUpdateWaitFactory()->create();
                     $waitUpdate->setJob($job);
                     $waitUpdate->save();
-                }else {
+                }elseif ($numberOfScheduledJobs > $scheduleLimit + $jobType->getScheduleLimitAllowance()) {
                     $failedLimitCheckUpdate = $this->_getServiceUpdateCompleteFailedScheduleLimitCheckFactory()->create();
                     $failedLimitCheckUpdate->setJob($job);
                     $failedLimitCheckUpdate->save();
+                    $scheduleLimitCollection->decrementNumberOfCurrentlyScheduledJobs();
                 }
             }catch(\Exception $exception){
                 $updatePanic = $this->_getServiceUpdatePanicFactory()->create();
                 $updatePanic->setJob($job);
                 $updatePanic->save();
-                $this->_getLogger()->alert('Panicking Job[' . $job->getId() . '].');
+                $this->_getLogger()->alert('Panicking job with ID[' . $job->getId() . '].');
             }
         }
 

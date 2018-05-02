@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Resource;
+namespace Neighborhoods\Kojo\Semaphore\Resource;
 
-use NHDS\Jobs\Semaphore\ResourceInterface;
+use Neighborhoods\Kojo\Semaphore\ResourceInterface;
+use Neighborhoods\Kojo\SemaphoreInterface;
 
 trait AwareTrait
 {
@@ -22,5 +23,17 @@ trait AwareTrait
     protected function _getSemaphoreResourceClone(): ResourceInterface
     {
         return clone $this->_read(ResourceInterface::class);
+    }
+
+    protected function _hasSemaphoreResource(): bool
+    {
+        return $this->_exists(SemaphoreInterface::class);
+    }
+
+    protected function _unsetSemaphoreResource(): self
+    {
+        $this->_delete(SemaphoreInterface::class);
+
+        return $this;
     }
 }

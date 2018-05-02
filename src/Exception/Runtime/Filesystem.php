@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Exception\Runtime;
+namespace Neighborhoods\Kojo\Exception\Runtime;
 
 class Filesystem extends Exception
 {

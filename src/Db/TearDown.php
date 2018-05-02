@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db;
+namespace Neighborhoods\Kojo\Db;
 
-use NHDS\Jobs\Db\Schema;
-use NHDS\Jobs\Db\Schema\Version;
+use Neighborhoods\Kojo\Db\Schema;
+use Neighborhoods\Kojo\Db\Schema\Version;
 use Zend\Db\Adapter\Exception\InvalidQueryException;
 
 class TearDown implements TearDownInterface

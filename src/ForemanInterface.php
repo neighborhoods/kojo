@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Service\Update;
-use NHDS\Jobs\Worker;
+use Neighborhoods\Kojo\Service\Update;
+use Neighborhoods\Kojo\Api\V1\Worker\ServiceInterface;
 
 interface ForemanInterface
 {
@@ -14,5 +14,5 @@ interface ForemanInterface
 
     public function setServiceUpdateCrashFactory(Update\Crash\FactoryInterface $updateCrashFactory);
 
-    public function setWorkerJobService(Worker\Job\ServiceInterface $workerJobService);
+    public function setApiV1WorkerService(ServiceInterface $workerService);
 }

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Scheduler\Time;
+namespace Neighborhoods\Kojo\Scheduler\Time;
 
-use NHDS\Jobs\Scheduler\TimeInterface;
+use Neighborhoods\Kojo\Scheduler\TimeInterface;
 
 trait AwareTrait
 {

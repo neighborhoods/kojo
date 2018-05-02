@@ -1,25 +1,31 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Worker;
+namespace Neighborhoods\Kojo\Worker;
 
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Db\Connection\Container;
-use NHDS\Jobs\Foreman;
+use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Db\Connection\Container;
+use Neighborhoods\Kojo\Foreman;
 
 abstract class BootstrapAbstract implements BootstrapInterface
 {
-    use Container\AwareTrait;
+    use Container\Repository\AwareTrait;
     use Foreman\AwareTrait;
-    use Strict\AwareTrait;
-    const PROP_PDO = 'pdo';
+    use Defensive\AwareTrait;
 
     abstract public function instantiate(): BootstrapInterface;
 
-    public function setPdo(\PDO $pdo): BootstrapInterface
+    protected function _setJobPdo(\PDO $pdo): BootstrapInterface
     {
-        $this->_create(self::PROP_PDO, $pdo);
-        $this->_getDbConnectionContainer('job')->setPdo($pdo);
+        $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB)->setPdo($pdo);
+
+        return $this;
+    }
+
+    protected function _setSchemaPdo(\PDO $pdo): BootstrapInterface
+    {
+        $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_SCHEMA)->setPdo($pdo);
 
         return $this;
     }

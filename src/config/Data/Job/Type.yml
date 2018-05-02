@@ -1,8 +1,0 @@
-services:
-  nhds.jobs.data.job.type:
-    class: NHDS\Jobs\Data\Job\Type
-    shared: false
-    calls:
-      - [addDbConnectionContainer, ['@db.connection.container-job']]
-  data.job.type:
-    alias: nhds.jobs.data.job.type

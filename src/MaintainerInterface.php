@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Data\Job\Collection\ScheduleLimitInterface;
+use Neighborhoods\Kojo\Data\Job\Collection\ScheduleLimitInterface;
 
 interface MaintainerInterface
 {

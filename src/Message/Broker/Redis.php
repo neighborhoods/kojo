@@ -1,13 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Message\Broker;
+namespace Neighborhoods\Kojo\Message\Broker;
 
-use NHDS\Jobs\Process\Pool\Logger;
+use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Kojo\Redis\Repository;
 
 class Redis extends BrokerAbstract
 {
     use Logger\AwareTrait;
+    use Repository\AwareTrait;
     protected $_redisClient;
 
     public function waitForNewMessage(): BrokerInterface
@@ -19,7 +21,7 @@ class Redis extends BrokerAbstract
                 0
             );
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 
@@ -29,10 +31,7 @@ class Redis extends BrokerAbstract
     protected function _getRedisClient(): \Redis
     {
         if ($this->_redisClient === null) {
-            $this->_redisClient = new \Redis();
-            // Do not use pconnet.
-            $this->_redisClient->connect($this->_getHost(), $this->_getPort());
-            $this->_redisClient->setOption(\Redis::OPT_READ_TIMEOUT, '-1');
+            $this->_redisClient = $this->_getRedisRepository()->getById(BrokerInterface::class);
         }
 
         return $this->_redisClient;
@@ -44,7 +43,7 @@ class Redis extends BrokerAbstract
             $publishChannelLength = $this->getPublishChannelLength();
             $subscriptionChannelLength = $this->getSubscriptionChannelLength();
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 
@@ -59,7 +58,7 @@ class Redis extends BrokerAbstract
                 $message = $this->_getRedisClient()->rPop($this->_getPublishChannelName());
             }
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 
@@ -71,7 +70,7 @@ class Redis extends BrokerAbstract
         try{
             $publishChannelLength = $this->_getRedisClient()->lLen($this->_getPublishChannelName());
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 
@@ -83,7 +82,7 @@ class Redis extends BrokerAbstract
         try{
             $subscriptionChannelLength = $this->_getRedisClient()->lLen($this->_getSubscriptionChannelName());
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
 
@@ -95,16 +94,9 @@ class Redis extends BrokerAbstract
         try{
             $this->_getRedisClient()->lPush($this->_getPublishChannelName(), $message);
         }catch(\Exception $exception){
-            $this->_getLogger()->warning($exception->getMessage());
+            $this->_getLogger()->critical($exception->getMessage());
             throw $exception;
         }
-
-        return $this;
-    }
-
-    public function __destruct()
-    {
-        $this->_getRedisClient()->close();
 
         return $this;
     }

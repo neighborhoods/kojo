@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db;
+namespace Neighborhoods\Kojo\Db;
 
-use NHDS\Jobs\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\Db\Connection\Container\RepositoryInterface;
 
 interface ModelInterface
 {
@@ -31,5 +31,5 @@ interface ModelInterface
 
     public function readPersistentProperties(): array;
 
-    public function addDbConnectionContainer(ContainerInterface $container);
+    public function setDbConnectionContainerRepository(RepositoryInterface $repository);
 }

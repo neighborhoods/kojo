@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.message.broker.type.collection-job:
+    class: Neighborhoods\Kojo\Message\Broker\Type\Collection
+    calls:
+      - [addBrokerType, ['job_broker', '@message.broker.redis']]
+      - [addBrokerType, ['process.listener.mutex.redis', '@message.broker.redis[process.listener.mutex.redis]']]
+  message.broker.type.collection-job:
+    alias: neighborhoods.kojo.message.broker.type.collection-job

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Toolkit\Time;
+use Neighborhoods\Pylon\Time;
 use Cron\CronExpression;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Data\Job;
-use NHDS\Jobs\Service\Create;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\Api;
 
 class Scheduler implements SchedulerInterface
 {
@@ -15,8 +15,8 @@ class Scheduler implements SchedulerInterface
     use Job\Collection\Scheduler\AwareTrait;
     use Job\Type\Collection\Scheduler\AwareTrait;
     use Time\AwareTrait;
-    use Strict\AwareTrait;
-    use Create\Factory\AwareTrait;
+    use Defensive\AwareTrait;
+    use Service\Create\Factory\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
 
     public function scheduleStaticJobs(): SchedulerInterface

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Setup\Schema;
+namespace Neighborhoods\Kojo\Db\Setup\Schema;
 
-use NHDS\Jobs\Db\Schema\VersionAbstract;
-use NHDS\Jobs\Db\Schema\VersionInterface;
-use NHDS\Jobs\Data\Job\Type;
-use NHDS\Jobs\Data\JobInterface;
+use Neighborhoods\Kojo\Db\Schema\VersionAbstract;
+use Neighborhoods\Kojo\Db\Schema\VersionInterface;
+use Neighborhoods\Kojo\Data\Job\Type;
+use Neighborhoods\Kojo\Data\JobInterface;
 use Zend\Db\Metadata\Object\ConstraintKeyObject;
 use Zend\Db\Sql\Ddl\Column\BigInteger;
 use Zend\Db\Sql\Ddl\Column\Boolean;
@@ -173,9 +173,16 @@ class Version_5_0_0 extends VersionAbstract
                 ]));
         $createTable->addColumn(
             new Varchar(
-                JobInterface::FIELD_NAME_PROCESS_TYPE_CODE, 255, false, null,
+                JobInterface::FIELD_NAME_MOST_RECENT_HOST_NAME, 255, true, null,
                 [
-                    'comment' => 'The process type code used to run this job.',
+                    'comment' => 'COMMENT',
+                ]));
+        $createTable->addColumn(
+            new Integer(
+                JobInterface::FIELD_NAME_MOST_RECENT_PROCESS_ID, true, null,
+                [
+                    'comment'  => 'COMMENT',
+                    'unsigned' => true,
                 ]));
         $createTable->addConstraint(new PrimaryKey(JobInterface::FIELD_NAME_ID));
         $createTable->addConstraint(
@@ -184,7 +191,6 @@ class Version_5_0_0 extends VersionAbstract
                     JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
                     JobInterface::FIELD_NAME_ASSIGNED_STATE,
                     JobInterface::FIELD_NAME_WORK_AT_DATE_TIME,
-                    JobInterface::FIELD_NAME_PROCESS_TYPE_CODE,
                     JobInterface::FIELD_NAME_PRIORITY,
                     JobInterface::FIELD_NAME_TYPE_CODE,
                     JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,

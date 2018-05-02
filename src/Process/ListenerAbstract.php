@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process;
+namespace Neighborhoods\Kojo\Process;
 
-use NHDS\Jobs\Message\Broker;
+use Neighborhoods\Kojo\Message\Broker;
 
-abstract class ListenerAbstract extends Forkable implements ListenerInterface
+abstract class ListenerAbstract extends Forked implements ListenerInterface
 {
     use Collection\AwareTrait;
     use Broker\Type\Collection\AwareTrait;

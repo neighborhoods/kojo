@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Type\Service;
+namespace Neighborhoods\Kojo\Type\Service;
 
-use NHDS\Jobs\Type;
+use Neighborhoods\Kojo\Type;
 
 class Create extends Type\ServiceAbstract implements CreateInterface
 {
@@ -66,6 +66,13 @@ class Create extends Type\ServiceAbstract implements CreateInterface
     public function setScheduleLimit(int $scheduleLimit): CreateInterface
     {
         $this->_getJobType()->setScheduleLimit($scheduleLimit);
+
+        return $this;
+    }
+
+    public function setScheduleLimitAllowance(int $scheduleLimitAllowance): CreateInterface
+    {
+        $this->_getJobType()->setScheduleLimitAllowance($scheduleLimitAllowance);
 
         return $this;
     }

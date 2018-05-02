@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.api.v1.job.scheduler:
+    class: Neighborhoods\Kojo\Api\V1\Job\Scheduler
+    public: false
+    shared: false
+  api.v1.job.scheduler:
+    alias: neighborhoods.kojo.api.v1.job.scheduler
+    public: false

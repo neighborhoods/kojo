@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Collection;
+namespace Neighborhoods\Kojo\Process\Collection;
 
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Process\Collection;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Process\Collection;
 
 class Iterator implements IteratorInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Collection\AwareTrait;
     protected $processPrototypes = [];
 

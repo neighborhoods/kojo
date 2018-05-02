@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Complete\Failed;
+namespace Neighborhoods\Kojo\Service\Update\Complete\Failed;
 
-use NHDS\Jobs\Service\Update\Complete\FailedInterface;
-use NHDS\Jobs\Service\Update\Complete\Failed;
-use NHDS\Jobs\State\Service;
-use NHDS\Jobs\Service\FactoryAbstract;
+use Neighborhoods\Kojo\Service\Update\Complete\FailedInterface;
+use Neighborhoods\Kojo\Service\Update\Complete\Failed;
+use Neighborhoods\Kojo\State\Service;
+use Neighborhoods\Kojo\Service\FactoryAbstract;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {

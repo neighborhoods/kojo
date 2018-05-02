@@ -1,17 +1,21 @@
+@bwilson - check limits / paging for all collections.
+@bwilson - lazy and env di audit.
+@bwilson - config dir to di dir.
+@bwilson - preference for interfaces?
 @bwilson - auto-scheduling components.
-@bwilson - implement redis mutex.
-@bwilson - Selector entropy as a DI property.
 @bwilson - clean up remaining aware traits and add factories / repositories as necessary.
 @bwilson - create NHDS independent aliases for all services.
 @bwilson - process_id as a job field.
 @bwilson - process_pool_id as a job field.
-@bwilson - implement zookeeper mutex.
 @bwilson - check indexes against selects.
 @bwilson - fix changed persistent properties.
 @bwilson - standardize commands.
 @bwilson - new relic integration.
 @bwilson - SIGTERM Console command.
 @bwilson - migrate to Doctrine DBAL.
+
+v2
+@bwilson - pool statistics.
 
 @bwilson - UserManager
 @bwilson - AreaManager

@@ -1,16 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job;
+namespace Neighborhoods\Kojo\Data\Job;
 
-use NHDS\Jobs\Data\Job\Collection\IteratorInterface;
-use NHDS\Jobs\Db;
-use NHDS\Jobs\Process;
+use Neighborhoods\Kojo\Data\Job\Collection\IteratorInterface;
+use Neighborhoods\Kojo\Db;
 
 abstract class CollectionAbstract extends Db\Model\CollectionAbstract
 {
-    use Process\Pool\Logger\AwareTrait;
-
     public function setIterator(IteratorInterface $iterator)
     {
         $iterator->setCollection($this);
@@ -27,15 +24,5 @@ abstract class CollectionAbstract extends Db\Model\CollectionAbstract
     protected function _getIterator(): IteratorInterface
     {
         return $this->_read(IteratorInterface::class);
-    }
-
-    protected function _logSelect(): CollectionAbstract
-    {
-        if ($this->_hasLogger()) {
-            $sql = $this->_getDbConnectionContainer(Db\Connection\ContainerInterface::NAME_JOB)->getSql();
-            $this->_getLogger()->debug(get_called_class() . ': ' . $sql->buildSqlString($this->getSelect()));
-        }
-
-        return $this;
     }
 }

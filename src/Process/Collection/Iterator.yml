@@ -1,0 +1,6 @@
+services:
+  neighborhoods.kojo.process.collection.iterator:
+    shared: false
+    class: Neighborhoods\Kojo\Process\Collection\Iterator
+  process.collection.iterator:
+    alias: neighborhoods.kojo.process.collection.iterator

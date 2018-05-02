@@ -1,6 +1,0 @@
-services:
-  nhds.jobs.service.update.work:
-    class: NHDS\Jobs\Service\Update\Work
-    shared: false
-  service.update.work:
-    alias: nhds.jobs.service.update.work

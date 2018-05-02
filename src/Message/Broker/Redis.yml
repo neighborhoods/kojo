@@ -1,0 +1,19 @@
+services:
+  neighborhoods.kojo.message.broker.redis:
+    class: Neighborhoods\Kojo\Message\Broker\Redis
+    shared: false
+    calls:
+      - [setLogger, ['@process.pool.logger']]
+      - [setSubscriptionChannelName, ['job_listener_subscribe']]
+      - [setPublishChannelName, ['job_listener_publish']]
+      - [setRedisRepository, ['@redis.repository']]
+  message.broker.redis:
+    alias: neighborhoods.kojo.message.broker.redis
+  neighborhoods.kojo.message.broker.redis[process.listener.mutex.redis]:
+    class: Neighborhoods\Kojo\Message\Broker\Redis
+    shared: false
+    calls:
+      - [setLogger, ['@process.pool.logger']]
+      - [setRedisRepository, ['@redis.repository']]
+  message.broker.redis[process.listener.mutex.redis]:
+    alias: neighborhoods.kojo.message.broker.redis[process.listener.mutex.redis]

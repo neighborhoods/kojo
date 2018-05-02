@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Exception\Runtime\Db\Model;
+namespace Neighborhoods\Kojo\Exception\Runtime\Db\Model;
 
-use NHDS\Jobs\Exception\Runtime\Exception;
+use Neighborhoods\Kojo\Exception\Runtime\Exception;
 
 class LoadException extends Exception
 {

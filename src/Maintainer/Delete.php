@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Maintainer;
+namespace Neighborhoods\Kojo\Maintainer;
 
-use NHDS\Jobs\Data\Job;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Semaphore;
-use NHDS\Jobs\Process\Pool\Logger;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Semaphore;
+use Neighborhoods\Kojo\Process\Pool\Logger;
 
 class Delete implements DeleteInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Semaphore\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
     use Job\Collection\Delete\AwareTrait;
@@ -26,7 +26,6 @@ class Delete implements DeleteInterface
                 $this->_deleteCompletedJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->releaseLock();
             }catch(\Exception $exception){
-                $this->_getLogger()->debug('Received Exception with message "' . $exception->getMessage() . '"');
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->releaseLock();
                 }

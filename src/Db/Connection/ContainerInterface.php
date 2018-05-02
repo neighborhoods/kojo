@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Connection;
+namespace Neighborhoods\Kojo\Db\Connection;
 
+use Neighborhoods\Kojo\Db\PDO\BuilderInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Driver\Pdo\Connection;
@@ -16,17 +17,17 @@ use Zend\Db\Sql\Update;
 
 interface ContainerInterface
 {
-    const NAME_SCHEMA            = 'schema';
-    const NAME_TEAR_DOWN         = 'tear_down';
-    const NAME_JOB               = 'job';
-    const NAME_STATUS            = 'status';
-    const NAME_NON_TRANSACTIONAL = 'non_transactional';
+    public const ID_SCHEMA            = 'schema';
+    public const ID_TEAR_DOWN         = 'tear_down';
+    public const ID_JOB               = 'job';
+    public const ID_STATUS            = 'status';
+    public const ID_NON_TRANSACTIONAL = 'non_transactional';
 
     public function getConnection(): Connection;
 
-    public function setName(string $name): ContainerInterface;
+    public function setId(string $id): ContainerInterface;
 
-    public function getName(): string;
+    public function getId(): string;
 
     public function getSql(): Sql;
 
@@ -51,4 +52,6 @@ interface ContainerInterface
     public function rollback(): Connection;
 
     public function setPdo(\PDO $pdo): ContainerInterface;
+
+    public function setDbPDOBuilder(BuilderInterface $dbPDOBuilder);
 }

@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process;
+namespace Neighborhoods\Kojo\Process;
 
-use NHDS\Jobs\Process\Collection\IteratorInterface;
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Process\Collection\IteratorInterface;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Collection implements CollectionInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const PROP_APPLIED_POOL = 'applied_pool';
     protected $_processPrototypes = [];
 
@@ -52,7 +52,10 @@ class Collection implements CollectionInterface
         /** @var ProcessInterface $processPrototype */
         foreach ($this->_processPrototypes as $processPrototype) {
             $processPrototype->setProcessPool($pool);
-            $processPrototype->setParentProcessPath($pool->getProcessPath());
+            $processPrototype->setParentProcessPath($pool->getProcess()->getPath());
+            $processPrototype->setParentProcessUuid($pool->getProcess()->getUuid());
+            $parentProcessTerminationSignalNumber = $pool->getProcess()->getTerminationSignalNumber();
+            $processPrototype->setParentProcessTerminationSignalNumber($parentProcessTerminationSignalNumber);
         }
 
         return $this;

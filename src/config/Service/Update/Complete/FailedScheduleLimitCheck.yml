@@ -1,6 +1,0 @@
-services:
-  nhds.jobs.service.update.complete.failedschedulelimitcheck:
-    class: NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheck
-    shared: false
-  service.update.complete.failedschedulelimitcheck:
-    alias: nhds.jobs.service.update.complete.failedschedulelimitcheck

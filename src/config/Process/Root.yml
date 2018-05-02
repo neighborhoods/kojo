@@ -1,9 +1,0 @@
-services:
-  nhds.jobs.process.root:
-    class: NHDS\Jobs\Process\Root
-    calls:
-      - [setProcessPoolFactory, ['@process.pool.factory']]
-      - [setLogger, ['@process.pool.logger']]
-      - [setProcessStrategy, ['@process.strategy.process_control']]
-  process.root:
-    alias: nhds.jobs.process.root

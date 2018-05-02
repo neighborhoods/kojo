@@ -1,18 +1,27 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Console;
+namespace Neighborhoods\Kojo\Console;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 use Symfony\Component\Console\Input\InputArgument;
 
 abstract class CommandAbstract extends Command
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const ARG_SERVICES_YML_FILE_PATH = 'services_yml_file_path';
+    const SPLASH_ART                 = [
+        '+------------------------------+',
+        '|   ⚡ Neighborhoods Kōjō ⚡   |',
+        '|                              |',
+        '|             工場             |',
+        '|                              |',
+        '|  a distributed task manager  |',
+        '+------------------------------+',
+    ];
 
     public function configure()
     {
@@ -33,7 +42,7 @@ abstract class CommandAbstract extends Command
     {
         $this->_setInput($input);
         $this->_setOutput($output);
-        $this->_writeSplash();
+        $this->_writeSplashArt();
         $this->_execute();
 
         return $this;
@@ -65,15 +74,9 @@ abstract class CommandAbstract extends Command
 
     abstract function _execute(): CommandAbstract;
 
-    protected function _writeSplash(): CommandAbstract
+    protected function _writeSplashArt(): CommandAbstract
     {
-        $this->_getOutput()->writeln(
-            [
-                'NHDS Jobs - A distributed task manager.',
-                '=======================================',
-                '',
-            ]
-        );
+        $this->_getOutput()->writeln(self::SPLASH_ART);
 
         return $this;
     }

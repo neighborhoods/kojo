@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Status;
+namespace Neighborhoods\Kojo\Status;
 
-use NHDS\Jobs\Data\Status;
+use Neighborhoods\Kojo\Data\Status;
 
 class Service implements ServiceInterface
 {

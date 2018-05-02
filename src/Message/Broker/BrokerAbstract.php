@@ -1,30 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Message\Broker;
+namespace Neighborhoods\Kojo\Message\Broker;
 
-use NHDS\Jobs\Process\Pool\Logger;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class BrokerAbstract implements BrokerInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Logger\AwareTrait;
     protected $_publishChannelName;
     protected $_subscriptionChannelName;
-    protected $_host;
-    protected $_port;
-
-    public function setHost(string $host): BrokerInterface
-    {
-        if ($this->_host === null) {
-            $this->_host = $host;
-        }else {
-            throw new \LogicException('Host is already set.');
-        }
-
-        return $this;
-    }
 
     public function setSubscriptionChannelName(string $channelName): BrokerInterface
     {
@@ -37,24 +24,6 @@ abstract class BrokerAbstract implements BrokerInterface
         return $this;
     }
 
-    public function setPublishChannelName(string $channelName): BrokerInterface
-    {
-        if ($this->_publishChannelName === null) {
-            $this->_publishChannelName = $channelName;
-        }
-
-        return $this;
-    }
-
-    protected function _getHost(): string
-    {
-        if ($this->_host === null) {
-            throw new \LogicException('Host is not set.');
-        }
-
-        return $this->_host;
-    }
-
     protected function _getSubscriptionChannelName(): string
     {
         if ($this->_subscriptionChannelName === null) {
@@ -64,6 +33,15 @@ abstract class BrokerAbstract implements BrokerInterface
         return $this->_subscriptionChannelName;
     }
 
+    public function setPublishChannelName(string $channelName): BrokerInterface
+    {
+        if ($this->_publishChannelName === null) {
+            $this->_publishChannelName = $channelName;
+        }
+
+        return $this;
+    }
+
     protected function _getPublishChannelName(): string
     {
         if ($this->_publishChannelName === null) {
@@ -71,25 +49,5 @@ abstract class BrokerAbstract implements BrokerInterface
         }
 
         return $this->_publishChannelName;
-    }
-
-    public function setPort(int $port): BrokerInterface
-    {
-        if ($this->_port === null) {
-            $this->_port = $port;
-        }else {
-            throw new \LogicException('Port is already set.');
-        }
-
-        return $this;
-    }
-
-    protected function _getPort(): int
-    {
-        if ($this->_port === null) {
-            throw new \LogicException('Port is not set.');
-        }
-
-        return $this->_port;
     }
 }

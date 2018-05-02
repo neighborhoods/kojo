@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheck;
+namespace Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
 
-use NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheck;
-use NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheckInterface;
+use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
+use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheckInterface;
 
 trait AwareTrait
 {

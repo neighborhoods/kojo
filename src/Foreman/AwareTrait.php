@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Foreman;
+namespace Neighborhoods\Kojo\Foreman;
 
-use NHDS\Jobs\ForemanInterface;
+use Neighborhoods\Kojo\ForemanInterface;
 
 trait AwareTrait
 {

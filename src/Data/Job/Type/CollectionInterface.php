@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job\Type;
+namespace Neighborhoods\Kojo\Data\Job\Type;
 
-use NHDS\Jobs\Data\Job\Type\Collection\IteratorInterface;
-use NHDS\Jobs\Db\Model;
+use Neighborhoods\Kojo\Data\Job\Type\Collection\IteratorInterface;
+use Neighborhoods\Kojo\Db\Model;
 
 interface CollectionInterface extends Model\CollectionInterface
 {

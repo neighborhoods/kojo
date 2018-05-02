@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Filesystem;
+namespace Neighborhoods\Kojo\Filesystem;
 
 use Symfony\Component\Filesystem\Filesystem;
 

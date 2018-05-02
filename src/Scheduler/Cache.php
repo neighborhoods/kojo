@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Scheduler;
+namespace Neighborhoods\Kojo\Scheduler;
 
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Scheduler;
-use NHDS\Toolkit\Time;
-use NHDS\Jobs\CacheItemPool;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Scheduler;
+use Neighborhoods\Pylon\Time;
+use Neighborhoods\Kojo\CacheItemPool;
 
 class Cache implements CacheInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Scheduler\Time\AwareTrait;
     use Time\AwareTrait;
-    use CacheItemPool\AwareTrait;
+    use CacheItemPool\Repository\AwareTrait;
     protected $_scheduleMinutesNotInCache = [];
 
     public function getMinutesNotInCache(): array
@@ -37,7 +37,7 @@ class Cache implements CacheInterface
     {
         $isMinuteScheduled = false;
         $referenceMinuteDateTimeString = $referenceMinuteDateTime->format(self::DATE_TIME_FORMAT_CACHE_MINUTE);
-        $cacheItemPool = $this->_getCacheItemPool();
+        $cacheItemPool = $this->_getCacheItemPoolRepository()->getById(self::CACHE_ITEM_POOL_ID);
         $hasItem = $cacheItemPool->hasItem(self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $referenceMinuteDateTimeString);
         if ($hasItem) {
             $isMinuteScheduled = true;
@@ -60,7 +60,7 @@ class Cache implements CacheInterface
 
     public function cacheScheduledMinutes(\DateTime $scheduledMinute): CacheInterface
     {
-        $cacheItemPool = $this->_getCacheItemPool();
+        $cacheItemPool = $this->_getCacheItemPoolRepository()->getById(self::CACHE_ITEM_POOL_ID);
         $cachedMinuteDateTimeString = $scheduledMinute->format(self::DATE_TIME_FORMAT_CACHE_MINUTE);
         $cacheItem = $cacheItemPool->getItem(self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $cachedMinuteDateTimeString);
         $cacheItem->set(self::CACHE_SCHEDULED_AHEAD_VALUE);

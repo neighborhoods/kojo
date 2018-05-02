@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\TearDown;
+namespace Neighborhoods\Kojo\Db\TearDown;
 
-use NHDS\Jobs\Db\TearDownInterface;
+use Neighborhoods\Kojo\Db\TearDownInterface;
 
 trait AwareTrait
 {

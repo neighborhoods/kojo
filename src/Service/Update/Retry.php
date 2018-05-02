@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update;
+namespace Neighborhoods\Kojo\Service\Update;
 
-use NHDS\Jobs\ServiceAbstract;
+use Neighborhoods\Kojo\ServiceAbstract;
 
 class Retry extends ServiceAbstract implements RetryInterface
 {
@@ -22,6 +22,8 @@ class Retry extends ServiceAbstract implements RetryInterface
     public function setDateTime(\DateTime $dateTime): RetryInterface
     {
         $this->_create(self::PROP_DATE_TIME, $dateTime);
+
+        return $this;
     }
 
     protected function _getDateTime(): \DateTime

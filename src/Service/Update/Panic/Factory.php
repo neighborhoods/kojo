@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Panic;
+namespace Neighborhoods\Kojo\Service\Update\Panic;
 
-use NHDS\Jobs\State\Service;
-use NHDS\Jobs\Service\FactoryAbstract;
-use NHDS\Jobs\Service\Update\Panic;
-use NHDS\Jobs\Service\Update\PanicInterface;
+use Neighborhoods\Kojo\State\Service;
+use Neighborhoods\Kojo\Service\FactoryAbstract;
+use Neighborhoods\Kojo\Service\Update\Panic;
+use Neighborhoods\Kojo\Service\Update\PanicInterface;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {

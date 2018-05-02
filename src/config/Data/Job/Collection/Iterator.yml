@@ -1,6 +1,0 @@
-services:
-  nhds.jobs.data.job.collection.iterator:
-    class: NHDS\Jobs\Data\Job\Collection\Iterator
-    shared: false
-  data.job.collection.iterator:
-    alias: nhds.jobs.data.job.collection.iterator

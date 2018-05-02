@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job;
+namespace Neighborhoods\Kojo\Data\Job;
 
 use Cron\CronExpression;
-use NHDS\Jobs\Db\Model;
+use Neighborhoods\Kojo\Db\Model;
 
 class Type extends Model implements TypeInterface
 {
@@ -116,6 +116,21 @@ class Type extends Model implements TypeInterface
         return (int)$this->_readPersistentProperty(TypeInterface::FIELD_NAME_SCHEDULE_LIMIT);
     }
 
+    public function setScheduleLimitAllowance(int $scheduleLimitAllowance): TypeInterface
+    {
+        if ($scheduleLimitAllowance < 0) {
+            throw new \InvalidArgumentException('Schedule limit allowance is less than zero.');
+        };
+        $this->_createPersistentProperty(TypeInterface::FIELD_NAME_SCHEDULE_LIMIT_ALLOWANCE, $scheduleLimitAllowance);
+
+        return $this;
+    }
+
+    public function getScheduleLimitAllowance(): int
+    {
+        return (int)$this->_readPersistentProperty(TypeInterface::FIELD_NAME_SCHEDULE_LIMIT_ALLOWANCE);
+    }
+
     public function setIsEnabled(bool $isEnabled): TypeInterface
     {
         $this->_createPersistentProperty(TypeInterface::FIELD_NAME_IS_ENABLED, $isEnabled);
@@ -154,17 +169,5 @@ class Type extends Model implements TypeInterface
     public function getAutoDeleteIntervalDuration(): string
     {
         return $this->_readPersistentProperty(TypeInterface::FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION);
-    }
-
-    public function setProcessTypeCode(string $processTypeCode): TypeInterface
-    {
-        $this->_createPersistentProperty(self::FIELD_NAME_PROCESS_TYPE_CODE, $processTypeCode);
-
-        return $this;
-    }
-
-    public function getProcessTypeCode(): string
-    {
-        return $this->_readPersistentProperty(self::FIELD_NAME_PROCESS_TYPE_CODE);
     }
 }

@@ -1,0 +1,4379 @@
+kojo_job:
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "new"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "new"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "new"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_1"
+    name: "Name 1"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+  -
+    kojo_job_id: !fixture/expression: numberPool.advance('job_id').getCurrentNumber('job_id')
+    type_code: "type_code_2"
+    name: "Name 2"
+    priority:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    importance:  !fixture/expression: numberPool.getCurrentNumber('job_id')
+    status_id: !fixture/expression: numberPool.getCurrentNumber('job_id')
+    work_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')
+    next_state_request: "schedule_limit_check"
+    assigned_state: "waiting"
+    previous_state: "new"
+    worker_uri: '\Neighborhoods\Kojo\Test\Worker\Mock'
+    worker_method: "work"
+    can_work_in_parallel: 1
+    last_transition_date_time: "2010-04-26 12:14:20"
+    last_transition_micro_time: 1511915506563849
+    times_worked: 0
+    times_retried: 0
+    times_held: 0
+    times_crashed: 0
+    times_panicked: 0
+    created_at_date_time: !fixture/expression: time.getNow().format('Y-m-d H:i:s')

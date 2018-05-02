@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Scheduler;
+namespace Neighborhoods\Kojo\Scheduler;
 
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Toolkit;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Pylon;
 
 class Time implements TimeInterface
 {
-    use Strict\AwareTrait;
-    use Toolkit\Time\AwareTrait;
+    use Defensive\AwareTrait;
+    use Pylon\Time\AwareTrait;
     const PROP_MINUTES_SCHEDULED_AHEAD_FOR  = 'minutes_scheduled_ahead_for';
     const PROP_REFERENCE_DISTANCE_DATE_TIME = 'reference_distance_date_time';
 

@@ -1,0 +1,20 @@
+services:
+  neighborhoods.kojo.process.job:
+    class: Neighborhoods\Kojo\Process\Job
+    public: true
+    shared: false
+    parent: process_abstract
+    calls:
+      - [setForeman, ['@foreman']]
+      - [setMaintainer, ['@maintainer']]
+      - [setScheduler, ['@scheduler']]
+      - [setBootstrap, ['@worker.bootstrap']]
+      - [setTypeCode, ['job']]
+      - [setSelector, ['@selector']]
+      - [setProcessStrategy, ['@process.strategy.process_control']]
+      - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
+      - [setUuidMaximumInteger, [9999999999]]
+      - [setProcessPoolFactory, ['@process.pool.factory-job']]
+      - [setTitlePrefix, ['%process.title.prefix%']]
+  process.job:
+    alias: neighborhoods.kojo.process.job

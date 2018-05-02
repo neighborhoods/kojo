@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Schema\Version;
+namespace Neighborhoods\Kojo\Db\Schema\Version;
 
-use NHDS\Jobs\Db\Schema\VersionInterface;
+use Neighborhoods\Kojo\Db\Schema\VersionInterface;
 
 trait AwareTrait
 {

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Wait;
+namespace Neighborhoods\Kojo\Service\Update\Wait;
 
-use NHDS\Jobs\Service\Update\WaitInterface;
+use Neighborhoods\Kojo\Service\Update\WaitInterface;
 
 trait AwareTrait
 {

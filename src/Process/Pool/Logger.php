@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool;
 
 use Psr\Log;
-use NHDS\Toolkit\Time;
-use NHDS\Jobs\ProcessInterface;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Pylon\Time;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const PAD_PID                   = 6;
     const PAD_PATH                  = 50;
     const PROP_IS_ENABLED           = 'is_enabled';

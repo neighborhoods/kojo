@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Resource\Factory;
+namespace Neighborhoods\Kojo\Semaphore\Resource\Factory;
 
-use NHDS\Jobs\Data\JobInterface;
-use NHDS\Jobs\Semaphore\Resource\FactoryInterface;
-use NHDS\Jobs\Semaphore;
-use NHDS\Jobs\Semaphore\ResourceInterface;
+use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Semaphore\Resource\FactoryInterface;
+use Neighborhoods\Kojo\Semaphore;
+use Neighborhoods\Kojo\Semaphore\ResourceInterface;
 
 trait AwareTrait
 {

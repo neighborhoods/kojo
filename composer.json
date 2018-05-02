@@ -1,7 +1,7 @@
 {
-    "name": "nhds/jobs",
+    "name": "neighborhoods/kojo",
     "type": "library",
-    "description": "NHDS Jobs is meant to solve the problem of easily writing distributed, fast, fault tolerant tasks.",
+    "description": "Neighborhoods Kōjō is a distributed task manager.",
     "license": "proprietary",
     "keywords": [],
     "authors": [
@@ -10,38 +10,44 @@
             "email": "brad.wilson@neighborhoods.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://satis.neighborhoods.com"
+        }
+    ],
     "require": {
         "php": ">=7.1",
+        "symfony/filesystem": "^4.0",
+        "symfony/config": "^4.0",
+        "symfony/yaml": "^4.0",
+        "symfony/dependency-injection": "^4.0",
+        "symfony/expression-language": "^4.0",
+        "symfony/cache": "^4.0",
+        "symfony/console": "^4.0",
+        "symfony/finder": "^4.0",
         "zendframework/zend-db": "^2.8",
         "dragonmantank/cron-expression": "^2.0",
-        "symfony/filesystem": "~4.0.3",
-        "symfony/config": "~4.0.3",
-        "symfony/yaml": "~4.0.3",
-        "symfony/dependency-injection": "~4.0.3",
-        "symfony/expression-language": "~4.0.3",
-        "symfony/cache": "~4.0.3",
-        "symfony/console": "~4.0.3"
+        "ocramius/proxy-manager": "^2.1",
+        "neighborhoods/pylon": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.4",
-        "phpunit/dbunit": "^3.0",
-        "symfony/finder": "^4.0"
+        "phpunit/phpunit": "^7.0",
+        "phpunit/dbunit": "^4.0",
+        "neighborhoods/scaffolding": "dev-master"
     },
     "bin": [
-        "src/bin/jobs",
-        "src/bin/server"
+        "bin/kojo"
     ],
     "autoload": {
         "psr-4": {
-            "NHDS\\Jobs\\": "src",
-            "NHDS\\Toolkit\\": "nhdstoolkitsrc"
+            "Neighborhoods\\Kojo\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NHDS\\Jobs\\Test\\": "tests",
-            "NHDS\\Watch\\": "nhdswatchsrc",
-            "NHDS\\Jobs\\Example\\": "example"
+            "Neighborhoods\\Kojo\\Test\\": "tests",
+            "Neighborhoods\\Kojo\\Example\\": "example"
         }
     }
 }

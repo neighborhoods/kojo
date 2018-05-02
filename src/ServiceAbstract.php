@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs;
+namespace Neighborhoods\Kojo;
 
-use NHDS\Jobs\Data\Job;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class ServiceAbstract implements ServiceInterface
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Job\AwareTrait;
     use State\Service\AwareTrait;
     const PROP_SAVED = 'saved';

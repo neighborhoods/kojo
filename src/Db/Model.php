@@ -1,18 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db;
+namespace Neighborhoods\Kojo\Db;
 
-use NHDS\Jobs\Exception\Runtime\Db\Model\LoadException;
-use NHDS\Toolkit\Data\Property;
-use NHDS\Jobs\Db;
-use NHDS\Jobs\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\Exception\Runtime\Db\Model\LoadException;
+use Neighborhoods\Pylon\Data\Property;
+use Neighborhoods\Kojo\Db;
+use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 use Zend\Db\Sql\Select;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Model implements ModelInterface
 {
+    use Defensive\AwareTrait;
     use Property\Persistent\AwareTrait;
-    use Db\Connection\Container\AwareTrait;
+    use Db\Connection\Container\Repository\AwareTrait;
     protected $_idPropertyName;
     protected $_tableName;
 
@@ -73,7 +75,8 @@ class Model implements ModelInterface
         }
 
         $select = $this->_getLoadSelect($propertyName, $propertyValue);
-        $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($select);
+        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
+        $statement = $dbConnectionContainer->getStatement($select);
         $data = $statement->execute()->current();
 
         if ($data) {
@@ -97,7 +100,8 @@ class Model implements ModelInterface
 
     protected function _getLoadSelect($field, $value): Select
     {
-        $select = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->select($this->getTableName());
+        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
+        $select = $dbConnectionContainer->select($this->getTableName());
         $select->where([$field => $value]);
 
         return $select;
@@ -116,9 +120,10 @@ class Model implements ModelInterface
 
     public function delete(): ModelInterface
     {
-        $delete = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->delete($this->getTableName());
+        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
+        $delete = $dbConnectionContainer->delete($this->getTableName());
         $delete->where([$this->getIdPropertyName() => $this->getId()]);
-        $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($delete);
+        $statement = $dbConnectionContainer->getStatement($delete);
         $statement->execute();
         $this->_emptyPersistentProperties();
 
@@ -127,11 +132,12 @@ class Model implements ModelInterface
 
     protected function insert(): ModelInterface
     {
-        $insert = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->insert($this->getTableName());
+        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
+        $insert = $dbConnectionContainer->insert($this->getTableName());
         $insert->values($this->_readChangedPersistentProperties());
-        $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($insert);
+        $statement = $dbConnectionContainer->getStatement($insert);
         $statement->execute();
-        $id = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getDriver()->getLastGeneratedValue();
+        $id = $dbConnectionContainer->getDriver()->getLastGeneratedValue();
         $this->setId((int)$id);
         $this->_emptyChangedPersistentProperties();
 
@@ -140,11 +146,12 @@ class Model implements ModelInterface
 
     protected function update(): ModelInterface
     {
+        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
         $changedPersistentProperties = $this->_readChangedPersistentProperties();
-        $update = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->update($this->getTableName());
+        $update = $dbConnectionContainer->update($this->getTableName());
         $update->where([$this->getIdPropertyName() => $this->getId()]);
         $update->set($changedPersistentProperties);
-        $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($update);
+        $statement = $dbConnectionContainer->getStatement($update);
         $statement->execute();
         $this->_emptyChangedPersistentProperties();
 

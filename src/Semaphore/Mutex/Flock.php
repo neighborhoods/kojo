@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Mutex;
+namespace Neighborhoods\Kojo\Semaphore\Mutex;
 
-use NHDS\Jobs\Exception\Runtime;
-use NHDS\Jobs\Filesystem;
-use NHDS\Jobs\Semaphore\MutexAbstract;
-use NHDS\Jobs\Semaphore\MutexInterface;
-use NHDS\Toolkit\Data\Property\Strict;
-use NHDS\Jobs\Process\Pool\Logger;
+use Neighborhoods\Kojo\Exception\Runtime;
+use Neighborhoods\Kojo\Filesystem;
+use Neighborhoods\Kojo\Semaphore\MutexAbstract;
+use Neighborhoods\Kojo\Semaphore\MutexInterface;
+use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Process\Pool\Logger;
 
 class Flock extends MutexAbstract
 {
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     use Filesystem\AwareTrait;
     use Logger\AwareTrait;
     const PROP_DIRECTORY_PATH_PREFIX = 'directory_path_prefix';
@@ -28,7 +28,6 @@ class Flock extends MutexAbstract
     {
         if ($this->_hasLock === false) {
             if (flock($this->_getLockFilePointer(), $this->_getFlockLockOperation()) === true) {
-                $this->_getLogger()->debug('Obtained lock for file "' . $this->_getFilePath() . '".');
                 $this->_hasLock = true;
             }
         }else {
@@ -44,7 +43,6 @@ class Flock extends MutexAbstract
             if (flock($this->_getLockFilePointer(), LOCK_UN) === false) {
                 $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_UNLOCK_FAILED);
             }
-            $this->_getLogger()->debug('Released lock for file "' . $this->_getFilePath() . '".');
             $this->_hasLock = false;
             if (fclose($this->_getLockFilePointer()) === false) {
                 $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FCLOSE_FAILED);

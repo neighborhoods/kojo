@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.process.signal.information:
+    class: Neighborhoods\Kojo\Process\Signal\Information
+    public: false
+    shared: false
+  process.signal.information:
+    public: false
+    alias: neighborhoods.kojo.process.signal.information

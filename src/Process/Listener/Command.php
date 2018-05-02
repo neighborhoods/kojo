@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Process\Listener;
+namespace Neighborhoods\Kojo\Process\Listener;
 
-use NHDS\Jobs\Process\Forkable;
-use NHDS\Jobs\Process\ListenerInterface;
-use NHDS\Jobs\Process\ListenerAbstract;
+use Neighborhoods\Kojo\Process\Forked;
+use Neighborhoods\Kojo\Process\ListenerInterface;
+use Neighborhoods\Kojo\Process\ListenerAbstract;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Command extends ListenerAbstract implements CommandInterface
@@ -36,7 +36,6 @@ class Command extends ListenerAbstract implements CommandInterface
 
     public function addProcess(string $processTypeCode): Command
     {
-        $this->_getLogger()->debug('Adding Process with type code "' . $processTypeCode . '".');
         $process = $this->_getProcessCollection()->getProcessPrototypeClone($processTypeCode);
         $this->_getProcessPool()->addChildProcess($process);
 
@@ -62,7 +61,7 @@ class Command extends ListenerAbstract implements CommandInterface
         return $this->_read(self::PROP_EXPRESSION_LANGUAGE);
     }
 
-    protected function _run(): Forkable
+    protected function _run(): Forked
     {
         if (!$this->_getMessageBroker()->hasMessage()) {
             $this->_getMessageBroker()->waitForNewMessage();

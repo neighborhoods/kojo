@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Resource\Owner;
+namespace Neighborhoods\Kojo\Semaphore\Resource\Owner;
 
-use NHDS\Jobs\Semaphore\Resource\OwnerInterface;
-use NHDS\Jobs\Data;
+use Neighborhoods\Kojo\Semaphore\Resource\OwnerInterface;
+use Neighborhoods\Kojo\Data;
 
 interface JobInterface extends OwnerInterface
 {

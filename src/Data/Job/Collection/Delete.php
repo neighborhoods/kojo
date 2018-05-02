@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job\Collection;
+namespace Neighborhoods\Kojo\Data\Job\Collection;
 
-use NHDS\Jobs\Data\Job\CollectionAbstract;
-use NHDS\Jobs\Data\JobInterface;
-use NHDS\Jobs\Db;
-use NHDS\Jobs\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\Data\Job\CollectionAbstract;
+use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Db;
+use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 use Zend\Db\Sql\Expression;
 
 class Delete extends CollectionAbstract implements DeleteInterface
@@ -31,7 +31,9 @@ class Delete extends CollectionAbstract implements DeleteInterface
             $this->_create(self::PROP_RECORDS, []);
         }
         $select = $this->getSelect();
-        $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($select);
+        $statement = $this->_getDbConnectionContainerRepository()
+                          ->get(ContainerInterface::ID_JOB)
+                          ->getStatement($select);
         /** @var \PDOStatement $pdoStatement */
         $pdoStatement = $statement->execute()->getResource();
         $pdoStatement->setFetchMode($this->_getFetchMode());

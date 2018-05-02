@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Scheduler\Cache;
+namespace Neighborhoods\Kojo\Scheduler\Cache;
 
-use NHDS\Jobs\Scheduler\CacheInterface;
+use Neighborhoods\Kojo\Scheduler\CacheInterface;
 
 trait AwareTrait
 {

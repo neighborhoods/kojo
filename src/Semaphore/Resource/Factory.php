@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Resource;
+namespace Neighborhoods\Kojo\Semaphore\Resource;
 
-use NHDS\Jobs\Semaphore;
-use NHDS\Jobs\Service\FactoryAbstract;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Semaphore;
+use Neighborhoods\Kojo\Service\FactoryAbstract;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {
@@ -13,7 +13,7 @@ class Factory extends FactoryAbstract implements FactoryInterface
     use Semaphore\Resource\AwareTrait;
     use Semaphore\Mutex\AwareTrait;
     use Semaphore\Resource\Owner\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
 
     public function create(): Semaphore\ResourceInterface
     {

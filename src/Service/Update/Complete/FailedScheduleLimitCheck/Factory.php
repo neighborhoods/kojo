@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheck;
+namespace Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
 
-use NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheckInterface;
-use NHDS\Jobs\Service\Update\Complete\FailedScheduleLimitCheck;
-use NHDS\Jobs\State\Service;
-use NHDS\Jobs\Service\FactoryAbstract;
+use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheckInterface;
+use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
+use Neighborhoods\Kojo\State\Service;
+use Neighborhoods\Kojo\Service\FactoryAbstract;
 
 class Factory extends FactoryAbstract implements FactoryInterface
 {

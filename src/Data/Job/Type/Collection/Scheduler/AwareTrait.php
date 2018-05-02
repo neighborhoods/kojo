@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job\Type\Collection\Scheduler;
+namespace Neighborhoods\Kojo\Data\Job\Type\Collection\Scheduler;
 
-use NHDS\Jobs\Data\Job\Type\Collection\SchedulerInterface;
+use Neighborhoods\Kojo\Data\Job\Type\Collection\SchedulerInterface;
 
 trait AwareTrait
 {

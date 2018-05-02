@@ -1,0 +1,14 @@
+services:
+  neighborhoods.kojo.process_abstract:
+    class: Neighborhoods\Kojo\ProcessAbstract
+    abstract: true
+    public: false
+    shared: false
+    calls:
+      - [setProcessRegistry, ['@process.registry']]
+      - [setLogger, ['@process.pool.logger']]
+      - [setProcessSignal, ['@process.signal']]
+      - [setApmNewRelic, ['@apm.new_relic']]
+  process_abstract:
+    alias: neighborhoods.kojo.process_abstract
+    public: false

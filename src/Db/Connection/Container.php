@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\Connection;
+namespace Neighborhoods\Kojo\Db\Connection;
 
+use Neighborhoods\Kojo\Db\PDO;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Driver\Pdo\Connection;
@@ -14,15 +15,19 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Adapter\Driver;
 use Zend\Db\Sql\Update;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Container implements ContainerInterface
 {
+    use Defensive\AwareTrait;
+    use PDO\Builder\AwareTrait;
     protected $_connection;
-    protected $_name;
+    protected $_id;
     protected $_sql;
     protected $_adapter;
     protected $_pdo;
     protected $_driver;
+    protected $_defaultPdo;
 
     public function setPdo(\PDO $pdo): ContainerInterface
     {
@@ -35,10 +40,10 @@ class Container implements ContainerInterface
         return $this;
     }
 
-    protected function _getPdo(): \Pdo
+    protected function _getPdo(): \PDO
     {
         if ($this->_pdo === null) {
-            throw new \LogicException('PDO is not set.');
+            $this->_pdo = $this->_getDbPDOBuilder()->getPdo();
         }
 
         return $this->_pdo;
@@ -53,24 +58,24 @@ class Container implements ContainerInterface
         return $this->_connection;
     }
 
-    public function setName(string $name): ContainerInterface
+    public function setId(string $id): ContainerInterface
     {
-        if ($this->_name === null) {
-            $this->_name = $name;
+        if ($this->_id === null) {
+            $this->_id = $id;
         }else {
-            throw new \LogicException('Name is already set.');
+            throw new \LogicException('ID is already set.');
         }
 
         return $this;
     }
 
-    public function getName(): string
+    public function getId(): string
     {
-        if ($this->_name === null) {
-            throw new \LogicException('Name is not set.');
+        if ($this->_id === null) {
+            throw new \LogicException('ID is not set.');
         }
 
-        return $this->_name;
+        return $this->_id;
     }
 
     public function getSql(): Sql

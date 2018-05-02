@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Semaphore\Resource\Owner;
+namespace Neighborhoods\Kojo\Semaphore\Resource\Owner;
 
-use NHDS\Jobs\Data;
-use NHDS\Toolkit\Data\Property\Strict;
+use Neighborhoods\Kojo\Data;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Job implements JobInterface
 {
     use Data\Job\AwareTrait;
-    use Strict\AwareTrait;
+    use Defensive\AwareTrait;
     const PROP_RESOURCE_NAME = 'resource_name';
     const PROP_RESOURCE_PATH = 'resource_path';
 

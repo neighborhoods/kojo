@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Message\Broker\Type\Collection;
+namespace Neighborhoods\Kojo\Message\Broker\Type\Collection;
 
-use NHDS\Jobs\Message\Broker\BrokerInterface;
-use NHDS\Jobs\Message\Broker\Type\Collection;
+use Neighborhoods\Kojo\Message\Broker\BrokerInterface;
+use Neighborhoods\Kojo\Message\Broker\Type\Collection;
 
 trait AwareTrait
 {

@@ -1,0 +1,6 @@
+services:
+  neighborhoods.kojo.service.update.panic:
+    class: Neighborhoods\Kojo\Service\Update\Panic
+    shared: false
+  service.update.panic:
+    alias: neighborhoods.kojo.service.update.panic

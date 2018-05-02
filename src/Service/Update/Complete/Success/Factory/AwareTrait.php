@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Service\Update\Complete\Success\Factory;
+namespace Neighborhoods\Kojo\Service\Update\Complete\Success\Factory;
 
-use NHDS\Jobs\Service\Update\Complete\Success\FactoryInterface;
+use Neighborhoods\Kojo\Service\Update\Complete\Success\FactoryInterface;
 
 trait AwareTrait
 {

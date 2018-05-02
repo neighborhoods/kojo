@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job\Collection;
+namespace Neighborhoods\Kojo\Data\Job\Collection;
 
-use NHDS\Jobs\Data\Job\CollectionAbstract;
-use NHDS\Jobs\Data\JobInterface;
-use NHDS\Jobs\Db\Connection\ContainerInterface;
-use NHDS\Jobs\State;
-use NHDS\Jobs\Db;
+use Neighborhoods\Kojo\Data\Job\CollectionAbstract;
+use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
+use Neighborhoods\Kojo\State;
+use Neighborhoods\Kojo\Db;
 
 class Selector extends CollectionAbstract implements SelectorInterface
 {
@@ -31,7 +31,9 @@ class Selector extends CollectionAbstract implements SelectorInterface
             $this->_create(self::PROP_RECORDS, []);
         }
         $select = $this->getSelect();
-        $statement = $this->_getDbConnectionContainer(ContainerInterface::NAME_JOB)->getStatement($select);
+        $statement = $this->_getDbConnectionContainerRepository()
+                          ->get(ContainerInterface::ID_JOB)
+                          ->getStatement($select);
         /** @var \PDOStatement $pdoStatement */
         $pdoStatement = $statement->execute()->getResource();
         $pdoStatement->setFetchMode($this->_getFetchMode());
@@ -64,12 +66,10 @@ class Selector extends CollectionAbstract implements SelectorInterface
                 JobInterface::FIELD_NAME_ID,
                 JobInterface::FIELD_NAME_TYPE_CODE,
                 JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
-                JobInterface::FIELD_NAME_PROCESS_TYPE_CODE,
             ]
         );
         $select->order(
             [
-                JobInterface::FIELD_NAME_PROCESS_TYPE_CODE . ' DESC',
                 JobInterface::FIELD_NAME_PRIORITY . ' DESC',
             ]
         );

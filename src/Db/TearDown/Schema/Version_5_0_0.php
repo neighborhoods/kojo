@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db\TearDown\Schema;
+namespace Neighborhoods\Kojo\Db\TearDown\Schema;
 
-use NHDS\Jobs\Db\Schema\VersionAbstract;
-use NHDS\Jobs\Db\Schema\VersionInterface;
-use NHDS\Jobs\Data\JobInterface;
+use Neighborhoods\Kojo\Db\Schema\VersionAbstract;
+use Neighborhoods\Kojo\Db\Schema\VersionInterface;
+use Neighborhoods\Kojo\Data\JobInterface;
 use Zend\Db\Sql\Ddl\DropTable;
 
 class Version_5_0_0 extends VersionAbstract

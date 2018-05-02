@@ -1,0 +1,12 @@
+services:
+  neighborhoods.kojo.maintainer.delete:
+    class: Neighborhoods\Kojo\Maintainer\Delete
+    calls:
+      - [setLogger, ['@process.pool.logger']]
+      - [setJobCollectionDelete, ['@data.job.collection.delete']]
+      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-maintainer_delete']]
+      - [setSemaphore, ['@semaphore']]
+      - [setPageSize, [50]]
+      - [setOffset, [50]]
+  maintainer.delete:
+    alias: neighborhoods.kojo.maintainer.delete

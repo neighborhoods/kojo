@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Db;
+namespace Neighborhoods\Kojo\Db;
 
-use NHDS\Jobs\Db\Schema\VersionInterface;
+use Neighborhoods\Kojo\Db\Schema\VersionInterface;
 
 interface SetupInterface
 {

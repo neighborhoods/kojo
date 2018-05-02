@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NHDS\Jobs\Data\Job\Type\Collection;
+namespace Neighborhoods\Kojo\Data\Job\Type\Collection;
 
-use NHDS\Jobs\Data\Job\Type\CollectionAbstract;
-use NHDS\Jobs\Data\Job\TypeInterface;
-use NHDS\Jobs\Db;
+use Neighborhoods\Kojo\Data\Job\Type\CollectionAbstract;
+use Neighborhoods\Kojo\Data\Job\TypeInterface;
+use Neighborhoods\Kojo\Db;
 
 class Scheduler extends CollectionAbstract implements SchedulerInterface
 {

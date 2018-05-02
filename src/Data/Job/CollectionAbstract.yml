@@ -1,0 +1,12 @@
+services:
+  neighborhoods.kojo.data.job.collection_abstract:
+    class: Neighborhoods\Kojo\Data\Job\CollectionAbstract
+    abstract: true
+    public: false
+    shared: false
+    calls:
+      - [setLogger, ['@process.pool.logger']]
+      - [setDbConnectionContainerRepository, ['@db.connection.container.repository']]
+  data.job.collection_abstract:
+    alias: neighborhoods.kojo.data.job.collection_abstract
+    public: false

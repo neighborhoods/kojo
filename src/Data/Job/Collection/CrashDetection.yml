@@ -1,0 +1,12 @@
+services:
+  neighborhoods.kojo.data.job.collection.crashdetection:
+    class: Neighborhoods\Kojo\Data\Job\Collection\CrashDetection
+    public: false
+    shared: false
+    parent: data.job.collection_abstract
+    calls:
+      - [setModel, ['@data.job']]
+      - [setIterator, ['@data.job.collection.iterator']]
+  data.job.collection.crashdetection:
+    alias: neighborhoods.kojo.data.job.collection.crashdetection
+    public: false

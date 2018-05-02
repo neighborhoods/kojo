@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.console.command.db.tear_down.uninstall:
+    class: Neighborhoods\Kojo\Console\Command\Db\TearDown\Uninstall
+    calls:
+      - [setBootstrap, ['@worker.bootstrap']]
+      - [setDbTearDown, ['@db.tear_down']]
+  console.command.db.tear_down.uninstall:
+    alias: neighborhoods.kojo.console.command.db.tear_down.uninstall

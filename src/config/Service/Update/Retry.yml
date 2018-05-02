@@ -1,6 +1,0 @@
-services:
-  nhds.jobs.service.update.retry:
-    class: NHDS\Jobs\Service\Update\Retry
-    shared: false
-  service.update.retry:
-    alias: nhds.jobs.service.update.retry

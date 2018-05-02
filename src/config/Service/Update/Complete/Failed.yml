@@ -1,6 +1,0 @@
-services:
-  nhds.jobs.service.update.complete.failed:
-    class: NHDS\Jobs\Service\Update\Complete\Failed
-    shared: false
-  service.update.complete.failed:
-    alias: nhds.jobs.service.update.complete.failed

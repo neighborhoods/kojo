@@ -1,0 +1,6 @@
+services:
+  neighborhoods.kojo.worker.locator:
+    class: Neighborhoods\Kojo\Worker\Locator
+    shared: false
+  worker.locator:
+    alias: neighborhoods.kojo.worker.locator
