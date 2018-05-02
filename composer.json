@@ -29,12 +29,12 @@
         "zendframework/zend-db": "^2.8",
         "dragonmantank/cron-expression": "^2.0",
         "ocramius/proxy-manager": "^2.1",
-        "neighborhoods/pylon": "dev-master"
+        "neighborhoods/pylon": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0",
         "phpunit/dbunit": "^4.0",
-        "neighborhoods/scaffolding": "dev-master"
+        "neighborhoods/scaffolding": "^1.0"
     },
     "bin": [
         "bin/kojo"
