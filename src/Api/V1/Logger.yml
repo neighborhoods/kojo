@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.api.v1.logger:
+    class: Neighborhoods\Kojo\Api\V1\Logger
+    public: false
+    shared: true
+    calls:
+      - [setLogger, ['@process.pool.logger']]
+  api.v1.logger:
+    alias: neighborhoods.kojo.api.v1.logger
+    public: false
