@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Exception\Runtime\Db\Model;
 
-use Neighborhoods\Kojo\Exception\Runtime\Exception;
+use Neighborhoods\Pylon\Exception\Runtime\Exception;
 
 class LoadException extends Exception
 {

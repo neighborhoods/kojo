@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Exception\Runtime;
 
+use Neighborhoods\Pylon\Exception\Runtime\Exception;
+
 class Filesystem extends Exception
 {
     const CODE_PREFIX        = self::class;

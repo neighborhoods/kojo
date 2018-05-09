@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Worker\Locator;
 
-use Neighborhoods\Kojo\Exception\Runtime;
+use Neighborhoods\Pylon\Exception\Runtime;
 
 interface ExceptionInterface extends Runtime\ExceptionInterface
 {
