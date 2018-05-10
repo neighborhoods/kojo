@@ -51,8 +51,7 @@ class Worker implements WorkerInterface
         $newJobScheduler = $this->_getApiV1WorkerService()->getNewJobScheduler();
         $newJobScheduler->setJobTypeCode(self::JOB_TYPE_CODE)
                         ->setWorkAtDateTime(new \DateTime('now'))
-                        ->save()
-                        ->getJobId();
+                        ->save();
 
         return $this;
     }
