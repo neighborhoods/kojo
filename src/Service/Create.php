@@ -85,6 +85,10 @@ class Create extends ServiceAbstract implements CreateInterface
             $job->setWorkAtDateTime($this->_read(self::PROP_WORK_AT_DATE_TIME));
             $job->setCreatedAtDateTime($this->_getTime()->getNow());
             $job->setTimesWorked(0);
+            $job->setTimesRetried(0);
+            $job->setTimesCrashed(0);
+            $job->setTimesHeld(0);
+            $job->setTimesPanicked(0);
             $job->setNextStateRequest(State\Service::STATE_NONE);
             $job->setAssignedState(State\Service::STATE_NEW);
             $this->_create(self::PROP_JOB_PREPARED, true);

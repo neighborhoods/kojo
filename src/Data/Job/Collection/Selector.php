@@ -5,7 +5,6 @@ namespace Neighborhoods\Kojo\Data\Job\Collection;
 
 use Neighborhoods\Kojo\Data\Job\CollectionAbstract;
 use Neighborhoods\Kojo\Data\JobInterface;
-use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 use Neighborhoods\Kojo\State;
 use Neighborhoods\Kojo\Db;
 
@@ -30,18 +29,10 @@ class Selector extends CollectionAbstract implements SelectorInterface
             $this->_prepareCollection();
             $this->_create(self::PROP_RECORDS, []);
         }
-        $select = $this->getSelect();
-        $statement = $this->_getDbConnectionContainerRepository()
-                          ->get(ContainerInterface::ID_JOB)
-                          ->getStatement($select);
-        /** @var \PDOStatement $pdoStatement */
-        $pdoStatement = $statement->execute()->getResource();
-        $pdoStatement->setFetchMode($this->_getFetchMode());
-        $records = $pdoStatement->fetchAll();
-        $this->_logSelect();
+        $records = $this->getQueryBuilder()->execute()->fetchAll();
         if ($records === false) {
             $this->_update(self::PROP_RECORDS, []);
-        }else {
+        } else {
             $this->_update(self::PROP_RECORDS, $records);
         }
 
@@ -50,30 +41,34 @@ class Selector extends CollectionAbstract implements SelectorInterface
 
     protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
-        $select = $this->getSelect();
-        $select->where(
-            [
-                JobInterface::FIELD_NAME_NEXT_STATE_REQUEST => State\ServiceInterface::STATE_WORKING,
-                JobInterface::FIELD_NAME_ASSIGNED_STATE     => [
-                    State\ServiceInterface::STATE_WAITING,
-                    State\Service::STATE_CRASHED,
-                    State\Service::STATE_NEW,
-                ],
-            ]
-        );
-        $select->columns(
+        $select = $this->getQueryBuilder();
+        $select->select(
             [
                 JobInterface::FIELD_NAME_ID,
                 JobInterface::FIELD_NAME_TYPE_CODE,
                 JobInterface::FIELD_NAME_CAN_WORK_IN_PARALLEL,
             ]
         );
-        $select->order(
-            [
-                JobInterface::FIELD_NAME_PRIORITY . ' DESC',
-            ]
+        $select->orderBy(JobInterface::FIELD_NAME_PRIORITY, ' DESC');
+        $select->where(
+            $this->getQueryBuilder()->expr()->andX(
+                $this->getQueryBuilder()->expr()->eq(
+                    JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
+                    $this->getQueryBuilder()->createNamedParameter(State\ServiceInterface::STATE_WORKING)
+                ),
+                $this->getQueryBuilder()->expr()->in(
+                    JobInterface::FIELD_NAME_ASSIGNED_STATE,
+                    [
+                        $this->getQueryBuilder()->createNamedParameter(State\ServiceInterface::STATE_WAITING),
+                        $this->getQueryBuilder()->createNamedParameter(State\Service::STATE_CRASHED),
+                        $this->getQueryBuilder()->createNamedParameter(State\Service::STATE_NEW),
+                    ]),
+                $this->getQueryBuilder()->expr()->lte(
+                    JobInterface::FIELD_NAME_WORK_AT_DATE_TIME,
+                    $this->getQueryBuilder()->createNamedParameter(gmdate("Y-m-d H:i:s"))
+                )
+            )
         );
-        $select->where(JobInterface::FIELD_NAME_WORK_AT_DATE_TIME . ' <= utc_timestamp()');
 
         return $this;
     }

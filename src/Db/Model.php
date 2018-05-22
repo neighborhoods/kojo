@@ -1,20 +1,21 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Db;
 
+use Doctrine\DBAL\Query\QueryBuilder;
+use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
 use Neighborhoods\Kojo\Exception\Runtime\Db\Model\LoadException;
 use Neighborhoods\Pylon\Data\Property;
-use Neighborhoods\Kojo\Db;
-use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
-use Zend\Db\Sql\Select;
+use Neighborhoods\Kojo\Doctrine;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Model implements ModelInterface
 {
     use Defensive\AwareTrait;
     use Property\Persistent\AwareTrait;
-    use Db\Connection\Container\Repository\AwareTrait;
+    use Doctrine\Connection\Decorator\Repository\AwareTrait;
     protected $_idPropertyName;
     protected $_tableName;
 
@@ -22,7 +23,7 @@ class Model implements ModelInterface
     {
         if ($this->_tableName === null) {
             $this->_tableName = $tableName;
-        }else {
+        } else {
             throw new \LogicException('Table name is already set.');
         }
 
@@ -51,7 +52,7 @@ class Model implements ModelInterface
     {
         if ($this->_idPropertyName === null) {
             $this->_idPropertyName = $idPropertyName;
-        }else {
+        } else {
             throw new \LogicException('ID property name is already set.');
         }
 
@@ -74,14 +75,16 @@ class Model implements ModelInterface
             $propertyValue = $this->_readPersistentProperty($propertyName);
         }
 
-        $select = $this->_getLoadSelect($propertyName, $propertyValue);
-        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
-        $statement = $dbConnectionContainer->getStatement($select);
-        $data = $statement->execute()->current();
+        $loadQueryBuilder = $this->_getLoadQueryBuilder($propertyName, $propertyValue);
+        $record = $loadQueryBuilder->execute()->fetchAll();
 
-        if ($data) {
-            $this->_hydrate($data);
-        }else {
+        if (isset($record[0])) {
+            if (!isset($record[1])) {
+                $this->_hydrate($record[0]);
+            } else {
+                throw (new LoadException())->setCode(LoadException::CODE_MULTIPLE_RECORDS_RETRIEVED);
+            }
+        } else {
             throw (new LoadException())->setCode(LoadException::CODE_NO_DATA_LOADED);
         }
 
@@ -98,20 +101,21 @@ class Model implements ModelInterface
         return $this->_hasPersistentProperty($this->getIdPropertyName());
     }
 
-    protected function _getLoadSelect($field, $value): Select
+    protected function _getLoadQueryBuilder($field, $value): QueryBuilder
     {
-        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
-        $select = $dbConnectionContainer->select($this->getTableName());
-        $select->where([$field => $value]);
+        $connection = $this->_getDoctrineConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_JOB);
+        $queryBuilder = $connection->createQueryBuilder();
+        $queryBuilder = $queryBuilder->select('*')->from($this->getTableName());
+        $queryBuilder->where($queryBuilder->expr()->eq($field, $queryBuilder->createNamedParameter($value)));
 
-        return $select;
+        return $queryBuilder;
     }
 
     public function save(): ModelInterface
     {
         if ($this->hasId()) {
             $this->update();
-        }else {
+        } else {
             $this->insert();
         }
 
@@ -120,11 +124,13 @@ class Model implements ModelInterface
 
     public function delete(): ModelInterface
     {
-        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
-        $delete = $dbConnectionContainer->delete($this->getTableName());
-        $delete->where([$this->getIdPropertyName() => $this->getId()]);
-        $statement = $dbConnectionContainer->getStatement($delete);
-        $statement->execute();
+        $connection = $this->_getDoctrineConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_JOB);
+        $queryBuilder = $connection->createQueryBuilder();
+        $queryBuilder->delete($this->getTableName());
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq($this->getIdPropertyName(), $this->getId())
+        );
+        $queryBuilder->execute();
         $this->_emptyPersistentProperties();
 
         return $this;
@@ -132,13 +138,33 @@ class Model implements ModelInterface
 
     protected function insert(): ModelInterface
     {
-        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
-        $insert = $dbConnectionContainer->insert($this->getTableName());
-        $insert->values($this->_readChangedPersistentProperties());
-        $statement = $dbConnectionContainer->getStatement($insert);
-        $statement->execute();
-        $id = $dbConnectionContainer->getDriver()->getLastGeneratedValue();
-        $this->setId((int)$id);
+        $connection = $this->_getDoctrineConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_JOB);
+        $changedPersistentProperties = $this->_readChangedPersistentProperties();
+        $changedPersistentPropertyTypes = [];
+        foreach ($changedPersistentProperties as $changedPersistentProperty) {
+            switch ($type = gettype($changedPersistentProperty)) {
+                case 'boolean':
+                    $changedPersistentPropertyTypes[] = \PDO::PARAM_BOOL;
+                    break;
+                case 'integer':
+                case 'double':
+                case 'float':
+                    $changedPersistentPropertyTypes[] = \PDO::PARAM_INT;
+                    break;
+                case 'string':
+                    $changedPersistentPropertyTypes[] = \PDO::PARAM_STR;
+                    break;
+                default:
+                    throw new \UnexpectedValueException("Type[$type] is unexpected.");
+            }
+        }
+        $connection->insert(
+            $this->getTableName(),
+            $this->_readChangedPersistentProperties(),
+            $changedPersistentPropertyTypes
+        );
+        $id = (int)$connection->lastInsertId();
+        $this->setId($id);
         $this->_emptyChangedPersistentProperties();
 
         return $this;
@@ -146,13 +172,32 @@ class Model implements ModelInterface
 
     protected function update(): ModelInterface
     {
-        $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
+        $connection = $this->_getDoctrineConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_JOB);
         $changedPersistentProperties = $this->_readChangedPersistentProperties();
-        $update = $dbConnectionContainer->update($this->getTableName());
-        $update->where([$this->getIdPropertyName() => $this->getId()]);
-        $update->set($changedPersistentProperties);
-        $statement = $dbConnectionContainer->getStatement($update);
-        $statement->execute();
+        $changedPersistentPropertyTypes = [];
+        foreach ($changedPersistentProperties as $changedPersistentProperty) {
+            switch ($type = gettype($changedPersistentProperty)) {
+                case 'boolean':
+                    $changedPersistentPropertyTypes[] = \PDO::PARAM_BOOL;
+                    break;
+                case 'integer':
+                case 'double':
+                case 'float':
+                    $changedPersistentPropertyTypes[] = \PDO::PARAM_INT;
+                    break;
+                case 'string':
+                    $changedPersistentPropertyTypes[] = \PDO::PARAM_STR;
+                    break;
+                default:
+                    throw new \UnexpectedValueException("Type[$type] is unexpected.");
+            }
+        }
+        $connection->update(
+            $this->getTableName(),
+            $changedPersistentProperties,
+            [$this->getIdPropertyName() => $this->getId()],
+            $changedPersistentPropertyTypes
+        );
         $this->_emptyChangedPersistentProperties();
 
         return $this;

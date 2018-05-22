@@ -7,9 +7,7 @@ use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\State;
 use Neighborhoods\Kojo\Data\Job\CollectionAbstract;
 use Neighborhoods\Kojo\Data\Job\Type;
-use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 use Neighborhoods\Kojo\Db;
-use Zend\Db\Sql\Expression;
 
 class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
 {
@@ -32,17 +30,10 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
     {
         if (!$this->_exists(self::PROP_RECORDS)) {
             $this->_prepareCollection();
-            $select = $this->getSelect();
-            $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
-            $statement = $dbConnectionContainer->getStatement($select);
-            /** @var \PDOStatement $pdoStatement */
-            $pdoStatement = $statement->execute()->getResource();
-            $pdoStatement->setFetchMode($this->_getFetchMode());
-            $records = $pdoStatement->fetchAll()[0];
-            $this->_logSelect();
+            $records = $this->getQueryBuilder()->execute()->fetchAll()[0];
             if ($records === false) {
                 $this->_create(self::PROP_RECORDS, []);
-            }else {
+            } else {
                 $this->_create(self::PROP_RECORDS, $records);
             }
             $numberOfScheduledJobs = (int)$this->_read(self::PROP_RECORDS)[self::ALIAS_NUMBER_OF_SCHEDULED_JOBS];
@@ -54,18 +45,27 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
 
     protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
-        $this->getSelect()->columns(
-            [
-                self::ALIAS_NUMBER_OF_SCHEDULED_JOBS => new Expression('COUNT(' . JobInterface::FIELD_NAME_ID . ')'),
-            ]
+        $this->getQueryBuilder()->select(
+            'COUNT(' . JobInterface::FIELD_NAME_ID . ') AS ' . self::ALIAS_NUMBER_OF_SCHEDULED_JOBS
         );
-        $this->getSelect()->where->equalTo(JobInterface::FIELD_NAME_TYPE_CODE, $this->_getJobType()->getCode());
-        $this->getSelect()
-            ->where
-            ->nest()
-            ->equalTo(JobInterface::FIELD_NAME_ASSIGNED_STATE, State\Service::STATE_WORKING)
-            ->or
-            ->equalTo(JobInterface::FIELD_NAME_NEXT_STATE_REQUEST, State\Service::STATE_WORKING);
+        $this->getQueryBuilder()->where(
+            $this->getQueryBuilder()->expr()->andX(
+                $this->getQueryBuilder()->expr()->eq(
+                    JobInterface::FIELD_NAME_TYPE_CODE,
+                    $this->getQueryBuilder()->createNamedParameter($this->_getJobType()->getCode())
+                ),
+                $this->getQueryBuilder()->expr()->orX(
+                    $this->getQueryBuilder()->expr()->eq(
+                        JobInterface::FIELD_NAME_ASSIGNED_STATE,
+                        $this->getQueryBuilder()->createNamedParameter(State\Service::STATE_WORKING)
+                    ),
+                    $this->getQueryBuilder()->expr()->eq(
+                        JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
+                        $this->getQueryBuilder()->createNamedParameter(State\Service::STATE_WORKING)
+                    )
+                )
+            )
+        );
 
         return $this;
     }

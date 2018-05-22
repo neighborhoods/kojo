@@ -5,7 +5,9 @@ namespace Neighborhoods\Kojo\Db\Schema;
 
 interface VersionInterface
 {
-    public function applySchemaChanges(): VersionInterface;
+    public function applySchemaSetupChanges(): VersionInterface;
 
-    public function assembleSchemaChanges(): VersionInterface;
+    public function setTableName(string $tableName): VersionInterface;
+
+    public function applySchemaTearDownChanges(): VersionInterface;
 }

@@ -1,0 +1,14 @@
+services:
+  neighborhoods.kojo.doctrine.connection.decorator.repository:
+    class: Neighborhoods\Kojo\Doctrine\Connection\Decorator\Repository
+    public: false
+    shared: true
+    calls:
+      - [setDoctrineConnectionDecoratorArrayFactory, ['@doctrine.connection.decorator_array.factory']]
+      - [setDoctrineConnectionDecoratorFactory, ['@doctrine.connection.decorator.factory']]
+      - [createById, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Doctrine\\\\Connection\\\\DecoratorInterface::ID_JOB\")"]]
+      - [createById, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Doctrine\\\\Connection\\\\DecoratorInterface::ID_SCHEMA\")"]]
+      - [createById, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Doctrine\\\\Connection\\\\DecoratorInterface::ID_STATUS\")"]]
+  doctrine.connection.decorator.repository:
+    alias: neighborhoods.kojo.doctrine.connection.decorator.repository
+    public: false

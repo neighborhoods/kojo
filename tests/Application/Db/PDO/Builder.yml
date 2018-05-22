@@ -1,4 +1,0 @@
-services:
-  db.pdo.builder:
-    public: true
-    alias: neighborhoods.kojo.db.pdo.builder

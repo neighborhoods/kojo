@@ -3,24 +3,25 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Db\Setup\Schema;
 
+use Doctrine\DBAL\Types\Type;
+use Neighborhoods\Kojo\Doctrine;
 use Neighborhoods\Kojo\Db\Schema\VersionAbstract;
 use Neighborhoods\Kojo\Db\Schema\VersionInterface;
-use Zend\Db\Sql\Ddl\Column\Varchar;
-use Zend\Db\Sql\Ddl\CreateTable;
+use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
 
 class Version_0_0_0 extends VersionAbstract
 {
-    public function assembleSchemaChanges(): VersionInterface
+    protected function _assembleSchemaChanges(): VersionInterface
     {
-        $createTable = new CreateTable('kojo_jobs_version_schema');
-        $createTable->addColumn(
-            new Varchar(
-                'version', 255, true, null,
-                [
-                    'comment' => 'The schema version for Kojo.',
-                ]));
-
-        $this->_setSchemaChanges($createTable);
+        $connectionDecoratorRepository = $this->_getDoctrineConnectionDecoratorRepository();
+        $createSchema = $connectionDecoratorRepository->createSchema(DecoratorInterface::ID_SCHEMA);
+        $createTable = $createSchema->createTable($this->_getTableName());
+        $createTable->addColumn('version', Type::STRING,
+            [
+                'notnull' => false,
+            ]
+        );
+        $this->_setCreateTable($createTable);
 
         return $this;
     }

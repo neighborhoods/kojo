@@ -36,9 +36,9 @@ class Selector implements SelectorInterface
 
     protected function _attemptSelect(): SelectorInterface
     {
-        $select = $this->_getSelectorJobCollection()->getSelect();
-        $select->offset($this->_collectionIterations * $this->_getPageSize());
-        $select->limit($this->_getPageSize());
+        $select = $this->_getSelectorJobCollection()->getQueryBuilder();
+        $select->setFirstResult($this->_collectionIterations * $this->_getPageSize());
+        $select->setMaxResults($this->_getPageSize());
         $jobCandidates = $this->_getSelectorJobCollection()->getModelsArray();
         $numberOfJobCandidates = count($jobCandidates);
         $publishedMessages = $this->_getMessageBroker()->getPublishChannelLength();
@@ -58,7 +58,7 @@ class Selector implements SelectorInterface
                     if ($this->_getSemaphore()->testAndSetLock($jobSemaphoreResource)) {
                         $job = $this->_getJobClone();
                         $job->setId($jobCandidate->getId());
-                        try{
+                        try {
                             $job->load();
                             $stateService = $this->_getStateServiceClone();
                             $stateService->setJob($job);
@@ -66,10 +66,10 @@ class Selector implements SelectorInterface
                             if ($stateService->isValidTransition()) {
                                 $this->_create(self::PROP_NEXT_JOB_TO_WORK, $job);
                                 break 2;
-                            }else {
+                            } else {
                                 $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
                             }
-                        }catch(LoadException $loadException){
+                        } catch (LoadException $loadException) {
                             if ($this->_getSemaphore()->hasLock($jobSemaphoreResource)) {
                                 $this->_getSemaphore()->releaseLock($jobSemaphoreResource);
                             }
@@ -78,7 +78,7 @@ class Selector implements SelectorInterface
                 }
             }
             ++$this->_collectionIterations;
-            $select->offset($this->_collectionIterations * $this->_getPageSize());
+            $select->setFirstResult($this->_collectionIterations * $this->_getPageSize());
             $jobCandidates = $this->_getSelectorJobCollection()->getRecords();
         }
 

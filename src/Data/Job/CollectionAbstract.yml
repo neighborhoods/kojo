@@ -6,7 +6,7 @@ services:
     shared: false
     calls:
       - [setLogger, ['@process.pool.logger']]
-      - [setDbConnectionContainerRepository, ['@db.connection.container.repository']]
+      - [setDoctrineConnectionDecoratorRepository, ['@doctrine.connection.decorator.repository']]
   data.job.collection_abstract:
     alias: neighborhoods.kojo.data.job.collection_abstract
     public: false

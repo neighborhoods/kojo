@@ -3,79 +3,38 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Db\Setup\Schema;
 
+use Doctrine\DBAL\Types\Type;
+use Neighborhoods\Kojo\Data\Status\MessageInterface;
 use Neighborhoods\Kojo\Db\Schema\VersionAbstract;
 use Neighborhoods\Kojo\Db\Schema\VersionInterface;
-use Neighborhoods\Kojo\Data\Status;
-use Neighborhoods\Kojo\Data\Status\Message;
-use Zend\Db\Metadata\Object\ConstraintKeyObject;
-use Zend\Db\Sql\Ddl\Column\BigInteger;
-use Zend\Db\Sql\Ddl\Column\Datetime;
-use Zend\Db\Sql\Ddl\Column\Integer;
-use Zend\Db\Sql\Ddl\Column\Text;
-use Zend\Db\Sql\Ddl\Constraint\ForeignKey;
-use Zend\Db\Sql\Ddl\Constraint\PrimaryKey;
-use Zend\Db\Sql\Ddl\CreateTable;
-use Zend\Db\Sql\Ddl\Index\Index;
+use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
 
 class Version_3_0_0 extends VersionAbstract
 {
-    public function assembleSchemaChanges(): VersionInterface
+    protected function _assembleSchemaChanges(): VersionInterface
     {
-        $createTable = new CreateTable(Message::TABLE_NAME);
-        $createTable->addColumn(
-            new BigInteger(
-                Message::FIELD_NAME_ID, false, null,
-                [
-                    'comment'  => 'The unique ID of this status message.',
-                    'identity' => true,
-                    'unsigned' => true,
-                ]));
-        $createTable->addColumn(
-            new BigInteger(
-                Message::FIELD_NAME_STATUS_ID, false, null,
-                [
-                    'comment'  => 'COMMENT',
-                    'unsigned' => true,
-                ]));
-        $createTable->addColumn(
-            new Datetime(
-                Message::FIELD_NAME_DATE_TIME, false, null,
-                [
-                    'comment' => 'COMMENT',
-                ]));
-        $createTable->addColumn(
-            new BigInteger(
-                Message::FIELD_NAME_MICRO_TIME, false, null,
-                [
-                    'comment'  => 'COMMENT',
-                    'unsigned' => true,
-                ]));
-        $createTable->addColumn(
-            new Integer(
-                Message::FIELD_NAME_LEVEL, true, null,
-                [
-                    'comment'  => 'COMMENT',
-                    'unsigned' => true,
-                ]));
-        $createTable->addColumn(
-            new Text(
-                Message::FIELD_NAME_MESSAGE, null, false, null,
-                [
-                    'comment' => 'COMMENT',
-                ]));
-        $createTable->addConstraint(new PrimaryKey(Message::FIELD_NAME_ID));
-        $createTable->addConstraint(new Index(Message::FIELD_NAME_STATUS_ID, Message::INDEX_NAME_STATUS_ID));
-        $createTable->addConstraint(
-            new ForeignKey(
-                Message::FOREIGN_KEY_NAME_STATUS_ID,
-                Message::FIELD_NAME_STATUS_ID,
-                Status::TABLE_NAME,
-                Status::FIELD_NAME_ID,
-                ConstraintKeyObject::FK_CASCADE,
-                ConstraintKeyObject::FK_CASCADE
-            )
+        $connectionDecoratorRepository = $this->_getDoctrineConnectionDecoratorRepository();
+        $createSchema = $connectionDecoratorRepository->createSchema(DecoratorInterface::ID_SCHEMA);
+        $createTable = $createSchema->createTable(MessageInterface::TABLE_NAME);
+        $createTable->addColumn(MessageInterface::FIELD_NAME_ID, Type::BIGINT,
+            [
+                'autoincrement' => true,
+                'unsigned' => true,
+            ]
         );
-        $this->_setSchemaChanges($createTable);
+        $createTable->setPrimaryKey([MessageInterface::FIELD_NAME_ID]);
+        $createTable->addColumn(MessageInterface::FIELD_NAME_STATUS_ID, Type::BIGINT, ['unsigned' => true]);
+        $createTable->addColumn(MessageInterface::FIELD_NAME_DATE_TIME, Type::DATETIME);
+        $createTable->addColumn(MessageInterface::FIELD_NAME_MICRO_TIME, Type::BIGINT, ['unsigned' => true]);
+        $createTable->addColumn(MessageInterface::FIELD_NAME_LEVEL, Type::INTEGER,
+            [
+                'unsigned' => true,
+                'notnull' => false,
+            ]
+        );
+        $createTable->addColumn(MessageInterface::FIELD_NAME_MESSAGE, Type::TEXT);
+        $createTable->addIndex([MessageInterface::FIELD_NAME_STATUS_ID]);
+        $this->_setCreateTable($createTable);
 
         return $this;
     }

@@ -8,7 +8,6 @@ services:
       - [setForeman, ['@foreman']]
       - [setMaintainer, ['@maintainer']]
       - [setScheduler, ['@scheduler']]
-      - [setBootstrap, ['@worker.bootstrap']]
       - [setTypeCode, ['job']]
       - [setSelector, ['@selector']]
       - [setProcessStrategy, ['@process.strategy.process_control']]

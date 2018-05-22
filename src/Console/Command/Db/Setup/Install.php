@@ -4,12 +4,10 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Console\Command\Db\Setup;
 
 use Neighborhoods\Kojo\Console\CommandAbstract;
-use Neighborhoods\Kojo\Worker\Bootstrap;
 use Neighborhoods\Kojo\Db\Setup;
 
 class Install extends CommandAbstract
 {
-    use Bootstrap\AwareTrait;
     use Setup\AwareTrait;
     public const COMMAND_NAME = 'db:setup:install';
 
@@ -24,7 +22,6 @@ class Install extends CommandAbstract
 
     public function _execute(): CommandAbstract
     {
-        $this->_getBootstrap()->instantiate();
         $this->_getDbSetup()->install();
         $this->_getOutput()->writeln('Kōjō has been successfully installed!');
 

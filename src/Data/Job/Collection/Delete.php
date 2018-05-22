@@ -6,8 +6,6 @@ namespace Neighborhoods\Kojo\Data\Job\Collection;
 use Neighborhoods\Kojo\Data\Job\CollectionAbstract;
 use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\Db;
-use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
-use Zend\Db\Sql\Expression;
 
 class Delete extends CollectionAbstract implements DeleteInterface
 {
@@ -30,18 +28,10 @@ class Delete extends CollectionAbstract implements DeleteInterface
             $this->_prepareCollection();
             $this->_create(self::PROP_RECORDS, []);
         }
-        $select = $this->getSelect();
-        $statement = $this->_getDbConnectionContainerRepository()
-                          ->get(ContainerInterface::ID_JOB)
-                          ->getStatement($select);
-        /** @var \PDOStatement $pdoStatement */
-        $pdoStatement = $statement->execute()->getResource();
-        $pdoStatement->setFetchMode($this->_getFetchMode());
-        $records = $pdoStatement->fetchAll();
-        $this->_logSelect();
+        $records = $this->getQueryBuilder()->execute()->fetchAll();
         if ($records === false) {
             $this->_update(self::PROP_RECORDS, []);
-        }else {
+        } else {
             $this->_update(self::PROP_RECORDS, $records);
         }
 
@@ -50,15 +40,17 @@ class Delete extends CollectionAbstract implements DeleteInterface
 
     protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
-        $select = $this->getSelect();
-        $select->columns(
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->select(
             [
                 JobInterface::FIELD_NAME_ID,
             ]
         );
-        $select->where->lessThanOrEqualTo(
-            JobInterface::FIELD_NAME_DELETE_AFTER_DATE_TIME,
-            new Expression('utc_timestamp()')
+        $queryBuilder->where(
+            $this->getQueryBuilder()->expr()->lte(
+                JobInterface::FIELD_NAME_DELETE_AFTER_DATE_TIME,
+                $this->getQueryBuilder()->createNamedParameter(gmdate("Y-m-d H:i:s"))
+            )
         );
 
         return $this;

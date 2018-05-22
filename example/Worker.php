@@ -16,20 +16,20 @@ class Worker implements WorkerInterface
 
     public function work(): WorkerInterface
     {
-        // Poll for first message.
-        $this->_getWorkerQueue()->waitForNextMessage();
+//        // Poll for first message.
+//        $this->_getWorkerQueue()->waitForNextMessage();
 
         // Schedule another job of the same type.
-        $this->_scheduleNextJob();
+//        $this->_scheduleNextJob();
 
         // Delegate the work for the first message.
-        $this->_delegateWork();
-
-        // Delegate the work until the observed Queue is empty.
-        while ($this->_getWorkerQueue()->hasNextMessage()) {
-            $this->_delegateWork();
-        }
-
+//        $this->_delegateWork();
+//
+//        // Delegate the work until the observed Queue is empty.
+//        while ($this->_getWorkerQueue()->hasNextMessage()) {
+//            $this->_delegateWork();
+//        }
+//
         // Tell Kōjō that we are done and all is well.
         $this->_getApiV1WorkerService()->requestCompleteSuccess()->applyRequest();
 

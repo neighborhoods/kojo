@@ -2,7 +2,6 @@ services:
   neighborhoods.kojo.console.command.db.setup.install:
     class: Neighborhoods\Kojo\Console\Command\Db\Setup\Install
     calls:
-      - [setBootstrap, ['@worker.bootstrap']]
       - [setDbSetup, ['@db.setup']]
   console.command.db.setup.install:
     alias: neighborhoods.kojo.console.command.db.setup.install

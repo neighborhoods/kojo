@@ -7,22 +7,22 @@ use Neighborhoods\Kojo\Db\ModelInterface;
 
 interface TypeInterface extends ModelInterface
 {
-    public const TABLE_NAME                               = 'kojo_job_type';
-    public const FIELD_NAME_ID                            = 'kojo_job_type_id';
-    public const FIELD_NAME_TYPE_CODE                     = 'type_code';
-    public const FIELD_NAME_NAME                          = 'name';
-    public const FIELD_NAME_WORKER_URI                    = 'worker_uri';
-    public const FIELD_NAME_WORKER_METHOD                 = 'worker_method';
-    public const FIELD_NAME_CAN_WORK_IN_PARALLEL          = 'can_work_in_parallel';
-    public const FIELD_NAME_DEFAULT_IMPORTANCE            = 'default_importance';
-    public const FIELD_NAME_CRON_EXPRESSION               = 'cron_expression';
-    public const FIELD_NAME_SCHEDULE_LIMIT                = 'schedule_limit';
-    public const FIELD_NAME_SCHEDULE_LIMIT_ALLOWANCE      = 'schedule_limit_allowance';
-    public const FIELD_NAME_IS_ENABLED                    = 'is_enabled';
-    public const FIELD_NAME_AUTO_COMPLETE_SUCCESS         = 'auto_complete_success';
+    public const TABLE_NAME = 'kojo_job_type';
+    public const FIELD_NAME_ID = 'kojo_job_type_id';
+    public const FIELD_NAME_TYPE_CODE = 'type_code';
+    public const FIELD_NAME_NAME = 'name';
+    public const FIELD_NAME_WORKER_URI = 'worker_uri';
+    public const FIELD_NAME_WORKER_METHOD = 'worker_method';
+    public const FIELD_NAME_CAN_WORK_IN_PARALLEL = 'can_work_in_parallel';
+    public const FIELD_NAME_DEFAULT_IMPORTANCE = 'default_importance';
+    public const FIELD_NAME_CRON_EXPRESSION = 'cron_expression';
+    public const FIELD_NAME_SCHEDULE_LIMIT = 'schedule_limit';
+    public const FIELD_NAME_SCHEDULE_LIMIT_ALLOWANCE = 'schedule_limit_allowance';
+    public const FIELD_NAME_IS_ENABLED = 'is_enabled';
+    public const FIELD_NAME_AUTO_COMPLETE_SUCCESS = 'auto_complete_success';
     public const FIELD_NAME_AUTO_DELETE_INTERVAL_DURATION = 'auto_delete_interval_duration';
-    public const INDEX_NAME_SCHEDULER_COVERING            = 'SCHEDULER_COVERING';
-    public const INDEX_NAME_COVERING                      = 'COVERING';
+    public const INDEX_NAME_SCHEDULER_COVERING = 'SCHEDULER_COVERING';
+    public const INDEX_NAME_IS_ENABLED__CODE = 'is_enabled__code';
 
     public function setCode(string $code): TypeInterface;
 

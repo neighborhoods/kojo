@@ -4,18 +4,16 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Console\Command\Db\TearDown;
 
 use Neighborhoods\Kojo\Console\CommandAbstract;
-use Neighborhoods\Kojo\Worker\Bootstrap;
 use Neighborhoods\Kojo\Db\TearDown;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Question\Question;
 
 class Uninstall extends CommandAbstract
 {
-    use Bootstrap\AwareTrait;
     use TearDown\AwareTrait;
-    public const COMMAND_NAME                    = 'db:tear_down:uninstall';
+    public const COMMAND_NAME = 'db:tear_down:uninstall';
     public const ANSWER_DELETE_CONFIRMED_BY_USER = 'delete';
-    public const ANSWER_DELETE_DECLINED_BY_USER  = 'no';
+    public const ANSWER_DELETE_DECLINED_BY_USER = 'no';
     protected $_question;
 
     protected function _configure(): CommandAbstract
@@ -30,10 +28,9 @@ class Uninstall extends CommandAbstract
     public function _execute(): CommandAbstract
     {
         if ($this->_isUninstallConfirmedByUser()) {
-            $this->_getBootstrap()->instantiate();
             $this->_getDbTearDown()->uninstall();
             $this->_getOutput()->writeln('Kōjō has been successfully uninstalled.');
-        }else {
+        } else {
             $this->_getOutput()->writeln('Kōjō was not uninstalled.');
         }
 
@@ -63,7 +60,7 @@ class Uninstall extends CommandAbstract
 
     protected function _getValidator(): callable
     {
-        $validator = function (string $answer): bool{
+        $validator = function (string $answer): bool {
             $confirmedByUser = Uninstall::ANSWER_DELETE_CONFIRMED_BY_USER;
             if (!($confirmedByUser === $answer || Uninstall::ANSWER_DELETE_DECLINED_BY_USER === $answer)) {
                 throw new \RuntimeException('Please type either "delete" or "no" to proceed.');
