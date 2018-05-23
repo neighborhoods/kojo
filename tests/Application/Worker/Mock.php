@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Test\Application\Worker;
+namespace Neighborhoods\KojoTest\Application\Worker;
 
 class Mock
 {

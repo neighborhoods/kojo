@@ -1,18 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Example\Worker\Queue\Message;
+namespace Neighborhoods\KojoExample\Worker\Queue\Message;
 
-use Neighborhoods\Kojo\Example\Worker\Queue\MessageInterface;
+use Neighborhoods\KojoExample\Worker\Queue\MessageInterface;
+use Neighborhoods\Pylon\Data;
 
+/** @codeCoverageIgnore */
 class Factory implements FactoryInterface
 {
     use AwareTrait;
+    use Data\Property\Defensive\AwareTrait;
 
     public function create(): MessageInterface
     {
-        $workerQueueMessage = $this->_getWorkerQueueMessageClone();
-
-        return $workerQueueMessage;
+        return clone $this->getWorkerQueueMessage();
     }
 }

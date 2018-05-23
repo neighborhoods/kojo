@@ -1,37 +1,39 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Example\Worker\Queue;
+namespace Neighborhoods\KojoExample\Worker\Queue;
 
-use Neighborhoods\Kojo\Example\Worker\QueueInterface;
+use Neighborhoods\KojoExample\Worker\QueueInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoExampleWorkerQueue;
+
     public function setWorkerQueue(QueueInterface $workerQueue): self
     {
-        $this->_create(QueueInterface::class, $workerQueue);
+        assert(!$this->hasWorkerQueue(), new \LogicException('NeighborhoodsKojoExampleWorkerQueue is already set.'));
+        $this->NeighborhoodsKojoExampleWorkerQueue = $workerQueue;
 
         return $this;
     }
 
-    protected function _getWorkerQueue(): QueueInterface
+    protected function getWorkerQueue(): QueueInterface
     {
-        return $this->_read(QueueInterface::class);
+        assert($this->hasWorkerQueue(), new \LogicException('NeighborhoodsKojoExampleWorkerQueue is not set.'));
+
+        return $this->NeighborhoodsKojoExampleWorkerQueue;
     }
 
-    protected function _getWorkerQueueClone(): QueueInterface
+    protected function hasWorkerQueue(): bool
     {
-        return clone $this->_getWorkerQueue();
+        return isset($this->NeighborhoodsKojoExampleWorkerQueue);
     }
 
-    protected function _hasWorkerQueue(): bool
+    protected function unsetWorkerQueue(): self
     {
-        return $this->_exists(QueueInterface::class);
-    }
-
-    protected function _unsetWorkerQueue(): self
-    {
-        $this->_delete(QueueInterface::class);
+        assert($this->hasWorkerQueue(), new \LogicException('NeighborhoodsKojoExampleWorkerQueue is not set.'));
+        unset($this->NeighborhoodsKojoExampleWorkerQueue);
 
         return $this;
     }

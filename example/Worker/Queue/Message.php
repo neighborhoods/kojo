@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Example\Worker\Queue;
+namespace Neighborhoods\KojoExample\Worker\Queue;
 
 class Message implements MessageInterface
 {

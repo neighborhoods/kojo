@@ -9,7 +9,7 @@ kojo_job:
     next_state_request: "working"
     assigned_state: "waiting"
     previous_state: "new"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -30,7 +30,7 @@ kojo_job:
     next_state_request: "working"
     assigned_state: "waiting"
     previous_state: "new"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -51,7 +51,7 @@ kojo_job:
     next_state_request: "working"
     assigned_state: "waiting"
     previous_state: "new"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -72,7 +72,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -93,7 +93,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -114,7 +114,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -135,7 +135,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -156,7 +156,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -177,7 +177,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -198,7 +198,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -219,7 +219,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -240,7 +240,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -261,7 +261,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -282,7 +282,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -303,7 +303,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -324,7 +324,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -345,7 +345,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -366,7 +366,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -387,7 +387,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -408,7 +408,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -429,7 +429,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -450,7 +450,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -471,7 +471,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -492,7 +492,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -513,7 +513,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -534,7 +534,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -555,7 +555,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -576,7 +576,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -597,7 +597,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -618,7 +618,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -639,7 +639,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -660,7 +660,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -681,7 +681,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -702,7 +702,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -723,7 +723,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -744,7 +744,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -765,7 +765,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -786,7 +786,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -807,7 +807,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -828,7 +828,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -849,7 +849,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -870,7 +870,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -891,7 +891,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -912,7 +912,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -933,7 +933,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -954,7 +954,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -975,7 +975,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -996,7 +996,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1017,7 +1017,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1038,7 +1038,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1059,7 +1059,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1080,7 +1080,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1101,7 +1101,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1122,7 +1122,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1143,7 +1143,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1164,7 +1164,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1185,7 +1185,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1206,7 +1206,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1227,7 +1227,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1248,7 +1248,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1269,7 +1269,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1290,7 +1290,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1311,7 +1311,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1332,7 +1332,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1353,7 +1353,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1374,7 +1374,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1395,7 +1395,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1416,7 +1416,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1437,7 +1437,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1458,7 +1458,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1479,7 +1479,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1500,7 +1500,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1521,7 +1521,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1542,7 +1542,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1563,7 +1563,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1584,7 +1584,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1605,7 +1605,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1626,7 +1626,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1647,7 +1647,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1668,7 +1668,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1689,7 +1689,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1710,7 +1710,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1731,7 +1731,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1752,7 +1752,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1773,7 +1773,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1794,7 +1794,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1815,7 +1815,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1836,7 +1836,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1857,7 +1857,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1878,7 +1878,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1899,7 +1899,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1920,7 +1920,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1941,7 +1941,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1962,7 +1962,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -1983,7 +1983,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2004,7 +2004,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2025,7 +2025,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2046,7 +2046,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2067,7 +2067,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2088,7 +2088,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2109,7 +2109,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2130,7 +2130,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2151,7 +2151,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2172,7 +2172,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2193,7 +2193,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2214,7 +2214,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2235,7 +2235,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2256,7 +2256,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2277,7 +2277,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2298,7 +2298,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2319,7 +2319,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2340,7 +2340,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2361,7 +2361,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2382,7 +2382,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2403,7 +2403,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2424,7 +2424,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2445,7 +2445,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2466,7 +2466,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2487,7 +2487,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2508,7 +2508,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2529,7 +2529,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2550,7 +2550,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2571,7 +2571,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2592,7 +2592,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2613,7 +2613,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2634,7 +2634,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2655,7 +2655,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2676,7 +2676,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2697,7 +2697,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2718,7 +2718,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2739,7 +2739,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2760,7 +2760,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2781,7 +2781,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2802,7 +2802,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2823,7 +2823,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2844,7 +2844,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2865,7 +2865,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2886,7 +2886,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2907,7 +2907,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2928,7 +2928,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2949,7 +2949,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2970,7 +2970,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -2991,7 +2991,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3012,7 +3012,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3033,7 +3033,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3054,7 +3054,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3075,7 +3075,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3096,7 +3096,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3117,7 +3117,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3138,7 +3138,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3159,7 +3159,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3180,7 +3180,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3201,7 +3201,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3222,7 +3222,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3243,7 +3243,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3264,7 +3264,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3285,7 +3285,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3306,7 +3306,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3327,7 +3327,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3348,7 +3348,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3369,7 +3369,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3390,7 +3390,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3411,7 +3411,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3432,7 +3432,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3453,7 +3453,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3474,7 +3474,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3495,7 +3495,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3516,7 +3516,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3537,7 +3537,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3558,7 +3558,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3579,7 +3579,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3600,7 +3600,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3621,7 +3621,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3642,7 +3642,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3663,7 +3663,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3684,7 +3684,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3705,7 +3705,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3726,7 +3726,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3747,7 +3747,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3768,7 +3768,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3789,7 +3789,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3810,7 +3810,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3831,7 +3831,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3852,7 +3852,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3873,7 +3873,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3894,7 +3894,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3915,7 +3915,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3936,7 +3936,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3957,7 +3957,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3978,7 +3978,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -3999,7 +3999,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -4020,7 +4020,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -4041,7 +4041,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -4062,7 +4062,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -4083,7 +4083,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -4104,7 +4104,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -4125,7 +4125,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -4146,7 +4146,7 @@ kojo_job:
     next_state_request: "none"
     assigned_state: "working"
     previous_state: "waiting"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"
@@ -4167,7 +4167,7 @@ kojo_job:
     next_state_request: "schedule_limit_check"
     assigned_state: "waiting"
     previous_state: "new"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: 1
     last_transition_date_time: "2010-04-26 12:14:20"

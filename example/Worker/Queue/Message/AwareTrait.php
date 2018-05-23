@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Example\Worker\Queue\Message;
+namespace Neighborhoods\KojoExample\Worker\Queue\Message;
 
-use Neighborhoods\Kojo\Example\Worker\Queue\MessageInterface;
+use Neighborhoods\KojoExample\Worker\Queue\MessageInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
     public function setWorkerQueueMessage(MessageInterface $workerQueueMessage): self
@@ -14,22 +15,17 @@ trait AwareTrait
         return $this;
     }
 
-    protected function _getWorkerQueueMessage(): MessageInterface
+    protected function getWorkerQueueMessage(): MessageInterface
     {
         return $this->_read(MessageInterface::class);
     }
 
-    protected function _getWorkerQueueMessageClone(): MessageInterface
-    {
-        return clone $this->_getWorkerQueueMessage();
-    }
-
-    protected function _hasWorkerQueueMessage(): bool
+    protected function hasWorkerQueueMessage(): bool
     {
         return $this->_exists(MessageInterface::class);
     }
 
-    protected function _unsetWorkerQueueMessage(): self
+    protected function unsetWorkerQueueMessage(): self
     {
         $this->_delete(MessageInterface::class);
 

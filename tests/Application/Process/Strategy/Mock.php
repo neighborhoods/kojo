@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Test\Application\Process\Strategy;
+namespace Neighborhoods\KojoTest\Application\Process\Strategy;
 
 use Neighborhoods\Kojo\Process\StrategyInterface;
 

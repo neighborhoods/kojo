@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Example\Worker\Queue;
+namespace Neighborhoods\KojoExample\Worker\Queue;
 
+/** @codeCoverageIgnore */
 class MessageArray extends \ArrayIterator implements MessageArrayInterface
 {
-    /** @param \Neighborhoods\Kojo\Example\Worker\Queue\Message ...$workerQueueMessages */
+    /** @param MessageInterface ...$workerQueueMessages */
     public function __construct(array $workerQueueMessages = array(), int $flags = 0)
     {
         if (!empty($workerQueueMessages)) {
@@ -15,36 +16,41 @@ class MessageArray extends \ArrayIterator implements MessageArrayInterface
         parent::__construct($workerQueueMessages, $flags);
     }
 
-    public function offsetGet($index): \Neighborhoods\Kojo\Example\Worker\Queue\Message
+    public function offsetGet($index): MessageInterface
     {
         return $this->_assertValidArrayItemType(parent::offsetGet($index));
     }
 
-    /** @param \Neighborhoods\Kojo\Example\Worker\Queue\Message $workerQueueMessage */
+    /** @param MessageInterface $workerQueueMessage */
     public function offsetSet($index, $workerQueueMessage)
     {
         parent::offsetSet($index, $this->_assertValidArrayItemType($workerQueueMessage));
     }
 
-    /** @param \Neighborhoods\Kojo\Example\Worker\Queue\Message $workerQueueMessage */
+    /** @param MessageInterface $workerQueueMessage */
     public function append($workerQueueMessage)
     {
         $this->_assertValidArrayItemType($workerQueueMessage);
         parent::append($workerQueueMessage);
     }
 
-    public function current(): \Neighborhoods\Kojo\Example\Worker\Queue\Message
+    public function current(): MessageInterface
     {
         return parent::current();
     }
 
-    protected function _assertValidArrayItemType(\Neighborhoods\Kojo\Example\Worker\Queue\Message $workerQueueMessage)
+    protected function _assertValidArrayItemType(MessageInterface $workerQueueMessage)
     {
         return $workerQueueMessage;
     }
 
-    protected function _assertValidArrayType(\Neighborhoods\Kojo\Example\Worker\Queue\Message ...$workerQueueMessages
-    ): MessageArrayInterface{
+    protected function _assertValidArrayType(MessageInterface ...$workerQueueMessages): MessageArrayInterface
+    {
         return $this;
+    }
+
+    public function getArrayCopy(): MessageArrayInterface
+    {
+        return new self(parent::getArrayCopy(), (int)$this->getFlags());
     }
 }
