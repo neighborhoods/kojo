@@ -1,8 +1,8 @@
 parameters:
-  neighborhoods.kojo.environment.parameters.redis_port:
-  neighborhoods.kojo.environment.parameters.redis_host:
-  neighborhoods.kojo.environment.parameters.database_user_name:
-  neighborhoods.kojo.environment.parameters.database_password:
-  neighborhoods.kojo.environment.parameters.database_adapter:
-  neighborhoods.kojo.environment.parameters.database_host:
-  neighborhoods.kojo.environment.parameters.database_name:
+  neighborhoods.kojo.environment.parameters.redis_port: 0
+  neighborhoods.kojo.environment.parameters.redis_host: ''
+  neighborhoods.kojo.environment.parameters.database_user_name: ''
+  neighborhoods.kojo.environment.parameters.database_password: ''
+  neighborhoods.kojo.environment.parameters.database_adapter: ''
+  neighborhoods.kojo.environment.parameters.database_host: ''
+  neighborhoods.kojo.environment.parameters.database_name: ''

@@ -1,5 +1,5 @@
 FROM neighborhoods/php-fpm-phalcon:php7.1_phalcon3.2
-ARG PROJECT_NAME=jobs
+ARG PROJECT_NAME=kojo
 
 # COMPOSER_TOKEN can also be passed via the COMPOSER_GITHUB_TOKEN file
 ARG COMPOSER_TOKEN=placeholder_token_you_must_replace_via_args_in_compose_file

@@ -7,20 +7,13 @@ use Neighborhoods\Kojo\Data\Job\CollectionAbstract;
 use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\State;
 use Neighborhoods\Kojo\Db;
-use Zend\Db\Sql\Expression;
 
 class LimitCheck extends CollectionAbstract implements LimitCheckInterface
 {
     protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
-        $select = $this->getSelect();
-        $select->where(
-            [
-                JobInterface::FIELD_NAME_NEXT_STATE_REQUEST => State\ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK,
-                JobInterface::FIELD_NAME_ASSIGNED_STATE     => State\ServiceInterface::STATE_WAITING,
-            ]
-        );
-        $select->columns(
+        $select = $this->getQueryBuilder();
+        $select->select(
             [
                 JobInterface::FIELD_NAME_ID,
                 JobInterface::FIELD_NAME_TYPE_CODE,
@@ -31,15 +24,23 @@ class LimitCheck extends CollectionAbstract implements LimitCheckInterface
                 JobInterface::FIELD_NAME_PREVIOUS_STATE,
             ]
         );
-        $this->getSelect()->where->and->lessThanOrEqualTo(
-            JobInterface::FIELD_NAME_WORK_AT_DATE_TIME, new Expression('utc_timestamp()')
+        $this->getQueryBuilder()->where(
+            $this->getQueryBuilder()->expr()->andX(
+                $this->getQueryBuilder()->expr()->eq(
+                    JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
+                    $this->getQueryBuilder()->createNamedParameter(State\ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK)
+                ),
+                $this->getQueryBuilder()->expr()->eq(
+                    JobInterface::FIELD_NAME_ASSIGNED_STATE,
+                    $this->getQueryBuilder()->createNamedParameter(State\ServiceInterface::STATE_WAITING)
+                ),
+                $this->getQueryBuilder()->expr()->lte(
+                    JobInterface::FIELD_NAME_WORK_AT_DATE_TIME,
+                    $this->getQueryBuilder()->createNamedParameter(gmdate("Y-m-d H:i:s"))
+                )
+            )
         );
-        $select->order(
-            [
-                JobInterface::FIELD_NAME_WORK_AT_DATE_TIME
-            ]
-        );
-        $this->_logSelect();
+        $select->addOrderBy(JobInterface::FIELD_NAME_WORK_AT_DATE_TIME);
 
         return $this;
     }

@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.doctrine.connection.decorator_array.factory:
+    class: Neighborhoods\Kojo\Doctrine\Connection\DecoratorArray\Factory
+    public: false
+    shared: true
+    calls:
+      - [setDoctrineConnectionDecoratorArray, ['@doctrine.connection.decorator_array']]
+  doctrine.connection.decorator_array.factory:
+    alias: neighborhoods.kojo.doctrine.connection.decorator_array.factory
+    public: false

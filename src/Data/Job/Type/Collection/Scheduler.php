@@ -11,7 +11,7 @@ class Scheduler extends CollectionAbstract implements SchedulerInterface
 {
     protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
-        $this->getSelect()->where(TypeInterface::FIELD_NAME_CRON_EXPRESSION . ' IS NOT NULL');
+        $this->getQueryBuilder()->select('*')->where(TypeInterface::FIELD_NAME_CRON_EXPRESSION . ' IS NOT NULL');
 
         return $this;
     }

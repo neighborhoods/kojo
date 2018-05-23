@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Api\V1;
 
 use Neighborhoods\Kojo\Process;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Logger implements LoggerInterface
 {
+    use Defensive\AwareTrait;
     use Process\Pool\Logger\AwareTrait;
 
     /** System is unusable. */

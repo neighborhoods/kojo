@@ -12,13 +12,14 @@ class CrashDetection extends CollectionAbstract implements CrashDetectionInterfa
 {
     protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
-        $select = $this->getSelect();
-        $select->where(
-            [
-                JobInterface::FIELD_NAME_ASSIGNED_STATE => State\ServiceInterface::STATE_WORKING,
-            ]
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq(
+                JobInterface::FIELD_NAME_ASSIGNED_STATE,
+                $queryBuilder->createNamedParameter(State\ServiceInterface::STATE_WORKING)
+            )
         );
-        $select->columns(
+        $queryBuilder->select(
             [
                 JobInterface::FIELD_NAME_ASSIGNED_STATE,
                 JobInterface::FIELD_NAME_ID,
@@ -30,8 +31,7 @@ class CrashDetection extends CollectionAbstract implements CrashDetectionInterfa
                 JobInterface::FIELD_NAME_TIMES_CRASHED,
             ]
         );
-        $select->order(JobInterface::FIELD_NAME_PRIORITY . ' DESC');
-        $this->_logSelect();
+        $queryBuilder->orderBy(JobInterface::FIELD_NAME_PRIORITY, ' DESC');
 
         return $this;
     }

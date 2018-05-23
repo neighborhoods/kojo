@@ -16,16 +16,16 @@ class Delete implements DeleteInterface
     use Job\Collection\Delete\AwareTrait;
     use Logger\AwareTrait;
     const PROP_PAGE_SIZE = 'page_size';
-    const PROP_OFFSET    = 'offset';
+    const PROP_OFFSET = 'offset';
     protected $_collectionIterations = 0;
 
     public function deleteCompletedJobs(): DeleteInterface
     {
         if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->testAndSetLock()) {
-            try{
+            try {
                 $this->_deleteCompletedJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->releaseLock();
-            }catch(\Exception $exception){
+            } catch (\Exception $exception) {
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->releaseLock();
                 }
@@ -38,9 +38,9 @@ class Delete implements DeleteInterface
 
     protected function _deleteCompletedJobs(): DeleteInterface
     {
-        $select = $this->_getJobCollectionDelete()->getSelect();
-        $select->offset($this->_collectionIterations * $this->_getPageSize());
-        $select->limit($this->_getPageSize());
+        $queryBuilder = $this->_getJobCollectionDelete()->getQueryBuilder();
+        $queryBuilder->setFirstResult($this->_collectionIterations * $this->_getPageSize());
+        $queryBuilder->setMaxResults($this->_getPageSize());
         $jobCandidates = $this->_getJobCollectionDelete()->getModelsArray();
 
         while (!empty($jobCandidates)) {
@@ -48,7 +48,7 @@ class Delete implements DeleteInterface
                 $jobCandidate->delete();
             }
             ++$this->_collectionIterations;
-            $select->offset($this->_collectionIterations * $this->_getPageSize());
+            $queryBuilder->setFirstResult($this->_collectionIterations * $this->_getPageSize());
             $jobCandidates = $this->_getJobCollectionDelete()->getRecords();
         }
 

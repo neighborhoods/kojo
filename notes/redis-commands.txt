@@ -1,4 +1,0 @@
-// request for a new job process to be run.
-lpush job_listener_publish "{
-   \"command\":\"commandProcess.addProcess('listener.command')\"
-}"

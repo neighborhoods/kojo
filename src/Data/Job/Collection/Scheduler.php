@@ -5,8 +5,8 @@ namespace Neighborhoods\Kojo\Data\Job\Collection;
 
 use Neighborhoods\Kojo\Data\Job\CollectionAbstract;
 use Neighborhoods\Kojo\Data\JobInterface;
-use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
 use Neighborhoods\Kojo\Db;
+use Neighborhoods\Kojo\Scheduler\CacheInterface;
 
 class Scheduler extends CollectionAbstract implements SchedulerInterface
 {
@@ -28,19 +28,15 @@ class Scheduler extends CollectionAbstract implements SchedulerInterface
     {
         if (!$this->_exists(self::PROP_RECORDS)) {
             $this->_prepareCollection();
-            $select = $this->getSelect();
-            $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
-            $statement = $dbConnectionContainer->getStatement($select);
-            /** @var \PDOStatement $pdoStatement */
-            $pdoStatement = $statement->execute()->getResource();
-            $pdoStatement->setFetchMode(\PDO::FETCH_NUM);
             $records = [];
-            while ($record = $pdoStatement->fetch()) {
-                $records[$record[0]][$record[1]] = 1;
+            $results = $this->getQueryBuilder()->execute()->fetchAll();
+            foreach ($results as $result) {
+                $typeCode = JobInterface::FIELD_NAME_TYPE_CODE;
+                $records[$result[$typeCode]][$result[JobInterface::FIELD_NAME_WORK_AT_DATE_TIME]] = 1;
             }
             if ($records === false) {
                 $this->_create(self::PROP_RECORDS, []);
-            }else {
+            } else {
                 $this->_create(self::PROP_RECORDS, $records);
             }
         }
@@ -50,10 +46,17 @@ class Scheduler extends CollectionAbstract implements SchedulerInterface
 
     protected function _prepareCollection(): Db\Model\CollectionAbstract
     {
-        $this->getSelect()->columns([JobInterface::FIELD_NAME_TYPE_CODE, JobInterface::FIELD_NAME_WORK_AT_DATE_TIME]);
-        $workAtDateTime = $this->_getReferenceDateTime()->format('Y-m-d H:i:0');
-        $this->getSelect()->where(JobInterface::FIELD_NAME_WORK_AT_DATE_TIME . ' >= "' . $workAtDateTime . '"');
-        $this->_logSelect();
+        $this->getQueryBuilder()->select([
+            JobInterface::FIELD_NAME_TYPE_CODE,
+            JobInterface::FIELD_NAME_WORK_AT_DATE_TIME
+        ]);
+        $workAtDateTime = $this->_getReferenceDateTime()->format(CacheInterface::DATE_TIME_FORMAT_MYSQL_MINUTE);
+        $this->getQueryBuilder()->where(
+            $this->getQueryBuilder()->expr()->gte(
+                JobInterface::FIELD_NAME_WORK_AT_DATE_TIME,
+                $this->getQueryBuilder()->createNamedParameter($workAtDateTime)
+            )
+        );
 
         return $this;
     }

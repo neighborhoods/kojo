@@ -3,44 +3,30 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Db\Setup\Schema;
 
-use Neighborhoods\Kojo\Data\Status\Type;
+use Doctrine\DBAL\Types\Type;
+use Neighborhoods\Kojo\Data\Status\TypeInterface;
 use Neighborhoods\Kojo\Db\Schema\VersionAbstract;
 use Neighborhoods\Kojo\Db\Schema\VersionInterface;
-use Zend\Db\Sql\Ddl\Column\BigInteger;
-use Zend\Db\Sql\Ddl\Column\Varchar;
-use Zend\Db\Sql\Ddl\Constraint\PrimaryKey;
-use Zend\Db\Sql\Ddl\CreateTable;
-use Zend\Db\Sql\Ddl\Index\Index;
+use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
 
 class Version_1_0_0 extends VersionAbstract
 {
-    public function assembleSchemaChanges(): VersionInterface
+    protected function _assembleSchemaChanges(): VersionInterface
     {
-        $createTable = new CreateTable(Type::TABLE_NAME);
-        $createTable->addColumn(
-            new BigInteger(
-                Type::FIELD_NAME_ID, false, null,
-                [
-                    'comment'  => 'The unique ID of this status type.',
-                    'identity' => true,
-                    'unsigned' => true,
-                ]));
-        $createTable->addColumn(
-            new Varchar(
-                Type::FIELD_NAME_CODE, 255, false, null,
-                [
-                    'comment' => 'COMMENT',
-                ]));
-        $createTable->addColumn(
-            new Varchar(
-                Type::FIELD_NAME_NAME, 255, false, null,
-                [
-                    'comment' => 'COMMENT',
-                ]));
-        $createTable->addConstraint(new PrimaryKey(Type::FIELD_NAME_ID));
-        $createTable->addConstraint(new Index(Type::FIELD_NAME_CODE, Type::INDEX_NAME_CODE));
-
-        $this->_setSchemaChanges($createTable);
+        $connectionDecoratorRepository = $this->_getDoctrineConnectionDecoratorRepository();
+        $createSchema = $connectionDecoratorRepository->createSchema(DecoratorInterface::ID_SCHEMA);
+        $createTable = $createSchema->createTable(TypeInterface::TABLE_NAME);
+        $createTable->addColumn(TypeInterface::FIELD_NAME_ID, Type::BIGINT,
+            [
+                'autoincrement' => true,
+                'unsigned' => true,
+            ]
+        );
+        $createTable->setPrimaryKey([TypeInterface::FIELD_NAME_ID]);
+        $createTable->addColumn(TypeInterface::FIELD_NAME_CODE, Type::STRING);
+        $createTable->addColumn(TypeInterface::FIELD_NAME_NAME, Type::STRING);
+        $createTable->addUniqueIndex([TypeInterface::FIELD_NAME_CODE], TypeInterface::FIELD_NAME_CODE);
+        $this->_setCreateTable($createTable);
 
         return $this;
     }

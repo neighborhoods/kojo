@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Exception\Runtime;
 
+use Neighborhoods\Pylon\Exception\Runtime\Exception;
+
 class Filesystem extends Exception
 {
-    const CODE_PREFIX        = self::class;
+    const CODE_PREFIX        = self::class . '-';
     const CODE_UNLOCK_FAILED = self::CODE_PREFIX . 'unlock_failed';
     const CODE_FOPEN_FAILED  = self::CODE_PREFIX . 'fopen_failed';
     const CODE_FCLOSE_FAILED = self::CODE_PREFIX . 'fclose_failed';

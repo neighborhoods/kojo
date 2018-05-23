@@ -1,13 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Db\Model;
 
-use Neighborhoods\Kojo\Db\Connection\ContainerInterface;
+use Doctrine\DBAL\Query\QueryBuilder;
 use Neighborhoods\Kojo\Db\Model;
+use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
-use Neighborhoods\Kojo\Db;
-use Zend\Db\Sql\Select;
+use Neighborhoods\Kojo\Doctrine;
 use Neighborhoods\Kojo\Process;
 
 abstract class CollectionAbstract implements CollectionInterface
@@ -15,21 +16,22 @@ abstract class CollectionAbstract implements CollectionInterface
     use Defensive\AwareTrait;
     use Model\AwareTrait;
     use Process\Pool\Logger\AwareTrait;
-    use Db\Connection\Container\Repository\AwareTrait;
-    const PROP_SELECT     = 'select';
-    const PROP_MODELS     = 'models';
-    const PROP_RECORDS    = 'records';
+    use Doctrine\Connection\Decorator\Repository\AwareTrait;
+    const PROP_QUERY_BUILDER = 'query_builder';
+    const PROP_MODELS = 'models';
+    const PROP_RECORDS = 'records';
     const PROP_FETCH_MODE = 'fetch_mode';
 
-    public function getSelect(): Select
+    public function getQueryBuilder(): QueryBuilder
     {
-        if (!$this->_exists(self::PROP_SELECT)) {
-            $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
-            $select = $dbConnectionContainer->select($this->_getModel()->getTableName());
-            $this->_create(self::PROP_SELECT, $select);
+        if (!$this->_exists(self::PROP_QUERY_BUILDER)) {
+            $connectionDecoratorRepository = $this->_getDoctrineConnectionDecoratorRepository();
+            $queryBuilder = $connectionDecoratorRepository->createQueryBuilder(DecoratorInterface::ID_JOB);
+            $queryBuilder = $queryBuilder->select()->from($this->_getModel()->getTableName());
+            $this->_create(self::PROP_QUERY_BUILDER, $queryBuilder);
         }
 
-        return $this->_read(self::PROP_SELECT);
+        return $this->_read(self::PROP_QUERY_BUILDER);
     }
 
     protected function _setFetchMode(int $fetchMode): CollectionAbstract
@@ -78,13 +80,7 @@ abstract class CollectionAbstract implements CollectionInterface
     {
         if (!$this->_exists(self::PROP_RECORDS)) {
             $this->_prepareCollection();
-            $select = $this->getSelect();
-            $dbConnectionContainer = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB);
-            $statement = $dbConnectionContainer->getStatement($select);
-            /** @var \PDOStatement $pdoStatement */
-            $pdoStatement = $statement->execute()->getResource();
-            $pdoStatement->setFetchMode($this->_getFetchMode());
-            $records = $pdoStatement->fetchAll();
+            $records = $this->getQueryBuilder()->execute()->fetchAll();
             if ($records === false) {
                 $this->_create(self::PROP_RECORDS, []);
             }else {
@@ -96,14 +92,4 @@ abstract class CollectionAbstract implements CollectionInterface
     }
 
     abstract protected function _prepareCollection(): CollectionAbstract;
-
-    protected function _logSelect(): CollectionInterface
-    {
-        if ($this->_hasLogger()) {
-            $sql = $this->_getDbConnectionContainerRepository()->get(ContainerInterface::ID_JOB)->getSql();
-            $this->_getLogger()->debug(get_called_class() . ': ' . $sql->buildSqlString($this->getSelect()));
-        }
-
-        return $this;
-    }
 }

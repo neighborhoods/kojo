@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.doctrine.connection.decorator:
+    class: Neighborhoods\Kojo\Doctrine\Connection\Decorator
+    public: false
+    shared: false
+    calls:
+      - [setPDOBuilderFactory, ['@pdo.builder.factory']]
+  doctrine.connection.decorator:
+    alias: neighborhoods.kojo.doctrine.connection.decorator
+    public: false
