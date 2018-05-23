@@ -2,7 +2,7 @@ kojo_job_type:
   - kojo_job_type_id: '1'
     type_code: "agent_reviews_update"
     name: "Agent Reviews Update"
-    worker_uri: '\Neighborhoods\Kojo\Example\Worker'
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
     worker_method: "work"
     can_work_in_parallel: '1'
     default_importance: '10'

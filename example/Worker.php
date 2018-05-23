@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Example;
+namespace Neighborhoods\KojoExample;
 
 use Neighborhoods\Kojo\Api;
 use Neighborhoods\Pylon\Data\Property;

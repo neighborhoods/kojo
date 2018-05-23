@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Example\Worker;
+namespace Neighborhoods\KojoExample\Worker;
 
-use Neighborhoods\Kojo\Example\Worker;
+use Neighborhoods\KojoExample\Worker;
 use Neighborhoods\Pylon\Data;
 
 class Delegate implements DelegateInterface

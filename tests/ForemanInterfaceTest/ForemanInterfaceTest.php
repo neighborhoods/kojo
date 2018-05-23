@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Test\Unit;
+namespace Neighborhoods\KojoTest\Unit;
 
 use Neighborhoods\Kojo\ForemanInterface;
 use Neighborhoods\Kojo\Process\JobInterface;

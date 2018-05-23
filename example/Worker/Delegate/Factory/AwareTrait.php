@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Example\Worker\Delegate\Factory;
+namespace Neighborhoods\KojoExample\Worker\Delegate\Factory;
 
-use Neighborhoods\Kojo\Example\Worker\Delegate\FactoryInterface;
+use Neighborhoods\KojoExample\Worker\Delegate\FactoryInterface;
 
 trait AwareTrait
 {
