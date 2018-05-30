@@ -5,33 +5,38 @@ namespace Neighborhoods\Kojo\Api\V1\Job\Type\Registrar\Factory;
 
 use Neighborhoods\Kojo\Api\V1\Job\Type\Registrar\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoApiV1JobTypeRegistrarFactory;
+
     public function setApiV1JobTypeRegistrarFactory(FactoryInterface $apiV1JobTypeRegistrarFactory): self
     {
-        $this->_create(FactoryInterface::class, $apiV1JobTypeRegistrarFactory);
+        assert(!$this->hasApiV1JobTypeRegistrarFactory(),
+            new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrarFactory is already set.'));
+        $this->NeighborhoodsKojoApiV1JobTypeRegistrarFactory = $apiV1JobTypeRegistrarFactory;
 
         return $this;
     }
 
-    protected function _getApiV1JobTypeRegistrarFactory(): FactoryInterface
+    protected function getApiV1JobTypeRegistrarFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        assert($this->hasApiV1JobTypeRegistrarFactory(),
+            new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrarFactory is not set.'));
+
+        return $this->NeighborhoodsKojoApiV1JobTypeRegistrarFactory;
     }
 
-    protected function _getApiV1JobTypeRegistrarFactoryClone(): FactoryInterface
+    protected function hasApiV1JobTypeRegistrarFactory(): bool
     {
-        return clone $this->_getApiV1JobTypeRegistrarFactory();
+        return isset($this->NeighborhoodsKojoApiV1JobTypeRegistrarFactory);
     }
 
-    protected function _hasApiV1JobTypeRegistrarFactory(): bool
+    protected function unsetApiV1JobTypeRegistrarFactory(): self
     {
-        return $this->_exists(FactoryInterface::class);
-    }
-
-    protected function _unsetApiV1JobTypeRegistrarFactory(): self
-    {
-        $this->_delete(FactoryInterface::class);
+        assert($this->hasApiV1JobTypeRegistrarFactory(),
+            new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrarFactory is not set.'));
+        unset($this->NeighborhoodsKojoApiV1JobTypeRegistrarFactory);
 
         return $this;
     }

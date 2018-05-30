@@ -5,28 +5,36 @@ namespace Neighborhoods\Kojo\Api\V1\Worker\Service;
 
 use Neighborhoods\Kojo\Api\V1\Worker\ServiceInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setApiV1WorkerService(ServiceInterface $workerService)
+    protected $NeighborhoodsKojoApiV1WorkerService;
+
+    public function setApiV1WorkerService(ServiceInterface $apiV1WorkerService): self
     {
-        $this->_create(ServiceInterface::class, $workerService);
+        assert(!$this->hasApiV1WorkerService(),
+            new \LogicException('NeighborhoodsKojoApiV1WorkerService is already set.'));
+        $this->NeighborhoodsKojoApiV1WorkerService = $apiV1WorkerService;
 
         return $this;
     }
 
-    protected function _getApiV1WorkerService(): ServiceInterface
+    protected function getApiV1WorkerService(): ServiceInterface
     {
-        return $this->_read(ServiceInterface::class);
+        assert($this->hasApiV1WorkerService(), new \LogicException('NeighborhoodsKojoApiV1WorkerService is not set.'));
+
+        return $this->NeighborhoodsKojoApiV1WorkerService;
     }
 
-    protected function _hasApiV1WorkerService(): bool
+    protected function hasApiV1WorkerService(): bool
     {
-        return $this->_exists(ServiceInterface::class);
+        return isset($this->NeighborhoodsKojoApiV1WorkerService);
     }
 
-    protected function _unsetApiV1WorkerService(): self
+    protected function unsetApiV1WorkerService(): self
     {
-        $this->_delete(ServiceInterface::class);
+        assert($this->hasApiV1WorkerService(), new \LogicException('NeighborhoodsKojoApiV1WorkerService is not set.'));
+        unset($this->NeighborhoodsKojoApiV1WorkerService);
 
         return $this;
     }

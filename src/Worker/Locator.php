@@ -11,8 +11,6 @@ class Locator implements LocatorInterface
 {
     use Job\AwareTrait;
     use Defensive\AwareTrait;
-    protected const PROP_METHOD_NAME = 'method_name';
-    protected const PROP_CLASS_NAME  = 'class_name';
     protected $_callable = [];
 
     public function getClass()
@@ -23,20 +21,18 @@ class Locator implements LocatorInterface
     public function getCallable(): callable
     {
         if (empty($this->_callable)) {
-            try{
-                $class = $this->_getJob()->getWorkerUri();
-                $method = $this->_getJob()->getWorkerMethod();
-                $this->_create(self::PROP_CLASS_NAME, $class);
-                $this->_create(self::PROP_METHOD_NAME, $method);
-                $object = new $class;
-                $callable = [$object, $method];
+            try {
+                $className = $this->getClassName();
+                $methodName = $this->getMethodName();
+                $object = new $className;
+                $callable = [$object, $methodName];
                 if (is_callable($callable)) {
                     $this->_callable = $callable;
-                }else {
-                    throw new \RuntimeException("Class[$class] and method[$method] is not callable.");
+                } else {
+                    throw new \RuntimeException("Class[$className] and method[$methodName] is not callable.");
                 }
-            }catch(\Throwable $throwable){
-                throw new Exception($throwable->getMessage(), Exception::CODE_CANNOT_INSTANTIATE_WORKER, $throwable);
+            } catch (\Throwable $throwable) {
+                throw new \Exception($throwable->getMessage(), Exception::CODE_CANNOT_INSTANTIATE_WORKER, $throwable);
             }
         }
 
@@ -45,11 +41,11 @@ class Locator implements LocatorInterface
 
     public function getMethodName(): string
     {
-        return $this->_read(self::PROP_METHOD_NAME);
+        return $this->_getJob()->getWorkerUri();
     }
 
     public function getClassName(): string
     {
-        return $this->_read(self::PROP_CLASS_NAME);
+        return $this->_getJob()->getWorkerMethod();
     }
 }

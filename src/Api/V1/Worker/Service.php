@@ -22,13 +22,13 @@ class Service implements ServiceInterface
     use Update\Complete\Failed\Factory\AwareTrait;
     use Create\Factory\AwareTrait;
     use Defensive\AwareTrait;
-    protected const     PROP_REQUEST             = 'request';
-    protected const     PROP_RETRY_DATE_TIME     = 'retry_date_time';
-    protected const     REQUEST_RETRY            = 'retry';
-    protected const     REQUEST_HOLD             = 'hold';
+    protected const     PROP_REQUEST = 'request';
+    protected const     PROP_RETRY_DATE_TIME = 'retry_date_time';
+    protected const     REQUEST_RETRY = 'retry';
+    protected const     REQUEST_HOLD = 'hold';
     protected const     REQUEST_COMPLETE_SUCCESS = 'complete_success';
-    protected const     REQUEST_COMPLETE_FAILED  = 'complete_failed';
-    protected const     PROP_REQUEST_APPLIED     = 'request_applied';
+    protected const     REQUEST_COMPLETE_FAILED = 'complete_failed';
+    protected const     PROP_REQUEST_APPLIED = 'request_applied';
 
     public function requestRetry(\DateTime $retryDateTime): ServiceInterface
     {
@@ -111,7 +111,7 @@ class Service implements ServiceInterface
 
     public function getLogger(): LoggerInterface
     {
-        return $this->_getApiV1Logger();
+        return $this->getApiV1Logger();
     }
 
     public function reload(): ServiceInterface
@@ -121,6 +121,6 @@ class Service implements ServiceInterface
 
     public function getNewJobScheduler(): SchedulerInterface
     {
-        return $this->_getApiV1JobSchedulerFactory()->create();
+        return $this->getApiV1JobSchedulerFactory()->create();
     }
 }
