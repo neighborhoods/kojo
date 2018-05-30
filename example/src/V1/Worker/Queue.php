@@ -20,12 +20,14 @@ class Queue implements QueueInterface
 
     public function getNextMessage(): MessageInterface
     {
-        return $this->getV1WorkerQueueMessage();
+        $v1WorkerQueueMessage = $this->getV1WorkerQueueMessage();
+        $this->unsetV1WorkerQueueMessage();
+
+        return $v1WorkerQueueMessage;
     }
 
     public function waitForNextMessage(): QueueInterface
     {
-        $this->unsetV1WorkerQueueMessage();
         $guzzleServiceResourceModel = $this->receiveMessage();
         while ($guzzleServiceResourceModel->get(self::MESSAGES) === null) {
             $guzzleServiceResourceModel = $this->receiveMessage();
