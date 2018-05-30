@@ -1,5 +1,7 @@
 # Example Protean Compliant Kōjō DLC Pattern
 
+SQS Queue Name: `local-bwilson`
+
 `scratch/worker-facade.php`
 ```php
 <?php
