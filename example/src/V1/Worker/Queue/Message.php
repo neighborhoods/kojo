@@ -3,53 +3,28 @@ declare(strict_types=1);
 
 namespace Neighborhoods\KojoExample\V1\Worker\Queue;
 
-use Aws\Sqs\SqsClient;
-use Guzzle\Service\Resource\Model;
+use Neighborhoods\KojoExample\V1;
 
 class Message implements MessageInterface
 {
-    protected $GuzzleServiceResourceModel;
-    protected $sqsClient;
+    use V1\Guzzle\Service\Resource\Model\AwareTrait;
+    use V1\Aws\Sqs\SqsClient\AwareTrait;
     protected $isDeleted = false;
-
-    public function setGuzzleServiceResourceModel(Model $guzzleServiceResourceModel): MessageInterface
-    {
-        if ($this->GuzzleServiceResourceModel === null) {
-            $this->GuzzleServiceResourceModel = $guzzleServiceResourceModel;
-        }
-
-        return $this;
-    }
-
-    protected function getGuzzleServiceResourceModel(): Model
-    {
-        if ($this->GuzzleServiceResourceModel === null) {
-            throw new \LogicException('GuzzleServiceResourceModel is not set.');
-        }
-
-        return $this->GuzzleServiceResourceModel;
-    }
+    protected const SQS_CLIENT_QUEUE_URL = 'QueueUrl';
+    protected const SQS_CLIENT_RECEIPT_HANDLE = 'ReceiptHandle';
 
     public function delete(): MessageInterface
     {
         if ($this->isDeleted !== false) {
             throw new \LogicException('Message is already deleted.');
         }
-        $this->getSqsClient()->deleteMessage([
-            'QueueUrl' => $this->getGuzzleServiceResourceModel()->get('QueueUrl'),
-            'ReceiptHandle' => $this->getGuzzleServiceResourceModel()->get('ReceiptHandle'),
+        $sqsClientReceiptHandle = $this->getV1GuzzleServiceResourceModel()->get(self::SQS_CLIENT_RECEIPT_HANDLE);
+        $this->getV1AwsSqsSqsClient()->deleteMessage([
+            self::SQS_CLIENT_QUEUE_URL => $this->getV1GuzzleServiceResourceModel()->get(self::SQS_CLIENT_QUEUE_URL),
+            self::SQS_CLIENT_RECEIPT_HANDLE => $sqsClientReceiptHandle,
         ]);
         $this->isDeleted = true;
 
         return $this;
-    }
-
-    protected function getSqsClient(): SqsClient
-    {
-        if ($this->sqsClient === null) {
-            $this->sqsClient = SqsClient::factory();
-        }
-
-        return $this->sqsClient;
     }
 }

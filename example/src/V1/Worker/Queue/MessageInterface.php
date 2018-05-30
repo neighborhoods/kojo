@@ -7,8 +7,7 @@ use Guzzle\Service\Resource\Model;
 
 interface MessageInterface
 {
-
-    public function setGuzzleServiceResourceModel(Model $guzzleServiceResourceModel): MessageInterface;
+    public function setV1GuzzleServiceResourceModel(Model $guzzleServiceResourceModel);
 
     public function delete(): MessageInterface;
 }

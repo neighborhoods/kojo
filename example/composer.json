@@ -19,7 +19,8 @@
   "require": {
     "php": ">=7.1",
     "neighborhoods/kojo": "^2.0.0",
-    "aws/aws-sdk-php": "2.*"
+    "aws/aws-sdk-php": "2.*",
+    "neighborhoods/pylon": "^1.0.0"
   },
   "autoload": {
     "psr-4": {

@@ -3,17 +3,17 @@ declare(strict_types=1);
 
 namespace Neighborhoods\KojoExample\V1\Worker;
 
-use Aws\Sqs\SqsClient;
 use Guzzle\Service\Resource\Model;
-use Neighborhoods\KojoExample\V1\Worker;
+use Neighborhoods\KojoExample\V1;
 use Neighborhoods\KojoExample\V1\Worker\Queue\MessageInterface;
 
 class Queue implements QueueInterface
 {
-    use Worker\Queue\Message\Factory\AwareTrait;
-    use Worker\Queue\Message\AwareTrait;
+    use V1\Worker\Queue\Message\Factory\AwareTrait;
+    use V1\Worker\Queue\Message\AwareTrait;
+    use V1\Aws\Sqs\SqsClient\AwareTrait;
 
-    protected $sqsClient;
+    protected $queueUrl;
 
     public function getNextMessage(): MessageInterface
     {
@@ -23,9 +23,9 @@ class Queue implements QueueInterface
     public function waitForNextMessage(): QueueInterface
     {
         $this->unsetV1WorkerQueueMessage();
-        $guzzleServiceResourceModel = $this->getSqsClient()->receiveMessage();
+        $guzzleServiceResourceModel = $this->receiveMessage();
         while (empty($guzzleServiceResourceModel)) {
-            $guzzleServiceResourceModel = $this->getSqsClient()->receiveMessage();
+            $guzzleServiceResourceModel = $this->receiveMessage();
         }
         $this->createNextMessage($guzzleServiceResourceModel);
 
@@ -35,7 +35,8 @@ class Queue implements QueueInterface
     public function hasNextMessage(): bool
     {
         if (!$this->hasV1WorkerQueueMessage()) {
-            if (!empty($guzzleServiceResourceModel = $this->getSqsClient()->receiveMessage())) {
+            $messages = $guzzleServiceResourceModel = $this->receiveMessage()->get('Messages');
+            if (!empty($messages)) {
                 $this->createNextMessage($guzzleServiceResourceModel);
             }
         }
@@ -43,21 +44,37 @@ class Queue implements QueueInterface
         return $this->hasV1WorkerQueueMessage();
     }
 
-    protected function getSqsClient(): SqsClient
-    {
-        if ($this->sqsClient === null) {
-            $this->sqsClient = SqsClient::factory();
-        }
-
-        return $this->sqsClient;
-    }
-
     protected function createNextMessage(Model $guzzleServiceResourceModel): QueueInterface
     {
         $v1WorkerQueueMessage = $this->getV1WorkerQueueMessageFactory()->create();
-        $v1WorkerQueueMessage->setGuzzleServiceResourceModel($guzzleServiceResourceModel);
+        $v1WorkerQueueMessage->setV1GuzzleServiceResourceModel($guzzleServiceResourceModel);
         $this->setV1WorkerQueueMessage($v1WorkerQueueMessage);
 
         return $this;
+    }
+
+    protected function receiveMessage(): Model
+    {
+        return $this->getV1AwsSqsSqsClient()->receiveMessage(['QueueUrl' => $this->getQueueUrl()]);
+    }
+
+    public function setQueueUrl(string $queueUrl): QueueInterface
+    {
+        if ($this->queueUrl === null) {
+            $this->queueUrl = $queueUrl;
+        } else {
+            throw new \LogicException('Queue URL is not set.');
+        }
+
+        return $this;
+    }
+
+    protected function getQueueUrl(): string
+    {
+        if ($this->queueUrl === null) {
+            throw new \LogicException('Queue URL is not set.');
+        }
+
+        return $this->queueUrl;
     }
 }
