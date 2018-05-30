@@ -1,0 +1,29 @@
+{
+  "name": "neighborhoods/kojo_example",
+  "type": "library",
+  "description": "Neighborhoods Kōjō Example provides an example of using kōjō and protean.",
+  "license": "proprietary",
+  "keywords": [],
+  "authors": [
+    {
+      "name": "Brad Wilson",
+      "email": "brad.wilson@neighborhoods.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://satis.neighborhoods.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "neighborhoods/kojo": "^2.0.0",
+    "aws/aws-sdk-php": "2.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Neighborhoods\\KojoExample\\": "src"
+    }
+  }
+}

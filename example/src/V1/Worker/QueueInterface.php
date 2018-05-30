@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoExample\Worker;
+namespace Neighborhoods\KojoExample\V1\Worker;
 
-use Neighborhoods\KojoExample\Worker\Queue\MessageInterface;
+use Neighborhoods\KojoExample\V1\Worker\Queue\MessageInterface;
 
 interface QueueInterface
 {
