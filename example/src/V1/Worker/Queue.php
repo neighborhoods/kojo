@@ -15,6 +15,9 @@ class Queue implements QueueInterface
 
     protected $queueUrl;
 
+    protected const QUEUE_URL = 'QueueUrl';
+    protected const MESSAGES = 'Messages';
+
     public function getNextMessage(): MessageInterface
     {
         return $this->getV1WorkerQueueMessage();
@@ -24,7 +27,7 @@ class Queue implements QueueInterface
     {
         $this->unsetV1WorkerQueueMessage();
         $guzzleServiceResourceModel = $this->receiveMessage();
-        while (empty($guzzleServiceResourceModel)) {
+        while ($guzzleServiceResourceModel->get(self::MESSAGES) === null) {
             $guzzleServiceResourceModel = $this->receiveMessage();
         }
         $this->createNextMessage($guzzleServiceResourceModel);
@@ -35,8 +38,8 @@ class Queue implements QueueInterface
     public function hasNextMessage(): bool
     {
         if (!$this->hasV1WorkerQueueMessage()) {
-            $messages = $guzzleServiceResourceModel = $this->receiveMessage()->get('Messages');
-            if (!empty($messages)) {
+            $guzzleServiceResourceModel = $this->receiveMessage();
+            if ($guzzleServiceResourceModel->get(self::MESSAGES) !== null) {
                 $this->createNextMessage($guzzleServiceResourceModel);
             }
         }
@@ -55,7 +58,7 @@ class Queue implements QueueInterface
 
     protected function receiveMessage(): Model
     {
-        return $this->getV1AwsSqsSqsClient()->receiveMessage(['QueueUrl' => $this->getQueueUrl()]);
+        return $this->getV1AwsSqsSqsClient()->receiveMessage([self::QUEUE_URL => $this->getQueueUrl()]);
     }
 
     public function setQueueUrl(string $queueUrl): QueueInterface
@@ -63,7 +66,7 @@ class Queue implements QueueInterface
         if ($this->queueUrl === null) {
             $this->queueUrl = $queueUrl;
         } else {
-            throw new \LogicException('Queue URL is not set.');
+            throw new \LogicException('Queue URL is already set.');
         }
 
         return $this;

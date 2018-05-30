@@ -10,4 +10,6 @@ interface MessageInterface
     public function setV1GuzzleServiceResourceModel(Model $guzzleServiceResourceModel);
 
     public function delete(): MessageInterface;
+
+    public function setQueueUrl($queueUrl): MessageInterface;
 }
