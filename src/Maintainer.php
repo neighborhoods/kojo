@@ -37,10 +37,10 @@ class Maintainer implements MaintainerInterface
     public function rescheduleCrashedJobs(): MaintainerInterface
     {
         if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->testAndSetLock()) {
-            try{
+            try {
                 $this->_rescheduleCrashedJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
-            }catch(\Exception $exception){
+            } catch (\Exception $exception) {
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
                 }
@@ -55,14 +55,14 @@ class Maintainer implements MaintainerInterface
     {
         foreach ($this->_getJobCollectionCrashDetection()->getIterator() as $job) {
             $jobSemaphoreResource = $this->_getNewJobOwnerResource($job);
-            try{
+            try {
                 if ($jobSemaphoreResource->testAndSetLock()) {
                     $crashUpdate = $this->_getServiceUpdateCrashFactory()->create();
                     $crashUpdate->setJob($job);
                     $crashUpdate->save();
                     $jobSemaphoreResource->releaseLock();
                 }
-            }catch(\Exception $exception){
+            } catch (\Exception $exception) {
                 if ($jobSemaphoreResource->hasLock()) {
                     $jobSemaphoreResource->releaseLock();
                 }
@@ -76,10 +76,10 @@ class Maintainer implements MaintainerInterface
     public function updatePendingJobs(): MaintainerInterface
     {
         if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->testAndSetLock()) {
-            try{
+            try {
                 $this->_updatePendingJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->releaseLock();
-            }catch(\Exception $exception){
+            } catch (\Exception $exception) {
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->releaseLock();
                 }
@@ -97,18 +97,18 @@ class Maintainer implements MaintainerInterface
             $scheduleLimitCollection = $this->_getJobCollectionScheduleLimitByJobType($jobType);
             $numberOfScheduledJobs = $scheduleLimitCollection->getNumberOfCurrentlyScheduledJobs();
             $scheduleLimit = $jobType->getScheduleLimit();
-            try{
-                if ($numberOfScheduledJobs <= $scheduleLimit) {
+            try {
+                if ($numberOfScheduledJobs < $scheduleLimit) {
                     $waitUpdate = $this->_getServiceUpdateWaitFactory()->create();
                     $waitUpdate->setJob($job);
                     $waitUpdate->save();
-                }elseif ($numberOfScheduledJobs > $scheduleLimit + $jobType->getScheduleLimitAllowance()) {
+                    $scheduleLimitCollection->incrementNumberOfCurrentlyScheduledJobs();
+                } elseif ($job->getWorkAtDateTime() < new \DateTime('now')) {
                     $failedLimitCheckUpdate = $this->_getServiceUpdateCompleteFailedScheduleLimitCheckFactory()->create();
                     $failedLimitCheckUpdate->setJob($job);
                     $failedLimitCheckUpdate->save();
-                    $scheduleLimitCollection->decrementNumberOfCurrentlyScheduledJobs();
                 }
-            }catch(\Exception $exception){
+            } catch (\Exception $exception) {
                 $updatePanic = $this->_getServiceUpdatePanicFactory()->create();
                 $updatePanic->setJob($job);
                 $updatePanic->save();

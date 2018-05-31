@@ -19,9 +19,9 @@ class ScheduleLimit extends CollectionAbstract implements ScheduleLimitInterface
         return $this->_getRecords()[self::ALIAS_NUMBER_OF_SCHEDULED_JOBS];
     }
 
-    public function decrementNumberOfCurrentlyScheduledJobs(): ScheduleLimitInterface
+    public function incrementNumberOfCurrentlyScheduledJobs(): ScheduleLimitInterface
     {
-        --$this->_getRecords()[self::ALIAS_NUMBER_OF_SCHEDULED_JOBS];
+        ++$this->_getRecords()[self::ALIAS_NUMBER_OF_SCHEDULED_JOBS];
 
         return $this;
     }

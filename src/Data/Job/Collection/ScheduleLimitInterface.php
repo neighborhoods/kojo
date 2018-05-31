@@ -12,5 +12,5 @@ interface ScheduleLimitInterface extends CollectionInterface
 
     public function getNumberOfCurrentlyScheduledJobs(): int;
 
-    public function decrementNumberOfCurrentlyScheduledJobs(): ScheduleLimitInterface;
+    public function incrementNumberOfCurrentlyScheduledJobs(): ScheduleLimitInterface;
 }
