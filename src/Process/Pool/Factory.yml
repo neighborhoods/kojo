@@ -1,5 +1,5 @@
 parameters:
-  process_pool_strategy.max_child_processes: 10
+  process_pool_strategy.max_child_processes: 20
   process_pool_strategy.child_process_wait_throttle: 1
   process_pool_strategy.max_alarm_time: 5
   process_pool_strategy-server.max_child_processes: 1

@@ -31,6 +31,8 @@ interface ServiceInterface
 
     public function reload(): ServiceInterface;
 
+    public function getTimesCrashed(): int;
+
     /** @injected:configuration */
     public function setServiceUpdateRetryFactory(Retry\FactoryInterface $updateRetryFactory);
 

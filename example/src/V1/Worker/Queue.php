@@ -89,4 +89,9 @@ class Queue implements QueueInterface
 
         return $this->queueUrl;
     }
+
+    public function setNumberOfPollCycles(int $numberOfPollCycles): QueueInterface
+    {
+        // TODO: Implement setNumberOfPollCycles() method.
+    }
 }
