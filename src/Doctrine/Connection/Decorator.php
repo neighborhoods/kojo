@@ -28,7 +28,7 @@ class Decorator implements DecoratorInterface
                 $connection = DriverManager::getConnection(['pdo' => $pdoBuilder->getPdo()]);
             }
 
-            $connection->getConfiguration()->setSQLLogger(new EchoSQLLogger());
+//            $connection->getConfiguration()->setSQLLogger(new EchoSQLLogger());
             $this->_create(Connection::class, $connection);
         }
 
