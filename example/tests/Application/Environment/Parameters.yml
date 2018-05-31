@@ -1,0 +1,13 @@
+parameters:
+  neighborhoods.kojo.environment.parameters.redis_port: '%env(REDIS_PORT)%'
+  neighborhoods.kojo.environment.parameters.redis_host: '%env(REDIS_HOST)%'
+  neighborhoods.kojo.environment.parameters.database_user_name: '%env(DATABASE_USERNAME)%'
+  neighborhoods.kojo.environment.parameters.database_password: '%env(DATABASE_PASSWORD)%'
+  neighborhoods.kojo.environment.parameters.database_adapter: '%env(DATABASE_ADAPTER)%'
+  neighborhoods.kojo.environment.parameters.database_host: '%env(DATABASE_HOST)%'
+  neighborhoods.kojo.environment.parameters.database_name: '%env(DATABASE_NAME)%'
+#  neighborhoods.kojo.environment.parameters.database_user_name: 'nhds'
+#  neighborhoods.kojo.environment.parameters.database_password: 'nhds2016'
+#  neighborhoods.kojo.environment.parameters.database_adapter: 'pgsql'
+#  neighborhoods.kojo.environment.parameters.database_host: 'pgsql'
+#  neighborhoods.kojo.environment.parameters.database_name: 'kojo'

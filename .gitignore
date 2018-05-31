@@ -1,6 +1,3 @@
 vendor/
-example/vendor/
 .composer/
 phpunit.xml
-scratch/
-data/

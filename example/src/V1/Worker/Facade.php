@@ -9,6 +9,7 @@ use Symfony\Component\Finder\Finder;
 
 class Facade implements FacadeInterface
 {
+    protected $containerBuilderFacade;
     protected $worker;
     protected $isBootStrapped = false;
 
@@ -25,7 +26,7 @@ class Facade implements FacadeInterface
         if ($this->isBootStrapped !== false) {
             throw new \LogicException('Worker facade is already bootstrapped.');
         }
-        $containerBuilderFacade = new DependencyInjection\ContainerBuilder\Facade();
+        $containerBuilderFacade = $this->getContainerBuilderFacade();
         $discoverableDirectories[] = __DIR__ . '/../../../src';
         $finder = new Finder();
         $finder->name('*.yml');
@@ -36,6 +37,15 @@ class Facade implements FacadeInterface
         $this->isBootStrapped = true;
 
         return $this;
+    }
+
+    public function getContainerBuilderFacade(): DependencyInjection\ContainerBuilder\Facade
+    {
+        if ($this->containerBuilderFacade === null) {
+            $this->containerBuilderFacade = new DependencyInjection\ContainerBuilder\Facade();
+        }
+
+        return $this->containerBuilderFacade;
     }
 
     protected function getWorker(): WorkerInterface

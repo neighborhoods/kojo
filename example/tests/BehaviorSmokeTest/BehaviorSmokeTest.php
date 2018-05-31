@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoTest\BehaviorSmokeTest;
+namespace Neighborhoods\KojoExampleTest\BehaviorSmokeTest;
 
 use Neighborhoods\Scaffolding\Fixture\AbstractTest;
 

@@ -18,7 +18,7 @@ class Worker implements WorkerInterface
         $this->getV1WorkerQueue()->waitForNextMessage();
 
         // Schedule another kōjō job of the same type.
-//        $this->_scheduleNextJob();
+        $this->_scheduleNextJob();
 
         // Delegate the work for the first message.
         $this->_delegateWork();
@@ -29,7 +29,7 @@ class Worker implements WorkerInterface
         }
 
         // Tell Kōjō that we are done and all is well.
-//        $this->getApiV1WorkerService()->requestCompleteSuccess()->applyRequest();
+        $this->getApiV1WorkerService()->requestCompleteSuccess()->applyRequest();
 
         // Fluent interfaces for the love of Pete.
         return $this;
