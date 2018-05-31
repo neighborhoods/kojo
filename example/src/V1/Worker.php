@@ -14,18 +14,20 @@ class Worker implements WorkerInterface
 
     public function work(): WorkerInterface
     {
-        // Wait for one message to become available.
-        $this->getV1WorkerQueue()->waitForNextMessage();
+        if ($this->getApiV1WorkerService()->getTimesCrashed() === 0) {
+            // Wait for one message to become available.
+            if($this->getV1WorkerQueue()->hasNextMessage()){
+                // Schedule another kōjō job of the same type.
+                $this->_scheduleNextJob();
 
-        // Schedule another kōjō job of the same type.
-        $this->_scheduleNextJob();
+                // Delegate the work for the first message.
+                $this->_delegateWork();
 
-        // Delegate the work for the first message.
-        $this->_delegateWork();
-
-        // Delegate the work until the observed Queue is empty.
-        while ($this->getV1WorkerQueue()->hasNextMessage()) {
-            $this->_delegateWork();
+                // Delegate the work until the observed Queue is empty.
+                while ($this->getV1WorkerQueue()->hasNextMessage()) {
+                    $this->_delegateWork();
+                }
+            }
         }
 
         // Tell Kōjō that we are done and all is well.

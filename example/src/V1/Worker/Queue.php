@@ -18,6 +18,8 @@ class Queue implements QueueInterface
     protected const QUEUE_URL = 'QueueUrl';
     protected const MESSAGES = 'Messages';
 
+    protected const WAIT_TIME_SECONDS = 'WaitTimeSeconds';
+
     public function getNextMessage(): MessageInterface
     {
         $v1WorkerQueueMessage = $this->getV1WorkerQueueMessage();
@@ -60,7 +62,12 @@ class Queue implements QueueInterface
 
     protected function receiveMessage(): Model
     {
-        return $this->getV1AwsSqsSqsClient()->receiveMessage([self::QUEUE_URL => $this->getQueueUrl()]);
+        return $this->getV1AwsSqsSqsClient()->receiveMessage(
+            [
+                self::QUEUE_URL => $this->getQueueUrl(),
+                self::WAIT_TIME_SECONDS => 20,
+            ]
+        );
     }
 
     public function setQueueUrl(string $queueUrl): QueueInterface
