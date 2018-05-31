@@ -5,5 +5,5 @@ namespace Neighborhoods\KojoExample\V1\Worker;
 
 interface FacadeInterface
 {
-
+    public function start(): FacadeInterface;
 }

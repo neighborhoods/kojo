@@ -38,7 +38,7 @@ class Facade implements FacadeInterface
         return $this;
     }
 
-    public function getWorker(): WorkerInterface
+    protected function getWorker(): WorkerInterface
     {
         if ($this->worker === null) {
             throw new \LogicException('Worker is not set.');
@@ -47,7 +47,7 @@ class Facade implements FacadeInterface
         return $this->worker;
     }
 
-    public function setWorker(WorkerInterface $worker): FacadeInterface
+    protected function setWorker(WorkerInterface $worker): FacadeInterface
     {
         if ($this->worker !== null) {
             throw new \LogicException('Worker is already set.');
