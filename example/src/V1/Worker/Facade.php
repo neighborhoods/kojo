@@ -10,6 +10,7 @@ use Symfony\Component\Finder\Finder;
 class Facade implements FacadeInterface
 {
     protected $worker;
+    protected $isBootStrapped = false;
 
     public function start(): FacadeInterface
     {
@@ -21,6 +22,9 @@ class Facade implements FacadeInterface
 
     protected function bootstrap(): FacadeInterface
     {
+        if ($this->isBootStrapped !== false) {
+            throw new \LogicException('Worker facade is already bootstrapped.');
+        }
         $containerBuilderFacade = new DependencyInjection\ContainerBuilder\Facade();
         $discoverableDirectories[] = __DIR__ . '/../../../src';
         $finder = new Finder();
@@ -29,6 +33,7 @@ class Facade implements FacadeInterface
         $containerBuilderFacade->addFinder($finder);
         $containerBuilder = $containerBuilderFacade->getContainerBuilder();
         $this->setWorker($containerBuilder->get('neighborhoods.kojo_example.v1.worker'));
+        $this->isBootStrapped = true;
 
         return $this;
     }
@@ -36,7 +41,7 @@ class Facade implements FacadeInterface
     public function getWorker(): WorkerInterface
     {
         if ($this->worker === null) {
-            throw new \LogicException('Worker has not been set.');
+            throw new \LogicException('Worker is not set.');
         }
 
         return $this->worker;
@@ -45,7 +50,7 @@ class Facade implements FacadeInterface
     public function setWorker(WorkerInterface $worker): FacadeInterface
     {
         if ($this->worker !== null) {
-            throw new \LogicException('Worker already set.');
+            throw new \LogicException('Worker is already set.');
         }
         $this->worker = $worker;
 
