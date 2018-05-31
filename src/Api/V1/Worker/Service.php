@@ -109,6 +109,11 @@ class Service implements ServiceInterface
         return $this->_exists(self::PROP_REQUEST_APPLIED);
     }
 
+    public function getTimesCrashed(): int
+    {
+        return $this->_getJob()->getTimesCrashed();
+    }
+
     public function getLogger(): LoggerInterface
     {
         return $this->getApiV1Logger();
