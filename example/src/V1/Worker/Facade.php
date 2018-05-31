@@ -6,9 +6,11 @@ namespace Neighborhoods\KojoExample\V1\Worker;
 use Neighborhoods\KojoExample\V1\WorkerInterface;
 use Neighborhoods\Pylon\DependencyInjection;
 use Symfony\Component\Finder\Finder;
+use Neighborhoods\Kojo\Api;
 
 class Facade implements FacadeInterface
 {
+    use Api\V1\Worker\Service\AwareTrait;
     protected $containerBuilderFacade;
     protected $worker;
     protected $isBootStrapped = false;
@@ -62,7 +64,7 @@ class Facade implements FacadeInterface
         if ($this->worker !== null) {
             throw new \LogicException('Worker is already set.');
         }
-        $this->worker = $worker;
+        $this->worker = $worker->setApiV1WorkerService($this->getApiV1WorkerService());
 
         return $this;
     }
