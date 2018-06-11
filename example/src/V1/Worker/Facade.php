@@ -41,7 +41,7 @@ class Facade implements FacadeInterface
         return $this;
     }
 
-    public function getContainerBuilderFacade(): DependencyInjection\ContainerBuilder\Facade
+    public function getContainerBuilderFacade(): DependencyInjection\ContainerBuilder\FacadeInterface
     {
         if ($this->containerBuilderFacade === null) {
             $this->containerBuilderFacade = new DependencyInjection\ContainerBuilder\Facade();
