@@ -15,7 +15,7 @@ class Factory extends FactoryAbstract implements FactoryInterface
 
     public function create(): SchedulerInterface
     {
-        $apiV1JobScheduler = $this->_getApiV1JobSchedulerClone();
+        $apiV1JobScheduler = clone $this->getApiV1JobScheduler();
         $apiV1JobScheduler->setServiceCreate($this->_getServiceCreateFactory()->create());
 
         return $apiV1JobScheduler;

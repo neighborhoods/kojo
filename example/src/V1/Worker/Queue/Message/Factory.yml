@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo_example.v1.worker.queue.message.factory:
+    class: Neighborhoods\KojoExample\V1\Worker\Queue\Message\Factory
+    public: false
+    shared: true
+    calls:
+      - [setV1WorkerQueueMessage, ['@v1.worker.queue.message']]
+  v1.worker.queue.message.factory:
+    alias: neighborhoods.kojo_example.v1.worker.queue.message.factory
+    public: true

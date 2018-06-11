@@ -5,33 +5,38 @@ namespace Neighborhoods\Kojo\Api\V1\Job\Scheduler\Factory;
 
 use Neighborhoods\Kojo\Api\V1\Job\Scheduler\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoApiV1JobSchedulerFactory;
+
     public function setApiV1JobSchedulerFactory(FactoryInterface $apiV1JobSchedulerFactory): self
     {
-        $this->_create(FactoryInterface::class, $apiV1JobSchedulerFactory);
+        assert(!$this->hasApiV1JobSchedulerFactory(),
+            new \LogicException('NeighborhoodsKojoApiV1JobSchedulerFactory is already set.'));
+        $this->NeighborhoodsKojoApiV1JobSchedulerFactory = $apiV1JobSchedulerFactory;
 
         return $this;
     }
 
-    protected function _getApiV1JobSchedulerFactoryClone(): FactoryInterface
+    protected function getApiV1JobSchedulerFactory(): FactoryInterface
     {
-        return clone $this->_getApiV1JobSchedulerFactory();
+        assert($this->hasApiV1JobSchedulerFactory(),
+            new \LogicException('NeighborhoodsKojoApiV1JobSchedulerFactory is not set.'));
+
+        return $this->NeighborhoodsKojoApiV1JobSchedulerFactory;
     }
 
-    protected function _getApiV1JobSchedulerFactory(): FactoryInterface
+    protected function hasApiV1JobSchedulerFactory(): bool
     {
-        return $this->_read(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoApiV1JobSchedulerFactory);
     }
 
-    protected function _hasApiV1JobSchedulerFactory(): bool
+    protected function unsetApiV1JobSchedulerFactory(): self
     {
-        return $this->_exists(FactoryInterface::class);
-    }
-
-    protected function _unsetApiV1JobSchedulerFactory(): self
-    {
-        $this->_delete(FactoryInterface::class);
+        assert($this->hasApiV1JobSchedulerFactory(),
+            new \LogicException('NeighborhoodsKojoApiV1JobSchedulerFactory is not set.'));
+        unset($this->NeighborhoodsKojoApiV1JobSchedulerFactory);
 
         return $this;
     }

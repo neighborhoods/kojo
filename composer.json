@@ -28,7 +28,6 @@
         "symfony/finder": "^4.0",
         "zendframework/zend-db": "^2.8",
         "dragonmantank/cron-expression": "^2.0",
-        "ocramius/proxy-manager": "^2.1",
         "neighborhoods/pylon": "^1.0",
         "doctrine/dbal": "^2.7"
     },
@@ -47,8 +46,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Neighborhoods\\KojoTest\\": "tests",
-            "Neighborhoods\\KojoExample\\": "example"
+            "Neighborhoods\\KojoTest\\": "tests"
         }
     }
 }

@@ -1,0 +1,1001 @@
+kojo_job:
+  - kojo_job_id: '2'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:23:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:09:47
+    last_transition_micro_time: '1525118987525328'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:22:24
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '3'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:24:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:09:59
+    last_transition_micro_time: '1525118999466217'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:22:24
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '4'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:25:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:12:00
+    last_transition_micro_time: '1525119120264405'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:22:24
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '5'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:26:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:13:48
+    last_transition_micro_time: '1525119228838578'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:22:24
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '6'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:27:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:15:20
+    last_transition_micro_time: '1525119320062890'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:22:24
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '7'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:28:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:16:10
+    last_transition_micro_time: '1525119370387988'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:26:16
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '8'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:29:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:16:22
+    last_transition_micro_time: '1525119382533304'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:26:16
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '9'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:30:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:29:36
+    last_transition_micro_time: '1525120176340327'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:26:16
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '10'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:31:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:30:02
+    last_transition_micro_time: '1525120202306093'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:26:16
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '11'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:34:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:47:28
+    last_transition_micro_time: '1525121248641458'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:34:18
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '12'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:35:00
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581630710'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:34:18
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '13'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:36:00
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581636667'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:34:18
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '14'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:37:00
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581644111'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:34:18
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '15'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:38:00
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581651200'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:34:18
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '16'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 19:39:00
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:17
+    last_transition_micro_time: '1525121717855916'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:34:18
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '17'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '0'
+    importance: '0'
+    status_id:
+    work_at_date_time: 2018-04-30 19:34:54
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581613946'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 19:34:54
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '18'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:09:00
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:17
+    last_transition_micro_time: '1525121717821446'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:09:48
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '19'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:10:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:16
+    last_transition_micro_time: '1525121716092219'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:09:48
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '20'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:11:00
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:17
+    last_transition_micro_time: '1525121717867295'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:09:48
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '27'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:18:00
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:18
+    last_transition_micro_time: '1525121718335847'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:13:53
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '29'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:19:00
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581726975'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:15:21
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '30'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:20:00
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:18
+    last_transition_micro_time: '1525121718446827'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:15:21
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '31'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:21:00
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:18
+    last_transition_micro_time: '1525121718725372'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:16:12
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '32'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:29:00
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581745361'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:29:39
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '33'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:30:00
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:18
+    last_transition_micro_time: '1525121718255557'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:29:39
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '34'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:31:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:16
+    last_transition_micro_time: '1525121716262394'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:29:39
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '38'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:35:00
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581782410'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:30:04
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '39'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:47:00
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581787662'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:47:32
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '40'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:48:00
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581794319'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:47:32
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '41'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:49:00
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:17
+    last_transition_micro_time: '1525121717973651'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:47:32
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '42'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:50:00
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581805940'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:47:32
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '43'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:51:00
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:17
+    last_transition_micro_time: '1525121717778582'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:47:32
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '44'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:52:00
+    next_state_request: "none"
+    assigned_state: "working"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:17
+    last_transition_micro_time: '1525121717927648'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:47:32
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '45'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '0'
+    importance: '0'
+    status_id:
+    work_at_date_time: 2018-04-30 20:51:15
+    next_state_request: "working"
+    assigned_state: "waiting"
+    previous_state: "waiting"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581817620'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:51:15
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '46'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '9'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:53:00
+    next_state_request: "working"
+    assigned_state: "crashed"
+    previous_state: "working"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:16
+    last_transition_micro_time: '1525121716323544'
+    times_worked: '1'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '1'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:53:01
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '49'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:56:00
+    next_state_request: "schedule_limit_check"
+    assigned_state: "waiting"
+    previous_state: "new"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581574489'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:53:01
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '50'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:57:00
+    next_state_request: "schedule_limit_check"
+    assigned_state: "waiting"
+    previous_state: "new"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581580374'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:53:01
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '51'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:58:00
+    next_state_request: "schedule_limit_check"
+    assigned_state: "waiting"
+    previous_state: "new"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:53:01
+    last_transition_micro_time: '1525121581586732'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:53:01
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '54'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 20:59:00
+    next_state_request: "schedule_limit_check"
+    assigned_state: "waiting"
+    previous_state: "new"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:54:02
+    last_transition_micro_time: '1525121642310586'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:54:02
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'
+  - kojo_job_id: '63'
+    type_code: "agent_reviews_update"
+    name: "Agent Reviews Update"
+    priority: '10'
+    importance: '10'
+    status_id:
+    work_at_date_time: 2018-04-30 21:00:00
+    next_state_request: "schedule_limit_check"
+    assigned_state: "waiting"
+    previous_state: "new"
+    worker_uri: '\Neighborhoods\KojoExample\Worker'
+    worker_method: "work"
+    can_work_in_parallel: '1'
+    last_transition_date_time: 2018-04-30 20:55:16
+    last_transition_micro_time: '1525121716355175'
+    times_worked: '0'
+    times_retried: '0'
+    times_held: '0'
+    times_crashed: '0'
+    times_panicked: '0'
+    created_at_date_time: 2018-04-30 20:55:16
+    completed_at_date_time:
+    delete_after_date_time:
+    most_recent_host_name:
+    most_recent_process_id: '0'

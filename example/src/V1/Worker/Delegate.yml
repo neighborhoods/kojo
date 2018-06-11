@@ -1,0 +1,5 @@
+services:
+  neighborhoods.kojo_example.v1.worker.delegate:
+    class: Neighborhoods\KojoExample\V1\Worker\Delegate
+    public: false
+    shared: false

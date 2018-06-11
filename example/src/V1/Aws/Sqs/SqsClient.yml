@@ -1,0 +1,14 @@
+parameters:
+  neighborhoods.kojo_example.v1.aws.sqs.sqs_client.region: '%env(SQS_REGION)%'
+services:
+  neighborhoods.kojo_example.v1.aws.sqs.sqs_client:
+    class: Aws\Sqs\SqsClient
+    public: false
+    shared: false
+    factory: [Aws\Sqs\SqsClient, factory]
+    arguments:
+      -
+        region: '%neighborhoods.kojo_example.v1.aws.sqs.sqs_client.region%'
+  v1.aws.sqs.sqs_client:
+    alias: neighborhoods.kojo_example.v1.aws.sqs.sqs_client
+    public: false

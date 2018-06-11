@@ -1,0 +1,14 @@
+parameters:
+  neighborhoods.kojo_example.v1.worker.queue.queue_url: 'https://sqs.us-east-1.amazonaws.com/272157948465/local-bwilson'
+services:
+  neighborhoods.kojo_example.v1.worker.queue:
+    class: Neighborhoods\KojoExample\V1\Worker\Queue
+    public: true
+    shared: false
+    calls:
+      - [setV1WorkerQueueMessageFactory, ['@v1.worker.queue.message.factory']]
+      - [setV1AwsSqsSqsClient, ['@v1.aws.sqs.sqs_client']]
+      - [setQueueUrl, ['%neighborhoods.kojo_example.v1.worker.queue.queue_url%']]
+  v1.worker.queue:
+    alias: neighborhoods.kojo_example.v1.worker.queue
+    public: true

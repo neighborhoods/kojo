@@ -12,7 +12,7 @@ class Factory extends FactoryAbstract implements FactoryInterface
 
     public function create(): RegistrarInterface
     {
-        $apiV1JobTypeRegistrar = $this->_getApiV1JobTypeRegistrarClone();
+        $apiV1JobTypeRegistrar = clone $this->getApiV1JobTypeRegistrar();
 
         return $apiV1JobTypeRegistrar;
     }

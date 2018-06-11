@@ -5,33 +5,35 @@ namespace Neighborhoods\Kojo\Api\V1\Logger;
 
 use Neighborhoods\Kojo\Api\V1\LoggerInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoApiV1Logger;
+
     public function setApiV1Logger(LoggerInterface $apiV1Logger): self
     {
-        $this->_create(LoggerInterface::class, $apiV1Logger);
+        assert(!$this->hasApiV1Logger(), new \LogicException('NeighborhoodsKojoApiV1Logger is already set.'));
+        $this->NeighborhoodsKojoApiV1Logger = $apiV1Logger;
 
         return $this;
     }
 
-    protected function _getApiV1Logger(): LoggerInterface
+    protected function getApiV1Logger(): LoggerInterface
     {
-        return $this->_read(LoggerInterface::class);
+        assert($this->hasApiV1Logger(), new \LogicException('NeighborhoodsKojoApiV1Logger is not set.'));
+
+        return $this->NeighborhoodsKojoApiV1Logger;
     }
 
-    protected function _getApiV1LoggerClone(): LoggerInterface
+    protected function hasApiV1Logger(): bool
     {
-        return clone $this->_getApiV1Logger();
+        return isset($this->NeighborhoodsKojoApiV1Logger);
     }
 
-    protected function _hasApiV1Logger(): bool
+    protected function unsetApiV1Logger(): self
     {
-        return $this->_exists(LoggerInterface::class);
-    }
-
-    protected function _unsetApiV1Logger(): self
-    {
-        $this->_delete(LoggerInterface::class);
+        assert($this->hasApiV1Logger(), new \LogicException('NeighborhoodsKojoApiV1Logger is not set.'));
+        unset($this->NeighborhoodsKojoApiV1Logger);
 
         return $this;
     }

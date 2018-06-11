@@ -26,4 +26,4 @@ RUN bash docker/build.sh \
 
 #CMD ["php-fpm"]
 
-EXPOSE 9000
+EXPOSE 9001
