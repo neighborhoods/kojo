@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\PDO;
 
+use Doctrine\DBAL\Driver\PDOConnection;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Builder implements BuilderInterface
@@ -26,7 +27,7 @@ class Builder implements BuilderInterface
             }else {
                 $options = [];
             }
-            $this->_pdo = new \PDO($dsn, $userName, $password, $options);
+            $this->_pdo = new PDOConnection($dsn, $userName, $password, $options);
         }
 
         return $this->_pdo;
