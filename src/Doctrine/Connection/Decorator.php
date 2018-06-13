@@ -22,10 +22,12 @@ class Decorator implements DecoratorInterface
     {
         if (!$this->_exists(Connection::class)) {
             if ($this->_hasPDO()) {
-                $connection = DriverManager::getConnection(['pdo' => $this->_getPDO()]);
+                $serverVersion = $this->_getPDO()->getAttribute(\PDO::ATTR_SERVER_VERSION);
+                $connection = DriverManager::getConnection(['pdo' => $this->_getPDO(), 'serverVersion' => $serverVersion]);
             } else {
                 $pdoBuilder = $this->_getPDOBuilderFactory()->create();
-                $connection = DriverManager::getConnection(['pdo' => $pdoBuilder->getPdo()]);
+                $serverVersion = $pdoBuilder->getPdo()->getAttribute(\PDO::ATTR_SERVER_VERSION);
+                $connection = DriverManager::getConnection(['pdo' => $pdoBuilder->getPdo(), 'serverVersion' => $serverVersion]);
             }
 
 //            $connection->getConfiguration()->setSQLLogger(new EchoSQLLogger());
