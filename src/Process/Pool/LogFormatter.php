@@ -1,18 +1,37 @@
 <?php
 declare(strict_types=1);
 
-
 namespace Neighborhoods\Kojo\Process\Pool;
+
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class LogFormatter implements LogFormatterInterface
 {
+    use Defensive\AwareTrait;
+
+    const PAD_PID = 6;
+    const PAD_PATH = 50;
+    const PROP_PROCESS_PATH_PADDING = 'process_path_padding';
+    const PROP_PROCESS_ID_PADDING = 'process_id_padding';
+
     /** @var array */
     protected $messageParts;
 
     /** @var string */
     protected $formattedMessage;
 
-    public function formatPipes()
+    public function format(): LogFormatterInterface
+    {
+        if ((int)$this->getMessageParts()['processId'] % 2 == 0){
+            $this->formatJson();
+        } else {
+            $this->formatPipes();
+        }
+
+        return $this;
+    }
+
+    public function formatPipes() : LogFormatterInterface
     {
         $messageParts = [
             'time' => $this->getMessageParts()['time'],
@@ -22,8 +41,8 @@ class LogFormatter implements LogFormatterInterface
             'message' => $this->getMessageParts()['message'],
         ];
 
-        $processIdPadding = 6;
-        $processPathPadding = 80;
+        $processIdPadding = $this->getProcessIdPadding();
+        $processPathPadding = $this->getProcessPathPadding();
 
         $messageParts['processId'] = str_pad($messageParts['processId'], $processIdPadding, ' ', STR_PAD_LEFT);
         $messageParts['typeCode'] = str_pad($messageParts['typeCode'], $processPathPadding, ' ');
@@ -31,12 +50,16 @@ class LogFormatter implements LogFormatterInterface
 
         $message = implode(' | ', array_values($messageParts));
         $this->setFormattedMessage($message);
+
+        return $this;
     }
 
-    public function formatJson()
+    public function formatJson() : LogFormatterInterface
     {
         $message = json_encode($this->getMessageParts());
         $this->setFormattedMessage($message);
+
+        return $this;
     }
 
     public function getMessageParts() : array
@@ -69,6 +92,30 @@ class LogFormatter implements LogFormatterInterface
         $this->formattedMessage = $formattedMessage;
 
         return $this;
+    }
+
+    public function setProcessPathPadding(int $processPathPadding) : LogFormatterInterface
+    {
+        $this->_create(self::PROP_PROCESS_PATH_PADDING, $processPathPadding);
+
+        return $this;
+    }
+
+    protected function getProcessPathPadding() : int
+    {
+        return $this->_read(self::PROP_PROCESS_PATH_PADDING);
+    }
+
+    public function setProcessIdPadding(int $processIdPadding) : LogFormatterInterface
+    {
+        $this->_create(self::PROP_PROCESS_ID_PADDING, $processIdPadding);
+
+        return $this;
+    }
+
+    protected function getProcessIdPadding() : int
+    {
+        return $this->_read(self::PROP_PROCESS_ID_PADDING);
     }
 
 }

@@ -12,11 +12,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
     use Defensive\AwareTrait;
-    const PAD_PID = 6;
-    const PAD_PATH = 50;
     const PROP_IS_ENABLED = 'is_enabled';
-    const PROP_PROCESS_PATH_PADDING = 'process_path_padding';
-    const PROP_PROCESS_ID_PADDING = 'process_id_padding';
 
     protected $log_formatter;
 
@@ -52,7 +48,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 'message' => $message,
             ];
 
-            $this->getLogFormatter()->setMessageParts($messageParts)->formatPipes();
+            $this->getLogFormatter()->setMessageParts($messageParts)->format();
             fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage() . "\n");
         }
 
@@ -69,30 +65,6 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
         $this->_create(self::PROP_IS_ENABLED, $isEnabled);
 
         return $this;
-    }
-
-    public function setProcessPathPadding(int $processPathPadding) : LoggerInterface
-    {
-        $this->_create(self::PROP_PROCESS_PATH_PADDING, $processPathPadding);
-
-        return $this;
-    }
-
-    protected function _getProcessPathPadding() : int
-    {
-        return $this->_read(self::PROP_PROCESS_PATH_PADDING);
-    }
-
-    public function setProcessIdPadding(int $processIdPadding) : LoggerInterface
-    {
-        $this->_create(self::PROP_PROCESS_ID_PADDING, $processIdPadding);
-
-        return $this;
-    }
-
-    protected function _getProcessIdPadding() : int
-    {
-        return $this->_read(self::PROP_PROCESS_ID_PADDING);
     }
 
     public function getLogFormatter() : LogFormatterInterface
