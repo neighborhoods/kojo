@@ -26,7 +26,7 @@ class LogFormatter implements LogFormatterInterface
         $messageParts['typeCode'] = str_pad($messageParts['typeCode'], $processPathPadding, ' ');
         $messageParts['level'] = str_pad($messageParts['level'], 12, ' ');
 
-        $message = implode(' | ', array_values($this->getMessageParts()));
+        $message = implode(' | ', array_values($messageParts));
         $this->write($message);
     }
 
