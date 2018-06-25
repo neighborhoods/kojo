@@ -46,21 +46,18 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 $typeCode = str_pad('', $processPathPadding, '?');
             }
 
-            $level = str_pad($level, 12, ' ');
+//            $level = str_pad($level, 12, ' ');
             $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
 
             $messageParts = [
                 'time' => $referenceTime,
                 'level' => $level,
-                'processId' => $paddedProcessId,
-                'typeCode' => $typeCode,
+                'processId' => $this->_getProcess()->getProcessId(),
+                'typeCode' => $this->_getProcess()->getPath(),
                 'message' => $message,
             ];
-            if ((int)$processId % 2 === 0) {
-                $this->getLogFormatter()->setMessageParts($messageParts)->writePipes();
-            } else {
-                $this->getLogFormatter()->setMessageParts($messageParts)->writeJson();
-            }
+
+            $this->getLogFormatter()->setMessageParts($messageParts)->writeJson();
         }
 
         return;
