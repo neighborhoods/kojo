@@ -1,0 +1,3 @@
+services:
+  neighborhoods.kojo.process.log_formatter:
+    class: Neighborhoods\Kojo\Process\LogFormatter

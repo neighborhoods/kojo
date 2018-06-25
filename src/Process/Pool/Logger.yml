@@ -10,5 +10,6 @@ services:
       - [setTime, ['@neighborhoods.pylon.time']]
       - [setProcessIdPadding, ['%process.pool.logger.process_id_padding%']]
       - [setProcessPathPadding, ['%process.pool.logger.path_padding%']]
+      - [setLogFormatter, ['@neighborhoods.kojo.process.log_formatter']]
   process.pool.logger:
     alias: neighborhoods.kojo.process.pool.logger

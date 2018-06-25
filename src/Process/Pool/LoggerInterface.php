@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
+use Neighborhoods\Kojo\Process\LogFormatterInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Psr\Log;
 
@@ -15,4 +16,8 @@ interface LoggerInterface extends Log\LoggerInterface
     public function setProcessPathPadding(int $processPathPadding): LoggerInterface;
 
     public function setProcessIdPadding(int $processIdPadding): LoggerInterface;
+
+    public function getLogFormatter() : LogFormatterInterface;
+
+    public function setLogFormatter($log_formatter) : LoggerInterface;
 }
