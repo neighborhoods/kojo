@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Neighborhoods\Kojo\Process;
+namespace Neighborhoods\Kojo\Process\Pool;
 
 class LogFormatter implements LogFormatterInterface
 {

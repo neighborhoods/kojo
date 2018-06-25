@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Neighborhoods\Kojo\Process;
+namespace Neighborhoods\Kojo\Process\Pool;
 
 
 interface LogFormatterInterface
