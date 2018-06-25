@@ -12,4 +12,6 @@ interface LogFormatterInterface
     public function getMessageParts() : array;
 
     public function setMessageParts(array $messageParts) : LogFormatterInterface;
+
+    public function writeJson();
 }

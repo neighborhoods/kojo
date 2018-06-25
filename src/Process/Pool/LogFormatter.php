@@ -11,8 +11,14 @@ class LogFormatter implements LogFormatterInterface
 
     public function writePipes()
     {
-        $message = implode(' | ', $this->getMessageParts());
-        fwrite(STDOUT, $message . "\n");
+        $message = implode(' | ', array_values($this->getMessageParts()));
+        $this->write($message);
+    }
+
+    public function writeJson()
+    {
+        $message =  json_encode($this->getMessageParts());
+        $this->write($message);
     }
 
     public function getMessageParts() : array
@@ -29,6 +35,14 @@ class LogFormatter implements LogFormatterInterface
         $this->messageParts = $messageParts;
 
         return $this;
+    }
+
+    /**
+     * @param $message
+     */
+    protected function write($message) : void
+    {
+        fwrite(STDOUT, $message . "\n");
     }
 
 }
