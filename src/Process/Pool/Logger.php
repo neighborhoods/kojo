@@ -52,7 +52,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 'message' => $message,
             ];
 
-            $this->getLogFormatter()->setMessageParts($messageParts)->writeJson();
+            $this->getLogFormatter()->setMessageParts($messageParts)->writePipes();
         }
 
         return;
