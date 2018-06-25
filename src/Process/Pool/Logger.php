@@ -35,24 +35,19 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     public function log($level, $message, array $context = [])
     {
         if ($this->_isEnabled() === true) {
-            $processIdPadding = $this->_getProcessIdPadding();
-            $processPathPadding = $this->_getProcessPathPadding();
+
             if ($this->_exists(ProcessInterface::class)) {
                 $processId = (string)$this->_getProcess()->getProcessId();
-                $paddedProcessId = str_pad($processId, $processIdPadding, ' ', STR_PAD_LEFT);
-                $typeCode = str_pad($this->_getProcess()->getPath(), $processPathPadding, ' ');
             } else {
-                $paddedProcessId = str_pad('', $processIdPadding, '?', STR_PAD_LEFT);
-                $typeCode = str_pad('', $processPathPadding, '?');
+                $processId = '?';
             }
 
-//            $level = str_pad($level, 12, ' ');
             $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
 
             $messageParts = [
                 'time' => $referenceTime,
                 'level' => $level,
-                'processId' => $this->_getProcess()->getProcessId(),
+                'processId' => $processId,
                 'typeCode' => $this->_getProcess()->getPath(),
                 'message' => $message,
             ];

@@ -11,13 +11,28 @@ class LogFormatter implements LogFormatterInterface
 
     public function writePipes()
     {
+        $messageParts = [
+            'time' => $this->getMessageParts()['time'],
+            'level' => $this->getMessageParts()['level'],
+            'processId' => $this->getMessageParts()['processId'],
+            'typeCode' => $this->getMessageParts()['typeCode'],
+            'message' => $this->getMessageParts()['message'],
+        ];
+
+        $processIdPadding = 6;
+        $processPathPadding = 80;
+
+        $messageParts['processId'] = str_pad($messageParts['processId'], $processIdPadding, ' ', STR_PAD_LEFT);
+        $messageParts['typeCode'] = str_pad($messageParts['typeCode'], $processPathPadding, ' ');
+        $messageParts['level'] = str_pad($messageParts['level'], 12, ' ');
+
         $message = implode(' | ', array_values($this->getMessageParts()));
         $this->write($message);
     }
 
     public function writeJson()
     {
-        $message =  json_encode($this->getMessageParts());
+        $message = json_encode($this->getMessageParts());
         $this->write($message);
     }
 
