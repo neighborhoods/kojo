@@ -6,4 +6,4 @@ services:
     class: Neighborhoods\Kojo\Process\Pool\LogFormatter
     calls:
       - [setProcessIdPadding, ['%process.pool.logger.process_id_padding%']]
-      - [setProcessPathPadding, ['%process.pool.logger.path_padding%']]]
+      - [setProcessPathPadding, ['%process.pool.logger.path_padding%']]
