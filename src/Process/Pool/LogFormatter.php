@@ -9,7 +9,10 @@ class LogFormatter implements LogFormatterInterface
     /** @var array */
     protected $messageParts;
 
-    public function writePipes()
+    /** @var string */
+    protected $formattedMessage;
+
+    public function formatPipes()
     {
         $messageParts = [
             'time' => $this->getMessageParts()['time'],
@@ -27,13 +30,13 @@ class LogFormatter implements LogFormatterInterface
         $messageParts['level'] = str_pad($messageParts['level'], 12, ' ');
 
         $message = implode(' | ', array_values($messageParts));
-        $this->write($message);
+        $this->setFormattedMessage($message);
     }
 
-    public function writeJson()
+    public function formatJson()
     {
         $message = json_encode($this->getMessageParts());
-        $this->write($message);
+        $this->setFormattedMessage($message);
     }
 
     public function getMessageParts() : array
@@ -52,12 +55,20 @@ class LogFormatter implements LogFormatterInterface
         return $this;
     }
 
-    /**
-     * @param $message
-     */
-    protected function write($message) : void
+    public function getFormattedMessage() : string
     {
-        fwrite(STDOUT, $message . "\n");
+        if ($this->formattedMessage === null) {
+            throw new \LogicException('LogFormatter formattedMessage has not been set.');
+        }
+
+        return $this->formattedMessage;
+    }
+
+    public function setFormattedMessage(string $formattedMessage) : LogFormatterInterface
+    {
+        $this->formattedMessage = $formattedMessage;
+
+        return $this;
     }
 
 }

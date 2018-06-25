@@ -52,7 +52,8 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 'message' => $message,
             ];
 
-            $this->getLogFormatter()->setMessageParts($messageParts)->writePipes();
+            $this->getLogFormatter()->setMessageParts($messageParts)->formatPipes();
+            fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage() . "\n");
         }
 
         return;
