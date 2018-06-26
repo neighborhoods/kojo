@@ -13,6 +13,13 @@ class LogFormatter implements LogFormatterInterface
     const PAD_PATH = 50;
     const PROP_PROCESS_PATH_PADDING = 'process_path_padding';
     const PROP_PROCESS_ID_PADDING = 'process_id_padding';
+    const PROP_LOG_FORMAT = 'log_format';
+
+    const KEY_TIME = 'time';
+    const KEY_LEVEL = 'level';
+    const KEY_PROCESS_ID = 'processId';
+    const KEY_TYPE_CODE = 'typeCode';
+    const KEY_MESSAGE = 'message';
 
     /** @var array */
     protected $messageParts;
@@ -20,12 +27,13 @@ class LogFormatter implements LogFormatterInterface
     /** @var string */
     protected $formattedMessage;
 
-    public function format(): LogFormatterInterface
+
+    public function format() : LogFormatterInterface
     {
-        if ((int)$this->getMessageParts()['processId'] % 2 == 0){
-            $this->formatJson();
-        } else {
+        if ($this->hasLogFormat() && $this->getLogFormat() === 'pipes'){
             $this->formatPipes();
+        } else {
+            $this->formatJson();
         }
 
         return $this;
@@ -33,22 +41,26 @@ class LogFormatter implements LogFormatterInterface
 
     public function formatPipes() : LogFormatterInterface
     {
-        $messageParts = [
-            'time' => $this->getMessageParts()['time'],
-            'level' => $this->getMessageParts()['level'],
-            'processId' => $this->getMessageParts()['processId'],
-            'typeCode' => $this->getMessageParts()['typeCode'],
-            'message' => $this->getMessageParts()['message'],
+        $paddedMessage = [
+            self::KEY_TIME => $this->getMessageParts()[self::KEY_TIME],
+            self::KEY_LEVEL => $this->getMessageParts()[self::KEY_LEVEL],
+            self::KEY_PROCESS_ID => $this->getMessageParts()[self::KEY_PROCESS_ID],
+            self::KEY_TYPE_CODE => $this->getMessageParts()[self::KEY_TYPE_CODE],
+            self::KEY_MESSAGE => $this->getMessageParts()[self::KEY_MESSAGE],
         ];
 
         $processIdPadding = $this->getProcessIdPadding();
         $processPathPadding = $this->getProcessPathPadding();
 
-        $messageParts['processId'] = str_pad($messageParts['processId'], $processIdPadding, ' ', STR_PAD_LEFT);
-        $messageParts['typeCode'] = str_pad($messageParts['typeCode'], $processPathPadding, ' ');
-        $messageParts['level'] = str_pad($messageParts['level'], 12, ' ');
+        $paddedMessage[self::KEY_PROCESS_ID] = str_pad($paddedMessage[self::KEY_PROCESS_ID],
+                                                      $processIdPadding,
+                                                      ' ',
+                                                      STR_PAD_LEFT
+        );
+        $paddedMessage[self::KEY_TYPE_CODE] = str_pad($paddedMessage[self::KEY_TYPE_CODE], $processPathPadding, ' ');
+        $paddedMessage[self::KEY_LEVEL] = str_pad($paddedMessage[self::KEY_LEVEL], 12, ' ');
 
-        $message = implode(' | ', array_values($messageParts));
+        $message = implode(' | ', array_values($paddedMessage));
         $this->setFormattedMessage($message);
 
         return $this;
@@ -118,4 +130,20 @@ class LogFormatter implements LogFormatterInterface
         return $this->_read(self::PROP_PROCESS_ID_PADDING);
     }
 
+    public function setLogFormat(string $logFormat)
+    {
+        $this->_create(self::PROP_LOG_FORMAT, $logFormat);
+
+        return $this;
+    }
+
+    protected function getLogFormat() : string
+    {
+        return $this->_read(self::PROP_LOG_FORMAT);
+    }
+
+    protected function hasLogFormat() : bool
+    {
+        return $this->_exists(self::PROP_LOG_FORMAT);
+    }
 }

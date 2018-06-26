@@ -7,3 +7,4 @@ services:
     calls:
       - [setProcessIdPadding, ['%process.pool.logger.process_id_padding%']]
       - [setProcessPathPadding, ['%process.pool.logger.path_padding%']]
+      - [setLogFormat, ['%neighborhoods.kojo.environment.parameters.log_format%']]

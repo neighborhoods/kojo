@@ -24,4 +24,6 @@ interface LogFormatterInterface
     public function setProcessPathPadding(int $processPathPadding) : LogFormatterInterface;
 
     public function setProcessIdPadding(int $processIdPadding) : LogFormatterInterface;
+
+    public function setLogFormat(string $logFormat);
 }
