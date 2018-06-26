@@ -21,13 +21,15 @@ class LogFormatter implements LogFormatterInterface
     const KEY_TYPE_CODE = 'typeCode';
     const KEY_MESSAGE = 'message';
 
+    const LOG_FORMAT_PIPES = 'pipes';
+    const LOG_FORMAT_JSON = 'json';
+
     protected $messageParts;
     protected $formattedMessage;
 
-
     public function format() : LogFormatterInterface
     {
-        if ($this->hasLogFormat() && $this->getLogFormat() === 'pipes') {
+        if ($this->hasLogFormat() && $this->getLogFormat() === self::LOG_FORMAT_PIPES) {
             $this->formatPipes();
         } else {
             $this->formatJson();
