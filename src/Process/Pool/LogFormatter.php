@@ -21,16 +21,13 @@ class LogFormatter implements LogFormatterInterface
     const KEY_TYPE_CODE = 'typeCode';
     const KEY_MESSAGE = 'message';
 
-    /** @var array */
     protected $messageParts;
-
-    /** @var string */
     protected $formattedMessage;
 
 
     public function format() : LogFormatterInterface
     {
-        if ($this->hasLogFormat() && $this->getLogFormat() === 'pipes'){
+        if ($this->hasLogFormat() && $this->getLogFormat() === 'pipes') {
             $this->formatPipes();
         } else {
             $this->formatJson();
@@ -53,9 +50,9 @@ class LogFormatter implements LogFormatterInterface
         $processPathPadding = $this->getProcessPathPadding();
 
         $paddedMessage[self::KEY_PROCESS_ID] = str_pad($paddedMessage[self::KEY_PROCESS_ID],
-                                                      $processIdPadding,
-                                                      ' ',
-                                                      STR_PAD_LEFT
+                                                       $processIdPadding,
+                                                       ' ',
+                                                       STR_PAD_LEFT
         );
         $paddedMessage[self::KEY_TYPE_CODE] = str_pad($paddedMessage[self::KEY_TYPE_CODE], $processPathPadding, ' ');
         $paddedMessage[self::KEY_LEVEL] = str_pad($paddedMessage[self::KEY_LEVEL], 12, ' ');
