@@ -7,4 +7,6 @@ services:
     calls:
       - [setProcessIdPadding, ['%process.pool.logger.process_id_padding%']]
       - [setProcessPathPadding, ['%process.pool.logger.path_padding%']]
+      # Move this property in here for organizational sake, rename to be name spaced to this.
+      # default to JSON for safety in prod.
       - [setLogFormat, ['%neighborhoods.kojo.environment.parameters.log_format%']]
