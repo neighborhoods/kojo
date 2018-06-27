@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Process\Pool;
+namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
 use Neighborhoods\Pylon\Data\Property\Defensive;
 
-class LogFormatter implements LogFormatterInterface
+class Formatter implements FormatterInterface
 {
     use Defensive\AwareTrait;
 
@@ -27,7 +27,7 @@ class LogFormatter implements LogFormatterInterface
     protected $messageParts;
     protected $formattedMessage;
 
-    public function format() : LogFormatterInterface
+    public function format() : FormatterInterface
     {
         if ($this->hasLogFormat() && $this->getLogFormat() === self::LOG_FORMAT_PIPES) {
             $this->formatPipes();
@@ -38,7 +38,7 @@ class LogFormatter implements LogFormatterInterface
         return $this;
     }
 
-    public function formatPipes() : LogFormatterInterface
+    public function formatPipes() : FormatterInterface
     {
         $paddedMessage = [
             self::KEY_TIME => $this->getMessageParts()[self::KEY_TIME],
@@ -65,7 +65,7 @@ class LogFormatter implements LogFormatterInterface
         return $this;
     }
 
-    public function formatJson() : LogFormatterInterface
+    public function formatJson() : FormatterInterface
     {
         $message = json_encode($this->getMessageParts());
         $this->setFormattedMessage($message);
@@ -76,13 +76,13 @@ class LogFormatter implements LogFormatterInterface
     public function getMessageParts() : array
     {
         if ($this->messageParts === null) {
-            throw new \LogicException('LogFormatter messageParts has not been set.');
+            throw new \LogicException('Formatter messageParts has not been set.');
         }
 
         return $this->messageParts;
     }
 
-    public function setMessageParts(array $messageParts) : LogFormatterInterface
+    public function setMessageParts(array $messageParts) : FormatterInterface
     {
         $this->messageParts = $messageParts;
 
@@ -92,20 +92,20 @@ class LogFormatter implements LogFormatterInterface
     public function getFormattedMessage() : string
     {
         if ($this->formattedMessage === null) {
-            throw new \LogicException('LogFormatter formattedMessage has not been set.');
+            throw new \LogicException('Formatter formattedMessage has not been set.');
         }
 
         return $this->formattedMessage;
     }
 
-    public function setFormattedMessage(string $formattedMessage) : LogFormatterInterface
+    public function setFormattedMessage(string $formattedMessage) : FormatterInterface
     {
         $this->formattedMessage = $formattedMessage;
 
         return $this;
     }
 
-    public function setProcessPathPadding(int $processPathPadding) : LogFormatterInterface
+    public function setProcessPathPadding(int $processPathPadding) : FormatterInterface
     {
         $this->_create(self::PROP_PROCESS_PATH_PADDING, $processPathPadding);
 
@@ -117,7 +117,7 @@ class LogFormatter implements LogFormatterInterface
         return $this->_read(self::PROP_PROCESS_PATH_PADDING);
     }
 
-    public function setProcessIdPadding(int $processIdPadding) : LogFormatterInterface
+    public function setProcessIdPadding(int $processIdPadding) : FormatterInterface
     {
         $this->_create(self::PROP_PROCESS_ID_PADDING, $processIdPadding);
 
