@@ -40,6 +40,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 
             $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
 
+            // first class DAO
             $messageParts = [
                 'time' => $referenceTime,
                 'level' => $level,
@@ -48,8 +49,10 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 'message' => $message,
             ];
 
-            $this->getLogFormatter()->setMessageParts($messageParts)->format();
+            // either way, up to you =)
+            $this->getLogFormatter()->setMessageParts($messageParts);
             fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage() . "\n");
+            $this->getLogFormatter()->unsetMessageParts();
         }
 
         return;

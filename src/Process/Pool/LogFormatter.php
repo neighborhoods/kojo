@@ -5,6 +5,8 @@ namespace Neighborhoods\Kojo\Process\Pool;
 
 use Neighborhoods\Pylon\Data\Property\Defensive;
 
+// consider refactoring this to Logger/Formatter for organization, but up to you.
+// Awesome stuff.
 class LogFormatter implements LogFormatterInterface
 {
     use Defensive\AwareTrait;
