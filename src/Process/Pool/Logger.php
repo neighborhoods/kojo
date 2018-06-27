@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
+use Neighborhoods\Kojo\Process\Pool\Logger\FormatterInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Pylon\Time;
@@ -67,7 +68,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
         return $this;
     }
 
-    public function getLogFormatter() : LogFormatterInterface
+    public function getLogFormatter() : FormatterInterface
     {
         if ($this->log_formatter === null) {
             throw new \LogicException('Logger log_formatter has not been set.');
@@ -76,7 +77,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
         return $this->log_formatter;
     }
 
-    public function setLogFormatter(LogFormatterInterface $log_formatter) : LoggerInterface
+    public function setLogFormatter(FormatterInterface $log_formatter) : LoggerInterface
     {
         if ($this->log_formatter !== null) {
             throw new \LogicException('Logger log_formatter already set.');
