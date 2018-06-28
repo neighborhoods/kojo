@@ -24,7 +24,7 @@ class Formatter implements FormatterInterface
     const LOG_FORMAT_PIPES = 'pipes';
     const LOG_FORMAT_JSON = 'json';
 
-    protected $messageParts;
+    protected $message;
     protected $formattedMessage;
 
     public function format() : FormatterInterface
@@ -40,51 +40,41 @@ class Formatter implements FormatterInterface
 
     public function formatPipes() : FormatterInterface
     {
-        $paddedMessage = [
-            self::KEY_TIME => $this->getMessageParts()[self::KEY_TIME],
-            self::KEY_LEVEL => $this->getMessageParts()[self::KEY_LEVEL],
-            self::KEY_PROCESS_ID => $this->getMessageParts()[self::KEY_PROCESS_ID],
-            self::KEY_TYPE_CODE => $this->getMessageParts()[self::KEY_TYPE_CODE],
-            self::KEY_MESSAGE => $this->getMessageParts()[self::KEY_MESSAGE],
-        ];
+        $message = $this->getMessage();
 
-        $processIdPadding = $this->getProcessIdPadding();
-        $processPathPadding = $this->getProcessPathPadding();
+        $processIdPaddingLength = $this->getProcessIdPadding();
+        $processPathPaddingLength = $this->getProcessPathPadding();
 
-        $paddedMessage[self::KEY_PROCESS_ID] = str_pad($paddedMessage[self::KEY_PROCESS_ID],
-                                                       $processIdPadding,
-                                                       ' ',
-                                                       STR_PAD_LEFT
-        );
-        $paddedMessage[self::KEY_TYPE_CODE] = str_pad($paddedMessage[self::KEY_TYPE_CODE], $processPathPadding, ' ');
-        $paddedMessage[self::KEY_LEVEL] = str_pad($paddedMessage[self::KEY_LEVEL], 12, ' ');
+        $processID = str_pad($message->getProcessId(), $processIdPaddingLength, ' ', STR_PAD_LEFT);
+        $typeCode = str_pad($message->getTypeCode(), $processPathPaddingLength, ' ');
+        $level = str_pad($message->getLevel(), 12, ' ');
 
-        $message = implode(' | ', array_values($paddedMessage));
-        $this->setFormattedMessage($message);
+        $pipeDelimitedMessage = implode(' | ', [$message->getTime(), $level, $processID, $typeCode]);
+        $this->setFormattedMessage($pipeDelimitedMessage);
 
         return $this;
     }
 
     public function formatJson() : FormatterInterface
     {
-        $message = json_encode($this->getMessageParts());
+        $message = json_encode($this->getMessage());
         $this->setFormattedMessage($message);
 
         return $this;
     }
 
-    public function getMessageParts() : array
+    public function getMessage() : MessageInterface
     {
-        if ($this->messageParts === null) {
+        if ($this->message === null) {
             throw new \LogicException('Formatter messageParts has not been set.');
         }
 
-        return $this->messageParts;
+        return $this->message;
     }
 
-    public function setMessageParts(array $messageParts) : FormatterInterface
+    public function setMessage(MessageInterface $message) : FormatterInterface
     {
-        $this->messageParts = $messageParts;
+        $this->message = $message;
 
         return $this;
     }

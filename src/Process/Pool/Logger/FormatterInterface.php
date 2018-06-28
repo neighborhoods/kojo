@@ -14,9 +14,9 @@ interface FormatterInterface
 
     public function formatJson() : FormatterInterface;
 
-    public function getMessageParts() : array;
+    public function getMessage() : MessageInterface;
 
-    public function setMessageParts(array $messageParts) : FormatterInterface;
+    public function setMessage(MessageInterface $message) : FormatterInterface;
 
     public function getFormattedMessage() : string;
 

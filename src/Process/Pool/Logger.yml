@@ -7,5 +7,6 @@ services:
       - [setIsEnabled, ['%process.pool.logger.is_enabled%']]
       - [setTime, ['@neighborhoods.pylon.time']]
       - [setLogFormatter, ['@neighborhoods.kojo.process.log_formatter']]
+      - [setProcessPoolLoggerMessageFactory, ['@neighborhoods.kojo.process.pool.logger.message.factory']]
   process.pool.logger:
     alias: neighborhoods.kojo.process.pool.logger

@@ -12,6 +12,7 @@ use Psr\Log;
 class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
+    use Logger\Message\Factory\AwareTrait;
     use Defensive\AwareTrait;
     const PROP_IS_ENABLED = 'is_enabled';
 
@@ -41,15 +42,14 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 
             $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
 
-            $messageParts = [
-                'time' => $referenceTime,
-                'level' => $level,
-                'processId' => $processId,
-                'typeCode' => $this->_getProcess()->getPath(),
-                'message' => $message,
-            ];
+            $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
+            $logMessage->setTime($referenceTime);
+            $logMessage->setLevel($level);
+            $logMessage->setProcessId($processId);
+            $logMessage->setTypeCode($this->_getProcess()->getPath());
+            $logMessage->setMessage($message);
 
-            $this->getLogFormatter()->setMessageParts($messageParts)->format();
+            $this->getLogFormatter()->setMessage($logMessage)->format();
             fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage() . "\n");
         }
 
