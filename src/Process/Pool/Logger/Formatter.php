@@ -27,18 +27,20 @@ class Formatter implements FormatterInterface
     protected $message;
     protected $formattedMessage;
 
-    public function format() : FormatterInterface
+    public function getFormattedMessage(MessageInterface $message) : string
     {
+        $this->setMessage($message);
+
         if ($this->hasLogFormat() && $this->getLogFormat() === self::LOG_FORMAT_PIPES) {
             $this->formatPipes();
         } else {
             $this->formatJson();
         }
 
-        return $this;
+        return $this->formattedMessage;
     }
 
-    public function formatPipes() : FormatterInterface
+    protected function formatPipes() : FormatterInterface
     {
         $logMessage = $this->getMessage();
 
@@ -55,7 +57,7 @@ class Formatter implements FormatterInterface
         return $this;
     }
 
-    public function formatJson() : FormatterInterface
+    protected function formatJson() : FormatterInterface
     {
         $logMessage = json_encode($this->getMessage());
         $this->setFormattedMessage($logMessage);
@@ -63,7 +65,7 @@ class Formatter implements FormatterInterface
         return $this;
     }
 
-    public function getMessage() : MessageInterface
+    protected function getMessage() : MessageInterface
     {
         if ($this->message === null) {
             throw new \LogicException('Formatter messageParts has not been set.');
@@ -72,23 +74,15 @@ class Formatter implements FormatterInterface
         return $this->message;
     }
 
-    public function setMessage(MessageInterface $message) : FormatterInterface
+    protected function setMessage(MessageInterface $message) : FormatterInterface
     {
         $this->message = $message;
 
         return $this;
     }
 
-    public function getFormattedMessage() : string
-    {
-        if ($this->formattedMessage === null) {
-            throw new \LogicException('Formatter formattedMessage has not been set.');
-        }
 
-        return $this->formattedMessage;
-    }
-
-    public function setFormattedMessage(string $formattedMessage) : FormatterInterface
+    protected function setFormattedMessage(string $formattedMessage) : FormatterInterface
     {
         $this->formattedMessage = $formattedMessage;
 
