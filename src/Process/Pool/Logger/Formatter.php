@@ -40,16 +40,16 @@ class Formatter implements FormatterInterface
 
     public function formatPipes() : FormatterInterface
     {
-        $message = $this->getMessage();
+        $logMessage = $this->getMessage();
 
         $processIdPaddingLength = $this->getProcessIdPadding();
         $processPathPaddingLength = $this->getProcessPathPadding();
 
-        $processID = str_pad($message->getProcessId(), $processIdPaddingLength, ' ', STR_PAD_LEFT);
-        $typeCode = str_pad($message->getTypeCode(), $processPathPaddingLength, ' ');
-        $level = str_pad($message->getLevel(), 12, ' ');
+        $processID = str_pad($logMessage->getProcessId(), $processIdPaddingLength, ' ', STR_PAD_LEFT);
+        $typeCode = str_pad($logMessage->getTypeCode(), $processPathPaddingLength, ' ');
+        $level = str_pad($logMessage->getLevel(), 12, ' ');
 
-        $pipeDelimitedMessage = implode(' | ', [$message->getTime(), $level, $processID, $typeCode]);
+        $pipeDelimitedMessage = implode(' | ', [$logMessage->getTime(), $level, $processID, $typeCode, $logMessage->getMessage()]);
         $this->setFormattedMessage($pipeDelimitedMessage);
 
         return $this;
@@ -57,8 +57,8 @@ class Formatter implements FormatterInterface
 
     public function formatJson() : FormatterInterface
     {
-        $message = json_encode($this->getMessage());
-        $this->setFormattedMessage($message);
+        $logMessage = json_encode($this->getMessage());
+        $this->setFormattedMessage($logMessage);
 
         return $this;
     }
