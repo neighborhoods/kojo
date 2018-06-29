@@ -1,6 +1,4 @@
 parameters:
-  process.pool.logger.process_id_padding: 6
-  process.pool.logger.path_padding: 80
   process.pool.logger.is_enabled: true
 services:
   neighborhoods.kojo.process.pool.logger:
@@ -8,7 +6,7 @@ services:
     calls:
       - [setIsEnabled, ['%process.pool.logger.is_enabled%']]
       - [setTime, ['@neighborhoods.pylon.time']]
-      - [setProcessIdPadding, ['%process.pool.logger.process_id_padding%']]
-      - [setProcessPathPadding, ['%process.pool.logger.path_padding%']]
+      - [setLogFormatter, ['@neighborhoods.kojo.process.log_formatter']]
+      - [setProcessPoolLoggerMessageFactory, ['@neighborhoods.kojo.process.pool.logger.message.factory']]
   process.pool.logger:
     alias: neighborhoods.kojo.process.pool.logger
