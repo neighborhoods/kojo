@@ -6,4 +6,3 @@ parameters:
   neighborhoods.kojo.environment.parameters.database_adapter: ''
   neighborhoods.kojo.environment.parameters.database_host: ''
   neighborhoods.kojo.environment.parameters.database_name: ''
-  neighborhoods.kojo.environment.parameters.log_format: ''
