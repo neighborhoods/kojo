@@ -15,78 +15,33 @@ class Formatter implements FormatterInterface
     const PROP_PROCESS_ID_PADDING = 'process_id_padding';
     const PROP_LOG_FORMAT = 'log_format';
 
-    const KEY_TIME = 'time';
-    const KEY_LEVEL = 'level';
-    const KEY_PROCESS_ID = 'processId';
-    const KEY_TYPE_CODE = 'typeCode';
-    const KEY_MESSAGE = 'message';
-
     const LOG_FORMAT_PIPES = 'pipes';
     const LOG_FORMAT_JSON = 'json';
 
-    protected $message;
-    protected $formattedMessage;
-
     public function getFormattedMessage(MessageInterface $message) : string
     {
-        $this->setMessage($message);
-
         if ($this->hasLogFormat() && $this->getLogFormat() === self::LOG_FORMAT_PIPES) {
-            $this->formatPipes();
+            return $this->formatPipes($message);
         } else {
-            $this->formatJson();
+            return $this->formatJson($message);
         }
-
-        return $this->formattedMessage;
     }
 
-    protected function formatPipes() : FormatterInterface
+    protected function formatPipes(MessageInterface $message) : string
     {
-        $logMessage = $this->getMessage();
-
         $processIdPaddingLength = $this->getProcessIdPadding();
         $processPathPaddingLength = $this->getProcessPathPadding();
 
-        $processID = str_pad($logMessage->getProcessId(), $processIdPaddingLength, ' ', STR_PAD_LEFT);
-        $typeCode = str_pad($logMessage->getTypeCode(), $processPathPaddingLength, ' ');
-        $level = str_pad($logMessage->getLevel(), 12, ' ');
+        $processID = str_pad($message->getProcessId(), $processIdPaddingLength, ' ', STR_PAD_LEFT);
+        $typeCode = str_pad($message->getTypeCode(), $processPathPaddingLength, ' ');
+        $level = str_pad($message->getLevel(), 12, ' ');
 
-        $pipeDelimitedMessage = implode(' | ', [$logMessage->getTime(), $level, $processID, $typeCode, $logMessage->getMessage()]);
-        $this->setFormattedMessage($pipeDelimitedMessage);
-
-        return $this;
+        return implode(' | ', [$message->getTime(), $level, $processID, $typeCode, $message->getMessage()]);
     }
 
-    protected function formatJson() : FormatterInterface
+    protected function formatJson(MessageInterface $message) : string
     {
-        $logMessage = json_encode($this->getMessage());
-        $this->setFormattedMessage($logMessage);
-
-        return $this;
-    }
-
-    protected function getMessage() : MessageInterface
-    {
-        if ($this->message === null) {
-            throw new \LogicException('Formatter messageParts has not been set.');
-        }
-
-        return $this->message;
-    }
-
-    protected function setMessage(MessageInterface $message) : FormatterInterface
-    {
-        $this->message = $message;
-
-        return $this;
-    }
-
-
-    protected function setFormattedMessage(string $formattedMessage) : FormatterInterface
-    {
-        $this->formattedMessage = $formattedMessage;
-
-        return $this;
+        return json_encode($message);
     }
 
     public function setProcessPathPadding(int $processPathPadding) : FormatterInterface
