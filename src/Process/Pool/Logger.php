@@ -17,15 +17,16 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     const PROP_IS_ENABLED = 'is_enabled';
 
     protected $log_formatter;
+    protected $level_filter_mask;
 
-    public function setProcess(ProcessInterface $process) : LoggerInterface
+    public function setProcess(ProcessInterface $process): LoggerInterface
     {
         $this->_createOrUpdate(ProcessInterface::class, $process);
 
         return $this;
     }
 
-    protected function _getProcess() : ProcessInterface
+    protected function _getProcess(): ProcessInterface
     {
         return $this->_read(ProcessInterface::class);
     }
@@ -33,41 +34,60 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     public function log($level, $message, array $context = [])
     {
         if ($this->_isEnabled() === true) {
+            if ($this->getLevelFilterMask()[$level] === false) {
+                if ($this->_exists(ProcessInterface::class)) {
+                    $processId = (string)$this->_getProcess()->getProcessId();
+                } else {
+                    $processId = '?';
+                }
 
-            if ($this->_exists(ProcessInterface::class)) {
-                $processId = (string)$this->_getProcess()->getProcessId();
-            } else {
-                $processId = '?';
+                $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
+                $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
+                $logMessage->setTime($referenceTime);
+                $logMessage->setLevel($level);
+                $logMessage->setProcessId($processId);
+                $logMessage->setProcessPath($this->_getProcess()->getPath());
+                $logMessage->setMessage($message);
+                fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage($logMessage) . "\n");
             }
-
-            $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
-
-            $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
-            $logMessage->setTime($referenceTime);
-            $logMessage->setLevel($level);
-            $logMessage->setProcessId($processId);
-            $logMessage->setTypeCode($this->_getProcess()->getPath());
-            $logMessage->setMessage($message);
-
-            fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage($logMessage) . "\n");
         }
 
         return;
     }
 
-    protected function _isEnabled() : bool
+    public function setLevelFilterMask(array $level_filter_mask): LoggerInterface
+    {
+        if ($this->level_filter_mask === null) {
+            $this->level_filter_mask = $level_filter_mask;
+        } else {
+            throw new \LogicException('Logger level_filter_mask is already set.');
+        }
+
+        return $this;
+    }
+
+    protected function getLevelFilterMask(): array
+    {
+        if ($this->level_filter_mask === null) {
+            $this->level_filter_mask = [];
+        }
+
+        return $this->level_filter_mask;
+    }
+
+    protected function _isEnabled(): bool
     {
         return $this->_read(self::PROP_IS_ENABLED);
     }
 
-    public function setIsEnabled(bool $isEnabled) : LoggerInterface
+    public function setIsEnabled(bool $isEnabled): LoggerInterface
     {
         $this->_create(self::PROP_IS_ENABLED, $isEnabled);
 
         return $this;
     }
 
-    public function getLogFormatter() : FormatterInterface
+    public function getLogFormatter(): FormatterInterface
     {
         if ($this->log_formatter === null) {
             throw new \LogicException('Logger log_formatter has not been set.');
@@ -76,7 +96,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
         return $this->log_formatter;
     }
 
-    public function setLogFormatter(FormatterInterface $log_formatter) : LoggerInterface
+    public function setLogFormatter(FormatterInterface $log_formatter): LoggerInterface
     {
         if ($this->log_formatter !== null) {
             throw new \LogicException('Logger log_formatter already set.');

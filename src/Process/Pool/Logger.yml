@@ -1,5 +1,14 @@
 parameters:
   process.pool.logger.is_enabled: true
+  neighborhoods.kojo.process.pool.logger.level_filter_mask:
+    !php/const \Psr\Log\LogLevel::EMERGENCY: false
+    !php/const \Psr\Log\LogLevel::ALERT: false
+    !php/const \Psr\Log\LogLevel::CRITICAL: false
+    !php/const \Psr\Log\LogLevel::ERROR: false
+    !php/const \Psr\Log\LogLevel::WARNING: false
+    !php/const \Psr\Log\LogLevel::NOTICE: false
+    !php/const \Psr\Log\LogLevel::INFO: false
+    !php/const \Psr\Log\LogLevel::DEBUG: true
 services:
   neighborhoods.kojo.process.pool.logger:
     class: Neighborhoods\Kojo\Process\Pool\Logger
@@ -8,5 +17,6 @@ services:
       - [setTime, ['@neighborhoods.pylon.time']]
       - [setLogFormatter, ['@neighborhoods.kojo.process.log_formatter']]
       - [setProcessPoolLoggerMessageFactory, ['@neighborhoods.kojo.process.pool.logger.message.factory']]
+      - [setLevelFilterMask, ['%neighborhoods.kojo.process.pool.logger.level_filter_mask%']]
   process.pool.logger:
     alias: neighborhoods.kojo.process.pool.logger
