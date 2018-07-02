@@ -41,9 +41,9 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                     $processId = '?';
                 }
 
-                $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
+                $referenceTime = $this->_getTime()->getNow();
                 $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
-                $logMessage->setTime($referenceTime);
+                $logMessage->setTime($referenceTime->format('D, d M y H:i:s.u T'));
                 $logMessage->setLevel($level);
                 $logMessage->setProcessId($processId);
                 $logMessage->setProcessPath($this->_getProcess()->getPath());
