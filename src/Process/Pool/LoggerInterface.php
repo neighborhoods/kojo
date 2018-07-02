@@ -16,4 +16,6 @@ interface LoggerInterface extends Log\LoggerInterface
     public function getLogFormatter() : FormatterInterface;
 
     public function setLogFormatter(FormatterInterface $log_formatter) : LoggerInterface;
+
+    public function setLevelFilterMask(array $level_filter_mask): LoggerInterface;
 }

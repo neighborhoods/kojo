@@ -9,27 +9,27 @@ class Message implements MessageInterface, \JsonSerializable
     const KEY_TIME = 'time';
     const KEY_LEVEL = 'level';
     const KEY_PROCESS_ID = 'process_id';
-    const KEY_TYPE_CODE = 'type_code';
+    const KEY_PROCESS_PATH = 'process_path';
     const KEY_MESSAGE = 'message';
 
     protected $time;
     protected $level;
     protected $process_id;
-    protected $type_code;
+    protected $process_path;
     protected $message;
 
-    public function jsonSerialize() : array
+    public function jsonSerialize(): array
     {
         return [
             self::KEY_TIME => $this->getTime(),
             self::KEY_LEVEL => $this->getLevel(),
             self::KEY_PROCESS_ID => $this->getProcessId(),
-            self::KEY_TYPE_CODE => $this->getTypeCode(),
+            self::KEY_PROCESS_PATH => $this->getProcessPath(),
             self::KEY_MESSAGE => $this->getMessage(),
         ];
     }
 
-    public function getTime() : string
+    public function getTime(): string
     {
         if ($this->time === null) {
             throw new \LogicException('Message ' . self::KEY_TIME . ' has not been set.');
@@ -38,7 +38,7 @@ class Message implements MessageInterface, \JsonSerializable
         return $this->time;
     }
 
-    public function setTime(string $time) : MessageInterface
+    public function setTime(string $time): MessageInterface
     {
         if ($this->time !== null) {
             throw new \LogicException('Message ' . self::KEY_TIME . ' already set.');
@@ -49,7 +49,7 @@ class Message implements MessageInterface, \JsonSerializable
         return $this;
     }
 
-    public function getLevel() : string
+    public function getLevel(): string
     {
         if ($this->level === null) {
             throw new \LogicException('Message ' . self::KEY_LEVEL . ' has not been set.');
@@ -58,7 +58,7 @@ class Message implements MessageInterface, \JsonSerializable
         return $this->level;
     }
 
-    public function setLevel(string $level) : MessageInterface
+    public function setLevel(string $level): MessageInterface
     {
         if ($this->level !== null) {
             throw new \LogicException('Message ' . self::KEY_LEVEL . ' already set.');
@@ -69,7 +69,7 @@ class Message implements MessageInterface, \JsonSerializable
         return $this;
     }
 
-    public function getProcessId() : string
+    public function getProcessId(): string
     {
         if ($this->process_id === null) {
             throw new \LogicException('Message ' . self::KEY_PROCESS_ID . ' has not been set.');
@@ -78,7 +78,7 @@ class Message implements MessageInterface, \JsonSerializable
         return $this->process_id;
     }
 
-    public function setProcessId(string $process_id) : MessageInterface
+    public function setProcessId(string $process_id): MessageInterface
     {
         if ($this->process_id !== null) {
             throw new \LogicException('Message ' . self::KEY_PROCESS_ID . ' already set.');
@@ -89,27 +89,27 @@ class Message implements MessageInterface, \JsonSerializable
         return $this;
     }
 
-    public function getTypeCode() : string
+    public function getProcessPath(): string
     {
-        if ($this->type_code === null) {
-            throw new \LogicException('Message ' . self::KEY_TYPE_CODE . ' has not been set.');
+        if ($this->process_path === null) {
+            throw new \LogicException('Message ' . self::KEY_PROCESS_PATH . ' has not been set.');
         }
 
-        return $this->type_code;
+        return $this->process_path;
     }
 
-    public function setTypeCode(string $type_code) : MessageInterface
+    public function setProcessPath(string $process_path): MessageInterface
     {
-        if ($this->type_code !== null) {
-            throw new \LogicException('Message ' . self::KEY_TYPE_CODE . ' already set.');
+        if ($this->process_path !== null) {
+            throw new \LogicException('Message ' . self::KEY_PROCESS_PATH . ' already set.');
         }
 
-        $this->type_code = $type_code;
+        $this->process_path = $process_path;
 
         return $this;
     }
 
-    public function getMessage() : string
+    public function getMessage(): string
     {
         if ($this->message === null) {
             throw new \LogicException('Message ' . self::KEY_MESSAGE . ' has not been set.');
@@ -118,7 +118,7 @@ class Message implements MessageInterface, \JsonSerializable
         return $this->message;
     }
 
-    public function setMessage(string $message) : MessageInterface
+    public function setMessage(string $message): MessageInterface
     {
         if ($this->message !== null) {
             throw new \LogicException('Message ' . self::KEY_MESSAGE . ' already set.');

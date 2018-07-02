@@ -33,7 +33,7 @@ class Start extends CommandAbstract
     public function _execute(): CommandAbstract
     {
         $arguments = [self::OPT_RUN_SERVER];
-        $arguments[] = self::OPT_YSDP . $this->_getInput()->getArgument(self::ARG_SERVICES_YML_FILE_PATH);
+        $arguments[] = self::OPT_YSDP . $this->_getInput()->getArgument(self::ARG_SERVICES_YML_ROOT_DIRECTORY_PATH);
         foreach ($this->_getInput()->getOption(self::OPT_SERVICES_YML_DIRECTORY_PATH) as $servicesYmlFilePath) {
             $arguments[] = self::OPT_YSDP . $servicesYmlFilePath;
         }

@@ -33,10 +33,10 @@ class Formatter implements FormatterInterface
         $processPathPaddingLength = $this->getProcessPathPadding();
 
         $processID = str_pad($message->getProcessId(), $processIdPaddingLength, ' ', STR_PAD_LEFT);
-        $typeCode = str_pad($message->getTypeCode(), $processPathPaddingLength, ' ');
+        $processPath = str_pad($message->getProcessPath(), $processPathPaddingLength, ' ');
         $level = str_pad($message->getLevel(), 12, ' ');
 
-        return implode(' | ', [$message->getTime(), $level, $processID, $typeCode, $message->getMessage()]);
+        return implode(' | ', [$message->getTime(), $level, $processID, $processPath, $message->getMessage()]);
     }
 
     protected function formatJson(MessageInterface $message) : string

@@ -19,9 +19,9 @@ interface MessageInterface
 
     public function setProcessId(string $process_id) : MessageInterface;
 
-    public function getTypeCode() : string;
+    public function getProcessPath() : string;
 
-    public function setTypeCode(string $type_code) : MessageInterface;
+    public function setProcessPath(string $process_path) : MessageInterface;
 
     public function getMessage() : string;
 
