@@ -14,7 +14,8 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     use Time\AwareTrait;
     use Logger\Message\Factory\AwareTrait;
     use Defensive\AwareTrait;
-    const PROP_IS_ENABLED = 'is_enabled';
+    public const PROP_IS_ENABLED = 'is_enabled';
+    protected const LOG_DATE_TIME_FORMAT = 'D, d M y H:i:s.u T';
 
     protected $log_formatter;
     protected $level_filter_mask;
@@ -41,9 +42,9 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                     $processId = '?';
                 }
 
-                $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
+                $referenceTime = $this->_getTime()->getNow();
                 $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
-                $logMessage->setTime($referenceTime);
+                $logMessage->setTime($referenceTime->format(self::LOG_DATE_TIME_FORMAT));
                 $logMessage->setLevel($level);
                 $logMessage->setProcessId($processId);
                 $logMessage->setProcessPath($this->_getProcess()->getPath());
