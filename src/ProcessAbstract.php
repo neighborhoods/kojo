@@ -56,6 +56,7 @@ abstract class ProcessAbstract implements ProcessInterface
         $this->_getProcessSignal()->addSignalHandler(SIGHUP, $this);
         $this->_getProcessSignal()->addSignalHandler(SIGQUIT, $this);
         $this->_getProcessSignal()->addSignalHandler(SIGABRT, $this);
+        $this->_getProcessSignal()->addSignalHandler(SIGUSR1, $this);
 
         return $this;
     }
