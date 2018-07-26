@@ -10,9 +10,12 @@ A distributed task manager.
 * Status system.
 * Distributed IPC.
 
-### Example usage
-```bash
-$ bin/kojo process:pool:server:start $PWD/example
-```
 
 ### Setting up a Worker.
+`example/bin/setup-worker.php`
+
+### Example usage
+```bash
+$ cd example
+$ vendor/bin/kojo process:pool:server:start $PWD/src/V1/Environment
+```
