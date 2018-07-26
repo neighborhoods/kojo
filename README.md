@@ -14,3 +14,5 @@ A distributed task manager.
 ```bash
 $ bin/kojo process:pool:server:start $PWD/example
 ```
+
+### Setting up a Worker.

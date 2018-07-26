@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: false
+    public: true
+  nhds.toolkit.time:
+    public: true
+    class: Neighborhoods\Pylon\Time
+  neighborhoods.scaffolding.fixture.expression.numberpool:
+    class: Neighborhoods\Scaffolding\Fixture\Expression\NumberPool
