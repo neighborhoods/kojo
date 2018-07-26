@@ -1,10 +1,13 @@
 <?php
 declare(strict_types=1);
+error_reporting(E_ALL);
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Finder\Finder;
 use Neighborhoods\Kojo\Api\V1\Job;
 
-$discoverableDirectories[] = __DIR__ . '/../../../V1';
+$discoverableDirectories[] = __DIR__ . '/../src/V1/Environment';
 $finder = new Finder();
 $finder->name('*.yml');
 $finder->files()->in($discoverableDirectories);
