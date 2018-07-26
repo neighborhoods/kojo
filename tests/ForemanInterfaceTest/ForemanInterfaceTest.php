@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\KojoTest\Unit;
 
 use Neighborhoods\Kojo\ForemanInterface;
-use Neighborhoods\Kojo\Process\JobInterface;
+use Neighborhoods\Kojo\Process\WorkerInterface;
 use Neighborhoods\Kojo\SelectorInterface;
 use Neighborhoods\Scaffolding\Fixture\AbstractTest;
 
@@ -30,8 +30,8 @@ class ForemanInterfaceTest extends AbstractTest
         return $this->_getContainerBuilderFacade()->getContainerBuilder()->get('selector');
     }
 
-    protected function _getJobProcess(): JobInterface
+    protected function _getJobProcess(): WorkerInterface
     {
-        return $this->_getContainerBuilderFacade()->getContainerBuilder()->get('process.job');
+        return $this->_getContainerBuilderFacade()->getContainerBuilder()->get('Worker');
     }
 }

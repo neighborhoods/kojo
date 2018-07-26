@@ -3,20 +3,22 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
-use Psr\Log;
-use Neighborhoods\Pylon\Time;
+use Neighborhoods\Kojo\Process\Pool\Logger\FormatterInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Pylon\Time;
+use Psr\Log;
 
 class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
+    use Logger\Message\Factory\AwareTrait;
     use Defensive\AwareTrait;
-    const PAD_PID                   = 6;
-    const PAD_PATH                  = 50;
-    const PROP_IS_ENABLED           = 'is_enabled';
-    const PROP_PROCESS_PATH_PADDING = 'process_path_padding';
-    const PROP_PROCESS_ID_PADDING   = 'process_id_padding';
+    public const PROP_IS_ENABLED = 'is_enabled';
+    protected const LOG_DATE_TIME_FORMAT = 'D, d M y H:i:s.u T';
+
+    protected $log_formatter;
+    protected $level_filter_mask;
 
     public function setProcess(ProcessInterface $process): LoggerInterface
     {
@@ -33,24 +35,45 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     public function log($level, $message, array $context = [])
     {
         if ($this->_isEnabled() === true) {
-            $processIdPadding = $this->_getProcessIdPadding();
-            $processPathPadding = $this->_getProcessPathPadding();
-            if ($this->_exists(ProcessInterface::class)) {
-                $processId = (string)$this->_getProcess()->getProcessId();
-                $paddedProcessId = str_pad($processId, $processIdPadding, ' ', STR_PAD_LEFT);
-                $typeCode = str_pad($this->_getProcess()->getPath(), $processPathPadding, ' ');
-            }else {
-                $paddedProcessId = str_pad('', $processIdPadding, '?', STR_PAD_LEFT);
-                $typeCode = str_pad('', $processPathPadding, '?');
-            }
+            if ($this->getLevelFilterMask()[$level] === false) {
+                if ($this->_exists(ProcessInterface::class)) {
+                    $processId = (string)$this->_getProcess()->getProcessId();
+                } else {
+                    $processId = '?';
+                }
 
-            $level = str_pad($level, 12, ' ');
-            $referenceTime = $this->_getTime()->getUnixReferenceTimeNow();
-            $format = "%s | %s | %s | %s | %s\n";
-            fwrite(STDOUT, sprintf($format, $referenceTime, $level, $paddedProcessId, $typeCode, $message));
+                $referenceTime = $this->_getTime()->getNow();
+                $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
+                $logMessage->setTime($referenceTime->format(self::LOG_DATE_TIME_FORMAT));
+                $logMessage->setLevel($level);
+                $logMessage->setProcessId($processId);
+                $logMessage->setProcessPath($this->_getProcess()->getPath());
+                $logMessage->setMessage($message);
+                fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage($logMessage) . "\n");
+            }
         }
 
         return;
+    }
+
+    public function setLevelFilterMask(array $level_filter_mask): LoggerInterface
+    {
+        if ($this->level_filter_mask === null) {
+            $this->level_filter_mask = $level_filter_mask;
+        } else {
+            throw new \LogicException('Logger level_filter_mask is already set.');
+        }
+
+        return $this;
+    }
+
+    protected function getLevelFilterMask(): array
+    {
+        if ($this->level_filter_mask === null) {
+            $this->level_filter_mask = [];
+        }
+
+        return $this->level_filter_mask;
     }
 
     protected function _isEnabled(): bool
@@ -65,27 +88,23 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
         return $this;
     }
 
-    public function setProcessPathPadding(int $processPathPadding): LoggerInterface
+    public function getLogFormatter(): FormatterInterface
     {
-        $this->_create(self::PROP_PROCESS_PATH_PADDING, $processPathPadding);
+        if ($this->log_formatter === null) {
+            throw new \LogicException('Logger log_formatter has not been set.');
+        }
+
+        return $this->log_formatter;
+    }
+
+    public function setLogFormatter(FormatterInterface $log_formatter): LoggerInterface
+    {
+        if ($this->log_formatter !== null) {
+            throw new \LogicException('Logger log_formatter already set.');
+        }
+
+        $this->log_formatter = $log_formatter;
 
         return $this;
-    }
-
-    protected function _getProcessPathPadding(): int
-    {
-        return $this->_read(self::PROP_PROCESS_PATH_PADDING);
-    }
-
-    public function setProcessIdPadding(int $processIdPadding): LoggerInterface
-    {
-        $this->_create(self::PROP_PROCESS_ID_PADDING, $processIdPadding);
-
-        return $this;
-    }
-
-    protected function _getProcessIdPadding(): int
-    {
-        return $this->_read(self::PROP_PROCESS_ID_PADDING);
     }
 }

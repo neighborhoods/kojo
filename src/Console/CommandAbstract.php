@@ -5,6 +5,7 @@ namespace Neighborhoods\Kojo\Console;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 use Symfony\Component\Console\Input\InputArgument;
@@ -12,8 +13,10 @@ use Symfony\Component\Console\Input\InputArgument;
 abstract class CommandAbstract extends Command
 {
     use Defensive\AwareTrait;
-    const ARG_SERVICES_YML_FILE_PATH = 'services_yml_file_path';
-    const SPLASH_ART                 = [
+    public const ARG_SERVICES_YML_ROOT_DIRECTORY_PATH = 'services_yml_root_directory_path';
+    public const OPT_ENABLE_SPLASH_ART = 'enable-splash-art';
+    public const OPT_ESA = 'esa';
+    public const SPLASH_ART = [
         '+------------------------------+',
         '|   ⚡ Neighborhoods Kōjō ⚡   |',
         '|                              |',
@@ -26,9 +29,16 @@ abstract class CommandAbstract extends Command
     public function configure()
     {
         $this->addArgument(
-            self::ARG_SERVICES_YML_FILE_PATH,
+            self::ARG_SERVICES_YML_ROOT_DIRECTORY_PATH,
             InputArgument::REQUIRED,
-            'The path to the YML services file for the client application.'
+            'The path to the YML services root directory for the client application.'
+        );
+
+        $this->addOption(
+            self::OPT_ENABLE_SPLASH_ART,
+            self::OPT_ESA,
+            InputOption::VALUE_NONE,
+            'Enables the splash art to be written to STDOUT.'
         );
 
         $this->_configure();
@@ -42,7 +52,9 @@ abstract class CommandAbstract extends Command
     {
         $this->_setInput($input);
         $this->_setOutput($output);
-        $this->_writeSplashArt();
+        if ($this->_getInput()->getOption(self::OPT_ENABLE_SPLASH_ART)) {
+            $this->_writeSplashArt();
+        }
         $this->_execute();
 
         return $this;

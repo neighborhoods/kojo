@@ -1,0 +1,7 @@
+services:
+  neighborhoods.scaffolding.testcase.service:
+    public: true
+    class: Neighborhoods\Scaffolding\TestCase\Service
+    calls:
+      - [addExpressionValue, ['time', '@nhds.toolkit.time']]
+      - [addExpressionValue, ['numberPool', '@neighborhoods.scaffolding.fixture.expression.numberpool']]
