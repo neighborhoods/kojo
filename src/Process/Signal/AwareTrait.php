@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Process\Signal;
 
 use Neighborhoods\Kojo\Process\SignalInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoProcessSignal;
+
     public function setProcessSignal(SignalInterface $processSignal): self
     {
-        $this->_create(SignalInterface::class, $processSignal);
+        if ($this->hasProcessSignal()) {
+            throw new \LogicException('NeighborhoodsKojoProcessSignal is already set.');
+        }
+        $this->NeighborhoodsKojoProcessSignal = $processSignal;
 
         return $this;
     }
 
-    protected function _getProcessSignal(): SignalInterface
+    protected function getProcessSignal(): SignalInterface
     {
-        return $this->_read(SignalInterface::class);
+        if (!$this->hasProcessSignal()) {
+            throw new \LogicException('NeighborhoodsKojoProcessSignal is not set.');
+        }
+
+        return $this->NeighborhoodsKojoProcessSignal;
     }
 
-    protected function _getProcessSignalClone(): SignalInterface
+    protected function hasProcessSignal(): bool
     {
-        return clone $this->_getProcessSignal();
+        return isset($this->NeighborhoodsKojoProcessSignal);
     }
 
-    protected function _hasProcessSignal(): bool
+    protected function unsetProcessSignal(): self
     {
-        return $this->_exists(SignalInterface::class);
-    }
-
-    protected function _unsetProcessSignal(): self
-    {
-        $this->_delete(SignalInterface::class);
+        if (!$this->hasProcessSignal()) {
+            throw new \LogicException('NeighborhoodsKojoProcessSignal is not set.');
+        }
+        unset($this->NeighborhoodsKojoProcessSignal);
 
         return $this;
     }

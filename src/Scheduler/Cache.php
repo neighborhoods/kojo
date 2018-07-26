@@ -3,41 +3,40 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Scheduler;
 
-use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Time;
 use Neighborhoods\Kojo\Scheduler;
-use Neighborhoods\Pylon\Time;
-use Neighborhoods\Kojo\CacheItemPool;
+use Neighborhoods\Kojo\Psr;
 
 class Cache implements CacheInterface
 {
-    use Defensive\AwareTrait;
     use Scheduler\Time\AwareTrait;
     use Time\AwareTrait;
-    use CacheItemPool\Repository\AwareTrait;
-    protected $_scheduleMinutesNotInCache = [];
+    use Psr\Cache\CacheItemPool\Repository\AwareTrait;
+    protected $scheduleMinutesNotInCache = [];
+    protected $scheduledKeyLifetime;
 
     public function getMinutesNotInCache(): array
     {
-        if (empty($this->_scheduleMinutesNotInCache)) {
-            $nexReferenceMinuteDateTime = $this->_getSchedulerTime()->getNextReferenceMinuteDateTime();
-            while ($this->_getSchedulerTime()->getReferenceDistanceDateTime() >= $nexReferenceMinuteDateTime) {
-                if (!$this->_isMinuteScheduledInCache($nexReferenceMinuteDateTime)) {
+        if (empty($this->scheduleMinutesNotInCache)) {
+            $nexReferenceMinuteDateTime = $this->getSchedulerTime()->getNextReferenceMinuteDateTime();
+            while ($this->getSchedulerTime()->getReferenceDistanceDateTime() >= $nexReferenceMinuteDateTime) {
+                if (!$this->isMinuteScheduledInCache($nexReferenceMinuteDateTime)) {
                     $scheduleMinute = $nexReferenceMinuteDateTime;
                     $scheduleMinuteIndex = $scheduleMinute->format(self::DATE_TIME_FORMAT_MYSQL_MINUTE);
-                    $this->_scheduleMinutesNotInCache[$scheduleMinuteIndex] = $scheduleMinute;
+                    $this->scheduleMinutesNotInCache[$scheduleMinuteIndex] = $scheduleMinute;
                 }
-                $nexReferenceMinuteDateTime = $this->_getSchedulerTime()->getNextReferenceMinuteDateTime();
+                $nexReferenceMinuteDateTime = $this->getSchedulerTime()->getNextReferenceMinuteDateTime();
             }
         }
 
-        return $this->_scheduleMinutesNotInCache;
+        return $this->scheduleMinutesNotInCache;
     }
 
-    protected function _isMinuteScheduledInCache(\DateTime $referenceMinuteDateTime): bool
+    protected function isMinuteScheduledInCache(\DateTime $referenceMinuteDateTime): bool
     {
         $isMinuteScheduled = false;
         $referenceMinuteDateTimeString = $referenceMinuteDateTime->format(self::DATE_TIME_FORMAT_CACHE_MINUTE);
-        $cacheItemPool = $this->_getCacheItemPoolRepository()->getById(self::CACHE_ITEM_POOL_ID);
+        $cacheItemPool = $this->getPsrCacheCacheItemPoolRepository()->get(self::CACHE_ITEM_POOL_ID);
         $hasItem = $cacheItemPool->hasItem(self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $referenceMinuteDateTimeString);
         if ($hasItem) {
             $isMinuteScheduled = true;
@@ -46,25 +45,25 @@ class Cache implements CacheInterface
         return $isMinuteScheduled;
     }
 
-    protected function _getScheduledKeyLifetime(): \DateTime
+    protected function getScheduledKeyLifetime(): \DateTime
     {
-        if (!$this->_exists(self::PROP_SCHEDULED_KEY_LIFETIME)) {
-            $now = $this->_getTime()->getNow();
-            $lifetimeSeconds = 5 * 60 + $this->_getSchedulerTime()->getMinutesToScheduleAheadFor();
+        if ($this->scheduledKeyLifetime === null) {
+            $now = $this->getTime()->getNow();
+            $lifetimeSeconds = 5 * 60 + $this->getSchedulerTime()->getMinutesToScheduleAheadFor();
             $dateInterval = new \DateInterval('PT' . $lifetimeSeconds . 'S');
-            $this->_create(self::PROP_SCHEDULED_KEY_LIFETIME, $now->add($dateInterval));
+            $this->scheduledKeyLifetime = $now->add($dateInterval);
         }
 
-        return $this->_read(self::PROP_SCHEDULED_KEY_LIFETIME);
+        return $this->scheduledKeyLifetime;
     }
 
     public function cacheScheduledMinutes(\DateTime $scheduledMinute): CacheInterface
     {
-        $cacheItemPool = $this->_getCacheItemPoolRepository()->getById(self::CACHE_ITEM_POOL_ID);
+        $cacheItemPool = $this->getPsrCacheCacheItemPoolRepository()->get(self::CACHE_ITEM_POOL_ID);
         $cachedMinuteDateTimeString = $scheduledMinute->format(self::DATE_TIME_FORMAT_CACHE_MINUTE);
         $cacheItem = $cacheItemPool->getItem(self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $cachedMinuteDateTimeString);
         $cacheItem->set(self::CACHE_SCHEDULED_AHEAD_VALUE);
-        $cacheItem->expiresAt($this->_getScheduledKeyLifetime());
+        $cacheItem->expiresAt($this->getScheduledKeyLifetime());
         $cacheItemPool->save($cacheItem);
 
         return $this;

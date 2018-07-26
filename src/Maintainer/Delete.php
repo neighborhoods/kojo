@@ -3,14 +3,12 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Maintainer;
 
-use Neighborhoods\Kojo\Data\Job;
-use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Job;
 use Neighborhoods\Kojo\Semaphore;
-use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Kojo\Logger;
 
 class Delete implements DeleteInterface
 {
-    use Defensive\AwareTrait;
     use Semaphore\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
     use Job\Collection\Delete\AwareTrait;
@@ -21,7 +19,7 @@ class Delete implements DeleteInterface
 
     public function deleteCompletedJobs(): DeleteInterface
     {
-        if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->testAndSetLock()) {
+        if ($this->getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->testAndSetLock()) {
             try {
                 $this->_deleteCompletedJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->releaseLock();

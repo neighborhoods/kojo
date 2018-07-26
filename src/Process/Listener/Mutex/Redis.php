@@ -3,18 +3,21 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Listener\Mutex;
 
+use Neighborhoods\Kojo\Message\Broker\RepositoryInterface;
 use Neighborhoods\Kojo\Process\Forked;
-use Neighborhoods\Kojo\Process\ListenerAbstract;
 use Neighborhoods\Kojo\Process\ListenerInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Kojo\Redis\Factory;
+use Neighborhoods\Kojo\Message;
 
-class Redis extends ListenerAbstract implements RedisInterface
+class Redis extends Forked implements RedisInterface
 {
     use Factory\AwareTrait;
-    const PROP_REDIS = 'redis';
+    use Message\Broker\Repository\AwareTrait;
 
-    protected function _run(): Forked
+    protected $redis;
+
+    protected function run(): Forked
     {
         $this->_register();
 
@@ -23,10 +26,11 @@ class Redis extends ListenerAbstract implements RedisInterface
 
     protected function _register(): ProcessInterface
     {
-        $this->_getRedis()->client('SETNAME', $this->getParentProcessUuid());
-        $this->_getMessageBroker()->setPublishChannelName($this->getParentProcessUuid());
-        $this->_getMessageBroker()->setSubscriptionChannelName($this->getParentProcessUuid());
-        $this->_getMessageBroker()->waitForNewMessage();
+        $this->getRedis()->client('SETNAME', $this->getParentProcessUuid());
+        $messageBroker = $this->getMessageBrokerRepository()->get(RepositoryInterface::ID_CORE);
+        $messageBroker->setPublishChannelName($this->getParentProcessUuid());
+        $messageBroker->setSubscriptionChannelName($this->getParentProcessUuid());
+        $messageBroker->waitForNewMessage();
         posix_kill($this->getParentProcessId(), $this->getParentProcessTerminationSignalNumber());
 
         return $this;
@@ -42,12 +46,12 @@ class Redis extends ListenerAbstract implements RedisInterface
         return true;
     }
 
-    protected function _getRedis(): \Redis
+    protected function getRedis(): \Redis
     {
-        if (!$this->_exists(self::PROP_REDIS)) {
-            $this->_create(self::PROP_REDIS, $this->_getRedisFactory()->create());
+        if ($this->redis === null) {
+            $this->redis = $this->getRedisFactory()->create();
         }
 
-        return $this->_read(self::PROP_REDIS);
+        return $this->redis;
     }
 }

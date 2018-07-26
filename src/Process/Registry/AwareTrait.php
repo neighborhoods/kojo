@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Process\Registry;
 
 use Neighborhoods\Kojo\Process\RegistryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setProcessRegistry(RegistryInterface $registry): self
+    protected $NeighborhoodsKojoProcessRegistry;
+
+    public function setProcessRegistry(RegistryInterface $processRegistry): self
     {
-        $this->_create(RegistryInterface::class, $registry);
+        if ($this->hasProcessRegistry()) {
+            throw new \LogicException('NeighborhoodsKojoProcessRegistry is already set.');
+        }
+        $this->NeighborhoodsKojoProcessRegistry = $processRegistry;
 
         return $this;
     }
 
-    public function hasProcessRegistry(): bool
+    protected function getProcessRegistry(): RegistryInterface
     {
-        return $this->_exists(RegistryInterface::class);
+        if (!$this->hasProcessRegistry()) {
+            throw new \LogicException('NeighborhoodsKojoProcessRegistry is not set.');
+        }
+
+        return $this->NeighborhoodsKojoProcessRegistry;
     }
 
-    protected function _getProcessRegistry(): RegistryInterface
+    protected function hasProcessRegistry(): bool
     {
-        return $this->_read(RegistryInterface::class);
+        return isset($this->NeighborhoodsKojoProcessRegistry);
     }
 
-    protected function _getProcessRegistryClone(): RegistryInterface
+    protected function unsetProcessRegistry(): self
     {
-        return clone $this->_getProcessRegistry();
-    }
-
-    protected function _unsetProcessRegistry(): self
-    {
-        $this->_delete(RegistryInterface::class);
+        if (!$this->hasProcessRegistry()) {
+            throw new \LogicException('NeighborhoodsKojoProcessRegistry is not set.');
+        }
+        unset($this->NeighborhoodsKojoProcessRegistry);
 
         return $this;
     }

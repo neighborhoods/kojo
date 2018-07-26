@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Complete\Failed;
 
 use Neighborhoods\Kojo\Service\Update\Complete\FailedInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateCompleteFailed(FailedInterface $serviceUpdateCompleteFailed)
+    protected $NeighborhoodsKojoServiceUpdateCompleteFailed;
+
+    public function setServiceUpdateCompleteFailed(FailedInterface $serviceUpdateCompleteFailed): self
     {
-        $this->_create(FailedInterface::class, $serviceUpdateCompleteFailed);
+        if ($this->hasServiceUpdateCompleteFailed()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailed is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateCompleteFailed = $serviceUpdateCompleteFailed;
 
         return $this;
     }
 
-    protected function _getServiceUpdateCompleteFailed(): FailedInterface
+    protected function getServiceUpdateCompleteFailed(): FailedInterface
     {
-        return $this->_read(FailedInterface::class);
+        if (!$this->hasServiceUpdateCompleteFailed()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailed is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateCompleteFailed;
     }
 
-    protected function _getServiceUpdateCompleteFailedClone(): FailedInterface
+    protected function hasServiceUpdateCompleteFailed(): bool
     {
-        return clone $this->_getServiceUpdateCompleteFailed();
+        return isset($this->NeighborhoodsKojoServiceUpdateCompleteFailed);
     }
 
-    protected function _unsetServiceUpdateCompleteFailed()
+    protected function unsetServiceUpdateCompleteFailed(): self
     {
-        $this->_delete(FailedInterface::class);
+        if (!$this->hasServiceUpdateCompleteFailed()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailed is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateCompleteFailed);
 
         return $this;
     }

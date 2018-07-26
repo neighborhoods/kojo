@@ -1,6 +1,4 @@
 services:
-  neighborhoods.kojo.service.update.crash:
+  Neighborhoods\Kojo\Service\Update\CrashInterface:
     class: Neighborhoods\Kojo\Service\Update\Crash
     shared: false
-  service.update.crash:
-    alias: neighborhoods.kojo.service.update.crash

@@ -1,15 +1,8 @@
 services:
-  neighborhoods.kojo.scheduler:
+  Neighborhoods\Kojo\SchedulerInterface:
     class: Neighborhoods\Kojo\Scheduler
     shared: false
-    public: false
     calls:
-      - [setTime, ['@neighborhoods.pylon.time']]
-      - [setSchedulerJobCollection, ['@data.job.collection.scheduler']]
-      - [setSchedulerJobTypeCollection, ['@data.job.type.collection.scheduler']]
-      - [setServiceCreateFactory, ['@service.create.factory']]
-      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-schedule']]
-      - [setSchedulerCache, ['@scheduler.cache']]
-  scheduler:
-    alias: neighborhoods.kojo.scheduler
-    public: false
+      - [setTime, ['@Neighborhoods\Kojo\TimeInterface']]
+      - [setServiceCreateBuilderFactory, ['@Neighborhoods\Kojo\Service\Create\Builder\FactoryInterface']]
+      - [setSchedulerCache, ['@Neighborhoods\Kojo\Scheduler\CacheInterface']]

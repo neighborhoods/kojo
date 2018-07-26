@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Work;
 
 use Neighborhoods\Kojo\Service\Update\WorkInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateWork(WorkInterface $serviceUpdateWork)
+    protected $NeighborhoodsKojoServiceUpdateWork;
+
+    public function setServiceUpdateWork(WorkInterface $serviceUpdateWork): self
     {
-        $this->_create(WorkInterface::class, $serviceUpdateWork);
+        if ($this->hasServiceUpdateWork()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWork is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateWork = $serviceUpdateWork;
 
         return $this;
     }
 
-    protected function _getServiceUpdateWork(): WorkInterface
+    protected function getServiceUpdateWork(): WorkInterface
     {
-        return $this->_read(WorkInterface::class);
+        if (!$this->hasServiceUpdateWork()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWork is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateWork;
     }
 
-    protected function _getServiceUpdateWorkClone(): WorkInterface
+    protected function hasServiceUpdateWork(): bool
     {
-        return clone $this->_getServiceUpdateWork();
+        return isset($this->NeighborhoodsKojoServiceUpdateWork);
     }
 
-    protected function _unsetServiceUpdateWork()
+    protected function unsetServiceUpdateWork(): self
     {
-        $this->_delete(WorkInterface::class);
+        if (!$this->hasServiceUpdateWork()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWork is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateWork);
 
         return $this;
     }

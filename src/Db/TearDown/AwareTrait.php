@@ -5,22 +5,42 @@ namespace Neighborhoods\Kojo\Db\TearDown;
 
 use Neighborhoods\Kojo\Db\TearDownInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setDbTearDown(TearDownInterface $tearDown)
+    protected $NeighborhoodsKojoDbTearDown;
+
+    public function setDbTearDown(TearDownInterface $dbTearDown): self
     {
-        $this->_create(TearDownInterface::class, $tearDown);
+        if ($this->hasDbTearDown()) {
+            throw new \LogicException('NeighborhoodsKojoDbTearDown is already set.');
+        }
+        $this->NeighborhoodsKojoDbTearDown = $dbTearDown;
 
         return $this;
     }
 
-    protected function _getDbTearDown(): TearDownInterface
+    protected function getDbTearDown(): TearDownInterface
     {
-        return $this->_read(TearDownInterface::class);
+        if (!$this->hasDbTearDown()) {
+            throw new \LogicException('NeighborhoodsKojoDbTearDown is not set.');
+        }
+
+        return $this->NeighborhoodsKojoDbTearDown;
     }
 
-    protected function _getDbTearDownClone(): TearDownInterface
+    protected function hasDbTearDown(): bool
     {
-        return clone $this->_getDbTearDown();
+        return isset($this->NeighborhoodsKojoDbTearDown);
+    }
+
+    protected function unsetDbTearDown(): self
+    {
+        if (!$this->hasDbTearDown()) {
+            throw new \LogicException('NeighborhoodsKojoDbTearDown is not set.');
+        }
+        unset($this->NeighborhoodsKojoDbTearDown);
+
+        return $this;
     }
 }

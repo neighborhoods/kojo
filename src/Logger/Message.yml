@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Logger\MessageInterface:
+    class: Neighborhoods\Kojo\Logger\Message
+    shared: false

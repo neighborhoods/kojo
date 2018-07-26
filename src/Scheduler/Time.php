@@ -3,67 +3,72 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Scheduler;
 
-use Neighborhoods\Pylon\Data\Property\Defensive;
-use Neighborhoods\Pylon;
+use Neighborhoods\Kojo;
 
 class Time implements TimeInterface
 {
-    use Defensive\AwareTrait;
-    use Pylon\Time\AwareTrait;
-    const PROP_MINUTES_SCHEDULED_AHEAD_FOR  = 'minutes_scheduled_ahead_for';
-    const PROP_REFERENCE_DISTANCE_DATE_TIME = 'reference_distance_date_time';
+    use Kojo\Time\AwareTrait;
+    const PROP_MINUTES_SCHEDULED_AHEAD_FOR = 'minutes_scheduled_ahead_for';
+    protected $referenceDistanceDateTime;
+    protected $nextReferenceMinuteDateTime;
+    protected $referenceDateTimeClone;
+    protected $minutesToScheduleAheadFor;
 
     public function getReferenceDistanceDateTime(): \DateTime
     {
-        if (!$this->_exists(self::PROP_REFERENCE_DISTANCE_DATE_TIME)) {
+        if ($this->referenceDistanceDateTime) {
             $minutesToScheduleAheadFor = $this->getMinutesToScheduleAheadFor();
             $minutesToScheduleAheadForDateTimeInterval = new \DateInterval('PT' . $minutesToScheduleAheadFor . 'M');
             $referenceDateTime = $this->getReferenceDateTimeClone();
             $referenceDistanceDateTime = $referenceDateTime->add($minutesToScheduleAheadForDateTimeInterval);
 
-            $this->_create(self::PROP_REFERENCE_DISTANCE_DATE_TIME, $referenceDistanceDateTime);
+            $this->referenceDistanceDateTime = $referenceDistanceDateTime;
         }
 
-        return $this->_read(self::PROP_REFERENCE_DISTANCE_DATE_TIME);
+        return $this->referenceDistanceDateTime;
     }
 
     public function getReferenceDateTimeClone(): \DateTime
     {
-        if (!$this->_exists(self::PROP_REFERENCE_DATE_TIME_CLONE)) {
-            $this->_create(self::PROP_REFERENCE_DATE_TIME_CLONE, $this->_getTime()->getNow());
+        if ($this->referenceDateTimeClone === null) {
+            $this->referenceDateTimeClone = $this->getTime()->getNow();
         }
 
-        return clone $this->_read(self::PROP_REFERENCE_DATE_TIME_CLONE);
+        return clone $this->referenceDateTimeClone;
     }
 
     public function getNextReferenceMinuteDateTime(): \DateTime
     {
-        if (!$this->_exists(self::PROP_NEXT_REFERENCE_MINUTE_DATE_TIME)) {
+        if ($this->nextReferenceMinuteDateTime === null) {
             $referenceDateTime = $this->getReferenceDateTimeClone();
             $referenceDateTimeMinuteString = $referenceDateTime->format(self::DATE_TIME_FORMAT_MYSQL_MINUTE);
             $nextReferenceMinuteDateTime = new \DateTime($referenceDateTimeMinuteString);
-            $this->_create(self::PROP_NEXT_REFERENCE_MINUTE_DATE_TIME, $nextReferenceMinuteDateTime);
-        }else {
+            $this->nextReferenceMinuteDateTime = $nextReferenceMinuteDateTime;
+        } else {
             /** @var \DateTime $nextReferenceMinuteDateTime */
-            $nextReferenceMinuteDateTime = $this->_read(self::PROP_NEXT_REFERENCE_MINUTE_DATE_TIME);
+            $nextReferenceMinuteDateTime = $this->nextReferenceMinuteDateTime;
             $nextReferenceMinuteDateTime->add(new \DateInterval('PT1M'));
         }
 
-        return clone $this->_read(self::PROP_NEXT_REFERENCE_MINUTE_DATE_TIME);
+        return clone $this->nextReferenceMinuteDateTime;
     }
 
     public function getMinutesToScheduleAheadFor(): int
     {
-        if (!$this->_exists(self::PROP_MINUTES_SCHEDULED_AHEAD_FOR)) {
-            $this->_create(self::PROP_MINUTES_SCHEDULED_AHEAD_FOR, 1);
+        if ($this->minutesToScheduleAheadFor === null) {
+            $this->minutesToScheduleAheadFor = 1;
         }
 
-        return $this->_read(self::PROP_MINUTES_SCHEDULED_AHEAD_FOR);
+        return $this->minutesToScheduleAheadFor;
     }
 
     public function setMinutesToScheduleAheadFor(int $minutesScheduledAheadFor): TimeInterface
     {
-        $this->_create(self::PROP_MINUTES_SCHEDULED_AHEAD_FOR, $minutesScheduledAheadFor);
+        if ($this->minutesToScheduleAheadFor === null) {
+            $this->minutesToScheduleAheadFor = $minutesScheduledAheadFor;
+        } else {
+            throw new \LogicException('Minutes to schedule ahead for is already set.');
+        }
 
         return $this;
     }

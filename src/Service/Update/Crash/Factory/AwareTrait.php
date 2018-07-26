@@ -5,23 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Crash\Factory;
 
 use Neighborhoods\Kojo\Service\Update\Crash\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateCrashFactory(FactoryInterface $serviceUpdateCrashFactory)
+    protected $NeighborhoodsKojoServiceUpdateCrashFactory;
+
+    public function setServiceUpdateCrashFactory(FactoryInterface $serviceUpdateCrashFactory): self
     {
-        $this->_create(FactoryInterface::class, $serviceUpdateCrashFactory);
+        if ($this->hasServiceUpdateCrashFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCrashFactory is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateCrashFactory = $serviceUpdateCrashFactory;
 
         return $this;
     }
 
-    protected function _getServiceUpdateCrashFactory(): FactoryInterface
+    protected function getServiceUpdateCrashFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasServiceUpdateCrashFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCrashFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateCrashFactory;
     }
 
-    protected function _unsetServiceUpdateCrashFactory()
+    protected function hasServiceUpdateCrashFactory(): bool
     {
-        $this->_delete(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoServiceUpdateCrashFactory);
+    }
+
+    protected function unsetServiceUpdateCrashFactory(): self
+    {
+        if (!$this->hasServiceUpdateCrashFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCrashFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateCrashFactory);
 
         return $this;
     }

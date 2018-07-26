@@ -1,8 +1,4 @@
 services:
-  neighborhoods.kojo.process.registry:
+  Neighborhoods\Kojo\Process\RegistryInterface:
     class: Neighborhoods\Kojo\Process\Registry
-    public: false
     shared: true
-  process.registry:
-    alias: neighborhoods.kojo.process.registry
-    public: false

@@ -4,19 +4,18 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\Process;
+use Neighborhoods\Kojo\Logger;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 use Neighborhoods\Kojo\ProcessInterface;
-use Neighborhoods\Pylon\Data\Property\Defensive;
 
 abstract class PoolAbstract implements PoolInterface
 {
-    use Defensive\AwareTrait;
-    use Process\Pool\Logger\AwareTrait;
+    use Logger\AwareTrait;
     use Process\Pool\Strategy\AwareTrait;
     use Process\AwareTrait;
     use Process\Signal\AwareTrait;
 
-    abstract protected function _childExitSignal(InformationInterface $information): PoolInterface;
+    abstract protected function childExitSignal(InformationInterface $information): PoolInterface;
 
     public function hasAlarm(): bool
     {
@@ -32,9 +31,9 @@ abstract class PoolAbstract implements PoolInterface
     public function setAlarm(int $seconds): PoolInterface
     {
         if ($seconds === 0) {
-            $this->_getLogger()->info("Disabling any existing alarm.");
+            $this->getLogger()->info("Disabling any existing alarm.");
         }else {
-            $this->_getLogger()->info("Setting alarm for $seconds seconds.");
+            $this->getLogger()->info("Setting alarm for $seconds seconds.");
         }
         pcntl_alarm($seconds);
 
@@ -48,37 +47,37 @@ abstract class PoolAbstract implements PoolInterface
 
     public function isFull(): bool
     {
-        return ($this->getCountOfChildProcesses() >= $this->_getProcessPoolStrategy()->getMaxChildProcesses());
+        return ($this->getCountOfChildProcesses() >= $this->getProcessPoolStrategy()->getMaxChildProcesses());
     }
 
     public function canEnvironmentSustainAdditionProcesses(): bool
     {
-        return ((float)current(sys_getloadavg()) <= $this->_getProcessPoolStrategy()->getMaximumLoadAverage());
+        return ((float)current(sys_getloadavg()) <= $this->getProcessPoolStrategy()->getMaximumLoadAverage());
     }
 
-    protected function _initialize(): PoolInterface
+    protected function initialize(): PoolInterface
     {
-        $this->_getProcessPoolStrategy()->initializePool();
+        $this->getProcessPoolStrategy()->initializePool();
 
         return $this;
     }
 
-    protected function _alarmSignal(InformationInterface $information): PoolInterface
+    protected function alarmSignal(InformationInterface $information): PoolInterface
     {
-        $this->_getProcessPoolStrategy()->receivedAlarm();
+        $this->getProcessPoolStrategy()->receivedAlarm();
 
         return $this;
     }
 
-    protected function _validateAlarm(): PoolInterface
+    protected function validateAlarm(): PoolInterface
     {
         $alarmValue = pcntl_alarm(0);
         if ($this->isEmpty()) {
             if ($alarmValue == 0) {
-                $this->_getLogger()->emergency('Process pool has no alarms and no processes.');
+                $this->getLogger()->emergency('Process pool has no alarms and no processes.');
                 throw new \LogicException('Invalid process pool state.');
             }else {
-                $this->_getLogger()->notice('Process pool only has a set alarm.');
+                $this->getLogger()->notice('Process pool only has a set alarm.');
             }
         }
         pcntl_alarm($alarmValue);
@@ -88,6 +87,6 @@ abstract class PoolAbstract implements PoolInterface
 
     public function getProcess(): ProcessInterface
     {
-        return $this->_getProcess();
+        return $this->getProcess();
     }
 }

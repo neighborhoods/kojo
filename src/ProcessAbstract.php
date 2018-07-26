@@ -4,273 +4,358 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo;
 
 use Neighborhoods\Kojo\Process;
-use Neighborhoods\Kojo\Process\Pool\Logger;
 use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
-use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Apm;
 
 abstract class ProcessAbstract implements ProcessInterface
 {
-    use Process\Pool\Factory\AwareTrait;
+    use Process\Pool\Repository\AwareTrait;
     use Process\Registry\AwareTrait;
     use Process\Pool\AwareTrait;
     use Process\Strategy\AwareTrait;
     use Process\Signal\AwareTrait;
-    use Defensive\AwareTrait;
     use Logger\AwareTrait;
     use Apm\NewRelic\AwareTrait;
-    protected $_exitCode = 0;
+    protected $exitCode = 0;
+    protected $isTitleSet = false;
+    protected $titlePrefix;
+    protected $isShutdownMethodActive = false;
+    protected $parentProcessPath;
+    protected $path;
+    protected $throttle;
+    protected $processId;
+    protected $parentProcessId;
+    protected $terminationSignalNumber;
+    protected $parentProcessTerminationSignalNumber;
+    protected $parentProcessUuid;
+    protected $uuid;
+    protected $uuidMaximumInteger;
 
-    protected function _initialize(): ProcessAbstract
+    protected function initialize(): ProcessAbstract
     {
-        $this->_getApmNewRelic()->ignoreTransaction();
-        $this->_getApmNewRelic()->endTransaction();
-        $this->_getProcessSignal()->incrementWaitCount();
-        $this->_setParentProcessId(posix_getppid());
-        $this->_setProcessId(posix_getpid());
+        $this->getApmNewRelic()->ignoreTransaction();
+        $this->getApmNewRelic()->endTransaction();
+        $this->getProcessSignal()->incrementWaitCount();
+        $this->setParentProcessId(posix_getppid());
+        $this->setProcessId(posix_getpid());
 
-        $this->_getLogger()->setProcess($this);
-        if ($this->_hasProcessPool()) {
-            $this->_getProcessPool()->emptyChildProcesses();
-            $this->_getProcessPool()->getProcess()->unregisterShutdownMethod();
-            $this->_unsetProcessPool();
+        $this->getLogger()->setProcess($this);
+        if ($this->hasProcessPool()) {
+            $this->getProcessPool()->emptyChildProcesses();
+            $this->getProcessPool()->getProcess()->unregisterShutdownMethod();
+            $this->unsetProcessPool();
         }
-        $this->setProcessPool($this->_getProcessPoolFactory()->create());
-        $this->_getProcessPool()->setProcess($this);
-        $this->_registerSignalHandlers();
-        $this->_registerShutdownMethod();
-        $this->_getProcessRegistry()->pushProcess($this);
-        $this->_setProcessTitle();
-        $this->_getProcessSignal()->decrementWaitCount();
+        $this->setProcessPool($this->getProcessPoolRepository()->get(static::class));
+        $this->getProcessPool()->setProcess($this);
+        $this->registerSignalHandlers();
+        $this->registerShutdownMethod();
+        $this->getProcessRegistry()->pushProcess($this);
+        $this->setTitle();
+        $this->getProcessSignal()->decrementWaitCount();
 
         return $this;
     }
 
-    protected function _registerSignalHandlers(): ProcessInterface
+    protected function registerSignalHandlers(): ProcessInterface
     {
-        $this->_getProcessSignal()->addSignalHandler(SIGCHLD, $this->_getProcessPool());
-        $this->_getProcessSignal()->addSignalHandler(SIGALRM, $this->_getProcessPool());
-        $this->_getProcessSignal()->addSignalHandler(SIGTERM, $this);
-        $this->_getProcessSignal()->addSignalHandler(SIGINT, $this);
-        $this->_getProcessSignal()->addSignalHandler(SIGHUP, $this);
-        $this->_getProcessSignal()->addSignalHandler(SIGQUIT, $this);
-        $this->_getProcessSignal()->addSignalHandler(SIGABRT, $this);
-        $this->_getProcessSignal()->addSignalHandler(SIGUSR1, $this);
+        $this->getProcessSignal()->addSignalHandler(SIGCHLD, $this->getProcessPool());
+        $this->getProcessSignal()->addSignalHandler(SIGALRM, $this->getProcessPool());
+        $this->getProcessSignal()->addSignalHandler(SIGTERM, $this);
+        $this->getProcessSignal()->addSignalHandler(SIGINT, $this);
+        $this->getProcessSignal()->addSignalHandler(SIGHUP, $this);
+        $this->getProcessSignal()->addSignalHandler(SIGQUIT, $this);
+        $this->getProcessSignal()->addSignalHandler(SIGABRT, $this);
+        $this->getProcessSignal()->addSignalHandler(SIGUSR1, $this);
 
         return $this;
     }
 
-    protected function _setProcessTitle(): ProcessInterface
+    protected function setTitle(): ProcessInterface
     {
-        $this->_create(self::PROP_IS_PROCESS_TITLE_SET, true);
-        cli_set_process_title($this->_getTitlePrefix() . $this->getPath());
+        if ($this->isTitleSet === false) {
+            cli_set_process_title($this->getTitlePrefix() . $this->getPath());
+            $this->isTitleSet = true;
+        } else {
+            throw new \LogicException('Title is already set.');
+        }
 
         return $this;
     }
 
     public function setTitlePrefix(string $titlePrefix): ProcessInterface
     {
-        $this->_create(self::PROP_TITLE_PREFIX, $titlePrefix);
+        if ($this->titlePrefix === null) {
+            $this->titlePrefix = $titlePrefix;
+        }
 
         return $this;
     }
 
-    protected function _getTitlePrefix(): string
+    protected function getTitlePrefix(): string
     {
-        return $this->_read(self::PROP_TITLE_PREFIX);
+        if ($this->titlePrefix === null) {
+            throw new \LogicException('Title prefix is not set.');
+        }
+
+        return $this->titlePrefix;
     }
 
     public function handleSignal(InformationInterface $information): HandlerInterface
     {
-        $this->_getProcessSignal()->block();
+        $this->getProcessSignal()->block();
         $this->exit();
 
         return $this;
     }
 
-    protected function _setOrReplaceExitCode(int $exitCode): ProcessInterface
+    protected function setOrReplaceExitCode(int $exitCode): ProcessInterface
     {
-        $this->_exitCode = $exitCode;
+        $this->exitCode = $exitCode;
 
         return $this;
     }
 
     public function exit(): void
     {
-        $this->_getProcessSignal()->block();
+        $this->getProcessSignal()->block();
         $this->unregisterShutdownMethod();
-        $this->_getProcessPool()->terminateChildProcesses();
-        exit($this->_exitCode);
+        $this->getProcessPool()->terminateChildProcesses();
+        exit($this->exitCode);
     }
 
     public function shutdown(): ProcessInterface
     {
-        if ($this->_read(self::PROP_IS_SHUTDOWN_METHOD_ACTIVE)) {
-            $this->_getLogger()->critical("Shutdown method invoked.");
-            $this->_setOrReplaceExitCode(255);
+        if ($this->isShutdownMethodActive === true) {
+            $this->getLogger()->critical("Shutdown method invoked.");
+            $this->setOrReplaceExitCode(255);
             $this->exit();
         }
 
         return $this;
     }
 
-    protected function _registerShutdownMethod(): ProcessInterface
+    protected function registerShutdownMethod(): ProcessInterface
     {
-        $this->_create(self::PROP_IS_SHUTDOWN_METHOD_ACTIVE, true);
-        register_shutdown_function([$this, 'shutdown']);
+        if ($this->isShutdownMethodActive === false) {
+            $this->isShutdownMethodActive = true;
+            register_shutdown_function([$this, 'shutdown']);
+        } else {
+            throw new \LogicException('Shutdown method is already active.');
+        }
 
         return $this;
     }
 
     public function unregisterShutdownMethod(): ProcessInterface
     {
-        $this->_update(self::PROP_IS_SHUTDOWN_METHOD_ACTIVE, false);
+        $this->isShutdownMethodActive = false;
 
         return $this;
     }
 
     public function setParentProcessPath(string $parentProcessPath): ProcessInterface
     {
-        $this->_create(self::PROP_PARENT_PROCESS_PATH, $parentProcessPath);
+        if ($this->parentProcessPath === null) {
+            $this->parentProcessPath = $parentProcessPath;
+        } else {
+            throw new \LogicException('Parent process path is already set.');
+        }
 
         return $this;
     }
 
-    protected function _getParentProcessPath(): string
+    protected function getParentProcessPath(): string
     {
-        return $this->_read(self::PROP_PARENT_PROCESS_PATH);
+        if ($this->parentProcessPath === null) {
+            throw new \LogicException('Parent process path is not set.');
+        }
+
+        return $this->parentProcessPath;
     }
 
     public function getPath(): string
     {
-        if (!$this->_exists(self::PROP_PATH)) {
+        if ($this->path === null) {
             $processId = $this->getProcessId();
-            $typeCode = $this->getTypeCode();
-            $path = $this->_getParentProcessPath() . '/' . $typeCode . '[' . $processId . ']';
-            $this->_create(self::PROP_PATH, $path);
+            $typeId = $this->getTypeId();
+            $path = $this->getParentProcessPath() . '/' . $typeId . '[' . $processId . ']';
+            $this->path = $path;
         }
 
-        return $this->_read(self::PROP_PATH);
+        return $this->path;
     }
 
-    public function getTypeCode(): string
+    public function getTypeId(): string
     {
-        return $this->_read(self::PROP_TYPE_CODE);
-    }
-
-    public function setTypeCode(string $typeCode): ProcessInterface
-    {
-        $this->_create(self::PROP_TYPE_CODE, $typeCode);
-
-        return $this;
+        return static::class;
     }
 
     abstract public function start(): ProcessInterface;
 
     public function setThrottle(int $seconds = 0): ProcessInterface
     {
-        $this->_create(self::PROP_THROTTLE, $seconds);
+        if ($this->throttle === null) {
+            $this->throttle = $seconds;
+        } else {
+            throw new \LogicException('Throttle is already set.');
+        }
 
         return $this;
     }
 
-    protected function _setProcessId(int $processId): ProcessAbstract
+    protected function setProcessId(int $processId): ProcessAbstract
     {
-        $this->_create(self::PROP_PROCESS_ID, $processId);
+        if ($this->processId === null) {
+            $this->processId = $processId;
+        } else {
+            throw new \LogicException('Process ID is already set.');
+        }
 
         return $this;
     }
 
     public function getProcessId(): int
     {
-        return $this->_read(self::PROP_PROCESS_ID);
+        if ($this->processId === null) {
+            throw new \LogicException('Process ID is not set.');
+        }
+
+        return $this->processId;
     }
 
-    protected function _setParentProcessId(int $parentProcessId): ProcessAbstract
+    protected function setParentProcessId(int $parentProcessId): ProcessAbstract
     {
-        $this->_create(self::PROP_PARENT_PROCESS_ID, $parentProcessId);
+        if ($this->parentProcessId === null) {
+            $this->parentProcessId = $parentProcessId;
+        } else {
+            throw new \LogicException('Parent process ID is already set.');
+        }
 
         return $this;
     }
 
     public function getParentProcessId(): int
     {
-        return $this->_read(self::PROP_PARENT_PROCESS_ID);
+        if ($this->parentProcessId === null) {
+            throw new \LogicException('Parent process ID is not set.');
+        }
+
+        return $this->parentProcessId;
     }
 
     public function setExitCode(int $exitCode): ProcessInterface
     {
-        $this->_create(self::PROP_EXIT_CODE, $exitCode);
+        if ($this->exitCode === null) {
+            $this->exitCode = $exitCode;
+        } else {
+            throw new \LogicException('Exit code is already set.');
+        }
 
         return $this;
     }
 
     public function getExitCode(): int
     {
-        return $this->_read(self::PROP_EXIT_CODE);
+        if ($this->exitCode === null) {
+            throw new \LogicException('Exit code is not set.');
+        }
+
+        return $this->exitCode;
     }
 
     public function setTerminationSignalNumber(int $terminationSignalNumber): ProcessInterface
     {
-        $this->_create(self::PROP_TERMINATION_SIGNAL_NUMBER, $terminationSignalNumber);
+        if ($this->terminationSignalNumber === null) {
+            $this->terminationSignalNumber = $terminationSignalNumber;
+        } else {
+            throw new \LogicException('Termination signal number is already set.');
+        }
 
         return $this;
     }
 
     public function getTerminationSignalNumber(): int
     {
-        return $this->_read(self::PROP_TERMINATION_SIGNAL_NUMBER);
+        if ($this->terminationSignalNumber === null) {
+            throw new \LogicException('Termination signal number is not set.');
+        }
+
+        return $this->terminationSignalNumber;
     }
 
     public function getParentProcessTerminationSignalNumber(): int
     {
-        return $this->_read(self::PROP_PARENT_PROCESS_TERMINATION_SIGNAL_NUMBER);
+        if ($this->parentProcessTerminationSignalNumber === null) {
+            throw new \LogicException('Parent process termination signal number is not set.');
+        }
+
+        return $this->parentProcessTerminationSignalNumber;
     }
 
     public function setParentProcessTerminationSignalNumber(int $parentProcessTerminationSignalNumber)
     {
-        $this->_create(self::PROP_PARENT_PROCESS_TERMINATION_SIGNAL_NUMBER, $parentProcessTerminationSignalNumber);
+        if ($this->parentProcessTerminationSignalNumber === null) {
+            $this->parentProcessTerminationSignalNumber = $parentProcessTerminationSignalNumber;
+        } else {
+            throw new \LogicException('Parent process termination signal number is not set.');
+        }
 
         return $this;
     }
 
     public function setParentProcessUuid(string $parentProcessUuid): ProcessInterface
     {
-        $this->_create(self::PROP_PARENT_PROCESS_UUID, $parentProcessUuid);
+        if ($this->parentProcessUuid === null) {
+            $this->parentProcessUuid = $parentProcessUuid;
+        } else {
+            throw new \LogicException('Parent process UUID is already set.');
+        }
 
         return $this;
     }
 
     public function getParentProcessUuid(): string
     {
-        return $this->_read(self::PROP_PARENT_PROCESS_UUID);
+        if ($this->parentProcessUuid === null) {
+            throw new \LogicException('Parent process UUID is not set.');
+        }
+
+        return $this->parentProcessUuid;
     }
 
     public function getUuid(): string
     {
-        if (!$this->_exists(self::PROP_UUID)) {
+        if ($this->uuid === null) {
             $hostname = gethostname();
             $processUuid = $hostname
                 . '-' . gethostbyname($hostname)
                 . '-' . $this->getPath()
                 . '-' . sprintf('%f', microtime(true))
-                . '-' . random_int(0, $this->_getUuidMaximumInteger());
-            $this->_create(self::PROP_UUID, $processUuid);
+                . '-' . random_int(0, $this->getUuidMaximumInteger());
+            $this->uuid = $processUuid;
         }
 
-        return $this->_read(self::PROP_UUID);
+        return $this->uuid;
     }
 
     public function setUuidMaximumInteger(int $uuidMaximumInteger): ProcessInterface
     {
-        $this->_create(self::PROP_UUID_MAXIMUM_INTEGER, $uuidMaximumInteger);
+        if ($this->uuidMaximumInteger === null) {
+            $this->uuidMaximumInteger = $uuidMaximumInteger;
+        } else {
+            throw new \LogicException('UUID maximum integer is already set.');
+        }
 
         return $this;
     }
 
-    protected function _getUuidMaximumInteger(): int
+    protected function getUuidMaximumInteger(): int
     {
-        return $this->_read(self::PROP_UUID_MAXIMUM_INTEGER);
+        if ($this->uuidMaximumInteger === null) {
+            throw new \LogicException('UUID maximum integer is not set.');
+        }
+
+        return $this->uuidMaximumInteger;
     }
 }

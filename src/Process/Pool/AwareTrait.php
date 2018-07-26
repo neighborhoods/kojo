@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Process\Pool;
 
 use Neighborhoods\Kojo\Process\PoolInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setProcessPool(PoolInterface $pool)
+    protected $NeighborhoodsKojoProcessPool;
+
+    public function setProcessPool(PoolInterface $processPool): self
     {
-        $this->_create(PoolInterface::class, $pool);
+        if ($this->hasProcessPool()) {
+            throw new \LogicException('NeighborhoodsKojoProcessPool is already set.');
+        }
+        $this->NeighborhoodsKojoProcessPool = $processPool;
 
         return $this;
     }
 
-    protected function _getProcessPool(): PoolInterface
+    protected function getProcessPool(): PoolInterface
     {
-        return $this->_read(PoolInterface::class);
+        if (!$this->hasProcessPool()) {
+            throw new \LogicException('NeighborhoodsKojoProcessPool is not set.');
+        }
+
+        return $this->NeighborhoodsKojoProcessPool;
     }
 
-    protected function _getProcessPoolClone(): PoolInterface
+    protected function hasProcessPool(): bool
     {
-        return clone $this->_getProcessPool();
+        return isset($this->NeighborhoodsKojoProcessPool);
     }
 
-    protected function _hasProcessPool(): bool
+    protected function unsetProcessPool(): self
     {
-        return $this->_exists(PoolInterface::class);
-    }
-
-    protected function _unsetProcessPool()
-    {
-        $this->_delete(PoolInterface::class);
+        if (!$this->hasProcessPool()) {
+            throw new \LogicException('NeighborhoodsKojoProcessPool is not set.');
+        }
+        unset($this->NeighborhoodsKojoProcessPool);
 
         return $this;
     }

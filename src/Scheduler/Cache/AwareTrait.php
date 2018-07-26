@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Scheduler\Cache;
 
 use Neighborhoods\Kojo\Scheduler\CacheInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setSchedulerCache(CacheInterface $schedulerCache)
+    protected $NeighborhoodsKojoSchedulerCache;
+
+    public function setSchedulerCache(CacheInterface $schedulerCache): self
     {
-        $this->_create(CacheInterface::class, $schedulerCache);
+        if ($this->hasSchedulerCache()) {
+            throw new \LogicException('NeighborhoodsKojoSchedulerCache is already set.');
+        }
+        $this->NeighborhoodsKojoSchedulerCache = $schedulerCache;
 
         return $this;
     }
 
-    protected function _getSchedulerCache(): CacheInterface
+    protected function getSchedulerCache(): CacheInterface
     {
-        return $this->_read(CacheInterface::class);
+        if (!$this->hasSchedulerCache()) {
+            throw new \LogicException('NeighborhoodsKojoSchedulerCache is not set.');
+        }
+
+        return $this->NeighborhoodsKojoSchedulerCache;
     }
 
-    protected function _getSchedulerCacheClone(): CacheInterface
+    protected function hasSchedulerCache(): bool
     {
-        return clone $this->_getSchedulerCache();
+        return isset($this->NeighborhoodsKojoSchedulerCache);
     }
 
-    protected function _hasSchedulerCache(): bool
+    protected function unsetSchedulerCache(): self
     {
-        return $this->_exists(CacheInterface::class);
-    }
-
-    protected function _unsetSchedulerCache()
-    {
-        $this->_delete(CacheInterface::class);
+        if (!$this->hasSchedulerCache()) {
+            throw new \LogicException('NeighborhoodsKojoSchedulerCache is not set.');
+        }
+        unset($this->NeighborhoodsKojoSchedulerCache);
 
         return $this;
     }

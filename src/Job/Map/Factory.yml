@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Job\Map\FactoryInterface:
+    class: Neighborhoods\Kojo\Job\Map\Factory
+    calls:
+      - [setJobMap, ['@Neighborhoods\Kojo\Job\MapInterface']]

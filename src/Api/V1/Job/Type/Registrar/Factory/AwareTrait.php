@@ -12,8 +12,9 @@ trait AwareTrait
 
     public function setApiV1JobTypeRegistrarFactory(FactoryInterface $apiV1JobTypeRegistrarFactory): self
     {
-        assert(!$this->hasApiV1JobTypeRegistrarFactory(),
-            new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrarFactory is already set.'));
+        if ($this->hasApiV1JobTypeRegistrarFactory()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrarFactory is already set.');
+        }
         $this->NeighborhoodsKojoApiV1JobTypeRegistrarFactory = $apiV1JobTypeRegistrarFactory;
 
         return $this;
@@ -21,8 +22,9 @@ trait AwareTrait
 
     protected function getApiV1JobTypeRegistrarFactory(): FactoryInterface
     {
-        assert($this->hasApiV1JobTypeRegistrarFactory(),
-            new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrarFactory is not set.'));
+        if (!$this->hasApiV1JobTypeRegistrarFactory()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrarFactory is not set.');
+        }
 
         return $this->NeighborhoodsKojoApiV1JobTypeRegistrarFactory;
     }
@@ -34,8 +36,9 @@ trait AwareTrait
 
     protected function unsetApiV1JobTypeRegistrarFactory(): self
     {
-        assert($this->hasApiV1JobTypeRegistrarFactory(),
-            new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrarFactory is not set.'));
+        if (!$this->hasApiV1JobTypeRegistrarFactory()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrarFactory is not set.');
+        }
         unset($this->NeighborhoodsKojoApiV1JobTypeRegistrarFactory);
 
         return $this;

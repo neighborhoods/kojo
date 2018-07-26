@@ -12,8 +12,9 @@ trait AwareTrait
 
     public function setApiV1WorkerService(ServiceInterface $apiV1WorkerService): self
     {
-        assert(!$this->hasApiV1WorkerService(),
-            new \LogicException('NeighborhoodsKojoApiV1WorkerService is already set.'));
+        if ($this->hasApiV1WorkerService()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1WorkerService is already set.');
+        }
         $this->NeighborhoodsKojoApiV1WorkerService = $apiV1WorkerService;
 
         return $this;
@@ -21,7 +22,9 @@ trait AwareTrait
 
     protected function getApiV1WorkerService(): ServiceInterface
     {
-        assert($this->hasApiV1WorkerService(), new \LogicException('NeighborhoodsKojoApiV1WorkerService is not set.'));
+        if (!$this->hasApiV1WorkerService()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1WorkerService is not set.');
+        }
 
         return $this->NeighborhoodsKojoApiV1WorkerService;
     }
@@ -33,7 +36,9 @@ trait AwareTrait
 
     protected function unsetApiV1WorkerService(): self
     {
-        assert($this->hasApiV1WorkerService(), new \LogicException('NeighborhoodsKojoApiV1WorkerService is not set.'));
+        if (!$this->hasApiV1WorkerService()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1WorkerService is not set.');
+        }
         unset($this->NeighborhoodsKojoApiV1WorkerService);
 
         return $this;

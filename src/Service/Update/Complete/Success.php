@@ -3,16 +3,14 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Service\Update\Complete;
 
-use Neighborhoods\Kojo\ServiceAbstract;
-
-class Success extends ServiceAbstract implements SuccessInterface
+class Success implements SuccessInterface
 {
-    public function _save(): SuccessInterface
+    public function save(): SuccessInterface
     {
-        $this->_getStateService()->setJob($this->_getJob());
-        $this->_getStateService()->requestCompleteSuccess();
-        $this->_getStateService()->applyRequest();
-        $this->_getJob()->save();
+        $this->getStateService()->setJob($this->getJob());
+        $this->getStateService()->requestCompleteSuccess();
+        $this->getStateService()->applyRequest();
+        $this->getJob()->save();
 
         return $this;
     }

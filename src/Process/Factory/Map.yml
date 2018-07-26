@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Process\Factory\MapInterface:
+    class: Neighborhoods\Kojo\Process\Factory\Map
+    shared: false

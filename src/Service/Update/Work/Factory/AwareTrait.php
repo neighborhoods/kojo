@@ -5,23 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Work\Factory;
 
 use Neighborhoods\Kojo\Service\Update\Work\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateWorkFactory(FactoryInterface $serviceUpdateWorkFactory)
+    protected $NeighborhoodsKojoServiceUpdateWorkFactory;
+
+    public function setServiceUpdateWorkFactory(FactoryInterface $serviceUpdateWorkFactory): self
     {
-        $this->_create(FactoryInterface::class, $serviceUpdateWorkFactory);
+        if ($this->hasServiceUpdateWorkFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWorkFactory is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateWorkFactory = $serviceUpdateWorkFactory;
 
         return $this;
     }
 
-    protected function _getServiceUpdateWorkFactory(): FactoryInterface
+    protected function getServiceUpdateWorkFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasServiceUpdateWorkFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWorkFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateWorkFactory;
     }
 
-    protected function _unsetServiceUpdateWorkFactory()
+    protected function hasServiceUpdateWorkFactory(): bool
     {
-        $this->_delete(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoServiceUpdateWorkFactory);
+    }
+
+    protected function unsetServiceUpdateWorkFactory(): self
+    {
+        if (!$this->hasServiceUpdateWorkFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWorkFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateWorkFactory);
 
         return $this;
     }

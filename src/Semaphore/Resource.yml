@@ -1,53 +1,44 @@
 services:
-  neighborhoods.kojo.semaphore.resource-job:
+  Neighborhoods\Kojo\Semaphore\ResourceInterface:
+    class: Neighborhoods\Kojo\Semaphore\Resource
+    shared: false
+  Neighborhoods\Kojo\Semaphore\ResourceInterface.job:
     class: Neighborhoods\Kojo\Semaphore\Resource
     shared: false
     calls:
       - [setIsBlocking, [false]]
-  semaphore.resource-job:
-    alias: neighborhoods.kojo.semaphore.resource-job
-  neighborhoods.kojo.semaphore.resource-maintainer_delete:
+  Neighborhoods\Kojo\Semaphore\ResourceInterface.maintainer_delete:
     class: Neighborhoods\Kojo\Semaphore\Resource
     shared: false
     calls:
       - [setResourceName, ['maintainer_delete.lock']]
       - [setResourcePath, ['neighborhoods/kojo']]
       - [setIsBlocking, [false]]
-  semaphore.resource-maintainer_delete:
-    alias: neighborhoods.kojo.semaphore.resource-maintainer_delete
-  neighborhoods.kojo.semaphore.resource-update_pending_jobs:
+  Neighborhoods\Kojo\Semaphore\ResourceInterface.update_pending_jobs:
     class: Neighborhoods\Kojo\Semaphore\Resource
     shared: false
     calls:
       - [setResourceName, ['update_pending_jobs.lock']]
       - [setResourcePath, ['neighborhoods/kojo']]
       - [setIsBlocking, [false]]
-  semaphore.resource-update_pending_jobs:
-    alias: neighborhoods.kojo.semaphore.resource-update_pending_jobs
-  neighborhoods.kojo.semaphore.resource-reschedule_jobs:
+  Neighborhoods\Kojo\Semaphore\ResourceInterface.reschedule_jobs:
     class: Neighborhoods\Kojo\Semaphore\Resource
     shared: false
     calls:
       - [setResourceName, ['reschedule_jobs.lock']]
       - [setResourcePath, ['neighborhoods/kojo']]
       - [setIsBlocking, [false]]
-  semaphore.resource-reschedule_jobs:
-    alias: neighborhoods.kojo.semaphore.resource-reschedule_jobs
-  neighborhoods.kojo.semaphore.resource-schedule:
+  Neighborhoods\Kojo\Semaphore\ResourceInterface.schedule:
     class: Neighborhoods\Kojo\Semaphore\Resource
     calls:
       - [setResourceName, ['schedule.lock']]
       - [setResourcePath, ['neighborhoods/kojo']]
       - [setIsBlocking, [false]]
     shared: false
-  semaphore.resource-schedule:
-    alias: neighborhoods.kojo.semaphore.resource-schedule
-  neighborhoods.kojo.semaphore.resource-server:
+  Neighborhoods\Kojo\Semaphore\ResourceInterface.server:
     class: Neighborhoods\Kojo\Semaphore\Resource
     shared: false
     calls:
       - [setResourceName, ['server.lock']]
       - [setResourcePath, ['neighborhoods/kojo']]
       - [setIsBlocking, [false]]
-  semaphore.resource-server:
-    alias: neighborhoods.kojo.semaphore.resource-server

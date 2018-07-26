@@ -1,8 +1,7 @@
 services:
-  neighborhoods.kojo.db.setup.schema.version.0_0_0:
+  Neighborhoods\Kojo\Db\Setup\Schema\Version_0_0_0:
     class: Neighborhoods\Kojo\Db\Setup\Schema\Version_0_0_0
+    shared: false
     calls:
-      - [setDoctrineConnectionDecoratorRepository, ["@doctrine.connection.decorator.repository"]]
+      - [setDoctrineDBALConnectionDecoratorRepository, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\RepositoryInterface']]
       - [setTableName, ['kojo_jobs_version_schema']]
-  db.setup.schema.version.0_0_0:
-    alias: neighborhoods.kojo.db.setup.schema.version.0_0_0

@@ -1,0 +1,10 @@
+services:
+  Neighborhoods\Kojo\Process\Pool\Strategy\RepositoryInterface:
+    class: Neighborhoods\Kojo\Process\Pool\Strategy\Repository
+    calls:
+      - [setProcessPoolStrategyBuilderMap, ['@Neighborhoods\Kojo\Process\Pool\Strategy\Builder\MapInterface']]
+      - [setProcessPoolStrategyFactory, ['@Neighborhoods\Kojo\Process\Pool\Strategy\FactoryInterface']]
+      - [attachBuilder, ['@Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.root']]
+      - [attachBuilder, ['@Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.server']]
+      - [attachBuilder, ['@Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.worker']]
+      - [attachBuilder, ['@Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.empty']]

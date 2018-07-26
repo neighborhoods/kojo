@@ -3,32 +3,44 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
 
-use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
 use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheckInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheck;
+
     public function setServiceUpdateCompleteFailedScheduleLimitCheck(
         FailedScheduleLimitCheckInterface $serviceUpdateCompleteFailedScheduleLimitCheck
-    ){
-        $this->_create(FailedScheduleLimitCheckInterface::class, $serviceUpdateCompleteFailedScheduleLimitCheck);
+    ): self {
+        if ($this->hasServiceUpdateCompleteFailedScheduleLimitCheck()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheck is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheck = $serviceUpdateCompleteFailedScheduleLimitCheck;
 
         return $this;
     }
 
-    protected function _getServiceUpdateCompleteFailedScheduleLimitCheck(): FailedScheduleLimitCheckInterface
+    protected function getServiceUpdateCompleteFailedScheduleLimitCheck(): FailedScheduleLimitCheckInterface
     {
-        return $this->_read(FailedScheduleLimitCheckInterface::class);
+        if (!$this->hasServiceUpdateCompleteFailedScheduleLimitCheck()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheck is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheck;
     }
 
-    protected function _getServiceUpdateCompleteFailedScheduleLimitCheckClone(): FailedScheduleLimitCheckInterface
+    protected function hasServiceUpdateCompleteFailedScheduleLimitCheck(): bool
     {
-        return clone $this->_getServiceUpdateCompleteFailedScheduleLimitCheck();
+        return isset($this->NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheck);
     }
 
-    protected function _unsetServiceUpdateCompleteFailedScheduleLimitCheck()
+    protected function unsetServiceUpdateCompleteFailedScheduleLimitCheck(): self
     {
-        $this->_delete(FailedScheduleLimitCheck::class);
+        if (!$this->hasServiceUpdateCompleteFailedScheduleLimitCheck()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheck is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheck);
 
         return $this;
     }

@@ -4,35 +4,42 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Semaphore\Resource;
 
 use Neighborhoods\Kojo\Semaphore\ResourceInterface;
-use Neighborhoods\Kojo\SemaphoreInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setSemaphoreResource(ResourceInterface $resource)
+    protected $NeighborhoodsKojoSemaphoreResource;
+
+    public function setSemaphoreResource(ResourceInterface $semaphoreResource): self
     {
-        $this->_create(ResourceInterface::class, $resource);
+        if ($this->hasSemaphoreResource()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphoreResource is already set.');
+        }
+        $this->NeighborhoodsKojoSemaphoreResource = $semaphoreResource;
 
         return $this;
     }
 
-    protected function _getSemaphoreResource(): ResourceInterface
+    protected function getSemaphoreResource(): ResourceInterface
     {
-        return $this->_read(ResourceInterface::class);
+        if (!$this->hasSemaphoreResource()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphoreResource is not set.');
+        }
+
+        return $this->NeighborhoodsKojoSemaphoreResource;
     }
 
-    protected function _getSemaphoreResourceClone(): ResourceInterface
+    protected function hasSemaphoreResource(): bool
     {
-        return clone $this->_read(ResourceInterface::class);
+        return isset($this->NeighborhoodsKojoSemaphoreResource);
     }
 
-    protected function _hasSemaphoreResource(): bool
+    protected function unsetSemaphoreResource(): self
     {
-        return $this->_exists(SemaphoreInterface::class);
-    }
-
-    protected function _unsetSemaphoreResource(): self
-    {
-        $this->_delete(SemaphoreInterface::class);
+        if (!$this->hasSemaphoreResource()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphoreResource is not set.');
+        }
+        unset($this->NeighborhoodsKojoSemaphoreResource);
 
         return $this;
     }

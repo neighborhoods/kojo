@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo;
 
-use Neighborhoods\Kojo\Data\Job\Collection\ScheduleLimitInterface;
-
 interface MaintainerInterface
 {
     const SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS     = 'reschedule_jobs';
@@ -13,8 +11,6 @@ interface MaintainerInterface
     public function rescheduleCrashedJobs(): MaintainerInterface;
 
     public function updatePendingJobs(): MaintainerInterface;
-
-    public function setJobCollectionScheduleLimit(ScheduleLimitInterface $jobCollectionScheduleLimit);
 
     public function deleteCompletedJobs(): MaintainerInterface;
 }

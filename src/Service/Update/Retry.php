@@ -3,31 +3,38 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Service\Update;
 
-use Neighborhoods\Kojo\ServiceAbstract;
-
-class Retry extends ServiceAbstract implements RetryInterface
+class Retry implements RetryInterface
 {
-    const PROP_DATE_TIME = 'date_time';
+    /** @var \DateTime */
+    protected $dateTime;
 
-    public function _save(): RetryInterface
+    public function save(): RetryInterface
     {
-        $this->_getStateService()->setJob($this->_getJob());
-        $this->_getStateService()->requestRetry($this->_getDateTime());
-        $this->_getStateService()->applyRequest();
-        $this->_getJob()->save();
+        $this->getStateService()->setJob($this->getJob());
+        $this->getStateService()->requestRetry($this->getDateTime());
+        $this->getStateService()->applyRequest();
+        $this->getJob()->save();
 
         return $this;
+    }
+
+    public function getDateTime(): \DateTime
+    {
+        if ($this->dateTime === null) {
+            throw new \LogicException('Retry dateTime has not been set.');
+        }
+
+        return $this->dateTime;
     }
 
     public function setDateTime(\DateTime $dateTime): RetryInterface
     {
-        $this->_create(self::PROP_DATE_TIME, $dateTime);
+        if ($this->dateTime !== null) {
+            throw new \LogicException('Retry dateTime is already set.');
+        }
+        $this->dateTime = $dateTime;
 
         return $this;
     }
-
-    protected function _getDateTime(): \DateTime
-    {
-        return $this->_read(self::PROP_DATE_TIME);
-    }
+    
 }

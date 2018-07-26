@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\State\Service\FactoryInterface:
+    class: Neighborhoods\Kojo\State\Service\Factory
+    calls:
+      - [setStateService, ['@Neighborhoods\Kojo\State\ServiceInterface']]

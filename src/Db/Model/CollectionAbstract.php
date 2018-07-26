@@ -6,17 +6,15 @@ namespace Neighborhoods\Kojo\Db\Model;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Neighborhoods\Kojo\Db\Model;
-use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
-use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Doctrine\DBAL\Connection\DecoratorInterface;
 use Neighborhoods\Kojo\Doctrine;
 use Neighborhoods\Kojo\Process;
 
 abstract class CollectionAbstract implements CollectionInterface
 {
-    use Defensive\AwareTrait;
     use Model\AwareTrait;
     use Process\Pool\Logger\AwareTrait;
-    use Doctrine\Connection\Decorator\Repository\AwareTrait;
+    use Doctrine\DBAL\Connection\Decorator\Repository\AwareTrait;
     const PROP_QUERY_BUILDER = 'query_builder';
     const PROP_MODELS = 'models';
     const PROP_RECORDS = 'records';
@@ -25,9 +23,9 @@ abstract class CollectionAbstract implements CollectionInterface
     public function getQueryBuilder(): QueryBuilder
     {
         if (!$this->_exists(self::PROP_QUERY_BUILDER)) {
-            $connectionDecoratorRepository = $this->_getDoctrineConnectionDecoratorRepository();
-            $queryBuilder = $connectionDecoratorRepository->createQueryBuilder(DecoratorInterface::ID_JOB);
-            $queryBuilder = $queryBuilder->select()->from($this->_getModel()->getTableName());
+            $connectionDecoratorRepository = $this->getDoctrineDBALConnectionDecoratorRepository();
+            $queryBuilder = $connectionDecoratorRepository->createQueryBuilder(DecoratorInterface::ID_CORE);
+            $queryBuilder = $queryBuilder->select()->from($this->getModel()->getTableName());
             $this->_create(self::PROP_QUERY_BUILDER, $queryBuilder);
         }
 

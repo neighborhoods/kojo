@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Redis\MapInterface:
+    class: Neighborhoods\Kojo\Redis\Map
+    shared: false

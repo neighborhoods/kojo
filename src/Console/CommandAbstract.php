@@ -7,12 +7,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Neighborhoods\Pylon\Data\Property\Defensive;
 use Symfony\Component\Console\Input\InputArgument;
 
 abstract class CommandAbstract extends Command
 {
-    use Defensive\AwareTrait;
     public const ARG_SERVICES_YML_ROOT_DIRECTORY_PATH = 'services_yml_root_directory_path';
     public const OPT_ENABLE_SPLASH_ART = 'enable-splash-art';
     public const OPT_ESA = 'esa';
@@ -25,6 +23,14 @@ abstract class CommandAbstract extends Command
         '|  a distributed task manager  |',
         '+------------------------------+',
     ];
+    /** @var \Symfony\Component\Console\Output\OutputInterface */
+    protected $output;
+    /** @var \Symfony\Component\Console\Input\InputInterface */
+    protected $input;
+
+    abstract protected function _configure(): CommandAbstract;
+
+    abstract function _execute(): CommandAbstract;
 
     public function configure()
     {
@@ -46,49 +52,60 @@ abstract class CommandAbstract extends Command
         return $this;
     }
 
-    abstract protected function _configure(): CommandAbstract;
-
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->_setInput($input);
-        $this->_setOutput($output);
-        if ($this->_getInput()->getOption(self::OPT_ENABLE_SPLASH_ART)) {
-            $this->_writeSplashArt();
+        $this->setInput($input);
+        $this->setOutput($output);
+        if ($this->getInput()->getOption(self::OPT_ENABLE_SPLASH_ART)) {
+            $this->writeSplashArt();
         }
         $this->_execute();
 
         return $this;
     }
 
-    protected function _setOutput(OutputInterface $output): CommandAbstract
+    public function getOutput(): OutputInterface
     {
-        $this->_create(OutputInterface::class, $output);
+        if ($this->output === null) {
+            throw new \LogicException('CommandAbstract output has not been set.');
+        }
+
+        return $this->output;
+    }
+
+    public function setOutput(OutputInterface $output): CommandAbstract
+    {
+        if ($this->output !== null) {
+            throw new \LogicException('CommandAbstract output is already set.');
+        }
+        $this->output = $output;
 
         return $this;
     }
 
-    protected function _getOutput(): OutputInterface
+    public function getInput(): InputInterface
     {
-        return $this->_read(OutputInterface::class);
+        if ($this->input === null) {
+            throw new \LogicException('CommandAbstract input has not been set.');
+        }
+
+        return $this->input;
     }
 
-    protected function _setInput(InputInterface $input): CommandAbstract
+    public function setInput(InputInterface $input): CommandAbstract
     {
-        $this->_create(InputInterface::class, $input);
+        if ($this->input !== null) {
+            throw new \LogicException('CommandAbstract input is already set.');
+        }
+        $this->input = $input;
 
         return $this;
     }
 
-    protected function _getInput(): InputInterface
-    {
-        return $this->_read(InputInterface::class);
-    }
 
-    abstract function _execute(): CommandAbstract;
-
-    protected function _writeSplashArt(): CommandAbstract
+    protected function writeSplashArt(): CommandAbstract
     {
-        $this->_getOutput()->writeln(self::SPLASH_ART);
+        $this->getOutput()->writeln(self::SPLASH_ART);
 
         return $this;
     }

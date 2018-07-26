@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Retry;
 
 use Neighborhoods\Kojo\Service\Update\RetryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateRetry(RetryInterface $serviceUpdateRetry)
+    protected $NeighborhoodsKojoServiceUpdateRetry;
+
+    public function setServiceUpdateRetry(RetryInterface $serviceUpdateRetry): self
     {
-        $this->_create(RetryInterface::class, $serviceUpdateRetry);
+        if ($this->hasServiceUpdateRetry()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateRetry is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateRetry = $serviceUpdateRetry;
 
         return $this;
     }
 
-    protected function _getServiceUpdateRetry(): RetryInterface
+    protected function getServiceUpdateRetry(): RetryInterface
     {
-        return $this->_read(RetryInterface::class);
+        if (!$this->hasServiceUpdateRetry()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateRetry is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateRetry;
     }
 
-    protected function _getServiceUpdateRetryClone(): RetryInterface
+    protected function hasServiceUpdateRetry(): bool
     {
-        return clone $this->_getServiceUpdateRetry();
+        return isset($this->NeighborhoodsKojoServiceUpdateRetry);
     }
 
-    protected function _unsetServiceUpdateRetry()
+    protected function unsetServiceUpdateRetry(): self
     {
-        $this->_delete(RetryInterface::class);
+        if (!$this->hasServiceUpdateRetry()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateRetry is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateRetry);
 
         return $this;
     }

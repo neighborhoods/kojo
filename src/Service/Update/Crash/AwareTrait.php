@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Crash;
 
 use Neighborhoods\Kojo\Service\Update\CrashInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateCrash(CrashInterface $serviceUpdateCrash)
+    protected $NeighborhoodsKojoServiceUpdateCrash;
+
+    public function setServiceUpdateCrash(CrashInterface $serviceUpdateCrash): self
     {
-        $this->_create(CrashInterface::class, $serviceUpdateCrash);
+        if ($this->hasServiceUpdateCrash()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCrash is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateCrash = $serviceUpdateCrash;
 
         return $this;
     }
 
-    protected function _getServiceUpdateCrash(): CrashInterface
+    protected function getServiceUpdateCrash(): CrashInterface
     {
-        return $this->_read(CrashInterface::class);
+        if (!$this->hasServiceUpdateCrash()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCrash is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateCrash;
     }
 
-    protected function _getServiceUpdateCrashClone(): CrashInterface
+    protected function hasServiceUpdateCrash(): bool
     {
-        return clone $this->_getServiceUpdateCrash();
+        return isset($this->NeighborhoodsKojoServiceUpdateCrash);
     }
 
-    protected function _unsetServiceUpdateCrash()
+    protected function unsetServiceUpdateCrash(): self
     {
-        $this->_delete(CrashInterface::class);
+        if (!$this->hasServiceUpdateCrash()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCrash is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateCrash);
 
         return $this;
     }

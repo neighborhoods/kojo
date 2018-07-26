@@ -3,34 +3,33 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Semaphore\Resource\Owner;
 
-use Neighborhoods\Kojo\Data;
-use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo;
 
 class Job implements JobInterface
 {
-    use Data\Job\AwareTrait;
-    use Defensive\AwareTrait;
-    const PROP_RESOURCE_NAME = 'resource_name';
-    const PROP_RESOURCE_PATH = 'resource_path';
+    use Kojo\Job\AwareTrait;
+
+    protected $resourceName;
+    protected $resourcePath;
 
     public function getResourceName(): string
     {
-        if (!$this->_exists(self::PROP_RESOURCE_NAME)) {
-            $resourceName = $this->_getJob()->getCanWorkInParallel() ? (string)$this->_getJob()->getId() : 'job';
-            $this->_create(self::PROP_RESOURCE_NAME, $resourceName);
+        if (!$this->resourceName === null) {
+            $resourceName = $this->getJob()->getCanWorkInParallel() ? (string)$this->getJob()->getId() : 'job';
+            $this->resourceName = $resourceName;
         }
 
-        return $this->_read(self::PROP_RESOURCE_NAME);
+        return $this->resourceName;
     }
 
     public function getResourcePath(): string
     {
-        if (!$this->_exists(self::PROP_RESOURCE_PATH)) {
-            $resourcePath = $this->_getJob()->getTypeCode();
-            $this->_create(self::PROP_RESOURCE_PATH, $resourcePath);
+        if (!$this->resourcePath === null) {
+            $resourcePath = $this->getJob()->getTypeCode();
+            $this->resourcePath = $resourcePath;
         }
 
-        return $this->_read(self::PROP_RESOURCE_PATH);
+        return $this->resourcePath;
     }
 
     public function getIsBlocking(): bool

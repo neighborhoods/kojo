@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\PDO\Builder;
 
 use Neighborhoods\Kojo\PDO\BuilderInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setPDOBuilder(BuilderInterface $dbPDOBuilder): self
+    protected $NeighborhoodsKojoPDOBuilder;
+
+    public function setPDOBuilder(BuilderInterface $pDOBuilder): self
     {
-        $this->_create(BuilderInterface::class, $dbPDOBuilder);
+        if ($this->hasPDOBuilder()) {
+            throw new \LogicException('NeighborhoodsKojoPDOBuilder is already set.');
+        }
+        $this->NeighborhoodsKojoPDOBuilder = $pDOBuilder;
 
         return $this;
     }
 
-    protected function _getPDOBuilder(): BuilderInterface
+    protected function getPDOBuilder(): BuilderInterface
     {
-        return $this->_read(BuilderInterface::class);
+        if (!$this->hasPDOBuilder()) {
+            throw new \LogicException('NeighborhoodsKojoPDOBuilder is not set.');
+        }
+
+        return $this->NeighborhoodsKojoPDOBuilder;
     }
 
-    protected function _hasPDOBuilder(): bool
+    protected function hasPDOBuilder(): bool
     {
-        return $this->_exists(BuilderInterface::class);
+        return isset($this->NeighborhoodsKojoPDOBuilder);
     }
 
-    protected function _unsetPDOBuilder(): self
+    protected function unsetPDOBuilder(): self
     {
-        $this->_delete(BuilderInterface::class);
+        if (!$this->hasPDOBuilder()) {
+            throw new \LogicException('NeighborhoodsKojoPDOBuilder is not set.');
+        }
+        unset($this->NeighborhoodsKojoPDOBuilder);
 
         return $this;
     }

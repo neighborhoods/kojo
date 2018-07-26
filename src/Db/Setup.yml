@@ -1,14 +1,9 @@
 services:
-  neighborhoods.kojo.db.setup:
-    public: false
+  Neighborhoods\Kojo\Db\SetupInterface:
     class: Neighborhoods\Kojo\Db\Setup
+    shared: false
     calls:
-      - [addVersion, ["@db.setup.schema.version.0_0_0"]]
-      - [addVersion, ["@db.setup.schema.version.1_0_0"]]
-      - [addVersion, ["@db.setup.schema.version.2_0_0"]]
-      - [addVersion, ["@db.setup.schema.version.3_0_0"]]
-      - [addVersion, ["@db.setup.schema.version.4_0_0"]]
-      - [addVersion, ["@db.setup.schema.version.5_0_0"]]
-  db.setup:
-    public: false
-    alias: neighborhoods.kojo.db.setup
+      - [setDbSchemaVersionMap, ['@Neighborhoods\Kojo\Db\Schema\Version\MapInterface']]
+      - [addVersion, ['@Neighborhoods\Kojo\Db\Setup\Schema\Version_0_0_0']]
+      - [addVersion, ['@Neighborhoods\Kojo\Db\Setup\Schema\Version_1_0_0']]
+      - [addVersion, ['@Neighborhoods\Kojo\Db\Setup\Schema\Version_2_0_0']]

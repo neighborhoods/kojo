@@ -4,11 +4,9 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Api\V1\Job\Type;
 
 use Neighborhoods\Kojo\Type;
-use Neighborhoods\Pylon\Data\Property;
 
 class Registrar implements RegistrarInterface
 {
-    use Property\Defensive\AwareTrait;
     use Type\Service\Create\AwareTrait;
 
     public function save(): RegistrarInterface

@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Semaphore;
 
 use Neighborhoods\Kojo\SemaphoreInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoSemaphore;
+
     public function setSemaphore(SemaphoreInterface $semaphore): self
     {
-        $this->_create(SemaphoreInterface::class, $semaphore);
+        if ($this->hasSemaphore()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphore is already set.');
+        }
+        $this->NeighborhoodsKojoSemaphore = $semaphore;
 
         return $this;
     }
 
-    protected function _getSemaphore(): SemaphoreInterface
+    protected function getSemaphore(): SemaphoreInterface
     {
-        return $this->_read(SemaphoreInterface::class);
+        if (!$this->hasSemaphore()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphore is not set.');
+        }
+
+        return $this->NeighborhoodsKojoSemaphore;
     }
 
-    protected function _getSemaphoreClone(): SemaphoreInterface
+    protected function hasSemaphore(): bool
     {
-        return clone $this->_getSemaphore();
+        return isset($this->NeighborhoodsKojoSemaphore);
     }
 
-    protected function _hasSemaphore(): bool
+    protected function unsetSemaphore(): self
     {
-        return $this->_exists(SemaphoreInterface::class);
-    }
-
-    protected function _unsetSemaphore(): self
-    {
-        $this->_delete(SemaphoreInterface::class);
+        if (!$this->hasSemaphore()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphore is not set.');
+        }
+        unset($this->NeighborhoodsKojoSemaphore);
 
         return $this;
     }

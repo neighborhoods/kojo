@@ -5,23 +5,42 @@ namespace Neighborhoods\Kojo\Db\Schema\Version;
 
 use Neighborhoods\Kojo\Db\Schema\VersionInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    protected $versions = [];
+    protected $NeighborhoodsKojoDbSchemaVersion;
 
-    public function addVersion(VersionInterface $version)
+    public function setDbSchemaVersion(VersionInterface $dbSchemaVersion): self
     {
-        if (isset($this->versions[get_class($version)])) {
-            throw new \LogicException('The version [' . get_class($version) . '] is already set.');
+        if ($this->hasDbSchemaVersion()) {
+            throw new \LogicException('NeighborhoodsKojoDbSchemaVersion is already set.');
         }
-
-        $this->versions[get_class($version)] = $version;
+        $this->NeighborhoodsKojoDbSchemaVersion = $dbSchemaVersion;
 
         return $this;
     }
 
-    protected function _getVersions(): array
+    protected function getDbSchemaVersion(): VersionInterface
     {
-        return $this->versions;
+        if (!$this->hasDbSchemaVersion()) {
+            throw new \LogicException('NeighborhoodsKojoDbSchemaVersion is not set.');
+        }
+
+        return $this->NeighborhoodsKojoDbSchemaVersion;
+    }
+
+    protected function hasDbSchemaVersion(): bool
+    {
+        return isset($this->NeighborhoodsKojoDbSchemaVersion);
+    }
+
+    protected function unsetDbSchemaVersion(): self
+    {
+        if (!$this->hasDbSchemaVersion()) {
+            throw new \LogicException('NeighborhoodsKojoDbSchemaVersion is not set.');
+        }
+        unset($this->NeighborhoodsKojoDbSchemaVersion);
+
+        return $this;
     }
 }

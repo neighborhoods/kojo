@@ -1,0 +1,3 @@
+services:
+  Neighborhoods\Kojo\Semaphore\Resource\RepositoryInterface:
+    class: Neighborhoods\Kojo\Semaphore\Resource\Repository

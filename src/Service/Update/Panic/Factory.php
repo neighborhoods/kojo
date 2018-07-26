@@ -4,11 +4,10 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Service\Update\Panic;
 
 use Neighborhoods\Kojo\State\Service;
-use Neighborhoods\Kojo\Service\FactoryAbstract;
 use Neighborhoods\Kojo\Service\Update\Panic;
 use Neighborhoods\Kojo\Service\Update\PanicInterface;
 
-class Factory extends FactoryAbstract implements FactoryInterface
+class Factory implements FactoryInterface
 {
     use Panic\AwareTrait;
     use Service\AwareTrait;

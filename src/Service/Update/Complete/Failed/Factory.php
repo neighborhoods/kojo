@@ -6,9 +6,8 @@ namespace Neighborhoods\Kojo\Service\Update\Complete\Failed;
 use Neighborhoods\Kojo\Service\Update\Complete\FailedInterface;
 use Neighborhoods\Kojo\Service\Update\Complete\Failed;
 use Neighborhoods\Kojo\State\Service;
-use Neighborhoods\Kojo\Service\FactoryAbstract;
 
-class Factory extends FactoryAbstract implements FactoryInterface
+class Factory implements FactoryInterface
 {
     use Failed\AwareTrait;
     use Service\AwareTrait;

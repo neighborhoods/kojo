@@ -1,8 +1,6 @@
 services:
-  neighborhoods.kojo.service.update.work.factory:
+  Neighborhoods\Kojo\Service\Update\Work\FactoryInterface:
     class: Neighborhoods\Kojo\Service\Update\Work\Factory
     calls:
-      - [setStateService, ['@state.service']]
-      - [setServiceUpdateWork, ['@service.update.work']]
-  service.update.work.factory:
-    alias: neighborhoods.kojo.service.update.work.factory
+      - [setStateService, ['@Neighborhoods\Kojo\State\ServiceInterface']]
+      - [setServiceUpdateWork, ['@Neighborhoods\Kojo\Service\Update\WorkInterface']]

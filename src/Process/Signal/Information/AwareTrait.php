@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Process\Signal\Information;
 
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoProcessSignalInformation;
+
     public function setProcessSignalInformation(InformationInterface $processSignalInformation): self
     {
-        $this->_create(InformationInterface::class, $processSignalInformation);
+        if ($this->hasProcessSignalInformation()) {
+            throw new \LogicException('NeighborhoodsKojoProcessSignalInformation is already set.');
+        }
+        $this->NeighborhoodsKojoProcessSignalInformation = $processSignalInformation;
 
         return $this;
     }
 
-    protected function _getProcessSignalInformation(): InformationInterface
+    protected function getProcessSignalInformation(): InformationInterface
     {
-        return $this->_read(InformationInterface::class);
+        if (!$this->hasProcessSignalInformation()) {
+            throw new \LogicException('NeighborhoodsKojoProcessSignalInformation is not set.');
+        }
+
+        return $this->NeighborhoodsKojoProcessSignalInformation;
     }
 
-    protected function _getProcessSignalInformationClone(): InformationInterface
+    protected function hasProcessSignalInformation(): bool
     {
-        return clone $this->_getProcessSignalInformation();
+        return isset($this->NeighborhoodsKojoProcessSignalInformation);
     }
 
-    protected function _hasProcessSignalInformation(): bool
+    protected function unsetProcessSignalInformation(): self
     {
-        return $this->_exists(InformationInterface::class);
-    }
-
-    protected function _unsetProcessSignalInformation(): self
-    {
-        $this->_delete(InformationInterface::class);
+        if (!$this->hasProcessSignalInformation()) {
+            throw new \LogicException('NeighborhoodsKojoProcessSignalInformation is not set.');
+        }
+        unset($this->NeighborhoodsKojoProcessSignalInformation);
 
         return $this;
     }

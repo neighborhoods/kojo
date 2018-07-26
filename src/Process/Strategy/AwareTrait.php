@@ -5,22 +5,42 @@ namespace Neighborhoods\Kojo\Process\Strategy;
 
 use Neighborhoods\Kojo\Process\StrategyInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setProcessStrategy(StrategyInterface $strategy)
+    protected $NeighborhoodsKojoProcessStrategy;
+
+    public function setProcessStrategy(StrategyInterface $processStrategy): self
     {
-        $this->_create(StrategyInterface::class, $strategy);
+        if ($this->hasProcessStrategy()) {
+            throw new \LogicException('NeighborhoodsKojoProcessStrategy is already set.');
+        }
+        $this->NeighborhoodsKojoProcessStrategy = $processStrategy;
 
         return $this;
     }
 
-    protected function _getProcessStrategy(): StrategyInterface
+    protected function getProcessStrategy(): StrategyInterface
     {
-        return $this->_read(StrategyInterface::class);
+        if (!$this->hasProcessStrategy()) {
+            throw new \LogicException('NeighborhoodsKojoProcessStrategy is not set.');
+        }
+
+        return $this->NeighborhoodsKojoProcessStrategy;
     }
 
-    protected function _getProcessStrategyClone(): StrategyInterface
+    protected function hasProcessStrategy(): bool
     {
-        return clone $this->_getProcessStrategy();
+        return isset($this->NeighborhoodsKojoProcessStrategy);
+    }
+
+    protected function unsetProcessStrategy(): self
+    {
+        if (!$this->hasProcessStrategy()) {
+            throw new \LogicException('NeighborhoodsKojoProcessStrategy is not set.');
+        }
+        unset($this->NeighborhoodsKojoProcessStrategy);
+
+        return $this;
     }
 }

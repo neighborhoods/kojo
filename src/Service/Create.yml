@@ -1,9 +1,7 @@
 services:
-  neighborhoods.kojo.service.create:
+  Neighborhoods\Kojo\Service\CreateInterface:
     class: Neighborhoods\Kojo\Service\Create
     shared: false
     calls:
-      - [setTypeRepository, ['@type.repository']]
-      - [setTime, ['@neighborhoods.pylon.time']]
-  service.create:
-    alias: neighborhoods.kojo.service.create
+      - [setJobTypeRepository, ['@Neighborhoods\Kojo\Job\Type\RepositoryInterface']]
+      - [setTime, ['@Neighborhoods\Kojo\TimeInterface']]

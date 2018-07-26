@@ -1,8 +1,6 @@
 services:
-  neighborhoods.kojo.service.update.wait.factory:
+  Neighborhoods\Kojo\Service\Update\Wait\FactoryInterface:
     class: Neighborhoods\Kojo\Service\Update\Wait\Factory
     calls:
-      - [setStateService, ['@state.service']]
-      - [setServiceUpdateWait, ['@service.update.wait']]
-  service.update.wait.factory:
-    alias: neighborhoods.kojo.service.update.wait.factory
+      - [setStateService, ['@Neighborhoods\Kojo\State\ServiceInterface']]
+      - [setServiceUpdateWait, ['@Neighborhoods\Kojo\Service\Update\WaitInterface']]

@@ -1,8 +1,6 @@
 services:
-  neighborhoods.kojo.service.update.panic.factory:
+  Neighborhoods\Kojo\Service\Update\Panic\FactoryInterface:
     class: Neighborhoods\Kojo\Service\Update\Panic\Factory
     calls:
-      - [setStateService, ['@state.service']]
-      - [setServiceUpdatePanic, ['@service.update.panic']]
-  service.update.panic.factory:
-    alias: neighborhoods.kojo.service.update.panic.factory
+      - [setStateService, ['@Neighborhoods\Kojo\State\ServiceInterface']]
+      - [setServiceUpdatePanic, ['@Neighborhoods\Kojo\Service\Update\PanicInterface']]

@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Job\Type\RepositoryInterface:
+    class: Neighborhoods\Kojo\Job\Type\Repository
+    calls:
+      - [setJobType, ['@Neighborhoods\Kojo\Job\TypeInterface']]

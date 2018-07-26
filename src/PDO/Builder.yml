@@ -1,12 +1,19 @@
+parameters:
+  neighborhoods.Kojo.pdo.builder.database_user_name: '%env(DATABASE_USERNAME)%'
+  neighborhoods.Kojo.pdo.builder.database_password: '%env(DATABASE_PASSWORD)%'
+  neighborhoods.Kojo.pdo.builder.database_adapter: '%env(DATABASE_ADAPTER)%'
+  neighborhoods.Kojo.pdo.builder.database_host: '%env(DATABASE_HOST)%'
+  neighborhoods.Kojo.pdo.builder.database_name: '%env(DATABASE_NAME)%'
+  neighborhoods.Kojo.pdo.builder.data_source_name: '%neighborhoods.Kojo.pdo.builder.database_adapter%:dbname=%neighborhoods.Kojo.pdo.builder.database_name%;host=%neighborhoods.Kojo.pdo.builder.database_host%'
+  neighborhoods.Kojo.pdo.builder.options:
+    !php/const \PDO::ATTR_PERSISTENT: true
+    !php/const \PDO::ATTR_EMULATE_PREPARES: false
 services:
-  neighborhoods.kojo.pdo.builder:
+  Neighborhoods\Kojo\PDO\BuilderInterface:
     class: Neighborhoods\Kojo\PDO\Builder
-    public: false
     shared: false
     calls:
-      - [setPassword, ['%neighborhoods.kojo.environment.parameters.database_password%']]
-      - [setUserName, ['%neighborhoods.kojo.environment.parameters.database_user_name%']]
-      - [setDataSourceName, ['%neighborhoods.kojo.environment.parameters.database_adapter%:dbname=%neighborhoods.kojo.environment.parameters.database_name%;host=%neighborhoods.kojo.environment.parameters.database_host%']]
-  pdo.builder:
-    alias: neighborhoods.kojo.pdo.builder
-    public: false
+      - [setOptions, ['%neighborhoods.Kojo.pdo.builder.options%']]
+      - [setPassword, ['%neighborhoods.Kojo.pdo.builder.database_password%']]
+      - [setUserName, ['%neighborhoods.Kojo.pdo.builder.database_user_name%']]
+      - [setDataSourceName, ['%neighborhoods.Kojo.pdo.builder.data_source_name%']]

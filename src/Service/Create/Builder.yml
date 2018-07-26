@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\Kojo\Service\Create\BuilderInterface:
+    class: Neighborhoods\Kojo\Service\Create\Builder
+    calls:
+      - [setStateServiceFactory, ['@Neighborhoods\Kojo\State\Service\FactoryInterface']]
+      - [setServiceCreateFactory, ['@Neighborhoods\Kojo\Service\Create\FactoryInterface']]
+      - [setJobRepository, ['@Neighborhoods\Kojo\Job\RepositoryInterface']]

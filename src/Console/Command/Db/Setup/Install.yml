@@ -1,7 +1,6 @@
 services:
-  neighborhoods.kojo.console.command.db.setup.install:
+  Neighborhoods\Kojo\Console\Command\Db\Setup\InstallInterface:
     class: Neighborhoods\Kojo\Console\Command\Db\Setup\Install
+    shared: false
     calls:
-      - [setDbSetup, ['@db.setup']]
-  console.command.db.setup.install:
-    alias: neighborhoods.kojo.console.command.db.setup.install
+      - [setDbSetup, ['@Neighborhoods\Kojo\Db\SetupInterface']]

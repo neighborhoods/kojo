@@ -1,9 +1,7 @@
 services:
-  neighborhoods.kojo.scheduler.time:
+  Neighborhoods\Kojo\Scheduler\TimeInterface:
     class: Neighborhoods\Kojo\Scheduler\Time
-    shared: true
+    shared: false
     calls:
       - [setMinutesToScheduleAheadFor, [5]]
-      - [setTime, ['@neighborhoods.pylon.time']]
-  scheduler.time:
-    alias: neighborhoods.kojo.scheduler.time
+      - [setTime, ['@Neighborhoods\Kojo\TimeInterface']]

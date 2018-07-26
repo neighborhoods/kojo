@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Scheduler;
 
 use Neighborhoods\Kojo\SchedulerInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setScheduler(SchedulerInterface $scheduler)
+    protected $NeighborhoodsKojoScheduler;
+
+    public function setScheduler(SchedulerInterface $scheduler): self
     {
-        $this->_create(SchedulerInterface::class, $scheduler);
+        if ($this->hasScheduler()) {
+            throw new \LogicException('NeighborhoodsKojoScheduler is already set.');
+        }
+        $this->NeighborhoodsKojoScheduler = $scheduler;
 
         return $this;
     }
 
-    protected function _getScheduler(): SchedulerInterface
+    protected function getScheduler(): SchedulerInterface
     {
-        return $this->_read(SchedulerInterface::class);
+        if (!$this->hasScheduler()) {
+            throw new \LogicException('NeighborhoodsKojoScheduler is not set.');
+        }
+
+        return $this->NeighborhoodsKojoScheduler;
     }
 
-    protected function _getSchedulerClone(): SchedulerInterface
+    protected function hasScheduler(): bool
     {
-        return clone $this->_getScheduler();
+        return isset($this->NeighborhoodsKojoScheduler);
     }
 
-    protected function _hasScheduler(): bool
+    protected function unsetScheduler(): self
     {
-        return $this->_exists(SchedulerInterface::class);
-    }
-
-    protected function _unsetScheduler()
-    {
-        $this->_delete(SchedulerInterface::class);
+        if (!$this->hasScheduler()) {
+            throw new \LogicException('NeighborhoodsKojoScheduler is not set.');
+        }
+        unset($this->NeighborhoodsKojoScheduler);
 
         return $this;
     }

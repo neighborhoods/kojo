@@ -1,0 +1,9 @@
+parameters:
+  neighborhoods.Kojo.doctrine.dbal.connection.decorator.repository.id_core: !php/const \Neighborhoods\Kojo\Doctrine\DBAL\Connection\DecoratorInterface::ID_CORE
+services:
+  Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\RepositoryInterface:
+    class: Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\Repository
+    calls:
+      - [setDoctrineDBALConnectionDecoratorArray, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\DecoratorArrayInterface']]
+      - [setDoctrineDBALConnectionDecoratorFactory, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\FactoryInterface']]
+      - [create, ['%neighborhoods.Kojo.doctrine.dbal.connection.decorator.repository.id_core%']]

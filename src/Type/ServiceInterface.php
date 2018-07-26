@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Type;
 
-use Neighborhoods\Kojo\Data\Job\TypeInterface;
+use Neighborhoods\Kojo\Job\TypeInterface;
 
 interface ServiceInterface
 {

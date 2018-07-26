@@ -1,12 +1,11 @@
 services:
-  neighborhoods.pylon.time:
-    class: Neighborhoods\Pylon\Time
-  symfony.component.expressionlanguage.expressionlanguage:
-    class: \Symfony\Component\ExpressionLanguage\ExpressionLanguage
-  neighborhoods.kojo.symfony.component.console.application:
+  Symfony\Component\ExpressionLanguage\ExpressionLanguage:
+    class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+    shared: false
+  Symfony\Component\Console\Application:
     public: true
     class: Symfony\Component\Console\Application
     calls:
-      - [add, ['@console.command.process.pool.server.start']]
-      - [add, ['@console.command.db.setup.install']]
-      - [add, ['@console.command.db.tear_down.uninstall']]
+      - [add, ['@Neighborhoods\Kojo\Console\Command\Process\Pool\Server\Start']]
+      - [add, ['@Neighborhoods\Kojo\Console\Command\Db\Setup\InstallInterface']]
+      - [add, ['@Neighborhoods\Kojo\Console\Command\Db\TearDown\UninstallInterface']]

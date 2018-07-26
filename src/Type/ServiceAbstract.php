@@ -4,13 +4,11 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Type;
 
 use Neighborhoods\Kojo\Type;
-use Neighborhoods\Kojo\Data\Job;
-use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Job;
 
 abstract class ServiceAbstract implements Type\ServiceInterface
 {
     use Job\Type\AwareTrait;
-    use Defensive\AwareTrait;
     const PROP_SAVED = 'saved';
 
     public function save(): ServiceInterface

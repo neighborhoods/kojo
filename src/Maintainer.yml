@@ -1,23 +1,13 @@
 services:
-  neighborhoods.kojo.maintainer:
+  Neighborhoods\Kojo\MaintainerInterface:
     class: Neighborhoods\Kojo\Maintainer
     shared: false
-    public: false
     calls:
-      - [setSemaphore, ['@semaphore']]
-      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job']]
-      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-update_pending_jobs']]
-      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-reschedule_jobs']]
-      - [setJobCollectionCrashDetection, ['@data.job.collection.crashdetection']]
-      - [setJobCollectionScheduleLimitCheck, ['@data.job.collection.schedule.limitcheck']]
-      - [setServiceUpdateCrashFactory, ['@service.update.crash.factory']]
-      - [setServiceUpdateWaitFactory, ['@service.update.wait.factory']]
-      - [setServiceUpdateCompleteFailedScheduleLimitCheckFactory, ['@service.update.complete.failedschedulelimitcheck.factory']]
-      - [setServiceUpdatePanicFactory, ['@service.update.panic.factory']]
-      - [setTypeRepository, ['@type.repository']]
-      - [setJobCollectionScheduleLimit, ['@data.job.collection.schedulelimit']]
-      - [setLogger, ['@process.pool.logger']]
-      - [setMaintainerDelete, ['@maintainer.delete']]
-  maintainer:
-    alias: neighborhoods.kojo.maintainer
-    public: false
+      - [setSemaphore, ['@Neighborhoods\Kojo\SemaphoreInterface']]
+      - [setServiceUpdateCrashFactory, ['@Neighborhoods\Kojo\Service\Update\Crash\FactoryInterface']]
+      - [setServiceUpdateWaitFactory, ['@Neighborhoods\Kojo\Service\Update\Wait\FactoryInterface']]
+      - [setServiceUpdateCompleteFailedScheduleLimitCheckFactory, ['@Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck\FactoryInterface']]
+      - [setServiceUpdatePanicFactory, ['@Neighborhoods\Kojo\Service\Update\Panic\FactoryInterface']]
+      - [setJobTypeRepository, ['@Neighborhoods\Kojo\Job\Type\RepositoryInterface']]
+      - [setLogger, ['@Neighborhoods\Kojo\LoggerInterface']]
+      - [setMaintainerDelete, ['@Neighborhoods\Kojo\Maintainer\DeleteInterface']]

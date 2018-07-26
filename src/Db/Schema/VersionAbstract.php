@@ -5,23 +5,23 @@ namespace Neighborhoods\Kojo\Db\Schema;
 
 use Doctrine\DBAL\Schema\Table;
 use Neighborhoods\Kojo\Doctrine;
-use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
-use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Db;
+use Neighborhoods\Kojo\Doctrine\DBAL\Connection\DecoratorInterface;
 
 abstract class VersionAbstract implements VersionInterface
 {
-    use Defensive\AwareTrait;
-    use Doctrine\Connection\Decorator\Repository\AwareTrait;
-    protected $_createTable;
-    protected $_tableName;
+    use Db\Schema\Version\Map\AwareTrait;
+    use Doctrine\DBAL\Connection\Decorator\Repository\AwareTrait;
+    protected $createTable;
+    protected $tableName;
 
     public function applySchemaSetupChanges(): VersionInterface
     {
-        $connection = $this->_getDoctrineConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_SCHEMA);
+        $connection = $this->getDoctrineDBALConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_SCHEMA);
         if (!$connection->getSchemaManager()->tablesExist([$this->_getTableName()])) {
             $connection->beginTransaction();
             try {
-                $this->_assembleSchemaChanges();
+                $this->assembleSchemaChanges();
                 $connection->getSchemaManager()->createTable($this->_getCreateTable());
                 $connection->commit();
             } catch (\Throwable $throwable) {
@@ -33,12 +33,12 @@ abstract class VersionAbstract implements VersionInterface
         return $this;
     }
 
-    abstract protected function _assembleSchemaChanges(): VersionInterface;
+    abstract protected function assembleSchemaChanges(): VersionInterface;
 
     public function applySchemaTearDownChanges(): VersionInterface
     {
-        $this->_assembleSchemaChanges();
-        $connection = $this->_getDoctrineConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_SCHEMA);
+        $this->assembleSchemaChanges();
+        $connection = $this->getDoctrineDBALConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_SCHEMA);
         if ($connection->getSchemaManager()->tablesExist([$this->_getTableName()])) {
             $connection->beginTransaction();
             try {
@@ -55,8 +55,8 @@ abstract class VersionAbstract implements VersionInterface
 
     public function setTableName(string $tableName): VersionInterface
     {
-        if (!$this->_hasTableName()) {
-            $this->_tableName = $tableName;
+        if (!$this->hasTableName()) {
+            $this->tableName = $tableName;
         } else {
             throw new \LogicException('DropTable name is already set.');
         }
@@ -66,22 +66,22 @@ abstract class VersionAbstract implements VersionInterface
 
     protected function _getTableName(): string
     {
-        if (!$this->_hasTableName()) {
+        if (!$this->hasTableName()) {
             throw new \LogicException('DropTable name is not set.');
         }
 
-        return $this->_tableName;
+        return $this->tableName;
     }
 
-    protected function _hasTableName(): bool
+    protected function hasTableName(): bool
     {
-        return $this->_tableName === null ? false : true;
+        return $this->tableName === null ? false : true;
     }
 
     protected function _setCreateTable(Table $createTable): VersionInterface
     {
-        if (!$this->_hasCreateTable()) {
-            $this->_createTable = $createTable;
+        if (!$this->hasCreateTable()) {
+            $this->createTable = $createTable;
         } else {
             throw new \LogicException('CreateTable is already set.');
         }
@@ -91,15 +91,15 @@ abstract class VersionAbstract implements VersionInterface
 
     protected function _getCreateTable(): Table
     {
-        if (!$this->_hasCreateTable()) {
+        if (!$this->hasCreateTable()) {
             throw new \LogicException('CreateTable is not set.');
         }
 
-        return $this->_createTable;
+        return $this->createTable;
     }
 
-    protected function _hasCreateTable(): bool
+    protected function hasCreateTable(): bool
     {
-        return $this->_createTable === null ? false : true;
+        return $this->createTable === null ? false : true;
     }
 }

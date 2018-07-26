@@ -3,22 +3,44 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Message\Broker;
 
+use Neighborhoods\Kojo\Message\BrokerInterface;
+
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setMessageBroker(BrokerInterface $broker)
+    protected $NeighborhoodsKojoMessageBroker;
+
+    public function setMessageBroker(BrokerInterface $messageBroker): self
     {
-        $this->_create(BrokerInterface::class, $broker);
+        if ($this->hasMessageBroker()) {
+            throw new \LogicException('NeighborhoodsKojoMessageBroker is already set.');
+        }
+        $this->NeighborhoodsKojoMessageBroker = $messageBroker;
 
         return $this;
     }
 
-    protected function _getMessageBroker(): BrokerInterface
+    protected function getMessageBroker(): BrokerInterface
     {
-        return $this->_read(BrokerInterface::class);
+        if (!$this->hasMessageBroker()) {
+            throw new \LogicException('NeighborhoodsKojoMessageBroker is not set.');
+        }
+
+        return $this->NeighborhoodsKojoMessageBroker;
     }
 
-    protected function _getMessageBrokerClone(): BrokerInterface
+    protected function hasMessageBroker(): bool
     {
-        return clone $this->_getMessageBroker();
+        return isset($this->NeighborhoodsKojoMessageBroker);
+    }
+
+    protected function unsetMessageBroker(): self
+    {
+        if (!$this->hasMessageBroker()) {
+            throw new \LogicException('NeighborhoodsKojoMessageBroker is not set.');
+        }
+        unset($this->NeighborhoodsKojoMessageBroker);
+
+        return $this;
     }
 }

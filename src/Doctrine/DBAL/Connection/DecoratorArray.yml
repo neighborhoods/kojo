@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Doctrine\DBAL\Connection\DecoratorArrayInterface:
+    class: Neighborhoods\Kojo\Doctrine\DBAL\Connection\DecoratorArray
+    shared: false

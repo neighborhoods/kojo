@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Process\Pool\Strategy;
 
 use Neighborhoods\Kojo\Process\Pool\StrategyInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setProcessPoolStrategy(StrategyInterface $strategy): self
+    protected $NeighborhoodsKojoProcessPoolStrategy;
+
+    public function setProcessPoolStrategy(StrategyInterface $processPoolStrategy): self
     {
-        $this->_create(StrategyInterface::class, $strategy);
+        if ($this->hasProcessPoolStrategy()) {
+            throw new \LogicException('NeighborhoodsKojoProcessPoolStrategy is already set.');
+        }
+        $this->NeighborhoodsKojoProcessPoolStrategy = $processPoolStrategy;
 
         return $this;
     }
 
-    protected function _getProcessPoolStrategy(): StrategyInterface
+    protected function getProcessPoolStrategy(): StrategyInterface
     {
-        return $this->_read(StrategyInterface::class);
+        if (!$this->hasProcessPoolStrategy()) {
+            throw new \LogicException('NeighborhoodsKojoProcessPoolStrategy is not set.');
+        }
+
+        return $this->NeighborhoodsKojoProcessPoolStrategy;
     }
 
-    protected function _hasProcessPoolStrategy(): bool
+    protected function hasProcessPoolStrategy(): bool
     {
-        return $this->_exists(StrategyInterface::class);
+        return isset($this->NeighborhoodsKojoProcessPoolStrategy);
     }
 
-    protected function _getProcessPoolStrategyClone(): StrategyInterface
+    protected function unsetProcessPoolStrategy(): self
     {
-        return clone $this->_getProcessPoolStrategy();
-    }
-
-    protected function _unsetProcessPoolStrategy(): self
-    {
-        $this->_delete(StrategyInterface::class);
+        if (!$this->hasProcessPoolStrategy()) {
+            throw new \LogicException('NeighborhoodsKojoProcessPoolStrategy is not set.');
+        }
+        unset($this->NeighborhoodsKojoProcessPoolStrategy);
 
         return $this;
     }

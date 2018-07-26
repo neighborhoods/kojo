@@ -5,24 +5,42 @@ namespace Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck\Fa
 
 use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheckFactory;
+
     public function setServiceUpdateCompleteFailedScheduleLimitCheckFactory(
         FactoryInterface $serviceUpdateCompleteFailedScheduleLimitCheckFactory
-    ){
-        $this->_create(FactoryInterface::class, $serviceUpdateCompleteFailedScheduleLimitCheckFactory);
+    ): self {
+        if ($this->hasServiceUpdateCompleteFailedScheduleLimitCheckFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheckFactory is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheckFactory = $serviceUpdateCompleteFailedScheduleLimitCheckFactory;
 
         return $this;
     }
 
-    protected function _getServiceUpdateCompleteFailedScheduleLimitCheckFactory(): FactoryInterface
+    protected function getServiceUpdateCompleteFailedScheduleLimitCheckFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasServiceUpdateCompleteFailedScheduleLimitCheckFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheckFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheckFactory;
     }
 
-    protected function _unsetServiceUpdateCompleteFailedScheduleLimitCheckFactory()
+    protected function hasServiceUpdateCompleteFailedScheduleLimitCheckFactory(): bool
     {
-        $this->_delete(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheckFactory);
+    }
+
+    protected function unsetServiceUpdateCompleteFailedScheduleLimitCheckFactory(): self
+    {
+        if (!$this->hasServiceUpdateCompleteFailedScheduleLimitCheckFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheckFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateCompleteFailedScheduleLimitCheckFactory);
 
         return $this;
     }

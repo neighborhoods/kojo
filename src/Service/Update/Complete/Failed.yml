@@ -1,6 +1,4 @@
 services:
-  neighborhoods.kojo.service.update.complete.failed:
+  Neighborhoods\Kojo\Service\Update\Complete\FailedInterface:
     class: Neighborhoods\Kojo\Service\Update\Complete\Failed
     shared: false
-  service.update.complete.failed:
-    alias: neighborhoods.kojo.service.update.complete.failed

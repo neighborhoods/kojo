@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Service\Update;
 
-use Neighborhoods\Kojo\ServiceInterface;
-
-interface RetryInterface extends ServiceInterface
+interface RetryInterface
 {
     public function setDateTime(\DateTime $dateTime): RetryInterface;
 }

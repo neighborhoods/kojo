@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Process\Pool\Strategy\Builder\MapInterface:
+    class: Neighborhoods\Kojo\Process\Pool\Strategy\Builder\Map
+    shared: false

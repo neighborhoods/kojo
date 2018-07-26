@@ -1,18 +1,12 @@
 services:
-  neighborhoods.kojo.selector:
+  Neighborhoods\Kojo\SelectorInterface:
     class: Neighborhoods\Kojo\Selector
-    public: false
-    shared: true
+    shared: false
     calls:
       - [setPageSize, [50]]
       - [setOffset, [50]]
-      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job']]
-      - [setMessageBroker, ['@message.broker.redis']]
-      - [setSemaphore, ['@semaphore']]
-      - [setSelectorJobCollection, ['@data.job.collection.selector']]
-      - [setJob, ['@data.job']]
-      - [setStateService, ['@state.service']]
+      - [setMessageBroker, ['@Neighborhoods\Kojo\Message\Broker\RedisInterface']]
+      - [setSemaphore, ['@Neighborhoods\Kojo\SemaphoreInterface']]
+      - [setJob, ['@Neighborhoods\Kojo\JobInterface']]
+      - [setStateServiceFactory, ['@Neighborhoods\Kojo\State\Service\FactoryInterface']]
       - [setRandomIntMax, [10]]
-  selector:
-    alias: neighborhoods.kojo.selector
-    public: false

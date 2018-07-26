@@ -1,6 +1,4 @@
 services:
-  neighborhoods.kojo.service.update.work:
+  Neighborhoods\Kojo\Service\Update\WorkInterface:
     class: Neighborhoods\Kojo\Service\Update\Work
     shared: false
-  service.update.work:
-    alias: neighborhoods.kojo.service.update.work

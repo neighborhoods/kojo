@@ -1,8 +1,0 @@
-services:
-  neighborhoods.kojo.doctrine.connection.decorator_array:
-    class: Neighborhoods\Kojo\Doctrine\Connection\DecoratorArray
-    public: false
-    shared: false
-  doctrine.connection.decorator_array:
-    alias: neighborhoods.kojo.doctrine.connection.decorator_array
-    public: false

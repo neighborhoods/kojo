@@ -7,32 +7,31 @@ use Neighborhoods\Kojo\Exception;
 
 abstract class MutexAbstract implements MutexInterface
 {
-    use Exception\Runtime\Filesystem\AwareTrait;
-    protected $_isBlocking;
-    protected $_resource;
+    protected $isBlocking;
+    protected $resource;
 
     public function setIsBlocking(bool $isBlocking): MutexInterface
     {
-        if ($this->_isBlocking === null) {
-            $this->_isBlocking = $isBlocking;
+        if ($this->isBlocking === null) {
+            $this->isBlocking = $isBlocking;
         }
 
         return $this;
     }
 
-    protected function _getIsBlocking(): bool
+    protected function getIsBlocking(): bool
     {
-        if ($this->_isBlocking === null) {
-            $this->_isBlocking = $this->_getResource()->getIsBlocking();
+        if ($this->isBlocking === null) {
+            $this->isBlocking = $this->getResource()->getIsBlocking();
         }
 
-        return $this->_isBlocking;
+        return $this->isBlocking;
     }
 
     public function setResource(ResourceInterface $resource): MutexInterface
     {
-        if ($this->_resource === null) {
-            $this->_resource = $resource;
+        if ($this->resource === null) {
+            $this->resource = $resource;
         }else {
             throw new \LogicException('Resource is already set.');
         }
@@ -40,12 +39,12 @@ abstract class MutexAbstract implements MutexInterface
         return $this;
     }
 
-    protected function _getResource(): ResourceInterface
+    protected function getResource(): ResourceInterface
     {
-        if ($this->_resource === null) {
+        if ($this->resource === null) {
             throw new \LogicException('Resource is not set.');
         }
 
-        return $this->_resource;
+        return $this->resource;
     }
 }

@@ -5,23 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Complete\Failed\Factory;
 
 use Neighborhoods\Kojo\Service\Update\Complete\Failed\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateCompleteFailedFactory(FactoryInterface $serviceUpdateCompleteFailedFactory)
+    protected $NeighborhoodsKojoServiceUpdateCompleteFailedFactory;
+
+    public function setServiceUpdateCompleteFailedFactory(FactoryInterface $serviceUpdateCompleteFailedFactory): self
     {
-        $this->_create(FactoryInterface::class, $serviceUpdateCompleteFailedFactory);
+        if ($this->hasServiceUpdateCompleteFailedFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailedFactory is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateCompleteFailedFactory = $serviceUpdateCompleteFailedFactory;
 
         return $this;
     }
 
-    protected function _getServiceUpdateCompleteFailedFactory(): FactoryInterface
+    protected function getServiceUpdateCompleteFailedFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasServiceUpdateCompleteFailedFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailedFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateCompleteFailedFactory;
     }
 
-    protected function _unsetServiceUpdateCompleteFailedFactory()
+    protected function hasServiceUpdateCompleteFailedFactory(): bool
     {
-        $this->_delete(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoServiceUpdateCompleteFailedFactory);
+    }
+
+    protected function unsetServiceUpdateCompleteFailedFactory(): self
+    {
+        if (!$this->hasServiceUpdateCompleteFailedFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteFailedFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateCompleteFailedFactory);
 
         return $this;
     }

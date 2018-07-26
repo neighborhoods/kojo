@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Complete\Success;
 
 use Neighborhoods\Kojo\Service\Update\Complete\SuccessInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateCompleteSuccess(SuccessInterface $serviceUpdateCompleteSuccess)
+    protected $NeighborhoodsKojoServiceUpdateCompleteSuccess;
+
+    public function setServiceUpdateCompleteSuccess(SuccessInterface $serviceUpdateCompleteSuccess): self
     {
-        $this->_create(SuccessInterface::class, $serviceUpdateCompleteSuccess);
+        if ($this->hasServiceUpdateCompleteSuccess()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteSuccess is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateCompleteSuccess = $serviceUpdateCompleteSuccess;
 
         return $this;
     }
 
-    protected function _getServiceUpdateCompleteSuccess(): SuccessInterface
+    protected function getServiceUpdateCompleteSuccess(): SuccessInterface
     {
-        return $this->_read(SuccessInterface::class);
+        if (!$this->hasServiceUpdateCompleteSuccess()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteSuccess is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateCompleteSuccess;
     }
 
-    protected function _getServiceUpdateCompleteSuccessClone(): SuccessInterface
+    protected function hasServiceUpdateCompleteSuccess(): bool
     {
-        return clone $this->_getServiceUpdateCompleteSuccess();
+        return isset($this->NeighborhoodsKojoServiceUpdateCompleteSuccess);
     }
 
-    protected function _unsetServiceUpdateCompleteSuccess()
+    protected function unsetServiceUpdateCompleteSuccess(): self
     {
-        $this->_delete(SuccessInterface::class);
+        if (!$this->hasServiceUpdateCompleteSuccess()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteSuccess is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateCompleteSuccess);
 
         return $this;
     }

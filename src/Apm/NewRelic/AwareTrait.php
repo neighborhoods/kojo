@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Apm\NewRelic;
 
 use Neighborhoods\Kojo\Apm\NewRelicInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoApmNewRelic;
+
     public function setApmNewRelic(NewRelicInterface $apmNewRelic): self
     {
-        $this->_create(NewRelicInterface::class, $apmNewRelic);
+        if ($this->hasApmNewRelic()) {
+            throw new \LogicException('NeighborhoodsKojoApmNewRelic is already set.');
+        }
+        $this->NeighborhoodsKojoApmNewRelic = $apmNewRelic;
 
         return $this;
     }
 
-    protected function _getApmNewRelic(): NewRelicInterface
+    protected function getApmNewRelic(): NewRelicInterface
     {
-        return $this->_read(NewRelicInterface::class);
+        if (!$this->hasApmNewRelic()) {
+            throw new \LogicException('NeighborhoodsKojoApmNewRelic is not set.');
+        }
+
+        return $this->NeighborhoodsKojoApmNewRelic;
     }
 
-    protected function _getApmNewRelicClone(): NewRelicInterface
+    protected function hasApmNewRelic(): bool
     {
-        return clone $this->_getApmNewRelic();
+        return isset($this->NeighborhoodsKojoApmNewRelic);
     }
 
-    protected function _hasApmNewRelic(): bool
+    protected function unsetApmNewRelic(): self
     {
-        return $this->_exists(NewRelicInterface::class);
-    }
-
-    protected function _unsetApmNewRelic(): self
-    {
-        $this->_delete(NewRelicInterface::class);
+        if (!$this->hasApmNewRelic()) {
+            throw new \LogicException('NeighborhoodsKojoApmNewRelic is not set.');
+        }
+        unset($this->NeighborhoodsKojoApmNewRelic);
 
         return $this;
     }

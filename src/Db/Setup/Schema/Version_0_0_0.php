@@ -7,13 +7,13 @@ use Doctrine\DBAL\Types\Type;
 use Neighborhoods\Kojo\Doctrine;
 use Neighborhoods\Kojo\Db\Schema\VersionAbstract;
 use Neighborhoods\Kojo\Db\Schema\VersionInterface;
-use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
+use Neighborhoods\Kojo\Doctrine\DBAL\Connection\DecoratorInterface;
 
 class Version_0_0_0 extends VersionAbstract
 {
-    protected function _assembleSchemaChanges(): VersionInterface
+    protected function assembleSchemaChanges(): VersionInterface
     {
-        $connectionDecoratorRepository = $this->_getDoctrineConnectionDecoratorRepository();
+        $connectionDecoratorRepository = $this->getDoctrineDBALConnectionDecoratorRepository();
         $createSchema = $connectionDecoratorRepository->createSchema(DecoratorInterface::ID_SCHEMA);
         $createTable = $createSchema->createTable($this->_getTableName());
         $createTable->addColumn('version', Type::STRING,

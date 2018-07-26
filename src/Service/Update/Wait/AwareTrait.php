@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Wait;
 
 use Neighborhoods\Kojo\Service\Update\WaitInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateWait(WaitInterface $serviceUpdateWait)
+    protected $NeighborhoodsKojoServiceUpdateWait;
+
+    public function setServiceUpdateWait(WaitInterface $serviceUpdateWait): self
     {
-        $this->_create(WaitInterface::class, $serviceUpdateWait);
+        if ($this->hasServiceUpdateWait()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWait is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateWait = $serviceUpdateWait;
 
         return $this;
     }
 
-    protected function _getServiceUpdateWait(): WaitInterface
+    protected function getServiceUpdateWait(): WaitInterface
     {
-        return $this->_read(WaitInterface::class);
+        if (!$this->hasServiceUpdateWait()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWait is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateWait;
     }
 
-    protected function _getServiceUpdateWaitClone(): WaitInterface
+    protected function hasServiceUpdateWait(): bool
     {
-        return clone $this->_getServiceUpdateWait();
+        return isset($this->NeighborhoodsKojoServiceUpdateWait);
     }
 
-    protected function _unsetServiceUpdateWait()
+    protected function unsetServiceUpdateWait(): self
     {
-        $this->_delete(WaitInterface::class);
+        if (!$this->hasServiceUpdateWait()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWait is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateWait);
 
         return $this;
     }

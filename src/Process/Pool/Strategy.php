@@ -4,20 +4,22 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool;
 
 use Neighborhoods\Kojo\ProcessInterface;
-use Neighborhoods\Kojo\Process\JobInterface;
+use Neighborhoods\Kojo\Process\WorkerInterface;
 use Neighborhoods\Kojo\Process\ListenerInterface;
+use Neighborhoods\Kojo\Process;
 
 class Strategy extends StrategyAbstract
 {
-    protected $_pausedListenerProcesses = [];
+    use Process\Repository\AwareTrait;
+    use Process\Listener\Map\AwareTrait;
 
     public function childProcessExited(ProcessInterface $process): StrategyInterface
     {
-        if ($process instanceof JobInterface) {
-            $this->_jobProcessExited($process);
-        }elseif ($process instanceof ListenerInterface) {
-            $this->_listenerProcessExited($process);
-        }else {
+        if ($process instanceof WorkerInterface) {
+            $this->workerProcessExited($process);
+        } elseif ($process instanceof ListenerInterface) {
+            $this->listenerProcessExited($process);
+        } else {
             $className = get_class($process);
             throw new \UnexpectedValueException("Unexpected process class[$className].");
         }
@@ -25,31 +27,30 @@ class Strategy extends StrategyAbstract
         return $this;
     }
 
-    protected function _listenerProcessExited(ListenerInterface $listenerProcess): Strategy
+    protected function listenerProcessExited(ListenerInterface $listenerProcess): Strategy
     {
         if ($listenerProcess->getExitCode() !== 0) {
-            $this->_pauseListenerProcess($listenerProcess);
-        }else {
+            $this->pauseListenerProcess($listenerProcess);
+        } else {
             while (
                 $listenerProcess->hasMessages()
-                && !$this->_getProcessPool()->isFull()
-                && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
+                && !$this->getProcessPool()->isFull()
+                && $this->getProcessPool()->canEnvironmentSustainAdditionProcesses()
             ) {
                 $listenerProcess->processMessages();
             }
 
-            if ($this->_getProcessPool()->isFull()) {
-                $this->_pauseListenerProcess($listenerProcess);
-            }else {
-                $this->_getProcessPool()->freeChildProcess($listenerProcess->getProcessId());
-                $typeCode = $listenerProcess->getTypeCode();
-                $replacementListenerProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
-                $this->_getProcessPool()->addChildProcess($replacementListenerProcess);
+            if ($this->getProcessPool()->isFull()) {
+                $this->pauseListenerProcess($listenerProcess);
+            } else {
+                $this->getProcessPool()->freeChildProcess($listenerProcess->getProcessId());
+                $replacementListenerProcess = $this->getProcessRepository()->create($listenerProcess->getTypeId());
+                $this->getProcessPool()->addChildProcess($replacementListenerProcess);
             }
         }
 
-        if (!$this->_getProcessPool()->hasAlarm()) {
-            $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
+        if (!$this->getProcessPool()->hasAlarm()) {
+            $this->getProcessPool()->setAlarm($this->getMaxAlarmTime());
         }
 
         return $this;
@@ -57,27 +58,26 @@ class Strategy extends StrategyAbstract
 
     public function currentPendingChildExitsCompleted(): StrategyInterface
     {
-        if ($this->_hasPausedListenerProcess()) {
-            $this->_unPauseListenerProcesses();
-        }else {
-            if (!$this->_getProcessPool()->hasAlarm()) {
-                $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
+        if ($this->hasPausedListenerProcess()) {
+            $this->unPauseListenerProcesses();
+        } else {
+            if (!$this->getProcessPool()->hasAlarm()) {
+                $this->getProcessPool()->setAlarm($this->getMaxAlarmTime());
             }
         }
 
         return $this;
     }
 
-    protected function _jobProcessExited(JobInterface $jobProcess): Strategy
+    protected function workerProcessExited(WorkerInterface $jobProcess): Strategy
     {
-        $this->_getProcessPool()->freeChildProcess($jobProcess->getProcessId());
-        if ($jobProcess->getExitCode() !== 0 && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
-            $typeCode = $jobProcess->getTypeCode();
-            $replacementProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
+        $this->getProcessPool()->freeChildProcess($jobProcess->getProcessId());
+        if ($jobProcess->getExitCode() !== 0 && $this->getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+            $replacementProcess = $this->getProcessRepository()->create($jobProcess->getTypeId());
             $replacementProcess->setThrottle($this->getChildProcessWaitThrottle());
-            $this->_getProcessPool()->addChildProcess($replacementProcess);
-            if (!$this->_getProcessPool()->hasAlarm()) {
-                $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
+            $this->getProcessPool()->addChildProcess($replacementProcess);
+            if (!$this->getProcessPool()->hasAlarm()) {
+                $this->getProcessPool()->setAlarm($this->getMaxAlarmTime());
             }
         }
 
@@ -86,17 +86,17 @@ class Strategy extends StrategyAbstract
 
     public function receivedAlarm(): StrategyInterface
     {
-        if (!$this->_getProcessPool()->isFull() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
-            if ($this->_hasPausedListenerProcess()) {
-                $this->_unPauseListenerProcesses();
-            }else {
-                $alarmProcessTypeCode = $this->_getAlarmProcessTypeCode();
-                $alarmProcess = $this->_getProcessCollection()->getProcessPrototypeClone($alarmProcessTypeCode);
-                $this->_getProcessPool()->addChildProcess($alarmProcess);
+        if (!$this->getProcessPool()->isFull() && $this->getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+            if ($this->hasPausedListenerProcess()) {
+                $this->unPauseListenerProcesses();
+            } else {
+                $alarmProcessTypeCode = $this->getAlarmProcessTypeId();
+                $alarmProcess = $this->getProcessRepository()->create($alarmProcessTypeCode);
+                $this->getProcessPool()->addChildProcess($alarmProcess);
             }
         }
-        if (!$this->_getProcessPool()->hasAlarm()) {
-            $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
+        if (!$this->getProcessPool()->hasAlarm()) {
+            $this->getProcessPool()->setAlarm($this->getMaxAlarmTime());
         }
 
         return $this;
@@ -104,59 +104,57 @@ class Strategy extends StrategyAbstract
 
     public function initializePool(): StrategyInterface
     {
-        $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
-        $this->_getProcessCollection()->applyProcessPool($this->_getProcessPool());
-        foreach ($this->_getProcessCollection() as $process) {
-            $this->_getProcessPool()->addChildProcess($process);
+        $this->getProcessPool()->setAlarm($this->getMaxAlarmTime());
+        $this->getProcessRepository()->applyProcessPool($this->getProcessPool());
+        foreach ($this->getProcessRepository()->getAll() as $process) {
+            $this->getProcessPool()->addChildProcess($process);
         }
-        if ($this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
-            while (!$this->_getProcessPool()->isFull()) {
-                $fillProcessTypeCode = $this->_getFillProcessTypeCode();
-                $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);
-                $this->_getProcessPool()->addChildProcess($fillProcess);
+        if ($this->hasFillProcessTypeId() && $this->getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+            while (!$this->getProcessPool()->isFull()) {
+                $fillProcess = $this->getProcessRepository()->create($this->getFillProcessTypeId());
+                $this->getProcessPool()->addChildProcess($fillProcess);
             }
         }
 
         return $this;
     }
 
-    protected function _pauseListenerProcess(ListenerInterface $listenerProcess): Strategy
+    protected function pauseListenerProcess(ListenerInterface $listenerProcess): Strategy
     {
         $listenerProcessId = $listenerProcess->getProcessId();
-        if (!isset($this->_pausedListenerProcesses[$listenerProcessId])) {
-            $this->_getProcessPool()->freeChildProcess($listenerProcessId);
-            $this->_pausedListenerProcesses[$listenerProcessId] = $listenerProcess;
-        }else {
+        if (!isset($this->getProcessListenerMap()[$listenerProcessId])) {
+            $this->getProcessPool()->freeChildProcess($listenerProcessId);
+            $this->getProcessListenerMap()[$listenerProcessId] = $listenerProcess;
+        } else {
             throw new \LogicException('Listener process is already paused.');
         }
 
         return $this;
     }
 
-    protected function _hasPausedListenerProcess(): bool
+    protected function hasPausedListenerProcess(): bool
     {
-        return !empty($this->_pausedListenerProcesses);
+        return !empty($this->getProcessListenerMap());
     }
 
-    protected function _unPauseListenerProcesses(): Strategy
+    protected function unPauseListenerProcesses(): Strategy
     {
-        if ($this->_hasPausedListenerProcess()) {
-            foreach ($this->_pausedListenerProcesses as $processId => $listenerProcess) {
-                if (!$this->_getProcessPool()->isFull()) {
-                    $typeCode = $listenerProcess->getTypeCode();
-                    $newListenerProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
-                    while (!$this->_getProcessPool()->isFull() && $listenerProcess->hasMessages()) {
+        if ($this->hasPausedListenerProcess()) {
+            foreach ($this->getProcessListenerMap() as $processId => $listenerProcess) {
+                if (!$this->getProcessPool()->isFull()) {
+                    $newListenerProcess = $this->getProcessRepository()->create($listenerProcess->getTypeId());
+                    while (!$this->getProcessPool()->isFull() && $listenerProcess->hasMessages()) {
                         $listenerProcess->processMessages();
                     }
-                    if (!$this->_getProcessPool()->isFull()) {
-                        unset($this->_pausedListenerProcesses[$processId]);
-                        $this->_getProcessPool()->addChildProcess($newListenerProcess);
+                    if (!$this->getProcessPool()->isFull()) {
+                        unset($this->getProcessListenerMap()[$processId]);
+                        $this->getProcessPool()->addChildProcess($newListenerProcess);
                     }
-                }else {
+                } else {
                     break;
                 }
             }
-        }else {
+        } else {
             throw new \LogicException('There are no paused listener processes.');
         }
 

@@ -5,27 +5,42 @@ namespace Neighborhoods\Kojo\Semaphore\Resource\Owner;
 
 use Neighborhoods\Kojo\Semaphore\Resource\OwnerInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setSemaphoreResourceOwner(OwnerInterface $semaphoreResourceOwner)
+    protected $NeighborhoodsKojoSemaphoreResourceOwner;
+
+    public function setSemaphoreResourceOwner(OwnerInterface $semaphoreResourceOwner): self
     {
-        $this->_create(OwnerInterface::class, $semaphoreResourceOwner);
+        if ($this->hasSemaphoreResourceOwner()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphoreResourceOwner is already set.');
+        }
+        $this->NeighborhoodsKojoSemaphoreResourceOwner = $semaphoreResourceOwner;
 
         return $this;
     }
 
-    protected function _hasSemaphoreResourceOwner(): bool
+    protected function getSemaphoreResourceOwner(): OwnerInterface
     {
-        return $this->_exists(OwnerInterface::class);
+        if (!$this->hasSemaphoreResourceOwner()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphoreResourceOwner is not set.');
+        }
+
+        return $this->NeighborhoodsKojoSemaphoreResourceOwner;
     }
 
-    protected function _getSemaphoreResourceOwner(): OwnerInterface
+    protected function hasSemaphoreResourceOwner(): bool
     {
-        return $this->_read(OwnerInterface::class);
+        return isset($this->NeighborhoodsKojoSemaphoreResourceOwner);
     }
 
-    protected function _getSemaphoreResourceOwnerClone(): OwnerInterface
+    protected function unsetSemaphoreResourceOwner(): self
     {
-        return clone $this->_getSemaphoreResourceOwner();
+        if (!$this->hasSemaphoreResourceOwner()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphoreResourceOwner is not set.');
+        }
+        unset($this->NeighborhoodsKojoSemaphoreResourceOwner);
+
+        return $this;
     }
 }

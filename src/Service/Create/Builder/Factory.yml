@@ -1,0 +1,3 @@
+services:
+  Neighborhoods\Kojo\Service\Create\Builder\FactoryInterface:
+    class: Neighborhoods\Kojo\Service\Create\Builder\Factory

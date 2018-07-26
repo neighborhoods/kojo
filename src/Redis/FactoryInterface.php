@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Redis;
 
-use Neighborhoods\Kojo\Service;
-
-interface FactoryInterface extends Service\FactoryInterface
+interface FactoryInterface
 {
-    const PROP_HOST = 'host';
-    const PROP_PORT = 'port';
+    public const PROP_HOST = 'host';
+    public const PROP_PORT = 'port';
 
     public function create(): \Redis;
 

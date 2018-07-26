@@ -1,19 +1,10 @@
 services:
-  neighborhoods.kojo.process.listener.mutex.redis:
+  Neighborhoods\Kojo\Process\Listener\Mutex\RedisInterface:
     class: Neighborhoods\Kojo\Process\Listener\Mutex\Redis
-    public: true
     shared: false
-    parent: process_abstract
+    parent: Neighborhoods\Kojo\ProcessAbstract
     calls:
-      - [setTypeCode, ['listener.mutex.redis']]
-      - [setProcessStrategy, ['@process.strategy.process_control']]
       - [setTerminationSignalNumber, ['@=constant("SIGKILL")']]
       - [setUuidMaximumInteger, [9999999999]]
-      - [setBrokerTypeCollection, ['@neighborhoods.kojo.message.broker.type.collection-job']]
-      - [setBrokerTypeCode, ['process.listener.mutex.redis']]
-      - [setProcessPoolFactory, ['@process.pool.factory-empty']]
-      - [setRedisFactory, ['@redis.factory']]
+      - [setRedisFactory, ['@Neighborhoods\Kojo\Redis\FactoryInterface']]
       - [setTitlePrefix, ['%process.title.prefix%']]
-  process.listener.mutex.redis:
-    alias: neighborhoods.kojo.process.listener.mutex.redis
-    public: false

@@ -5,23 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Wait\Factory;
 
 use Neighborhoods\Kojo\Service\Update\Wait\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateWaitFactory(FactoryInterface $serviceUpdateWaitFactory)
+    protected $NeighborhoodsKojoServiceUpdateWaitFactory;
+
+    public function setServiceUpdateWaitFactory(FactoryInterface $serviceUpdateWaitFactory): self
     {
-        $this->_create(FactoryInterface::class, $serviceUpdateWaitFactory);
+        if ($this->hasServiceUpdateWaitFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWaitFactory is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateWaitFactory = $serviceUpdateWaitFactory;
 
         return $this;
     }
 
-    protected function _getServiceUpdateWaitFactory(): FactoryInterface
+    protected function getServiceUpdateWaitFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasServiceUpdateWaitFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWaitFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateWaitFactory;
     }
 
-    protected function _unsetServiceUpdateWaitFactory()
+    protected function hasServiceUpdateWaitFactory(): bool
     {
-        $this->_delete(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoServiceUpdateWaitFactory);
+    }
+
+    protected function unsetServiceUpdateWaitFactory(): self
+    {
+        if (!$this->hasServiceUpdateWaitFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateWaitFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateWaitFactory);
 
         return $this;
     }

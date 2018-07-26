@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Psr\Cache\CacheItemPool\MapInterface:
+    class: Neighborhoods\Kojo\Psr\Cache\CacheItemPool\Map
+    shared: false

@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Api\V1\Worker;
 
 use Neighborhoods\Kojo\Api\V1\Job\SchedulerInterface;
 use Neighborhoods\Kojo\Api\V1\LoggerInterface;
-use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\JobInterface;
 use Neighborhoods\Kojo\Service\Update\Hold;
 use Neighborhoods\Kojo\Service\Update\Retry;
 use Neighborhoods\Kojo\Service\Update\Complete\Success;

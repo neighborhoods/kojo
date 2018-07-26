@@ -3,19 +3,17 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Redis;
 
-use Neighborhoods\Kojo\Service\FactoryAbstract;
-use Neighborhoods\Pylon\Data\Property\Defensive;
-
-class Factory extends FactoryAbstract implements FactoryInterface
+class Factory implements FactoryInterface
 {
-    use Defensive\AwareTrait;
-    protected $_options = [];
+    protected $options = [];
+    protected $port;
+    protected $host;
 
     public function create(): \Redis
     {
         $redis = new \Redis();
-        $redis->connect($this->_getHost(), $this->_getPort());
-        if ($this->_hasOptions()) {
+        $redis->connect($this->getHost(), $this->getPort());
+        if ($this->hasOptions()) {
             foreach ($this->_getOptions() as $optionName => $optionValue) {
                 $redis->setOption($optionName, $optionValue);
             }
@@ -26,47 +24,63 @@ class Factory extends FactoryAbstract implements FactoryInterface
 
     public function setPort(int $port): FactoryInterface
     {
-        $this->_create(self::PROP_PORT, $port);
+        if ($this->port === null) {
+            $this->port = $port;
+        } else {
+            throw new \LogicException('Port is already set.');
+        }
 
         return $this;
     }
 
-    protected function _getPort(): int
+    protected function getPort(): int
     {
-        return $this->_read(self::PROP_PORT);
+        if ($this->port === null) {
+            throw new \LogicException('Port is not set.');
+        }
+
+        return $this->port;
     }
 
     public function setHost(string $host): FactoryInterface
     {
-        $this->_create(self::PROP_HOST, $host);
+        if ($this->host === null) {
+            $this->host = $host;
+        } else {
+            throw new \LogicException('Host is already set.');
+        }
 
         return $this;
     }
 
-    protected function _getHost(): string
+    protected function getHost(): string
     {
-        return $this->_read(self::PROP_HOST);
+        if ($this->host === null) {
+            throw new \LogicException('Host is not set.');
+        }
+
+        return $this->host;
     }
 
     public function addOption(int $optionName, string $optionValue): FactoryInterface
     {
-        if (isset($this->_options[$optionName])) {
-            $optionValue = $this->_options[$optionName];
+        if (isset($this->options[$optionName])) {
+            $optionValue = $this->options[$optionName];
             throw new \LogicException("Option [$optionName] is already set with value [$optionValue].");
         }
 
-        $this->_options[$optionName] = $optionValue;
+        $this->options[$optionName] = $optionValue;
 
         return $this;
     }
 
-    protected function _hasOptions(): bool
+    protected function hasOptions(): bool
     {
-        return !empty($this->_options);
+        return !empty($this->options);
     }
 
     protected function _getOptions(): array
     {
-        return $this->_options;
+        return $this->options;
     }
 }

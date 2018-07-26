@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\State;
 
-use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\JobInterface;
 
 interface ServiceInterface
 {

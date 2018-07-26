@@ -5,10 +5,9 @@ namespace Neighborhoods\Kojo\Service\Update\Wait;
 
 use Neighborhoods\Kojo\Service\Update\WaitInterface;
 use Neighborhoods\Kojo\State\Service;
-use Neighborhoods\Kojo\Service\FactoryAbstract;
 use Neighborhoods\Kojo\Service\Update\Wait;
 
-class Factory extends FactoryAbstract implements FactoryInterface
+class Factory implements FactoryInterface
 {
     use Wait\AwareTrait;
     use Service\AwareTrait;

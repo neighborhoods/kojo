@@ -5,17 +5,42 @@ namespace Neighborhoods\Kojo\Foreman;
 
 use Neighborhoods\Kojo\ForemanInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setForeman(ForemanInterface $foreman)
+    protected $NeighborhoodsKojoForeman;
+
+    public function setForeman(ForemanInterface $foreman): self
     {
-        $this->_create(ForemanInterface::class, $foreman);
+        if ($this->hasForeman()) {
+            throw new \LogicException('NeighborhoodsKojoForeman is already set.');
+        }
+        $this->NeighborhoodsKojoForeman = $foreman;
 
         return $this;
     }
 
-    protected function _getForeman(): ForemanInterface
+    protected function getForeman(): ForemanInterface
     {
-        return $this->_read(ForemanInterface::class);
+        if (!$this->hasForeman()) {
+            throw new \LogicException('NeighborhoodsKojoForeman is not set.');
+        }
+
+        return $this->NeighborhoodsKojoForeman;
+    }
+
+    protected function hasForeman(): bool
+    {
+        return isset($this->NeighborhoodsKojoForeman);
+    }
+
+    protected function unsetForeman(): self
+    {
+        if (!$this->hasForeman()) {
+            throw new \LogicException('NeighborhoodsKojoForeman is not set.');
+        }
+        unset($this->NeighborhoodsKojoForeman);
+
+        return $this;
     }
 }

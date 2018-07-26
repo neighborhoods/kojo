@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Hold;
 
 use Neighborhoods\Kojo\Service\Update\HoldInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateHold(HoldInterface $serviceUpdateHold)
+    protected $NeighborhoodsKojoServiceUpdateHold;
+
+    public function setServiceUpdateHold(HoldInterface $serviceUpdateHold): self
     {
-        $this->_create(HoldInterface::class, $serviceUpdateHold);
+        if ($this->hasServiceUpdateHold()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateHold is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateHold = $serviceUpdateHold;
 
         return $this;
     }
 
-    protected function _getServiceUpdateHold(): HoldInterface
+    protected function getServiceUpdateHold(): HoldInterface
     {
-        return $this->_read(HoldInterface::class);
+        if (!$this->hasServiceUpdateHold()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateHold is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateHold;
     }
 
-    protected function _getServiceUpdateHoldClone(): HoldInterface
+    protected function hasServiceUpdateHold(): bool
     {
-        return clone $this->_getServiceUpdateHold();
+        return isset($this->NeighborhoodsKojoServiceUpdateHold);
     }
 
-    protected function _unsetServiceUpdateHold()
+    protected function unsetServiceUpdateHold(): self
     {
-        $this->_delete(HoldInterface::class);
+        if (!$this->hasServiceUpdateHold()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateHold is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateHold);
 
         return $this;
     }

@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Scheduler\Time;
 
 use Neighborhoods\Kojo\Scheduler\TimeInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setSchedulerTime(TimeInterface $schedulerTime)
+    protected $NeighborhoodsKojoSchedulerTime;
+
+    public function setSchedulerTime(TimeInterface $schedulerTime): self
     {
-        $this->_create(TimeInterface::class, $schedulerTime);
+        if ($this->hasSchedulerTime()) {
+            throw new \LogicException('NeighborhoodsKojoSchedulerTime is already set.');
+        }
+        $this->NeighborhoodsKojoSchedulerTime = $schedulerTime;
 
         return $this;
     }
 
-    protected function _getSchedulerTime(): TimeInterface
+    protected function getSchedulerTime(): TimeInterface
     {
-        return $this->_read(TimeInterface::class);
+        if (!$this->hasSchedulerTime()) {
+            throw new \LogicException('NeighborhoodsKojoSchedulerTime is not set.');
+        }
+
+        return $this->NeighborhoodsKojoSchedulerTime;
     }
 
-    protected function _getSchedulerTimeClone(): TimeInterface
+    protected function hasSchedulerTime(): bool
     {
-        return clone $this->_getSchedulerTime();
+        return isset($this->NeighborhoodsKojoSchedulerTime);
     }
 
-    protected function _hasSchedulerTime(): bool
+    protected function unsetSchedulerTime(): self
     {
-        return $this->_exists(TimeInterface::class);
-    }
-
-    protected function _unsetSchedulerTime()
-    {
-        $this->_delete(TimeInterface::class);
+        if (!$this->hasSchedulerTime()) {
+            throw new \LogicException('NeighborhoodsKojoSchedulerTime is not set.');
+        }
+        unset($this->NeighborhoodsKojoSchedulerTime);
 
         return $this;
     }

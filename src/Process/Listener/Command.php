@@ -5,12 +5,11 @@ namespace Neighborhoods\Kojo\Process\Listener;
 
 use Neighborhoods\Kojo\Process\Forked;
 use Neighborhoods\Kojo\Process\ListenerInterface;
-use Neighborhoods\Kojo\Process\ListenerAbstract;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Neighborhoods\Kojo\Symfony;
 
-class Command extends ListenerAbstract implements CommandInterface
+class Command extends Forked implements CommandInterface
 {
-    const PROP_EXPRESSION_LANGUAGE = 'expression_language';
+    use Symfony\Component\ExpressionLanguage\ExpressionLanguage\AwareTrait;
 
     public function hasMessages(): bool
     {
@@ -21,14 +20,14 @@ class Command extends ListenerAbstract implements CommandInterface
     {
         $message = $this->_getMessageBroker()->getNextMessage();
         if (json_decode($message) !== null) {
-            $this->_getExpressionLanguage()->evaluate(
+            $this->getSymfonyComponentExpressionLanguageExpressionLanguage()->evaluate(
                 json_decode($message, true)['command'],
                 [
                     'commandProcess' => $this,
                 ]
             );
-        }else {
-            $this->_getLogger()->warning('The message is not a JSON: "' . $message . '".');
+        } else {
+            $this->getLogger()->warning('The message is not a JSON: "' . $message . '".');
         }
 
         return $this;
@@ -49,19 +48,7 @@ class Command extends ListenerAbstract implements CommandInterface
         return $this;
     }
 
-    public function setExpressionLanguage(ExpressionLanguage $expressionLanguage): Command
-    {
-        $this->_create(self::PROP_EXPRESSION_LANGUAGE, $expressionLanguage);
-
-        return $this;
-    }
-
-    protected function _getExpressionLanguage(): ExpressionLanguage
-    {
-        return $this->_read(self::PROP_EXPRESSION_LANGUAGE);
-    }
-
-    protected function _run(): Forked
+    protected function run(): Forked
     {
         if (!$this->_getMessageBroker()->hasMessage()) {
             $this->_getMessageBroker()->waitForNewMessage();

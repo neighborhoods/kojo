@@ -1,33 +1,45 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\PDO\Builder\Factory;
 
 use Neighborhoods\Kojo\PDO\Builder\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setPDOBuilderFactory(FactoryInterface $dbPDOBuilderFactory): self
+    protected $NeighborhoodsKojoPDOBuilderFactory;
+
+    public function setPDOBuilderFactory(FactoryInterface $pDOBuilderFactory): self
     {
-        $this->_create(FactoryInterface::class, $dbPDOBuilderFactory);
+        if ($this->hasPDOBuilderFactory()) {
+            throw new \LogicException('NeighborhoodsKojoPDOBuilderFactory is already set.');
+        }
+        $this->NeighborhoodsKojoPDOBuilderFactory = $pDOBuilderFactory;
 
         return $this;
     }
 
-    protected function _getPDOBuilderFactory(): FactoryInterface
+    protected function getPDOBuilderFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasPDOBuilderFactory()) {
+            throw new \LogicException('NeighborhoodsKojoPDOBuilderFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoPDOBuilderFactory;
     }
 
-    protected function _hasPDOBuilderFactory(): bool
+    protected function hasPDOBuilderFactory(): bool
     {
-        return $this->_exists(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoPDOBuilderFactory);
     }
 
-    protected function _unsetPDOBuilderFactory(): self
+    protected function unsetPDOBuilderFactory(): self
     {
-        $this->_delete(FactoryInterface::class);
+        if (!$this->hasPDOBuilderFactory()) {
+            throw new \LogicException('NeighborhoodsKojoPDOBuilderFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoPDOBuilderFactory);
 
         return $this;
     }

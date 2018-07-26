@@ -5,23 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Hold\Factory;
 
 use Neighborhoods\Kojo\Service\Update\Hold\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateHoldFactory(FactoryInterface $serviceUpdateHoldFactory)
+    protected $NeighborhoodsKojoServiceUpdateHoldFactory;
+
+    public function setServiceUpdateHoldFactory(FactoryInterface $serviceUpdateHoldFactory): self
     {
-        $this->_create(FactoryInterface::class, $serviceUpdateHoldFactory);
+        if ($this->hasServiceUpdateHoldFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateHoldFactory is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateHoldFactory = $serviceUpdateHoldFactory;
 
         return $this;
     }
 
-    protected function _getServiceUpdateHoldFactory(): FactoryInterface
+    protected function getServiceUpdateHoldFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasServiceUpdateHoldFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateHoldFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateHoldFactory;
     }
 
-    protected function _unsetServiceUpdateHoldFactory()
+    protected function hasServiceUpdateHoldFactory(): bool
     {
-        $this->_delete(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoServiceUpdateHoldFactory);
+    }
+
+    protected function unsetServiceUpdateHoldFactory(): self
+    {
+        if (!$this->hasServiceUpdateHoldFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateHoldFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateHoldFactory);
 
         return $this;
     }

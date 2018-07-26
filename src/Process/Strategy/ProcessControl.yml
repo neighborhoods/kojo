@@ -1,5 +1,3 @@
 services:
-  neighborhoods.kojo.process.strategy.process_control:
+  Neighborhoods\Kojo\Process\Strategy\ProcessControlInterface:
     class: Neighborhoods\Kojo\Process\Strategy\ProcessControl
-  process.strategy.process_control:
-    alias: neighborhoods.kojo.process.strategy.process_control

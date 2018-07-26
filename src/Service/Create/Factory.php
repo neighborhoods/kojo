@@ -4,23 +4,22 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Service\Create;
 
 use Neighborhoods\Kojo\Service\CreateInterface;
-use Neighborhoods\Kojo\State\Service;
-use Neighborhoods\Kojo\Service\FactoryAbstract;
-use Neighborhoods\Kojo\Service\Create;
-use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\State;
+use Neighborhoods\Kojo\Service;
+use Neighborhoods\Kojo;
 
-class Factory extends FactoryAbstract implements FactoryInterface
+class Factory implements FactoryInterface
 {
-    use Create\AwareTrait;
-    use Service\AwareTrait;
-    use Job\Type\AwareTrait;
-    use Job\AwareTrait;
-    use Job\Collection\ScheduleLimit\AwareTrait;
+    use Service\Create\AwareTrait;
+    use Kojo\Job\Type\AwareTrait;
+    use Kojo\Job\AwareTrait;
+    use Kojo\Job\Collection\ScheduleLimit\AwareTrait;
+    use State\Service\Factory\AwareTrait;
 
     public function create(): CreateInterface
     {
-        $create = $this->_getServiceCreateClone();
-        $stateService = $this->_getStateServiceClone();
+        $create = clone $this->getServiceCreate();
+        $stateService = clone $this->getStateServiceFactory()->create();
         $create->setStateService($stateService);
         $create->setJobCollectionScheduleLimit($this->_getJobCollectionScheduleLimitClone());
         $create->setJob($this->_getJobClone());

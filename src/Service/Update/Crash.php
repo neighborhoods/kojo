@@ -3,16 +3,29 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Service\Update;
 
-use Neighborhoods\Kojo\ServiceAbstract;
+use Neighborhoods\Kojo\ServiceInterface;
+use Neighborhoods\Kojo\State;
+use Neighborhoods\Kojo;
 
-class Crash extends ServiceAbstract implements CrashInterface
+class Crash implements CrashInterface
 {
-    public function _save(): CrashInterface
+    use State\Service\AwareTrait;
+    use Kojo\Job\AwareTrait;
+
+    protected $isSaved = false;
+
+    public function save(): ServiceInterface
     {
-        $this->_getStateService()->setJob($this->_getJob());
-        $this->_getStateService()->requestCrashed();
-        $this->_getStateService()->applyRequest();
-        $this->_getJob()->save();
+        if ($this->isSaved === false) {
+            $this->getStateService()->setJob($this->getJob());
+            $this->getStateService()->requestCrashed();
+            $this->getStateService()->applyRequest();
+            $this->getJob()->save();
+            $this->isSaved = true;
+        } else {
+            throw new \LogicException('Crash is already saved.');
+        }
+
 
         return $this;
     }

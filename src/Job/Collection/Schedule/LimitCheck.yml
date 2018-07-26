@@ -1,0 +1,6 @@
+services:
+  Neighborhoods\Kojo\Job\Collection\Schedule\LimitCheckInterface:
+    class: Neighborhoods\Kojo\Job\Collection\Schedule\LimitCheck
+    calls:
+      - [setDbModel, ['@Neighborhoods\Kojo\Db\ModelInterface']]
+      - [setDoctrineDBALConnectionDecoratorRepository, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\RepositoryInterface']]

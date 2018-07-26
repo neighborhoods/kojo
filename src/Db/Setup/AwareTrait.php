@@ -5,22 +5,42 @@ namespace Neighborhoods\Kojo\Db\Setup;
 
 use Neighborhoods\Kojo\Db\SetupInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setDbSetup(SetupInterface $setup)
+    protected $NeighborhoodsKojoDbSetup;
+
+    public function setDbSetup(SetupInterface $dbSetup): self
     {
-        $this->_create(SetupInterface::class, $setup);
+        if ($this->hasDbSetup()) {
+            throw new \LogicException('NeighborhoodsKojoDbSetup is already set.');
+        }
+        $this->NeighborhoodsKojoDbSetup = $dbSetup;
 
         return $this;
     }
 
-    protected function _getDbSetup(): SetupInterface
+    protected function getDbSetup(): SetupInterface
     {
-        return $this->_read(SetupInterface::class);
+        if (!$this->hasDbSetup()) {
+            throw new \LogicException('NeighborhoodsKojoDbSetup is not set.');
+        }
+
+        return $this->NeighborhoodsKojoDbSetup;
     }
 
-    protected function _getDbSetupClone(): SetupInterface
+    protected function hasDbSetup(): bool
     {
-        return clone $this->_getDbSetup();
+        return isset($this->NeighborhoodsKojoDbSetup);
+    }
+
+    protected function unsetDbSetup(): self
+    {
+        if (!$this->hasDbSetup()) {
+            throw new \LogicException('NeighborhoodsKojoDbSetup is not set.');
+        }
+        unset($this->NeighborhoodsKojoDbSetup);
+
+        return $this;
     }
 }

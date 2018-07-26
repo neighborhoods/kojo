@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Redis\Repository;
 
 use Neighborhoods\Kojo\Redis\RepositoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoRedisRepository;
+
     public function setRedisRepository(RepositoryInterface $redisRepository): self
     {
-        $this->_create(RepositoryInterface::class, $redisRepository);
+        if ($this->hasRedisRepository()) {
+            throw new \LogicException('NeighborhoodsKojoRedisRepository is already set.');
+        }
+        $this->NeighborhoodsKojoRedisRepository = $redisRepository;
 
         return $this;
     }
 
-    protected function _getRedisRepository(): RepositoryInterface
+    protected function getRedisRepository(): RepositoryInterface
     {
-        return $this->_read(RepositoryInterface::class);
+        if (!$this->hasRedisRepository()) {
+            throw new \LogicException('NeighborhoodsKojoRedisRepository is not set.');
+        }
+
+        return $this->NeighborhoodsKojoRedisRepository;
     }
 
-    protected function _getRedisRepositoryClone(): RepositoryInterface
+    protected function hasRedisRepository(): bool
     {
-        return clone $this->_getRedisRepository();
+        return isset($this->NeighborhoodsKojoRedisRepository);
     }
 
-    protected function _hasRedisRepository(): bool
+    protected function unsetRedisRepository(): self
     {
-        return $this->_exists(RepositoryInterface::class);
-    }
-
-    protected function _unsetRedisRepository(): self
-    {
-        $this->_delete(RepositoryInterface::class);
+        if (!$this->hasRedisRepository()) {
+            throw new \LogicException('NeighborhoodsKojoRedisRepository is not set.');
+        }
+        unset($this->NeighborhoodsKojoRedisRepository);
 
         return $this;
     }

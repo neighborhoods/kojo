@@ -1,11 +1,6 @@
 services:
-  neighborhoods.kojo.redis.repository:
+  Neighborhoods\Kojo\Redis\RepositoryInterface:
     class: Neighborhoods\Kojo\Redis\Repository
-    public: false
-    shared: true
     calls:
-      - [setProcessRegistry, ['@process.registry']]
-      - [setRedisFactory, ['@redis.factory']]
-  redis.repository:
-    alias: neighborhoods.kojo.redis.repository
-    public: false
+      - [setRedisFactory, ['@Neighborhoods\Kojo\Redis\FactoryInterface']]
+      - [setRedisMap, ['@Neighborhoods\Kojo\Redis\MapInterface']]

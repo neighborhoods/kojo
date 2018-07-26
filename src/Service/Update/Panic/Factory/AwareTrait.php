@@ -5,23 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Panic\Factory;
 
 use Neighborhoods\Kojo\Service\Update\Panic\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdatePanicFactory(FactoryInterface $serviceUpdatePanicFactory)
+    protected $NeighborhoodsKojoServiceUpdatePanicFactory;
+
+    public function setServiceUpdatePanicFactory(FactoryInterface $serviceUpdatePanicFactory): self
     {
-        $this->_create(FactoryInterface::class, $serviceUpdatePanicFactory);
+        if ($this->hasServiceUpdatePanicFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdatePanicFactory is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdatePanicFactory = $serviceUpdatePanicFactory;
 
         return $this;
     }
 
-    protected function _getServiceUpdatePanicFactory(): FactoryInterface
+    protected function getServiceUpdatePanicFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasServiceUpdatePanicFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdatePanicFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdatePanicFactory;
     }
 
-    protected function _unsetServiceUpdatePanicFactory()
+    protected function hasServiceUpdatePanicFactory(): bool
     {
-        $this->_delete(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoServiceUpdatePanicFactory);
+    }
+
+    protected function unsetServiceUpdatePanicFactory(): self
+    {
+        if (!$this->hasServiceUpdatePanicFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdatePanicFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdatePanicFactory);
 
         return $this;
     }

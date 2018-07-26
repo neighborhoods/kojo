@@ -11,7 +11,7 @@ interface PoolInterface extends HandlerInterface
 {
     public function start(): PoolInterface;
 
-    public function setProcessPoolStrategy(StrategyInterface $strategy);
+    public function setProcessPoolStrategy(StrategyInterface $processPoolStrategy);
 
     public function setAlarm(int $seconds): PoolInterface;
 

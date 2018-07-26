@@ -1,0 +1,13 @@
+services:
+  Neighborhoods\Kojo\Process\WorkerInterface:
+    class: Neighborhoods\Kojo\Process\Worker
+    shared: false
+    parent: Neighborhoods\Kojo\ProcessAbstract
+    calls:
+      - [setForeman, ['@Neighborhoods\Kojo\ForemanInterface']]
+      - [setMaintainer, ['@Neighborhoods\Kojo\MaintainerInterface']]
+      - [setScheduler, ['@Neighborhoods\Kojo\SchedulerInterface']]
+      - [setSelector, ['@Neighborhoods\Kojo\SelectorInterface']]
+      - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
+      - [setUuidMaximumInteger, [9999999999]]
+      - [setTitlePrefix, ['%process.title.prefix%']]

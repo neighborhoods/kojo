@@ -1,0 +1,6 @@
+services:
+  Neighborhoods\Kojo\Psr\Cache\CacheItemPool\RepositoryInterface:
+    class: Neighborhoods\Kojo\Psr\Cache\CacheItemPool\Repository
+    calls:
+      - [setPsrCacheCacheItemPoolFactory, ['@Neighborhoods\Kojo\Psr\Cache\CacheItemPool\FactoryInterface']]
+      - [setProcessRegistry, ['@Neighborhoods\Kojo\Process\RegistryInterface']]

@@ -1,13 +1,11 @@
 services:
-  neighborhoods.kojo.api.v1.worker.service:
+  Neighborhoods\Kojo\Api\V1\Worker\ServiceInterface:
     class: Neighborhoods\Kojo\Api\V1\Worker\Service
     shared: false
     calls:
-      - [setServiceUpdateCompleteFailedFactory, ['@service.update.complete.failed.factory']]
-      - [setServiceUpdateCompleteSuccessFactory, ['@service.update.complete.success.factory']]
-      - [setServiceUpdateHoldFactory, ['@service.update.hold.factory']]
-      - [setServiceUpdateRetryFactory, ['@service.update.retry.factory']]
-      - [setApiV1JobSchedulerFactory, ['@api.v1.job.scheduler.factory']]
-      - [setApiV1Logger, ['@api.v1.logger']]
-  api.v1.worker.service:
-    alias: neighborhoods.kojo.api.v1.worker.service
+      - [setServiceUpdateCompleteFailedFactory, ['@Neighborhoods\Kojo\Service\Update\Complete\Failed\FactoryInterface']]
+      - [setServiceUpdateCompleteSuccessFactory, ['@Neighborhoods\Kojo\Service\Update\Complete\Success\FactoryInterface']]
+      - [setServiceUpdateHoldFactory, ['@Neighborhoods\Kojo\Service\Update\Hold\FactoryInterface']]
+      - [setServiceUpdateRetryFactory, ['@Neighborhoods\Kojo\Service\Update\Retry\FactoryInterface']]
+      - [setApiV1JobSchedulerFactory, ['@Neighborhoods\Kojo\Api\V1\Job\Scheduler\FactoryInterface']]
+      - [setApiV1Logger, ['@Neighborhoods\Kojo\Api\V1\LoggerInterface']]

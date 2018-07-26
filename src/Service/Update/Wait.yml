@@ -1,6 +1,4 @@
 services:
-  neighborhoods.kojo.service.update.wait:
+  Neighborhoods\Kojo\Service\Update\WaitInterface:
     class: Neighborhoods\Kojo\Service\Update\Wait
     shared: false
-  service.update.wait:
-    alias: neighborhoods.kojo.service.update.wait

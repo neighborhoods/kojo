@@ -1,6 +1,4 @@
 services:
-  neighborhoods.kojo.service.update.complete.success:
+  Neighborhoods\Kojo\Service\Update\Complete\SuccessInterface:
     class: Neighborhoods\Kojo\Service\Update\Complete\Success
     shared: false
-  service.update.complete.success:
-    alias: neighborhoods.kojo.service.update.complete.success

@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Type\Service\Create;
 
-use Neighborhoods\Kojo\Service\FactoryAbstract;
 use Neighborhoods\Kojo\Type\Service\Create;
 use Neighborhoods\Kojo\Type\Service\CreateInterface;
 
-class Factory extends FactoryAbstract implements FactoryInterface
+class Factory implements FactoryInterface
 {
     use Create\AwareTrait;
 

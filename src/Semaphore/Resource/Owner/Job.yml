@@ -1,5 +1,4 @@
 services:
-  neighborhoods.kojo.semaphore.resource.owner.job:
+  Neighborhoods\Kojo\Semaphore\Resource\Owner\JobInterface:
     class: Neighborhoods\Kojo\Semaphore\Resource\Owner\Job
-  semaphore.resource.owner.job:
-    alias: neighborhoods.kojo.semaphore.resource.owner.job
+    shared: false

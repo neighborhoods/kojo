@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Job\Type\MapInterface:
+    class: Neighborhoods\Kojo\Job\Type\Map
+    shared: false

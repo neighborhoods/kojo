@@ -3,17 +3,13 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Service;
 
-use Neighborhoods\Kojo\Data\Job\Collection\ScheduleLimitInterface;
+use Neighborhoods\Kojo\Job\Collection\ScheduleLimitInterface;
 use Neighborhoods\Kojo\ServiceInterface;
-use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\JobInterface;
 
 interface CreateInterface extends ServiceInterface
 {
-    /** @injected:configuration */
     public function setJob(JobInterface $job);
-
-    /** @injected:configuration */
-    public function setJobCollectionScheduleLimit(ScheduleLimitInterface $jobCollectionScheduleLimit);
 
     public function setJobTypeCode(string $jobTypeCode): CreateInterface;
 

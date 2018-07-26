@@ -29,9 +29,9 @@ class Uninstall extends CommandAbstract
     {
         if ($this->_isUninstallConfirmedByUser()) {
             $this->_getDbTearDown()->uninstall();
-            $this->_getOutput()->writeln('Kōjō has been successfully uninstalled.');
+            $this->getOutput()->writeln('Kōjō has been successfully uninstalled.');
         } else {
-            $this->_getOutput()->writeln('Kōjō was not uninstalled.');
+            $this->getOutput()->writeln('Kōjō was not uninstalled.');
         }
 
         return $this;
@@ -39,7 +39,7 @@ class Uninstall extends CommandAbstract
 
     protected function _isUninstallConfirmedByUser(): bool
     {
-        return $this->_getQuestionHelper()->ask($this->_getInput(), $this->_getOutput(), $this->_getQuestion());
+        return $this->_getQuestionHelper()->ask($this->getInput(), $this->getOutput(), $this->_getQuestion());
     }
 
     protected function _getQuestionHelper(): QuestionHelper

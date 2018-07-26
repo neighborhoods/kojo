@@ -5,22 +5,42 @@ namespace Neighborhoods\Kojo\Semaphore\Mutex;
 
 use Neighborhoods\Kojo\Semaphore\MutexInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setMutex(MutexInterface $job)
+    protected $NeighborhoodsKojoSemaphoreMutex;
+
+    public function setSemaphoreMutex(MutexInterface $semaphoreMutex): self
     {
-        $this->_create(MutexInterface::class, $job);
+        if ($this->hasSemaphoreMutex()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphoreMutex is already set.');
+        }
+        $this->NeighborhoodsKojoSemaphoreMutex = $semaphoreMutex;
 
         return $this;
     }
 
-    protected function _getMutex(): MutexInterface
+    protected function getSemaphoreMutex(): MutexInterface
     {
-        return $this->_read(MutexInterface::class);
+        if (!$this->hasSemaphoreMutex()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphoreMutex is not set.');
+        }
+
+        return $this->NeighborhoodsKojoSemaphoreMutex;
     }
 
-    protected function _getMutexClone(): MutexInterface
+    protected function hasSemaphoreMutex(): bool
     {
-        return clone $this->_getMutex();
+        return isset($this->NeighborhoodsKojoSemaphoreMutex);
+    }
+
+    protected function unsetSemaphoreMutex(): self
+    {
+        if (!$this->hasSemaphoreMutex()) {
+            throw new \LogicException('NeighborhoodsKojoSemaphoreMutex is not set.');
+        }
+        unset($this->NeighborhoodsKojoSemaphoreMutex);
+
+        return $this;
     }
 }

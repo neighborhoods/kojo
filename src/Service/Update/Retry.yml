@@ -1,6 +1,4 @@
 services:
-  neighborhoods.kojo.service.update.retry:
+  Neighborhoods\Kojo\Service\Update\RetryInterface:
     class: Neighborhoods\Kojo\Service\Update\Retry
     shared: false
-  service.update.retry:
-    alias: neighborhoods.kojo.service.update.retry

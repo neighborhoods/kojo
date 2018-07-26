@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Psr\Cache\CacheItemPool\FactoryInterface:
+    class: Neighborhoods\Kojo\Psr\Cache\CacheItemPool\Factory
+    calls:
+      - [setRedisRepository, ['@Neighborhoods\Kojo\Redis\RepositoryInterface']]

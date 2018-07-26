@@ -3,16 +3,14 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Service\Update;
 
-use Neighborhoods\Kojo\ServiceAbstract;
-
-class Wait extends ServiceAbstract implements WaitInterface
+class Wait implements WaitInterface
 {
-    public function _save(): WaitInterface
+    public function save(): WaitInterface
     {
-        $this->_getStateService()->setJob($this->_getJob());
-        $this->_getStateService()->requestWaitForWork();
-        $this->_getStateService()->applyRequest();
-        $this->_getJob()->save();
+        $this->getStateService()->setJob($this->getJob());
+        $this->getStateService()->requestWaitForWork();
+        $this->getStateService()->applyRequest();
+        $this->getJob()->save();
 
         return $this;
     }

@@ -6,9 +6,8 @@ namespace Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
 use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheckInterface;
 use Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck;
 use Neighborhoods\Kojo\State\Service;
-use Neighborhoods\Kojo\Service\FactoryAbstract;
 
-class Factory extends FactoryAbstract implements FactoryInterface
+class Factory implements FactoryInterface
 {
     use FailedScheduleLimitCheck\AwareTrait;
     use Service\AwareTrait;

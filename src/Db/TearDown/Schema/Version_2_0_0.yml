@@ -1,7 +1,6 @@
 services:
-  neighborhoods.kojo.db.tear_down.schema.version.2_0_0:
+  Neighborhoods\Kojo\Db\TearDown\Schema\Version_2_0_0:
     class: Neighborhoods\Kojo\Db\TearDown\Schema\Version_2_0_0
+    shared: false
     calls:
-      - [setDoctrineConnectionDecoratorRepository, ["@doctrine.connection.decorator.repository"]]
-  db.tear_down.schema.version.2_0_0:
-    alias: neighborhoods.kojo.db.tear_down.schema.version.2_0_0
+      - [setDoctrineDBALConnectionDecoratorRepository, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\RepositoryInterface']]

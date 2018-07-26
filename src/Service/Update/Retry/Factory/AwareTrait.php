@@ -5,23 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Retry\Factory;
 
 use Neighborhoods\Kojo\Service\Update\Retry\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateRetryFactory(FactoryInterface $serviceUpdateRetryFactory)
+    protected $NeighborhoodsKojoServiceUpdateRetryFactory;
+
+    public function setServiceUpdateRetryFactory(FactoryInterface $serviceUpdateRetryFactory): self
     {
-        $this->_create(FactoryInterface::class, $serviceUpdateRetryFactory);
+        if ($this->hasServiceUpdateRetryFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateRetryFactory is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateRetryFactory = $serviceUpdateRetryFactory;
 
         return $this;
     }
 
-    protected function _getServiceUpdateRetryFactory(): FactoryInterface
+    protected function getServiceUpdateRetryFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasServiceUpdateRetryFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateRetryFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateRetryFactory;
     }
 
-    protected function _unsetServiceUpdateRetryFactory()
+    protected function hasServiceUpdateRetryFactory(): bool
     {
-        $this->_delete(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoServiceUpdateRetryFactory);
+    }
+
+    protected function unsetServiceUpdateRetryFactory(): self
+    {
+        if (!$this->hasServiceUpdateRetryFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateRetryFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateRetryFactory);
 
         return $this;
     }

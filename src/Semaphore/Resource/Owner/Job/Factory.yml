@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Semaphore\Resource\Owner\Job\FactoryInterface:
+    class: Neighborhoods\Kojo\Semaphore\Resource\Owner\Job\Factory
+    calls:
+      - [setSemaphoreResourceOwnerJob, ['@Neighborhoods\Kojo\Semaphore\Resource\Owner\JobInterface']]

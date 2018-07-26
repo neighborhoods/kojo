@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\State\Service;
 
 use Neighborhoods\Kojo\State\ServiceInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setStateService(ServiceInterface $stateService)
+    protected $NeighborhoodsKojoStateService;
+
+    public function setStateService(ServiceInterface $stateService): self
     {
-        $this->_create(ServiceInterface::class, $stateService);
+        if ($this->hasStateService()) {
+            throw new \LogicException('NeighborhoodsKojoStateService is already set.');
+        }
+        $this->NeighborhoodsKojoStateService = $stateService;
 
         return $this;
     }
 
-    protected function _getStateService(): ServiceInterface
+    protected function getStateService(): ServiceInterface
     {
-        return $this->_read(ServiceInterface::class);
+        if (!$this->hasStateService()) {
+            throw new \LogicException('NeighborhoodsKojoStateService is not set.');
+        }
+
+        return $this->NeighborhoodsKojoStateService;
     }
 
-    protected function _getStateServiceClone(): ServiceInterface
+    protected function hasStateService(): bool
     {
-        return clone $this->_getStateService();
+        return isset($this->NeighborhoodsKojoStateService);
     }
 
-    protected function _unsetStateService()
+    protected function unsetStateService(): self
     {
-        $this->_delete(ServiceInterface::class);
+        if (!$this->hasStateService()) {
+            throw new \LogicException('NeighborhoodsKojoStateService is not set.');
+        }
+        unset($this->NeighborhoodsKojoStateService);
 
         return $this;
     }

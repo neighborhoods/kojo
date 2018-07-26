@@ -5,35 +5,33 @@ namespace Neighborhoods\Kojo\Semaphore\Mutex;
 
 use Neighborhoods\Kojo\Semaphore\MutexAbstract;
 use Neighborhoods\Kojo\Semaphore\MutexInterface;
-use Neighborhoods\Pylon\Data\Property\Defensive;
-use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Kojo\Logger;
 use Neighborhoods\Kojo\Process;
 use Neighborhoods\Kojo\Redis\Repository;
 
 class Redis extends MutexAbstract implements RedisInterface
 {
-    use Defensive\AwareTrait;
     use Logger\AwareTrait;
     use Process\Registry\AwareTrait;
     use Repository\AwareTrait;
-    const PROP_REDIS = 'redis';
-    const PROP_KEY   = 'key';
-    protected $_hasLock = false;
+    protected $hasLock = false;
+    protected $key;
+    protected $redisClient;
 
     public function testAndSetLock(): bool
     {
-        if ($this->_hasLock === false) {
-            $key = $this->_getKey();
-            $processUUID = $this->_getProcessUuid();
-            $this->_getRedisClient()->watch($key);
+        if ($this->hasLock === false) {
+            $key = $this->getKey();
+            $processUUID = $this->getProcessUuid();
+            $this->getRedisClient()->watch($key);
 
             // If the mutex resource ID is set, then check if the owning client is connected.
-            $mutexKeyValue = $this->_getRedisClient()->get($key);
+            $mutexKeyValue = $this->getRedisClient()->get($key);
             if (!empty($mutexKeyValue)) {
                 $mutexClientIsConnected = false;
 
                 // Get a list of connected clients.
-                $clients = $this->_getRedisClient()->client('LIST');
+                $clients = $this->getRedisClient()->client('LIST');
                 foreach ($clients as $client) {
                     if ($client['name'] === $mutexKeyValue) {
                         $mutexClientIsConnected = true;
@@ -44,40 +42,40 @@ class Redis extends MutexAbstract implements RedisInterface
                 // If the client that registered for the mutex resource ID is connected, the mutex is held by another client.
                 if ($mutexClientIsConnected === false) {
                     // If not, try to obtain the lock by registering on the mutex resource ID.
-                    $this->_getRedisClient()->multi();
-                    $this->_getRedisClient()->set($key, $processUUID);
-                    $reply = $this->_getRedisClient()->exec();
+                    $this->getRedisClient()->multi();
+                    $this->getRedisClient()->set($key, $processUUID);
+                    $reply = $this->getRedisClient()->exec();
 
                     // If the mutex resource ID was not set by another client, the mutex is obtained by this client.
                     if ($reply[0] === true) {
-                        $this->_hasLock = true;
+                        $this->hasLock = true;
                     }
                 }
-            }else {
+            } else {
                 // If the mutex resource ID is not set, try to obtain the mutex.
-                $this->_getRedisClient()->multi();
-                $this->_getRedisClient()->set($key, $processUUID);
-                $reply = $this->_getRedisClient()->exec();
+                $this->getRedisClient()->multi();
+                $this->getRedisClient()->set($key, $processUUID);
+                $reply = $this->getRedisClient()->exec();
                 if (is_array($reply) && $reply[0] === true) {
-                    $this->_hasLock = true;
-                }elseif ($reply !== false) {
+                    $this->hasLock = true;
+                } elseif ($reply !== false) {
                     $type = gettype($reply);
                     throw new \UnexpectedValueException("Reply is of type [$type]");
                 }
             }
-        }else {
+        } else {
             throw new \LogicException('The mutex already has obtained a lock.');
         }
 
-        return $this->_hasLock;
+        return $this->hasLock;
     }
 
     public function releaseLock(): MutexInterface
     {
-        if ($this->_hasLock === true) {
-            $this->_getRedisClient()->del($this->_getKey());
-            $this->_hasLock = false;
-        }else {
+        if ($this->hasLock === true) {
+            $this->getRedisClient()->del($this->getKey());
+            $this->hasLock = false;
+        } else {
             throw new \LogicException('The mutex has not obtained a lock.');
         }
 
@@ -86,32 +84,32 @@ class Redis extends MutexAbstract implements RedisInterface
 
     public function hasLock(): bool
     {
-        return $this->_hasLock;
+        return $this->hasLock;
     }
 
-    protected function _getProcessUuid(): string
+    protected function getProcessUuid(): string
     {
-        return $this->_getProcessRegistry()->getLastRegisteredProcess()->getUuid();
+        return $this->getProcessRegistry()->getLastRegisteredProcess()->getUuid();
     }
 
-    protected function _getKey(): string
+    protected function getKey(): string
     {
-        if (!$this->_exists(self::PROP_KEY)) {
-            $key = '/' . $this->_getResource()->getResourcePath() . '/' . $this->_getResource()->getResourceName();
-            $this->_create(self::PROP_KEY, $key);
+        if ($this->key === null) {
+            $key = '/' . $this->getResource()->getResourcePath() . '/' . $this->getResource()->getResourceName();
+            $this->key = $key;
         }
 
-        return $this->_read(self::PROP_KEY);
+        return $this->key;
     }
 
-    protected function _getRedisClient(): \Redis
+    protected function getRedisClient(): \Redis
     {
-        if (!$this->_exists(self::PROP_REDIS)) {
-            $redis = $this->_getRedisRepository()->getById(RedisInterface::class);
-            $redis->client('SETNAME', $this->_getProcessUuid());
-            $this->_create(self::PROP_REDIS, $redis);
+        if ($this->redisClient === null) {
+            $redisClient = $this->getRedisRepository()->get(RedisInterface::class);
+            $redisClient->client('SETNAME', $this->getProcessUuid());
+            $this->redisClient = $redisClient;
         }
 
-        return $this->_read(self::PROP_REDIS);
+        return $this->redisClient;
     }
 }

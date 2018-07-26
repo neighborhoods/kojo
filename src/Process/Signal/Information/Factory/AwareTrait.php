@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Process\Signal\Information\Factory;
 
 use Neighborhoods\Kojo\Process\Signal\Information\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoProcessSignalInformationFactory;
+
     public function setProcessSignalInformationFactory(FactoryInterface $processSignalInformationFactory): self
     {
-        $this->_create(FactoryInterface::class, $processSignalInformationFactory);
+        if ($this->hasProcessSignalInformationFactory()) {
+            throw new \LogicException('NeighborhoodsKojoProcessSignalInformationFactory is already set.');
+        }
+        $this->NeighborhoodsKojoProcessSignalInformationFactory = $processSignalInformationFactory;
 
         return $this;
     }
 
-    protected function _getProcessSignalInformationFactory(): FactoryInterface
+    protected function getProcessSignalInformationFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasProcessSignalInformationFactory()) {
+            throw new \LogicException('NeighborhoodsKojoProcessSignalInformationFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoProcessSignalInformationFactory;
     }
 
-    protected function _getProcessSignalInformationFactoryClone(): FactoryInterface
+    protected function hasProcessSignalInformationFactory(): bool
     {
-        return clone $this->_getProcessSignalInformationFactory();
+        return isset($this->NeighborhoodsKojoProcessSignalInformationFactory);
     }
 
-    protected function _hasProcessSignalInformationFactory(): bool
+    protected function unsetProcessSignalInformationFactory(): self
     {
-        return $this->_exists(FactoryInterface::class);
-    }
-
-    protected function _unsetProcessSignalInformationFactory(): self
-    {
-        $this->_delete(FactoryInterface::class);
+        if (!$this->hasProcessSignalInformationFactory()) {
+            throw new \LogicException('NeighborhoodsKojoProcessSignalInformationFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoProcessSignalInformationFactory);
 
         return $this;
     }

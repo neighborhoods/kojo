@@ -3,61 +3,58 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\State;
 
-use Neighborhoods\Kojo\Data\Job;
-use Neighborhoods\Kojo\Type;
-use Neighborhoods\Pylon\Data\Property\Defensive;
-use Neighborhoods\Pylon\Time;
+use Neighborhoods\Kojo\Job;
+use Neighborhoods\Kojo\Time;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Service implements ServiceInterface
 {
-    use Defensive\AwareTrait;
     use Job\AwareTrait;
     use Time\AwareTrait;
-    use Type\Repository\AwareTrait;
-    protected $_nextStateRequestUpdate;
-    protected $_assignedStateUpdate;
-    protected $_updateExpression;
-    protected $_retryDateTime;
+    use Job\Type\Repository\AwareTrait;
+    protected $nextStateRequestUpdate;
+    protected $assignedStateUpdate;
+    protected $updateExpression;
+    protected $retryDateTime;
 
     public function requestNew(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_NEW;
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
+        $this->assignedStateUpdate = ServiceInterface::STATE_NEW;
 
         return $this;
     }
 
     public function requestWork(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_WORKING;
-        $this->_updateExpression = 'job.setTimesWorked(job.getTimesWorked()+1)';
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->assignedStateUpdate = ServiceInterface::STATE_WORKING;
+        $this->updateExpression = 'job.setTimesWorked(job.getTimesWorked()+1)';
 
         return $this;
     }
 
     public function requestWaitForWork(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_WAITING;
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
+        $this->assignedStateUpdate = ServiceInterface::STATE_WAITING;
 
         return $this;
     }
 
     public function requestScheduleLimitCheck(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_WAITING;
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_SCHEDULE_LIMIT_CHECK;
+        $this->assignedStateUpdate = ServiceInterface::STATE_WAITING;
 
         return $this;
     }
 
     public function requestCompleteFailedScheduleLimitCheck(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_FAILED_SCHEDULE_LIMIT_CHECK;
-        $this->_updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->assignedStateUpdate = ServiceInterface::STATE_COMPLETE_FAILED_SCHEDULE_LIMIT_CHECK;
+        $this->updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
             && job.setDeleteAfterDateTime(referenceDateTime.add(autoDeleteDateInterval))';
 
         return $this;
@@ -65,9 +62,9 @@ class Service implements ServiceInterface
 
     public function requestCompleteSuccess(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_SUCCESS;
-        $this->_updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->assignedStateUpdate = ServiceInterface::STATE_COMPLETE_SUCCESS;
+        $this->updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
             && job.setDeleteAfterDateTime(referenceDateTime.add(autoDeleteDateInterval))';
 
         return $this;
@@ -75,9 +72,9 @@ class Service implements ServiceInterface
 
     public function requestCompleteTerminated(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_TERMINATED;
-        $this->_updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->assignedStateUpdate = ServiceInterface::STATE_COMPLETE_TERMINATED;
+        $this->updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
             && job.setDeleteAfterDateTime(referenceDateTime.add(autoDeleteDateInterval))';
 
         return $this;
@@ -85,9 +82,9 @@ class Service implements ServiceInterface
 
     public function requestCompleteFailed(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_COMPLETE_FAILED;
-        $this->_updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->assignedStateUpdate = ServiceInterface::STATE_COMPLETE_FAILED;
+        $this->updateExpression = 'job.setCompletedAtDateTime(referenceDateTime) 
             && job.setDeleteAfterDateTime(referenceDateTime.add(autoDeleteDateInterval))';
 
         return $this;
@@ -95,9 +92,9 @@ class Service implements ServiceInterface
 
     public function requestCrashed(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_CRASHED;
-        $this->_updateExpression = 'job.setTimesCrashed(job.getTimesCrashed()+1) 
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
+        $this->assignedStateUpdate = ServiceInterface::STATE_CRASHED;
+        $this->updateExpression = 'job.setTimesCrashed(job.getTimesCrashed()+1) 
             && job.setPriority(job.getPriority()-1)';
 
         return $this;
@@ -105,9 +102,9 @@ class Service implements ServiceInterface
 
     public function requestPanicked(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_PANICKED;
-        $this->_updateExpression = 'job.setTimesPanicked(job.getTimesPanicked()+1) 
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->assignedStateUpdate = ServiceInterface::STATE_PANICKED;
+        $this->updateExpression = 'job.setTimesPanicked(job.getTimesPanicked()+1) 
             && job.setPriority(job.getPriority()-1)';
 
         return $this;
@@ -115,72 +112,72 @@ class Service implements ServiceInterface
 
     public function requestHold(): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_HOLD;
-        $this->_updateExpression = 'job.setTimesHeld(job.getTimesHeld()+1)';
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_NONE;
+        $this->assignedStateUpdate = ServiceInterface::STATE_HOLD;
+        $this->updateExpression = 'job.setTimesHeld(job.getTimesHeld()+1)';
 
         return $this;
     }
 
     public function requestRetry(\DateTime $retryDateTime): ServiceInterface
     {
-        $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
-        $this->_assignedStateUpdate = ServiceInterface::STATE_WAITING;
-        $this->_updateExpression = 'job.setWorkAtDateTime(retryDateTime) 
+        $this->nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
+        $this->assignedStateUpdate = ServiceInterface::STATE_WAITING;
+        $this->updateExpression = 'job.setWorkAtDateTime(retryDateTime) 
             && job.setTimesRetried(job.getTimesRetried()+1)';
-        $this->_retryDateTime = $retryDateTime;
+        $this->retryDateTime = $retryDateTime;
 
         return $this;
     }
 
     public function applyRequest(): ServiceInterface
     {
-        $this->_assertValidTransition();
-        $referenceTime = $this->_getTime()->getNow();
-        $this->_getJob()->setPreviousState($this->_getJob()->getAssignedState());
-        $jobType = $this->_getTypeRepository()->getJobTypeClone($this->_getJob()->getTypeCode());
-        if ($this->_updateExpression !== null) {
+        $this->assertValidTransition();
+        $referenceTime = $this->getTime()->getNow();
+        $this->getJob()->setPreviousState($this->getJob()->getAssignedState());
+        $jobType = $this->getJobTypeRepository()->get($this->getJob()->getTypeCode());
+        if ($this->updateExpression !== null) {
             $expressionLanguage = new ExpressionLanguage();
             $expressionLanguage->evaluate(
-                $this->_updateExpression,
+                $this->updateExpression,
                 [
-                    'job'                    => $this->_getJob(),
-                    'retryDateTime'          => $this->_retryDateTime,
-                    'referenceDateTime'      => $referenceTime,
-                    'autoDeleteDateInterval' => new \DateInterval($jobType->getAutoDeleteIntervalDuration()),
+                    'job' => $this->getJob(),
+                    'retryDateTime' => $this->retryDateTime,
+                    'referenceDateTime' => $referenceTime,
+                    'autoDeleteDateInterval' => $jobType->getAutoDeleteIntervalDuration(),
                 ]
             );
         }
-        $this->_getJob()->setAssignedState($this->_getAssignedStateUpdate());
-        $this->_getJob()->setNextStateRequest($this->_getNextStateRequestUpdate());
-        $this->_getJob()->setLastTransitionInDatetime($referenceTime);
+        $this->getJob()->setAssignedState($this->getAssignedStateUpdate());
+        $this->getJob()->setNextStateRequest($this->getNextStateRequestUpdate());
+        $this->getJob()->setLastTransitionDatetime($referenceTime);
 
         return $this;
     }
 
-    protected function _getNextStateRequestUpdate(): string
+    protected function getNextStateRequestUpdate(): string
     {
-        if ($this->_nextStateRequestUpdate === null) {
+        if ($this->nextStateRequestUpdate === null) {
             throw new \LogicException('Next state request update is not set.');
         }
 
-        return $this->_nextStateRequestUpdate;
+        return $this->nextStateRequestUpdate;
     }
 
-    protected function _getAssignedStateUpdate()
+    protected function getAssignedStateUpdate()
     {
-        if ($this->_assignedStateUpdate === null) {
+        if ($this->assignedStateUpdate === null) {
             throw new \LogicException('Current state update is not set.');
         }
 
-        return $this->_assignedStateUpdate;
+        return $this->assignedStateUpdate;
     }
 
-    protected function _assertValidTransition(): ServiceInterface
+    protected function assertValidTransition(): ServiceInterface
     {
-        $nextStateRequestUpdate = $this->_getNextStateRequestUpdate();
-        $assignedStateUpdate = $this->_getAssignedStateUpdate();
-        $assignedState = $this->_getJob()->getAssignedState();
+        $nextStateRequestUpdate = $this->getNextStateRequestUpdate();
+        $assignedStateUpdate = $this->getAssignedStateUpdate();
+        $assignedState = $this->getJob()->getAssignedState();
         $isValidTransition = $this->isValidTransition();
         if (!$isValidTransition) {
             $invalidTransitionMessage = 'Invalid state transition [' . $nextStateRequestUpdate . ']';
@@ -194,15 +191,15 @@ class Service implements ServiceInterface
     public function isValidTransition(): bool
     {
         $isValidTransition = true;
-        $nextStateRequestUpdate = $this->_getNextStateRequestUpdate();
-        $assignedStateUpdate = $this->_getAssignedStateUpdate();
-        $assignedState = $this->_getJob()->getAssignedState();
+        $nextStateRequestUpdate = $this->getNextStateRequestUpdate();
+        $assignedStateUpdate = $this->getAssignedStateUpdate();
+        $assignedState = $this->getJob()->getAssignedState();
         switch ($nextStateRequestUpdate . $assignedStateUpdate) {
             // Waiting for work.
             case ServiceInterface::STATE_WORKING . ServiceInterface::STATE_WAITING:
                 switch ($assignedState) {
                     case ServiceInterface::STATE_WAITING:
-                        switch ($this->_getJob()->getNextStateRequest()) {
+                        switch ($this->getJob()->getNextStateRequest()) {
                             case Service::STATE_SCHEDULE_LIMIT_CHECK:
                                 break;
                             default:

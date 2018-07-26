@@ -1,8 +1,6 @@
 services:
-  neighborhoods.kojo.service.update.retry.factory:
+  Neighborhoods\Kojo\Service\Update\Retry\FactoryInterface:
     class: Neighborhoods\Kojo\Service\Update\Retry\Factory
     calls:
-      - [setStateService, ['@state.service']]
-      - [setServiceUpdateRetry, ['@service.update.retry']]
-  service.update.retry.factory:
-    alias: neighborhoods.kojo.service.update.retry.factory
+      - [setStateService, ['@Neighborhoods\Kojo\State\ServiceInterface']]
+      - [setServiceUpdateRetry, ['@Neighborhoods\Kojo\Service\Update\RetryInterface']]

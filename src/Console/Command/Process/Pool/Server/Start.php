@@ -33,12 +33,12 @@ class Start extends CommandAbstract
     public function _execute(): CommandAbstract
     {
         $arguments = [self::OPT_RUN_SERVER];
-        $arguments[] = self::OPT_YSDP . $this->_getInput()->getArgument(self::ARG_SERVICES_YML_ROOT_DIRECTORY_PATH);
-        foreach ($this->_getInput()->getOption(self::OPT_SERVICES_YML_DIRECTORY_PATH) as $servicesYmlFilePath) {
+        $arguments[] = self::OPT_YSDP . $this->getInput()->getArgument(self::ARG_SERVICES_YML_ROOT_DIRECTORY_PATH);
+        foreach ($this->getInput()->getOption(self::OPT_SERVICES_YML_DIRECTORY_PATH) as $servicesYmlFilePath) {
             $arguments[] = self::OPT_YSDP . $servicesYmlFilePath;
         }
         pcntl_exec(__DIR__ . '/../../../../../../bin/kojo', $arguments);
-        $this->_getOutput()->writeln('An error occurred trying to start the process pool server.');
+        $this->getOutput()->writeln('An error occurred trying to start the process pool server.');
 
         return $this;
     }

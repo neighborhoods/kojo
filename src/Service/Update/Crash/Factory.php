@@ -5,10 +5,9 @@ namespace Neighborhoods\Kojo\Service\Update\Crash;
 
 use Neighborhoods\Kojo\Service\Update\CrashInterface;
 use Neighborhoods\Kojo\State\Service;
-use Neighborhoods\Kojo\Service\FactoryAbstract;
 use Neighborhoods\Kojo\Service\Update\Crash;
 
-class Factory extends FactoryAbstract implements FactoryInterface
+class Factory implements FactoryInterface
 {
     use Crash\AwareTrait;
     use Service\AwareTrait;

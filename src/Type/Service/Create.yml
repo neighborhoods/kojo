@@ -1,7 +1,6 @@
 services:
-  neighborhoods.kojo.type.service.create:
+  Neighborhoods\Kojo\Type\Service\CreateInterface:
     class: Neighborhoods\Kojo\Type\Service\Create
+    shared: false
     calls:
-      - [setJobType, ['@data.job.type']]
-  type.service.create:
-    alias: neighborhoods.kojo.type.service.create
+      - [setJobType, ['@Neighborhoods\Kojo\Job\TypeInterface']]

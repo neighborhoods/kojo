@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Worker;
 
-use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\JobInterface;
 
 interface LocatorInterface
 {

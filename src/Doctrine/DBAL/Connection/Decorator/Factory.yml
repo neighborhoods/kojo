@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\FactoryInterface:
+    class: Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\Factory
+    calls:
+      - [setDoctrineDBALConnectionDecorator, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\DecoratorInterface']]

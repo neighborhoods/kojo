@@ -1,15 +1,10 @@
 services:
-  neighborhoods.kojo.process.root:
+  Neighborhoods\Kojo\Process\RootInterface:
     class: Neighborhoods\Kojo\Process\Root
-    public: true
     shared: false
-    parent: process_abstract
+    parent: Neighborhoods\Kojo\ProcessAbstract
     calls:
-      - [setProcessPoolFactory, ['@process.pool.factory']]
-      - [setProcessStrategy, ['@process.strategy.process_control']]
+      - [setProcessStrategy, ['@Neighborhoods\Kojo\Process\Strategy\ProcessControlInterface']]
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
       - [setTitlePrefix, ['%process.title.prefix%']]
-  process.root:
-    alias: neighborhoods.kojo.process.root
-    public: false

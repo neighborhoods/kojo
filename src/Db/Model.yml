@@ -1,11 +1,7 @@
 services:
-  neighborhoods.kojo.db.model:
+  Neighborhoods\Kojo\Db\ModelInterface:
     class: Neighborhoods\Kojo\Db\Model
-    public: false
     shared: false
     abstract: true
     calls:
-        - [setDoctrineConnectionDecoratorRepository, ['@doctrine.connection.decorator.repository']]
-  db.model:
-    alias: neighborhoods.kojo.db.model
-    public: false
+      - [setDoctrineDBALConnectionDecoratorRepository, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\RepositoryInterface']]

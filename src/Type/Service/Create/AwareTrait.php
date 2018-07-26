@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\Type\Service\Create;
 
 use Neighborhoods\Kojo\Type\Service\CreateInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setTypeServiceCreate(CreateInterface $create)
+    protected $NeighborhoodsKojoTypeServiceCreate;
+
+    public function setTypeServiceCreate(CreateInterface $typeServiceCreate): self
     {
-        $this->_create(CreateInterface ::class, $create);
+        if ($this->hasTypeServiceCreate()) {
+            throw new \LogicException('NeighborhoodsKojoTypeServiceCreate is already set.');
+        }
+        $this->NeighborhoodsKojoTypeServiceCreate = $typeServiceCreate;
 
         return $this;
     }
 
-    protected function _getTypeServiceCreate(): CreateInterface
+    protected function getTypeServiceCreate(): CreateInterface
     {
-        return $this->_read(CreateInterface ::class);
+        if (!$this->hasTypeServiceCreate()) {
+            throw new \LogicException('NeighborhoodsKojoTypeServiceCreate is not set.');
+        }
+
+        return $this->NeighborhoodsKojoTypeServiceCreate;
     }
 
-    protected function _getTypeServiceCreateClone(): CreateInterface
+    protected function hasTypeServiceCreate(): bool
     {
-        return clone $this->_getServiceCreate();
+        return isset($this->NeighborhoodsKojoTypeServiceCreate);
     }
 
-    protected function _unsetTypeServiceCreate()
+    protected function unsetTypeServiceCreate(): self
     {
-        $this->_delete(CreateInterface::class);
+        if (!$this->hasTypeServiceCreate()) {
+            throw new \LogicException('NeighborhoodsKojoTypeServiceCreate is not set.');
+        }
+        unset($this->NeighborhoodsKojoTypeServiceCreate);
 
         return $this;
     }

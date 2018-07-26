@@ -5,22 +5,20 @@ namespace Neighborhoods\Kojo\Redis;
 
 use Neighborhoods\Kojo\Redis;
 use Neighborhoods\Kojo\Process;
-use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Repository implements RepositoryInterface
 {
-    use Defensive\AwareTrait;
-    use Redis\Factory\AwareTrait;
     use Process\Registry\AwareTrait;
-    protected $_redisCollection = [];
+    use Redis\Factory\AwareTrait;
+    use Redis\Map\AwareTrait;
 
-    public function getById(string $id): \Redis
+    public function get(string $id): \Redis
     {
-        $id .= $this->_getProcessRegistry()->getLastRegisteredProcess()->getUuid();
-        if (!isset($this->_redisCollection[$id])) {
-            $this->_redisCollection[$id] = $this->_getRedisFactory()->create();
+        $id .= $this->getProcessRegistry()->getLastRegisteredProcess()->getUuid();
+        if (!isset($this->getRedisMap()[$id])) {
+            $this->getRedisMap()[$id] = $this->getRedisFactory()->create();
         }
 
-        return $this->_redisCollection[$id];
+        return $this->getRedisMap()[$id];
     }
 }

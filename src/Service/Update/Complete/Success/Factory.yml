@@ -1,8 +1,6 @@
 services:
-  neighborhoods.kojo.service.update.complete.success.factory:
+  Neighborhoods\Kojo\Service\Update\Complete\Success\FactoryInterface:
     class: Neighborhoods\Kojo\Service\Update\Complete\Success\Factory
     calls:
-      - [setStateService, ['@state.service']]
-      - [setServiceUpdateCompleteSuccess, ['@service.update.complete.success']]
-  service.update.complete.success.factory:
-    alias: neighborhoods.kojo.service.update.complete.success.factory
+      - [setStateService, ['@Neighborhoods\Kojo\State\ServiceInterface']]
+      - [setServiceUpdateCompleteSuccess, ['@Neighborhoods\Kojo\Service\Update\Complete\SuccessInterface']]

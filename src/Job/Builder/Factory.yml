@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Job\Builder\FactoryInterface:
+    class: Neighborhoods\Kojo\Job\Builder\Factory
+    calls:
+      - [setJobBuilder, ['@Neighborhoods\Kojo\Job\BuilderInterface']]

@@ -12,8 +12,9 @@ trait AwareTrait
 
     public function setApiV1JobScheduler(SchedulerInterface $apiV1JobScheduler): self
     {
-        assert(!$this->hasApiV1JobScheduler(),
-            new \LogicException('NeighborhoodsKojoApiV1JobScheduler is already set.'));
+        if ($this->hasApiV1JobScheduler()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobScheduler is already set.');
+        }
         $this->NeighborhoodsKojoApiV1JobScheduler = $apiV1JobScheduler;
 
         return $this;
@@ -21,7 +22,9 @@ trait AwareTrait
 
     protected function getApiV1JobScheduler(): SchedulerInterface
     {
-        assert($this->hasApiV1JobScheduler(), new \LogicException('NeighborhoodsKojoApiV1JobScheduler is not set.'));
+        if (!$this->hasApiV1JobScheduler()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobScheduler is not set.');
+        }
 
         return $this->NeighborhoodsKojoApiV1JobScheduler;
     }
@@ -33,7 +36,9 @@ trait AwareTrait
 
     protected function unsetApiV1JobScheduler(): self
     {
-        assert($this->hasApiV1JobScheduler(), new \LogicException('NeighborhoodsKojoApiV1JobScheduler is not set.'));
+        if (!$this->hasApiV1JobScheduler()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobScheduler is not set.');
+        }
         unset($this->NeighborhoodsKojoApiV1JobScheduler);
 
         return $this;

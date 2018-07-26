@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Db\Schema\Version\MapInterface:
+    class: Neighborhoods\Kojo\Db\Schema\Version\Map
+    shared: false

@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\Process\Pool\Factory;
 
 use Neighborhoods\Kojo\Process\Pool\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setProcessPoolFactory(FactoryInterface $pool)
+    protected $NeighborhoodsKojoProcessPoolFactory;
+
+    public function setProcessPoolFactory(FactoryInterface $processPoolFactory): self
     {
-        $this->_create(FactoryInterface::class, $pool);
+        if ($this->hasProcessPoolFactory()) {
+            throw new \LogicException('NeighborhoodsKojoProcessPoolFactory is already set.');
+        }
+        $this->NeighborhoodsKojoProcessPoolFactory = $processPoolFactory;
 
         return $this;
     }
 
-    protected function _getProcessPoolFactory(): FactoryInterface
+    protected function getProcessPoolFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasProcessPoolFactory()) {
+            throw new \LogicException('NeighborhoodsKojoProcessPoolFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoProcessPoolFactory;
     }
 
-    protected function _hasProcessPoolFactory(): bool
+    protected function hasProcessPoolFactory(): bool
     {
-        return $this->_exists(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoProcessPoolFactory);
     }
 
-    protected function _unsetProcessPoolFactory()
+    protected function unsetProcessPoolFactory(): self
     {
-        $this->_delete(FactoryInterface::class);
+        if (!$this->hasProcessPoolFactory()) {
+            throw new \LogicException('NeighborhoodsKojoProcessPoolFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoProcessPoolFactory);
 
         return $this;
     }

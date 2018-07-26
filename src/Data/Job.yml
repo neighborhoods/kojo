@@ -1,8 +1,0 @@
-services:
-  neighborhoods.kojo.data.job:
-    class: Neighborhoods\Kojo\Data\Job
-    shared: false
-    parent: db.model
-  data.job:
-    alias: neighborhoods.kojo.data.job
-    public: false

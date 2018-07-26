@@ -1,8 +1,9 @@
+parameters:
+  Neighborhoods\Kojo\Db\Setup\Schema\Version_1_0_0.table_name: !php/const \Neighborhoods\Kojo\Job\TypeInterface::TABLE_NAME
 services:
-  neighborhoods.kojo.db.setup.schema.version.1_0_0:
+  Neighborhoods\Kojo\Db\Setup\Schema\Version_1_0_0:
     class: Neighborhoods\Kojo\Db\Setup\Schema\Version_1_0_0
+    shared: false
     calls:
-      - [setDoctrineConnectionDecoratorRepository, ["@doctrine.connection.decorator.repository"]]
-      - [setTableName, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Data\\\\Status\\\\TypeInterface::TABLE_NAME\")"]]
-  db.setup.schema.version.1_0_0:
-    alias: neighborhoods.kojo.db.setup.schema.version.1_0_0
+      - [setDoctrineDBALConnectionDecoratorRepository, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\RepositoryInterface']]
+      - [setTableName, ['%Neighborhoods\Kojo\Db\Setup\Schema\Version_1_0_0.table_name%']]

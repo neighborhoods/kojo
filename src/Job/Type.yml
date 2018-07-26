@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Job\TypeInterface:
+    class: Neighborhoods\Kojo\Job\Type
+    shared: false

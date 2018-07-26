@@ -4,51 +4,50 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Semaphore\Mutex;
 
 use Neighborhoods\Kojo\Exception\Runtime;
-use Neighborhoods\Kojo\Filesystem;
+use Neighborhoods\Kojo\Exception\Runtime\Filesystem\Exception;
 use Neighborhoods\Kojo\Semaphore\MutexAbstract;
 use Neighborhoods\Kojo\Semaphore\MutexInterface;
-use Neighborhoods\Pylon\Data\Property\Defensive;
-use Neighborhoods\Kojo\Process\Pool\Logger;
+use Neighborhoods\Kojo\Logger;
+use Neighborhoods\Kojo\Symfony;
 
 class Flock extends MutexAbstract
 {
-    use Defensive\AwareTrait;
-    use Filesystem\AwareTrait;
+    use Symfony\Component\Filesystem\Filesystem\AwareTrait;
     use Logger\AwareTrait;
-    const PROP_DIRECTORY_PATH_PREFIX = 'directory_path_prefix';
-    protected $_fileName;
-    protected $_directoryPath;
-    protected $_filePointer;
-    protected $_filePath;
-    protected $_fileMode;
-    protected $_directoryMode;
-    protected $_hasLock = false;
+    protected $fileName;
+    protected $directoryPath;
+    protected $filePointer;
+    protected $filePath;
+    protected $fileMode;
+    protected $directoryMode;
+    protected $hasLock = false;
+    protected $directoryPathPrefix;
 
     public function testAndSetLock(): bool
     {
-        if ($this->_hasLock === false) {
-            if (flock($this->_getLockFilePointer(), $this->_getFlockLockOperation()) === true) {
-                $this->_hasLock = true;
+        if ($this->hasLock === false) {
+            if (flock($this->getLockFilePointer(), $this->getFlockLockOperation()) === true) {
+                $this->hasLock = true;
             }
-        }else {
+        } else {
             throw new \LogicException('The mutex already has obtained a lock.');
         }
 
-        return $this->_hasLock;
+        return $this->hasLock;
     }
 
     public function releaseLock(): MutexInterface
     {
-        if ($this->_hasLock === true) {
-            if (flock($this->_getLockFilePointer(), LOCK_UN) === false) {
-                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_UNLOCK_FAILED);
+        if ($this->hasLock === true) {
+            if (flock($this->getLockFilePointer(), LOCK_UN) === false) {
+                throw new (new Exception())->setCode(Exception::CODE_UNLOCK_FAILED);
             }
-            $this->_hasLock = false;
-            if (fclose($this->_getLockFilePointer()) === false) {
-                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FCLOSE_FAILED);
-                $this->_filePointer = null;
+            $this->hasLock = false;
+            if (fclose($this->getLockFilePointer()) === false) {
+                $this->filePointer = null;
+                throw (new Exception())->setCode(Exception::CODE_FCLOSE_FAILED);
             }
-        }else {
+        } else {
             throw new \LogicException('The mutex has not obtained a lock.');
         }
 
@@ -57,112 +56,127 @@ class Flock extends MutexAbstract
 
     public function hasLock(): bool
     {
-        return $this->_hasLock;
+        return $this->hasLock;
     }
 
-    protected function _getLockFilePointer()
+    protected function getLockFilePointer()
     {
-        if ($this->_filePointer === null) {
-            if (!is_readable($this->_getFilePath())) {
-                $this->_getFilesystem()->mkdir($this->_getDirectoryPath(), $this->_getDirectoryMode());
+        if ($this->filePointer === null) {
+            if (!is_readable($this->getFilePath())) {
+                $this->getSymfonyComponentFilesystemFilesystem()->mkdir(
+                    $this->getDirectoryPath(), $this->getDirectoryMode()
+                );
             }
 
-            $filePointer = fopen($this->_getFilePath(), $this->_getFileMode());
+            $filePointer = fopen($this->getFilePath(), $this->getFileMode());
             if (!is_resource($filePointer) || $filePointer === false) {
-                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FOPEN_FAILED);
+                throw (new Exception())->setCode(Exception::CODE_FOPEN_FAILED);
             }
-            $this->_filePointer = $filePointer;
+            $this->filePointer = $filePointer;
         }
 
-        return $this->_filePointer;
+        return $this->filePointer;
     }
 
-    protected function _getFilePath()
+    protected function getFilePath()
     {
-        if ($this->_filePath === null) {
-            $this->_filePath = $this->_getDirectoryPath() . DIRECTORY_SEPARATOR . $this->_getFileName();
+        if ($this->filePath === null) {
+            $this->filePath = $this->getDirectoryPath() . DIRECTORY_SEPARATOR . $this->getFileName();
         }
 
-        return $this->_filePath;
+        return $this->filePath;
     }
 
     public function setDirectoryPathPrefix(string $directoryPathPrefix): Flock
     {
-        $this->_create(self::PROP_DIRECTORY_PATH_PREFIX, $directoryPathPrefix);
+        if (!$this->hasDirectoryPathPrefix()) {
+            $this->directoryPathPrefix = $directoryPathPrefix;
+        } else {
+            throw new \LogicException('Directory path prefix is already set.');
+        }
 
         return $this;
     }
 
-    protected function _getDirectoryPathPrefix(): string
+    protected function getDirectoryPathPrefix(): string
     {
-        return $this->_read(self::PROP_DIRECTORY_PATH_PREFIX);
+        if (!$this->hasDirectoryPathPrefix()) {
+            throw new \LogicException('Directory path prefix is not set.');
+        }
+
+        return $this->directoryPathPrefix;
+    }
+
+    protected function hasDirectoryPathPrefix(): bool
+    {
+        return $this->directoryPathPrefix === null ? false : true;
     }
 
     public function setFileMode(string $fileMode)
     {
-        if ($this->_fileMode === null) {
-            $this->_fileMode = $fileMode;
-        }else {
+        if ($this->fileMode === null) {
+            $this->fileMode = $fileMode;
+        } else {
             throw new \LogicException('File mode is already set.');
         }
 
         return $this;
     }
 
-    protected function _getFileMode()
+    protected function getFileMode()
     {
-        if ($this->_fileMode === null) {
+        if ($this->fileMode === null) {
             throw new \LogicException('File mode is not set.');
         }
 
-        return $this->_fileMode;
+        return $this->fileMode;
     }
 
-    protected function _getDirectoryPath()
+    protected function getDirectoryPath()
     {
-        if ($this->_directoryPath === null) {
-            if ($this->_exists(self::PROP_DIRECTORY_PATH_PREFIX)) {
-                $directoryPathPrefix = $this->_getDirectoryPathPrefix();
-            }else {
+        if ($this->directoryPath === null) {
+            if ($this->hasDirectoryPathPrefix()) {
+                $directoryPathPrefix = $this->getDirectoryPathPrefix();
+            } else {
                 $directoryPathPrefix = '';
             }
-            $this->_directoryPath = $directoryPathPrefix . $this->_getResource()->getResourcePath();
+            $this->directoryPath = $directoryPathPrefix . $this->getResource()->getResourcePath();
         }
 
-        return $this->_directoryPath;
+        return $this->directoryPath;
     }
 
-    protected function _getFileName()
+    protected function getFileName()
     {
-        if ($this->_fileName === null) {
-            $this->_fileName = $this->_getResource()->getResourceName();
+        if ($this->fileName === null) {
+            $this->fileName = $this->getResource()->getResourceName();
         }
 
-        return $this->_fileName;
+        return $this->fileName;
     }
 
-    protected function _getDirectoryMode()
+    protected function getDirectoryMode()
     {
-        if ($this->_directoryMode === null) {
+        if ($this->directoryMode === null) {
             throw new \LogicException('Directory mode is not set.');
         }
 
-        return $this->_directoryMode;
+        return $this->directoryMode;
     }
 
     public function setDirectoryMode(int $directoryMode)
     {
-        if ($this->_directoryMode === null) {
-            $this->_directoryMode = $directoryMode;
-        }else {
+        if ($this->directoryMode === null) {
+            $this->directoryMode = $directoryMode;
+        } else {
             throw new \LogicException('Directory mode is already set.');
         }
 
-        return $this->_directoryMode;
+        return $this->directoryMode;
     }
 
-    protected function _getFlockLockOperation()
+    protected function getFlockLockOperation()
     {
-        return $this->_getIsBlocking() ? LOCK_EX : LOCK_EX | LOCK_NB;
+        return $this->getIsBlocking() ? LOCK_EX : LOCK_EX | LOCK_NB;
     }
 }

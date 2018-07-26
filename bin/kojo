@@ -1,18 +1,20 @@
 #!/usr/bin/env php
 <?php
 declare(strict_types=1);
-ini_set('assert.exception', '1');
 error_reporting(E_ALL);
 
 use Neighborhoods\Kojo\Console\Command\Process\Pool\Server\Start;
-use Neighborhoods\Pylon\DependencyInjection\ContainerBuilder\Facade;
+use Neighborhoods\Kojo\Process\Pool\ServerInterface;
+use Neighborhoods\Kojo\Symfony\Component\DependencyInjection\ContainerBuilder\Facade;
+use Symfony\Component\Console\Application;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Finder\Finder;
 
 if (PHP_SAPI !== 'cli') {
     echo 'bin/kojo must be run as a CLI application';
     exit(1);
 }
-try{
+try {
     foreach ([
                  __DIR__ . '/../../../autoload.php',
                  __DIR__ . '/../vendor/autoload.php',
@@ -22,17 +24,17 @@ try{
             break;
         }
     }
-}catch(\Exception $exception){
+} catch (\Exception $exception) {
     echo 'Autoload error: ' . $exception->getMessage();
     exit(1);
 }
-$containerBuilderFacade = new Facade();
+$containerBuilderFacade = (new Facade())->setContainerBuilder(new ContainerBuilder());
 $discoverableDirectories[] = __DIR__ . '/../src';
 $finder = new Finder();
 $finder->name('*.yml');
 if (isset($argv[2]) && is_string($argv[2]) && is_dir($argv[2])) {
     $discoverableDirectories[] = $argv[2];
-}elseif (isset($argv[1]) && is_string($argv[1]) && $argv[1] === Start::OPT_RUN_SERVER) {
+} elseif (isset($argv[1]) && is_string($argv[1]) && $argv[1] === Start::OPT_RUN_SERVER) {
     foreach ($argv as $argument) {
         if (strstr($argument, Start::OPT_YSDP) !== false) {
             $ymlServicesFilePath = explode(Start::OPT_YSDP, $argument);
@@ -41,15 +43,15 @@ if (isset($argv[2]) && is_string($argv[2]) && is_dir($argv[2])) {
     }
     $finder->files()->in($discoverableDirectories);
     $containerBuilderFacade->addFinder($finder);
-    $server = $containerBuilderFacade->getContainerBuilder()->get('process.pool.server');
+    $server = $containerBuilderFacade->assembleYaml()->build()->getContainerBuilder()->get(ServerInterface::class);
     $server->setParentProcessPath('');
     $server->start();
     exit();
 }
 $finder->files()->in($discoverableDirectories);
 $containerBuilderFacade->addFinder($finder);
-$containerBuilder = $containerBuilderFacade->getContainerBuilder();
-$consoleApplication = $containerBuilder->get('neighborhoods.kojo.symfony.component.console.application');
+$containerBuilder = $containerBuilderFacade->assembleYaml()->build()->getContainerBuilder();
+$consoleApplication = $containerBuilder->get(Application::class);
 $consoleApplication->run();
 
 return;

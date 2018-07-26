@@ -12,8 +12,9 @@ trait AwareTrait
 
     public function setApiV1JobSchedulerFactory(FactoryInterface $apiV1JobSchedulerFactory): self
     {
-        assert(!$this->hasApiV1JobSchedulerFactory(),
-            new \LogicException('NeighborhoodsKojoApiV1JobSchedulerFactory is already set.'));
+        if ($this->hasApiV1JobSchedulerFactory()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobSchedulerFactory is already set.');
+        }
         $this->NeighborhoodsKojoApiV1JobSchedulerFactory = $apiV1JobSchedulerFactory;
 
         return $this;
@@ -21,8 +22,9 @@ trait AwareTrait
 
     protected function getApiV1JobSchedulerFactory(): FactoryInterface
     {
-        assert($this->hasApiV1JobSchedulerFactory(),
-            new \LogicException('NeighborhoodsKojoApiV1JobSchedulerFactory is not set.'));
+        if (!$this->hasApiV1JobSchedulerFactory()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobSchedulerFactory is not set.');
+        }
 
         return $this->NeighborhoodsKojoApiV1JobSchedulerFactory;
     }
@@ -34,8 +36,9 @@ trait AwareTrait
 
     protected function unsetApiV1JobSchedulerFactory(): self
     {
-        assert($this->hasApiV1JobSchedulerFactory(),
-            new \LogicException('NeighborhoodsKojoApiV1JobSchedulerFactory is not set.'));
+        if (!$this->hasApiV1JobSchedulerFactory()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobSchedulerFactory is not set.');
+        }
         unset($this->NeighborhoodsKojoApiV1JobSchedulerFactory);
 
         return $this;

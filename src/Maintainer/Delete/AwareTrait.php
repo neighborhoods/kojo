@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Maintainer\Delete;
 
 use Neighborhoods\Kojo\Maintainer\DeleteInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setMaintainerDelete(DeleteInterface $delete)
+    protected $NeighborhoodsKojoMaintainerDelete;
+
+    public function setMaintainerDelete(DeleteInterface $maintainerDelete): self
     {
-        $this->_create(DeleteInterface::class, $delete);
+        if ($this->hasMaintainerDelete()) {
+            throw new \LogicException('NeighborhoodsKojoMaintainerDelete is already set.');
+        }
+        $this->NeighborhoodsKojoMaintainerDelete = $maintainerDelete;
 
         return $this;
     }
 
-    public function hasMaintainerDelete(): bool
+    protected function getMaintainerDelete(): DeleteInterface
     {
-        return $this->_exists(DeleteInterface::class);
+        if (!$this->hasMaintainerDelete()) {
+            throw new \LogicException('NeighborhoodsKojoMaintainerDelete is not set.');
+        }
+
+        return $this->NeighborhoodsKojoMaintainerDelete;
     }
 
-    protected function _getMaintainerDeleteClone(): DeleteInterface
+    protected function hasMaintainerDelete(): bool
     {
-        return clone $this->_getMaintainerDelete();
+        return isset($this->NeighborhoodsKojoMaintainerDelete);
     }
 
-    protected function _getMaintainerDelete(): DeleteInterface
+    protected function unsetMaintainerDelete(): self
     {
-        return $this->_read(DeleteInterface::class);
-    }
-
-    protected function _unsetMaintainerDelete()
-    {
-        $this->_delete(DeleteInterface::class);
+        if (!$this->hasMaintainerDelete()) {
+            throw new \LogicException('NeighborhoodsKojoMaintainerDelete is not set.');
+        }
+        unset($this->NeighborhoodsKojoMaintainerDelete);
 
         return $this;
     }

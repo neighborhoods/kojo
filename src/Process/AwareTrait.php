@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\ProcessInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
+    protected $NeighborhoodsKojoProcess;
+
     public function setProcess(ProcessInterface $process): self
     {
-        $this->_create(ProcessInterface::class, $process);
+        if ($this->hasProcess()) {
+            throw new \LogicException('NeighborhoodsKojoProcess is already set.');
+        }
+        $this->NeighborhoodsKojoProcess = $process;
 
         return $this;
     }
 
-    protected function _getProcess(): ProcessInterface
+    protected function getProcess(): ProcessInterface
     {
-        return $this->_read(ProcessInterface::class);
+        if (!$this->hasProcess()) {
+            throw new \LogicException('NeighborhoodsKojoProcess is not set.');
+        }
+
+        return $this->NeighborhoodsKojoProcess;
     }
 
-    protected function _getProcessClone(): ProcessInterface
+    protected function hasProcess(): bool
     {
-        return clone $this->_getProcess();
+        return isset($this->NeighborhoodsKojoProcess);
     }
 
-    protected function _hasProcess(): bool
+    protected function unsetProcess(): self
     {
-        return $this->_exists(ProcessInterface::class);
-    }
-
-    protected function _unsetProcess(): self
-    {
-        $this->_delete(ProcessInterface::class);
+        if (!$this->hasProcess()) {
+            throw new \LogicException('NeighborhoodsKojoProcess is not set.');
+        }
+        unset($this->NeighborhoodsKojoProcess);
 
         return $this;
     }

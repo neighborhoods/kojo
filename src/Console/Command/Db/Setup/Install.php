@@ -23,7 +23,7 @@ class Install extends CommandAbstract
     public function _execute(): CommandAbstract
     {
         $this->_getDbSetup()->install();
-        $this->_getOutput()->writeln('Kōjō has been successfully installed!');
+        $this->getOutput()->writeln('Kōjō has been successfully installed!');
 
         return $this;
     }

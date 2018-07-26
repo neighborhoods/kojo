@@ -5,22 +5,42 @@ namespace Neighborhoods\Kojo\Worker\Locator;
 
 use Neighborhoods\Kojo\Worker\LocatorInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setLocator(LocatorInterface $locator)
+    protected $NeighborhoodsKojoWorkerLocator;
+
+    public function setWorkerLocator(LocatorInterface $workerLocator): self
     {
-        $this->_create(LocatorInterface::class, $locator);
+        if ($this->hasWorkerLocator()) {
+            throw new \LogicException('NeighborhoodsKojoWorkerLocator is already set.');
+        }
+        $this->NeighborhoodsKojoWorkerLocator = $workerLocator;
 
         return $this;
     }
 
-    protected function _getLocator(): LocatorInterface
+    protected function getWorkerLocator(): LocatorInterface
     {
-        return $this->_read(LocatorInterface::class);
+        if (!$this->hasWorkerLocator()) {
+            throw new \LogicException('NeighborhoodsKojoWorkerLocator is not set.');
+        }
+
+        return $this->NeighborhoodsKojoWorkerLocator;
     }
 
-    protected function _getLocatorClone(): LocatorInterface
+    protected function hasWorkerLocator(): bool
     {
-        return clone $this->_getLocator();
+        return isset($this->NeighborhoodsKojoWorkerLocator);
+    }
+
+    protected function unsetWorkerLocator(): self
+    {
+        if (!$this->hasWorkerLocator()) {
+            throw new \LogicException('NeighborhoodsKojoWorkerLocator is not set.');
+        }
+        unset($this->NeighborhoodsKojoWorkerLocator);
+
+        return $this;
     }
 }

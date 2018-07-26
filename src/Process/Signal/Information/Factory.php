@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Signal\Information;
 
-use Neighborhoods\Kojo\Service\FactoryAbstract;
 use Neighborhoods\Kojo\Process\Signal\Information;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 
-class Factory extends FactoryAbstract implements FactoryInterface
+class Factory implements FactoryInterface
 {
     use Information\AwareTrait;
 

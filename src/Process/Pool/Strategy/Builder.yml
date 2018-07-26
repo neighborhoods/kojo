@@ -1,0 +1,46 @@
+parameters:
+  process_pool_strategy.root-max_child_processes: 20
+  process_pool_strategy.root-child_process_wait_throttle: 1
+  process_pool_strategy.root-max_alarm_time: 5
+  process_pool_strategy.server-max_child_processes: 1
+  process_pool_strategy.server-child_process_wait_throttle: 1
+  process_pool_strategy.server-max_alarm_time: 0
+  process_pool_strategy.job-max_child_processes: 1
+  process_pool_strategy.job-child_process_wait_throttle: 0
+  process_pool_strategy.job-max_alarm_time: 0
+  process_pool_strategy.empty-max_child_processes: 0
+  process_pool_strategy.empty-child_process_wait_throttle: 0
+  process_pool_strategy.empty-max_alarm_time: 0
+services:
+  Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface:
+    class: Neighborhoods\Kojo\Process\Pool\Strategy\Builder
+    calls:
+      - [setProcessPoolStrategyFactory, ['@Neighborhoods\Kojo\Process\Pool\Strategy\FactoryInterface']]
+  Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.root:
+    class: Neighborhoods\Kojo\Process\Pool\Strategy\Builder
+    calls:
+      - [setProcessPoolStrategyFactory, ['@Neighborhoods\Kojo\Process\Pool\Strategy\FactoryInterface']]
+      - [setMaxChildProcesses, ['%process_pool_strategy.root-max_child_processes%']]
+      - [setChildProcessWaitThrottle, ['%process_pool_strategy.root-child_process_wait_throttle%']]
+      - [setMaxAlarmTime, ['%process_pool_strategy.root-max_alarm_time%']]
+  Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.server:
+    class: Neighborhoods\Kojo\Process\Pool\Strategy\Builder
+    calls:
+      - [setProcessPoolStrategyFactory, ['@Neighborhoods\Kojo\Process\Pool\Strategy\FactoryInterface']]
+      - [setMaxChildProcesses, ['%process_pool_strategy-server.max_child_processes%']]
+      - [setChildProcessWaitThrottle, ['%process_pool_strategy-server.child_process_wait_throttle%']]
+      - [setMaxAlarmTime, ['%process_pool_strategy-server.max_alarm_time%']]
+  Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.worker:
+    class: Neighborhoods\Kojo\Process\Pool\Strategy\Builder
+    calls:
+      - [setProcessPoolStrategyFactory, ['@Neighborhoods\Kojo\Process\Pool\Strategy\FactoryInterface']]
+      - [setMaxChildProcesses, ['%process_pool_strategy-job.max_child_processes%']]
+      - [setChildProcessWaitThrottle, ['%process_pool_strategy-job.child_process_wait_throttle%']]
+      - [setMaxAlarmTime, ['%process_pool_strategy-job.max_alarm_time%']]
+  Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.empty:
+    class: Neighborhoods\Kojo\Process\Pool\Strategy\Builder
+    calls:
+      - [setProcessPoolStrategyFactory, ['@Neighborhoods\Kojo\Process\Pool\Strategy\FactoryInterface']]
+      - [setMaxChildProcesses, ['%process_pool_strategy-empty.max_child_processes%']]
+      - [setChildProcessWaitThrottle, ['%process_pool_strategy-empty.child_process_wait_throttle%']]
+      - [setMaxAlarmTime, ['%process_pool_strategy-empty.max_alarm_time%']]

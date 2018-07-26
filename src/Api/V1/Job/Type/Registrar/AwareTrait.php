@@ -12,8 +12,9 @@ trait AwareTrait
 
     public function setApiV1JobTypeRegistrar(RegistrarInterface $apiV1JobTypeRegistrar): self
     {
-        assert(!$this->hasApiV1JobTypeRegistrar(),
-            new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrar is already set.'));
+        if ($this->hasApiV1JobTypeRegistrar()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrar is already set.');
+        }
         $this->NeighborhoodsKojoApiV1JobTypeRegistrar = $apiV1JobTypeRegistrar;
 
         return $this;
@@ -21,8 +22,9 @@ trait AwareTrait
 
     protected function getApiV1JobTypeRegistrar(): RegistrarInterface
     {
-        assert($this->hasApiV1JobTypeRegistrar(),
-            new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrar is not set.'));
+        if (!$this->hasApiV1JobTypeRegistrar()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrar is not set.');
+        }
 
         return $this->NeighborhoodsKojoApiV1JobTypeRegistrar;
     }
@@ -34,8 +36,9 @@ trait AwareTrait
 
     protected function unsetApiV1JobTypeRegistrar(): self
     {
-        assert($this->hasApiV1JobTypeRegistrar(),
-            new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrar is not set.'));
+        if (!$this->hasApiV1JobTypeRegistrar()) {
+            throw new \LogicException('NeighborhoodsKojoApiV1JobTypeRegistrar is not set.');
+        }
         unset($this->NeighborhoodsKojoApiV1JobTypeRegistrar);
 
         return $this;

@@ -1,0 +1,8 @@
+services:
+  Neighborhoods\Kojo\Job\RepositoryInterface:
+    class: Neighborhoods\Kojo\Job\Repository
+    calls:
+      - [setJobMap, ['@Neighborhoods\Kojo\Job\MapInterface']]
+      - [setJobBuilderFactory, ['@Neighborhoods\Kojo\Job\Builder\FactoryInterface']]
+      - [setJobFactory, ['@Neighborhoods\Kojo\Job\FactoryInterface']]
+      - [setJobMapFactory, ['@Neighborhoods\Kojo\Job\Map\FactoryInterface']]

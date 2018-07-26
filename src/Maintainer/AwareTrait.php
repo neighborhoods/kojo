@@ -5,17 +5,42 @@ namespace Neighborhoods\Kojo\Maintainer;
 
 use Neighborhoods\Kojo\MaintainerInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setMaintainer(MaintainerInterface $scheduler)
+    protected $NeighborhoodsKojoMaintainer;
+
+    public function setMaintainer(MaintainerInterface $maintainer): self
     {
-        $this->_create(MaintainerInterface::class, $scheduler);
+        if ($this->hasMaintainer()) {
+            throw new \LogicException('NeighborhoodsKojoMaintainer is already set.');
+        }
+        $this->NeighborhoodsKojoMaintainer = $maintainer;
 
         return $this;
     }
 
-    protected function _getMaintainer(): MaintainerInterface
+    protected function getMaintainer(): MaintainerInterface
     {
-        return $this->_read(MaintainerInterface::class);
+        if (!$this->hasMaintainer()) {
+            throw new \LogicException('NeighborhoodsKojoMaintainer is not set.');
+        }
+
+        return $this->NeighborhoodsKojoMaintainer;
+    }
+
+    protected function hasMaintainer(): bool
+    {
+        return isset($this->NeighborhoodsKojoMaintainer);
+    }
+
+    protected function unsetMaintainer(): self
+    {
+        if (!$this->hasMaintainer()) {
+            throw new \LogicException('NeighborhoodsKojoMaintainer is not set.');
+        }
+        unset($this->NeighborhoodsKojoMaintainer);
+
+        return $this;
     }
 }

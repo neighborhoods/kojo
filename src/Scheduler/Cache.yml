@@ -1,10 +1,8 @@
 services:
-  neighborhoods.kojo.scheduler.cache:
+  Neighborhoods\Kojo\Scheduler\CacheInterface:
     class: Neighborhoods\Kojo\Scheduler\Cache
-    shared: true
+    shared: false
     calls:
-      - [setSchedulerTime, ['@scheduler.time']]
-      - [setCacheItemPoolRepository, ['@cache_item_pool.repository']]
-      - [setTime, ['@neighborhoods.pylon.time']]
-  scheduler.cache:
-    alias: neighborhoods.kojo.scheduler.cache
+      - [setSchedulerTime, ['@Neighborhoods\Kojo\Scheduler\TimeInterface']]
+      - [setPsrCacheCacheItemPoolRepository, ['@Neighborhoods\Kojo\Psr\Cache\CacheItemPool\RepositoryInterface']]
+      - [setTime, ['@Neighborhoods\Kojo\TimeInterface']]

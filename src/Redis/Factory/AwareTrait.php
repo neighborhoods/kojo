@@ -5,33 +5,41 @@ namespace Neighborhoods\Kojo\Redis\Factory;
 
 use Neighborhoods\Kojo\Redis\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setRedisFactory(FactoryInterface $factory)
+    protected $NeighborhoodsKojoRedisFactory;
+
+    public function setRedisFactory(FactoryInterface $redisFactory): self
     {
-        $this->_create(FactoryInterface::class, $factory);
+        if ($this->hasRedisFactory()) {
+            throw new \LogicException('NeighborhoodsKojoRedisFactory is already set.');
+        }
+        $this->NeighborhoodsKojoRedisFactory = $redisFactory;
 
         return $this;
     }
 
-    protected function _hasRedisFactory(): bool
+    protected function getRedisFactory(): FactoryInterface
     {
-        return $this->_exists(FactoryInterface::class);
+        if (!$this->hasRedisFactory()) {
+            throw new \LogicException('NeighborhoodsKojoRedisFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoRedisFactory;
     }
 
-    protected function _getRedisFactory(): FactoryInterface
+    protected function hasRedisFactory(): bool
     {
-        return $this->_read(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoRedisFactory);
     }
 
-    protected function _getRedisFactoryClone(): FactoryInterface
+    protected function unsetRedisFactory(): self
     {
-        return clone $this->_getRedisFactory();
-    }
-
-    protected function _unsetRedisFactory()
-    {
-        $this->_delete(FactoryInterface::class);
+        if (!$this->hasRedisFactory()) {
+            throw new \LogicException('NeighborhoodsKojoRedisFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoRedisFactory);
 
         return $this;
     }

@@ -5,23 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Complete\Success\Factory;
 
 use Neighborhoods\Kojo\Service\Update\Complete\Success\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdateCompleteSuccessFactory(FactoryInterface $serviceUpdateCompleteSuccessFactory)
+    protected $NeighborhoodsKojoServiceUpdateCompleteSuccessFactory;
+
+    public function setServiceUpdateCompleteSuccessFactory(FactoryInterface $serviceUpdateCompleteSuccessFactory): self
     {
-        $this->_create(FactoryInterface::class, $serviceUpdateCompleteSuccessFactory);
+        if ($this->hasServiceUpdateCompleteSuccessFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteSuccessFactory is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdateCompleteSuccessFactory = $serviceUpdateCompleteSuccessFactory;
 
         return $this;
     }
 
-    protected function _getServiceUpdateCompleteSuccessFactory(): FactoryInterface
+    protected function getServiceUpdateCompleteSuccessFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasServiceUpdateCompleteSuccessFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteSuccessFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdateCompleteSuccessFactory;
     }
 
-    protected function _unsetServiceUpdateCompleteSuccessFactory()
+    protected function hasServiceUpdateCompleteSuccessFactory(): bool
     {
-        $this->_delete(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoServiceUpdateCompleteSuccessFactory);
+    }
+
+    protected function unsetServiceUpdateCompleteSuccessFactory(): self
+    {
+        if (!$this->hasServiceUpdateCompleteSuccessFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdateCompleteSuccessFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdateCompleteSuccessFactory);
 
         return $this;
     }

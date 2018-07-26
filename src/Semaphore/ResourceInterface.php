@@ -8,7 +8,7 @@ use Neighborhoods\Kojo\SemaphoreInterface;
 
 interface ResourceInterface
 {
-    public function setSemaphore(SemaphoreInterface $semaphore): ResourceInterface;
+    public function setSemaphore(SemaphoreInterface $semaphore);
 
     public function testAndSetLock(): bool;
 
@@ -34,7 +34,5 @@ interface ResourceInterface
 
     public function getMutex(): MutexInterface;
 
-    public function setResourceOwner(OwnerInterface $resourceOwner): ResourceInterface;
-
-    public function getResourceOwner(): OwnerInterface;
+    public function setSemaphoreResourceOwner(OwnerInterface $resourceOwner);
 }

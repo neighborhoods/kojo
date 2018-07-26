@@ -1,0 +1,6 @@
+services:
+  Neighborhoods\Kojo\Process\Pool\RepositoryInterface:
+    class: Neighborhoods\Kojo\Process\Pool\Repository
+    calls:
+      - [setProcessPoolMap, ['@Neighborhoods\Kojo\Process\Pool\MapInterface']]
+      - [setProcessPoolStrategyRepository, ['@Neighborhoods\Kojo\Process\Pool\Strategy\RepositoryInterface']]

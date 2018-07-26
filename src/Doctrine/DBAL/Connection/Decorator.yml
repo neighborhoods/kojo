@@ -1,0 +1,6 @@
+services:
+  Neighborhoods\Kojo\Doctrine\DBAL\Connection\DecoratorInterface:
+    class: Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator
+    shared: false
+    calls:
+      - [setPDOBuilderFactory, ['@Neighborhoods\Kojo\PDO\Builder\FactoryInterface']]

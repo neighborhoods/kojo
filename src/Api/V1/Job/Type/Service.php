@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Api\V1\Job\Type;
 
-use Neighborhoods\Pylon\DependencyInjection\ContainerBuilder\Facade;
-use Neighborhoods\Pylon\DependencyInjection\ContainerBuilder\FacadeInterface;
+use Neighborhoods\Kojo\Symfony\Component\DependencyInjection\ContainerBuilder\Facade;
+use Neighborhoods\Kojo\Symfony\Component\DependencyInjection\ContainerBuilder\FacadeInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Finder\Finder;
 

@@ -9,91 +9,91 @@ class Create extends Type\ServiceAbstract implements CreateInterface
 {
     public function _save(): CreateInterface
     {
-        $this->_getJobType()->save();
+        $this->getDataJobType()->save();
 
         return $this;
     }
 
     public function setCode(string $code): CreateInterface
     {
-        $this->_getJobType()->setCode($code);
+        $this->getDataJobType()->setCode($code);
 
         return $this;
     }
 
     public function setWorkerClassUri(string $workerModelUri): CreateInterface
     {
-        $this->_getJobType()->setWorkerClassUri($workerModelUri);
+        $this->getDataJobType()->setWorkerClassUri($workerModelUri);
 
         return $this;
     }
 
     public function setWorkerMethod(string $workerMethod): CreateInterface
     {
-        $this->_getJobType()->setWorkerMethod($workerMethod);
+        $this->getDataJobType()->setWorkerMethod($workerMethod);
 
         return $this;
     }
 
     public function setName(string $name): CreateInterface
     {
-        $this->_getJobType()->setName($name);
+        $this->getDataJobType()->setName($name);
 
         return $this;
     }
 
     public function setCronExpression(string $cronExpression): CreateInterface
     {
-        $this->_getJobType()->setCronExpression($cronExpression);
+        $this->getDataJobType()->setCronExpression($cronExpression);
 
         return $this;
     }
 
     public function setCanWorkInParallel(bool $canWorkInParallel): CreateInterface
     {
-        $this->_getJobType()->setCanWorkInParallel($canWorkInParallel);
+        $this->getDataJobType()->setCanWorkInParallel($canWorkInParallel);
 
         return $this;
     }
 
     public function setDefaultImportance(int $defaultImportance): CreateInterface
     {
-        $this->_getJobType()->setDefaultImportance($defaultImportance);
+        $this->getDataJobType()->setDefaultImportance($defaultImportance);
 
         return $this;
     }
 
     public function setScheduleLimit(int $scheduleLimit): CreateInterface
     {
-        $this->_getJobType()->setScheduleLimit($scheduleLimit);
+        $this->getDataJobType()->setScheduleLimit($scheduleLimit);
 
         return $this;
     }
 
     public function setScheduleLimitAllowance(int $scheduleLimitAllowance): CreateInterface
     {
-        $this->_getJobType()->setScheduleLimitAllowance($scheduleLimitAllowance);
+        $this->getDataJobType()->setScheduleLimitAllowance($scheduleLimitAllowance);
 
         return $this;
     }
 
     public function setIsEnabled(bool $isEnabled): CreateInterface
     {
-        $this->_getJobType()->setIsEnabled($isEnabled);
+        $this->getDataJobType()->setIsEnabled($isEnabled);
 
         return $this;
     }
 
     public function setAutoCompleteSuccess(bool $autoCompleteSuccess): CreateInterface
     {
-        $this->_getJobType()->setAutoCompleteSuccess($autoCompleteSuccess);
+        $this->getDataJobType()->setAutoCompleteSuccess($autoCompleteSuccess);
 
         return $this;
     }
 
     public function setAutoDeleteIntervalDuration(string $autoDeleteIntervalDuration): CreateInterface
     {
-        $this->_getJobType()->setAutoDeleteIntervalDuration($autoDeleteIntervalDuration);
+        $this->getDataJobType()->setAutoDeleteIntervalDuration($autoDeleteIntervalDuration);
 
         return $this;
     }

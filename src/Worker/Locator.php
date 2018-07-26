@@ -3,14 +3,12 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Worker;
 
-use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\Job;
 use Neighborhoods\Kojo\Worker\Locator\Exception;
-use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Locator implements LocatorInterface
 {
     use Job\AwareTrait;
-    use Defensive\AwareTrait;
     protected $_callable = [];
 
     public function getClass()
@@ -44,11 +42,11 @@ class Locator implements LocatorInterface
 
     public function getMethodName(): string
     {
-        return $this->_getJob()->getWorkerMethod();
+        return $this->getJob()->getWorkerMethod();
     }
 
     public function getClassName(): string
     {
-        return $this->_getJob()->getWorkerUri();
+        return $this->getJob()->getWorkerUri();
     }
 }

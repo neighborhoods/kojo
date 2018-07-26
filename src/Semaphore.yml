@@ -1,8 +1,4 @@
 services:
-  neighborhoods.kojo.semaphore:
+  Neighborhoods\Kojo\SemaphoreInterface:
     class: Neighborhoods\Kojo\Semaphore
-    public: false
     shared: true
-  semaphore:
-    alias: neighborhoods.kojo.semaphore
-    public: false

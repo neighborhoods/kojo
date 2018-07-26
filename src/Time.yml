@@ -1,0 +1,3 @@
+services:
+  Neighborhoods\Kojo\TimeInterface:
+    class: Neighborhoods\Kojo\Time

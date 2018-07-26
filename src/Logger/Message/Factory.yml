@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Logger\Message\FactoryInterface:
+    class: Neighborhoods\Kojo\Logger\Message\Factory
+    calls:
+      - [setLoggerMessage, ['@Neighborhoods\Kojo\Logger\MessageInterface']]

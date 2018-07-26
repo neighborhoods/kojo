@@ -1,10 +1,5 @@
 services:
-  neighborhoods.kojo.pdo.builder.factory:
+  Neighborhoods\Kojo\PDO\Builder\FactoryInterface:
     class: Neighborhoods\Kojo\PDO\Builder\Factory
-    public: false
-    shared: true
     calls:
-      - [setPDOBuilder, ['@pdo.builder']]
-  pdo.builder.factory:
-    alias: neighborhoods.kojo.pdo.builder.factory
-    public: false
+      - [setPDOBuilder, ['@Neighborhoods\Kojo\PDO\BuilderInterface']]

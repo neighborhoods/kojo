@@ -5,10 +5,9 @@ namespace Neighborhoods\Kojo\Api\V1\Worker;
 
 use Neighborhoods\Kojo\Api\V1\Job\SchedulerInterface;
 use Neighborhoods\Kojo\Api\V1\LoggerInterface;
-use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\Job;
 use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Api;
-use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Service\Create;
 
 class Service implements ServiceInterface
@@ -21,7 +20,6 @@ class Service implements ServiceInterface
     use Update\Complete\Success\Factory\AwareTrait;
     use Update\Complete\Failed\Factory\AwareTrait;
     use Create\Factory\AwareTrait;
-    use Defensive\AwareTrait;
     protected const     PROP_REQUEST = 'request';
     protected const     PROP_RETRY_DATE_TIME = 'retry_date_time';
     protected const     REQUEST_RETRY = 'retry';
@@ -75,24 +73,24 @@ class Service implements ServiceInterface
         if (!$this->_exists(self::PROP_REQUEST_APPLIED)) {
             switch ($this->_read(self::PROP_REQUEST)) {
                 case self::REQUEST_RETRY:
-                    $updateRetry = $this->_getServiceUpdateRetryFactory()->create();
+                    $updateRetry = $this->getServiceUpdateRetryFactory()->create();
                     $updateRetry->setDateTime($this->_getDateTime());
-                    $updateRetry->setJob($this->_getJob());
+                    $updateRetry->setJob($this->getJob());
                     $updateRetry->save();
                     break;
                 case self::REQUEST_HOLD:
-                    $updateHold = $this->_getServiceUpdateHoldFactory()->create();
-                    $updateHold->setJob($this->_getJob());
+                    $updateHold = $this->getServiceUpdateHoldFactory()->create();
+                    $updateHold->setJob($this->getJob());
                     $updateHold->save();
                     break;
                 case self::REQUEST_COMPLETE_SUCCESS:
-                    $updateCompleteSuccess = $this->_getServiceUpdateCompleteSuccessFactory()->create();
-                    $updateCompleteSuccess->setJob($this->_getJob());
+                    $updateCompleteSuccess = $this->getServiceUpdateCompleteSuccessFactory()->create();
+                    $updateCompleteSuccess->setJob($this->getJob());
                     $updateCompleteSuccess->save();
                     break;
                 case self::REQUEST_COMPLETE_FAILED:
-                    $updateCompleteFailed = $this->_getServiceUpdateCompleteFailedFactory()->create();
-                    $updateCompleteFailed->setJob($this->_getJob());
+                    $updateCompleteFailed = $this->getServiceUpdateCompleteFailedFactory()->create();
+                    $updateCompleteFailed->setJob($this->getJob());
                     $updateCompleteFailed->save();
                     break;
                 default:
@@ -111,7 +109,7 @@ class Service implements ServiceInterface
 
     public function getTimesCrashed(): int
     {
-        return $this->_getJob()->getTimesCrashed();
+        return $this->getJob()->getTimesCrashed();
     }
 
     public function getLogger(): LoggerInterface

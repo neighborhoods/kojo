@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Process\Pool\Strategy\FactoryInterface:
+    class: Neighborhoods\Kojo\Process\Pool\Strategy\Factory
+    calls:
+      - [setProcessPoolStrategy, ['@Neighborhoods\Kojo\Process\Pool\StrategyInterface']]

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Exception\Runtime\Db\Model;
 
-use Neighborhoods\Pylon\Exception\Runtime\Exception;
+use Neighborhoods\AreaService\Exception\Runtime\Exception;
 
 class LoadException extends Exception
 {
@@ -13,8 +13,8 @@ class LoadException extends Exception
 
     public function __construct($message = null, $code = 0, \Throwable $previous = null)
     {
-        $this->_addPossibleMessage(self::CODE_NO_DATA_LOADED, 'No data was loaded.');
-        $this->_addPossibleMessage(self::CODE_MULTIPLE_RECORDS_RETRIEVED, 'Multiple records retrieved.');
+        $this->addPossibleMessage(self::CODE_NO_DATA_LOADED, 'No data was loaded.');
+        $this->addPossibleMessage(self::CODE_MULTIPLE_RECORDS_RETRIEVED, 'Multiple records retrieved.');
 
         return parent::__construct($message, $code, $previous);
     }

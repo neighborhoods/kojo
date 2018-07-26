@@ -4,11 +4,9 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Api\V1\Job;
 
 use Neighborhoods\Kojo\Service;
-use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Scheduler implements SchedulerInterface
 {
-    use Defensive\AwareTrait;
     use Service\Create\AwareTrait;
 
     public function setJobTypeCode(string $jobTypeCode): SchedulerInterface

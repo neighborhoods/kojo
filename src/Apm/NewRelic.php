@@ -3,33 +3,36 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Apm;
 
-use Neighborhoods\Pylon\Data\Property;
-
 class NewRelic implements NewRelicInterface
 {
-    use Property\Defensive\AwareTrait;
-    protected const PROP_APPLICATION_NAME = 'application_name';
+    /** @var string */
+    protected $applicationName;
 
     public function setApplicationName(string $applicationName): NewRelicInterface
     {
-        $this->_create(self::PROP_APPLICATION_NAME, $applicationName);
+        if ($this->applicationName === null) {
+            $this->applicationName = $applicationName;
+        } else {
+            throw new \LogicException('NewRelic applicationName is already set.');
+        }
+
 
         return $this;
     }
 
-    protected function _getApplicationName(): string
+    protected function getApplicationName(): string
     {
-        if (!$this->_exists(self::PROP_APPLICATION_NAME)) {
-            $this->_create(self::PROP_APPLICATION_NAME, ini_get("newrelic.appname"));
+        if ($this->applicationName === null) {
+            $this->setApplicationName(ini_get("newrelic.appname"));
         }
 
-        return $this->_read(self::PROP_APPLICATION_NAME);
+        return $this->applicationName;
     }
 
     public function startTransaction(): NewRelicInterface
     {
         if (extension_loaded(self::NEW_RELIC_EXTENSION_NAME)) {
-            newrelic_start_transaction($this->_getApplicationName());
+            newrelic_start_transaction($this->getApplicationName());
         }
 
         return $this;

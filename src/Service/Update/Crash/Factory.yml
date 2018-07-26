@@ -1,8 +1,6 @@
 services:
-  neighborhoods.kojo.service.update.crash.factory:
+  Neighborhoods\Kojo\Service\Update\Crash\FactoryInterface:
     class: Neighborhoods\Kojo\Service\Update\Crash\Factory
     calls:
-      - [setStateService, ['@state.service']]
-      - [setServiceUpdateCrash, ['@service.update.crash']]
-  service.update.crash.factory:
-    alias: neighborhoods.kojo.service.update.crash.factory
+      - [setStateService, ['@Neighborhoods\Kojo\State\ServiceInterface']]
+      - [setServiceUpdateCrash, ['@Neighborhoods\Kojo\Service\Update\CrashInterface']]

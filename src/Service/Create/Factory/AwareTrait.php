@@ -5,29 +5,41 @@ namespace Neighborhoods\Kojo\Service\Create\Factory;
 
 use Neighborhoods\Kojo\Service\Create\FactoryInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    /** @injected:runtime */
+    protected $NeighborhoodsKojoServiceCreateFactory;
+
     public function setServiceCreateFactory(FactoryInterface $serviceCreateFactory): self
     {
-        $this->_create(FactoryInterface::class, $serviceCreateFactory);
+        if ($this->hasServiceCreateFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceCreateFactory is already set.');
+        }
+        $this->NeighborhoodsKojoServiceCreateFactory = $serviceCreateFactory;
 
         return $this;
     }
 
-    protected function _getServiceCreateFactory(): FactoryInterface
+    protected function getServiceCreateFactory(): FactoryInterface
     {
-        return $this->_read(FactoryInterface::class);
+        if (!$this->hasServiceCreateFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceCreateFactory is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceCreateFactory;
     }
 
-    protected function _hasServiceCreateFactory(): bool
+    protected function hasServiceCreateFactory(): bool
     {
-        return $this->_exists(FactoryInterface::class);
+        return isset($this->NeighborhoodsKojoServiceCreateFactory);
     }
 
-    protected function _unsetServiceCreateFactory(): self
+    protected function unsetServiceCreateFactory(): self
     {
-        $this->_delete(FactoryInterface::class);
+        if (!$this->hasServiceCreateFactory()) {
+            throw new \LogicException('NeighborhoodsKojoServiceCreateFactory is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceCreateFactory);
 
         return $this;
     }

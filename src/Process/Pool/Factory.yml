@@ -12,7 +12,7 @@ parameters:
   process_pool_strategy-empty.child_process_wait_throttle: 0
   process_pool_strategy-empty.max_alarm_time: 0
 services:
-  neighborhoods.kojo.process.pool.factory:
+  Neighborhoods\Kojo\Process\Pool\FactoryInterface.root:
     class: Neighborhoods\Kojo\Process\Pool\Factory
     shared: false
     calls:
@@ -22,9 +22,7 @@ services:
       - [setProcessPool, ['@process.pool']]
       - [setProcessPoolStrategy, ['@process.pool.strategy']]
       - [setProcessCollection, ['@process.collection']]
-  process.pool.factory:
-    alias: neighborhoods.kojo.process.pool.factory
-  neighborhoods.kojo.process.pool.factory-server:
+  Neighborhoods\Kojo\Process\Pool\FactoryInterface.server:
     class: Neighborhoods\Kojo\Process\Pool\Factory
     shared: false
     calls:
@@ -34,9 +32,7 @@ services:
       - [setProcessPool, ['@process.pool']]
       - [setProcessPoolStrategy, ['@process.pool.strategy-server']]
       - [setProcessCollection, ['@process.collection-server']]
-  process.pool.factory-server:
-    alias: neighborhoods.kojo.process.pool.factory-server
-  neighborhoods.kojo.process.pool.factory-job:
+  Neighborhoods\Kojo\Process\Pool\FactoryInterface.job:
     class: Neighborhoods\Kojo\Process\Pool\Factory
     shared: false
     calls:
@@ -46,9 +42,7 @@ services:
       - [setProcessPool, ['@process.pool']]
       - [setProcessPoolStrategy, ['@process.pool.strategy-job']]
       - [setProcessCollection, ['@process.collection-job']]
-  process.pool.factory-job:
-    alias: neighborhoods.kojo.process.pool.factory-job
-  neighborhoods.kojo.process.pool.factory-empty:
+  Neighborhoods\Kojo\Process\Pool\FactoryInterface.empty:
     class: Neighborhoods\Kojo\Process\Pool\Factory
     shared: false
     calls:
@@ -58,5 +52,3 @@ services:
       - [setProcessPool, ['@process.pool']]
       - [setProcessPoolStrategy, ['@process.pool.strategy-job']]
       - [setProcessCollection, ['@process.collection-empty']]
-  process.pool.factory-empty:
-    alias: neighborhoods.kojo.process.pool.factory-empty

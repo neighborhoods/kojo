@@ -5,28 +5,41 @@ namespace Neighborhoods\Kojo\Service\Update\Panic;
 
 use Neighborhoods\Kojo\Service\Update\PanicInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setServiceUpdatePanic(PanicInterface $serviceUpdatePanic)
+    protected $NeighborhoodsKojoServiceUpdatePanic;
+
+    public function setServiceUpdatePanic(PanicInterface $serviceUpdatePanic): self
     {
-        $this->_create(PanicInterface::class, $serviceUpdatePanic);
+        if ($this->hasServiceUpdatePanic()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdatePanic is already set.');
+        }
+        $this->NeighborhoodsKojoServiceUpdatePanic = $serviceUpdatePanic;
 
         return $this;
     }
 
-    protected function _getServiceUpdatePanic(): PanicInterface
+    protected function getServiceUpdatePanic(): PanicInterface
     {
-        return $this->_read(PanicInterface::class);
+        if (!$this->hasServiceUpdatePanic()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdatePanic is not set.');
+        }
+
+        return $this->NeighborhoodsKojoServiceUpdatePanic;
     }
 
-    protected function _getServiceUpdatePanicClone(): PanicInterface
+    protected function hasServiceUpdatePanic(): bool
     {
-        return clone $this->_getServiceUpdatePanic();
+        return isset($this->NeighborhoodsKojoServiceUpdatePanic);
     }
 
-    protected function _unsetServiceUpdatePanic()
+    protected function unsetServiceUpdatePanic(): self
     {
-        $this->_delete(PanicInterface::class);
+        if (!$this->hasServiceUpdatePanic()) {
+            throw new \LogicException('NeighborhoodsKojoServiceUpdatePanic is not set.');
+        }
+        unset($this->NeighborhoodsKojoServiceUpdatePanic);
 
         return $this;
     }

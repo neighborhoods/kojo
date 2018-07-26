@@ -3,18 +3,16 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Api\V1;
 
-use Neighborhoods\Kojo\Process;
-use Neighborhoods\Pylon\Data\Property\Defensive;
+use Neighborhoods\Kojo\Logger\AwareTrait;
 
 class Logger implements LoggerInterface
 {
-    use Defensive\AwareTrait;
-    use Process\Pool\Logger\AwareTrait;
+    use AwareTrait;
 
     /** System is unusable. */
     public function emergency($message, array $context = array())
     {
-        $this->_getLogger()->emergency($message, $context);
+        $this->getLogger()->emergency($message, $context);
     }
 
     /**
@@ -25,7 +23,7 @@ class Logger implements LoggerInterface
      */
     public function alert($message, array $context = array())
     {
-        $this->_getLogger()->alert($message, $context);
+        $this->getLogger()->alert($message, $context);
     }
 
     /**
@@ -35,13 +33,13 @@ class Logger implements LoggerInterface
      */
     public function critical($message, array $context = array())
     {
-        $this->_getLogger()->critical($message, $context);
+        $this->getLogger()->critical($message, $context);
     }
 
     /** Runtime errors that do not require immediate action but should typically be logged and monitored. */
     public function error($message, array $context = array())
     {
-        $this->_getLogger()->error($message, $context);
+        $this->getLogger()->error($message, $context);
     }
 
     /**
@@ -52,13 +50,13 @@ class Logger implements LoggerInterface
      */
     public function warning($message, array $context = array())
     {
-        $this->_getLogger()->warning($message, $context);
+        $this->getLogger()->warning($message, $context);
     }
 
     /** Normal but significant events. */
     public function notice($message, array $context = array())
     {
-        $this->_getLogger()->notice($message, $context);
+        $this->getLogger()->notice($message, $context);
     }
 
     /**
@@ -68,18 +66,18 @@ class Logger implements LoggerInterface
      */
     public function info($message, array $context = array())
     {
-        $this->_getLogger()->info($message, $context);
+        $this->getLogger()->info($message, $context);
     }
 
     /** Detailed debug information. */
     public function debug($message, array $context = array())
     {
-        $this->_getLogger()->debug($message, $context);
+        $this->getLogger()->debug($message, $context);
     }
 
     /** Logs with an arbitrary level. */
     public function log($level, $message, array $context = array())
     {
-        $this->_getLogger()->log($level, $message, $context);
+        $this->getLogger()->log($level, $message, $context);
     }
 }

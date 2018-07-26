@@ -1,12 +1,9 @@
 services:
-  neighborhoods.kojo.maintainer.delete:
+  Neighborhoods\Kojo\Maintainer\DeleteInterface:
     class: Neighborhoods\Kojo\Maintainer\Delete
+    shared: false
     calls:
-      - [setLogger, ['@process.pool.logger']]
-      - [setJobCollectionDelete, ['@data.job.collection.delete']]
-      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-maintainer_delete']]
-      - [setSemaphore, ['@semaphore']]
+      - [setLogger, ['@Neighborhoods\Kojo\LoggerInterface']]
+      - [setSemaphore, ['@Neighborhoods\Kojo\SemaphoreInterface']]
       - [setPageSize, [50]]
       - [setOffset, [50]]
-  maintainer.delete:
-    alias: neighborhoods.kojo.maintainer.delete

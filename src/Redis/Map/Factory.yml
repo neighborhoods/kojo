@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Redis\Map\FactoryInterface:
+    class: Neighborhoods\Kojo\Redis\Map\Factory
+    calls:
+      - [setRedisMap, ['@Neighborhoods\Kojo\Redis\MapInterface']]

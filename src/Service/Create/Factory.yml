@@ -1,11 +1,8 @@
 services:
-  neighborhoods.kojo.service.create.factory:
+  Neighborhoods\Kojo\Service\Create\FactoryInterface:
     class: Neighborhoods\Kojo\Service\Create\Factory
     calls:
-      - [setStateService, ['@state.service']]
-      - [setServiceCreate, ['@service.create']]
-      - [setJobCollectionScheduleLimit, ['@data.job.collection.schedulelimit']]
-      - [setJobType, ['@data.job.type']]
-      - [setJob, ['@data.job']]
-  service.create.factory:
-    alias: neighborhoods.kojo.service.create.factory
+      - [setStateService, ['@Neighborhoods\Kojo\State\ServiceInterface']]
+      - [setServiceCreate, ['@Neighborhoods\Kojo\Service\CreateInterface']]
+      - [setJobType, ['@Neighborhoods\Kojo\Job\TypeInterface']]
+      - [setJob, ['@Neighborhoods\Kojo\JobInterface']]

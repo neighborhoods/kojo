@@ -5,16 +5,15 @@ namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
-use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Process;
+use Neighborhoods\Kojo\Logger;
 
 class Signal implements SignalInterface
 {
-    use Defensive\AwareTrait;
     use Process\Signal\Information\Factory\AwareTrait;
-    use Process\Pool\Logger\AwareTrait;
-    protected $_waitCount       = 0;
-    protected $_signalHandlers  = [];
+    use Logger\AwareTrait;
+    protected $_waitCount = 0;
+    protected $_signalHandlers = [];
     protected $_bufferedSignals = [];
 
     public function addSignalHandler(int $signalNumber, HandlerInterface $signalHandler): SignalInterface
@@ -76,10 +75,10 @@ class Signal implements SignalInterface
             while ($childProcessId = pcntl_wait($status, WNOHANG)) {
                 if ($childProcessId == -1) {
                     $errorMessage = var_export(pcntl_strerror(pcntl_get_last_error()), true);
-                    $this->_getLogger()->notice("Received a process control wait error with message[$errorMessage].");
+                    $this->getLogger()->notice("Received a process control wait error with message[$errorMessage].");
                     break;
-                }else {
-                    $this->_getLogger()->info("Child with process ID[$childProcessId] exited with status[$status].");
+                } else {
+                    $this->getLogger()->info("Child with process ID[$childProcessId] exited with status[$status].");
                     $childInformation[InformationInterface::SIGNAL_NUMBER] = SIGCHLD;
                     $childInformation[InformationInterface::PROCESS_ID] = $childProcessId;
                     $childInformation[InformationInterface::EXIT_VALUE] = $status;
@@ -87,9 +86,9 @@ class Signal implements SignalInterface
                     $this->_bufferedSignals[] = $information;
                 }
             }
-        }else {
+        } else {
             $information = $this->_getProcessSignalInformationFactory()->create()->hydrate($signalInformation);
-            $this->_getLogger()->info("Handling signal number[{$information->getSignalNumber()}].");
+            $this->getLogger()->info("Handling signal number[{$information->getSignalNumber()}].");
             $this->_bufferedSignals[] = $information;
         }
         if ($this->_waitCount === 0) {

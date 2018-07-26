@@ -6,9 +6,8 @@ namespace Neighborhoods\Kojo\Service\Update\Retry;
 use Neighborhoods\Kojo\Service\Update\RetryInterface;
 use Neighborhoods\Kojo\Service\Update\Retry;
 use Neighborhoods\Kojo\State\Service;
-use Neighborhoods\Kojo\Service\FactoryAbstract;
 
-class Factory extends FactoryAbstract implements FactoryInterface
+class Factory implements FactoryInterface
 {
     use Retry\AwareTrait;
     use Service\AwareTrait;

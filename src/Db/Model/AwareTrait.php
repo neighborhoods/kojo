@@ -5,22 +5,42 @@ namespace Neighborhoods\Kojo\Db\Model;
 
 use Neighborhoods\Kojo\Db\ModelInterface;
 
+/** @codeCoverageIgnore */
 trait AwareTrait
 {
-    public function setModel(ModelInterface $model)
+    protected $NeighborhoodsKojoDbModel;
+
+    public function setDbModel(ModelInterface $dbModel): self
     {
-        $this->_create(ModelInterface::class, $model);
+        if ($this->hasDbModel()) {
+            throw new \LogicException('NeighborhoodsKojoDbModel is already set.');
+        }
+        $this->NeighborhoodsKojoDbModel = $dbModel;
 
         return $this;
     }
 
-    protected function _getModel(): ModelInterface
+    protected function getDbModel(): ModelInterface
     {
-        return $this->_read(ModelInterface::class);
+        if (!$this->hasDbModel()) {
+            throw new \LogicException('NeighborhoodsKojoDbModel is not set.');
+        }
+
+        return $this->NeighborhoodsKojoDbModel;
     }
 
-    protected function _getModelClone(): ModelInterface
+    protected function hasDbModel(): bool
     {
-        return clone $this->_getModel();
+        return isset($this->NeighborhoodsKojoDbModel);
+    }
+
+    protected function unsetDbModel(): self
+    {
+        if (!$this->hasDbModel()) {
+            throw new \LogicException('NeighborhoodsKojoDbModel is not set.');
+        }
+        unset($this->NeighborhoodsKojoDbModel);
+
+        return $this;
     }
 }

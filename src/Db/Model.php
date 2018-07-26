@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Db;
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
+use Neighborhoods\Kojo\Doctrine\DBAL\Connection\DecoratorInterface;
 use Neighborhoods\Kojo\Exception\Runtime\Db\Model\LoadException;
-use Neighborhoods\Pylon\Data\Property;
 use Neighborhoods\Kojo\Doctrine;
-use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Model implements ModelInterface
 {
-    use Defensive\AwareTrait;
-    use Property\Persistent\AwareTrait;
-    use Doctrine\Connection\Decorator\Repository\AwareTrait;
+    use Doctrine\DBAL\Connection\Decorator\Repository\AwareTrait;
     protected $_idPropertyName;
     protected $_tableName;
 

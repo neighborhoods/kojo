@@ -1,6 +1,4 @@
 services:
-  neighborhoods.kojo.service.update.complete.failedschedulelimitcheck:
+  Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheckInterface:
     class: Neighborhoods\Kojo\Service\Update\Complete\FailedScheduleLimitCheck
     shared: false
-  service.update.complete.failedschedulelimitcheck:
-    alias: neighborhoods.kojo.service.update.complete.failedschedulelimitcheck

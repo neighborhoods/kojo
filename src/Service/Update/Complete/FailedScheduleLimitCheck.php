@@ -5,14 +5,14 @@ namespace Neighborhoods\Kojo\Service\Update\Complete;
 
 use Neighborhoods\Kojo\ServiceAbstract;
 
-class FailedScheduleLimitCheck extends ServiceAbstract implements FailedScheduleLimitCheckInterface
+class FailedScheduleLimitCheck implements FailedScheduleLimitCheckInterface
 {
     public function _save(): FailedScheduleLimitCheckInterface
     {
-        $this->_getStateService()->setJob($this->_getJob());
-        $this->_getStateService()->requestCompleteFailedScheduleLimitCheck();
-        $this->_getStateService()->applyRequest();
-        $this->_getJob()->save();
+        $this->getStateService()->setJob($this->getJob());
+        $this->getStateService()->requestCompleteFailedScheduleLimitCheck();
+        $this->getStateService()->applyRequest();
+        $this->getJob()->save();
 
         return $this;
     }
