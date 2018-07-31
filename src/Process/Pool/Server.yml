@@ -8,6 +8,5 @@ services:
       - [setProcessRegistry, ['@Neighborhoods\Kojo\Process\RegistryInterface']]
       - [setApmNewRelic, ['@Neighborhoods\Kojo\Apm\NewRelicInterface']]
       - [setProcessSignal, ['@Neighborhoods\Kojo\Process\SignalInterface']]
-      - [handleSignal, ['@Neighborhoods\Kojo\Process\Signal\InformationInterface']]
       - [setSemaphore, ['@Neighborhoods\Kojo\SemaphoreInterface']]
       - [setProcessStrategy, ['@Neighborhoods\Kojo\Process\Strategy\ProcessControlInterface']]
