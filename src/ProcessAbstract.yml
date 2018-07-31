@@ -1,3 +1,5 @@
+parameters:
+  Neighborhoods\Kojo\ProcessAbstract.title_prefix: 'neighborhoods-kojo: '
 services:
   Neighborhoods\Kojo\ProcessAbstract:
     class: Neighborhoods\Kojo\ProcessAbstract
@@ -8,3 +10,5 @@ services:
       - [setLogger, ['@Neighborhoods\Kojo\LoggerInterface']]
       - [setProcessSignal, ['@Neighborhoods\Kojo\Process\SignalInterface']]
       - [setApmNewRelic, ['@Neighborhoods\Kojo\Apm\NewRelicInterface']]
+      - [setTitlePrefix, ['%Neighborhoods\Kojo\ProcessAbstract.title_prefix%']]
+      - [setProcessPoolRepository, ['@Neighborhoods\Kojo\Process\Pool\RepositoryInterface']]

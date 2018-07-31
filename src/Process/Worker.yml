@@ -10,4 +10,3 @@ services:
       - [setSelector, ['@Neighborhoods\Kojo\SelectorInterface']]
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
-      - [setTitlePrefix, ['%process.title.prefix%']]

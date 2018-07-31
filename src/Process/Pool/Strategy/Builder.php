@@ -15,6 +15,8 @@ class Builder implements BuilderInterface
     protected $childProcessWaitThrottle;
     /** @var int */
     protected $maxAlarmTime;
+    /** @var string */
+    protected $identity;
 
     public function build(): StrategyInterface
     {
@@ -79,6 +81,25 @@ class Builder implements BuilderInterface
             throw new \LogicException('Builder maxAlarmTime is already set.');
         }
         $this->maxAlarmTime = $maxAlarmTime;
+
+        return $this;
+    }
+
+    public function getIdentity(): string
+    {
+        if ($this->identity === null) {
+            throw new \LogicException('Builder identity has not been set.');
+        }
+
+        return $this->identity;
+    }
+
+    public function setIdentity(string $identity): BuilderInterface
+    {
+        if ($this->identity !== null) {
+            throw new \LogicException('Builder identity is already set.');
+        }
+        $this->identity = $identity;
 
         return $this;
     }

@@ -24,6 +24,4 @@ class Repository implements RepositoryInterface
 
         return $this->getProcessPoolMap()[$id];
     }
-
-
 }

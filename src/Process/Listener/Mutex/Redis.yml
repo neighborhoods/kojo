@@ -7,4 +7,3 @@ services:
       - [setTerminationSignalNumber, ['@=constant("SIGKILL")']]
       - [setUuidMaximumInteger, [9999999999]]
       - [setRedisFactory, ['@Neighborhoods\Kojo\Redis\FactoryInterface']]
-      - [setTitlePrefix, ['%process.title.prefix%']]

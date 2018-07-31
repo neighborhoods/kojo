@@ -21,7 +21,7 @@ class Repository implements RepositoryInterface
 
     public function attachBuilder(BuilderInterface $builder): RepositoryInterface
     {
-        $this->getProcessPoolStrategyBuilderMap()->append($builder);
+        $this->getProcessPoolStrategyBuilderMap()->offsetSet($builder->getIdentity(), $builder);
 
         return $this;
     }

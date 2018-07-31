@@ -8,4 +8,3 @@ services:
       - [setProcessStrategy, ['@Neighborhoods\Kojo\Process\Strategy\ProcessControlInterface']]
       - [setTerminationSignalNumber, ['@=constant("SIGKILL")']]
       - [setUuidMaximumInteger, [9999999999]]
-      - [setTitlePrefix, ['%process.title.prefix%']]

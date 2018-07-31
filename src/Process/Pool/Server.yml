@@ -1,12 +1,9 @@
 services:
   Neighborhoods\Kojo\Process\Pool\ServerInterface:
     class: Neighborhoods\Kojo\Process\Pool\Server
+    parent: Neighborhoods\Kojo\ProcessAbstract
     shared: false
     public: true
     calls:
-      - [setProcessPoolRepository, ['@Neighborhoods\Kojo\Process\Pool\RepositoryInterface']]
-      - [setProcessRegistry, ['@Neighborhoods\Kojo\Process\RegistryInterface']]
-      - [setApmNewRelic, ['@Neighborhoods\Kojo\Apm\NewRelicInterface']]
-      - [setProcessSignal, ['@Neighborhoods\Kojo\Process\SignalInterface']]
-      - [setSemaphore, ['@Neighborhoods\Kojo\SemaphoreInterface']]
-      - [setProcessStrategy, ['@Neighborhoods\Kojo\Process\Strategy\ProcessControlInterface']]
+        - [setSemaphore, ['@Neighborhoods\Kojo\SemaphoreInterface']]
+        - [setSemaphoreResourceRepository, ['@Neighborhoods\Kojo\Semaphore\Resource\RepositoryInterface']]

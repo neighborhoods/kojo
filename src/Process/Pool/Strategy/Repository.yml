@@ -7,4 +7,4 @@ services:
       - [attachBuilder, ['@Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.root']]
       - [attachBuilder, ['@Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.server']]
       - [attachBuilder, ['@Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.worker']]
-      - [attachBuilder, ['@Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.empty']]
+      - [attachBuilder, ['@Neighborhoods\Kojo\Process\Pool\Strategy\BuilderInterface.redis_watch_dog']]

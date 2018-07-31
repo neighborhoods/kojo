@@ -4,3 +4,4 @@ services:
     calls:
       - [setProcessPoolMap, ['@Neighborhoods\Kojo\Process\Pool\MapInterface']]
       - [setProcessPoolStrategyRepository, ['@Neighborhoods\Kojo\Process\Pool\Strategy\RepositoryInterface']]
+      - [setProcessPoolFactory, ['@Neighborhoods\Kojo\Process\Pool\FactoryInterface']]
