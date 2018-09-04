@@ -1,4 +1,5 @@
-FROM neighborhoods/php-fpm-phalcon:php7.1_phalcon3.2
+FROM neighborhoods/php-fpm-phalcon:php7.2_phalcon3.4
+RUN apt-get update -y && apt-get install -y unzip procps
 ARG PROJECT_NAME=kojo
 
 # COMPOSER_TOKEN can also be passed via the COMPOSER_GITHUB_TOKEN file
