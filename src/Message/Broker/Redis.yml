@@ -4,8 +4,8 @@ services:
     shared: false
     calls:
       - [setLogger, ['@process.pool.logger']]
-      - [setSubscriptionChannelName, ['job_listener_subscribe']]
-      - [setPublishChannelName, ['job_listener_publish']]
+      - [setSubscriptionChannelName, ['%neighborhoods.kojo.environment.parameters.lock_prefix%job_listener_subscribe']]
+      - [setPublishChannelName, ['%neighborhoods.kojo.environment.parameters.lock_prefix%job_listener_publish']]
       - [setRedisRepository, ['@redis.repository']]
   message.broker.redis:
     alias: neighborhoods.kojo.message.broker.redis

@@ -15,6 +15,8 @@ class Cache implements CacheInterface
     use Time\AwareTrait;
     use CacheItemPool\Repository\AwareTrait;
     protected $_scheduleMinutesNotInCache = [];
+    /** @var string */
+    protected $cacheScheduledAheadKeyPrefix;
 
     public function getMinutesNotInCache(): array
     {
@@ -38,7 +40,7 @@ class Cache implements CacheInterface
         $isMinuteScheduled = false;
         $referenceMinuteDateTimeString = $referenceMinuteDateTime->format(self::DATE_TIME_FORMAT_CACHE_MINUTE);
         $cacheItemPool = $this->_getCacheItemPoolRepository()->getById(self::CACHE_ITEM_POOL_ID);
-        $hasItem = $cacheItemPool->hasItem(self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $referenceMinuteDateTimeString);
+        $hasItem = $cacheItemPool->hasItem($this->getCacheScheduledAheadKeyPrefix() . $referenceMinuteDateTimeString);
         if ($hasItem) {
             $isMinuteScheduled = true;
         }
@@ -62,10 +64,30 @@ class Cache implements CacheInterface
     {
         $cacheItemPool = $this->_getCacheItemPoolRepository()->getById(self::CACHE_ITEM_POOL_ID);
         $cachedMinuteDateTimeString = $scheduledMinute->format(self::DATE_TIME_FORMAT_CACHE_MINUTE);
-        $cacheItem = $cacheItemPool->getItem(self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $cachedMinuteDateTimeString);
+        $cacheItem = $cacheItemPool->getItem($this->getCacheScheduledAheadKeyPrefix() . $cachedMinuteDateTimeString);
         $cacheItem->set(self::CACHE_SCHEDULED_AHEAD_VALUE);
         $cacheItem->expiresAt($this->_getScheduledKeyLifetime());
         $cacheItemPool->save($cacheItem);
+
+        return $this;
+    }
+
+    public function getCacheScheduledAheadKeyPrefix() : string
+    {
+        if ($this->cacheScheduledAheadKeyPrefix === null) {
+            return self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX;
+        }
+
+        return $this->cacheScheduledAheadKeyPrefix;
+    }
+
+    public function setCacheScheduledAheadKeyPrefix(string $cacheScheduledAheadKeyPrefix) : CacheInterface
+    {
+        if ($this->cacheScheduledAheadKeyPrefix !== null) {
+            throw new \LogicException('Cache cacheScheduledAheadKeyPrefix is already set.');
+        }
+
+        $this->cacheScheduledAheadKeyPrefix = $cacheScheduledAheadKeyPrefix;
 
         return $this;
     }

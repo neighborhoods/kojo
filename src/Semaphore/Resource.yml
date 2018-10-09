@@ -10,7 +10,7 @@ services:
     class: Neighborhoods\Kojo\Semaphore\Resource
     shared: false
     calls:
-      - [setResourceName, ['maintainer_delete.lock']]
+    - [setResourceName, ['%neighborhoods.kojo.environment.parameters.lock_prefix%maintainer_delete.lock']]
       - [setResourcePath, ['neighborhoods/kojo']]
       - [setIsBlocking, [false]]
   semaphore.resource-maintainer_delete:
@@ -19,7 +19,7 @@ services:
     class: Neighborhoods\Kojo\Semaphore\Resource
     shared: false
     calls:
-      - [setResourceName, ['update_pending_jobs.lock']]
+    - [setResourceName, ['%neighborhoods.kojo.environment.parameters.lock_prefix%update_pending_jobs.lock']]
       - [setResourcePath, ['neighborhoods/kojo']]
       - [setIsBlocking, [false]]
   semaphore.resource-update_pending_jobs:
@@ -28,7 +28,7 @@ services:
     class: Neighborhoods\Kojo\Semaphore\Resource
     shared: false
     calls:
-      - [setResourceName, ['reschedule_jobs.lock']]
+    - [setResourceName, ['%neighborhoods.kojo.environment.parameters.lock_prefix%reschedule_jobs.lock']]
       - [setResourcePath, ['neighborhoods/kojo']]
       - [setIsBlocking, [false]]
   semaphore.resource-reschedule_jobs:
@@ -36,7 +36,7 @@ services:
   neighborhoods.kojo.semaphore.resource-schedule:
     class: Neighborhoods\Kojo\Semaphore\Resource
     calls:
-      - [setResourceName, ['schedule.lock']]
+    - [setResourceName, ['%neighborhoods.kojo.environment.parameters.lock_prefix%schedule.lock']]
       - [setResourcePath, ['neighborhoods/kojo']]
       - [setIsBlocking, [false]]
     shared: false
@@ -46,7 +46,7 @@ services:
     class: Neighborhoods\Kojo\Semaphore\Resource
     shared: false
     calls:
-      - [setResourceName, ['server.lock']]
+    - [setResourceName, ['%neighborhoods.kojo.environment.parameters.lock_prefix%server.lock']]
       - [setResourcePath, ['neighborhoods/kojo']]
       - [setIsBlocking, [false]]
   semaphore.resource-server:
