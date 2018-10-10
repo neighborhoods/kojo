@@ -29,9 +29,16 @@ class Formatter implements FormatterInterface
 
     public function getFormattedThrowableMessage(\Throwable $throwable): string
     {
-        $throwableType = get_class($throwable);
-        $throwableMessage = $throwable->getMessage();
-        return "{$throwableType}: {$throwableMessage}";
+        if ($throwable->getPrevious()) {
+            $previousType = get_class($throwable);
+            $previousMessage = $throwable->getMessage();
+            $previousMessage = "{$previousType}: {$previousMessage}";
+            $message = implode(' ', [$throwable->getMessage(), $previousMessage]);
+        } else {
+            $message = $throwable->getMessage();
+        }
+
+        return $message;
     }
 
     protected function formatPipes(MessageInterface $message) : string
