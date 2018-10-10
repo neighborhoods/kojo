@@ -19,4 +19,6 @@ interface CacheInterface
     public function getMinutesNotInCache(): array;
 
     public function cacheScheduledMinutes(\DateTime $scheduledMinute): CacheInterface;
+
+    public function setLockPrefix(string $cacheScheduledAheadKeyPrefix) : CacheInterface;
 }
