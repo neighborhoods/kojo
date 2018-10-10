@@ -40,9 +40,7 @@ class Cache implements CacheInterface
         $isMinuteScheduled = false;
         $referenceMinuteDateTimeString = $referenceMinuteDateTime->format(self::DATE_TIME_FORMAT_CACHE_MINUTE);
         $cacheItemPool = $this->_getCacheItemPoolRepository()->getById(self::CACHE_ITEM_POOL_ID);
-        $hasItem = $cacheItemPool->hasItem(
-            $this->getLockPrefix() . self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $referenceMinuteDateTimeString
-        );
+        $hasItem = $cacheItemPool->hasItem($this->getCacheKeyPrefix() . $referenceMinuteDateTimeString);
         if ($hasItem) {
             $isMinuteScheduled = true;
         }
@@ -66,9 +64,7 @@ class Cache implements CacheInterface
     {
         $cacheItemPool = $this->_getCacheItemPoolRepository()->getById(self::CACHE_ITEM_POOL_ID);
         $cachedMinuteDateTimeString = $scheduledMinute->format(self::DATE_TIME_FORMAT_CACHE_MINUTE);
-        $cacheItem = $cacheItemPool->getItem(
-            $this->getLockPrefix() . self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX . $cachedMinuteDateTimeString
-        );
+        $cacheItem = $cacheItemPool->getItem($this->getCacheKeyPrefix() . $cachedMinuteDateTimeString);
         $cacheItem->set(self::CACHE_SCHEDULED_AHEAD_VALUE);
         $cacheItem->expiresAt($this->_getScheduledKeyLifetime());
         $cacheItemPool->save($cacheItem);
@@ -76,10 +72,15 @@ class Cache implements CacheInterface
         return $this;
     }
 
-    public function getLockPrefix() : string
+    protected function getCacheKeyPrefix() : string
+    {
+        return $this->getLockPrefix() . self::CACHE_SCHEDULED_AHEAD_KEY_PREFIX;
+    }
+
+    protected function getLockPrefix() : string
     {
         if ($this->lock_prefix === null) {
-            return '';
+            throw new \LogicException('Cache lock_prefix has not been set.');
         }
 
         return $this->lock_prefix;
@@ -88,7 +89,7 @@ class Cache implements CacheInterface
     public function setLockPrefix(string $lock_prefix) : CacheInterface
     {
         if ($this->lock_prefix !== null) {
-            throw new \LogicException('Cache cacheScheduledAheadKeyPrefix is already set.');
+            throw new \LogicException('Cache lock_prefix is already set.');
         }
 
         $this->lock_prefix = $lock_prefix;
