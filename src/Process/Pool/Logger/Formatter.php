@@ -27,6 +27,13 @@ class Formatter implements FormatterInterface
         }
     }
 
+    public function getFormattedThrowableMessage(\Throwable $throwable): string
+    {
+        $throwableType = get_class($throwable);
+        $throwableMessage = $throwable->getMessage();
+        return "{$throwableType}: $throwableMessage}";
+    }
+
     protected function formatPipes(MessageInterface $message) : string
     {
         $processIdPaddingLength = $this->getProcessIdPadding();
