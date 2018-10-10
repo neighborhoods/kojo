@@ -31,7 +31,7 @@ class Formatter implements FormatterInterface
     {
         $throwableType = get_class($throwable);
         $throwableMessage = $throwable->getMessage();
-        return "{$throwableType}: $throwableMessage}";
+        return "{$throwableType}: {$throwableMessage}";
     }
 
     protected function formatPipes(MessageInterface $message) : string
