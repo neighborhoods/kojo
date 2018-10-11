@@ -14,4 +14,6 @@ interface FormatterInterface
     public function setProcessIdPadding(int $processIdPadding) : FormatterInterface;
 
     public function setLogFormat(string $logFormat);
+
+    public function getFormattedThrowableMessage(\Throwable $throwable) : string;
 }
