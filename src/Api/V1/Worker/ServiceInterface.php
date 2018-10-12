@@ -33,6 +33,8 @@ interface ServiceInterface
 
     public function getTimesCrashed(): int;
 
+    public function getJobId(): int;
+
     /** @injected:configuration */
     public function setServiceUpdateRetryFactory(Retry\FactoryInterface $updateRetryFactory);
 

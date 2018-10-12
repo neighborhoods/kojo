@@ -128,4 +128,9 @@ class Service implements ServiceInterface
     {
         return $this->getApiV1JobSchedulerFactory()->create();
     }
+
+    public function getJobId(): int
+    {
+        return $this->_getJob()->getId();
+    }
 }
