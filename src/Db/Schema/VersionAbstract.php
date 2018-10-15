@@ -7,6 +7,7 @@ use Doctrine\DBAL\Schema\Table;
 use Neighborhoods\Kojo\Doctrine;
 use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
+use Doctrine\DBAL\Types\Type;
 
 abstract class VersionAbstract implements VersionInterface
 {
@@ -19,14 +20,37 @@ abstract class VersionAbstract implements VersionInterface
     {
         $connection = $this->_getDoctrineConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_SCHEMA);
         if (!$connection->getSchemaManager()->tablesExist([$this->_getTableName()])) {
-            $connection->beginTransaction();
-            try {
-                $this->_assembleSchemaChanges();
-                $connection->getSchemaManager()->createTable($this->_getCreateTable());
-                $connection->commit();
-            } catch (\Throwable $throwable) {
-                $connection->rollBack();
-                throw $throwable;
+            while (true) {
+                $connection->beginTransaction();
+                try {
+                    $this->_assembleSchemaChanges();
+                    $connection->getSchemaManager()->createTable($this->_getCreateTable());
+                    $connection->commit();
+                    break;
+                } catch (\Doctrine\DBAL\DBALException $e) {
+                    $stackTrace = $e->getTrace();
+                    $exceptionThrowingFunctionTrace = $stackTrace[0];
+                    $exceptionThrowingFunctionName = $exceptionThrowingFunctionTrace['function'];
+
+                    if ($exceptionThrowingFunctionName === 'getDoctrineTypeMapping') {
+                        $unsupportedType = $exceptionThrowingFunctionTrace['args'][0];
+
+                        // roll back transaction so we don't have any inconsistent state
+                        $connection->rollBack();
+
+                        // tell Doctrine to treat this non-standard type (e.g. enum, point, geometry) as a string
+                        // kojo doesn't use non-standard types, but Doctrine scans all tables when attempting
+                        // to apply your schema changes
+                        $connection->getDatabasePlatform()->registerDoctrineTypeMapping($unsupportedType, Type::STRING);
+
+                        continue;
+                    } else {
+                        throw $e;
+                    }
+                } catch (\Throwable $throwable) {
+                    $connection->rollBack();
+                    throw $throwable;
+                }
             }
         }
 
