@@ -10,29 +10,7 @@ A distributed task manager.
 * Status system.
 * Distributed IPC.
 
-### Install Kōjō
-```bash
-$ cd example
-$ vendor/bin/kojo db:setup:install $PWD/src/V1/Environment
-```
+## Trying out Kōjō
 
-### Setting up a Worker.
-```bash
-$ cd example
-$ php bin/setup-worker.php
-```
+Real-world use cases for Kōjō and instructions for getting Kōjō up and running in your project can be found at [KojoFitness](https://github.com/neighborhoods/KojoFitness).
 
-### Example usage
-Change `https://sqs.us-east-1.amazonaws.com/272157948465/local-bwilson` in `example/src` and `example/bin/create-messages.php` to your favorite SQS queue.
-
-```bash
-$ cd example
-$ php bin/create-messages.php
-$ vendor/bin/kojo process:pool:server:start $PWD/src/V1/Environment
-```
-
-### Uninstall Kōjō
-```bash
-$ cd example
-$ vendor/bin/kojo db:tear_down:uninstall $PWD/src/V1/Environment
-```

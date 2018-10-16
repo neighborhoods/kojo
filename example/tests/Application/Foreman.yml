@@ -1,4 +1,0 @@
-services:
-  foreman:
-    public: true
-    alias: neighborhoods.kojo.foreman
