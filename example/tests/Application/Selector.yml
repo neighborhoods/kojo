@@ -1,4 +1,0 @@
-services:
-  selector:
-    public: true
-    alias: neighborhoods.kojo.selector

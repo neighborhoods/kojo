@@ -1,4 +1,0 @@
-services:
-  db.setup:
-    public: true
-    alias: neighborhoods.kojo.db.setup
