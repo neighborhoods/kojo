@@ -8,17 +8,19 @@
         {
             "name": "Brad Wilson",
             "email": "brad.wilson@neighborhoods.com"
+        },
+        {
+            "name": "Alex Berryman",
+            "email": "alex.berryman@neighborhoods.com"
+        },
+        {
+            "name": "Przemyslaw Mucha",
+            "email": "przemyslaw.mucha@neighborhoods.com"
         }
     ],
     "config": {
         "sort-packages": true
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://satis.neighborhoods.com"
-        }
-    ],
     "require": {
         "php": ">=7.1",
         "symfony/filesystem": "^4.0",

@@ -1,4 +1,0 @@
-services:
-  db.tear_down:
-    public: true
-    alias: neighborhoods.kojo.db.tear_down
