@@ -15,46 +15,58 @@ abstract class VersionAbstract implements VersionInterface
     use Doctrine\Connection\Decorator\Repository\AwareTrait;
     protected $_createTable;
     protected $_tableName;
+    protected $_mostRecentUnsupportedType;
 
     public function applySchemaSetupChanges(): VersionInterface
     {
         $connection = $this->_getDoctrineConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_SCHEMA);
         if (!$connection->getSchemaManager()->tablesExist([$this->_getTableName()])) {
-            while (true) {
+            try {
                 $connection->beginTransaction();
-                try {
-                    $this->_assembleSchemaChanges();
-                    $connection->getSchemaManager()->createTable($this->_getCreateTable());
-                    $connection->commit();
-                    break;
-                } catch (\Doctrine\DBAL\DBALException $e) {
-                    $stackTrace = $e->getTrace();
-                    $exceptionThrowingFunctionTrace = $stackTrace[0];
-                    $exceptionThrowingFunctionName = $exceptionThrowingFunctionTrace['function'];
-
-                    if ($exceptionThrowingFunctionName === 'getDoctrineTypeMapping') {
-                        $unsupportedType = $exceptionThrowingFunctionTrace['args'][0];
-
-                        // roll back transaction so we don't have any inconsistent state
-                        $connection->rollBack();
-
-                        // tell Doctrine to treat this non-standard type (e.g. enum, point, geometry) as a string
-                        // kojo doesn't use non-standard types, but Doctrine scans all tables when attempting
-                        // to apply your schema changes
-                        $connection->getDatabasePlatform()->registerDoctrineTypeMapping($unsupportedType, Type::STRING);
-
-                        continue;
-                    } else {
-                        throw $e;
-                    }
-                } catch (\Throwable $throwable) {
+                while (!$this->_canAssembleSchemaChanges()) {
                     $connection->rollBack();
-                    throw $throwable;
+                    $connection
+                        ->getDatabasePlatform()
+                        ->registerDoctrineTypeMapping(
+                            $this->_getMostRecentUnsupportedType(),
+                            Type::STRING
+                        );
+                    $connection->beginTransaction();
                 }
+            } catch (\Throwable $throwable) {
+                $connection->rollBack();
+                throw $throwable;
             }
         }
-
         return $this;
+    }
+
+    protected function _canAssembleSchemaChanges(): bool
+    {
+        try {
+            $this->_assembleSchemaChanges();
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            if ($this->_isUnsupportedTypeException($e)) {
+                return false;
+            }
+
+            throw $e;
+        }
+
+        return true;
+    }
+
+    protected function _isUnsupportedTypeException(\Doctrine\DBAL\DBALException $e) : bool
+    {
+        $stackTrace = $e->getTrace();
+        $exceptionThrowingFunctionTrace = $stackTrace[0];
+
+        if ($exceptionThrowingFunctionTrace['function'] !== 'getDoctrineTypeMapping') {
+            return false;
+        }
+
+        $this->_setMostRecentUnsupportedType($exceptionThrowingFunctionTrace['args'][0]);
+        return true;
     }
 
     abstract protected function _assembleSchemaChanges(): VersionInterface;
@@ -125,5 +137,19 @@ abstract class VersionAbstract implements VersionInterface
     protected function _hasCreateTable(): bool
     {
         return $this->_createTable === null ? false : true;
+    }
+
+    protected function _getMostRecentUnsupportedType() : string
+    {
+        if ($this->_mostRecentUnsupportedType === null) {
+            throw new \LogicException('MostRecentUnsupportedType is not set.');
+        }
+        return $this->_mostRecentUnsupportedType;
+    }
+
+    protected function _setMostRecentUnsupportedType(string $mostRecentUnsupportedType) : VersionInterface
+    {
+        $this->_mostRecentUnsupportedType = $mostRecentUnsupportedType;
+        return $this;
     }
 }
