@@ -33,6 +33,7 @@ class Service implements ServiceInterface
     public function requestRetry(\DateTime $retryDateTime): ServiceInterface
     {
         $this->_createOrUpdate(self::PROP_REQUEST, self::REQUEST_RETRY);
+        $this->_updateOrInsertDateTime($retryDateTime);
 
         return $this;
     }
@@ -132,5 +133,10 @@ class Service implements ServiceInterface
     public function getJobId(): int
     {
         return $this->_getJob()->getId();
+    }
+
+    public function getTimesRetried() : int
+    {
+        return $this->_getJob()->getTimesRetried();
     }
 }
