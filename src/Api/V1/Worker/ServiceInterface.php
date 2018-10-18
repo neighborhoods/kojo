@@ -35,6 +35,8 @@ interface ServiceInterface
 
     public function getJobId(): int;
 
+    public function getTimesRetried(): int;
+
     /** @injected:configuration */
     public function setServiceUpdateRetryFactory(Retry\FactoryInterface $updateRetryFactory);
 
