@@ -134,4 +134,9 @@ class Service implements ServiceInterface
     {
         return $this->_getJob()->getId();
     }
+
+    public function getTimesRetried() : int
+    {
+        return $this->_getJob()->getTimesRetried();
+    }
 }
