@@ -17,7 +17,6 @@ services:
       - [setApiV1WorkerService, ['@api.v1.worker.service']]
       - [setStateService, ['@state.service']]
       - [setMessageBroker, ['@message.broker.redis']]
-      - [setApmNewRelic, ['@apm.new_relic']]
   foreman:
     alias: neighborhoods.kojo.foreman
     public: false

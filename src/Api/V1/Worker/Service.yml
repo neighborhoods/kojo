@@ -9,5 +9,6 @@ services:
       - [setServiceUpdateRetryFactory, ['@service.update.retry.factory']]
       - [setApiV1JobSchedulerFactory, ['@api.v1.job.scheduler.factory']]
       - [setApiV1Logger, ['@api.v1.logger']]
+      - [setApmNewRelic, ['@apm.new_relic']]
   api.v1.worker.service:
     alias: neighborhoods.kojo.api.v1.worker.service
