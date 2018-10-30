@@ -32,10 +32,9 @@ class Locator implements LocatorInterface
                     throw new \RuntimeException("Class[$className] and method[$methodName] is not callable.");
                 }
             } catch (\Throwable $throwable) {
-                throw (new Exception(
-                    $throwable->getMessage(),
-                    $throwable
-                ))->setCode(Exception::CODE_CANNOT_INSTANTIATE_WORKER);
+                throw (new Exception())
+                    ->setCode(Exception::CODE_CANNOT_INSTANTIATE_WORKER)
+                    ->setPrevious($throwable);
             }
         }
 

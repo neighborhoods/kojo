@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Runtime\ExceptionInterface:
+    class: Neighborhoods\Kojo\Runtime\Exception
+    shared: false

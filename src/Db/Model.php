@@ -78,15 +78,14 @@ class Model implements ModelInterface
         $loadQueryBuilder = $this->_getLoadQueryBuilder($propertyName, $propertyValue);
         $record = $loadQueryBuilder->execute()->fetchAll();
 
-        if (isset($record[0])) {
-            if (!isset($record[1])) {
-                $this->_hydrate($record[0]);
-            } else {
-                throw (new LoadException())->setCode(LoadException::CODE_MULTIPLE_RECORDS_RETRIEVED);
-            }
-        } else {
+        if (!isset($record[0])) {
             throw (new LoadException())->setCode(LoadException::CODE_NO_DATA_LOADED);
         }
+        if (isset($record[1])) {
+            throw (new LoadException())->setCode(LoadException::CODE_MULTIPLE_RECORDS_RETRIEVED);
+        }
+
+        $this->_hydrate($record[0]);
 
         return $this;
     }
