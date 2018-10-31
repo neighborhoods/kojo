@@ -5,6 +5,7 @@ namespace Neighborhoods\Kojo\Api\V1\Worker;
 
 use Neighborhoods\Kojo\Api\V1\Job\SchedulerInterface;
 use Neighborhoods\Kojo\Api\V1\LoggerInterface;
+use Neighborhoods\Kojo\Apm;
 use Neighborhoods\Kojo\Data\Job;
 use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Api;
@@ -22,13 +23,14 @@ class Service implements ServiceInterface
     use Update\Complete\Failed\Factory\AwareTrait;
     use Create\Factory\AwareTrait;
     use Defensive\AwareTrait;
-    protected const     PROP_REQUEST = 'request';
-    protected const     PROP_RETRY_DATE_TIME = 'retry_date_time';
-    protected const     REQUEST_RETRY = 'retry';
-    protected const     REQUEST_HOLD = 'hold';
-    protected const     REQUEST_COMPLETE_SUCCESS = 'complete_success';
-    protected const     REQUEST_COMPLETE_FAILED = 'complete_failed';
-    protected const     PROP_REQUEST_APPLIED = 'request_applied';
+    use Apm\NewRelic\AwareTrait;
+    protected const PROP_REQUEST = 'request';
+    protected const PROP_RETRY_DATE_TIME = 'retry_date_time';
+    protected const REQUEST_RETRY = 'retry';
+    protected const REQUEST_HOLD = 'hold';
+    protected const REQUEST_COMPLETE_SUCCESS = 'complete_success';
+    protected const REQUEST_COMPLETE_FAILED = 'complete_failed';
+    protected const PROP_REQUEST_APPLIED = 'request_applied';
 
     public function requestRetry(\DateTime $retryDateTime): ServiceInterface
     {
@@ -138,5 +140,10 @@ class Service implements ServiceInterface
     public function getTimesRetried() : int
     {
         return $this->_getJob()->getTimesRetried();
+    }
+
+    public function getNewRelic() : Apm\NewRelicInterface
+    {
+        return $this->_getApmNewRelic();
     }
 }

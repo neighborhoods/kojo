@@ -28,7 +28,6 @@ class Foreman implements ForemanInterface
     use Update\Complete\Success\Factory\AwareTrait;
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
-    use Apm\NewRelic\AwareTrait;
 
     public function workWorker(): ForemanInterface
     {
@@ -74,13 +73,8 @@ class Foreman implements ForemanInterface
     protected function _runWorker(): ForemanInterface
     {
         try {
-            $className = $this->_getLocator()->getClassName();
-            $methodName = $this->_getLocator()->getMethodName();
-            $this->_getApmNewRelic()->startTransaction();
-            $this->_getApmNewRelic()->nameTransaction($className . '::' . $methodName);
             $this->_injectWorkerService();
             call_user_func($this->_getLocator()->getCallable());
-            $this->_getApmNewRelic()->endTransaction();
         } catch (\Exception $throwable) {
             $this->_crashJob();
             throw $throwable;
