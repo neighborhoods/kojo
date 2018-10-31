@@ -10,6 +10,7 @@ use Neighborhoods\Kojo\Service\Update\Hold;
 use Neighborhoods\Kojo\Service\Update\Retry;
 use Neighborhoods\Kojo\Service\Update\Complete\Success;
 use Neighborhoods\Kojo\Service\Update\Complete\Failed;
+use Neighborhoods\Kojo\Apm;
 
 interface ServiceInterface
 {
@@ -37,6 +38,8 @@ interface ServiceInterface
 
     public function getTimesRetried(): int;
 
+    public function getNewRelic(): Apm\NewRelicInterface;
+
     /** @injected:configuration */
     public function setServiceUpdateRetryFactory(Retry\FactoryInterface $updateRetryFactory);
 
@@ -48,6 +51,9 @@ interface ServiceInterface
 
     /** @injected:configuration */
     public function setServiceUpdateHoldFactory(Hold\FactoryInterface $updateHoldFactory);
+
+    /** @injected:configuration */
+    public function setApmNewRelic(Apm\NewRelicInterface $newRelic);
 
     /** @injected:runtime */
     public function setJob(JobInterface $job);
