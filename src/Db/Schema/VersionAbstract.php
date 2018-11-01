@@ -45,20 +45,20 @@ abstract class VersionAbstract implements VersionInterface
     {
         try {
             $this->_assembleSchemaChanges();
-        } catch (\Doctrine\DBAL\DBALException $e) {
-            if ($this->_isUnsupportedTypeException($e)) {
+        } catch (\Doctrine\DBAL\DBALException $doctrineDbalDbalException) {
+            if ($this->_isUnsupportedTypeException($doctrineDbalDbalException)) {
                 return false;
             }
 
-            throw $e;
+            throw $doctrineDbalDbalException;
         }
 
         return true;
     }
 
-    protected function _isUnsupportedTypeException(\Doctrine\DBAL\DBALException $e) : bool
+    protected function _isUnsupportedTypeException(\Doctrine\DBAL\DBALException $doctrineDbalDbalException) : bool
     {
-        $stackTrace = $e->getTrace();
+        $stackTrace = $doctrineDbalDbalException->getTrace();
         $exceptionThrowingFunctionTrace = $stackTrace[0];
 
         if ($exceptionThrowingFunctionTrace['function'] !== 'getDoctrineTypeMapping') {
