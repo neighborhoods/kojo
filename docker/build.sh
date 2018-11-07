@@ -30,7 +30,7 @@ done
 
 # Support setting composer token via file
 if [ -f "COMPOSER_GITHUB_TOKEN" ]; then
-    COMPOSER_TOKEN=$(cat COMPOSER_GITHUB_TOKEN | tr -d '[:space:]')
+    COMPOSER_TOKEN=$(tr -d '[:space:]' < COMPOSER_GITHUB_TOKEN)
 fi
 
 if [[ "$COMPOSER_TOKEN" == placeholder* ]]; then
@@ -38,7 +38,7 @@ if [[ "$COMPOSER_TOKEN" == placeholder* ]]; then
     exit 1
 fi
 
-composer config -g github-oauth.github.com $COMPOSER_TOKEN
+composer config -g github-oauth.github.com "$COMPOSER_TOKEN"
 
 if [ -f "DEPLOY_KEY" ]; then
     echo "Installing deploy key"
