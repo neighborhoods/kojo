@@ -12,7 +12,6 @@ class Exception extends \RuntimeException implements ExceptionInterface
     public function __construct()
     {
         $this->addPossibleMessage(self::CODE_ANONYMOUS, 'An anonymous runtime exception occurred.');
-        $this->addMessageFromCode(self::CODE_ANONYMOUS);
 
         return $this;
     }
