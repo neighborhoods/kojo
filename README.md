@@ -7,7 +7,6 @@ A distributed task manager.
 * Distributed, cooperative, process-aware semaphores and mutex's.
 * Static cron scheduling.
 * Multi-process model.
-* Status system.
 * Distributed IPC.
 
 ## Trying out Kōjō
