@@ -1,0 +1,8 @@
+services:
+  Neighborhoods\Kojo\Api\V1\RDBMS\Connection\ServiceInterface:
+    class: Neighborhoods\Kojo\Api\V1\RDBMS\Connection\Service
+    public: false
+    shared: true
+    calls:
+    - [setDoctrineConnectionDecoratorRepository, ['@neighborhoods.kojo.doctrine.connection.decorator.repository']]
+    - [setDoctrineConnectionDecoratorFactory, ['@neighborhoods.kojo.doctrine.connection.decorator.factory']]

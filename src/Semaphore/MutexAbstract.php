@@ -7,7 +7,6 @@ use Neighborhoods\Kojo\Exception;
 
 abstract class MutexAbstract implements MutexInterface
 {
-    use Exception\Runtime\Filesystem\AwareTrait;
     protected $_isBlocking;
     protected $_resource;
 

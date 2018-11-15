@@ -28,6 +28,7 @@ class Foreman implements ForemanInterface
     use Update\Complete\Success\Factory\AwareTrait;
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
+    use Api\V1\RDBMS\Connection\Service\AwareTrait;
 
     public function workWorker(): ForemanInterface
     {
@@ -70,10 +71,21 @@ class Foreman implements ForemanInterface
         return $this;
     }
 
+    protected function _injectRDBMSConnectionService(): ForemanInterface
+    {
+        $worker = $this->_getLocator()->getClass();
+        if (method_exists($worker, 'setApiV1RDBMSConnectionService')) {
+            $worker->setApiV1RDBMSConnectionService($this->getApiV1RDBMSConnectionService());
+        }
+
+        return $this;
+    }
+
     protected function _runWorker(): ForemanInterface
     {
         try {
             $this->_injectWorkerService();
+            $this->_injectRDBMSConnectionService();
             call_user_func($this->_getLocator()->getCallable());
         } catch (\Exception $throwable) {
             $this->_crashJob();

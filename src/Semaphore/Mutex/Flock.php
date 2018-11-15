@@ -30,7 +30,7 @@ class Flock extends MutexAbstract
             if (flock($this->_getLockFilePointer(), $this->_getFlockLockOperation()) === true) {
                 $this->_hasLock = true;
             }
-        }else {
+        } else {
             throw new \LogicException('The mutex already has obtained a lock.');
         }
 
@@ -41,14 +41,14 @@ class Flock extends MutexAbstract
     {
         if ($this->_hasLock === true) {
             if (flock($this->_getLockFilePointer(), LOCK_UN) === false) {
-                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_UNLOCK_FAILED);
+                throw (new Runtime\Filesystem())->setCode(Runtime\Filesystem::CODE_UNLOCK_FAILED);
             }
             $this->_hasLock = false;
             if (fclose($this->_getLockFilePointer()) === false) {
-                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FCLOSE_FAILED);
                 $this->_filePointer = null;
+                throw (new Runtime\Filesystem())->setCode(Runtime\Filesystem::CODE_FCLOSE_FAILED);
             }
-        }else {
+        } else {
             throw new \LogicException('The mutex has not obtained a lock.');
         }
 
@@ -69,7 +69,7 @@ class Flock extends MutexAbstract
 
             $filePointer = fopen($this->_getFilePath(), $this->_getFileMode());
             if (!is_resource($filePointer) || $filePointer === false) {
-                $this->_throwNewFilesystemException(Runtime\Filesystem::CODE_FOPEN_FAILED);
+                throw (new Runtime\Filesystem())->setCode(Runtime\Filesystem::CODE_FOPEN_FAILED);
             }
             $this->_filePointer = $filePointer;
         }
@@ -102,7 +102,7 @@ class Flock extends MutexAbstract
     {
         if ($this->_fileMode === null) {
             $this->_fileMode = $fileMode;
-        }else {
+        } else {
             throw new \LogicException('File mode is already set.');
         }
 
@@ -123,7 +123,7 @@ class Flock extends MutexAbstract
         if ($this->_directoryPath === null) {
             if ($this->_exists(self::PROP_DIRECTORY_PATH_PREFIX)) {
                 $directoryPathPrefix = $this->_getDirectoryPathPrefix();
-            }else {
+            } else {
                 $directoryPathPrefix = '';
             }
             $this->_directoryPath = $directoryPathPrefix . $this->_getResource()->getResourcePath();
@@ -154,7 +154,7 @@ class Flock extends MutexAbstract
     {
         if ($this->_directoryMode === null) {
             $this->_directoryMode = $directoryMode;
-        }else {
+        } else {
             throw new \LogicException('Directory mode is already set.');
         }
 
