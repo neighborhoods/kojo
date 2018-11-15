@@ -8,6 +8,4 @@ interface ExceptionInterface extends \Throwable, \JsonSerializable
     public function setCode(string $code): ExceptionInterface;
 
     public function addMessage(string $additionalMessage): ExceptionInterface;
-
-    public function jsonSerialize();
 }
