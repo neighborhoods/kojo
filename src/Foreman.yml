@@ -4,19 +4,20 @@ services:
     shared: false
     public: false
     calls:
-      - [setTypeRepository, ['@type.repository']]
-      - [setSelector, ['@selector']]
-      - [setLocator, ['@worker.locator']]
-      - [setSemaphore, ['@semaphore']]
-      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job']]
-      - [setServiceUpdateWorkFactory, ['@service.update.work.factory']]
-      - [setServiceUpdatePanicFactory, ['@service.update.panic.factory']]
-      - [setServiceUpdateCrashFactory, ['@service.update.crash.factory']]
-      - [setServiceUpdateCompleteSuccessFactory, ['@service.update.complete.success.factory']]
-      - [setLogger, ['@process.pool.logger']]
-      - [setApiV1WorkerService, ['@api.v1.worker.service']]
-      - [setStateService, ['@state.service']]
-      - [setMessageBroker, ['@message.broker.redis']]
+    - [setTypeRepository, ['@type.repository']]
+    - [setSelector, ['@selector']]
+    - [setLocator, ['@worker.locator']]
+    - [setSemaphore, ['@semaphore']]
+    - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job']]
+    - [setServiceUpdateWorkFactory, ['@service.update.work.factory']]
+    - [setServiceUpdatePanicFactory, ['@service.update.panic.factory']]
+    - [setServiceUpdateCrashFactory, ['@service.update.crash.factory']]
+    - [setServiceUpdateCompleteSuccessFactory, ['@service.update.complete.success.factory']]
+    - [setLogger, ['@process.pool.logger']]
+    - [setApiV1WorkerService, ['@api.v1.worker.service']]
+    - [setStateService, ['@state.service']]
+    - [setMessageBroker, ['@message.broker.redis']]
+    - [setApiV1RDBMSConnectionService, ['@Neighborhoods\Kojo\Api\V1\RDBMS\Connection\ServiceInterface']]
   foreman:
     alias: neighborhoods.kojo.foreman
     public: false

@@ -4,10 +4,9 @@ A distributed task manager.
 
 ### `Kōjō` is a collection of the following components:
 * Distributed task management.
-* Distributed, cooperative, process-aware semaphores and mutex's.
+* Distributed, cooperative, process-aware semaphores and mutexes.
 * Static cron scheduling.
 * Multi-process model.
-* Status system.
 * Distributed IPC.
 
 ## Trying out Kōjō
