@@ -23,7 +23,7 @@ class Repository implements RepositoryInterface
     public function createById(string $id): RepositoryInterface
     {
         if (isset($this->_getDoctrineConnectionDecoratorArray()[$id])) {
-            throw new \LogicException("Decorator with ID[$id] is already set.");
+            throw new \LogicException("Decorator with ID[$id] already exists.");
         } else {
             $connectionDecorator = $this->_getDoctrineConnectionDecoratorFactory()->create()->setId($id);
             $this->_getDoctrineConnectionDecoratorArray()[$id] = $connectionDecorator;
@@ -41,6 +41,41 @@ class Repository implements RepositoryInterface
         return $this->_getDoctrineConnectionDecoratorArray()[$id];
     }
 
+    public function remove(DecoratorInterface $decorator): RepositoryInterface
+    {
+        $id = $decorator->getId();
+        if (isset($this->_getDoctrineConnectionDecoratorArray()[$id])) {
+            unset($this->_getDoctrineConnectionDecoratorArray()[$id]);
+        } else {
+            throw new \LogicException("Decorator with ID[$id] does not exist.");
+        }
+
+        return $this;
+    }
+
+    public function add(DecoratorInterface $decorator): RepositoryInterface
+    {
+        $id = $decorator->getId();
+        if (isset($this->_getDoctrineConnectionDecoratorArray()[$id])) {
+            throw new \LogicException("Decorator with ID[$id] already exists.");
+        }
+        $this->_getDoctrineConnectionDecoratorArray()[$id] = $decorator;
+
+        return $this;
+    }
+
+    public function replace(DecoratorInterface $decorator): RepositoryInterface
+    {
+        $id = $decorator->getId();
+        if (!isset($this->_getDoctrineConnectionDecoratorArray()[$id])) {
+            throw new \LogicException("Decorator with ID[$id] does not exist.");
+        }
+        unset($this->_getDoctrineConnectionDecoratorArray()[$id]);
+        $this->_getDoctrineConnectionDecoratorArray()[$id] = $decorator;
+
+        return $this;
+    }
+
     public function getConnection(string $id): Connection
     {
         return $this->get($id)->getDoctrineConnection();
@@ -55,21 +90,9 @@ class Repository implements RepositoryInterface
     {
         return $this->getConnection($id)->getSchemaManager();
     }
-
     public function createSchema(string $id): Schema
     {
         return $this->getSchemaManager($id)->createSchema();
-    }
-
-    public function add(DecoratorInterface $decorator): RepositoryInterface
-    {
-        $id = $decorator->getId();
-        if (isset($this->_getDoctrineConnectionDecoratorArray()[$id])) {
-            throw new \LogicException("Decorator with ID[$id] is already set.");
-        }
-        $this->_getDoctrineConnectionDecoratorArray()[$id] = $decorator;
-
-        return $this;
     }
 
     protected function _getDoctrineConnectionDecoratorArray(): DecoratorArrayInterface

@@ -25,6 +25,10 @@ interface RepositoryInterface
 
     public function add(DecoratorInterface $decorator): RepositoryInterface;
 
+    public function replace(DecoratorInterface $decorator): RepositoryInterface;
+
+    public function remove(DecoratorInterface $decorator): RepositoryInterface;
+
     public function createQueryBuilder(string $id): QueryBuilder;
 
     public function createSchema(string $id): Schema;
