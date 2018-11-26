@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\SearchCriteria\Filter\Map\FactoryInterface:
+    class: Neighborhoods\Kojo\SearchCriteria\Filter\Map\Factory
+    calls:
+    - [setSearchCriteriaFilterMap, ['@Neighborhoods\Kojo\SearchCriteria\Filter\MapInterface']]

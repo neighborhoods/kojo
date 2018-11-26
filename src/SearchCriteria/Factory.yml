@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\SearchCriteria\FactoryInterface:
+    class: Neighborhoods\Kojo\SearchCriteria\Factory
+    calls:
+    - [setSearchCriteria, ['@Neighborhoods\Kojo\SearchCriteriaInterface']]

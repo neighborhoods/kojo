@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\Kojo\Notifier\Map\FactoryInterface:
+    class: Neighborhoods\Kojo\Notifier\Map\Factory
+    public: false
+    shared: true
+    calls:
+      - [setRETS1NotifierMap, ['@Neighborhoods\Kojo\Notifier\MapInterface']]

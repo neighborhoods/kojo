@@ -1,0 +1,10 @@
+services:
+  Neighborhoods\Kojo\Notification\Map\RepositoryInterface:
+    class: Neighborhoods\Kojo\Notification\Map\Repository
+    public: false
+    shared: true
+    calls:
+      - [setRETS1NotificationMapFactory, ['@Neighborhoods\Kojo\Notification\Map\FactoryInterface']]
+      - [setRETS1NotificationMapBuilderFactory, ['@Neighborhoods\Kojo\Notification\Map\Builder\FactoryInterface']]
+      - [setDoctrineDBALConnectionDecoratorRepository, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\RepositoryInterface']]
+      - [setSearchCriteriaDoctrineDBALQueryQueryBuilderBuilderFactory, ['@Neighborhoods\Kojo\SearchCriteria\Doctrine\DBAL\Query\QueryBuilder\Builder\FactoryInterface']]

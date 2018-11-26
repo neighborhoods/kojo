@@ -1,0 +1,8 @@
+services:
+  Neighborhoods\Kojo\SearchCriteria\Filter\Group\Map\Repository\HandlerInterface:
+    class: Neighborhoods\Kojo\SearchCriteria\Filter\Group\Map\Repository\Handler
+    public: false
+    shared: false
+    calls:
+      - [setSearchCriteriaFilterGroupMapRepository, ['@Neighborhoods\Kojo\SearchCriteria\Filter\Group\Map\RepositoryInterface']]
+      - [setSearchCriteriaServerRequestBuilderFactory, ['@Neighborhoods\Kojo\SearchCriteria\ServerRequest\Builder\FactoryInterface']]

@@ -1,0 +1,10 @@
+services:
+  Neighborhoods\Kojo\SearchCriteria\Filter\Group\RepositoryInterface:
+    class: Neighborhoods\Kojo\SearchCriteria\Filter\Group\Repository
+    public: false
+    shared: true
+    calls:
+      - [setSearchCriteriaFilterGroupFactory, ['@Neighborhoods\Kojo\SearchCriteria\Filter\Group\FactoryInterface']]
+      - [setSearchCriteriaFilterGroupBuilderFactory, ['@Neighborhoods\Kojo\SearchCriteria\Filter\Group\Builder\FactoryInterface']]
+      - [setDoctrineDBALConnectionDecoratorRepository, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\RepositoryInterface']]
+      - [setSearchCriteriaDoctrineDBALQueryQueryBuilderBuilderFactory, ['@Neighborhoods\Kojo\SearchCriteria\Doctrine\DBAL\Query\QueryBuilder\Builder\FactoryInterface']]

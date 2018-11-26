@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\Kojo\SearchCriteriaInterface:
+    class: Neighborhoods\Kojo\SearchCriteria
+    calls:
+    - [setSearchCriteriaFilterMap, ['@Neighborhoods\Kojo\SearchCriteria\Filter\MapInterface']]
+    - [setSearchCriteriaSortOrderMap, ['@Neighborhoods\Kojo\SearchCriteria\SortOrder\MapInterface']]
+    shared: false

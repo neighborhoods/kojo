@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\SearchCriteria\Filter\Group\MapInterface:
+    class: Neighborhoods\Kojo\SearchCriteria\Filter\Group\Map
+    public: false
+    shared: false

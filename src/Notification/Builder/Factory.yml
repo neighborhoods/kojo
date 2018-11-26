@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\Kojo\Notification\Builder\FactoryInterface:
+    class: Neighborhoods\Kojo\Notification\Builder\Factory
+    public: false
+    shared: true
+    calls:
+      - [setRETS1NotificationBuilder, ['@Neighborhoods\Kojo\Notification\BuilderInterface']]

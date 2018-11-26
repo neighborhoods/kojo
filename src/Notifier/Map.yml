@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Notifier\MapInterface:
+    class: Neighborhoods\Kojo\Notifier\Map
+    public: false
+    shared: false

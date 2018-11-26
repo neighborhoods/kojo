@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\NotifierInterface:
+    class: Neighborhoods\Kojo\Notifier
+    public: false
+    shared: true
