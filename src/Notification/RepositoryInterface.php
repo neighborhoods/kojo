@@ -3,19 +3,19 @@
 namespace Neighborhoods\Kojo\Notification;
 
 use Neighborhoods\Kojo\NotificationInterface;
-use Neighborhoods\Kojo\SearchCriteriaInterface;
+use Neighborhoods\Kojo\AskInterface; // "Root" level like SC was.
 
 interface RepositoryInterface
 {
     public function add(NotificationInterface $notification): RepositoryInterface;
 
-    public function exists(NotificationInterface $notification): bool;
+    public function exists(AskInterface $ask): bool;
 
-    public function get(SearchCriteriaInterface $searchCriteria): NotificationInterface;
+    public function get(AskInterface $ask): NotificationInterface;
 
-    public function replace(NotificationInterface $notification): RepositoryInterface;
+    public function replace(AskInterface $ask): RepositoryInterface;
 
-    public function remove(NotificationInterface $notification): RepositoryInterface;
+    public function remove(AskInterface $ask): RepositoryInterface;
 
     public function startTransaction(): RepositoryInterface;
 

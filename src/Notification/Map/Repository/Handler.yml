@@ -1,8 +1,0 @@
-services:
-  Neighborhoods\Kojo\Notification\Map\Repository\HandlerInterface:
-    class: Neighborhoods\Kojo\Notification\Map\Repository\Handler
-    public: false
-    shared: false
-    calls:
-      - [setRETS1NotificationMapRepository, ['@Neighborhoods\Kojo\Notification\Map\RepositoryInterface']]
-      - [setSearchCriteriaServerRequestBuilderFactory, ['@Neighborhoods\Kojo\SearchCriteria\ServerRequest\Builder\FactoryInterface']]

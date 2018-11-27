@@ -1,4 +1,0 @@
-services:
-  Neighborhoods\Kojo\SearchCriteria\SortOrderInterface:
-    class: Neighborhoods\Kojo\SearchCriteria\SortOrder
-    shared: false

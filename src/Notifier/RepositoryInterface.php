@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Notifier;
 interface RepositoryInterface
 {
 
-    public function get(\Neighborhoods\Kojo\SearchCriteriaInterface $searchCriteria) : \Neighborhoods\Kojo\NotifierInterface;
+    public function get(\Neighborhoods\Kojo\WhereInterface $where) : \Neighborhoods\Kojo\NotifierInterface;
     public function add(\Neighborhoods\Kojo\NotifierInterface $Notifier) : \Neighborhoods\Kojo\Notifier\RepositoryInterface;
     public function exists(\Neighborhoods\Kojo\NotifierInterface $Notifier) : bool;
     public function replace(\Neighborhoods\Kojo\NotifierInterface $Notifier) : \Neighborhoods\Kojo\Notifier\RepositoryInterface;

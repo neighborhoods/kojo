@@ -7,4 +7,4 @@ services:
       - [setRETS1NotifierFactory, ['@Neighborhoods\Kojo\Notifier\FactoryInterface']]
       - [setRETS1NotifierBuilderFactory, ['@Neighborhoods\Kojo\Notifier\Builder\FactoryInterface']]
       - [setDoctrineDBALConnectionDecoratorRepository, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\RepositoryInterface']]
-      - [setSearchCriteriaDoctrineDBALQueryQueryBuilderBuilderFactory, ['@Neighborhoods\Kojo\SearchCriteria\Doctrine\DBAL\Query\QueryBuilder\Builder\FactoryInterface']]
+      - [setWhereDoctrineDBALQueryQueryBuilderBuilderFactory, ['@Neighborhoods\Kojo\Where\Doctrine\DBAL\Query\QueryBuilder\Builder\FactoryInterface']]

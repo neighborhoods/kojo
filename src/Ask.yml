@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\AskInterface:
+    class: Neighborhoods\Kojo\Ask
+    public: false
+    shared: true

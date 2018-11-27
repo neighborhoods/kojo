@@ -2,20 +2,20 @@
 
 namespace Neighborhoods\Kojo\Notification\Map;
 
+use Neighborhoods\Kojo\AskInterface;
 use Neighborhoods\Kojo\Notification\MapInterface;
-use Neighborhoods\Kojo\SearchCriteriaInterface;
 
 interface RepositoryInterface
 {
     public function add(MapInterface $map): RepositoryInterface;
 
-    public function exists(MapInterface $map): bool;
+    public function exists(AskInterface $ask): bool;
 
-    public function get(SearchCriteriaInterface $searchCriteria): MapInterface;
+    public function get(AskInterface $ask): MapInterface;
 
-    public function replace(MapInterface $map): RepositoryInterface;
+    public function replace(AskInterface $ask): RepositoryInterface;
 
-    public function remove(MapInterface $map): RepositoryInterface;
+    public function remove(AskInterface $ask): RepositoryInterface;
 
     public function startTransaction(): RepositoryInterface;
 

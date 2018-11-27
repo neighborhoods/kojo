@@ -1,8 +1,0 @@
-services:
-  Neighborhoods\Kojo\SearchCriteria\Filter\Group\Repository\HandlerInterface:
-    class: Neighborhoods\Kojo\SearchCriteria\Filter\Group\Repository\Handler
-    public: false
-    shared: false
-    calls:
-      - [setSearchCriteriaFilterGroupRepository, ['@Neighborhoods\Kojo\SearchCriteria\Filter\Group\RepositoryInterface']]
-      - [setSearchCriteriaServerRequestBuilderFactory, ['@Neighborhoods\Kojo\SearchCriteria\ServerRequest\Builder\FactoryInterface']]

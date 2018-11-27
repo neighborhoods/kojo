@@ -7,7 +7,7 @@ class Repository implements RepositoryInterface
 
     use \Neighborhoods\Kojo\Notifier\Map\Builder\AwareTrait;
 
-    public function get(\Neighborhoods\Kojo\SearchCriteriaInterface $searchCriteria) : \Neighborhoods\Kojo\Notifier\MapInterface
+    public function get(\Neighborhoods\Kojo\WhereInterface $where) : \Neighborhoods\Kojo\Notifier\MapInterface
     {
         // TODO: Implement get() method.
         throw new \LogicException('Unimplemented get method.');

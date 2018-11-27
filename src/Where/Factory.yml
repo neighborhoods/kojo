@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Where\FactoryInterface:
+    class: Neighborhoods\Kojo\Where\Factory
+    calls:
+      - [setWhere, ['@Neighborhoods\Kojo\WhereInterface']]

@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Where\SortOrder\Map\FactoryInterface:
+    class: Neighborhoods\Kojo\Where\SortOrder\Map\Factory
+    calls:
+      - [setWhereSortOrderMap, ['@Neighborhoods\Kojo\Where\SortOrder\MapInterface']]

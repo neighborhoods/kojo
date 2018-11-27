@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Where\Filter\GroupInterface:
+    class: Neighborhoods\Kojo\Where\Filter\Group
+    public: false
+    shared: true

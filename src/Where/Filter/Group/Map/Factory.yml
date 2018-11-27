@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\Kojo\Where\Filter\Group\Map\FactoryInterface:
+    class: Neighborhoods\Kojo\Where\Filter\Group\Map\Factory
+    public: false
+    shared: true
+    calls:
+      - [setWhereFilterGroupMap, ['@Neighborhoods\Kojo\Where\Filter\Group\MapInterface']]

@@ -1,4 +1,0 @@
-services:
-  Neighborhoods\Kojo\SearchCriteria\Filter\MapInterface:
-    class: Neighborhoods\Kojo\SearchCriteria\Filter\Map
-    shared: false

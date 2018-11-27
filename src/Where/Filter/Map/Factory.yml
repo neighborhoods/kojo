@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Where\Filter\Map\FactoryInterface:
+    class: Neighborhoods\Kojo\Where\Filter\Map\Factory
+    calls:
+      - [setWhereFilterMap, ['@Neighborhoods\Kojo\Where\Filter\MapInterface']]

@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Where\SortOrderInterface:
+    class: Neighborhoods\Kojo\Where\SortOrder
+    shared: false

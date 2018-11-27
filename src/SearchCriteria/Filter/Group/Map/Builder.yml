@@ -1,8 +1,0 @@
-services:
-  Neighborhoods\Kojo\SearchCriteria\Filter\Group\Map\BuilderInterface:
-    class: Neighborhoods\Kojo\SearchCriteria\Filter\Group\Map\Builder
-    public: false
-    shared: false
-    calls:
-      - [setSearchCriteriaFilterGroupMapFactory, ['@Neighborhoods\Kojo\SearchCriteria\Filter\Group\Map\FactoryInterface']]
-      - [setSearchCriteriaFilterGroupBuilderFactory, ['@Neighborhoods\Kojo\SearchCriteria\Filter\Group\Builder\FactoryInterface']]

@@ -1,5 +1,0 @@
-services:
-  Neighborhoods\Kojo\SearchCriteria\SortOrder\FactoryInterface:
-    class: Neighborhoods\Kojo\SearchCriteria\SortOrder\Factory
-    calls:
-    - [setSearchCriteriaSortOrder, ['@Neighborhoods\Kojo\SearchCriteria\SortOrderInterface']]

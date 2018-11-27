@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Where\SortOrder\MapInterface:
+    class: Neighborhoods\Kojo\Where\SortOrder\Map
+    shared: false

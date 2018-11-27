@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\Notifier\Repository;
 class Handler implements HandlerInterface
 {
 
-    use \Neighborhoods\Kojo\Notifier\Repository\AwareTrait, \Neighborhoods\Kojo\Psr\Http\Message\ServerRequest\AwareTrait, \Neighborhoods\Kojo\SearchCriteria\ServerRequest\Builder\Factory\AwareTrait;
+    use \Neighborhoods\Kojo\Notifier\Repository\AwareTrait, \Neighborhoods\Kojo\Psr\Http\Message\ServerRequest\AwareTrait, \Neighborhoods\Kojo\Where\ServerRequest\Builder\Factory\AwareTrait;
 
     public function handle(\Psr\Http\Message\ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
     {
@@ -16,11 +16,11 @@ class Handler implements HandlerInterface
 
     protected function get() : \Neighborhoods\Kojo\NotifierInterface
     {
-        $searchCriteriaBuilder = $this->getSearchCriteriaServerRequestBuilderFactory()->create();
-        $searchCriteriaBuilder->setPsrHttpMessageServerRequest($this->getPsrHttpMessageServerRequest());
-        $searchCriteria = $searchCriteriaBuilder->build();
+        $whereBuilder = $this->getWhereServerRequestBuilderFactory()->create();
+        $whereBuilder->setPsrHttpMessageServerRequest($this->getPsrHttpMessageServerRequest());
+        $where = $whereBuilder->build();
 
-        return $this->getRETS1NotifierRepository()->get($searchCriteria);
+        return $this->getRETS1NotifierRepository()->get($where);
     }
 
     protected function getRouteResult() : \Zend\Expressive\Router\RouteResult

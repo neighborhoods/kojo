@@ -2,15 +2,16 @@
 
 namespace Neighborhoods\Kojo\Notification;
 
+use Neighborhoods\Kojo\AskInterface; // "Root" level like SC was.
 use Neighborhoods\Kojo\NotificationInterface;
-use Neighborhoods\Kojo\SearchCriteriaInterface;
 use Neighborhoods\Kojo\Notification;
 
 class Repository implements RepositoryInterface
 {
-    use Notification\Builder\AwareTrait;
+    use Notification\Builder\Repository\AwareTrait;
+    use Notification\Factory\Repository\AwareTrait;
 
-    public function get(SearchCriteriaInterface $searchCriteria): NotificationInterface
+    public function get(AskInterface $ask): NotificationInterface
     {
         // TODO: Implement get() method.
         throw new \LogicException('Unimplemented get method.');
@@ -26,7 +27,7 @@ class Repository implements RepositoryInterface
         return $this;
     }
 
-    public function exists(NotificationInterface $notification): bool
+    public function exists(AskInterface $ask): bool
     {
         // TODO: Implement exists() method.
         throw new \LogicException('Unimplemented exists method.');
@@ -34,7 +35,7 @@ class Repository implements RepositoryInterface
         return $this;
     }
 
-    public function replace(NotificationInterface $notification): RepositoryInterface
+    public function replace(AskInterface $ask): RepositoryInterface
     {
         // TODO: Implement replace() method.
         throw new \LogicException('Unimplemented replace method.');
@@ -42,7 +43,7 @@ class Repository implements RepositoryInterface
         return $this;
     }
 
-    public function remove(NotificationInterface $notification): RepositoryInterface
+    public function remove(AskInterface $ask): RepositoryInterface
     {
         // TODO: Implement remove() method.
         throw new \LogicException('Unimplemented remove method.');

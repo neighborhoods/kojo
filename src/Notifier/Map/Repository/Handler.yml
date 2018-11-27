@@ -5,4 +5,4 @@ services:
     shared: false
     calls:
       - [setRETS1NotifierMapRepository, ['@Neighborhoods\Kojo\Notifier\Map\RepositoryInterface']]
-      - [setSearchCriteriaServerRequestBuilderFactory, ['@Neighborhoods\Kojo\SearchCriteria\ServerRequest\Builder\FactoryInterface']]
+      - [setWhereServerRequestBuilderFactory, ['@Neighborhoods\Kojo\Where\ServerRequest\Builder\FactoryInterface']]

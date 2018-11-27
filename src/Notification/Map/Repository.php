@@ -2,15 +2,16 @@
 
 namespace Neighborhoods\Kojo\Notification\Map;
 
+use Neighborhoods\Kojo\AskInterface;
 use Neighborhoods\Kojo\Notification\MapInterface;
-use Neighborhoods\Kojo\SearchCriteriaInterface;
 use Neighborhoods\Kojo\Notification;
 
 class Repository implements RepositoryInterface
 {
-    use Notification\Map\Builder\AwareTrait;
+    use Notification\Map\Builder\Repository\AwareTrait;
+    use Notification\Map\Builder\Repository\AwareTrait;
 
-    public function get(SearchCriteriaInterface $searchCriteria): MapInterface
+    public function get(AskInterface $ask): MapInterface
     {
         // TODO: Implement get() method.
         throw new \LogicException('Unimplemented get method.');
@@ -26,7 +27,7 @@ class Repository implements RepositoryInterface
         return $this;
     }
 
-    public function exists(MapInterface $map): bool
+    public function exists(AskInterface $ask): bool
     {
         // TODO: Implement exists() method.
         throw new \LogicException('Unimplemented exists method.');
@@ -34,7 +35,7 @@ class Repository implements RepositoryInterface
         return $this;
     }
 
-    public function replace(MapInterface $map): RepositoryInterface
+    public function replace(AskInterface $ask): RepositoryInterface
     {
         // TODO: Implement replace() method.
         throw new \LogicException('Unimplemented replace method.');
@@ -42,7 +43,7 @@ class Repository implements RepositoryInterface
         return $this;
     }
 
-    public function remove(MapInterface $map): RepositoryInterface
+    public function remove(AskInterface $ask): RepositoryInterface
     {
         // TODO: Implement remove() method.
         throw new \LogicException('Unimplemented remove method.');

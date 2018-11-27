@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\Kojo\Where\BuilderInterface:
+    class: Neighborhoods\Kojo\Where\Builder
+    public: false
+    shared: false
+    calls:
+      - [setWhereFactory, ['@Neighborhoods\Kojo\Where\FactoryInterface']]

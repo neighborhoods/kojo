@@ -1,0 +1,4 @@
+services:
+  Neighborhoods\Kojo\Where\FilterInterface:
+    class: Neighborhoods\Kojo\Where\Filter
+    shared: false
