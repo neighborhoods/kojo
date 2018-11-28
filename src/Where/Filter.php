@@ -33,7 +33,7 @@ class Filter implements FilterInterface
         return $this;
     }
 
-    public function getValues(): array
+    public function getValue()
     {
         if ($this->values === null) {
             throw new \LogicException('Filter values has not been set.');
@@ -42,7 +42,7 @@ class Filter implements FilterInterface
         return $this->values;
     }
 
-    public function setValues(array $values): FilterInterface
+    public function setValue($values): FilterInterface
     {
         if ($this->values !== null) {
             throw new \LogicException('Filter values is already set.');

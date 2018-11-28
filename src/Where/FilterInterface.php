@@ -9,9 +9,9 @@ interface FilterInterface extends \JsonSerializable
 
     public function setField(string $field): FilterInterface;
 
-    public function getValues(): array;
+    public function getValue();
 
-    public function setValues(array $values): FilterInterface;
+    public function setValue($values): FilterInterface;
 
     public function getConditionType(): string;
 

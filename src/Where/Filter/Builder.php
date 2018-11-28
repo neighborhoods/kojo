@@ -17,7 +17,7 @@ class Builder implements BuilderInterface
         $from = $this->getFrom();
         $filter = $this->getWhereFilterFactory()->create();
         $filter->setField($from['field']);
-        $filter->setValues($from['values']);
+        $filter->setValue($from['value']);
         $filter->setConditionType($from['condition_type']);
 
         return $filter;
