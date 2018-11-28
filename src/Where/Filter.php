@@ -7,7 +7,7 @@ class Filter implements FilterInterface
 {
     protected $field;
     protected $values;
-    protected $condition;
+    protected $condition_type;
 
     public function jsonSerialize()
     {
@@ -52,21 +52,21 @@ class Filter implements FilterInterface
         return $this;
     }
 
-    public function getCondition(): string
+    public function getConditionType(): string
     {
-        if ($this->condition === null) {
-            throw new \LogicException('Filter condition has not been set.');
+        if ($this->condition_type === null) {
+            throw new \LogicException('Filter condition_type has not been set.');
         }
 
-        return $this->condition;
+        return $this->condition_type;
     }
 
-    public function setCondition(string $condition): FilterInterface
+    public function setConditionType(string $condition): FilterInterface
     {
-        if ($this->condition !== null) {
-            throw new \LogicException('Filter condition is already set.');
+        if ($this->condition_type !== null) {
+            throw new \LogicException('Filter condition_type is already set.');
         }
-        $this->condition = $condition;
+        $this->condition_type = $condition;
 
         return $this;
     }

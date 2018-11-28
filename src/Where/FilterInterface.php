@@ -13,7 +13,7 @@ interface FilterInterface extends \JsonSerializable
 
     public function setValues(array $values): FilterInterface;
 
-    public function getCondition(): string;
+    public function getConditionType(): string;
 
-    public function setCondition(string $condition): FilterInterface;
+    public function setConditionType(string $condition): FilterInterface;
 }
