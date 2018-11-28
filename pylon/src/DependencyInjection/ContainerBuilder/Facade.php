@@ -18,6 +18,7 @@ class Facade implements FacadeInterface
     protected $_containerBuilder;
     protected $_yamlServicesFilePaths = [];
     protected $_finderArray;
+    protected $publicDefinitionIds = [];
 
     public function addFinder(Finder $finder): Facade
     {
@@ -56,6 +57,9 @@ class Facade implements FacadeInterface
             foreach ($this->_getYamlServicesFilePaths() as $servicesYmlFilePath) {
                 $loader->import($servicesYmlFilePath);
             }
+            foreach ($this->publicDefinitionIds as $publicDefinitionId) {
+                $containerBuilder->getDefinition($publicDefinitionId)->setPublic(true);
+            }
             $passes = [new AnalyzeServiceReferencesPass(), new InlineServiceDefinitionsPass()];
             $repeatedPass = new RepeatedPass($passes);
             $repeatedPass->process($containerBuilder);
@@ -64,5 +68,15 @@ class Facade implements FacadeInterface
         }
 
         return $this->_containerBuilder;
+    }
+
+    public function addPublicDefinitionId(string $definitionId): FacadeInterface
+    {
+        if (isset($this->publicDefinitionIds[$definitionId])) {
+            throw new \LogicException(sprintf('Public definition ID[%s] is already set.', $definitionId));
+        }
+        $this->publicDefinitionIds[] = $definitionId;
+
+        return $this;
     }
 }
