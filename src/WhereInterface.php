@@ -19,13 +19,13 @@ interface WhereInterface extends \JsonSerializable
 
     public function getSortOrders(): SortOrder\MapInterface;
 
-    public function addSortOrder(SortOrderInterface $sortOrder): WhereInterface;
+    public function addSortOrder(SortOrderInterface $sort_order): WhereInterface;
 
     public function getPageSize(): int;
 
-    public function setPageSize(int $pageSize): WhereInterface;
+    public function setPageSize(int $page_size): WhereInterface;
 
     public function getCurrentPage(): int;
 
-    public function setCurrentPage(int $currentPage): WhereInterface;
+    public function setCurrentPage(int $current_page): WhereInterface;
 }

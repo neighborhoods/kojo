@@ -24,7 +24,7 @@ class Builder implements BuilderInterface
         $sortOrderMapBuilder = $this->getWhereSortOrderMapBuilderFactory()->create();
         $sortOrderMapBuilder->setFrom($from['sort_orders']);
         $where->setWhereSortOrderMap($sortOrderMapBuilder->build());
-        $where->setCurrentPage($from['page_size']);
+        $where->setPageSize($from['page_size']);
         $where->setCurrentPage($from['current_page']);
 
         return $where;

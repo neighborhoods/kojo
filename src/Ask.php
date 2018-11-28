@@ -5,33 +5,33 @@ namespace Neighborhoods\Kojo;
 
 class Ask implements AskInterface
 {
-    protected $search_criteria;
+    protected $where;
     protected $factory_fqcn;
-    protected $with;
     protected $builder_fqcn;
+    protected $with;
 
     public function getWhere(): WhereInterface
     {
-        if ($this->search_criteria === null) {
-            throw new \LogicException('Ask search_criteria has not been set.');
+        if ($this->where === null) {
+            throw new \LogicException('Ask where has not been set.');
         }
 
-        return $this->search_criteria;
+        return $this->where;
     }
 
-    public function setWhere(WhereInterface $search_criteria): AskInterface
+    public function setWhere(WhereInterface $where): AskInterface
     {
-        if ($this->search_criteria !== null) {
-            throw new \LogicException('Ask search_criteria is already set.');
+        if ($this->where !== null) {
+            throw new \LogicException('Ask where is already set.');
         }
-        $this->search_criteria = $search_criteria;
+        $this->where = $where;
 
         return $this;
     }
 
     public function hasWhere(): bool
     {
-        return $this->search_criteria !== null;
+        return $this->where !== null;
     }
 
     public function getFactoryFQCN(): string

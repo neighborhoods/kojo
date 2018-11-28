@@ -22,7 +22,7 @@ class Builder implements BuilderInterface
         $where->setFrom($from['where']);
         $ask->setWhere($where->build());
         $ask->setFactoryFQCN($from['factory_fqcns']);
-        $ask->setFactoryFQCN($from['builder_fqcns']);
+        $ask->setBuilderFQCN($from['builder_fqcns']);
         $ask->setWith($from['with']);
 
         return $ask;

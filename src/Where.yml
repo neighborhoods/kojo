@@ -3,6 +3,3 @@ services:
     class: Neighborhoods\Kojo\Where
     shared: false
     public: false
-    calls:
-      - [setWhereFilterGroupMapFactory, ['@Neighborhoods\Kojo\Where\Filter\Group\Map\FactoryInterface']]
-      - [setWhereSortOrderMapFactory, ['@Neighborhoods\Kojo\Where\SortOrder\Map\FactoryInterface']]

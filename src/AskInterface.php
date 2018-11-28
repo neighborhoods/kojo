@@ -7,7 +7,7 @@ interface AskInterface extends \JsonSerializable
 {
     public function getWhere(): WhereInterface;
 
-    public function setWhere(WhereInterface $search_criteria): AskInterface;
+    public function setWhere(WhereInterface $where): AskInterface;
 
     public function hasWhere(): bool;
 

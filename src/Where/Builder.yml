@@ -5,3 +5,5 @@ services:
     shared: false
     calls:
       - [setWhereFactory, ['@Neighborhoods\Kojo\Where\FactoryInterface']]
+      - [setWhereFilterGroupMapBuilderFactory, ['@Neighborhoods\Kojo\Where\Filter\Group\Map\Builder\FactoryInterface']]
+      - [setWhereSortOrderMapBuilderFactory, ['@Neighborhoods\Kojo\Where\SortOrder\Map\Builder\FactoryInterface']]

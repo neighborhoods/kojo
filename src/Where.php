@@ -14,8 +14,6 @@ class Where implements WhereInterface
     use SortOrder\Map\AwareTrait;
     protected $page_size;
     protected $current_page;
-    protected $filter_groups;
-    protected $sort_orders;
 
     public function jsonSerialize()
     {
@@ -44,9 +42,9 @@ class Where implements WhereInterface
         return $this->getWhereSortOrderMap();
     }
 
-    public function addSortOrder(SortOrderInterface $sortOrder): WhereInterface
+    public function addSortOrder(SortOrderInterface $sort_order): WhereInterface
     {
-        $this->getWhereSortOrderMap()[] = $sortOrder;
+        $this->getWhereSortOrderMap()[] = $sort_order;
 
         return $this;
     }
@@ -54,18 +52,18 @@ class Where implements WhereInterface
     public function getPageSize(): int
     {
         if ($this->page_size === null) {
-            throw new \LogicException('Where pageSize has not been set.');
+            throw new \LogicException('Where page_size has not been set.');
         }
 
         return $this->page_size;
     }
 
-    public function setPageSize(int $pageSize): WhereInterface
+    public function setPageSize(int $page_size): WhereInterface
     {
         if ($this->page_size !== null) {
-            throw new \LogicException('Where pageSize is already set.');
+            throw new \LogicException('Where page_size is already set.');
         }
-        $this->page_size = $pageSize;
+        $this->page_size = $page_size;
 
         return $this;
     }
@@ -73,18 +71,18 @@ class Where implements WhereInterface
     public function getCurrentPage(): int
     {
         if ($this->current_page === null) {
-            throw new \LogicException('Where currentPage has not been set.');
+            throw new \LogicException('Where current_page has not been set.');
         }
 
         return $this->current_page;
     }
 
-    public function setCurrentPage(int $currentPage): WhereInterface
+    public function setCurrentPage(int $current_page): WhereInterface
     {
         if ($this->current_page !== null) {
-            throw new \LogicException('Where currentPage is already set.');
+            throw new \LogicException('Where current_page is already set.');
         }
-        $this->current_page = $currentPage;
+        $this->current_page = $current_page;
 
         return $this;
     }

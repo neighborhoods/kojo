@@ -8,9 +8,12 @@ use Neighborhoods\Kojo\Where\Filter;
 
 class Group implements GroupInterface
 {
-    use Filter\Map\Factory\AwareTrait;
+    use Filter\Map\AwareTrait;
 
-    protected $filters;
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
 
     public function addFilter(FilterInterface $filter): GroupInterface
     {
@@ -22,14 +25,5 @@ class Group implements GroupInterface
     public function getFilters(): Filter\MapInterface
     {
         return $this->getWhereFilterMap();
-    }
-
-    protected function getWhereFilterMap(): MapInterface
-    {
-        if ($this->filters == null) {
-            $this->filters = $this->getWhereFilterMapFactory()->create();
-        }
-
-        return $this->filters;
     }
 }

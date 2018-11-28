@@ -1,0 +1,8 @@
+services:
+  Neighborhoods\Kojo\Where\Filter\Map\BuilderInterface:
+    class: Neighborhoods\Kojo\Where\Filter\Map\Builder
+    public: false
+    shared: false
+    calls:
+      - [setWhereFilterMapFactory, ['@Neighborhoods\Kojo\Where\Filter\Map\FactoryInterface']]
+      - [setWhereFilterBuilderFactory, ['@Neighborhoods\Kojo\Where\Filter\Builder\FactoryInterface']]

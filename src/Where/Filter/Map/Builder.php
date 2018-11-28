@@ -1,25 +1,26 @@
 <?php
 
-namespace Neighborhoods\Kojo\Where\Filter\Group;
+namespace Neighborhoods\Kojo\Where\Filter\Map;
 
-use Neighborhoods\Kojo\Where\Filter\GroupInterface;
 use Neighborhoods\Kojo\Where;
+use Neighborhoods\Kojo\Where\Filter\MapInterface;
 
 class Builder implements BuilderInterface
 {
-    use Where\Filter\Group\Factory\AwareTrait;
-    use Where\Filter\Map\Builder\Factory\AwareTrait;
+    use Where\Filter\Map\Factory\AwareTrait;
+    use Where\Filter\Builder\Factory\AwareTrait;
 
     protected $from;
 
-    public function build(): GroupInterface
+    public function build(): MapInterface
     {
-        $from = $this->getFrom();
-        $group = $this->getWhereFilterGroupFactory()->create();
-        $builder = $this->getWhereFilterMapBuilderFactory()->create();
-        $group->setWhereFilterMap($builder->setFrom($from['filters'])->build());
+        $map = $this->getWhereFilterMapFactory()->create();
+        foreach ($this->getFrom() as $filterExpression) {
+            $builder = $this->getWhereFilterBuilderFactory()->create();
+            $map[] = $builder->setFrom($filterExpression)->build();
+        }
 
-        return $group;
+        return $map;
     }
 
     protected function getFrom(): array

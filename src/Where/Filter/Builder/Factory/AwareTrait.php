@@ -8,12 +8,12 @@ trait AwareTrait
 {
     protected $WhereFilterBuilderFactory = null;
 
-    public function setWhereFilterBuilderFactory(FactoryInterface $WhereFilterBuilderFactory): self
+    public function setWhereFilterBuilderFactory(FactoryInterface $whereFilterBuilderFactory): self
     {
         if ($this->hasWhereFilterBuilderFactory()) {
             throw new \LogicException('WhereFilterBuilderFactory is already set.');
         }
-        $this->WhereFilterBuilderFactory = $WhereFilterBuilderFactory;
+        $this->WhereFilterBuilderFactory = $whereFilterBuilderFactory;
 
         return $this;
     }
