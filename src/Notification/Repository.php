@@ -19,7 +19,7 @@ class Repository implements RepositoryInterface
         return $this;
     }
 
-    public function add(NotificationInterface $notification): RepositoryInterface
+    public function add(AskInterface $ask): RepositoryInterface
     {
         // TODO: Implement add() method.
         throw new \LogicException('Unimplemented add method.');

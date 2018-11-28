@@ -12,7 +12,7 @@ class Factory implements FactoryInterface
 
     public function create() : \Neighborhoods\Kojo\NotifierInterface
     {
-        return clone $this->getRETS1Notifier();
+        return clone $this->getAskNotifier();
     }
 
 

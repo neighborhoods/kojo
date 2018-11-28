@@ -12,18 +12,18 @@ interface MapInterface extends \SeekableIterator, \ArrayAccess, \Serializable, \
 {
 
     /**
-     * @param \Neighborhoods\Kojo\NotificationInterface ...$RETS1Notifications
+     * @param \Neighborhoods\Kojo\NotificationInterface ...$AskNotifications
      */
-    public function __construct(array $RETS1Notifications = [], int $flags = 0);
+    public function __construct(array $AskNotifications = [], int $flags = 0);
     public function offsetGet($index) : \Neighborhoods\Kojo\NotificationInterface;
     /**
-     * @param \Neighborhoods\Kojo\NotificationInterface $RETS1Notification
+     * @param \Neighborhoods\Kojo\NotificationInterface $AskNotification
      */
-    public function offsetSet($index, $RETS1Notification);
+    public function offsetSet($index, $AskNotification);
     /**
-     * @param \Neighborhoods\Kojo\NotificationInterface $RETS1Notification
+     * @param \Neighborhoods\Kojo\NotificationInterface $AskNotification
      */
-    public function append($RETS1Notification);
+    public function append($AskNotification);
     public function current() : \Neighborhoods\Kojo\NotificationInterface;
     public function getArrayCopy() : MapInterface;
     public function toArray() : array;

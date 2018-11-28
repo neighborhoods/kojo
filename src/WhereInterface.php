@@ -9,9 +9,13 @@ use Neighborhoods\Kojo\Where\SortOrderInterface;
 
 interface WhereInterface extends \JsonSerializable
 {
+    public function setWhereFilterGroupMap(Where\Filter\Group\MapInterface $WhereFilterGroupMap);
+
     public function addFilterGroup(Filter\GroupInterface $filter): WhereInterface;
 
     public function getFilterGroups(): Filter\Group\MapInterface;
+
+    public function setWhereSortOrderMap(Where\SortOrder\MapInterface $whereSortOrderMap);
 
     public function getSortOrders(): SortOrder\MapInterface;
 

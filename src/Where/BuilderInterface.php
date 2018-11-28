@@ -8,4 +8,6 @@ use Neighborhoods\Kojo\WhereInterface;
 interface BuilderInterface
 {
     public function build(): WhereInterface;
+
+    public function setFrom(array $from): BuilderInterface;
 }

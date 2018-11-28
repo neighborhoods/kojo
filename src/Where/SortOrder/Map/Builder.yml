@@ -1,0 +1,8 @@
+services:
+  Neighborhoods\Kojo\Where\SortOrder\Map\BuilderInterface:
+    class: Neighborhoods\Kojo\Where\SortOrder\Map\Builder
+    public: false
+    shared: false
+    calls:
+      - [setWhereSortOrderMapFactory, ['@Neighborhoods\Kojo\Where\SortOrder\Map\FactoryInterface']]
+      - [setWhereSortOrderBuilderFactory, ['@Neighborhoods\Kojo\Where\SortOrder\Builder\FactoryInterface']]

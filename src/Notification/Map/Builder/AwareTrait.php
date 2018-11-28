@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notification\Map\Builder;
 trait AwareTrait
 {
 
-    protected $RETS1NotificationMapBuilder = null;
+    protected $AskNotificationMapBuilder = null;
 
-    public function setRETS1NotificationMapBuilder(\Neighborhoods\Kojo\Notification\Map\BuilderInterface $RETS1NotificationMapBuilder) : self
+    public function setAskNotificationMapBuilder(\Neighborhoods\Kojo\Notification\Map\BuilderInterface $AskNotificationMapBuilder) : self
     {
-        if ($this->hasRETS1NotificationMapBuilder()) {
-            throw new \LogicException('RETS1NotificationMapBuilder is already set.');
+        if ($this->hasAskNotificationMapBuilder()) {
+            throw new \LogicException('AskNotificationMapBuilder is already set.');
         }
-        $this->RETS1NotificationMapBuilder = $RETS1NotificationMapBuilder;
+        $this->AskNotificationMapBuilder = $AskNotificationMapBuilder;
 
         return $this;
     }
 
-    protected function getRETS1NotificationMapBuilder() : \Neighborhoods\Kojo\Notification\Map\BuilderInterface
+    protected function getAskNotificationMapBuilder() : \Neighborhoods\Kojo\Notification\Map\BuilderInterface
     {
-        if (!$this->hasRETS1NotificationMapBuilder()) {
-            throw new \LogicException('RETS1NotificationMapBuilder is not set.');
+        if (!$this->hasAskNotificationMapBuilder()) {
+            throw new \LogicException('AskNotificationMapBuilder is not set.');
         }
 
-        return $this->RETS1NotificationMapBuilder;
+        return $this->AskNotificationMapBuilder;
     }
 
-    protected function hasRETS1NotificationMapBuilder() : bool
+    protected function hasAskNotificationMapBuilder() : bool
     {
-        return isset($this->RETS1NotificationMapBuilder);
+        return isset($this->AskNotificationMapBuilder);
     }
 
-    protected function unsetRETS1NotificationMapBuilder() : self
+    protected function unsetAskNotificationMapBuilder() : self
     {
-        if (!$this->hasRETS1NotificationMapBuilder()) {
-            throw new \LogicException('RETS1NotificationMapBuilder is not set.');
+        if (!$this->hasAskNotificationMapBuilder()) {
+            throw new \LogicException('AskNotificationMapBuilder is not set.');
         }
-        unset($this->RETS1NotificationMapBuilder);
+        unset($this->AskNotificationMapBuilder);
 
         return $this;
     }

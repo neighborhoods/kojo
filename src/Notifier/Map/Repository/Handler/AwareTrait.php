@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notifier\Map\Repository\Handler;
 trait AwareTrait
 {
 
-    protected $RETS1NotifierMapRepositoryHandler = null;
+    protected $AskNotifierMapRepositoryHandler = null;
 
-    public function setRETS1NotifierMapRepositoryHandler(\Neighborhoods\Kojo\Notifier\Map\Repository\HandlerInterface $RETS1NotifierMapRepositoryHandler) : self
+    public function setAskNotifierMapRepositoryHandler(\Neighborhoods\Kojo\Notifier\Map\Repository\HandlerInterface $AskNotifierMapRepositoryHandler) : self
     {
-        if ($this->hasRETS1NotifierMapRepositoryHandler()) {
-            throw new \LogicException('RETS1NotifierMapRepositoryHandler is already set.');
+        if ($this->hasAskNotifierMapRepositoryHandler()) {
+            throw new \LogicException('AskNotifierMapRepositoryHandler is already set.');
         }
-        $this->RETS1NotifierMapRepositoryHandler = $RETS1NotifierMapRepositoryHandler;
+        $this->AskNotifierMapRepositoryHandler = $AskNotifierMapRepositoryHandler;
 
         return $this;
     }
 
-    protected function getRETS1NotifierMapRepositoryHandler() : \Neighborhoods\Kojo\Notifier\Map\Repository\HandlerInterface
+    protected function getAskNotifierMapRepositoryHandler() : \Neighborhoods\Kojo\Notifier\Map\Repository\HandlerInterface
     {
-        if (!$this->hasRETS1NotifierMapRepositoryHandler()) {
-            throw new \LogicException('RETS1NotifierMapRepositoryHandler is not set.');
+        if (!$this->hasAskNotifierMapRepositoryHandler()) {
+            throw new \LogicException('AskNotifierMapRepositoryHandler is not set.');
         }
 
-        return $this->RETS1NotifierMapRepositoryHandler;
+        return $this->AskNotifierMapRepositoryHandler;
     }
 
-    protected function hasRETS1NotifierMapRepositoryHandler() : bool
+    protected function hasAskNotifierMapRepositoryHandler() : bool
     {
-        return isset($this->RETS1NotifierMapRepositoryHandler);
+        return isset($this->AskNotifierMapRepositoryHandler);
     }
 
-    protected function unsetRETS1NotifierMapRepositoryHandler() : self
+    protected function unsetAskNotifierMapRepositoryHandler() : self
     {
-        if (!$this->hasRETS1NotifierMapRepositoryHandler()) {
-            throw new \LogicException('RETS1NotifierMapRepositoryHandler is not set.');
+        if (!$this->hasAskNotifierMapRepositoryHandler()) {
+            throw new \LogicException('AskNotifierMapRepositoryHandler is not set.');
         }
-        unset($this->RETS1NotifierMapRepositoryHandler);
+        unset($this->AskNotifierMapRepositoryHandler);
 
         return $this;
     }

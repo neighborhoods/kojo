@@ -8,5 +8,5 @@ interface BuilderInterface
 {
     public function build(): GroupInterface;
 
-    public function setRecord(array $record): BuilderInterface;
+    public function setFrom(array $from): BuilderInterface;
 }

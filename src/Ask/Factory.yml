@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Ask\FactoryInterface:
+    class: Neighborhoods\Kojo\Ask\Factory
+    calls:
+      - [setAsk, ['@Neighborhoods\Kojo\AskInterface']]

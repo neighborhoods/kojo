@@ -10,19 +10,35 @@ class Builder implements BuilderInterface
 {
     use Where\SortOrder\Factory\AwareTrait;
 
+    protected $from;
+
     public function build(): SortOrderInterface
     {
-        // TODO: Implement build() method.
-        throw new \LogicException('Unimplemented build method.');
-    }
+        $from = $this->getFrom();
+        $sortOrder = $this->getWhereSortOrderFactory()->create();
+        $sortOrder->setField($from['field']);
+        $sortOrder->setDirection($from['direction']);
 
-    public function setfrom(array $from): BuilderInterface
-    {
-        return $this;
+        return $sortOrder;
     }
 
     protected function getFrom(): array
     {
+        if ($this->from === null) {
+            throw new \LogicException('Builder from has not been set.');
+        }
 
+        return $this->from;
+    }
+
+    public function setFrom(array $from): BuilderInterface
+    {
+        if ($this->from !== null) {
+            throw new \LogicException('Builder from is already set.');
+        }
+
+        $this->from = $from;
+
+        return $this;
     }
 }

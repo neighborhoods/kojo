@@ -4,7 +4,7 @@ services:
     public: false
     shared: true
     calls:
-      - [setRETS1NotifierMapFactory, ['@Neighborhoods\Kojo\Notifier\Map\FactoryInterface']]
-      - [setRETS1NotifierMapBuilderFactory, ['@Neighborhoods\Kojo\Notifier\Map\Builder\FactoryInterface']]
+      - [setAskNotifierMapFactory, ['@Neighborhoods\Kojo\Notifier\Map\FactoryInterface']]
+      - [setAskNotifierMapBuilderFactory, ['@Neighborhoods\Kojo\Notifier\Map\Builder\FactoryInterface']]
       - [setDoctrineDBALConnectionDecoratorRepository, ['@Neighborhoods\Kojo\Doctrine\DBAL\Connection\Decorator\RepositoryInterface']]
       - [setWhereDoctrineDBALQueryQueryBuilderBuilderFactory, ['@Neighborhoods\Kojo\Where\Doctrine\DBAL\Query\QueryBuilder\Builder\FactoryInterface']]

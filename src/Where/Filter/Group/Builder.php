@@ -8,34 +8,40 @@ use Neighborhoods\Kojo\Where;
 class Builder implements BuilderInterface
 {
     use Where\Filter\Group\Factory\AwareTrait;
+    use Where\Filter\Builder\Factory\AwareTrait;
 
-    protected $record;
+    protected $from;
 
     public function build(): GroupInterface
     {
+        $from = $this->getFrom();
+        $group = $this->getWhereFilterGroupFactory()->create();
+        foreach ($from['filters'] as $filterRecord) {
+            $builder = $this->getWhereFilterBuilderFactory()->create();
+            $group->addFilter($builder->setFrom($filterRecord)->build());
+        }
         // TODO: Implement build() method.
         throw new \LogicException('Unimplemented build method.');
-        $group = $this->getWhereFilterGroupFactory()->create();
 
         return $group;
     }
 
-    protected function getRecord(): array
+    protected function getFrom(): array
     {
-        if ($this->record === null) {
-            throw new \LogicException('Builder record has not been set.');
+        if ($this->from === null) {
+            throw new \LogicException('Builder from has not been set.');
         }
 
-        return $this->record;
+        return $this->from;
     }
 
-    public function setRecord(array $record): BuilderInterface
+    public function setFrom(array $from): BuilderInterface
     {
-        if ($this->record !== null) {
-            throw new \LogicException('Builder record is already set.');
+        if ($this->from !== null) {
+            throw new \LogicException('Builder from is already set.');
         }
 
-        $this->record = $record;
+        $this->from = $from;
 
         return $this;
     }

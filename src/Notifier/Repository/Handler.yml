@@ -4,5 +4,5 @@ services:
     public: false
     shared: false
     calls:
-      - [setRETS1NotifierRepository, ['@Neighborhoods\Kojo\Notifier\RepositoryInterface']]
+      - [setAskNotifierRepository, ['@Neighborhoods\Kojo\Notifier\RepositoryInterface']]
       - [setWhereServerRequestBuilderFactory, ['@Neighborhoods\Kojo\Where\ServerRequest\Builder\FactoryInterface']]

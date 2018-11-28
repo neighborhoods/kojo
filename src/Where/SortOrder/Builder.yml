@@ -1,7 +1,7 @@
 services:
-  Neighborhoods\Kojo\Where\BuilderInterface:
-    class: Neighborhoods\Kojo\Where\Builder
+  Neighborhoods\Kojo\Where\SortOrder\BuilderInterface:
+    class: Neighborhoods\Kojo\Where\SortOrder\Builder
     public: false
     shared: false
     calls:
-      - [setWhereFactory, ['@Neighborhoods\Kojo\Where\FactoryInterface']]
+      - [setWhereSortOrderFactory, ['@Neighborhoods\Kojo\Where\SortOrder\FactoryInterface']]

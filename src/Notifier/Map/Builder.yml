@@ -4,5 +4,5 @@ services:
     public: false
     shared: false
     calls:
-      - [setRETS1NotifierMapFactory, ['@Neighborhoods\Kojo\Notifier\Map\FactoryInterface']]
-      - [setRETS1NotifierBuilderFactory, ['@Neighborhoods\Kojo\Notifier\Builder\FactoryInterface']]
+      - [setAskNotifierMapFactory, ['@Neighborhoods\Kojo\Notifier\Map\FactoryInterface']]
+      - [setAskNotifierBuilderFactory, ['@Neighborhoods\Kojo\Notifier\Builder\FactoryInterface']]

@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notifier\Builder;
 trait AwareTrait
 {
 
-    protected $RETS1NotifierBuilder = null;
+    protected $AskNotifierBuilder = null;
 
-    public function setRETS1NotifierBuilder(\Neighborhoods\Kojo\Notifier\BuilderInterface $RETS1NotifierBuilder) : self
+    public function setAskNotifierBuilder(\Neighborhoods\Kojo\Notifier\BuilderInterface $AskNotifierBuilder) : self
     {
-        if ($this->hasRETS1NotifierBuilder()) {
-            throw new \LogicException('RETS1NotifierBuilder is already set.');
+        if ($this->hasAskNotifierBuilder()) {
+            throw new \LogicException('AskNotifierBuilder is already set.');
         }
-        $this->RETS1NotifierBuilder = $RETS1NotifierBuilder;
+        $this->AskNotifierBuilder = $AskNotifierBuilder;
 
         return $this;
     }
 
-    protected function getRETS1NotifierBuilder() : \Neighborhoods\Kojo\Notifier\BuilderInterface
+    protected function getAskNotifierBuilder() : \Neighborhoods\Kojo\Notifier\BuilderInterface
     {
-        if (!$this->hasRETS1NotifierBuilder()) {
-            throw new \LogicException('RETS1NotifierBuilder is not set.');
+        if (!$this->hasAskNotifierBuilder()) {
+            throw new \LogicException('AskNotifierBuilder is not set.');
         }
 
-        return $this->RETS1NotifierBuilder;
+        return $this->AskNotifierBuilder;
     }
 
-    protected function hasRETS1NotifierBuilder() : bool
+    protected function hasAskNotifierBuilder() : bool
     {
-        return isset($this->RETS1NotifierBuilder);
+        return isset($this->AskNotifierBuilder);
     }
 
-    protected function unsetRETS1NotifierBuilder() : self
+    protected function unsetAskNotifierBuilder() : self
     {
-        if (!$this->hasRETS1NotifierBuilder()) {
-            throw new \LogicException('RETS1NotifierBuilder is not set.');
+        if (!$this->hasAskNotifierBuilder()) {
+            throw new \LogicException('AskNotifierBuilder is not set.');
         }
-        unset($this->RETS1NotifierBuilder);
+        unset($this->AskNotifierBuilder);
 
         return $this;
     }

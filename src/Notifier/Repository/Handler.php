@@ -20,7 +20,7 @@ class Handler implements HandlerInterface
         $whereBuilder->setPsrHttpMessageServerRequest($this->getPsrHttpMessageServerRequest());
         $where = $whereBuilder->build();
 
-        return $this->getRETS1NotifierRepository()->get($where);
+        return $this->getAskNotifierRepository()->get($where);
     }
 
     protected function getRouteResult() : \Zend\Expressive\Router\RouteResult

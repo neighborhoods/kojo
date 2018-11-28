@@ -15,7 +15,7 @@ class Builder implements BuilderInterface
     public function build() : \Neighborhoods\Kojo\NotifierInterface
     {
         $Notifier =
-            $this->getRETS1NotifierFactory()
+            $this->getAskNotifierFactory()
                 ->create();
         return $Notifier->setNotify($this->record['notify'])
 ;

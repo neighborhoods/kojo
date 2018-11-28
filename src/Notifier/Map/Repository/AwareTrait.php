@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notifier\Map\Repository;
 trait AwareTrait
 {
 
-    protected $RETS1NotifierMapRepository = null;
+    protected $AskNotifierMapRepository = null;
 
-    public function setRETS1NotifierMapRepository(\Neighborhoods\Kojo\Notifier\Map\RepositoryInterface $RETS1NotifierMapRepository) : self
+    public function setAskNotifierMapRepository(\Neighborhoods\Kojo\Notifier\Map\RepositoryInterface $AskNotifierMapRepository) : self
     {
-        if ($this->hasRETS1NotifierMapRepository()) {
-            throw new \LogicException('RETS1NotifierMapRepository is already set.');
+        if ($this->hasAskNotifierMapRepository()) {
+            throw new \LogicException('AskNotifierMapRepository is already set.');
         }
-        $this->RETS1NotifierMapRepository = $RETS1NotifierMapRepository;
+        $this->AskNotifierMapRepository = $AskNotifierMapRepository;
 
         return $this;
     }
 
-    protected function getRETS1NotifierMapRepository() : \Neighborhoods\Kojo\Notifier\Map\RepositoryInterface
+    protected function getAskNotifierMapRepository() : \Neighborhoods\Kojo\Notifier\Map\RepositoryInterface
     {
-        if (!$this->hasRETS1NotifierMapRepository()) {
-            throw new \LogicException('RETS1NotifierMapRepository is not set.');
+        if (!$this->hasAskNotifierMapRepository()) {
+            throw new \LogicException('AskNotifierMapRepository is not set.');
         }
 
-        return $this->RETS1NotifierMapRepository;
+        return $this->AskNotifierMapRepository;
     }
 
-    protected function hasRETS1NotifierMapRepository() : bool
+    protected function hasAskNotifierMapRepository() : bool
     {
-        return isset($this->RETS1NotifierMapRepository);
+        return isset($this->AskNotifierMapRepository);
     }
 
-    protected function unsetRETS1NotifierMapRepository() : self
+    protected function unsetAskNotifierMapRepository() : self
     {
-        if (!$this->hasRETS1NotifierMapRepository()) {
-            throw new \LogicException('RETS1NotifierMapRepository is not set.');
+        if (!$this->hasAskNotifierMapRepository()) {
+            throw new \LogicException('AskNotifierMapRepository is not set.');
         }
-        unset($this->RETS1NotifierMapRepository);
+        unset($this->AskNotifierMapRepository);
 
         return $this;
     }

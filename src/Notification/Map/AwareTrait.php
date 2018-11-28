@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notification\Map;
 trait AwareTrait
 {
 
-    protected $RETS1NotificationMap = null;
+    protected $AskNotificationMap = null;
 
-    public function setRETS1NotificationMap(\Neighborhoods\Kojo\Notification\MapInterface $RETS1NotificationMap) : self
+    public function setAskNotificationMap(\Neighborhoods\Kojo\Notification\MapInterface $AskNotificationMap) : self
     {
-        if ($this->hasRETS1NotificationMap()) {
-            throw new \LogicException('RETS1NotificationMap is already set.');
+        if ($this->hasAskNotificationMap()) {
+            throw new \LogicException('AskNotificationMap is already set.');
         }
-        $this->RETS1NotificationMap = $RETS1NotificationMap;
+        $this->AskNotificationMap = $AskNotificationMap;
 
         return $this;
     }
 
-    protected function getRETS1NotificationMap() : \Neighborhoods\Kojo\Notification\MapInterface
+    protected function getAskNotificationMap() : \Neighborhoods\Kojo\Notification\MapInterface
     {
-        if (!$this->hasRETS1NotificationMap()) {
-            throw new \LogicException('RETS1NotificationMap is not set.');
+        if (!$this->hasAskNotificationMap()) {
+            throw new \LogicException('AskNotificationMap is not set.');
         }
 
-        return $this->RETS1NotificationMap;
+        return $this->AskNotificationMap;
     }
 
-    protected function hasRETS1NotificationMap() : bool
+    protected function hasAskNotificationMap() : bool
     {
-        return isset($this->RETS1NotificationMap);
+        return isset($this->AskNotificationMap);
     }
 
-    protected function unsetRETS1NotificationMap() : self
+    protected function unsetAskNotificationMap() : self
     {
-        if (!$this->hasRETS1NotificationMap()) {
-            throw new \LogicException('RETS1NotificationMap is not set.');
+        if (!$this->hasAskNotificationMap()) {
+            throw new \LogicException('AskNotificationMap is not set.');
         }
-        unset($this->RETS1NotificationMap);
+        unset($this->AskNotificationMap);
 
         return $this;
     }

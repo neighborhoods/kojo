@@ -8,5 +8,5 @@ interface BuilderInterface
 {
     public function build(): MapInterface;
 
-    public function setRecords(array $record): BuilderInterface;
+    public function setFrom(array $from): BuilderInterface;
 }

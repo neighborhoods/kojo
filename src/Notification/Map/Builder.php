@@ -14,9 +14,9 @@ class Builder implements BuilderInterface
 
     public function build() : \Neighborhoods\Kojo\Notification\MapInterface
     {
-        $map = $this->getRETS1NotificationMapFactory()->create();
+        $map = $this->getAskNotificationMapFactory()->create();
         foreach ($this->getRecords() as $record) {
-            $builder = $this->getRETS1NotificationBuilderFactory()->create();
+            $builder = $this->getAskNotificationBuilderFactory()->create();
             $item = $builder->setRecord($record)->build();
             $map[$item->getId()] = $item; // remove or change index field as desired
         }

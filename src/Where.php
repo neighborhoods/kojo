@@ -10,8 +10,8 @@ use Neighborhoods\Kojo\Where\SortOrderInterface;
 
 class Where implements WhereInterface
 {
-    use Filter\Group\Map\Factory\AwareTrait;
-    use SortOrder\Map\Factory\AwareTrait;
+    use Filter\Group\Map\AwareTrait;
+    use SortOrder\Map\AwareTrait;
     protected $page_size;
     protected $current_page;
     protected $filter_groups;
@@ -30,6 +30,11 @@ class Where implements WhereInterface
     }
 
     public function getFilterGroups(): Filter\Group\MapInterface
+    {
+        return $this->getWhereFilterGroupMap();
+    }
+
+    public function setFilterGroups(): Filter\Group\MapInterface
     {
         return $this->getWhereFilterGroupMap();
     }
@@ -82,23 +87,5 @@ class Where implements WhereInterface
         $this->current_page = $currentPage;
 
         return $this;
-    }
-
-    protected function getWhereFilterGroupMap(): Filter\Group\MapInterface
-    {
-        if ($this->filter_groups === null) {
-            $this->filter_groups = $this->getWhereFilterGroupMapFactory()->create();
-        }
-
-        return $this->filter_groups;
-    }
-
-    protected function getWhereSortOrderMap(): SortOrder\MapInterface
-    {
-        if ($this->sort_orders === null) {
-            $this->sort_orders = $this->getWhereSortOrderMapFactory()->create();
-        }
-
-        return $this->sort_orders;
     }
 }

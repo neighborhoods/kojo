@@ -8,4 +8,6 @@ use Neighborhoods\Kojo\Where\SortOrderInterface;
 interface BuilderInterface
 {
     public function build(): SortOrderInterface;
+
+    public function setFrom(array $from): BuilderInterface;
 }

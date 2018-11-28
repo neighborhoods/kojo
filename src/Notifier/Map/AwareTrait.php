@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notifier\Map;
 trait AwareTrait
 {
 
-    protected $RETS1NotifierMap = null;
+    protected $AskNotifierMap = null;
 
-    public function setRETS1NotifierMap(\Neighborhoods\Kojo\Notifier\MapInterface $RETS1NotifierMap) : self
+    public function setAskNotifierMap(\Neighborhoods\Kojo\Notifier\MapInterface $AskNotifierMap) : self
     {
-        if ($this->hasRETS1NotifierMap()) {
-            throw new \LogicException('RETS1NotifierMap is already set.');
+        if ($this->hasAskNotifierMap()) {
+            throw new \LogicException('AskNotifierMap is already set.');
         }
-        $this->RETS1NotifierMap = $RETS1NotifierMap;
+        $this->AskNotifierMap = $AskNotifierMap;
 
         return $this;
     }
 
-    protected function getRETS1NotifierMap() : \Neighborhoods\Kojo\Notifier\MapInterface
+    protected function getAskNotifierMap() : \Neighborhoods\Kojo\Notifier\MapInterface
     {
-        if (!$this->hasRETS1NotifierMap()) {
-            throw new \LogicException('RETS1NotifierMap is not set.');
+        if (!$this->hasAskNotifierMap()) {
+            throw new \LogicException('AskNotifierMap is not set.');
         }
 
-        return $this->RETS1NotifierMap;
+        return $this->AskNotifierMap;
     }
 
-    protected function hasRETS1NotifierMap() : bool
+    protected function hasAskNotifierMap() : bool
     {
-        return isset($this->RETS1NotifierMap);
+        return isset($this->AskNotifierMap);
     }
 
-    protected function unsetRETS1NotifierMap() : self
+    protected function unsetAskNotifierMap() : self
     {
-        if (!$this->hasRETS1NotifierMap()) {
-            throw new \LogicException('RETS1NotifierMap is not set.');
+        if (!$this->hasAskNotifierMap()) {
+            throw new \LogicException('AskNotifierMap is not set.');
         }
-        unset($this->RETS1NotifierMap);
+        unset($this->AskNotifierMap);
 
         return $this;
     }

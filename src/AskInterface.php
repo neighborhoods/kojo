@@ -11,15 +11,21 @@ interface AskInterface extends \JsonSerializable
 
     public function hasWhere(): bool;
 
-    public function getUse(): array;
+    public function getFactoryFQCN(): string;
 
-    public function setUse(array $use): AskInterface;
+    public function setFactoryFQCN(string $factory_fqcn): AskInterface;
 
-    public function hasUse(): bool;
+    public function hasFactoryFQCN(): bool;
 
-    public function getWith(): \Object;
+    public function getBuilderFQCN(): string;
 
-    public function setWith(\Object $with): AskInterface;
+    public function setBuilderFQCN(string $builder_fqcn): AskInterface;
+
+    public function hasBuilderFQCN(): bool;
+
+    public function getWith(): array;
+
+    public function setWith(array $with): AskInterface;
 
     public function hasWith(): bool;
 }

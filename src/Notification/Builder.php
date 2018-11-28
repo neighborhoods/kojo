@@ -8,12 +8,11 @@ class Builder implements BuilderInterface
 {
     use \Neighborhoods\Kojo\Notification\Factory\AwareTrait;
 
-    /** @var array */
-    protected $record = null;
+    protected $record;
 
     public function build(): NotificationInterface
     {
-        $Notification = $this->getRETS1NotificationFactory()->create();
+        $Notification = $this->getAskNotificationFactory()->create();
 
         return $Notification;
     }

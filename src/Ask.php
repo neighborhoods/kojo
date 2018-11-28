@@ -6,8 +6,9 @@ namespace Neighborhoods\Kojo;
 class Ask implements AskInterface
 {
     protected $search_criteria;
-    protected $use;
+    protected $factory_fqcn;
     protected $with;
+    protected $builder_fqcn;
 
     public function getWhere(): WhereInterface
     {
@@ -33,31 +34,55 @@ class Ask implements AskInterface
         return $this->search_criteria !== null;
     }
 
-    public function getUse(): array
+    public function getFactoryFQCN(): string
     {
-        if ($this->use === null) {
-            throw new \LogicException('Ask use has not been set.');
+        if ($this->factory_fqcn === null) {
+            throw new \LogicException('Ask factory_fqcn has not been set.');
         }
 
-        return $this->use;
+        return $this->factory_fqcn;
     }
 
-    public function setUse(array $use): AskInterface
+    public function setFactoryFQCN(string $factory_fqcn): AskInterface
     {
-        if ($this->use !== null) {
-            throw new \LogicException('Ask use is already set.');
+        if ($this->factory_fqcn !== null) {
+            throw new \LogicException('Ask factory_fqcn is already set.');
         }
-        $this->use = $use;
+        $this->factory_fqcn = $factory_fqcn;
 
         return $this;
     }
 
-    public function hasUse(): bool
+    public function hasFactoryFQCN(): bool
     {
-        return $this->use !== null;
+        return $this->factory_fqcn !== null;
     }
 
-    public function getWith(): \Object
+    public function getBuilderFQCN(): string
+    {
+        if ($this->builder_fqcn === null) {
+            throw new \LogicException('Ask builder_fqcn has not been set.');
+        }
+
+        return $this->builder_fqcn;
+    }
+
+    public function setBuilderFQCN(string $builder_fqcn): AskInterface
+    {
+        if ($this->builder_fqcn !== null) {
+            throw new \LogicException('Ask builder_fqcn is already set.');
+        }
+        $this->builder_fqcn = $builder_fqcn;
+
+        return $this;
+    }
+
+    public function hasBuilderFQCN(): bool
+    {
+        return $this->builder_fqcn !== null;
+    }
+
+    public function getWith(): array
     {
         if ($this->with === null) {
             throw new \LogicException('Ask with has not been set.');
@@ -66,7 +91,7 @@ class Ask implements AskInterface
         return $this->with;
     }
 
-    public function setWith(\Object $with): AskInterface
+    public function setWith(array $with): AskInterface
     {
         if ($this->with !== null) {
             throw new \LogicException('Ask with is already set.');

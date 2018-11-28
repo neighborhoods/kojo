@@ -4,4 +4,4 @@ services:
     public: false
     shared: true
     calls:
-      - [setRETS1NotifierMapBuilder, ['@Neighborhoods\Kojo\Notifier\Map\BuilderInterface']]
+      - [setAskNotifierMapBuilder, ['@Neighborhoods\Kojo\Notifier\Map\BuilderInterface']]

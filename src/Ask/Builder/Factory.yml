@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\Kojo\Ask\Builder\FactoryInterface:
+    class: Neighborhoods\Kojo\Ask\Builder\Factory
+    public: false
+    shared: true
+    calls:
+      - [setAskBuilder, ['@Neighborhoods\Kojo\Ask\BuilderInterface']]

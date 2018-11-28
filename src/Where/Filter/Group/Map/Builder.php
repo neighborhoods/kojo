@@ -10,39 +10,35 @@ class Builder implements BuilderInterface
     use Where\Filter\Group\Map\Factory\AwareTrait;
     use Where\Filter\Group\Builder\Factory\AwareTrait;
 
-    protected $records = null;
+    protected $from;
 
     public function build(): MapInterface
     {
-        // TODO: Implement build() method.
-        throw new \LogicException('Unimplemented build method.');
-
         $map = $this->getWhereFilterGroupMapFactory()->create();
-        foreach ($this->getRecords() as $record) {
+        foreach ($this->getFrom() as $filterGroupExpression) {
             $builder = $this->getWhereFilterGroupBuilderFactory()->create();
-            $item = $builder->setRecord($record)->build();
-            $map[$item->getId()] = $item; // remove or change index field as desired
+            $map[] = $builder->setFrom($filterGroupExpression)->build();
         }
 
         return $map;
     }
 
-    protected function getRecords(): array
+    protected function getFrom(): array
     {
-        if ($this->records === null) {
-            throw new \LogicException('Builder records has not been set.');
+        if ($this->from === null) {
+            throw new \LogicException('Builder from has not been set.');
         }
 
-        return $this->records;
+        return $this->from;
     }
 
-    public function setRecords(array $records): BuilderInterface
+    public function setFrom(array $from): BuilderInterface
     {
-        if ($this->records !== null) {
-            throw new \LogicException('Builder records is already set.');
+        if ($this->from !== null) {
+            throw new \LogicException('Builder from is already set.');
         }
 
-        $this->records = $records;
+        $this->from = $from;
 
         return $this;
     }

@@ -2,19 +2,14 @@
 
 namespace Neighborhoods\Kojo\Notification;
 
-/**
- * @codeCoverageIgnore
- */
+use Neighborhoods\Kojo\NotificationInterface;
+
 class Factory implements FactoryInterface
 {
-
     use AwareTrait;
 
-    public function create() : \Neighborhoods\Kojo\NotificationInterface
+    public function create(): NotificationInterface
     {
-        return clone $this->getRETS1Notification();
+        return clone $this->getAskNotification();
     }
-
-
 }
-

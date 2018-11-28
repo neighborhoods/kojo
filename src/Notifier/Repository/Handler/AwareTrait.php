@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notifier\Repository\Handler;
 trait AwareTrait
 {
 
-    protected $RETS1NotifierRepositoryHandler = null;
+    protected $AskNotifierRepositoryHandler = null;
 
-    public function setRETS1NotifierRepositoryHandler(\Neighborhoods\Kojo\Notifier\Repository\HandlerInterface $RETS1NotifierRepositoryHandler) : self
+    public function setAskNotifierRepositoryHandler(\Neighborhoods\Kojo\Notifier\Repository\HandlerInterface $AskNotifierRepositoryHandler) : self
     {
-        if ($this->hasRETS1NotifierRepositoryHandler()) {
-            throw new \LogicException('RETS1NotifierRepositoryHandler is already set.');
+        if ($this->hasAskNotifierRepositoryHandler()) {
+            throw new \LogicException('AskNotifierRepositoryHandler is already set.');
         }
-        $this->RETS1NotifierRepositoryHandler = $RETS1NotifierRepositoryHandler;
+        $this->AskNotifierRepositoryHandler = $AskNotifierRepositoryHandler;
 
         return $this;
     }
 
-    protected function getRETS1NotifierRepositoryHandler() : \Neighborhoods\Kojo\Notifier\Repository\HandlerInterface
+    protected function getAskNotifierRepositoryHandler() : \Neighborhoods\Kojo\Notifier\Repository\HandlerInterface
     {
-        if (!$this->hasRETS1NotifierRepositoryHandler()) {
-            throw new \LogicException('RETS1NotifierRepositoryHandler is not set.');
+        if (!$this->hasAskNotifierRepositoryHandler()) {
+            throw new \LogicException('AskNotifierRepositoryHandler is not set.');
         }
 
-        return $this->RETS1NotifierRepositoryHandler;
+        return $this->AskNotifierRepositoryHandler;
     }
 
-    protected function hasRETS1NotifierRepositoryHandler() : bool
+    protected function hasAskNotifierRepositoryHandler() : bool
     {
-        return isset($this->RETS1NotifierRepositoryHandler);
+        return isset($this->AskNotifierRepositoryHandler);
     }
 
-    protected function unsetRETS1NotifierRepositoryHandler() : self
+    protected function unsetAskNotifierRepositoryHandler() : self
     {
-        if (!$this->hasRETS1NotifierRepositoryHandler()) {
-            throw new \LogicException('RETS1NotifierRepositoryHandler is not set.');
+        if (!$this->hasAskNotifierRepositoryHandler()) {
+            throw new \LogicException('AskNotifierRepositoryHandler is not set.');
         }
-        unset($this->RETS1NotifierRepositoryHandler);
+        unset($this->AskNotifierRepositoryHandler);
 
         return $this;
     }

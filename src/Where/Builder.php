@@ -9,20 +9,44 @@ use Neighborhoods\Kojo\Where;
 class Builder implements BuilderInterface
 {
     use Where\Factory\AwareTrait;
+    use Where\Filter\Group\Map\Builder\Factory\AwareTrait;
+    use Where\SortOrder\Map\Builder\Factory\AwareTrait;
+
+    protected $from;
 
     public function build(): WhereInterface
     {
-        // TODO: Implement build() method.
-        throw new \LogicException('Unimplemented build method.');
+        $from = $this->getFrom();
+        $where = $this->getWhereFactory()->create();
+        $filterGroupMapBuilder = $this->getWhereFilterGroupMapBuilderFactory()->create();
+        $filterGroupMapBuilder->setFrom($from['filter_groups']);
+        $where->setWhereFilterGroupMap($filterGroupMapBuilder->build());
+        $sortOrderMapBuilder = $this->getWhereSortOrderMapBuilderFactory()->create();
+        $sortOrderMapBuilder->setFrom($from['sort_orders']);
+        $where->setWhereSortOrderMap($sortOrderMapBuilder->build());
+        $where->setCurrentPage($from['page_size']);
+        $where->setCurrentPage($from['current_page']);
+
+        return $where;
     }
 
-    public function setRecord(array $record): BuilderInterface
+    protected function getFrom(): array
     {
+        if ($this->from === null) {
+            throw new \LogicException('Builder from has not been set.');
+        }
+
+        return $this->from;
+    }
+
+    public function setFrom(array $from): BuilderInterface
+    {
+        if ($this->from !== null) {
+            throw new \LogicException('Builder from is already set.');
+        }
+
+        $this->from = $from;
+
         return $this;
-    }
-
-    protected function getRecord(): array
-    {
-
     }
 }

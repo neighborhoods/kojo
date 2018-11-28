@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notifier;
 trait AwareTrait
 {
 
-    protected $RETS1Notifier = null;
+    protected $AskNotifier = null;
 
-    public function setRETS1Notifier(\Neighborhoods\Kojo\NotifierInterface $RETS1Notifier) : self
+    public function setAskNotifier(\Neighborhoods\Kojo\NotifierInterface $AskNotifier) : self
     {
-        if ($this->hasRETS1Notifier()) {
-            throw new \LogicException('RETS1Notifier is already set.');
+        if ($this->hasAskNotifier()) {
+            throw new \LogicException('AskNotifier is already set.');
         }
-        $this->RETS1Notifier = $RETS1Notifier;
+        $this->AskNotifier = $AskNotifier;
 
         return $this;
     }
 
-    protected function getRETS1Notifier() : \Neighborhoods\Kojo\NotifierInterface
+    protected function getAskNotifier() : \Neighborhoods\Kojo\NotifierInterface
     {
-        if (!$this->hasRETS1Notifier()) {
-            throw new \LogicException('RETS1Notifier is not set.');
+        if (!$this->hasAskNotifier()) {
+            throw new \LogicException('AskNotifier is not set.');
         }
 
-        return $this->RETS1Notifier;
+        return $this->AskNotifier;
     }
 
-    protected function hasRETS1Notifier() : bool
+    protected function hasAskNotifier() : bool
     {
-        return isset($this->RETS1Notifier);
+        return isset($this->AskNotifier);
     }
 
-    protected function unsetRETS1Notifier() : self
+    protected function unsetAskNotifier() : self
     {
-        if (!$this->hasRETS1Notifier()) {
-            throw new \LogicException('RETS1Notifier is not set.');
+        if (!$this->hasAskNotifier()) {
+            throw new \LogicException('AskNotifier is not set.');
         }
-        unset($this->RETS1Notifier);
+        unset($this->AskNotifier);
 
         return $this;
     }

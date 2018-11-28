@@ -12,19 +12,19 @@ class Map extends \ArrayIterator implements MapInterface
 {
 
     /**
-     * @param \Neighborhoods\Kojo\NotificationInterface ...$RETS1Notifications
+     * @param \Neighborhoods\Kojo\NotificationInterface ...$AskNotifications
      */
-    public function __construct(array $RETS1Notifications = [], int $flags = 0)
+    public function __construct(array $AskNotifications = [], int $flags = 0)
     {
         if ($this->count() !== 0) {
             throw new \LogicException('Map is not empty.');
         }
 
-        if (!empty($RETS1Notifications)) {
-            $this->assertValidArrayType(...array_values($RETS1Notifications));
+        if (!empty($AskNotifications)) {
+            $this->assertValidArrayType(...array_values($AskNotifications));
         }
 
-        parent::__construct($RETS1Notifications, $flags);
+        parent::__construct($AskNotifications, $flags);
     }
 
     public function offsetGet($index) : \Neighborhoods\Kojo\NotificationInterface
@@ -33,20 +33,20 @@ class Map extends \ArrayIterator implements MapInterface
     }
 
     /**
-     * @param \Neighborhoods\Kojo\NotificationInterface $RETS1Notification
+     * @param \Neighborhoods\Kojo\NotificationInterface $AskNotification
      */
-    public function offsetSet($index, $RETS1Notification)
+    public function offsetSet($index, $AskNotification)
     {
-        parent::offsetSet($index, $this->assertValidArrayItemType($RETS1Notification));
+        parent::offsetSet($index, $this->assertValidArrayItemType($AskNotification));
     }
 
     /**
-     * @param \Neighborhoods\Kojo\NotificationInterface $RETS1Notification
+     * @param \Neighborhoods\Kojo\NotificationInterface $AskNotification
      */
-    public function append($RETS1Notification)
+    public function append($AskNotification)
     {
-        $this->assertValidArrayItemType($RETS1Notification);
-        parent::append($RETS1Notification);
+        $this->assertValidArrayItemType($AskNotification);
+        parent::append($AskNotification);
     }
 
     public function current() : \Neighborhoods\Kojo\NotificationInterface
@@ -54,12 +54,12 @@ class Map extends \ArrayIterator implements MapInterface
         return parent::current();
     }
 
-    protected function assertValidArrayItemType(\Neighborhoods\Kojo\NotificationInterface $RETS1Notification)
+    protected function assertValidArrayItemType(\Neighborhoods\Kojo\NotificationInterface $AskNotification)
     {
-        return $RETS1Notification;
+        return $AskNotification;
     }
 
-    protected function assertValidArrayType(\Neighborhoods\Kojo\NotificationInterface ... $RETS1Notifications) : MapInterface
+    protected function assertValidArrayType(\Neighborhoods\Kojo\NotificationInterface ... $AskNotifications) : MapInterface
     {
         return $this;
     }

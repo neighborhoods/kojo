@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notifier\Repository;
 trait AwareTrait
 {
 
-    protected $RETS1NotifierRepository = null;
+    protected $AskNotifierRepository = null;
 
-    public function setRETS1NotifierRepository(\Neighborhoods\Kojo\Notifier\RepositoryInterface $RETS1NotifierRepository) : self
+    public function setAskNotifierRepository(\Neighborhoods\Kojo\Notifier\RepositoryInterface $AskNotifierRepository) : self
     {
-        if ($this->hasRETS1NotifierRepository()) {
-            throw new \LogicException('RETS1NotifierRepository is already set.');
+        if ($this->hasAskNotifierRepository()) {
+            throw new \LogicException('AskNotifierRepository is already set.');
         }
-        $this->RETS1NotifierRepository = $RETS1NotifierRepository;
+        $this->AskNotifierRepository = $AskNotifierRepository;
 
         return $this;
     }
 
-    protected function getRETS1NotifierRepository() : \Neighborhoods\Kojo\Notifier\RepositoryInterface
+    protected function getAskNotifierRepository() : \Neighborhoods\Kojo\Notifier\RepositoryInterface
     {
-        if (!$this->hasRETS1NotifierRepository()) {
-            throw new \LogicException('RETS1NotifierRepository is not set.');
+        if (!$this->hasAskNotifierRepository()) {
+            throw new \LogicException('AskNotifierRepository is not set.');
         }
 
-        return $this->RETS1NotifierRepository;
+        return $this->AskNotifierRepository;
     }
 
-    protected function hasRETS1NotifierRepository() : bool
+    protected function hasAskNotifierRepository() : bool
     {
-        return isset($this->RETS1NotifierRepository);
+        return isset($this->AskNotifierRepository);
     }
 
-    protected function unsetRETS1NotifierRepository() : self
+    protected function unsetAskNotifierRepository() : self
     {
-        if (!$this->hasRETS1NotifierRepository()) {
-            throw new \LogicException('RETS1NotifierRepository is not set.');
+        if (!$this->hasAskNotifierRepository()) {
+            throw new \LogicException('AskNotifierRepository is not set.');
         }
-        unset($this->RETS1NotifierRepository);
+        unset($this->AskNotifierRepository);
 
         return $this;
     }

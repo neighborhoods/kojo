@@ -7,7 +7,7 @@ use Neighborhoods\Kojo\AskInterface; // "Root" level like SC was.
 
 interface RepositoryInterface
 {
-    public function add(NotificationInterface $notification): RepositoryInterface;
+    public function add(AskInterface $ask): RepositoryInterface;
 
     public function exists(AskInterface $ask): bool;
 

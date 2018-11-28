@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notification\Map\Factory;
 trait AwareTrait
 {
 
-    protected $RETS1NotificationMapFactory = null;
+    protected $AskNotificationMapFactory = null;
 
-    public function setRETS1NotificationMapFactory(\Neighborhoods\Kojo\Notification\Map\FactoryInterface $RETS1NotificationMapFactory) : self
+    public function setAskNotificationMapFactory(\Neighborhoods\Kojo\Notification\Map\FactoryInterface $AskNotificationMapFactory) : self
     {
-        if ($this->hasRETS1NotificationMapFactory()) {
-            throw new \LogicException('RETS1NotificationMapFactory is already set.');
+        if ($this->hasAskNotificationMapFactory()) {
+            throw new \LogicException('AskNotificationMapFactory is already set.');
         }
-        $this->RETS1NotificationMapFactory = $RETS1NotificationMapFactory;
+        $this->AskNotificationMapFactory = $AskNotificationMapFactory;
 
         return $this;
     }
 
-    protected function getRETS1NotificationMapFactory() : \Neighborhoods\Kojo\Notification\Map\FactoryInterface
+    protected function getAskNotificationMapFactory() : \Neighborhoods\Kojo\Notification\Map\FactoryInterface
     {
-        if (!$this->hasRETS1NotificationMapFactory()) {
-            throw new \LogicException('RETS1NotificationMapFactory is not set.');
+        if (!$this->hasAskNotificationMapFactory()) {
+            throw new \LogicException('AskNotificationMapFactory is not set.');
         }
 
-        return $this->RETS1NotificationMapFactory;
+        return $this->AskNotificationMapFactory;
     }
 
-    protected function hasRETS1NotificationMapFactory() : bool
+    protected function hasAskNotificationMapFactory() : bool
     {
-        return isset($this->RETS1NotificationMapFactory);
+        return isset($this->AskNotificationMapFactory);
     }
 
-    protected function unsetRETS1NotificationMapFactory() : self
+    protected function unsetAskNotificationMapFactory() : self
     {
-        if (!$this->hasRETS1NotificationMapFactory()) {
-            throw new \LogicException('RETS1NotificationMapFactory is not set.');
+        if (!$this->hasAskNotificationMapFactory()) {
+            throw new \LogicException('AskNotificationMapFactory is not set.');
         }
-        unset($this->RETS1NotificationMapFactory);
+        unset($this->AskNotificationMapFactory);
 
         return $this;
     }

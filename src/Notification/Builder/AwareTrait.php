@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notification\Builder;
 trait AwareTrait
 {
 
-    protected $RETS1NotificationBuilder = null;
+    protected $AskNotificationBuilder = null;
 
-    public function setRETS1NotificationBuilder(\Neighborhoods\Kojo\Notification\BuilderInterface $RETS1NotificationBuilder) : self
+    public function setAskNotificationBuilder(\Neighborhoods\Kojo\Notification\BuilderInterface $AskNotificationBuilder) : self
     {
-        if ($this->hasRETS1NotificationBuilder()) {
-            throw new \LogicException('RETS1NotificationBuilder is already set.');
+        if ($this->hasAskNotificationBuilder()) {
+            throw new \LogicException('AskNotificationBuilder is already set.');
         }
-        $this->RETS1NotificationBuilder = $RETS1NotificationBuilder;
+        $this->AskNotificationBuilder = $AskNotificationBuilder;
 
         return $this;
     }
 
-    protected function getRETS1NotificationBuilder() : \Neighborhoods\Kojo\Notification\BuilderInterface
+    protected function getAskNotificationBuilder() : \Neighborhoods\Kojo\Notification\BuilderInterface
     {
-        if (!$this->hasRETS1NotificationBuilder()) {
-            throw new \LogicException('RETS1NotificationBuilder is not set.');
+        if (!$this->hasAskNotificationBuilder()) {
+            throw new \LogicException('AskNotificationBuilder is not set.');
         }
 
-        return $this->RETS1NotificationBuilder;
+        return $this->AskNotificationBuilder;
     }
 
-    protected function hasRETS1NotificationBuilder() : bool
+    protected function hasAskNotificationBuilder() : bool
     {
-        return isset($this->RETS1NotificationBuilder);
+        return isset($this->AskNotificationBuilder);
     }
 
-    protected function unsetRETS1NotificationBuilder() : self
+    protected function unsetAskNotificationBuilder() : self
     {
-        if (!$this->hasRETS1NotificationBuilder()) {
-            throw new \LogicException('RETS1NotificationBuilder is not set.');
+        if (!$this->hasAskNotificationBuilder()) {
+            throw new \LogicException('AskNotificationBuilder is not set.');
         }
-        unset($this->RETS1NotificationBuilder);
+        unset($this->AskNotificationBuilder);
 
         return $this;
     }

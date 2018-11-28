@@ -8,38 +8,38 @@ namespace Neighborhoods\Kojo\Notifier\Factory;
 trait AwareTrait
 {
 
-    protected $RETS1NotifierFactory = null;
+    protected $AskNotifierFactory = null;
 
-    public function setRETS1NotifierFactory(\Neighborhoods\Kojo\Notifier\FactoryInterface $RETS1NotifierFactory) : self
+    public function setAskNotifierFactory(\Neighborhoods\Kojo\Notifier\FactoryInterface $AskNotifierFactory) : self
     {
-        if ($this->hasRETS1NotifierFactory()) {
-            throw new \LogicException('RETS1NotifierFactory is already set.');
+        if ($this->hasAskNotifierFactory()) {
+            throw new \LogicException('AskNotifierFactory is already set.');
         }
-        $this->RETS1NotifierFactory = $RETS1NotifierFactory;
+        $this->AskNotifierFactory = $AskNotifierFactory;
 
         return $this;
     }
 
-    protected function getRETS1NotifierFactory() : \Neighborhoods\Kojo\Notifier\FactoryInterface
+    protected function getAskNotifierFactory() : \Neighborhoods\Kojo\Notifier\FactoryInterface
     {
-        if (!$this->hasRETS1NotifierFactory()) {
-            throw new \LogicException('RETS1NotifierFactory is not set.');
+        if (!$this->hasAskNotifierFactory()) {
+            throw new \LogicException('AskNotifierFactory is not set.');
         }
 
-        return $this->RETS1NotifierFactory;
+        return $this->AskNotifierFactory;
     }
 
-    protected function hasRETS1NotifierFactory() : bool
+    protected function hasAskNotifierFactory() : bool
     {
-        return isset($this->RETS1NotifierFactory);
+        return isset($this->AskNotifierFactory);
     }
 
-    protected function unsetRETS1NotifierFactory() : self
+    protected function unsetAskNotifierFactory() : self
     {
-        if (!$this->hasRETS1NotifierFactory()) {
-            throw new \LogicException('RETS1NotifierFactory is not set.');
+        if (!$this->hasAskNotifierFactory()) {
+            throw new \LogicException('AskNotifierFactory is not set.');
         }
-        unset($this->RETS1NotifierFactory);
+        unset($this->AskNotifierFactory);
 
         return $this;
     }
