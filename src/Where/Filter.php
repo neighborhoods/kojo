@@ -6,7 +6,7 @@ namespace Neighborhoods\Kojo\Where;
 class Filter implements FilterInterface
 {
     protected $field;
-    protected $values;
+    protected $value;
     protected $condition_type;
 
     public function jsonSerialize()
@@ -33,23 +33,33 @@ class Filter implements FilterInterface
         return $this;
     }
 
+    public function hasField(): bool
+    {
+        return $this->field !== null;
+    }
+
     public function getValue()
     {
-        if ($this->values === null) {
-            throw new \LogicException('Filter values has not been set.');
+        if ($this->value === null) {
+            throw new \LogicException('Filter value has not been set.');
         }
 
-        return $this->values;
+        return $this->value;
     }
 
     public function setValue($values): FilterInterface
     {
-        if ($this->values !== null) {
-            throw new \LogicException('Filter values is already set.');
+        if ($this->value !== null) {
+            throw new \LogicException('Filter value is already set.');
         }
-        $this->values = $values;
+        $this->value = $values;
 
         return $this;
+    }
+
+    public function hasValue(): bool
+    {
+        return $this->value !== null;
     }
 
     public function getConditionType(): string
@@ -69,5 +79,10 @@ class Filter implements FilterInterface
         $this->condition_type = $condition;
 
         return $this;
+    }
+
+    public function hasConditionType(): bool
+    {
+        return $this->condition_type !== null;
     }
 }

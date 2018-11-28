@@ -12,4 +12,8 @@ interface SortOrderInterface extends \JsonSerializable
     public function getDirection(): string;
 
     public function setDirection(string $direction): SortOrderInterface;
+
+    public function hasField(): bool;
+
+    public function hasDirection(): bool;
 }

@@ -16,4 +16,10 @@ interface FilterInterface extends \JsonSerializable
     public function getConditionType(): string;
 
     public function setConditionType(string $condition): FilterInterface;
+
+    public function hasValue(): bool;
+
+    public function hasField(): bool;
+
+    public function hasConditionType(): bool;
 }

@@ -32,6 +32,11 @@ class SortOrder implements SortOrderInterface
         return $this;
     }
 
+    public function hasField(): bool
+    {
+        return $this->field !== null;
+    }
+
     public function getDirection(): string
     {
         if ($this->direction === null) {
@@ -49,5 +54,10 @@ class SortOrder implements SortOrderInterface
         $this->direction = $direction;
 
         return $this;
+    }
+
+    public function hasDirection(): bool
+    {
+        return $this->direction !== null;
     }
 }
