@@ -14,7 +14,7 @@ services:
     alias: neighborhoods.kojo.process.pool.strategy
   neighborhoods.kojo.process.pool.strategy-server:
     shared: false
-    class: Neighborhoods\Kojo\Process\Pool\Strategy
+    class: Neighborhoods\Kojo\Process\Pool\Strategy\Server
     calls:
       - [setAlarmProcessTypeCode, ['root']]
       - [setFillProcessTypeCode, ['root']]
