@@ -6,6 +6,6 @@ services:
       - [setSchedulerTime, ['@scheduler.time']]
       - [setCacheItemPoolRepository, ['@cache_item_pool.repository']]
       - [setTime, ['@neighborhoods.pylon.time']]
-      - [setLockPrefix, ['%neighborhoods.kojo.environment.parameters.lock_prefix%']]
+      - [setLockPrefix, ['%neighborhoods.kojo.environment.parameters.lock_prefix%-']]
   scheduler.cache:
     alias: neighborhoods.kojo.scheduler.cache
