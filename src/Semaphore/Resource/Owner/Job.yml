@@ -1,9 +1,5 @@
-parameters:
-  Neighborhoods\Kojo\Semaphore\Resource\Owner\JobInterface.resource_name_space: '%neighborhoods.kojo.environment.parameters.lock_prefix%/'
 services:
   neighborhoods.kojo.semaphore.resource.owner.job:
     class: Neighborhoods\Kojo\Semaphore\Resource\Owner\Job
-    calls:
-      - [setResourceNameSpace, ['%Neighborhoods\Kojo\Semaphore\Resource\Owner\JobInterface.resource_name_space%']]
   semaphore.resource.owner.job:
     alias: neighborhoods.kojo.semaphore.resource.owner.job
