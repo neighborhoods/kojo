@@ -324,28 +324,4 @@ class Job extends Model implements JobInterface
 
         return new \DateTime($deleteAfterDateTimeString);
     }
-
-    public function setMostRecentHostName(string $mostRecentHostName): JobInterface
-    {
-        $this->_createOrUpdatePersistentProperty(JobInterface::FIELD_NAME_MOST_RECENT_HOST_NAME, $mostRecentHostName);
-
-        return $this;
-    }
-
-    public function getMostRecentHostName(): string
-    {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_MOST_RECENT_HOST_NAME);
-    }
-
-    public function setMostRecentProcessId(int $mostRecentProcessId): JobInterface
-    {
-        $this->_createOrUpdatePersistentProperty(JobInterface::FIELD_NAME_MOST_RECENT_PROCESS_ID, $mostRecentProcessId);
-
-        return $this;
-    }
-
-    public function getMostRecentProcessId(): int
-    {
-        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_MOST_RECENT_PROCESS_ID);
-    }
 }

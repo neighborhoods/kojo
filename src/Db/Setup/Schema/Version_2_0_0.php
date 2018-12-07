@@ -52,13 +52,6 @@ class Version_2_0_0 extends VersionAbstract
         $createTable->addColumn(JobInterface::FIELD_NAME_CREATED_AT_DATE_TIME, Type::DATETIME, ['notnull' => false]);
         $createTable->addColumn(JobInterface::FIELD_NAME_COMPLETED_AT_DATE_TIME, Type::DATETIME, ['notnull' => false]);
         $createTable->addColumn(JobInterface::FIELD_NAME_DELETE_AFTER_DATE_TIME, Type::DATETIME, ['notnull' => false]);
-        $createTable->addColumn(JobInterface::FIELD_NAME_MOST_RECENT_HOST_NAME, Type::STRING, ['notnull' => false]);
-        $createTable->addColumn(JobInterface::FIELD_NAME_MOST_RECENT_PROCESS_ID, Type::INTEGER,
-            [
-                'unsigned' => true,
-                'notnull' => false,
-            ]
-        );
         $createTable->addIndex([
             JobInterface::FIELD_NAME_NEXT_STATE_REQUEST,
             JobInterface::FIELD_NAME_ASSIGNED_STATE,
