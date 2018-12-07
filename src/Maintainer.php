@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo;
 
+use Neighborhoods\Kojo\Data;
 use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Data\Job\Collection\CrashDetection;
 use Neighborhoods\Kojo\Data\Job\Collection\Schedule\LimitCheck;
@@ -26,6 +27,7 @@ class Maintainer implements MaintainerInterface
     use Update\Crash\Factory\AwareTrait;
     use Update\Panic\Factory\AwareTrait;
     use Logger\AwareTrait;
+    use Data\Job\AwareTrait;
 
     public function deleteCompletedJobs(): MaintainerInterface
     {
@@ -57,9 +59,14 @@ class Maintainer implements MaintainerInterface
             $jobSemaphoreResource = $this->_getNewJobOwnerResource($job);
             try {
                 if ($jobSemaphoreResource->testAndSetLock()) {
-                    $crashUpdate = $this->_getServiceUpdateCrashFactory()->create();
-                    $crashUpdate->setJob($job);
-                    $crashUpdate->save();
+                    $mutuallyExcludedJob = $this->_getJobClone();
+                    $mutuallyExcludedJob->setId($job->getId());
+                    $mutuallyExcludedJob->load();
+                    if ($mutuallyExcludedJob->getAssignedState() === State\Service::STATE_WORKING) {
+                        $crashUpdate = $this->_getServiceUpdateCrashFactory()->create();
+                        $crashUpdate->setJob($mutuallyExcludedJob);
+                        $crashUpdate->save();
+                    }
                     $jobSemaphoreResource->releaseLock();
                 }
             } catch (\Exception $exception) {

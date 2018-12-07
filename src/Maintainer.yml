@@ -18,6 +18,7 @@ services:
       - [setJobCollectionScheduleLimit, ['@data.job.collection.schedulelimit']]
       - [setLogger, ['@process.pool.logger']]
       - [setMaintainerDelete, ['@maintainer.delete']]
+      - [setJob, ['@data.job']]
   maintainer:
     alias: neighborhoods.kojo.maintainer
     public: false
