@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Db\TearDown\Schema;
 
-use Neighborhoods\Kojo\Data\Status\TypeInterface;
+use Neighborhoods\Kojo\Data\Job\TypeInterface;
 use Neighborhoods\Kojo\Db\Schema\VersionAbstract;
 use Neighborhoods\Kojo\Db\Schema\VersionInterface;
 

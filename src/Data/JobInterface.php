@@ -13,7 +13,6 @@ interface JobInterface extends ModelInterface
     public const FIELD_NAME_NAME                                  = 'name';
     public const FIELD_NAME_PRIORITY                              = 'priority';
     public const FIELD_NAME_IMPORTANCE                            = 'importance';
-    public const FIELD_NAME_STATUS_ID                             = 'status_id';
     public const FIELD_NAME_WORK_AT_DATE_TIME                     = 'work_at_date_time';
     public const FIELD_NAME_NEXT_STATE_REQUEST                    = 'next_state_request';
     public const FIELD_NAME_ASSIGNED_STATE                        = 'assigned_state';
@@ -54,10 +53,6 @@ interface JobInterface extends ModelInterface
     public function setImportance(int $importance): JobInterface;
 
     public function getImportance(): int;
-
-    public function setStatusId(int $statusId): JobInterface;
-
-    public function getStatusId(): int;
 
     public function setWorkAtDateTime(\DateTime $workAtDateTime): JobInterface;
 

@@ -88,18 +88,6 @@ class Job extends Model implements JobInterface
         return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_IMPORTANCE);
     }
 
-    public function setStatusId(int $statusId): JobInterface
-    {
-        $this->_createPersistentProperty(JobInterface::FIELD_NAME_STATUS_ID, $statusId);
-
-        return $this;
-    }
-
-    public function getStatusId(): int
-    {
-        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_STATUS_ID);
-    }
-
     public function setWorkAtDateTime(\DateTime $workAtDateTime): JobInterface
     {
         $this->_createOrUpdatePersistentProperty(
