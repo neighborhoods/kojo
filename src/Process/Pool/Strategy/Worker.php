@@ -4,24 +4,32 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool\Strategy;
 
 use Neighborhoods\Kojo\Process\Pool\StrategyAbstract;
-use Neighborhoods\Kojo\Process\Root;
-use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Kojo\Process\Pool\StrategyInterface;
+use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Kojo\Process\ListenerInterface;
 
-class Server extends StrategyAbstract
+class Worker extends StrategyAbstract
 {
     protected $_pausedListenerProcesses = [];
 
     public function childProcessExited(ProcessInterface $process): StrategyInterface
     {
-        if ($process instanceof Root) {
-            $this->_getProcessPool()->freeChildProcess($process->getProcessId());
-            $rootProcess = $this->_getProcessCollection()->getProcessPrototypeClone($process->getTypeCode());
-            $this->_getProcessPool()->addChildProcess($rootProcess);
+        if ($process instanceof ListenerInterface) {
+            $this->_listenerProcessExited($process);
         } else {
             $className = get_class($process);
             throw new \UnexpectedValueException("Unexpected process class[$className].");
         }
+
+        return $this;
+    }
+
+    protected function _listenerProcessExited(ListenerInterface $listenerProcess): StrategyInterface
+    {
+        while ($listenerProcess->hasMessages()) {
+            $listenerProcess->processMessages();
+        }
+
 
         return $this;
     }
@@ -42,7 +50,7 @@ class Server extends StrategyAbstract
         foreach ($this->_getProcessCollection() as $process) {
             $this->_getProcessPool()->addChildProcess($process);
         }
-        if ($this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+        if ($this->_hasFillProcessTypeCode()) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();
                 $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);

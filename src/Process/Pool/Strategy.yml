@@ -24,7 +24,7 @@ services:
     alias: neighborhoods.kojo.process.pool.strategy-server
   neighborhoods.kojo.process.pool.strategy-job:
     shared: false
-    class: Neighborhoods\Kojo\Process\Pool\Strategy
+    class: Neighborhoods\Kojo\Process\Pool\Strategy\Worker
     calls:
       - [setLogger, ['@process.pool.logger']]
       - [setMaximumLoadAverage, ['%process.pool.strategy-job.maximum_load_average%']]
