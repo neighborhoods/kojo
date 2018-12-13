@@ -3,12 +3,8 @@ services:
     public: false
     class: Neighborhoods\Kojo\Db\Setup
     calls:
-      - [addVersion, ["@db.setup.schema.version.0_0_0"]]
       - [addVersion, ["@db.setup.schema.version.1_0_0"]]
       - [addVersion, ["@db.setup.schema.version.2_0_0"]]
-      - [addVersion, ["@db.setup.schema.version.3_0_0"]]
-      - [addVersion, ["@db.setup.schema.version.4_0_0"]]
-      - [addVersion, ["@db.setup.schema.version.5_0_0"]]
   db.setup:
     public: false
     alias: neighborhoods.kojo.db.setup

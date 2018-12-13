@@ -1,8 +1,0 @@
-services:
-  neighborhoods.kojo.db.setup.schema.version.5_0_0:
-    class: Neighborhoods\Kojo\Db\Setup\Schema\Version_5_0_0
-    calls:
-      - [setDoctrineConnectionDecoratorRepository, ["@doctrine.connection.decorator.repository"]]
-      - [setTableName, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Data\\\\JobInterface::TABLE_NAME\")"]]
-  db.setup.schema.version.5_0_0:
-    alias: neighborhoods.kojo.db.setup.schema.version.5_0_0
