@@ -3,6 +3,6 @@ services:
     class: Neighborhoods\Kojo\Db\Setup\Schema\Version_1_0_0
     calls:
       - [setDoctrineConnectionDecoratorRepository, ["@doctrine.connection.decorator.repository"]]
-      - [setTableName, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Data\\\\Status\\\\TypeInterface::TABLE_NAME\")"]]
+      - [setTableName, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Data\\\\Job\\\\TypeInterface::TABLE_NAME\")"]]
   db.setup.schema.version.1_0_0:
     alias: neighborhoods.kojo.db.setup.schema.version.1_0_0
