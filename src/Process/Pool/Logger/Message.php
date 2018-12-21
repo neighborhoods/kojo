@@ -139,7 +139,7 @@ class Message implements MessageInterface, \JsonSerializable
 
     public function setContext(\JsonSerializable $context): MessageInterface
     {
-        if ($this->hasContext()) {
+        if ($this->context !== null) {
             throw new \LogicException('Message context is already set.');
         }
 
@@ -155,7 +155,7 @@ class Message implements MessageInterface, \JsonSerializable
 
     public function getContext(): \JsonSerializable
     {
-        if ($this->hasContext()) {
+        if ($this->context === null) {
             throw new \LogicException('Message context has not been set.');
         }
 
