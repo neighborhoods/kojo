@@ -51,7 +51,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 $logMessage->setMessage($message);
                 if (count($context) === 1) {
                     $contextValue = array_pop($context);
-                    if ($contextValue instanceof \JsonSerializable) {
+                    if (is_object($contextValue) && $contextValue instanceof \JsonSerializable) {
                         $logMessage->setContext($contextValue);
                     }
                 }
