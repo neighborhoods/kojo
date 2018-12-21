@@ -11,6 +11,7 @@ class Message implements MessageInterface, \JsonSerializable
     const KEY_PROCESS_ID = 'process_id';
     const KEY_PROCESS_PATH = 'process_path';
     const KEY_MESSAGE = 'message';
+    const KEY_CONTEXT = 'context';
 
     protected $time;
     protected $level;
@@ -27,6 +28,7 @@ class Message implements MessageInterface, \JsonSerializable
             self::KEY_PROCESS_ID => $this->getProcessId(),
             self::KEY_PROCESS_PATH => $this->getProcessPath(),
             self::KEY_MESSAGE => $this->getMessage(),
+            self::KEY_CONTEXT => $this->getContext(),
         ];
     }
 
