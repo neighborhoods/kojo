@@ -6,7 +6,6 @@ namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
 interface MessageInterface
 {
-
     public function getTime() : string;
 
     public function setTime(string $time) : MessageInterface;
@@ -26,4 +25,8 @@ interface MessageInterface
     public function getMessage() : string;
 
     public function setMessage(string $message) : MessageInterface;
+
+    public function setContext(\JsonSerializable $context): MessageInterface;
+
+    public function getContext(): \JsonSerializable;
 }

@@ -17,6 +17,7 @@ class Message implements MessageInterface, \JsonSerializable
     protected $process_id;
     protected $process_path;
     protected $message;
+    protected $context;
 
     public function jsonSerialize(): array
     {
@@ -125,6 +126,26 @@ class Message implements MessageInterface, \JsonSerializable
         }
 
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getContext(): \JsonSerializable
+    {
+        if ($this->context === null) {
+            throw new \LogicException('Message context has not been set.');
+        }
+
+        return $this->context;
+    }
+
+    public function setContext(\JsonSerializable $context): MessageInterface
+    {
+        if ($this->context !== null) {
+            throw new \LogicException('Message context is already set.');
+        }
+
+        $this->context = $context;
 
         return $this;
     }
