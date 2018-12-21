@@ -150,7 +150,7 @@ class Message implements MessageInterface, \JsonSerializable
 
     protected function hasContext(): bool
     {
-        return ($this->context === null);
+        return !($this->context === null);
     }
 
     public function getContext(): \JsonSerializable
