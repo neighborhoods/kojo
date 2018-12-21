@@ -6,27 +6,31 @@ namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
 interface MessageInterface
 {
-    public function getTime() : string;
+    public function getTime(): string;
 
-    public function setTime(string $time) : MessageInterface;
+    public function setTime(string $time): MessageInterface;
 
-    public function getLevel() : string;
+    public function getLevel(): string;
 
-    public function setLevel(string $level) : MessageInterface;
+    public function setLevel(string $level): MessageInterface;
 
-    public function getProcessId() : string;
+    public function getProcessId(): string;
 
-    public function setProcessId(string $process_id) : MessageInterface;
+    public function setProcessId(string $process_id): MessageInterface;
 
-    public function getProcessPath() : string;
+    public function getProcessPath(): string;
 
-    public function setProcessPath(string $process_path) : MessageInterface;
+    public function setProcessPath(string $process_path): MessageInterface;
 
-    public function getMessage() : string;
+    public function getMessage(): string;
 
-    public function setMessage(string $message) : MessageInterface;
+    public function setMessage(string $message): MessageInterface;
 
-    public function setContext(\JsonSerializable $context): MessageInterface;
+    public function setContext(array $context): MessageInterface;
 
-    public function getContext(): \JsonSerializable;
+    public function getContext(): array;
+
+    public function getContextJsonLastError(): int;
+
+    public function setContextJsonLastError(int $context_json_last_error): MessageInterface;
 }
