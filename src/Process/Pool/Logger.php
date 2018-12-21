@@ -49,8 +49,8 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 $logMessage->setProcessId($processId);
                 $logMessage->setProcessPath($this->_getProcess()->getPath());
                 $logMessage->setMessage($message);
-                if (count($context) === 1 && $context instanceof \JsonSerializable) {
-                    $logMessage->setContext($context);
+                if (count($context) === 1 && $context[0] instanceof \JsonSerializable) {
+                    $logMessage->setContext($context[0]);
                 }
                 fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage($logMessage) . PHP_EOL);
             }
