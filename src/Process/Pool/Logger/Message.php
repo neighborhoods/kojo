@@ -22,13 +22,18 @@ class Message implements MessageInterface, \JsonSerializable
 
     public function jsonSerialize(): array
     {
+        $context = '';
+        if ($this->hasContext()) {
+            $context = $this->getContext();
+        }
+
         return [
             self::KEY_TIME => $this->getTime(),
             self::KEY_LEVEL => $this->getLevel(),
             self::KEY_PROCESS_ID => $this->getProcessId(),
             self::KEY_PROCESS_PATH => $this->getProcessPath(),
             self::KEY_MESSAGE => $this->getMessage(),
-            self::KEY_CONTEXT => $this->getContext(),
+            self::KEY_CONTEXT => $context,
         ];
     }
 
@@ -132,23 +137,28 @@ class Message implements MessageInterface, \JsonSerializable
         return $this;
     }
 
-    public function getContext(): \JsonSerializable
-    {
-        if ($this->context === null) {
-            throw new \LogicException('Message context has not been set.');
-        }
-
-        return $this->context;
-    }
-
     public function setContext(\JsonSerializable $context): MessageInterface
     {
-        if ($this->context !== null) {
+        if ($this->hasContext()) {
             throw new \LogicException('Message context is already set.');
         }
 
         $this->context = $context;
 
         return $this;
+    }
+
+    protected function hasContext(): bool
+    {
+        return ($this->context === null);
+    }
+
+    public function getContext(): \JsonSerializable
+    {
+        if ($this->hasContext()) {
+            throw new \LogicException('Message context has not been set.');
+        }
+
+        return $this->context;
     }
 }
