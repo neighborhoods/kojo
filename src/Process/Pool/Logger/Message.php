@@ -17,16 +17,12 @@ class Message implements MessageInterface, \JsonSerializable
     protected $process_id;
     protected $process_path;
     protected $message;
+    protected $context;
+    protected $context_json_last_error;
 
     public function jsonSerialize(): array
     {
-        return [
-            self::KEY_TIME => $this->getTime(),
-            self::KEY_LEVEL => $this->getLevel(),
-            self::KEY_PROCESS_ID => $this->getProcessId(),
-            self::KEY_PROCESS_PATH => $this->getProcessPath(),
-            self::KEY_MESSAGE => $this->getMessage(),
-        ];
+        return get_object_vars($this);
     }
 
     public function getTime(): string
@@ -125,6 +121,46 @@ class Message implements MessageInterface, \JsonSerializable
         }
 
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function setContext(array $context): MessageInterface
+    {
+        if ($this->context !== null) {
+            throw new \LogicException('Message context is already set.');
+        }
+
+        $this->context = $context;
+
+        return $this;
+    }
+
+    public function getContext(): array
+    {
+        if ($this->context === null) {
+            throw new \LogicException('Message context has not been set.');
+        }
+
+        return $this->context;
+    }
+
+    public function getContextJsonLastError(): int
+    {
+        if ($this->context_json_last_error === null) {
+            throw new \LogicException('Message context_json_last_error has not been set.');
+        }
+
+        return $this->context_json_last_error;
+    }
+
+    public function setContextJsonLastError(int $context_json_last_error): MessageInterface
+    {
+        if ($this->context_json_last_error !== null) {
+            throw new \LogicException('Message context_json_last_error is already set.');
+        }
+
+        $this->context_json_last_error = $context_json_last_error;
 
         return $this;
     }
