@@ -87,9 +87,9 @@ class Foreman implements ForemanInterface
             $this->_injectWorkerService();
             $this->_injectRDBMSConnectionService();
             call_user_func($this->_getLocator()->getCallable());
-        } catch (\Throwable $throwable) {
+        } catch (\Exception $exception) {
             $this->_crashJob();
-            throw $throwable;
+            throw $exception;
         }
 
         return $this;
