@@ -42,11 +42,11 @@ class Maintainer implements MaintainerInterface
             try {
                 $this->_rescheduleCrashedJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
-            } catch (\Exception $exception) {
+            } catch (\Throwable $throwable) {
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
                 }
-                throw $exception;
+                throw $throwable;
             }
         }
 
@@ -69,11 +69,11 @@ class Maintainer implements MaintainerInterface
                     }
                     $jobSemaphoreResource->releaseLock();
                 }
-            } catch (\Exception $exception) {
+            } catch (\Throwable $throwable) {
                 if ($jobSemaphoreResource->hasLock()) {
                     $jobSemaphoreResource->releaseLock();
                 }
-                throw $exception;
+                throw $throwable;
             }
         }
 
@@ -86,11 +86,11 @@ class Maintainer implements MaintainerInterface
             try {
                 $this->_updatePendingJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->releaseLock();
-            } catch (\Exception $exception) {
+            } catch (\Throwable $throwable) {
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->releaseLock();
                 }
-                throw $exception;
+                throw $throwable;
             }
         }
 
@@ -115,7 +115,7 @@ class Maintainer implements MaintainerInterface
                     $failedLimitCheckUpdate->setJob($job);
                     $failedLimitCheckUpdate->save();
                 }
-            } catch (\Exception $exception) {
+            } catch (\Throwable $throwable) {
                 $updatePanic = $this->_getServiceUpdatePanicFactory()->create();
                 $updatePanic->setJob($job);
                 $updatePanic->save();

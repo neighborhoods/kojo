@@ -27,11 +27,11 @@ class Scheduler implements SchedulerInterface
                     $this->_scheduleStaticJobs();
                 }
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->releaseLock();
-            }catch(\Exception $exception){
+            }catch(\Throwable $throwable){
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->releaseLock();
                 }
-                throw $exception;
+                throw $throwable;
             }
         }
 

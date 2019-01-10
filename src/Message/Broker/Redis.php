@@ -20,9 +20,9 @@ class Redis extends BrokerAbstract
                 $this->_getSubscriptionChannelName(),
                 0
             );
-        }catch(\Exception $exception){
-            $this->_getLogger()->critical($exception->getMessage());
-            throw $exception;
+        }catch(\Throwable $throwable){
+            $this->_getLogger()->critical($throwable->getMessage(), [$throwable->__toString()]);
+            throw $throwable;
         }
 
         return $this;
@@ -42,9 +42,9 @@ class Redis extends BrokerAbstract
         try{
             $publishChannelLength = $this->getPublishChannelLength();
             $subscriptionChannelLength = $this->getSubscriptionChannelLength();
-        }catch(\Exception $exception){
-            $this->_getLogger()->critical($exception->getMessage());
-            throw $exception;
+        }catch(\Throwable $throwable){
+            $this->_getLogger()->critical($throwable->getMessage(), [$throwable->__toString()]);
+            throw $throwable;
         }
 
         return $publishChannelLength + $subscriptionChannelLength > 0 ? true : false;
@@ -57,9 +57,9 @@ class Redis extends BrokerAbstract
             if ($message === false) {
                 $message = $this->_getRedisClient()->rPop($this->_getPublishChannelName());
             }
-        }catch(\Exception $exception){
-            $this->_getLogger()->critical($exception->getMessage());
-            throw $exception;
+        }catch(\Throwable $throwable){
+            $this->_getLogger()->critical($throwable->getMessage(), [$throwable->__toString()]);
+            throw $throwable;
         }
 
         return (string)$message;
@@ -69,9 +69,9 @@ class Redis extends BrokerAbstract
     {
         try{
             $publishChannelLength = $this->_getRedisClient()->lLen($this->_getPublishChannelName());
-        }catch(\Exception $exception){
-            $this->_getLogger()->critical($exception->getMessage());
-            throw $exception;
+        }catch(\Throwable $throwable){
+            $this->_getLogger()->critical($throwable->getMessage(), [$throwable->__toString()]);
+            throw $throwable;
         }
 
         return $publishChannelLength;
@@ -81,9 +81,9 @@ class Redis extends BrokerAbstract
     {
         try{
             $subscriptionChannelLength = $this->_getRedisClient()->lLen($this->_getSubscriptionChannelName());
-        }catch(\Exception $exception){
-            $this->_getLogger()->critical($exception->getMessage());
-            throw $exception;
+        }catch(\Throwable $throwable){
+            $this->_getLogger()->critical($throwable->getMessage(), [$throwable->__toString()]);
+            throw $throwable;
         }
 
         return $subscriptionChannelLength;
@@ -93,9 +93,9 @@ class Redis extends BrokerAbstract
     {
         try{
             $this->_getRedisClient()->lPush($this->_getPublishChannelName(), $message);
-        }catch(\Exception $exception){
-            $this->_getLogger()->critical($exception->getMessage());
-            throw $exception;
+        }catch(\Throwable $throwable){
+            $this->_getLogger()->critical($throwable->getMessage(), [$throwable->__toString()]);
+            throw $throwable;
         }
 
         return $this;

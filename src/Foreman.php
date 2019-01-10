@@ -87,7 +87,7 @@ class Foreman implements ForemanInterface
             $this->_injectWorkerService();
             $this->_injectRDBMSConnectionService();
             call_user_func($this->_getLocator()->getCallable());
-        } catch (\Exception $throwable) {
+        } catch (\Throwable $throwable) {
             $this->_crashJob();
             throw $throwable;
         }
@@ -101,10 +101,10 @@ class Foreman implements ForemanInterface
             $updateWork = $this->_getServiceUpdateWorkFactory()->create();
             $updateWork->setJob($this->_getJob());
             $updateWork->save();
-        } catch (\Exception $exception) {
+        } catch (\Throwable $throwable) {
             $this->_panicJob();
             $this->_getSemaphore()->releaseLock($this->_getNewJobOwnerResource($this->_getJob()));
-            throw $exception;
+            throw $throwable;
         }
 
         return $this;

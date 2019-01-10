@@ -15,5 +15,6 @@ interface FormatterInterface
 
     public function setLogFormat(string $logFormat);
 
+    /** @deprecated Use the \Throwable's __toString() method as the message and/or context instead. */
     public function getFormattedThrowableMessage(\Throwable $throwable) : string;
 }
