@@ -22,16 +22,16 @@ class Scheduler implements SchedulerInterface
     public function scheduleStaticJobs(): SchedulerInterface
     {
         if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->testAndSetLock()) {
-            try{
+            try {
                 if (!empty($this->_getSchedulerCache()->getMinutesNotInCache())) {
                     $this->_scheduleStaticJobs();
                 }
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->releaseLock();
-            }catch(\Exception $exception){
+            } catch (\Throwable $throwable) {
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->releaseLock();
                 }
-                throw $exception;
+                throw $throwable;
             }
         }
 

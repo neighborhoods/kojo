@@ -27,8 +27,7 @@ class Job extends Forked implements JobInterface
             $this->_getMaintainer()->deleteCompletedJobs();
             $this->_getForeman()->workWorker();
         } catch (\Throwable $throwable) {
-            $message = $this->_getLogger()->getLogFormatter()->getFormattedThrowableMessage($throwable);
-            $this->_getLogger()->critical($message);
+            $this->_getLogger()->critical($throwable->getMessage(), [(string)$throwable]);
             $this->_setOrReplaceExitCode(255);
         }
 

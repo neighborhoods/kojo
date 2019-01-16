@@ -25,11 +25,11 @@ class Delete implements DeleteInterface
             try {
                 $this->_deleteCompletedJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->releaseLock();
-            } catch (\Exception $exception) {
+            } catch (\Throwable $throwable) {
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_MAINTAINER_DELETE)->releaseLock();
                 }
-                throw $exception;
+                throw $throwable;
             }
         }
 
