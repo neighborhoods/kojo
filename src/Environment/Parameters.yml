@@ -5,6 +5,6 @@ parameters:
   neighborhoods.kojo.environment.parameters.database_password: ''
   neighborhoods.kojo.environment.parameters.database_adapter: ''
   neighborhoods.kojo.environment.parameters.database_host: ''
-  neighborhoods.kojo.environment.parameters.database_port: ''
+  neighborhoods.kojo.environment.parameters.database_port: 0
   neighborhoods.kojo.environment.parameters.database_name: ''
   neighborhoods.kojo.environment.parameters.lock_prefix: ''

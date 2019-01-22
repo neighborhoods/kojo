@@ -15,5 +15,5 @@ interface BuilderInterface
 
     public function setOptions(array $options): BuilderInterface;
 
-    public function setPort(string $port): BuilderInterface;
+    public function setPort(int $port): BuilderInterface;
 }

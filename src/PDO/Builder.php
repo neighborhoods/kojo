@@ -20,7 +20,7 @@ class Builder implements BuilderInterface
     {
         if ($this->_pdo === null) {
             $dsn = $this->_getDataSourceName();
-            if ($this->_hasPort() && is_numeric($this->_getPort())){
+            if ($this->_hasPort() && $this->_getPort() !== 0){
                 $dsn = $dsn . sprintf(';port=%d', $this->_getPort());
             }
             $userName = $this->_getUserName();
@@ -92,14 +92,14 @@ class Builder implements BuilderInterface
         return $this->_exists(self::PROP_OPTIONS);
     }
 
-    public function setPort(string $port): BuilderInterface
+    public function setPort(int $port): BuilderInterface
     {
         $this->_create(self::PROP_PORT, $port);
 
         return $this;
     }
 
-    protected function _getPort(): string
+    protected function _getPort(): int
     {
         return $this->_read(self::PROP_PORT);
     }
