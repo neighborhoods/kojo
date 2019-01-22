@@ -7,6 +7,7 @@ services:
       - [setPassword, ['%neighborhoods.kojo.environment.parameters.database_password%']]
       - [setUserName, ['%neighborhoods.kojo.environment.parameters.database_user_name%']]
       - [setDataSourceName, ['%neighborhoods.kojo.environment.parameters.database_adapter%:dbname=%neighborhoods.kojo.environment.parameters.database_name%;host=%neighborhoods.kojo.environment.parameters.database_host%']]
+      - [setPort, ['%neighborhoods.kojo.environment.parameters.database_port%']]
   pdo.builder:
     alias: neighborhoods.kojo.pdo.builder
     public: false
