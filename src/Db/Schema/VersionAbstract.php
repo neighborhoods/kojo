@@ -33,6 +33,8 @@ abstract class VersionAbstract implements VersionInterface
                         );
                     $connection->beginTransaction();
                 }
+                $connection->getSchemaManager()->createTable($this->_getCreateTable());
+                $connection->commit();
             } catch (\Throwable $throwable) {
                 $connection->rollBack();
                 throw $throwable;
