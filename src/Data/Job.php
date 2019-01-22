@@ -88,18 +88,6 @@ class Job extends Model implements JobInterface
         return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_IMPORTANCE);
     }
 
-    public function setStatusId(int $statusId): JobInterface
-    {
-        $this->_createPersistentProperty(JobInterface::FIELD_NAME_STATUS_ID, $statusId);
-
-        return $this;
-    }
-
-    public function getStatusId(): int
-    {
-        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_STATUS_ID);
-    }
-
     public function setWorkAtDateTime(\DateTime $workAtDateTime): JobInterface
     {
         $this->_createOrUpdatePersistentProperty(
@@ -335,29 +323,5 @@ class Job extends Model implements JobInterface
         $deleteAfterDateTimeString = $this->_readPersistentProperty(JobInterface::FIELD_NAME_DELETE_AFTER_DATE_TIME);
 
         return new \DateTime($deleteAfterDateTimeString);
-    }
-
-    public function setMostRecentHostName(string $mostRecentHostName): JobInterface
-    {
-        $this->_createOrUpdatePersistentProperty(JobInterface::FIELD_NAME_MOST_RECENT_HOST_NAME, $mostRecentHostName);
-
-        return $this;
-    }
-
-    public function getMostRecentHostName(): string
-    {
-        return $this->_readPersistentProperty(JobInterface::FIELD_NAME_MOST_RECENT_HOST_NAME);
-    }
-
-    public function setMostRecentProcessId(int $mostRecentProcessId): JobInterface
-    {
-        $this->_createOrUpdatePersistentProperty(JobInterface::FIELD_NAME_MOST_RECENT_PROCESS_ID, $mostRecentProcessId);
-
-        return $this;
-    }
-
-    public function getMostRecentProcessId(): int
-    {
-        return (int)$this->_readPersistentProperty(JobInterface::FIELD_NAME_MOST_RECENT_PROCESS_ID);
     }
 }
