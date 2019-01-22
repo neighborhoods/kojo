@@ -19,9 +19,10 @@ class Builder implements BuilderInterface
     public function getPdo(): \PDO
     {
         if ($this->_pdo === null) {
-            $dsn = $this->_getDataSourceName();
-            if ($this->_hasPort() && $this->_getPort() !== 0){
-                $dsn = $dsn . sprintf(';port=%d', $this->_getPort());
+            if ($this->_getPort() !== 0){
+                $dsn = sprintf('%s;port=%d', $this->_getDataSourceName(),$this->_getPort());
+            } else {
+                $dsn = $this->_getDataSourceName();
             }
             $userName = $this->_getUserName();
             $password = $this->_getPassword();
