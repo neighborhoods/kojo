@@ -104,9 +104,4 @@ class Builder implements BuilderInterface
     {
         return $this->_read(self::PROP_PORT);
     }
-
-    protected function _hasPort(): bool
-    {
-        return $this->_exists(self::PROP_PORT);
-    }
 }
