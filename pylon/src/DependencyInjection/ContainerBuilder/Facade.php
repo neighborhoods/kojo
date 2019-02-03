@@ -7,8 +7,8 @@ use Neighborhoods\Pylon\Symfony\Component\FinderArray;
 use Neighborhoods\Pylon\Symfony\Component\FinderArrayInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Compiler\RepeatedPass;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+
 use Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
 use Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass;
 use Symfony\Component\Finder\Finder;
@@ -56,9 +56,8 @@ class Facade implements FacadeInterface
             foreach ($this->_getYamlServicesFilePaths() as $servicesYmlFilePath) {
                 $loader->import($servicesYmlFilePath);
             }
-            $passes = [new AnalyzeServiceReferencesPass(), new InlineServiceDefinitionsPass()];
-            $repeatedPass = new RepeatedPass($passes);
-            $repeatedPass->process($containerBuilder);
+            $containerBuilder->addCompilerPass(new AnalyzeServiceReferencesPass());
+            $containerBuilder->addCompilerPass(new InlineServiceDefinitionsPass());
             $containerBuilder->compile(true);
             $this->_containerBuilder = $containerBuilder;
         }

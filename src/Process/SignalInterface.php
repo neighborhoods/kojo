@@ -7,20 +7,9 @@ use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 
 interface SignalInterface
 {
-    public function incrementWaitCount(): SignalInterface;
-
-    public function decrementWaitCount(): SignalInterface;
-
-    /**
-     * Signals are blocked by PHP while the IRQ handling logic is executed.
-     */
     public function handleSignal(int $signalNumber, $signalInformation): void;
 
     public function addSignalHandler(int $signalNumber, HandlerInterface $signalHandler): SignalInterface;
 
-    public function block(): SignalInterface;
-
-    public function waitForSignal(): SignalInterface;
-
-    public function unBlock(): SignalInterface;
+    public function processBufferedSignals(): SignalInterface;
 }

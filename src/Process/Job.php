@@ -17,7 +17,7 @@ class Job extends Forked implements JobInterface
     use Selector\AwareTrait;
     use Process\Pool\Factory\AwareTrait;
 
-    protected function _run() : Forked
+    protected function _run(): Forked
     {
         try {
             $this->_getSelector()->setProcess($this);
