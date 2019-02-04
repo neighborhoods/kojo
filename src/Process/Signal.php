@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process;
 
-use Neighborhoods\Kojo\Process\Signal\Exception;
 use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
@@ -33,13 +32,8 @@ class Signal implements SignalInterface
     public function processBufferedSignals(): SignalInterface
     {
         foreach ($this->bufferedSignals as $position => $information) {
-            try {
-                $this->processSignalInformation($information);
-                unset($this->bufferedSignals[$position]);
-            } catch (\Throwable $throwable) {
-                unset($this->bufferedSignals[$position]);
-                throw $throwable;
-            }
+            unset($this->bufferedSignals[$position]);
+            $this->processSignalInformation($information);
         }
 
         return $this;
@@ -131,7 +125,10 @@ class Signal implements SignalInterface
         if ($this->canBufferSignals !== $canBufferSignals) {
             $this->canBufferSignals = $canBufferSignals;
         } else {
-            throw new \LogicException(sprintf('Can buffer signals is already set to [%s]', $this->canBufferSignals));
+            throw new \LogicException(sprintf(
+                'Can buffer signals is already set to [%s]',
+                $this->canBufferSignals ? 'true' : 'false'
+            ));
         }
 
         return $this;
