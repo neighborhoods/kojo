@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process;
 
+use Neighborhoods\Kojo\Process\Signal\Exception;
 use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
@@ -13,14 +14,18 @@ class Signal implements SignalInterface
     use Defensive\AwareTrait;
     use Process\Signal\Information\Factory\AwareTrait;
     use Process\Pool\Logger\AwareTrait;
+
+    protected const HANDLE_SIGNAL = 'handleSignal';
+
     protected $signalHandlers = [];
     protected $bufferedSignals = [];
+    protected $canBufferSignals = true;
 
     public function addSignalHandler(int $signalNumber, HandlerInterface $signalHandler): SignalInterface
     {
         pcntl_async_signals(true);
         $this->signalHandlers[$signalNumber] = $signalHandler;
-        pcntl_signal($signalNumber, [$this, 'handleSignal']);
+        pcntl_signal($signalNumber, [$this, self::HANDLE_SIGNAL]);
 
         return $this;
     }
@@ -28,8 +33,13 @@ class Signal implements SignalInterface
     public function processBufferedSignals(): SignalInterface
     {
         foreach ($this->bufferedSignals as $position => $information) {
-            unset($this->bufferedSignals[$position]);
-            $this->processSignalInformation($information);
+            try {
+                $this->processSignalInformation($information);
+                unset($this->bufferedSignals[$position]);
+            } catch (\Throwable $throwable) {
+                unset($this->bufferedSignals[$position]);
+                throw $throwable;
+            }
         }
 
         return $this;
@@ -37,7 +47,7 @@ class Signal implements SignalInterface
 
     protected function processSignalInformation(InformationInterface $information): SignalInterface
     {
-        call_user_func([$this->getSignalHandler($information->getSignalNumber()), 'handleSignal'], $information);
+        call_user_func([$this->getSignalHandler($information->getSignalNumber()), self::HANDLE_SIGNAL], $information);
 
         return $this;
     }
@@ -84,7 +94,7 @@ class Signal implements SignalInterface
                     $childInformation[InformationInterface::PROCESS_ID] = $childProcessId;
                     $childInformation[InformationInterface::EXIT_VALUE] = $status;
                     $information = $this->_getProcessSignalInformationFactory()->create()->hydrate($childInformation);
-                    $this->bufferedSignals[] = $information;
+                    $this->bufferSignalInformation($information);
                 } elseif ($lastPCNTLError === PCNTL_ECHILD) {
                     break;
                 } else {
@@ -100,10 +110,35 @@ class Signal implements SignalInterface
                 // For now, SITGTERM is safe.
                 $this->processSignalInformation($information);
             } else {
-                $this->bufferedSignals[] = $information;
+                $this->bufferSignalInformation($information);
             }
         }
 
         return;
+    }
+
+    protected function bufferSignalInformation(InformationInterface $information): SignalInterface
+    {
+        if ($this->getCanBufferSignals()) {
+            $this->bufferedSignals[] = $information;
+        }
+
+        return $this;
+    }
+
+    public function setCanBufferSignals(bool $canBufferSignals): SignalInterface
+    {
+        if ($this->canBufferSignals !== $canBufferSignals) {
+            $this->canBufferSignals = $canBufferSignals;
+        } else {
+            throw new \LogicException(sprintf('Can buffer signals is already set to [%s]', $this->canBufferSignals));
+        }
+
+        return $this;
+    }
+
+    public function getCanBufferSignals(): bool
+    {
+        return $this->canBufferSignals;
     }
 }

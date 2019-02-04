@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process;
 
+use Neighborhoods\Kojo\Process\Forked\Exception;
 use Neighborhoods\Kojo\ProcessAbstract;
 use Neighborhoods\Kojo\ProcessInterface;
 
@@ -16,7 +17,7 @@ abstract class Forked extends ProcessAbstract implements ProcessInterface
         $this->_create(self::PROP_HAS_FORKED, true);
         $processId = $this->_getProcessStrategy()->fork();
         if ($processId === self::FORK_FAILURE_CODE) {
-            throw new \RuntimeException('Failed to fork a new process.');
+            throw (new Exception())->setCode(Exception::CODE_FORK_FAILED);
         } elseif ($processId > 0) {
             // This is executed in the parent process.
             $this->_setProcessId($processId);

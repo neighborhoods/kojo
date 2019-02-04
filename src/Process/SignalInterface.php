@@ -12,4 +12,8 @@ interface SignalInterface
     public function addSignalHandler(int $signalNumber, HandlerInterface $signalHandler): SignalInterface;
 
     public function processBufferedSignals(): SignalInterface;
+
+    public function getCanBufferSignals(): bool;
+
+    public function setCanBufferSignals(bool $canBufferSignals): SignalInterface;
 }

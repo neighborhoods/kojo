@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Listener;
 
 use Neighborhoods\Kojo\Process\Forked;
+use Neighborhoods\Kojo\Process\Forked\Exception;
 use Neighborhoods\Kojo\Process\ListenerInterface;
 use Neighborhoods\Kojo\Process\ListenerAbstract;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -27,7 +28,7 @@ class Command extends ListenerAbstract implements CommandInterface
                     'commandProcess' => $this,
                 ]
             );
-        }else {
+        } else {
             $this->_getLogger()->warning('The message is not a JSON: "' . $message . '".');
         }
 
@@ -37,14 +38,11 @@ class Command extends ListenerAbstract implements CommandInterface
     public function addProcess(string $processTypeCode): Command
     {
         $process = $this->_getProcessCollection()->getProcessPrototypeClone($processTypeCode);
-        $this->_getProcessPool()->addChildProcess($process);
-
-        return $this;
-    }
-
-    public function setAlarm(int $seconds): Command
-    {
-        $this->_getProcessPool()->setAlarm($seconds);
+        try {
+            $this->_getProcessPool()->addChildProcess($process);
+        } catch (Exception $forkedException) {
+            $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+        }
 
         return $this;
     }
@@ -63,6 +61,7 @@ class Command extends ListenerAbstract implements CommandInterface
 
     protected function _run(): Forked
     {
+        $this->_getProcessSignal()->setCanBufferSignals(false);
         if (!$this->_getMessageBroker()->hasMessage()) {
             $this->_getMessageBroker()->waitForNewMessage();
         }
