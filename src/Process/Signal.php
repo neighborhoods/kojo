@@ -122,14 +122,7 @@ class Signal implements SignalInterface
 
     public function setCanBufferSignals(bool $canBufferSignals): SignalInterface
     {
-        if ($this->canBufferSignals !== $canBufferSignals) {
-            $this->canBufferSignals = $canBufferSignals;
-        } else {
-            throw new \LogicException(sprintf(
-                'Can buffer signals is already set to [%s]',
-                $this->canBufferSignals ? 'true' : 'false'
-            ));
-        }
+        $this->canBufferSignals = $canBufferSignals;
 
         return $this;
     }
