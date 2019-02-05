@@ -99,12 +99,18 @@ class Signal implements SignalInterface
             }
         } else {
             $information = $this->_getProcessSignalInformationFactory()->create()->hydrate($signalInformation);
-            if ($information->getSignalNumber() === SIGTERM) {
-                // Future Kōjō signal handlers MUST specify immediate or deferred processing.
-                // For now, SITGTERM is safe.
-                $this->processSignalInformation($information);
-            } else {
-                $this->bufferSignalInformation($information);
+            switch ($information->getSignalNumber()) {
+                case SIGTERM:
+                case SIGQUIT:
+                case SIGINT:
+                case SIGHUP:
+                    // Future Kōjō signal handlers MUST specify immediate or deferred processing.
+                    // For now, signals that imply termination are safe and necessary to process immediately.
+                    $this->processSignalInformation($information);
+                    break;
+                default:
+                    $this->bufferSignalInformation($information);
+                    break;
             }
         }
 
