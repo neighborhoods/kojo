@@ -9,7 +9,6 @@ use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Worker\Locator;
 use Neighborhoods\Kojo\Process\Pool\Logger;
 use Neighborhoods\Pylon\Data\Property\Defensive;
-use Neighborhoods\Kojo\Apm;
 
 class Foreman implements ForemanInterface
 {
@@ -84,10 +83,13 @@ class Foreman implements ForemanInterface
     protected function _runWorker(): ForemanInterface
     {
         try {
+            restore_error_handler();
             $this->_injectWorkerService();
             $this->_injectRDBMSConnectionService();
             call_user_func($this->_getLocator()->getCallable());
+            set_error_handler(new ErrorHandler());
         } catch (\Exception $exception) {
+            set_error_handler(new ErrorHandler());
             $this->_crashJob();
             throw $exception;
         }

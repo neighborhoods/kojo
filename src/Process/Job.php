@@ -17,9 +17,10 @@ class Job extends Forked implements JobInterface
     use Selector\AwareTrait;
     use Process\Pool\Factory\AwareTrait;
 
-    protected function _run() : Forked
+    protected function _run(): Forked
     {
         try {
+            $this->_getProcessSignal()->setCanBufferSignals(false);
             $this->_getSelector()->setProcess($this);
             $this->_getMaintainer()->rescheduleCrashedJobs();
             $this->_getScheduler()->scheduleStaticJobs();

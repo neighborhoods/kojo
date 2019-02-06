@@ -16,6 +16,7 @@ class Redis extends ListenerAbstract implements RedisInterface
 
     protected function _run(): Forked
     {
+        $this->_getProcessSignal()->setCanBufferSignals(false);
         $this->_register();
 
         return $this;

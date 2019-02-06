@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Strategy;
 
+use Neighborhoods\Kojo\Process\Forked\Exception;
 use Neighborhoods\Kojo\Process\Pool\StrategyAbstract;
 use Neighborhoods\Kojo\Process\Pool\StrategyInterface;
 use Neighborhoods\Kojo\ProcessInterface;
@@ -48,13 +49,23 @@ class Worker extends StrategyAbstract
     {
         $this->_getProcessCollection()->applyProcessPool($this->_getProcessPool());
         foreach ($this->_getProcessCollection() as $process) {
-            $this->_getProcessPool()->addChildProcess($process);
+            try {
+                $this->_getProcessPool()->addChildProcess($process);
+            } catch (Exception $forkedException) {
+                $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                $this->_getProcessPool()->getProcess()->exit();
+            }
         }
         if ($this->_hasFillProcessTypeCode()) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();
                 $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);
-                $this->_getProcessPool()->addChildProcess($fillProcess);
+                try {
+                    $this->_getProcessPool()->addChildProcess($fillProcess);
+                } catch (Exception $forkedException) {
+                    $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                    $this->_getProcessPool()->getProcess()->exit();
+                }
             }
         }
 

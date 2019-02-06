@@ -13,113 +13,128 @@ class Signal implements SignalInterface
     use Defensive\AwareTrait;
     use Process\Signal\Information\Factory\AwareTrait;
     use Process\Pool\Logger\AwareTrait;
-    protected $_waitCount       = 0;
-    protected $_signalHandlers  = [];
-    protected $_bufferedSignals = [];
+
+    protected const HANDLE_SIGNAL = 'handleSignal';
+
+    protected $signalHandlers = [];
+    protected $bufferedSignals = [];
+    protected $canBufferSignals = true;
 
     public function addSignalHandler(int $signalNumber, HandlerInterface $signalHandler): SignalInterface
     {
-        $this->incrementWaitCount();
         pcntl_async_signals(true);
-        $this->_signalHandlers[$signalNumber] = $signalHandler;
-        pcntl_signal($signalNumber, [$this, 'handleSignal']);
-        $this->decrementWaitCount();
+        $this->signalHandlers[$signalNumber] = $signalHandler;
+        pcntl_signal($signalNumber, [$this, self::HANDLE_SIGNAL]);
 
         return $this;
     }
 
-    public function incrementWaitCount(): SignalInterface
+    public function processBufferedSignals(): SignalInterface
     {
-        ++$this->_waitCount;
-
-        return $this;
-    }
-
-    public function decrementWaitCount(): SignalInterface
-    {
-        $this->block();
-        if ($this->_waitCount === 1) {
-            $this->_processBufferedSignals();
-        }
-        --$this->_waitCount;
-        $this->unBlock();
-
-        return $this;
-    }
-
-    protected function _processBufferedSignals(): SignalInterface
-    {
-        foreach ($this->_bufferedSignals as $position => $information) {
-            unset($this->_bufferedSignals[$position]);
-            call_user_func([$this->_getSignalHandler($information->getSignalNumber()), 'handleSignal'], $information);
+        foreach ($this->bufferedSignals as $position => $information) {
+            unset($this->bufferedSignals[$position]);
+            $this->processSignalInformation($information);
         }
 
         return $this;
     }
 
-    protected function _getSignalHandler(int $signalNumber): HandlerInterface
+    protected function processSignalInformation(InformationInterface $information): SignalInterface
     {
-        if (!isset($this->_signalHandlers[$signalNumber])) {
+        call_user_func([$this->getSignalHandler($information->getSignalNumber()), self::HANDLE_SIGNAL], $information);
+
+        return $this;
+    }
+
+    protected function getSignalHandler(int $signalNumber): HandlerInterface
+    {
+        if (!isset($this->signalHandlers[$signalNumber])) {
             throw new \LogicException("Signal handler for signal number[$signalNumber] is not set.");
         }
 
-        return $this->_signalHandlers[$signalNumber];
+        return $this->signalHandlers[$signalNumber];
     }
 
     /**
-     * Signals are "blocked" by PHP while the IRQ handling logic is executed
-     * from the context of being called by the VM as a signal handler.
+     * The VM uses sigprocmask and a global data structure to prevent reentrancy. The latter is not exposed to
+     * user space so all user space signal processing will be halted and until this method returns.
+     * This has a serious consequence when using fork, since the expectation is that the execution branch will not
+     * return. Since the kernel copies the exact memory image from the parent process to the new child process,
+     * the blocking VM data structure persists in the child process. Thereby blocking any future user space signal
+     * handling in the new process.
+     *
+     * Any non-terminating signals that result in non-deterministic or non-returning execution branches have to be
+     * buffered and processed using processBufferedSignals otherwise future signals will not be handled (since they
+     * will be blocked by the VM).
+     *
+     * Terminating signals however must be handled immediately.
+     *
+     * In the future, Kōjō signal handlers MUST specify whether or not they should be processed immediately, that is,
+     * with the knowledge that all other signals will be blocked until their execution branch returns, or if they
+     * should be buffered and deferred.
+     *
+     * Signals that specify that they should be handled immediately MUST return deterministically, or result
+     * in program termination.
      */
     public function handleSignal(int $signalNumber, $signalInformation): void
     {
+        $this->_getLogger()->debug(sprintf('Received signal[%s].', $signalNumber));
         if ($signalNumber === SIGCHLD) {
             while ($childProcessId = pcntl_wait($status, WNOHANG)) {
-                if ($childProcessId == -1) {
-                    $errorMessage = var_export(pcntl_strerror(pcntl_get_last_error()), true);
-                    $this->_getLogger()->notice("Received a process control wait error with message[$errorMessage].");
-                    break;
-                }else {
-                    $this->_getLogger()->info("Child with process ID[$childProcessId] exited with status[$status].");
+                $lastPCNTLError = pcntl_get_last_error();
+                if ($childProcessId != -1) {
+                    $this->_getLogger()->debug("Child with process ID[$childProcessId] exited with status[$status].");
                     $childInformation[InformationInterface::SIGNAL_NUMBER] = SIGCHLD;
                     $childInformation[InformationInterface::PROCESS_ID] = $childProcessId;
                     $childInformation[InformationInterface::EXIT_VALUE] = $status;
                     $information = $this->_getProcessSignalInformationFactory()->create()->hydrate($childInformation);
-                    $this->_bufferedSignals[] = $information;
+                    $this->bufferSignalInformation($information);
+                } elseif ($lastPCNTLError === PCNTL_ECHILD) {
+                    break;
+                } else {
+                    $message = sprintf('Encountered pcntl error[%s] while processing SIGCHLD.', $lastPCNTLError);
+                    $this->_getLogger()->critical($message);
+                    throw new \RuntimeException($message);
                 }
             }
-        }else {
+        } else {
             $information = $this->_getProcessSignalInformationFactory()->create()->hydrate($signalInformation);
-            $this->_getLogger()->info("Handling signal number[{$information->getSignalNumber()}].");
-            $this->_bufferedSignals[] = $information;
-        }
-        if ($this->_waitCount === 0) {
-            $this->_processBufferedSignals();
+            switch ($information->getSignalNumber()) {
+                case SIGTERM:
+                case SIGQUIT:
+                case SIGINT:
+                case SIGHUP:
+                    // Future Kōjō signal handlers MUST specify immediate or deferred processing.
+                    // For now, signals that imply termination are safe and necessary to process immediately.
+                    $this->processSignalInformation($information);
+                    break;
+                default:
+                    $this->bufferSignalInformation($information);
+                    break;
+            }
         }
 
         return;
     }
 
-    public function waitForSignal(): SignalInterface
+    protected function bufferSignalInformation(InformationInterface $information): SignalInterface
     {
-        $this->block();
-        $signalNumber = pcntl_sigwaitinfo(array_keys($this->_signalHandlers), $signalInformation);
-        $this->handleSignal($signalNumber, $signalInformation);
-        $this->unBlock();
+        if ($this->getCanBufferSignals()) {
+            $this->bufferedSignals[] = $information;
+        }
 
         return $this;
     }
 
-    public function block(): SignalInterface
+    public function setCanBufferSignals(bool $canBufferSignals): SignalInterface
     {
-        pcntl_sigprocmask(SIG_BLOCK, array_keys($this->_signalHandlers));
+        $this->canBufferSignals = $canBufferSignals;
 
         return $this;
     }
 
-    public function unBlock(): SignalInterface
+    public function getCanBufferSignals(): bool
     {
-        pcntl_sigprocmask(SIG_UNBLOCK, array_keys($this->_signalHandlers));
-
-        return $this;
+        return $this->canBufferSignals;
     }
 }

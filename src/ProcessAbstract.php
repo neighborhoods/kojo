@@ -26,7 +26,6 @@ abstract class ProcessAbstract implements ProcessInterface
     {
         $this->_getApmNewRelic()->ignoreTransaction();
         $this->_getApmNewRelic()->endTransaction();
-        $this->_getProcessSignal()->incrementWaitCount();
         $this->_setParentProcessId(posix_getppid());
         $this->_setProcessId(posix_getpid());
 
@@ -42,7 +41,6 @@ abstract class ProcessAbstract implements ProcessInterface
         $this->_registerShutdownMethod();
         $this->_getProcessRegistry()->pushProcess($this);
         $this->_setProcessTitle();
-        $this->_getProcessSignal()->decrementWaitCount();
 
         return $this;
     }
@@ -57,6 +55,7 @@ abstract class ProcessAbstract implements ProcessInterface
         $this->_getProcessSignal()->addSignalHandler(SIGQUIT, $this);
         $this->_getProcessSignal()->addSignalHandler(SIGABRT, $this);
         $this->_getProcessSignal()->addSignalHandler(SIGUSR1, $this);
+        $this->_getLogger()->debug('Registered signal handlers.');
 
         return $this;
     }
@@ -83,7 +82,6 @@ abstract class ProcessAbstract implements ProcessInterface
 
     public function handleSignal(InformationInterface $information): HandlerInterface
     {
-        $this->_getProcessSignal()->block();
         $this->exit();
 
         return $this;
@@ -98,7 +96,6 @@ abstract class ProcessAbstract implements ProcessInterface
 
     public function exit(): void
     {
-        $this->_getProcessSignal()->block();
         $this->unregisterShutdownMethod();
         $this->_getProcessPool()->terminateChildProcesses();
         exit($this->_exitCode);
