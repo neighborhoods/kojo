@@ -17,7 +17,8 @@ abstract class Forked extends ProcessAbstract implements ProcessInterface
         $this->_create(self::PROP_HAS_FORKED, true);
         try {
             $processId = $this->_getProcessStrategy()->fork();
-        } catch (\ErrorException $errorException) {
+        } /** @noinspection PhpRedundantCatchClauseInspection */
+        catch (\ErrorException $errorException) {
             throw (new Exception())->setCode(Exception::CODE_FORK_FAILED)->setPrevious($errorException);
         }
 
