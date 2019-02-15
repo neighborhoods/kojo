@@ -49,6 +49,7 @@ class Server extends StrategyAbstract
                 $this->_getProcessPool()->addChildProcess($process);
             } catch (Exception $forkedException) {
                 $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                $this->_getProcessPool()->getProcess()->exit();
             }
         }
         if ($this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {

@@ -98,6 +98,7 @@ abstract class ProcessAbstract implements ProcessInterface
     {
         $this->unregisterShutdownMethod();
         $this->_getProcessPool()->terminateChildProcesses();
+        $this->_getLogger()->debug("Exiting.");
         exit($this->_exitCode);
     }
 

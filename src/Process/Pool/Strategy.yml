@@ -16,8 +16,6 @@ services:
     shared: false
     class: Neighborhoods\Kojo\Process\Pool\Strategy\Server
     calls:
-      - [setAlarmProcessTypeCode, ['root']]
-      - [setFillProcessTypeCode, ['root']]
       - [setLogger, ['@process.pool.logger']]
       - [setMaximumLoadAverage, ['%process.pool.strategy-server.maximum_load_average%']]
   process.pool.strategy-server:
