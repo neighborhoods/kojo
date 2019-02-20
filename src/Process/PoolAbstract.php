@@ -78,7 +78,7 @@ abstract class PoolAbstract implements PoolInterface
                 $this->_getLogger()->emergency('Process pool has no alarms and no processes.');
                 throw new \LogicException('Invalid process pool state.');
             }else {
-                $this->_getLogger()->notice('Process pool only has a set alarm.');
+                $this->_getLogger()->debug('Process pool only has a set alarm.');
             }
         }
         pcntl_alarm($alarmValue);

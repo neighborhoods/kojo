@@ -48,7 +48,7 @@ class Pool extends PoolAbstract implements PoolInterface
             $this->_getProcessPoolStrategy()->currentPendingChildExitsCompleted();
         } else {
             $processId = $this->_getProcess()->getProcessId();
-            $this->_getLogger()->notice("Child process[$childProcessId] is not in the pool for process[$processId].");
+            $this->_getLogger()->debug("Child process[$childProcessId] is not in the pool for process[$processId].");
         }
 
         return $this;
