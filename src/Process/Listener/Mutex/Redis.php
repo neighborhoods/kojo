@@ -22,7 +22,7 @@ class Redis extends ListenerAbstract implements RedisInterface
         } catch (\Throwable $throwable) {
             posix_kill($this->getParentProcessId(), $this->getParentProcessTerminationSignalNumber());
             $this->_getLogger()->critical(
-                'Redis mutex watchdog registration encountered an exception.',
+                'Redis mutex watchdog registration encountered a Throwable.',
                 [(string)$throwable]
             );
             $this->shutdown();
