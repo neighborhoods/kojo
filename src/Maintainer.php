@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo;
 
 use Neighborhoods\Kojo\Data;
+use Neighborhoods\Kojo\Exception\Runtime\Db\Model\LoadException;
 use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Data\Job\Collection\CrashDetection;
 use Neighborhoods\Kojo\Data\Job\Collection\Schedule\LimitCheck;
@@ -73,7 +74,11 @@ class Maintainer implements MaintainerInterface
                 if ($jobSemaphoreResource->hasLock()) {
                     $jobSemaphoreResource->releaseLock();
                 }
-                throw $throwable;
+                if (!($throwable instanceof LoadException)
+                    || $throwable->getCode() !== LoadException::CODE_NO_DATA_LOADED
+                ) {
+                    throw $throwable;
+                }
             }
         }
 
