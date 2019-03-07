@@ -14,7 +14,6 @@ Make it easy to monitor events across multiple instances of Kōjō deployments
 ## Not Doing Right Now
 * Notification API for exceptions, and other complex structures
 * Rewriting the logger to use Monolog
-* Cleaning up `critical` log messages when an execution environment is cleanly terminated
 
 ## Level of Effort
 
