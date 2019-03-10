@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
+use Neighborhoods\Kojo\Process\Forked\Exception;
+use Neighborhoods\Kojo\Process\Listener\CommandInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Kojo\Process\JobInterface;
 use Neighborhoods\Kojo\Process\ListenerInterface;
@@ -15,9 +17,9 @@ class Strategy extends StrategyAbstract
     {
         if ($process instanceof JobInterface) {
             $this->_jobProcessExited($process);
-        }elseif ($process instanceof ListenerInterface) {
+        } elseif ($process instanceof ListenerInterface) {
             $this->_listenerProcessExited($process);
-        }else {
+        } else {
             $className = get_class($process);
             throw new \UnexpectedValueException("Unexpected process class[$className].");
         }
@@ -29,7 +31,7 @@ class Strategy extends StrategyAbstract
     {
         if ($listenerProcess->getExitCode() !== 0) {
             $this->_pauseListenerProcess($listenerProcess);
-        }else {
+        } else {
             while (
                 $listenerProcess->hasMessages()
                 && !$this->_getProcessPool()->isFull()
@@ -40,11 +42,16 @@ class Strategy extends StrategyAbstract
 
             if ($this->_getProcessPool()->isFull()) {
                 $this->_pauseListenerProcess($listenerProcess);
-            }else {
+            } else {
                 $this->_getProcessPool()->freeChildProcess($listenerProcess->getProcessId());
                 $typeCode = $listenerProcess->getTypeCode();
                 $replacementListenerProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
-                $this->_getProcessPool()->addChildProcess($replacementListenerProcess);
+                try {
+                    $this->_getProcessPool()->addChildProcess($replacementListenerProcess);
+                } catch (Exception $forkedException) {
+                    $this->_pauseListenerProcess($listenerProcess);
+                    $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                }
             }
         }
 
@@ -59,7 +66,7 @@ class Strategy extends StrategyAbstract
     {
         if ($this->_hasPausedListenerProcess()) {
             $this->_unPauseListenerProcesses();
-        }else {
+        } else {
             if (!$this->_getProcessPool()->hasAlarm()) {
                 $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
             }
@@ -75,7 +82,11 @@ class Strategy extends StrategyAbstract
             $typeCode = $jobProcess->getTypeCode();
             $replacementProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
             $replacementProcess->setThrottle($this->getChildProcessWaitThrottle());
-            $this->_getProcessPool()->addChildProcess($replacementProcess);
+            try {
+                $this->_getProcessPool()->addChildProcess($replacementProcess);
+            } catch (Exception $forkedException) {
+                $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+            }
             if (!$this->_getProcessPool()->hasAlarm()) {
                 $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
             }
@@ -89,10 +100,14 @@ class Strategy extends StrategyAbstract
         if (!$this->_getProcessPool()->isFull() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
             if ($this->_hasPausedListenerProcess()) {
                 $this->_unPauseListenerProcesses();
-            }else {
+            } else {
                 $alarmProcessTypeCode = $this->_getAlarmProcessTypeCode();
                 $alarmProcess = $this->_getProcessCollection()->getProcessPrototypeClone($alarmProcessTypeCode);
-                $this->_getProcessPool()->addChildProcess($alarmProcess);
+                try {
+                    $this->_getProcessPool()->addChildProcess($alarmProcess);
+                } catch (Exception $forkedException) {
+                    $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                }
             }
         }
         if (!$this->_getProcessPool()->hasAlarm()) {
@@ -107,13 +122,24 @@ class Strategy extends StrategyAbstract
         $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
         $this->_getProcessCollection()->applyProcessPool($this->_getProcessPool());
         foreach ($this->_getProcessCollection() as $process) {
-            $this->_getProcessPool()->addChildProcess($process);
+            try {
+                $this->_getProcessPool()->addChildProcess($process);
+            } catch (Exception $forkedException) {
+                $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                if ($process instanceof CommandInterface) {
+                    $this->_getProcessPool()->getProcess()->exit();
+                }
+            }
         }
         if ($this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();
                 $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);
-                $this->_getProcessPool()->addChildProcess($fillProcess);
+                try {
+                    $this->_getProcessPool()->addChildProcess($fillProcess);
+                } catch (Exception $forkedException) {
+                    $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                }
             }
         }
 
@@ -126,7 +152,7 @@ class Strategy extends StrategyAbstract
         if (!isset($this->_pausedListenerProcesses[$listenerProcessId])) {
             $this->_getProcessPool()->freeChildProcess($listenerProcessId);
             $this->_pausedListenerProcesses[$listenerProcessId] = $listenerProcess;
-        }else {
+        } else {
             throw new \LogicException('Listener process is already paused.');
         }
 
@@ -149,14 +175,18 @@ class Strategy extends StrategyAbstract
                         $listenerProcess->processMessages();
                     }
                     if (!$this->_getProcessPool()->isFull()) {
-                        unset($this->_pausedListenerProcesses[$processId]);
-                        $this->_getProcessPool()->addChildProcess($newListenerProcess);
+                        try {
+                            $this->_getProcessPool()->addChildProcess($newListenerProcess);
+                            unset($this->_pausedListenerProcesses[$processId]);
+                        } catch (Exception $forkedException) {
+                            $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                        }
                     }
-                }else {
+                } else {
                     break;
                 }
             }
-        }else {
+        } else {
             throw new \LogicException('There are no paused listener processes.');
         }
 
