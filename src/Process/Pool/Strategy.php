@@ -33,11 +33,11 @@ class Strategy extends StrategyAbstract
             $this->_pauseListenerProcess($listenerProcess);
         } else {
             while (
-                $listenerProcess->hasMessages()
-                && !$this->_getProcessPool()->isFull()
+                !$this->_getProcessPool()->isFull()
                 && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
+                && $listenerProcess->hasMessages()
             ) {
-                $listenerProcess->processMessages();
+                $listenerProcess->processMessage();
             }
 
             if ($this->_getProcessPool()->isFull()) {
@@ -171,8 +171,12 @@ class Strategy extends StrategyAbstract
                 if (!$this->_getProcessPool()->isFull()) {
                     $typeCode = $listenerProcess->getTypeCode();
                     $newListenerProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
-                    while (!$this->_getProcessPool()->isFull() && $listenerProcess->hasMessages()) {
-                        $listenerProcess->processMessages();
+                    while (
+                        !$this->_getProcessPool()->isFull() &&
+                        $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses() &&
+                        $listenerProcess->hasMessages()
+                    ) {
+                        $listenerProcess->processMessage();
                     }
                     if (!$this->_getProcessPool()->isFull()) {
                         try {

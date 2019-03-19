@@ -18,18 +18,21 @@ class Command extends ListenerAbstract implements CommandInterface
         return $this->_getMessageBroker()->hasMessage();
     }
 
-    public function processMessages(): ListenerInterface
+    public function processMessage(): ListenerInterface
     {
-        $message = $this->_getMessageBroker()->getNextMessage();
-        if (json_decode($message) !== null) {
-            $this->_getExpressionLanguage()->evaluate(
-                json_decode($message, true)['command'],
-                [
-                    'commandProcess' => $this,
-                ]
-            );
-        } else {
-            $this->_getLogger()->warning('The message is not a JSON: "' . $message . '".');
+        $message = $this->_getMessageBroker()->attemptGetNextMessage();
+
+        if ($message !== null) {
+            if (json_decode($message) !== null) {
+                $this->_getExpressionLanguage()->evaluate(
+                    json_decode($message, true)['command'],
+                    [
+                        'commandProcess' => $this,
+                    ]
+                );
+            } else {
+                $this->_getLogger()->warning('The message is not a JSON: "' . $message . '".');
+            }
         }
 
         return $this;

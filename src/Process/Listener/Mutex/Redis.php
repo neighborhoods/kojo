@@ -42,7 +42,7 @@ class Redis extends ListenerAbstract implements RedisInterface
         return $this;
     }
 
-    public function processMessages(): ListenerInterface
+    public function processMessage(): ListenerInterface
     {
         throw new \RuntimeException('The connection to redis was lost.');
     }

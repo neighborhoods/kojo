@@ -47,22 +47,29 @@ class Redis extends BrokerAbstract
             throw $throwable;
         }
 
-        return $publishChannelLength + $subscriptionChannelLength > 0 ? true : false;
+        return ($publishChannelLength + $subscriptionChannelLength > 0);
     }
 
-    public function getNextMessage(): string
+    public function attemptGetNextMessage(): ?string
     {
         try {
-            $message = $this->_getRedisClient()->lPop($this->_getSubscriptionChannelName());
-            if ($message === false) {
-                $message = $this->_getRedisClient()->rPop($this->_getPublishChannelName());
+            $subscriptionMessage = $this->_getRedisClient()->lPop($this->_getSubscriptionChannelName());
+
+            if ($subscriptionMessage !== false) {
+                return $subscriptionMessage;
             }
+
+            $publicationMessage = $this->_getRedisClient()->rPop($this->_getPublishChannelName());
+
+            if ($publicationMessage !== false) {
+                return $publicationMessage;
+            }
+
+            return null;
         } catch (\Throwable $throwable) {
             $this->_getLogger()->critical($throwable->getMessage(), [(string)$throwable]);
             throw $throwable;
         }
-
-        return (string)$message;
     }
 
     public function getPublishChannelLength(): int
