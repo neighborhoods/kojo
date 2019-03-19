@@ -21,7 +21,7 @@ trait AwareTrait
 
     protected function _getTypeServiceCreateClone(): CreateInterface
     {
-        return clone $this->_getServiceCreate();
+        return clone $this->_getTypeServiceCreate();
     }
 
     protected function _unsetTypeServiceCreate()
