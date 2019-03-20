@@ -59,7 +59,7 @@ class Scheduler implements SchedulerInterface
             $typeCode = $jobType->getCode();
             $cronExpression = CronExpression::factory($cronExpressionString);
             foreach ($schedulerCache->getMinutesNotInCache() as $unscheduledMinute => $unscheduledDateTime) {
-                if ($cronExpression->isDue($unscheduledDateTime)) {
+                if ($cronExpression->isDue($unscheduledDateTime, 'UTC')) {
                     if (!isset($this->_getSchedulerJobCollection()->getRecords()[$typeCode][$unscheduledMinute])) {
                         $create = $this->_getServiceCreateFactory()->create();
                         $create->setJobTypeCode($typeCode);
