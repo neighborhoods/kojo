@@ -42,13 +42,12 @@ class Scheduler implements SchedulerInterface
     {
         $schedulerCache = $this->_getSchedulerCache();
         $this->_getSchedulerJobCollection()->setReferenceDateTime($this->_getTime()->getNow());
-        $timezone = new \DateTimeZone('UTC');
         foreach ($this->_getSchedulerJobTypeCollection()->getIterator() as $jobType) {
             $cronExpressionString = $jobType->getCronExpression();
             $typeCode = $jobType->getCode();
             $cronExpression = CronExpression::factory($cronExpressionString);
             foreach ($schedulerCache->getMinutesNotInCache() as $unscheduledMinute => $unscheduledDateTime) {
-                if ($cronExpression->isDue($unscheduledDateTime, $timezone)) {
+                if ($cronExpression->isDue($unscheduledDateTime, 'UTC')) {
                     if (!isset($this->_getSchedulerJobCollection()->getRecords()[$typeCode][$unscheduledMinute])) {
                         $create = $this->_getServiceCreateFactory()->create();
                         $create->setJobTypeCode($typeCode);
