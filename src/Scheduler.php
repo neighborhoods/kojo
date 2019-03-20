@@ -50,7 +50,8 @@ class Scheduler implements SchedulerInterface
                     sprintf(
                         'Scheduler skipping disabled job type [%s]',
                         $jobType->getCode()
-                    )
+                    ),
+                    ['disabled_job_type_skipped' => $jobType->getCode()]
                 );
                 continue;
             }
