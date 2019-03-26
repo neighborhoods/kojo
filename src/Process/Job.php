@@ -17,9 +17,10 @@ class Job extends Forked implements JobInterface
     use Selector\AwareTrait;
     use Process\Pool\Factory\AwareTrait;
 
-    protected function _run() : Forked
+    protected function _run(): Forked
     {
         try {
+            $this->_getProcessSignal()->setCanBufferSignals(false);
             $this->_getSelector()->setProcess($this);
             $this->_getMaintainer()->rescheduleCrashedJobs();
             $this->_getScheduler()->scheduleStaticJobs();
@@ -27,8 +28,7 @@ class Job extends Forked implements JobInterface
             $this->_getMaintainer()->deleteCompletedJobs();
             $this->_getForeman()->workWorker();
         } catch (\Throwable $throwable) {
-            $message = $this->_getLogger()->getLogFormatter()->getFormattedThrowableMessage($throwable);
-            $this->_getLogger()->critical($message);
+            $this->_getLogger()->critical($throwable->getMessage(), [(string)$throwable]);
             $this->_setOrReplaceExitCode(255);
         }
 

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Strategy;
 
+use Neighborhoods\Kojo\Process\Forked\Exception;
 use Neighborhoods\Kojo\Process\Pool\StrategyAbstract;
 use Neighborhoods\Kojo\Process\Root;
 use Neighborhoods\Kojo\ProcessInterface;
@@ -17,7 +18,11 @@ class Server extends StrategyAbstract
         if ($process instanceof Root) {
             $this->_getProcessPool()->freeChildProcess($process->getProcessId());
             $rootProcess = $this->_getProcessCollection()->getProcessPrototypeClone($process->getTypeCode());
-            $this->_getProcessPool()->addChildProcess($rootProcess);
+            try {
+                $this->_getProcessPool()->addChildProcess($rootProcess);
+            } catch (Exception $forkedException) {
+                $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+            }
         } else {
             $className = get_class($process);
             throw new \UnexpectedValueException("Unexpected process class[$className].");
@@ -40,13 +45,23 @@ class Server extends StrategyAbstract
     {
         $this->_getProcessCollection()->applyProcessPool($this->_getProcessPool());
         foreach ($this->_getProcessCollection() as $process) {
-            $this->_getProcessPool()->addChildProcess($process);
+            try {
+                $this->_getProcessPool()->addChildProcess($process);
+            } catch (Exception $forkedException) {
+                $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                $this->_getProcessPool()->getProcess()->exit();
+            }
         }
         if ($this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();
                 $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);
-                $this->_getProcessPool()->addChildProcess($fillProcess);
+                try {
+                    $this->_getProcessPool()->addChildProcess($fillProcess);
+                } catch (Exception $forkedException) {
+                    $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                    $this->_getProcessPool()->getProcess()->exit();
+                }
             }
         }
 

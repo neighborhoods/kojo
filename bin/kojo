@@ -3,27 +3,17 @@
 declare(strict_types=1);
 ini_set('assert.exception', '1');
 error_reporting(E_ALL);
+require_once __DIR__ . '/../../../../vendor/autoload.php';
 
 use Neighborhoods\Kojo\Console\Command\Process\Pool\Server\Start;
+use Neighborhoods\Kojo\ErrorHandler;
 use Neighborhoods\Pylon\DependencyInjection\ContainerBuilder\Facade;
 use Symfony\Component\Finder\Finder;
 
+set_error_handler(new ErrorHandler());
+
 if (PHP_SAPI !== 'cli') {
     echo 'bin/kojo must be run as a CLI application';
-    exit(1);
-}
-try{
-    foreach ([
-                 __DIR__ . '/../../../autoload.php',
-                 __DIR__ . '/../vendor/autoload.php',
-             ] as $autoLoaderFilePathCandidate) {
-        if (file_exists($autoLoaderFilePathCandidate)) {
-            require_once $autoLoaderFilePathCandidate;
-            break;
-        }
-    }
-}catch(\Exception $exception){
-    echo 'Autoload error: ' . $exception->getMessage();
     exit(1);
 }
 $containerBuilderFacade = new Facade();
@@ -32,7 +22,7 @@ $finder = new Finder();
 $finder->name('*.yml');
 if (isset($argv[2]) && is_string($argv[2]) && is_dir($argv[2])) {
     $discoverableDirectories[] = $argv[2];
-}elseif (isset($argv[1]) && is_string($argv[1]) && $argv[1] === Start::OPT_RUN_SERVER) {
+} elseif (isset($argv[1]) && is_string($argv[1]) && $argv[1] === Start::OPT_RUN_SERVER) {
     foreach ($argv as $argument) {
         if (strstr($argument, Start::OPT_YSDP) !== false) {
             $ymlServicesFilePath = explode(Start::OPT_YSDP, $argument);

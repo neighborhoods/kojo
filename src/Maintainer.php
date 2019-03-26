@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo;
 
 use Neighborhoods\Kojo\Data;
+use Neighborhoods\Kojo\Exception\Runtime\Db\Model\LoadException;
 use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Data\Job\Collection\CrashDetection;
 use Neighborhoods\Kojo\Data\Job\Collection\Schedule\LimitCheck;
@@ -42,11 +43,11 @@ class Maintainer implements MaintainerInterface
             try {
                 $this->_rescheduleCrashedJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
-            } catch (\Exception $exception) {
+            } catch (\Throwable $throwable) {
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_RESCHEDULE_JOBS)->releaseLock();
                 }
-                throw $exception;
+                throw $throwable;
             }
         }
 
@@ -69,11 +70,15 @@ class Maintainer implements MaintainerInterface
                     }
                     $jobSemaphoreResource->releaseLock();
                 }
-            } catch (\Exception $exception) {
+            } catch (\Throwable $throwable) {
                 if ($jobSemaphoreResource->hasLock()) {
                     $jobSemaphoreResource->releaseLock();
                 }
-                throw $exception;
+                if (!($throwable instanceof LoadException)
+                    || $throwable->getCode() !== LoadException::CODE_NO_DATA_LOADED
+                ) {
+                    throw $throwable;
+                }
             }
         }
 
@@ -86,11 +91,11 @@ class Maintainer implements MaintainerInterface
             try {
                 $this->_updatePendingJobs();
                 $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->releaseLock();
-            } catch (\Exception $exception) {
+            } catch (\Throwable $throwable) {
                 if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->hasLock()) {
                     $this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_UPDATE_PENDING_JOBS)->releaseLock();
                 }
-                throw $exception;
+                throw $throwable;
             }
         }
 
@@ -115,7 +120,7 @@ class Maintainer implements MaintainerInterface
                     $failedLimitCheckUpdate->setJob($job);
                     $failedLimitCheckUpdate->save();
                 }
-            } catch (\Exception $exception) {
+            } catch (\Throwable $throwable) {
                 $updatePanic = $this->_getServiceUpdatePanicFactory()->create();
                 $updatePanic->setJob($job);
                 $updatePanic->save();

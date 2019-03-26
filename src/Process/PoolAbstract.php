@@ -32,9 +32,9 @@ abstract class PoolAbstract implements PoolInterface
     public function setAlarm(int $seconds): PoolInterface
     {
         if ($seconds === 0) {
-            $this->_getLogger()->info("Disabling any existing alarm.");
+            $this->_getLogger()->debug("Disabling any existing alarm.");
         }else {
-            $this->_getLogger()->info("Setting alarm for $seconds seconds.");
+            $this->_getLogger()->debug("Setting alarm for $seconds seconds.");
         }
         pcntl_alarm($seconds);
 
@@ -78,7 +78,7 @@ abstract class PoolAbstract implements PoolInterface
                 $this->_getLogger()->emergency('Process pool has no alarms and no processes.');
                 throw new \LogicException('Invalid process pool state.');
             }else {
-                $this->_getLogger()->notice('Process pool only has a set alarm.');
+                $this->_getLogger()->debug('Process pool only has a set alarm.');
             }
         }
         pcntl_alarm($alarmValue);

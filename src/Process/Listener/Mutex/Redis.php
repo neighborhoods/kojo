@@ -16,7 +16,17 @@ class Redis extends ListenerAbstract implements RedisInterface
 
     protected function _run(): Forked
     {
-        $this->_register();
+        $this->_getProcessSignal()->setCanBufferSignals(false);
+        try {
+            $this->_register();
+        } catch (\Throwable $throwable) {
+            posix_kill($this->getParentProcessId(), $this->getParentProcessTerminationSignalNumber());
+            $this->_getLogger()->critical(
+                'Redis mutex watchdog registration encountered a Throwable.',
+                [(string)$throwable]
+            );
+            $this->shutdown();
+        }
 
         return $this;
     }

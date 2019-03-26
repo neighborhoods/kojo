@@ -23,12 +23,13 @@ class Server extends ProcessAbstract implements ServerInterface
         $this->_initialize();
         $this->_getLogger()->debug('Starting process pool server...');
         if ($this->_getSemaphore()->testAndSetLock($this->_getServerSemaphoreResource())) {
-            $this->_getLogger()->info('Process pool server started.');
+            $this->_getLogger()->debug('Process pool server started.');
             $this->_getProcessPool()->start();
             while (true) {
-                $this->_getProcessSignal()->waitForSignal();
+                $this->_getProcessSignal()->processBufferedSignals();
+                sleep(1);
             }
-        }else {
+        } else {
             $this->_getLogger()->debug('Cannot obtain the process pool server mutex. Quitting.');
             $this->exit();
         }
