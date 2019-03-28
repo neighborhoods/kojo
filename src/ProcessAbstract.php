@@ -109,7 +109,7 @@ abstract class ProcessAbstract implements ProcessInterface
             ini_set('memory_limit','-1');
             $this->_getLogger()->critical(
                 'Shutdown method invoked.',
-                ['error_get_last' => error_get_last()]
+                ['potentially_unrelated_error_get_last' => error_get_last()]
             );
             $this->_setOrReplaceExitCode(255);
             $this->exit();
