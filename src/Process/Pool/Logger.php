@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
+use Monolog\Formatter\NormalizerFormatter;
 use Neighborhoods\Kojo\Process\Pool\Logger\FormatterInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
@@ -54,9 +55,10 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 if (array_key_exists(self::CONTEXT_KEY_EXCEPTION, $context) && $context[self::CONTEXT_KEY_EXCEPTION]
                 instanceof \Throwable){
                     $exceptionObject = $context[self::CONTEXT_KEY_EXCEPTION];
+                    $normalizedException = (new NormalizerFormatter())->format([$context[self::CONTEXT_KEY_EXCEPTION]]);
                     unset($context[self::CONTEXT_KEY_EXCEPTION]);
                     $formattedException = ['exception_string'=> (string)$exceptionObject];
-                    $context['exception'] = $formattedException;
+                    $context['exception'] = $normalizedException;
                 }
 
                 if (json_encode($context) === false) {
