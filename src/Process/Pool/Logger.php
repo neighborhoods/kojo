@@ -16,6 +16,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     use Defensive\AwareTrait;
     public const PROP_IS_ENABLED = 'is_enabled';
     protected const LOG_DATE_TIME_FORMAT = 'D, d M y H:i:s.u T';
+    const CONTEXT_KEY_EXCEPTION = 'exception';
 
     protected $log_formatter;
     protected $level_filter_mask;
@@ -49,6 +50,15 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 $logMessage->setProcessId($processId);
                 $logMessage->setProcessPath($this->_getProcess()->getPath());
                 $logMessage->setMessage($message);
+
+                if (array_key_exists(self::CONTEXT_KEY_EXCEPTION, $context) && $context[self::CONTEXT_KEY_EXCEPTION]
+                instanceof \Throwable){
+                    $exceptionObject = $context[self::CONTEXT_KEY_EXCEPTION];
+                    unset($context[self::CONTEXT_KEY_EXCEPTION]);
+                    $formattedException = ['exception_string'=> (string)$exceptionObject];
+                    $context['exception'] = $formattedException;
+                }
+
                 if (json_encode($context) === false) {
                     $logMessage->setContext([]);
                 } else {
