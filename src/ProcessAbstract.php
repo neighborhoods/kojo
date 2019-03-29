@@ -105,7 +105,12 @@ abstract class ProcessAbstract implements ProcessInterface
     public function shutdown(): ProcessInterface
     {
         if ($this->_read(self::PROP_IS_SHUTDOWN_METHOD_ACTIVE)) {
-            $this->_getLogger()->critical("Shutdown method invoked.");
+            // to avoid hitting artificial memory limits while executing this block
+            ini_set('memory_limit','-1');
+            $this->_getLogger()->critical(
+                'Shutdown method invoked.',
+                ['potentially_unrelated_error_get_last' => error_get_last()]
+            );
             $this->_setOrReplaceExitCode(255);
             $this->exit();
         }
