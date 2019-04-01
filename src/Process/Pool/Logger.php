@@ -15,9 +15,12 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     use Time\AwareTrait;
     use Logger\Message\Factory\AwareTrait;
     use Defensive\AwareTrait;
+
     public const PROP_IS_ENABLED = 'is_enabled';
+    public const CONTEXT_KEY_EXCEPTION = 'exception';
+    public const CONTEXT_KEY_EXCEPTION_STRING = 'exception_string';
+
     protected const LOG_DATE_TIME_FORMAT = 'D, d M y H:i:s.u T';
-    const CONTEXT_KEY_EXCEPTION = 'exception';
 
     protected $log_formatter;
     protected $level_filter_mask;
@@ -54,10 +57,10 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 
                 if (array_key_exists(self::CONTEXT_KEY_EXCEPTION, $context) && $context[self::CONTEXT_KEY_EXCEPTION]
                 instanceof \Throwable){
-                    $context['exception_sting'] = (string)$context[self::CONTEXT_KEY_EXCEPTION];
+                    $context[self::CONTEXT_KEY_EXCEPTION_STRING] = (string)$context[self::CONTEXT_KEY_EXCEPTION];
                     $normalizedException = (new NormalizerFormatter())->format([$context[self::CONTEXT_KEY_EXCEPTION]]);
                     unset($context[self::CONTEXT_KEY_EXCEPTION]);
-                    $context['exception'] = $normalizedException[0];
+                    $context[self::CONTEXT_KEY_EXCEPTION] = $normalizedException[0];
                 }
 
                 if (json_encode($context) === false) {
