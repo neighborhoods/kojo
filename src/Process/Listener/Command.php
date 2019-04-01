@@ -41,7 +41,7 @@ class Command extends ListenerAbstract implements CommandInterface
         try {
             $this->_getProcessPool()->addChildProcess($process);
         } catch (Exception $forkedException) {
-            $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+            $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
         }
 
         return $this;
