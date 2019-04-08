@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
+use Monolog\Formatter\NormalizerFormatter;
 use Neighborhoods\Kojo\Process\Pool\Logger\FormatterInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
@@ -14,7 +15,11 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     use Time\AwareTrait;
     use Logger\Message\Factory\AwareTrait;
     use Defensive\AwareTrait;
+
     public const PROP_IS_ENABLED = 'is_enabled';
+    public const CONTEXT_KEY_EXCEPTION = 'exception';
+    public const CONTEXT_KEY_EXCEPTION_STRING = 'exception_string';
+
     protected const LOG_DATE_TIME_FORMAT = 'D, d M y H:i:s.u T';
 
     protected $log_formatter;
@@ -49,6 +54,15 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 $logMessage->setProcessId($processId);
                 $logMessage->setProcessPath($this->_getProcess()->getPath());
                 $logMessage->setMessage($message);
+
+                if (array_key_exists(self::CONTEXT_KEY_EXCEPTION, $context) && $context[self::CONTEXT_KEY_EXCEPTION]
+                instanceof \Throwable){
+                    $context[self::CONTEXT_KEY_EXCEPTION_STRING] = (string)$context[self::CONTEXT_KEY_EXCEPTION];
+                    $normalizedException = (new NormalizerFormatter())->format([$context[self::CONTEXT_KEY_EXCEPTION]]);
+                    unset($context[self::CONTEXT_KEY_EXCEPTION]);
+                    $context[self::CONTEXT_KEY_EXCEPTION] = $normalizedException[0];
+                }
+
                 if (json_encode($context) === false) {
                     $logMessage->setContext([]);
                 } else {
