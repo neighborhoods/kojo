@@ -57,7 +57,6 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 
                 if (array_key_exists(self::CONTEXT_KEY_EXCEPTION, $context) && $context[self::CONTEXT_KEY_EXCEPTION]
                 instanceof \Throwable){
-                    $context[self::CONTEXT_KEY_EXCEPTION_STRING] = (string)$context[self::CONTEXT_KEY_EXCEPTION];
                     $normalizedException = (new NormalizerFormatter())->format([$context[self::CONTEXT_KEY_EXCEPTION]]);
                     unset($context[self::CONTEXT_KEY_EXCEPTION]);
                     $context[self::CONTEXT_KEY_EXCEPTION] = $normalizedException[0];
