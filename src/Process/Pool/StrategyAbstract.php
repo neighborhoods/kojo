@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
+use LogicException;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Process\Collection;
+use Neighborhoods\Kojo\Environment;
 
 abstract class StrategyAbstract implements StrategyInterface
 {
@@ -12,6 +14,7 @@ abstract class StrategyAbstract implements StrategyInterface
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
     use Collection\AwareTrait;
+    use Environment\Memory\AwareTrait;
 
     public function setMaxAlarmTime(int $seconds): StrategyInterface
     {
@@ -54,6 +57,41 @@ abstract class StrategyAbstract implements StrategyInterface
         $this->_create(self::PROP_ALARM_PROCESS_TYPE_CODE, $alarmProcessTypeCode);
 
         return $this;
+    }
+
+    public function canEnvironmentSustainAdditionalProcesses(): bool
+    {
+        $canEnvironmentSustainAdditionalProcesses = true;
+        $maximumEnvironmentLoadAverage = $this->getMaximumLoadAverage();
+        $currentEnvironmentLoadAverage = (float)current(sys_getloadavg());
+        if ($currentEnvironmentLoadAverage <= $maximumEnvironmentLoadAverage) {
+            $canEnvironmentSustainAdditionalProcesses = false;
+            $this->_getLogger()->debug(sprintf(
+                'Current environment load average of [%s] equals or exceeds maximum environment load average of [%s].',
+                $currentEnvironmentLoadAverage,
+                $maximumEnvironmentLoadAverage
+            ));
+        } else {
+            $numberOfCurrentWorkers = $this->_getProcessPool()->getCountOfChildProcesses();
+            $maximumNumberOfWorkers = $this->getEnvironmentMemory()->getMaximumNumberOfWorkers();
+            if ($maximumNumberOfWorkers > $numberOfCurrentWorkers) {
+                throw new LogicException(sprintf(
+                    'Current number of workers [%s] exceeds the maximum number of workers [%s].',
+                    $numberOfCurrentWorkers,
+                    $maximumNumberOfWorkers
+                ));
+            }
+            if ($maximumNumberOfWorkers === $numberOfCurrentWorkers) {
+                $canEnvironmentSustainAdditionalProcesses = false;
+                $this->_getLogger()->debug(sprintf(
+                    'Current number of workers [%s] is equivalent to maximum number of workers [%s].',
+                    $numberOfCurrentWorkers,
+                    $maximumNumberOfWorkers
+                ));
+            }
+        }
+
+        return $canEnvironmentSustainAdditionalProcesses;
     }
 
     protected function _getAlarmProcessTypeCode(): string

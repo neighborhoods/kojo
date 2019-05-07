@@ -52,7 +52,7 @@ class Server extends StrategyAbstract
                 $this->_getProcessPool()->getProcess()->exit();
             }
         }
-        if ($this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+        if ($this->_hasFillProcessTypeCode() && $this->canEnvironmentSustainAdditionalProcesses()) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();
                 $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);

@@ -1,0 +1,15 @@
+parameters:
+  Neighborhoods\Kojo\Environment\MemoryInterface.EnvironmentMaximumMemoryInputValue: '%env(ENVIRONMENT_MAXIMUM_MEMORY_INPUT_VALUE)%'
+  Neighborhoods\Kojo\Environment\MemoryInterface.EnvironmentMaximumMemoryInputUnit: '%env(ENVIRONMENT_MAXIMUM_MEMORY_INPUT_UNIT)%'
+  Neighborhoods\Kojo\Environment\MemoryInterface.WorkerMaximumMemoryValue: '%env(WORKER_MAXIMUM_MEMORY_INPUT_VALUE)%'
+  Neighborhoods\Kojo\Environment\MemoryInterface.WorkerMaximumMemoryUnit: '%env(WORKER_MAXIMUM_MEMORY_INPUT_UNIT)%'
+services:
+  Neighborhoods\Kojo\Environment\MemoryInterface:
+    class: Neighborhoods\Kojo\Environment\Memory
+    shared: true
+    public: false
+    calls:
+      - [setEnvironmentMaximumMemoryValue, ['%Neighborhoods\Kojo\Environment\MemoryInterface.EnvironmentMaximumMemoryInputValue%']]
+      - [setEnvironmentMaximumMemoryInputUnit, ['%Neighborhoods\Kojo\Environment\MemoryInterface.EnvironmentMaximumMemoryInputUnit%']]
+      - [setWorkerMaximumMemoryValue, ['%Neighborhoods\Kojo\Environment\MemoryInterface.WorkerMaximumMemoryValue%']]
+      - [setWorkerMaximumMemoryInputUnit, ['%Neighborhoods\Kojo\Environment\MemoryInterface.WorkerMaximumMemoryUnit%']]

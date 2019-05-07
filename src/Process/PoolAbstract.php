@@ -51,11 +51,6 @@ abstract class PoolAbstract implements PoolInterface
         return ($this->getCountOfChildProcesses() >= $this->_getProcessPoolStrategy()->getMaxChildProcesses());
     }
 
-    public function canEnvironmentSustainAdditionProcesses(): bool
-    {
-        return ((float)current(sys_getloadavg()) <= $this->_getProcessPoolStrategy()->getMaximumLoadAverage());
-    }
-
     protected function _initialize(): PoolInterface
     {
         $this->_getProcessPoolStrategy()->initializePool();
