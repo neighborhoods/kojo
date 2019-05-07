@@ -8,6 +8,8 @@ use Neighborhoods\Kojo\Maintainer;
 use Neighborhoods\Kojo\Process;
 use Neighborhoods\Kojo\Scheduler;
 use Neighborhoods\Kojo\Selector;
+use Neighborhoods\Kojo\Environment;
+use Throwable;
 
 class Job extends Forked implements JobInterface
 {
@@ -16,6 +18,7 @@ class Job extends Forked implements JobInterface
     use Scheduler\AwareTrait;
     use Selector\AwareTrait;
     use Process\Pool\Factory\AwareTrait;
+    use Environment\Memory\AwareTrait;
 
     protected function _run(): Forked
     {
@@ -26,11 +29,21 @@ class Job extends Forked implements JobInterface
             $this->_getScheduler()->scheduleStaticJobs();
             $this->_getMaintainer()->updatePendingJobs();
             $this->_getMaintainer()->deleteCompletedJobs();
+            $this->applyMemoryLimit();
             $this->_getForeman()->workWorker();
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             $this->_getLogger()->critical($throwable->getMessage(), ['exception' => $throwable]);
             $this->_setOrReplaceExitCode(255);
         }
+
+        return $this;
+    }
+
+    protected function applyMemoryLimit(): JobInterface
+    {
+        $processMaximumMemoryValue = $this->getEnvironmentMemory()->getWorkerMaximumMemoryValue();
+        $this->_getLogger()->debug(sprintf('Applying memory limit of [%s] bytes.', $processMaximumMemoryValue));
+        ini_set('memory_limit', $processMaximumMemoryValue);
 
         return $this;
     }

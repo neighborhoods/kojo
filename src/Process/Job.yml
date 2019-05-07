@@ -15,5 +15,6 @@ services:
       - [setUuidMaximumInteger, [9999999999]]
       - [setProcessPoolFactory, ['@process.pool.factory-job']]
       - [setTitlePrefix, ['%process.title.prefix%']]
+      - [setEnvironmentMemory, ['@Neighborhoods\Kojo\Environment\MemoryInterface']]
   process.job:
     alias: neighborhoods.kojo.process.job

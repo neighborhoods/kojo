@@ -35,7 +35,7 @@ class Strategy extends StrategyAbstract
             while (
                 $listenerProcess->hasMessages()
                 && !$this->_getProcessPool()->isFull()
-                && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
+                && $this->canEnvironmentSustainAdditionalProcesses()
             ) {
                 $listenerProcess->processMessages();
             }
@@ -78,7 +78,7 @@ class Strategy extends StrategyAbstract
     protected function _jobProcessExited(JobInterface $jobProcess): Strategy
     {
         $this->_getProcessPool()->freeChildProcess($jobProcess->getProcessId());
-        if ($jobProcess->getExitCode() !== 0 && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+        if ($jobProcess->getExitCode() !== 0 && $this->canEnvironmentSustainAdditionalProcesses()) {
             $typeCode = $jobProcess->getTypeCode();
             $replacementProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
             $replacementProcess->setThrottle($this->getChildProcessWaitThrottle());
@@ -97,7 +97,7 @@ class Strategy extends StrategyAbstract
 
     public function receivedAlarm(): StrategyInterface
     {
-        if (!$this->_getProcessPool()->isFull() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+        if (!$this->_getProcessPool()->isFull() && $this->canEnvironmentSustainAdditionalProcesses()) {
             if ($this->_hasPausedListenerProcess()) {
                 $this->_unPauseListenerProcesses();
             } else {
@@ -131,7 +131,7 @@ class Strategy extends StrategyAbstract
                 }
             }
         }
-        if ($this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+        if ($this->_hasFillProcessTypeCode() && $this->canEnvironmentSustainAdditionalProcesses()) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();
                 $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);
