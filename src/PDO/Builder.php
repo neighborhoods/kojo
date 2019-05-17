@@ -12,13 +12,18 @@ class Builder implements BuilderInterface
     protected const PROP_DATA_SOURCE_NAME = 'data_source_name';
     protected const PROP_USER_NAME        = 'user_name';
     protected const PROP_PASSWORD         = 'password';
+    protected const PROP_PORT             = 'port';
     protected const PROP_OPTIONS          = 'options';
     protected $_pdo;
 
     public function getPdo(): \PDO
     {
         if ($this->_pdo === null) {
-            $dsn = $this->_getDataSourceName();
+            if ($this->_getPort() !== 0){
+                $dsn = sprintf('%s;port=%d', $this->_getDataSourceName(),$this->_getPort());
+            } else {
+                $dsn = $this->_getDataSourceName();
+            }
             $userName = $this->_getUserName();
             $password = $this->_getPassword();
             if ($this->_hasOptions()) {
@@ -86,5 +91,17 @@ class Builder implements BuilderInterface
     protected function _hasOptions(): bool
     {
         return $this->_exists(self::PROP_OPTIONS);
+    }
+
+    public function setPort(int $port): BuilderInterface
+    {
+        $this->_create(self::PROP_PORT, $port);
+
+        return $this;
+    }
+
+    protected function _getPort(): int
+    {
+        return $this->_read(self::PROP_PORT);
     }
 }

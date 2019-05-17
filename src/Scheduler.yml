@@ -10,6 +10,7 @@ services:
       - [setServiceCreateFactory, ['@service.create.factory']]
       - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-schedule']]
       - [setSchedulerCache, ['@scheduler.cache']]
+      - [setLogger, ['@process.pool.logger']]
   scheduler:
     alias: neighborhoods.kojo.scheduler
     public: false

@@ -52,7 +52,7 @@ class Worker extends StrategyAbstract
             try {
                 $this->_getProcessPool()->addChildProcess($process);
             } catch (Exception $forkedException) {
-                $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
                 $this->_getProcessPool()->getProcess()->exit();
             }
         }
@@ -63,7 +63,7 @@ class Worker extends StrategyAbstract
                 try {
                     $this->_getProcessPool()->addChildProcess($fillProcess);
                 } catch (Exception $forkedException) {
-                    $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                    $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
                     $this->_getProcessPool()->getProcess()->exit();
                 }
             }

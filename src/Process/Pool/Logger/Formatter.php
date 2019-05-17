@@ -17,11 +17,14 @@ class Formatter implements FormatterInterface
 
     const LOG_FORMAT_PIPES = 'pipes';
     const LOG_FORMAT_JSON = 'json';
+    const LOG_FORMAT_JSON_PRETTY_PRINT = 'json_pretty_print';
 
     public function getFormattedMessage(MessageInterface $message) : string
     {
         if ($this->hasLogFormat() && $this->getLogFormat() === self::LOG_FORMAT_PIPES) {
             return $this->formatPipes($message);
+        } elseif ($this->hasLogFormat() && $this->getLogFormat() === self::LOG_FORMAT_JSON_PRETTY_PRINT) {
+            return $this->formatJsonPrettyPrint($message);
         } else {
             return $this->formatJson($message);
         }
@@ -56,6 +59,11 @@ class Formatter implements FormatterInterface
     protected function formatJson(MessageInterface $message) : string
     {
         return json_encode($message);
+    }
+
+    protected function formatJsonPrettyPrint(MessageInterface $message) : string
+    {
+        return json_encode($message, JSON_PRETTY_PRINT);
     }
 
     public function setProcessPathPadding(int $processPathPadding) : FormatterInterface

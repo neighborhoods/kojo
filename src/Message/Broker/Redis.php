@@ -21,7 +21,7 @@ class Redis extends BrokerAbstract
                 0
             );
         } catch (\Throwable $throwable) {
-            $this->_getLogger()->critical($throwable->getMessage(), [(string)$throwable]);
+            $this->_getLogger()->critical($throwable->getMessage(), ['exception' => $throwable]);
             throw $throwable;
         }
 
@@ -43,7 +43,7 @@ class Redis extends BrokerAbstract
             $publishChannelLength = $this->getPublishChannelLength();
             $subscriptionChannelLength = $this->getSubscriptionChannelLength();
         } catch (\Throwable $throwable) {
-            $this->_getLogger()->critical($throwable->getMessage(), [(string)$throwable]);
+            $this->_getLogger()->critical($throwable->getMessage(), ['exception' => $throwable]);
             throw $throwable;
         }
 
@@ -58,7 +58,7 @@ class Redis extends BrokerAbstract
                 $message = $this->_getRedisClient()->rPop($this->_getPublishChannelName());
             }
         } catch (\Throwable $throwable) {
-            $this->_getLogger()->critical($throwable->getMessage(), [(string)$throwable]);
+            $this->_getLogger()->critical($throwable->getMessage(), ['exception' => $throwable]);
             throw $throwable;
         }
 
@@ -70,7 +70,7 @@ class Redis extends BrokerAbstract
         try {
             $publishChannelLength = $this->_getRedisClient()->lLen($this->_getPublishChannelName());
         } catch (\Throwable $throwable) {
-            $this->_getLogger()->critical($throwable->getMessage(), [(string)$throwable]);
+            $this->_getLogger()->critical($throwable->getMessage(), ['exception' => $throwable]);
             throw $throwable;
         }
 
@@ -82,7 +82,7 @@ class Redis extends BrokerAbstract
         try {
             $subscriptionChannelLength = $this->_getRedisClient()->lLen($this->_getSubscriptionChannelName());
         } catch (\Throwable $throwable) {
-            $this->_getLogger()->critical($throwable->getMessage(), [(string)$throwable]);
+            $this->_getLogger()->critical($throwable->getMessage(), ['exception' => $throwable]);
             throw $throwable;
         }
 
@@ -94,7 +94,7 @@ class Redis extends BrokerAbstract
         try {
             $this->_getRedisClient()->lPush($this->_getPublishChannelName(), $message);
         } catch (\Throwable $throwable) {
-            $this->_getLogger()->critical($throwable->getMessage(), [(string)$throwable]);
+            $this->_getLogger()->critical($throwable->getMessage(), ['exception' => $throwable]);
             throw $throwable;
         }
 

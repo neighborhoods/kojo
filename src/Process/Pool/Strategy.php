@@ -50,7 +50,7 @@ class Strategy extends StrategyAbstract
                     $this->_getProcessPool()->addChildProcess($replacementListenerProcess);
                 } catch (Exception $forkedException) {
                     $this->_pauseListenerProcess($listenerProcess);
-                    $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                    $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
                 }
             }
         }
@@ -85,7 +85,7 @@ class Strategy extends StrategyAbstract
             try {
                 $this->_getProcessPool()->addChildProcess($replacementProcess);
             } catch (Exception $forkedException) {
-                $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
             }
             if (!$this->_getProcessPool()->hasAlarm()) {
                 $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
@@ -106,7 +106,7 @@ class Strategy extends StrategyAbstract
                 try {
                     $this->_getProcessPool()->addChildProcess($alarmProcess);
                 } catch (Exception $forkedException) {
-                    $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                    $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
                 }
             }
         }
@@ -125,7 +125,7 @@ class Strategy extends StrategyAbstract
             try {
                 $this->_getProcessPool()->addChildProcess($process);
             } catch (Exception $forkedException) {
-                $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
                 if ($process instanceof CommandInterface) {
                     $this->_getProcessPool()->getProcess()->exit();
                 }
@@ -138,7 +138,7 @@ class Strategy extends StrategyAbstract
                 try {
                     $this->_getProcessPool()->addChildProcess($fillProcess);
                 } catch (Exception $forkedException) {
-                    $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                    $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
                 }
             }
         }
@@ -179,7 +179,7 @@ class Strategy extends StrategyAbstract
                             $this->_getProcessPool()->addChildProcess($newListenerProcess);
                             unset($this->_pausedListenerProcesses[$processId]);
                         } catch (Exception $forkedException) {
-                            $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                            $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
                         }
                     }
                 } else {

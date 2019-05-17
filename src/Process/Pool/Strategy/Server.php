@@ -21,7 +21,7 @@ class Server extends StrategyAbstract
             try {
                 $this->_getProcessPool()->addChildProcess($rootProcess);
             } catch (Exception $forkedException) {
-                $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
             }
         } else {
             $className = get_class($process);
@@ -48,7 +48,7 @@ class Server extends StrategyAbstract
             try {
                 $this->_getProcessPool()->addChildProcess($process);
             } catch (Exception $forkedException) {
-                $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
                 $this->_getProcessPool()->getProcess()->exit();
             }
         }
@@ -59,7 +59,7 @@ class Server extends StrategyAbstract
                 try {
                     $this->_getProcessPool()->addChildProcess($fillProcess);
                 } catch (Exception $forkedException) {
-                    $this->_getLogger()->critical($forkedException->getMessage(), [(string)$forkedException]);
+                    $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
                     $this->_getProcessPool()->getProcess()->exit();
                 }
             }

@@ -14,4 +14,6 @@ interface BuilderInterface
     public function setPassword(string $password): BuilderInterface;
 
     public function setOptions(array $options): BuilderInterface;
+
+    public function setPort(int $port): BuilderInterface;
 }
