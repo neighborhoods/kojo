@@ -6,4 +6,4 @@ services:
       - [setLogger, ['@neighborhoods.kojo.process.pool.logger']]
       - [setProcessSignalHandlerDecoratorFactory, ['@Neighborhoods\Kojo\Process\Signal\Handler\Decorator\FactoryInterface']]
     public: false
-    shared: false
+    shared: true
