@@ -5,13 +5,14 @@ namespace Neighborhoods\Kojo\Process\Listener;
 
 use Neighborhoods\Kojo\Process\Forked;
 use Neighborhoods\Kojo\Process\Forked\Exception;
-use Neighborhoods\Kojo\Process\ListenerInterface;
 use Neighborhoods\Kojo\Process\ListenerAbstract;
+use Neighborhoods\Kojo\Process\ListenerInterface;
+use Neighborhoods\Kojo\ProcessInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Command extends ListenerAbstract implements CommandInterface
 {
-    const PROP_EXPRESSION_LANGUAGE = 'expression_language';
+    protected const PROP_EXPRESSION_LANGUAGE = 'expression_language';
 
     public function hasMessages(): bool
     {
@@ -21,7 +22,7 @@ class Command extends ListenerAbstract implements CommandInterface
     public function processMessages(): ListenerInterface
     {
         $message = $this->_getMessageBroker()->getNextMessage();
-        if (json_decode($message) !== null) {
+        if (json_decode($message, true) !== null) {
             $this->_getExpressionLanguage()->evaluate(
                 json_decode($message, true)['command'],
                 [
@@ -29,13 +30,13 @@ class Command extends ListenerAbstract implements CommandInterface
                 ]
             );
         } else {
-            $this->_getLogger()->warning('The message is not a JSON: "' . $message . '".');
+            $this->_getLogger()->warning(sprintf('The message is not a JSON: [%s]', $message));
         }
 
         return $this;
     }
 
-    public function addProcess(string $processTypeCode): Command
+    public function addProcess(string $processTypeCode): CommandInterface
     {
         $process = $this->_getProcessCollection()->getProcessPrototypeClone($processTypeCode);
         try {
@@ -47,7 +48,7 @@ class Command extends ListenerAbstract implements CommandInterface
         return $this;
     }
 
-    public function setExpressionLanguage(ExpressionLanguage $expressionLanguage): Command
+    public function setExpressionLanguage(ExpressionLanguage $expressionLanguage): CommandInterface
     {
         $this->_create(self::PROP_EXPRESSION_LANGUAGE, $expressionLanguage);
 
@@ -61,10 +62,24 @@ class Command extends ListenerAbstract implements CommandInterface
 
     protected function _run(): Forked
     {
-        $this->_getProcessSignal()->setCanBufferSignals(false);
         if (!$this->_getMessageBroker()->hasMessage()) {
             $this->_getMessageBroker()->waitForNewMessage();
         }
+
+        return $this;
+    }
+
+    protected function _registerSignalHandlers(): ProcessInterface
+    {
+        $this->getProcessSignalDispatcher()->ignoreSignal(SIGCHLD);
+        $this->getProcessSignalDispatcher()->ignoreSignal(SIGALRM);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGTERM, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGINT, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGHUP, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGQUIT, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGABRT, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGUSR1, $this, false);
+        $this->_getLogger()->debug('Registered signal handlers.');
 
         return $this;
     }

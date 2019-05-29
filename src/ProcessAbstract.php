@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo;
 
+use Neighborhoods\Kojo\Apm;
 use Neighborhoods\Kojo\Process;
 use Neighborhoods\Kojo\Process\Pool\Logger;
 use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
-use Neighborhoods\Kojo\Apm;
 
 abstract class ProcessAbstract implements ProcessInterface
 {
@@ -16,7 +16,7 @@ abstract class ProcessAbstract implements ProcessInterface
     use Process\Registry\AwareTrait;
     use Process\Pool\AwareTrait;
     use Process\Strategy\AwareTrait;
-    use Process\Signal\AwareTrait;
+    use Process\Signal\Dispatcher\AwareTrait;
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
     use Apm\NewRelic\AwareTrait;
@@ -47,14 +47,14 @@ abstract class ProcessAbstract implements ProcessInterface
 
     protected function _registerSignalHandlers(): ProcessInterface
     {
-        $this->_getProcessSignal()->addSignalHandler(SIGCHLD, $this->_getProcessPool());
-        $this->_getProcessSignal()->addSignalHandler(SIGALRM, $this->_getProcessPool());
-        $this->_getProcessSignal()->addSignalHandler(SIGTERM, $this);
-        $this->_getProcessSignal()->addSignalHandler(SIGINT, $this);
-        $this->_getProcessSignal()->addSignalHandler(SIGHUP, $this);
-        $this->_getProcessSignal()->addSignalHandler(SIGQUIT, $this);
-        $this->_getProcessSignal()->addSignalHandler(SIGABRT, $this);
-        $this->_getProcessSignal()->addSignalHandler(SIGUSR1, $this);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGCHLD, $this->_getProcessPool(), true);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGALRM, $this->_getProcessPool(), true);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGTERM, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGINT, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGHUP, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGQUIT, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGABRT, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGUSR1, $this, false);
         $this->_getLogger()->debug('Registered signal handlers.');
 
         return $this;
@@ -106,7 +106,7 @@ abstract class ProcessAbstract implements ProcessInterface
     {
         if ($this->_read(self::PROP_IS_SHUTDOWN_METHOD_ACTIVE)) {
             // to avoid hitting artificial memory limits while executing this block
-            ini_set('memory_limit','-1');
+            ini_set('memory_limit', '-1');
             $this->_getLogger()->critical(
                 'Shutdown method invoked.',
                 ['potentially_unrelated_error_get_last' => error_get_last()]

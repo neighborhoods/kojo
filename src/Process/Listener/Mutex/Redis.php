@@ -8,18 +8,19 @@ use Neighborhoods\Kojo\Process\ListenerAbstract;
 use Neighborhoods\Kojo\Process\ListenerInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Kojo\Redis\Factory;
+use RuntimeException;
+use Throwable;
 
 class Redis extends ListenerAbstract implements RedisInterface
 {
     use Factory\AwareTrait;
-    const PROP_REDIS = 'redis';
+    public const PROP_REDIS = 'redis';
 
     protected function _run(): Forked
     {
-        $this->_getProcessSignal()->setCanBufferSignals(false);
         try {
             $this->_register();
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             posix_kill($this->getParentProcessId(), $this->getParentProcessTerminationSignalNumber());
             $this->_getLogger()->critical(
                 'Redis mutex watchdog registration encountered a Throwable.',
@@ -44,7 +45,7 @@ class Redis extends ListenerAbstract implements RedisInterface
 
     public function processMessages(): ListenerInterface
     {
-        throw new \RuntimeException('The connection to redis was lost.');
+        throw new RuntimeException('The connection to redis was lost.');
     }
 
     public function hasMessages(): bool
@@ -59,5 +60,19 @@ class Redis extends ListenerAbstract implements RedisInterface
         }
 
         return $this->_read(self::PROP_REDIS);
+    }
+
+    protected function _registerSignalHandlers(): ProcessInterface
+    {
+        $this->getProcessSignalDispatcher()->ignoreSignal(SIGCHLD);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGTERM, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGINT, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGHUP, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGQUIT, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGABRT, $this, false);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGUSR1, $this, false);
+        $this->_getLogger()->debug('Registered signal handlers.');
+
+        return $this;
     }
 }
