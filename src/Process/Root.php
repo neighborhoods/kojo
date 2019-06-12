@@ -3,11 +3,9 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process;
 
-use Neighborhoods\Kojo\ProcessInterface;
-
-class Root extends Forked implements ProcessInterface
+class Root extends Forked
 {
-    const TYPE_CODE = 'root';
+    public const TYPE_CODE = 'root';
 
     public function __construct()
     {
@@ -17,7 +15,7 @@ class Root extends Forked implements ProcessInterface
     protected function _run(): Forked
     {
         while (true) {
-            $this->_getProcessSignal()->processBufferedSignals();
+            $this->getProcessSignalDispatcher()->processBufferedSignals();
             sleep(1);
         }
 

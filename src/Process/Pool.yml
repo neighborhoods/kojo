@@ -4,6 +4,6 @@ services:
     shared: false
     calls:
       - [setLogger, ['@process.pool.logger']]
-      - [setProcessSignal, ['@process.signal']]
+      - [setProcessSignalDispatcher, ['@Neighborhoods\Kojo\Process\Signal\DispatcherInterface']]
   process.pool:
     alias: neighborhoods.kojo.process.pool

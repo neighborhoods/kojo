@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\Kojo\Process\Signal\Handler\Decorator\FactoryInterface:
+    class: Neighborhoods\Kojo\Process\Signal\Handler\Decorator\Factory
+    calls:
+      - [setProcessSignalHandlerDecorator, ['@Neighborhoods\Kojo\Process\Signal\Handler\DecoratorInterface']]
+    public: false
+    shared: true
