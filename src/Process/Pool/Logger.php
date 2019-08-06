@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool;
 
 use Monolog\Formatter\NormalizerFormatter;
+use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\Process\Pool\Logger\FormatterInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
@@ -24,10 +25,37 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 
     protected $log_formatter;
     protected $level_filter_mask;
+    /** @var JobInterface */
+    protected $job;
 
     public function setProcess(ProcessInterface $process): LoggerInterface
     {
         $this->_createOrUpdate(ProcessInterface::class, $process);
+
+        return $this;
+    }
+
+    public function hasJob(): bool
+    {
+        return isset($this->job);
+    }
+
+    public function getJob() : JobInterface
+    {
+        if ($this->job === null) {
+            throw new \LogicException('Logger job has not been set.');
+        }
+
+        return $this->job;
+    }
+
+    public function setJob(JobInterface $job) : LoggerInterface
+    {
+        if ($this->job !== null) {
+            throw new \LogicException('Logger job is already set.');
+        }
+
+        $this->job = $job;
 
         return $this;
     }
@@ -53,6 +81,11 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                 $logMessage->setLevel($level);
                 $logMessage->setProcessId($processId);
                 $logMessage->setProcessPath($this->_getProcess()->getPath());
+
+                if ($this->hasJob()){
+                    $logMessage->setKojoJob($this->getJob());
+                }
+
                 $logMessage->setMessage($message);
 
                 if (array_key_exists(self::CONTEXT_KEY_EXCEPTION, $context) && $context[self::CONTEXT_KEY_EXCEPTION]

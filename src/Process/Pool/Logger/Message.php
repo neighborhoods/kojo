@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
+use Neighborhoods\Kojo\Data\JobInterface;
+
 class Message implements MessageInterface, \JsonSerializable
 {
     const KEY_TIME = 'time';
@@ -11,11 +13,13 @@ class Message implements MessageInterface, \JsonSerializable
     const KEY_PROCESS_ID = 'process_id';
     const KEY_PROCESS_PATH = 'process_path';
     const KEY_MESSAGE = 'message';
+    const KEY_JOB_METADATA = 'kojo_job';
 
     protected $time;
     protected $level;
     protected $process_id;
     protected $process_path;
+    protected $kojo_job = [];
     protected $message;
     protected $context;
     protected $context_json_last_error;
@@ -161,6 +165,26 @@ class Message implements MessageInterface, \JsonSerializable
         }
 
         $this->context_json_last_error = $context_json_last_error;
+
+        return $this;
+    }
+
+    public function getKojoJob() : JobInterface
+    {
+        if ($this->kojo_job === null) {
+            throw new \LogicException('Message job_metadata has not been set.');
+        }
+
+        return $this->kojo_job;
+    }
+
+    public function setKojoJob(JobInterface $kojo_job) : MessageInterface
+    {
+        if ($this->kojo_job !== []) {
+            throw new \LogicException('Message job_metadata is already set.');
+        }
+
+        $this->kojo_job = $kojo_job;
 
         return $this;
     }

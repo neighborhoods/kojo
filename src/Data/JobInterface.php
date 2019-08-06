@@ -119,4 +119,6 @@ interface JobInterface extends ModelInterface
     public function setDeleteAfterDateTime(\DateTime $deleteAfterDateTime): JobInterface;
 
     public function getDeleteAfterDateTime(): \DateTime;
+
+    public function jsonSerialize();
 }
