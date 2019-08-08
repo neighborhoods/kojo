@@ -36,5 +36,7 @@ interface MessageInterface
 
     public function setContextJsonLastError(int $context_json_last_error): MessageInterface;
 
+    public function getKojoJob() : JobInterface;
+
     public function setKojoJob(JobInterface $job_metadata) : MessageInterface;
 }

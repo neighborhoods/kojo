@@ -13,13 +13,12 @@ class Message implements MessageInterface, \JsonSerializable
     const KEY_PROCESS_ID = 'process_id';
     const KEY_PROCESS_PATH = 'process_path';
     const KEY_MESSAGE = 'message';
-    const KEY_JOB_METADATA = 'kojo_job';
 
     protected $time;
     protected $level;
     protected $process_id;
     protected $process_path;
-    protected $kojo_job = [];
+    protected $kojo_job;
     protected $message;
     protected $context;
     protected $context_json_last_error;
@@ -172,7 +171,7 @@ class Message implements MessageInterface, \JsonSerializable
     public function getKojoJob() : JobInterface
     {
         if ($this->kojo_job === null) {
-            throw new \LogicException('Message job_metadata has not been set.');
+            throw new \LogicException('Message kojo_job has not been set.');
         }
 
         return $this->kojo_job;
@@ -180,8 +179,8 @@ class Message implements MessageInterface, \JsonSerializable
 
     public function setKojoJob(JobInterface $kojo_job) : MessageInterface
     {
-        if ($this->kojo_job !== []) {
-            throw new \LogicException('Message job_metadata is already set.');
+        if ($this->kojo_job !== null) {
+            throw new \LogicException('Message kojo_job is already set.');
         }
 
         $this->kojo_job = $kojo_job;
