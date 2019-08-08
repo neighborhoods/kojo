@@ -168,6 +168,11 @@ class Message implements MessageInterface, \JsonSerializable
         return $this;
     }
 
+    public function hasKojoJob(): bool
+    {
+        return isset($this->kojo_job);
+    }
+
     public function getKojoJob() : JobInterface
     {
         if ($this->kojo_job === null) {

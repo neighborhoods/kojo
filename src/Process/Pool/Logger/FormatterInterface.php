@@ -11,8 +11,6 @@ interface FormatterInterface
 
     public function setProcessPathPadding(int $processPathPadding): FormatterInterface;
 
-    public function setProcessIdPadding(int $processIdPadding): FormatterInterface;
-
     public function setLogFormat(string $logFormat);
 
     /**

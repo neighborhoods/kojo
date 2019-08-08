@@ -39,4 +39,6 @@ interface MessageInterface
     public function getKojoJob() : JobInterface;
 
     public function setKojoJob(JobInterface $job_metadata) : MessageInterface;
+
+    public function hasKojoJob() : bool;
 }

@@ -3,16 +3,14 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
+use DateTime;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Formatter implements FormatterInterface
 {
     use Defensive\AwareTrait;
 
-    const PAD_PID = 6;
-    const PAD_PATH = 50;
     const PROP_PROCESS_PATH_PADDING = 'process_path_padding';
-    const PROP_PROCESS_ID_PADDING = 'process_id_padding';
     const PROP_LOG_FORMAT = 'log_format';
 
     const LOG_FORMAT_PIPES = 'pipes';
@@ -46,14 +44,29 @@ class Formatter implements FormatterInterface
 
     protected function formatPipes(MessageInterface $message) : string
     {
-        $processIdPaddingLength = $this->getProcessIdPadding();
         $processPathPaddingLength = $this->getProcessPathPadding();
 
-        $processID = str_pad($message->getProcessId(), $processIdPaddingLength, ' ', STR_PAD_LEFT);
         $processPath = str_pad($message->getProcessPath(), $processPathPaddingLength, ' ');
-        $level = str_pad($message->getLevel(), 12, ' ');
+        $level = str_pad($message->getLevel(), 8, ' ');
+        $kojoJobTypeCode = str_pad($message->hasKojoJob() ? $message->getKojoJob()->getTypeCode() : '', 26, ' ');
+        $kojoJobAssignedState = str_pad(
+            $message->hasKojoJob() ? $message->getKojoJob()->getAssignedState() : '',
+            20,
+            ' '
+        );
 
-        return implode(' | ', [$message->getTime(), $level, $processID, $processPath, $message->getMessage()]);
+
+        return implode(
+            ' | ',
+            [
+                DateTime::createFromFormat('D, d M y H:i:s.u T', $message->getTime())->format('H:i:s.u'),
+                $level,
+                $processPath,
+                $kojoJobTypeCode,
+                $kojoJobAssignedState,
+                $message->getMessage(),
+            ]
+        );
     }
 
     protected function formatJson(MessageInterface $message) : string
@@ -76,18 +89,6 @@ class Formatter implements FormatterInterface
     protected function getProcessPathPadding() : int
     {
         return $this->_read(self::PROP_PROCESS_PATH_PADDING);
-    }
-
-    public function setProcessIdPadding(int $processIdPadding) : FormatterInterface
-    {
-        $this->_create(self::PROP_PROCESS_ID_PADDING, $processIdPadding);
-
-        return $this;
-    }
-
-    protected function getProcessIdPadding() : int
-    {
-        return $this->_read(self::PROP_PROCESS_ID_PADDING);
     }
 
     public function setLogFormat(string $logFormat)
