@@ -32,7 +32,7 @@ If there are any assumptions within Kōjō about the process hierarchy, they cou
 Otherwise it's a purely additive modification to Kōjō.
 
 ## Example 1
-1. There exists a dynamically scheduled job with `previous_state: 'new'`, `assigned_state: 'waiting'`, `next_state_request: 'working'`, and `work_at_datetime > NOW()`
+1. There exists a dynamically scheduled job with `previous_state: 'new'`, `assigned_state: 'waiting'`, `next_state_request: 'working'`, and `work_at_datetime < NOW()`
 1. A recently spawned `Worker` process selects that job to work
 1. That `Worker` process reaches `Neighborhoods\Kojo\Foreman::_updateJobAsWorking()` and invokes `Neighborhoods\Kojo\State\Service::applyRequest()` to transition the job from `waiting` to `working`
 1. The job, process, and transition information are inserted into `kojo_job_state_transitions`
@@ -54,7 +54,7 @@ There are multiple unknowns with this design which could cause it to become infe
 
 ## Alternatives
 1. `Neighborhoods\Kojo\State\Service::applyRequest()` emits the message itself when the transition happens
-    1. There exists a dynamically scheduled job with `previous_state: 'new'`, `assigned_state: 'waiting'`, `next_state_request: 'working'`, and `work_at_datetime > NOW()`
+    1. There exists a dynamically scheduled job with `previous_state: 'new'`, `assigned_state: 'waiting'`, `next_state_request: 'working'`, and `work_at_datetime < NOW()`
     1. A recently spawned `Worker` process selects that job to work
     1. That `Worker` process reaches `Neighborhoods\Kojo\Foreman::_updateJobAsWorking()` and invokes `Neighborhoods\Kojo\State\Service::applyRequest()` to transition the job from `waiting` to `working`
     1. `Neighborhoods\Kojo\State\Service::applyRequest()` emits the transition message itself
@@ -63,7 +63,7 @@ There are multiple unknowns with this design which could cause it to become infe
     1. Userspace begins a transaction and issues a `complete_success` request via the Kōjō API (which causes a message to be emitted)
     1. Userspace rolls back the transaction, and issues a `complete_failed` request (which causes a contradictory message to be emitted)
 1. `kojo_job_state_transitions` is populated via triggers on `kojo_job`
-    1. There exists a dynamically scheduled job with `previous_state: 'new'`, `assigned_state: 'waiting'`, `next_state_request: 'working'`, and `work_at_datetime > NOW()`
+    1. There exists a dynamically scheduled job with `previous_state: 'new'`, `assigned_state: 'waiting'`, `next_state_request: 'working'`, and `work_at_datetime < NOW()`
     1. A recently spawned `Worker` process selects that job to work
     1. That `Worker` process reaches `Neighborhoods\Kojo\Foreman::_updateJobAsWorking()` and invokes `Neighborhoods\Kojo\State\Service::applyRequest()` to transition the job from `waiting` to `working`
     1. Once `Neighborhoods\Kojo\State\Service::applyRequest()` updates `kojo_job`, a trigger writes the old and new row information to `kojo_job_state_transitions`
