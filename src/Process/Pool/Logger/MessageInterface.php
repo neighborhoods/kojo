@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
+use Neighborhoods\Kojo\Data\JobInterface;
+
 interface MessageInterface
 {
     public function getTime(): string;
@@ -33,4 +35,10 @@ interface MessageInterface
     public function getContextJsonLastError(): int;
 
     public function setContextJsonLastError(int $context_json_last_error): MessageInterface;
+
+    public function getKojoJob() : JobInterface;
+
+    public function setKojoJob(JobInterface $kojo_job) : MessageInterface;
+
+    public function hasKojoJob() : bool;
 }
