@@ -15,6 +15,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
     use Logger\Message\Factory\AwareTrait;
+    use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessInterface\Builder\AwareTrait;
     use Defensive\AwareTrait;
 
     public const PROP_IS_ENABLED = 'is_enabled';
@@ -68,15 +69,21 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     public function log($level, $message, array $context = [])
     {
         if ($this->_isEnabled() === true) {
+            $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
+
             if ($this->getLevelFilterMask()[$level] === false) {
                 if ($this->_exists(ProcessInterface::class)) {
                     $processId = (string)$this->_getProcess()->getProcessId();
+                    $fromProcessInterfaceBuilder =
+                        $this->getProcessPoolLoggerMessageProcessFromProcessInterfaceBuilder();
+                    $logMessage->setKojoProcess(
+                        $fromProcessInterfaceBuilder->setProcessInterface($this->_getProcess())->build()
+                    );
                 } else {
                     $processId = '?';
                 }
 
                 $referenceTime = $this->_getTime()->getNow();
-                $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
                 $logMessage->setTime($referenceTime->format(self::LOG_DATE_TIME_FORMAT));
                 $logMessage->setLevel($level);
                 $logMessage->setProcessId($processId);

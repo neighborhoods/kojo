@@ -1,0 +1,5 @@
+services:
+  neighborhoods.kojo.process.pool.logger.message.process.from_process_interface.builder.factory:
+    class: Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessInterface\Builder\Factory
+    calls:
+      - [setProcessPoolLoggerMessageProcessFromProcessInterfaceBuilder, ['@neighborhoods.kojo.process.pool.logger.message.process.from_process_interface.builder']]

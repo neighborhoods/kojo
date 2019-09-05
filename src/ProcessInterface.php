@@ -7,7 +7,7 @@ use Neighborhoods\Kojo\Process\Pool\LoggerInterface;
 use Neighborhoods\Kojo\Process\PoolInterface;
 use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 
-interface ProcessInterface extends HandlerInterface, \JsonSerializable
+interface ProcessInterface extends HandlerInterface
 {
     public const PROP_THROTTLE                                 = 'throttle';
     public const PROP_EXIT_CODE                                = 'exit_code';

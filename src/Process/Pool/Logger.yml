@@ -18,5 +18,7 @@ services:
       - [setLogFormatter, ['@neighborhoods.kojo.process.log_formatter']]
       - [setProcessPoolLoggerMessageFactory, ['@neighborhoods.kojo.process.pool.logger.message.factory']]
       - [setLevelFilterMask, ['%neighborhoods.kojo.process.pool.logger.level_filter_mask%']]
+      - [setProcessPoolLoggerMessageProcessFromProcessInterfaceBuilder, ['@neighborhoods.kojo.process.pool.logger.message.process.from_process_interface.builder']]
   process.pool.logger:
     alias: neighborhoods.kojo.process.pool.logger
+

@@ -276,19 +276,4 @@ abstract class ProcessAbstract implements ProcessInterface
     {
         return $this->_read(self::PROP_UUID_MAXIMUM_INTEGER);
     }
-
-    public function jsonSerialize()
-    {
-        $usefulStuff = [
-            self::PROP_PROCESS_ID => $this->getProcessId(),
-            self::PROP_PARENT_PROCESS_ID => $this->getParentProcessId(),
-            self::PROP_PATH => $this->getPath(),
-            self::PROP_PARENT_PROCESS_PATH => $this->_getParentProcessPath(),
-            self::PROP_UUID => $this->getUuid(),
-            self::PROP_PARENT_PROCESS_UUID => $this->getParentProcessUuid(),
-            self::PROP_TYPE_CODE => $this->getTypeCode(),
-        ];
-
-        return $usefulStuff;
-    }
 }
