@@ -28,9 +28,8 @@ class Worker extends StrategyAbstract
     protected function _listenerProcessExited(ListenerInterface $listenerProcess): StrategyInterface
     {
         while ($listenerProcess->hasMessages()) {
-            $listenerProcess->processMessages();
+            $listenerProcess->processMessage();
         }
-
 
         return $this;
     }
