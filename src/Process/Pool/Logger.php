@@ -14,7 +14,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
     use Logger\Message\Factory\AwareTrait;
-    use Logger\Message\Process\FromProcessModel\Builder\Factory\AwareTrait;
+    use Logger\Message\SerializableProcess\FromProcessModel\Builder\Factory\AwareTrait;
     use Defensive\AwareTrait;
 
     public const PROP_IS_ENABLED = 'is_enabled';

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\Factory;
+namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess\Factory;
 
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FactoryInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess\FactoryInterface;
 
 /** @codeCoverageIgnore */
 trait AwareTrait

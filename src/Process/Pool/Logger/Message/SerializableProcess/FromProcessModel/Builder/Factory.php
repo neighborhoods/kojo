@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessModel\Builder;
+namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess\FromProcessModel\Builder;
 
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessModel\BuilderInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess\FromProcessModel\BuilderInterface;
 
 /** @codeCoverageIgnore */
 class Factory implements FactoryInterface

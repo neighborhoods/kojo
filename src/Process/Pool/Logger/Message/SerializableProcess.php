@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Logger\Message;
 
-class Process implements ProcessInterface
+class SerializableProcess implements SerializableProcessInterface
 {
     /** @var int  */
     protected $process_id;
@@ -25,7 +25,7 @@ class Process implements ProcessInterface
         return $this->process_id;
     }
 
-    public function setProcessId(int $process_id) : ProcessInterface
+    public function setProcessId(int $process_id) : SerializableProcessInterface
     {
         if ($this->process_id !== null) {
             throw new \LogicException('Process process_id is already set.');
@@ -45,7 +45,7 @@ class Process implements ProcessInterface
         return $this->parent_process_id;
     }
 
-    public function setParentProcessId(int $parent_process_id) : ProcessInterface
+    public function setParentProcessId(int $parent_process_id) : SerializableProcessInterface
     {
         if ($this->parent_process_id !== null) {
             throw new \LogicException('Process parent_process_id is already set.');
@@ -65,7 +65,7 @@ class Process implements ProcessInterface
         return $this->uuid;
     }
 
-    public function setUuid(string $uuid) : ProcessInterface
+    public function setUuid(string $uuid) : SerializableProcessInterface
     {
         if ($this->uuid !== null) {
             throw new \LogicException('Process uuid is already set.');
@@ -85,7 +85,7 @@ class Process implements ProcessInterface
         return $this->type_code;
     }
 
-    public function setTypeCode(string $type_code) : ProcessInterface
+    public function setTypeCode(string $type_code) : SerializableProcessInterface
     {
         if ($this->type_code !== null) {
             throw new \LogicException('Process type_code is already set.');
