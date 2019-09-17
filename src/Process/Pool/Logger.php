@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
-use Monolog\Formatter\NormalizerFormatter;
 use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
@@ -14,14 +13,13 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
     use Logger\Message\Factory\AwareTrait;
-    use Logger\Message\Process\FromProcessInterface\Builder\Factory\AwareTrait;
+    use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Builder\AwareTrait;
+    use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Builder\Factory\AwareTrait;
+
     use Defensive\AwareTrait;
 
     public const PROP_IS_ENABLED = 'is_enabled';
-    public const CONTEXT_KEY_EXCEPTION = 'exception';
-    public const CONTEXT_KEY_EXCEPTION_STRING = 'exception_string';
 
-    protected const LOG_DATE_TIME_FORMAT = 'D, d M y H:i:s.u T';
 
     protected $log_formatter;
     protected $level_filter_mask;
@@ -60,7 +58,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
         return $this;
     }
 
-    protected function _getProcess(): ProcessInterface
+    protected function getProcess(): ProcessInterface
     {
         return $this->_read(ProcessInterface::class);
     }
@@ -68,47 +66,21 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
     public function log($level, $message, array $context = [])
     {
         if ($this->_isEnabled() === true) {
-            $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
+            $logMessageBuilder = $this->getProcessPoolLoggerMessageBuilderFactory()->create();
+            $logMessageBuilder->setLevel($level);
+            $logMessageBuilder->setMessage($message);
+            $logMessageBuilder->setContext($context);
 
             if ($this->getLevelFilterMask()[$level] === false) {
                 if ($this->_exists(ProcessInterface::class)) {
-                    $processId = (string)$this->_getProcess()->getProcessId();
-                    $serializableProcess = $this->getProcessPoolLoggerMessageProcessFromProcessInterfaceBuilderFactory()
-                        ->create()
-                        ->setProcessModelInterface($this->_getProcess())
-                        ->build();
-                    $logMessage->setKojoProcess($serializableProcess);
-
-                } else {
-                    $processId = '?';
+                    $logMessageBuilder->setProcess($this->getProcess());
                 }
-
-                $referenceTime = $this->_getTime()->getNow();
-                $logMessage->setTime($referenceTime->format(self::LOG_DATE_TIME_FORMAT));
-                $logMessage->setLevel($level);
-                $logMessage->setProcessId($processId);
-                $logMessage->setProcessPath($this->_getProcess()->getPath());
 
                 if ($this->hasJob()){
-                    $logMessage->setKojoJob($this->getJob());
+                    $logMessageBuilder->setJob($this->getJob());
                 }
 
-                $logMessage->setMessage($message);
-
-                if (array_key_exists(self::CONTEXT_KEY_EXCEPTION, $context) && $context[self::CONTEXT_KEY_EXCEPTION]
-                instanceof \Throwable){
-                    $normalizedException = (new NormalizerFormatter())->format([$context[self::CONTEXT_KEY_EXCEPTION]]);
-                    unset($context[self::CONTEXT_KEY_EXCEPTION]);
-                    $context[self::CONTEXT_KEY_EXCEPTION] = $normalizedException[0];
-                }
-
-                if (json_encode($context) === false) {
-                    $logMessage->setContext([]);
-                } else {
-                    $logMessage->setContext($context);
-                }
-
-                $logMessage->setContextJsonLastError(json_last_error());
+                $logMessage = $logMessageBuilder->build();
                 fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage($logMessage) . PHP_EOL);
             }
         }

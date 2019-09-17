@@ -1,0 +1,7 @@
+services:
+  neighborhoods.kojo.process.pool.logger.message.builder:
+    class: Neighborhoods\Kojo\Process\Pool\Logger\Message\Builder
+    calls:
+      - [setProcessPoolLoggerMessageFactory, ['@neighborhoods.kojo.process.pool.logger.message.factory']]
+      - [setProcessPoolLoggerMessageProcessFromProcessInterfaceBuilderFactory, ['@neighborhoods.kojo.process.pool.logger.message.process.from_process_interface.builder.factory']]
+      - [setTime, ['@neighborhoods.pylon.time']]
