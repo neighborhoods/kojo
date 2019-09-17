@@ -12,7 +12,7 @@ services:
       - [setBrokerTypeCollection, ['@neighborhoods.kojo.message.broker.type.collection-job']]
       - [setBrokerTypeCode, ['process.listener.mutex.redis']]
       - [setProcessPoolFactory, ['@process.pool.factory-empty']]
-      - [setRedisFactory, ['@redis.factory']]
+      - [setRedisRepository, ['@redis.repository']]
       - [setTitlePrefix, ['%process.title.prefix%']]
   process.listener.mutex.redis:
     alias: neighborhoods.kojo.process.listener.mutex.redis
