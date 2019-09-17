@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessInterfaceInterface;
+
 use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\ProcessInterface;
 
 interface MessageInterface
 {
@@ -45,8 +46,8 @@ interface MessageInterface
 
     public function hasKojoProcess() : bool;
 
-    public function setKojoProcess(FromProcessInterfaceInterface $kojo_process) : MessageInterface;
+    public function setKojoProcess(ProcessInterface $kojo_process) : MessageInterface;
 
-    public function getKojoProcess() : FromProcessInterfaceInterface;
+    public function getKojoProcess() : ProcessInterface;
 
 }

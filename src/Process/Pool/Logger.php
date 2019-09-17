@@ -75,7 +75,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
                     $processId = (string)$this->_getProcess()->getProcessId();
                     $serializableProcess = $this->getProcessPoolLoggerMessageProcessFromProcessInterfaceBuilderFactory()
                         ->create()
-                        ->setProcessInterface($this->_getProcess())
+                        ->setProcessModelInterface($this->_getProcess())
                         ->build();
                     $logMessage->setKojoProcess($serializableProcess);
 

@@ -3,39 +3,43 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessInterface;
 
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessInterfaceInterface;
-use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\ProcessInterface as MessageProcessInterface;
+use Neighborhoods\Kojo\ProcessInterface as ProcessModelInterface;
 
 class Builder implements BuilderInterface
 {
     use Factory\AwareTrait;
-    /** @var ProcessInterface */
-    protected $processInterface;
+    use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\Factory\AwareTrait;
+    /** @var ProcessModelInterface */
+    protected $processModelInterface;
 
-    public function build() : FromProcessInterfaceInterface
+    public function build() : MessageProcessInterface
     {
-        $fromProcessInterface = $this->getProcessPoolLoggerMessageProcessFromProcessInterfaceFactory()->create();
-        $fromProcessInterface->setProcessInterface($this->getProcessInterface());
+        $process = $this->getProcessPoolLoggerMessageProcessFactory()->create();
+        $process->setProcessId($this->getProcessModelInterface()->getProcessId());
+        $process->setParentProcessId($this->getProcessModelInterface()->getParentProcessId());
+        $process->setUuid($this->getProcessModelInterface()->getUuid());
+        $process->setTypeCode($this->getProcessModelInterface()->getTypeCode());
 
-        return $fromProcessInterface;
+        return $process;
     }
 
-    public function getProcessInterface() : ProcessInterface
+    public function getProcessModelInterface() : ProcessModelInterface
     {
-        if ($this->processInterface === null) {
+        if ($this->processModelInterface === null) {
             throw new \LogicException('Builder processInterface has not been set.');
         }
 
-        return $this->processInterface;
+        return $this->processModelInterface;
     }
 
-    public function setProcessInterface(ProcessInterface $processInterface) : BuilderInterface
+    public function setProcessModelInterface(ProcessModelInterface $processModelInterface) : BuilderInterface
     {
-        if ($this->processInterface !== null) {
+        if ($this->processModelInterface !== null) {
             throw new \LogicException('Builder processInterface is already set.');
         }
 
-        $this->processInterface = $processInterface;
+        $this->processModelInterface = $processModelInterface;
 
         return $this;
     }

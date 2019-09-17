@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessInterfaceInterface;
 use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\ProcessInterface;
 
 class Message implements MessageInterface, \JsonSerializable
 {
@@ -20,7 +20,7 @@ class Message implements MessageInterface, \JsonSerializable
     protected $process_id;
     protected $process_path;
     protected $kojo_job;
-    /** @var FromProcessInterfaceInterface */
+    /** @var ProcessInterface */
     protected $kojo_process;
     protected $message;
     protected $context;
@@ -201,7 +201,7 @@ class Message implements MessageInterface, \JsonSerializable
         return isset($this->kojo_process);
     }
 
-    public function getKojoProcess() : FromProcessInterfaceInterface
+    public function getKojoProcess() : ProcessInterface
     {
         if ($this->kojo_process === null) {
             throw new \LogicException('Message kojo_process has not been set.');
@@ -210,7 +210,7 @@ class Message implements MessageInterface, \JsonSerializable
         return $this->kojo_process;
     }
 
-    public function setKojoProcess(FromProcessInterfaceInterface $kojo_process) : MessageInterface
+    public function setKojoProcess(ProcessInterface $kojo_process) : MessageInterface
     {
         if ($this->kojo_process !== null) {
             throw new \LogicException('Message kojo_process is already set.');

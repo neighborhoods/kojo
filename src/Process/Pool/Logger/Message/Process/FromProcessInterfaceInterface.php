@@ -5,10 +5,7 @@ namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\Process;
 
 use Neighborhoods\Kojo\ProcessInterface;
 
-interface FromProcessInterfaceInterface extends \JsonSerializable
+interface FromProcessInterfaceInterface
 {
-
-    public function jsonSerialize();
-
     public function setProcessInterface(ProcessInterface $processInterface) : FromProcessInterfaceInterface;
 }

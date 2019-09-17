@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessInterface;
 
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessInterfaceInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\ProcessInterface as ProcessInterfaceAlias;
 use Neighborhoods\Kojo\ProcessInterface;
 
 interface BuilderInterface
 {
-    public function build() : FromProcessInterfaceInterface;
+    public function build() : ProcessInterfaceAlias;
 
-    public function getProcessInterface() : ProcessInterface;
+    public function getProcessModelInterface() : ProcessInterface;
 
-    public function setProcessInterface(ProcessInterface $processInterface) : BuilderInterface;
+    public function setProcessModelInterface(ProcessInterface $processInterface) : BuilderInterface;
 }
