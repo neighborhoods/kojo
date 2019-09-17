@@ -5,7 +5,6 @@ namespace Neighborhoods\Kojo\Process\Pool;
 
 use Monolog\Formatter\NormalizerFormatter;
 use Neighborhoods\Kojo\Data\JobInterface;
-use Neighborhoods\Kojo\Process\Pool\Logger\FormatterInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Pylon\Time;
@@ -15,7 +14,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
     use Logger\Message\Factory\AwareTrait;
-    use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessInterface\Builder\Factory\AwareTrait;
+    use Logger\Message\Process\FromProcessInterface\Builder\Factory\AwareTrait;
     use Defensive\AwareTrait;
 
     public const PROP_IS_ENABLED = 'is_enabled';
@@ -148,7 +147,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
         return $this;
     }
 
-    public function getLogFormatter(): FormatterInterface
+    public function getLogFormatter(): Logger\FormatterInterface
     {
         if ($this->log_formatter === null) {
             throw new \LogicException('Logger log_formatter has not been set.');
@@ -157,7 +156,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
         return $this->log_formatter;
     }
 
-    public function setLogFormatter(FormatterInterface $log_formatter): LoggerInterface
+    public function setLogFormatter(Logger\FormatterInterface $log_formatter): LoggerInterface
     {
         if ($this->log_formatter !== null) {
             throw new \LogicException('Logger log_formatter already set.');
