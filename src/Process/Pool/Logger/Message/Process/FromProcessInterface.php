@@ -26,15 +26,6 @@ class FromProcessInterface implements FromProcessInterfaceInterface
         return $usefulStuff;
     }
 
-    public function getProcessInterface() : ProcessInterface
-    {
-        if ($this->processInterface === null) {
-            throw new \LogicException('FromProcessInterface processInterface has not been set.');
-        }
-
-        return $this->processInterface;
-    }
-
     public function setProcessInterface(ProcessInterface $processInterface) : FromProcessInterfaceInterface
     {
         if ($this->processInterface !== null) {

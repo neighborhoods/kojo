@@ -11,6 +11,4 @@ interface FromProcessInterfaceInterface extends \JsonSerializable
     public function jsonSerialize();
 
     public function setProcessInterface(ProcessInterface $processInterface) : FromProcessInterfaceInterface;
-
-    public function getProcessInterface() : ProcessInterface;
 }
