@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
 use Neighborhoods\Kojo\Data\JobInterface;
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\MetadataInterface;
 use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcessInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\MetadataInterface;
 
 class Message implements MessageInterface, \JsonSerializable
 {

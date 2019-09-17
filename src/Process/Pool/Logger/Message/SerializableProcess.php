@@ -56,6 +56,26 @@ class SerializableProcess implements SerializableProcessInterface
         return $this;
     }
 
+    public function getPath() : string
+    {
+        if ($this->path === null) {
+            throw new \LogicException('SerializableProcess path has not been set.');
+        }
+
+        return $this->path;
+    }
+
+    public function setPath(string $path) : SerializableProcessInterface
+    {
+        if ($this->path !== null) {
+            throw new \LogicException('SerializableProcess path is already set.');
+        }
+
+        $this->path = $path;
+
+        return $this;
+    }
+
     public function getUuid() : string
     {
         if ($this->uuid === null) {
