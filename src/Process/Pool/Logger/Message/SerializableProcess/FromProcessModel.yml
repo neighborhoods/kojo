@@ -1,0 +1,3 @@
+services:
+  neighborhoods.kojo.process.pool.logger.message.serializable_process.from_process_model:
+    class: Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess\FromProcessModel

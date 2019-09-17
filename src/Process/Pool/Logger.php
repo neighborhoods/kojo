@@ -13,6 +13,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
     use Logger\Message\Factory\AwareTrait;
+    use Logger\Message\SerializableProcess\FromProcessModel\Builder\Factory\AwareTrait;
     use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Builder\AwareTrait;
     use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Builder\Factory\AwareTrait;
 

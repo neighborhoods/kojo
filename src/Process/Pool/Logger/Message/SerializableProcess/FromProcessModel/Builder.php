@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\FromProcessInterface;
+namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess\FromProcessModel;
 
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\ProcessInterface as MessageProcessInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcessInterface as MessageProcessInterface;
 use Neighborhoods\Kojo\ProcessInterface as ProcessModelInterface;
 
 class Builder implements BuilderInterface
 {
     use Factory\AwareTrait;
-    use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Process\Factory\AwareTrait;
+    use \Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess\Factory\AwareTrait;
     /** @var ProcessModelInterface */
     protected $processModelInterface;
 

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\Process;
+namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess;
 
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\ProcessInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcessInterface;
 
 /** @codeCoverageIgnore */
 trait AwareTrait
@@ -11,7 +11,7 @@ trait AwareTrait
     protected $NeighborhoodsKojoProcessPoolLoggerMessageProcess;
 
     public function setProcessPoolLoggerMessageProcess(
-        ProcessInterface $ProcessPoolLoggerMessageProcess
+        SerializableProcessInterface $ProcessPoolLoggerMessageProcess
     ) : self
     {
         if ($this->hasProcessPoolLoggerMessageProcess()) {
@@ -24,7 +24,7 @@ trait AwareTrait
         return $this;
     }
 
-    protected function getProcessPoolLoggerMessageProcess() : ProcessInterface
+    protected function getProcessPoolLoggerMessageProcess() : SerializableProcessInterface
     {
         if (!$this->hasProcessPoolLoggerMessageProcess()) {
             throw new \LogicException(
