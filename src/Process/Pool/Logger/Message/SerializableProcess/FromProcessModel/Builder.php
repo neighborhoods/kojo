@@ -18,6 +18,7 @@ class Builder implements BuilderInterface
         $process = $this->getProcessPoolLoggerMessageProcessFactory()->create();
         $process->setProcessId($this->getProcessModelInterface()->getProcessId());
         $process->setParentProcessId($this->getProcessModelInterface()->getParentProcessId());
+        $process->setPath($this->getProcessModelInterface()->getPath());
         $process->setUuid($this->getProcessModelInterface()->getUuid());
         $process->setTypeCode($this->getProcessModelInterface()->getTypeCode());
 
