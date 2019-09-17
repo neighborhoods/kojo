@@ -8,48 +8,48 @@ use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess\FromProce
 /** @codeCoverageIgnore */
 trait AwareTrait
 {
-    protected $NeighborhoodsKojoProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory;
+    protected $NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory;
 
-    public function setProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory(
-        FactoryInterface $ProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory
+    public function setProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory(
+        FactoryInterface $ProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory
     ) : self
     {
-        if ($this->hasProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory()) {
+        if ($this->hasProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory()) {
             throw new \LogicException(
-                'NeighborhoodsKojoProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory is already set.'
+                'NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory is already set.'
             );
         }
-        $this->NeighborhoodsKojoProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory = $ProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory;
+        $this->NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory = $ProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory;
 
         return $this;
     }
 
-    protected function getProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory(
+    protected function getProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory(
     ) : FactoryInterface
     {
-        if (!$this->hasProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory()) {
+        if (!$this->hasProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory()) {
             throw new \LogicException(
-                'NeighborhoodsKojoProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory is not set.'
+                'NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory is not set.'
             );
         }
 
-        return $this->NeighborhoodsKojoProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory;
+        return $this->NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory;
     }
 
-    protected function hasProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory() : bool
+    protected function hasProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory() : bool
     {
-        return isset($this->NeighborhoodsKojoProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory);
+        return isset($this->NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory);
     }
 
-    protected function unsetProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory(
+    protected function unsetProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory(
     ) : self
     {
-        if (!$this->hasProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory()) {
+        if (!$this->hasProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory()) {
             throw new \LogicException(
-                'NeighborhoodsKojoProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory is not set.'
+                'NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory is not set.'
             );
         }
-        unset($this->NeighborhoodsKojoProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory);
+        unset($this->NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory);
 
         return $this;
     }

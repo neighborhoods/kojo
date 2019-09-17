@@ -14,7 +14,7 @@ use Neighborhoods\Pylon\Time;
 class Builder implements BuilderInterface
 {
     use Factory\AwareTrait;
-    use Process\FromProcessInterface\Builder\Factory\AwareTrait;
+    use SerializableProcess\FromProcessModel\Builder\Factory\AwareTrait;
     use Time\AwareTrait;
 
     public const CONTEXT_KEY_EXCEPTION = 'exception';
@@ -36,7 +36,7 @@ class Builder implements BuilderInterface
         $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
         if ($this->hasProcess()) {
             $processId = (string)$this->getProcess()->getProcessId();
-            $serializableProcess = $this->getProcessPoolLoggerMessageProcessFromProcessInterfaceBuilderFactory()
+            $serializableProcess = $this->getProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory()
                 ->create()
                 ->setProcessModelInterface($this->getProcess())
                 ->build();

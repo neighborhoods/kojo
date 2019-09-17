@@ -12,6 +12,6 @@ class Factory implements FactoryInterface
 
     public function create() : FromProcessModelInterface
     {
-        return clone $this->getProcessPoolLoggerMessageProcessFromProcessModel();
+        return clone $this->getProcessPoolLoggerMessageSerializableProcessFromProcessModel();
     }
 }

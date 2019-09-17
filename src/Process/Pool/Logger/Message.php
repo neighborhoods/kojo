@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
 use Neighborhoods\Kojo\Data\JobInterface;
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\ProcessInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\MetadataInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcessInterface;
 
 class Message implements MessageInterface, \JsonSerializable
 {
@@ -25,6 +26,8 @@ class Message implements MessageInterface, \JsonSerializable
     protected $message;
     protected $context;
     protected $context_json_last_error;
+    /** @var MetadataInterface */
+    protected $kojo_metadata;
 
     public function jsonSerialize(): array
     {
@@ -217,6 +220,26 @@ class Message implements MessageInterface, \JsonSerializable
         }
 
         $this->kojo_process = $kojo_process;
+
+        return $this;
+    }
+
+    public function getKojoMetadata() : MetadataInterface
+    {
+        if ($this->kojo_metadata === null) {
+            throw new \LogicException('Message kojo_metadata has not been set.');
+        }
+
+        return $this->kojo_metadata;
+    }
+
+    public function setKojoMetadata(MetadataInterface $kojo_metadata) : MessageInterface
+    {
+        if ($this->kojo_metadata !== null) {
+            throw new \LogicException('Message kojo_metadata is already set.');
+        }
+
+        $this->kojo_metadata = $kojo_metadata;
 
         return $this;
     }
