@@ -5,15 +5,15 @@ namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\Process;
 
 use Neighborhoods\Kojo\ProcessInterface;
 
-class FromProcessInterface implements FromProcessInterfaceInterface
+class FromProcessModel implements FromProcessModelInterface
 {
     /** @var ProcessInterface */
     protected $processInterface;
 
-    public function setProcessInterface(ProcessInterface $processInterface) : FromProcessInterfaceInterface
+    public function setProcessInterface(ProcessInterface $processInterface) : FromProcessModelInterface
     {
         if ($this->processInterface !== null) {
-            throw new \LogicException('FromProcessInterface processInterface is already set.');
+            throw new \LogicException('FromProcessModel processInterface is already set.');
         }
 
         $this->processInterface = $processInterface;
@@ -24,7 +24,7 @@ class FromProcessInterface implements FromProcessInterfaceInterface
     protected function getProcessInterface() : ProcessInterface
     {
         if ($this->processInterface === null) {
-            throw new \LogicException('FromProcessInterface processInterface has not been set.');
+            throw new \LogicException('FromProcessModel processInterface has not been set.');
         }
 
         return $this->processInterface;

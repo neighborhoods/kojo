@@ -14,7 +14,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 {
     use Time\AwareTrait;
     use Logger\Message\Factory\AwareTrait;
-    use Logger\Message\Process\FromProcessInterface\Builder\Factory\AwareTrait;
+    use Logger\Message\Process\FromProcessModel\Builder\Factory\AwareTrait;
     use Defensive\AwareTrait;
 
     public const PROP_IS_ENABLED = 'is_enabled';
@@ -73,7 +73,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
             if ($this->getLevelFilterMask()[$level] === false) {
                 if ($this->_exists(ProcessInterface::class)) {
                     $processId = (string)$this->_getProcess()->getProcessId();
-                    $serializableProcess = $this->getProcessPoolLoggerMessageProcessFromProcessInterfaceBuilderFactory()
+                    $serializableProcess = $this->getProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory()
                         ->create()
                         ->setProcessModelInterface($this->_getProcess())
                         ->build();
