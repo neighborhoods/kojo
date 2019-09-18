@@ -8,8 +8,6 @@ use Psr\Log;
 
 class Logger extends Log\AbstractLogger implements LoggerInterface
 {
-    use Logger\Message\Factory\AwareTrait;
-    use Logger\Message\Builder\AwareTrait;
     use Logger\Message\Builder\Factory\AwareTrait;
     use Defensive\AwareTrait;
 

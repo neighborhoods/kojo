@@ -15,8 +15,6 @@ services:
     calls:
       - [setIsEnabled, ['%process.pool.logger.is_enabled%']]
       - [setLogFormatter, ['@neighborhoods.kojo.process.log_formatter']]
-      - [setProcessPoolLoggerMessageFactory, ['@neighborhoods.kojo.process.pool.logger.message.factory']]
-      - [setProcessPoolLoggerMessageBuilder, ['@neighborhoods.kojo.process.pool.logger.message.builder']]
       - [setProcessPoolLoggerMessageBuilderFactory, ['@neighborhoods.kojo.process.pool.logger.message.builder.factory']]
       - [setLevelFilterMask, ['%neighborhoods.kojo.process.pool.logger.level_filter_mask%']]
   process.pool.logger:
