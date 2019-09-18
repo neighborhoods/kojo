@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
-use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
-use Neighborhoods\Pylon\Time;
 use Psr\Log;
 
 class Logger extends Log\AbstractLogger implements LoggerInterface
@@ -17,14 +15,8 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 
     public const PROP_IS_ENABLED = 'is_enabled';
 
-
     protected $log_formatter;
     protected $level_filter_mask;
-
-    protected function getProcess(): ProcessInterface
-    {
-        return $this->_read(ProcessInterface::class);
-    }
 
     public function log($level, $message, array $context = [])
     {
