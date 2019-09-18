@@ -44,32 +44,40 @@ class Redis extends MutexAbstract implements RedisInterface
                 // If the client that registered for the mutex resource ID is connected, the mutex is held by another client.
                 if ($mutexClientIsConnected === false) {
                     // If not, try to obtain the lock by registering on the mutex resource ID.
-                    $this->_getRedisClient()->multi();
-                    $this->_getRedisClient()->set($key, $processUUID);
-                    $reply = $this->_getRedisClient()->exec();
-
-                    // If the mutex resource ID was not set by another client, the mutex is obtained by this client.
-                    if ($reply[0] === true) {
+                    if ($this->setLockKey($key, $processUUID)) {
                         $this->_hasLock = true;
                     }
                 }
-            }else {
+            } else {
                 // If the mutex resource ID is not set, try to obtain the mutex.
-                $this->_getRedisClient()->multi();
-                $this->_getRedisClient()->set($key, $processUUID);
-                $reply = $this->_getRedisClient()->exec();
-                if (is_array($reply) && $reply[0] === true) {
+                if ($this->setLockKey($key, $processUUID)) {
                     $this->_hasLock = true;
-                }elseif ($reply !== false) {
-                    $type = gettype($reply);
-                    throw new \UnexpectedValueException("Reply is of type [$type]");
                 }
             }
-        }else {
+        } else {
             throw new \LogicException('The mutex already has obtained a lock.');
         }
 
         return $this->_hasLock;
+    }
+
+    protected function setLockKey(string $key, string $processUUID) : bool
+    {
+        $this->_getRedisClient()->multi();
+        $this->_getRedisClient()->set($key, $processUUID);
+
+        $reply = $this->_getRedisClient()->exec();
+
+        if (is_array($reply) && $reply[0] === true) {
+            return true;
+        }
+
+        if ($reply === false) {
+            return false;
+        }
+
+        $type = gettype($reply);
+        throw new \UnexpectedValueException("Reply is of type [$type]");
     }
 
     public function testLock() : bool
@@ -96,7 +104,7 @@ class Redis extends MutexAbstract implements RedisInterface
         if ($this->_hasLock === true) {
             $this->_getRedisClient()->del($this->_getKey());
             $this->_hasLock = false;
-        }else {
+        } else {
             throw new \LogicException('The mutex has not obtained a lock.');
         }
 
