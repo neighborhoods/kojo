@@ -27,6 +27,7 @@ class Foreman implements ForemanInterface
     use Update\Complete\Success\Factory\AwareTrait;
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
+    use Logger\Message\Metadata\Builder\AwareTrait;
     use Api\V1\RDBMS\Connection\Service\AwareTrait;
 
     public function workWorker(): ForemanInterface
@@ -43,7 +44,7 @@ class Foreman implements ForemanInterface
         $this->setJob($this->_getSelector()->getWorkableJob());
         $this->_getLocator()->setJob($this->_getJob());
         try {
-            $this->_getLogger()->setJob($this->_getJob());
+            $this->getProcessPoolLoggerMessageMetadataBuilder()->setJob($this->_getJob());
             $this->_updateJobAsWorking();
             $this->_runWorker();
             $this->_updateJobAfterWork();

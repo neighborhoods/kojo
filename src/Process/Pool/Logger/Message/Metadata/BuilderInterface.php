@@ -8,6 +8,4 @@ use Neighborhoods\Kojo\Process\Pool\Logger\Message\MetadataInterface;
 interface BuilderInterface
 {
     public function build() : MetadataInterface;
-
-    public function setRecord(array $record) : BuilderInterface;
 }

@@ -34,6 +34,11 @@ class Metadata implements MetadataInterface
         return $this;
     }
 
+    public function hasJob() : bool
+    {
+        return isset($this->job);
+    }
+
     public function getProcess() : SerializableProcessInterface
     {
         if ($this->process === null) {
@@ -52,6 +57,16 @@ class Metadata implements MetadataInterface
         $this->process = $process;
 
         return $this;
+    }
+
+    public function hasProcess() : bool
+    {
+        return isset($this->process);
+    }
+
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
     }
 
 }

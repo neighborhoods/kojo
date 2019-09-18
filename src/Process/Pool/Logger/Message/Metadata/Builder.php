@@ -3,43 +3,85 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata;
 
+use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\Process\Pool\Logger\Message\MetadataInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess;
+use Neighborhoods\Kojo\ProcessInterface;
 
 class Builder implements BuilderInterface
 {
     use Factory\AwareTrait;
-    /** @var array */
-    protected $record;
+    use SerializableProcess\FromProcessModel\Builder\Factory\AwareTrait;
+
+    /** @var ProcessInterface */
+    protected $process;
+    /** @var JobInterface */
+    protected $job;
 
     public function build() : MetadataInterface
     {
         $metadata = $this->getProcessPoolLoggerMessageMetadataFactory()->create();
-        $record = $this->getRecord();
 
-        // Set fields from record
-        // $metadata->setId($record[MetadataInterface::FIELD_ID]);
-        // etc.
+        if ($this->hasProcess()) {
+            $serializableProcess = $this->getProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory()
+                ->create()
+                ->setProcessModelInterface($this->getProcess())
+                ->build();
+
+            $metadata->setProcess($serializableProcess);
+        }
+
+        if ($this->hasJob()){
+            $metadata->setJob($this->getJob());
+        }
 
         return $metadata;
     }
 
-    protected function getRecord() : array
+    public function getProcess() : ProcessInterface
     {
-        if ($this->record === null) {
-            throw new \LogicException('Builder record has not been set.');
+        if ($this->process === null) {
+            throw new \LogicException('Builder process has not been set.');
         }
 
-        return $this->record;
+        return $this->process;
     }
 
-    public function setRecord(array $record) : BuilderInterface
+    public function setProcess(ProcessInterface $process) : BuilderInterface
     {
-        if ($this->record !== null) {
-            throw new \LogicException('Builder record is already set.');
-        }
 
-        $this->record = $record;
+        $this->process = $process;
 
         return $this;
+    }
+
+    public function hasProcess() : bool
+    {
+        return isset($this->process);
+    }
+
+    public function getJob() : JobInterface
+    {
+        if ($this->job === null) {
+            throw new \LogicException('Builder job has not been set.');
+        }
+
+        return $this->job;
+    }
+
+    public function setJob(JobInterface $job) : BuilderInterface
+    {
+        if ($this->job !== null) {
+            throw new \LogicException('Builder job is already set.');
+        }
+
+        $this->job = $job;
+
+        return $this;
+    }
+
+    public function hasJob() : bool
+    {
+        return isset($this->job);
     }
 }
