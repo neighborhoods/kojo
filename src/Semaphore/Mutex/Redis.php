@@ -72,6 +72,25 @@ class Redis extends MutexAbstract implements RedisInterface
         return $this->_hasLock;
     }
 
+    public function testLock() : bool
+    {
+        $keyValue = $this->_getRedisClient()->get($this->_getKey());
+
+        // not likely if nothing cleans up the key after the lock is released
+        if (empty($keyValue)) {
+            return true;
+        }
+
+        $clients = $this->_getRedisClient()->client('LIST');
+        foreach ($clients as $client) {
+            if ($client['name'] === $keyValue) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public function releaseLock(): MutexInterface
     {
         if ($this->_hasLock === true) {

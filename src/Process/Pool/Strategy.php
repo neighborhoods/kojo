@@ -8,6 +8,7 @@ use Neighborhoods\Kojo\Process\Listener\CommandInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Kojo\Process\JobInterface;
 use Neighborhoods\Kojo\Process\ListenerInterface;
+use Neighborhoods\Kojo\Process\StateTransitionLoggerInterface;
 
 class Strategy extends StrategyAbstract
 {
@@ -19,6 +20,8 @@ class Strategy extends StrategyAbstract
             $this->_jobProcessExited($process);
         } elseif ($process instanceof ListenerInterface) {
             $this->_listenerProcessExited($process);
+        } elseif ($process instanceof StateTransitionLoggerInterface) {
+            // A new STL process will be created by the Root when appropriate
         } else {
             $className = get_class($process);
             throw new \UnexpectedValueException("Unexpected process class[$className].");

@@ -51,3 +51,12 @@ services:
       - [setIsBlocking, [false]]
   semaphore.resource-server:
     alias: neighborhoods.kojo.semaphore.resource-server
+  neighborhoods.kojo.semaphore.resource-state_transition_logger:
+    class: Neighborhoods\Kojo\Semaphore\Resource
+    shared: false
+    calls:
+      - [setResourceName, ['%neighborhoods.kojo.environment.parameters.lock_prefix%/state_transition_logger.lock']]
+      - [setResourcePath, ['neighborhoods/kojo']]
+      - [setIsBlocking, [false]]
+  semaphore.resource-state_transition_logger:
+    alias: neighborhoods.kojo.semaphore.resource-state_transition_logger

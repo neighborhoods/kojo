@@ -6,6 +6,7 @@ services:
       - [setIterator, ['@process.collection.iterator']]
       - [addProcessPrototype, ['@process.listener.command']]
       - [addProcessPrototype, ['@process.job']]
+      - [addProcessPrototype, ['@process.state_transition_logger']]
   process.collection:
     alias: neighborhoods.kojo.process.collection
   neighborhoods.kojo.process.collection-server:
@@ -24,6 +25,22 @@ services:
       - [addProcessPrototype, ['@process.listener.mutex.redis']]
   process.collection-job:
     alias: neighborhoods.kojo.process.collection-job
+  neighborhoods.kojo.process.collection-state_transition_logger:
+    shared: true
+    class: Neighborhoods\Kojo\Process\Collection
+    calls:
+      - [setIterator, ['@process.collection.iterator']]
+      - [addProcessPrototype, ['@process.listener.mutex.redis']]
+  process.collection-state_transition_logger:
+    alias: neighborhoods.kojo.process.collection-state_transition_logger
+  neighborhoods.kojo.process.collection-singleton_manager:
+    shared: true
+    class: Neighborhoods\Kojo\Process\Collection
+    calls:
+      - [setIterator, ['@process.collection.iterator']]
+      - [addProcessPrototype, ['@process.state_transition_logger']]
+  process.collection-singleton_manager:
+    alias: neighborhoods.kojo.process.collection-singleton_manager
   neighborhoods.kojo.process.collection-empty:
     shared: true
     class: Neighborhoods\Kojo\Process\Collection

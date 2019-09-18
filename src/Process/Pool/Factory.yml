@@ -8,6 +8,9 @@ parameters:
   process_pool_strategy-job.max_child_processes: 1
   process_pool_strategy-job.child_process_wait_throttle: 0
   process_pool_strategy-job.max_alarm_time: 0
+  process_pool_strategy-state_transition_logger.max_child_processes: 1
+  process_pool_strategy-state_transition_logger.child_process_wait_throttle: 0
+  process_pool_strategy-state_transition_logger.max_alarm_time: 0
   process_pool_strategy-empty.max_child_processes: 0
   process_pool_strategy-empty.child_process_wait_throttle: 0
   process_pool_strategy-empty.max_alarm_time: 0
@@ -48,6 +51,18 @@ services:
       - [setProcessCollection, ['@process.collection-job']]
   process.pool.factory-job:
     alias: neighborhoods.kojo.process.pool.factory-job
+  neighborhoods.kojo.process.pool.factory-state_transition_logger:
+    class: Neighborhoods\Kojo\Process\Pool\Factory
+    shared: false
+    calls:
+      - [setMaxChildProcesses, ['%process_pool_strategy-state_transition_logger.max_child_processes%']]
+      - [setChildProcessWaitThrottle, ['%process_pool_strategy-state_transition_logger.child_process_wait_throttle%']]
+      - [setMaxAlarmTime, ['%process_pool_strategy-state_transition_logger.max_alarm_time%']]
+      - [setProcessPool, ['@process.pool']]
+      - [setProcessPoolStrategy, ['@process.pool.strategy-state_transition_logger']]
+      - [setProcessCollection, ['@process.collection-state_transition_logger']]
+  process.pool.factory-state_transition_logger:
+    alias: neighborhoods.kojo.process.pool.factory-state_transition_logger
   neighborhoods.kojo.process.pool.factory-empty:
     class: Neighborhoods\Kojo\Process\Pool\Factory
     shared: false

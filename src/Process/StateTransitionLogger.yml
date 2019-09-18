@@ -1,17 +1,16 @@
 services:
-  neighborhoods.kojo.process.root:
-    class: Neighborhoods\Kojo\Process\Root
+  neighborhoods.kojo.process.state_transition_logger:
+    class: Neighborhoods\Kojo\Process\StateTransitionLogger
     public: true
     shared: false
     parent: process_abstract
     calls:
-      - [setProcessPoolFactory, ['@process.pool.factory']]
+      - [setTypeCode, ['state_transition_logger']]
       - [setProcessStrategy, ['@process.strategy.process_control']]
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
+      - [setProcessPoolFactory, ['@process.pool.factory-state_transition_logger']]
       - [setTitlePrefix, ['%process.title.prefix%']]
       - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-state_transition_logger']]
-      - [setProcessCollection, ['@process.collection-singleton_manager']]
-  process.root:
-    alias: neighborhoods.kojo.process.root
-    public: false
+  process.state_transition_logger:
+    alias: neighborhoods.kojo.process.state_transition_logger

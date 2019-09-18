@@ -12,6 +12,8 @@ interface ResourceInterface
 
     public function testAndSetLock(): bool;
 
+    public function testLock(): bool;
+
     public function hasLock(): bool;
 
     public function releaseLock(): ResourceInterface;

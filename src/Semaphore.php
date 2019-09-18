@@ -27,6 +27,21 @@ class Semaphore implements SemaphoreInterface
         return $this->hasLock($resource);
     }
 
+    public function testLock(ResourceInterface $resource) : bool
+    {
+        $resourceId = $resource->getResourceId();
+
+        if (!$this->_hasResource($resourceId)) {
+            $this->_resources[$resourceId] = $resource;
+        }
+
+        $isLockAvailable = $this->_getResource($resourceId)->getMutex()->testLock();
+
+        $this->_unsetResource($resourceId);
+
+        return $isLockAvailable;
+    }
+
     public function releaseLock(ResourceInterface $resource): SemaphoreInterface
     {
         $resourceId = $resource->getResourceId();

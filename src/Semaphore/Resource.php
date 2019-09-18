@@ -34,6 +34,11 @@ class Resource implements ResourceInterface
         return $this->_getSemaphore()->testAndSetLock($this);
     }
 
+    public function testLock(): bool
+    {
+        return $this->_getSemaphore()->testLock($this);
+    }
+
     public function releaseLock(): ResourceInterface
     {
         $this->_getSemaphore()->releaseLock($this);
