@@ -3,17 +3,18 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Listener\Mutex;
 
+use Neighborhoods\Kojo\Message\Broker\BrokerInterface;
 use Neighborhoods\Kojo\Process\Forked;
 use Neighborhoods\Kojo\Process\ListenerAbstract;
 use Neighborhoods\Kojo\Process\ListenerInterface;
 use Neighborhoods\Kojo\ProcessInterface;
-use Neighborhoods\Kojo\Redis\Factory;
+use Neighborhoods\Kojo\Redis\Repository;
 use RuntimeException;
 use Throwable;
 
 class Redis extends ListenerAbstract implements RedisInterface
 {
-    use Factory\AwareTrait;
+    use Repository\AwareTrait;
     public const PROP_REDIS = 'redis';
 
     protected function _run(): Forked
@@ -56,7 +57,7 @@ class Redis extends ListenerAbstract implements RedisInterface
     protected function _getRedis(): \Redis
     {
         if (!$this->_exists(self::PROP_REDIS)) {
-            $this->_create(self::PROP_REDIS, $this->_getRedisFactory()->create());
+            $this->_create(self::PROP_REDIS, $this->_getRedisRepository()->getById(BrokerInterface::class));
         }
 
         return $this->_read(self::PROP_REDIS);
