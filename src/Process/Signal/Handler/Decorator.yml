@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\Kojo\Process\Signal\Handler\DecoratorInterface:
+    class: Neighborhoods\Kojo\Process\Signal\Handler\Decorator
+    public: false
+    shared: false

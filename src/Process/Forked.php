@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process;
 
+use ErrorException;
 use Neighborhoods\Kojo\Process\Forked\Exception;
 use Neighborhoods\Kojo\ProcessAbstract;
 use Neighborhoods\Kojo\ProcessInterface;
 
-abstract class Forked extends ProcessAbstract implements ProcessInterface
+abstract class Forked extends ProcessAbstract
 {
-    const FORK_FAILURE_CODE = -1;
-    const PROP_HAS_FORKED = 'has_forked';
+    protected const PROP_HAS_FORKED = 'has_forked';
 
     public function start(): ProcessInterface
     {
@@ -18,7 +18,7 @@ abstract class Forked extends ProcessAbstract implements ProcessInterface
         try {
             $processId = $this->_getProcessStrategy()->fork();
         } /** @noinspection PhpRedundantCatchClauseInspection */
-        catch (\ErrorException $errorException) {
+        catch (ErrorException $errorException) {
             throw (new Exception())->setCode(Exception::CODE_FORK_FAILED)->setPrevious($errorException);
         }
 

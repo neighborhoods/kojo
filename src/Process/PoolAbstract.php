@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process;
 
+use LogicException;
 use Neighborhoods\Kojo\Process;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 use Neighborhoods\Kojo\ProcessInterface;
@@ -14,7 +15,7 @@ abstract class PoolAbstract implements PoolInterface
     use Process\Pool\Logger\AwareTrait;
     use Process\Pool\Strategy\AwareTrait;
     use Process\AwareTrait;
-    use Process\Signal\AwareTrait;
+    use Process\Signal\Dispatcher\AwareTrait;
 
     abstract protected function _childExitSignal(InformationInterface $information): PoolInterface;
 
@@ -32,9 +33,9 @@ abstract class PoolAbstract implements PoolInterface
     public function setAlarm(int $seconds): PoolInterface
     {
         if ($seconds === 0) {
-            $this->_getLogger()->debug("Disabling any existing alarm.");
-        }else {
-            $this->_getLogger()->debug("Setting alarm for $seconds seconds.");
+            $this->_getLogger()->debug('Disabling any existing alarm.');
+        } else {
+            $this->_getLogger()->debug(sprintf('Setting alarm for [%s] seconds.', $seconds));
         }
         pcntl_alarm($seconds);
 
@@ -63,8 +64,8 @@ abstract class PoolAbstract implements PoolInterface
         return $this;
     }
 
-    protected function _alarmSignal(InformationInterface $information): PoolInterface
-    {
+    protected function _alarmSignal(/** @noinspection PhpUnusedParameterInspection */ InformationInterface $information
+    ): PoolInterface {
         $this->_getProcessPoolStrategy()->receivedAlarm();
 
         return $this;
@@ -74,12 +75,12 @@ abstract class PoolAbstract implements PoolInterface
     {
         $alarmValue = pcntl_alarm(0);
         if ($this->isEmpty()) {
-            if ($alarmValue == 0) {
+            if ($alarmValue === 0) {
                 $this->_getLogger()->emergency('Process pool has no alarms and no processes.');
-                throw new \LogicException('Invalid process pool state.');
-            }else {
-                $this->_getLogger()->debug('Process pool only has a set alarm.');
+                throw new LogicException('Invalid process pool state.');
             }
+
+            $this->_getLogger()->debug('Process pool only has a set alarm.');
         }
         pcntl_alarm($alarmValue);
 

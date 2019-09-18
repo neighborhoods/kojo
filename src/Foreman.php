@@ -43,6 +43,7 @@ class Foreman implements ForemanInterface
         $this->setJob($this->_getSelector()->getWorkableJob());
         $this->_getLocator()->setJob($this->_getJob());
         try {
+            $this->_getLogger()->setJob($this->_getJob());
             $this->_updateJobAsWorking();
             $this->_runWorker();
             $this->_updateJobAfterWork();

@@ -1,11 +1,9 @@
 parameters:
-  process.pool.logger.formatter.process_id_padding: 6
-  process.pool.logger.formatter.path_padding: 80
+  process.pool.logger.formatter.path_padding: 65
   process.pool.logger.formatter.log_format: !php/const \Neighborhoods\Kojo\Process\Pool\Logger\Formatter::LOG_FORMAT_JSON
 services:
   neighborhoods.kojo.process.log_formatter:
     class: Neighborhoods\Kojo\Process\Pool\Logger\Formatter
     calls:
-      - [setProcessIdPadding, ['%process.pool.logger.formatter.process_id_padding%']]
       - [setProcessPathPadding, ['%process.pool.logger.formatter.path_padding%']]
       - [setLogFormat, ['%process.pool.logger.formatter.log_format%']]

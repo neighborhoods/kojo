@@ -6,7 +6,7 @@ namespace Neighborhoods\Kojo\Data;
 use Neighborhoods\Kojo\Db\Model;
 use Neighborhoods\Pylon\TimeInterface;
 
-class Job extends Model implements JobInterface
+class Job extends Model implements JobInterface, \JsonSerializable
 {
     public function __construct()
     {
@@ -323,5 +323,10 @@ class Job extends Model implements JobInterface
         $deleteAfterDateTimeString = $this->_readPersistentProperty(JobInterface::FIELD_NAME_DELETE_AFTER_DATE_TIME);
 
         return new \DateTime($deleteAfterDateTimeString);
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->_persistentProperties;
     }
 }
