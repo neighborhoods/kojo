@@ -5,3 +5,5 @@ services:
       - [setProcessPoolLoggerMessageFactory, ['@neighborhoods.kojo.process.pool.logger.message.factory']]
       - [setProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory, ['@neighborhoods.kojo.process.pool.logger.message.serializable_process.from_process_model.builder.factory']]
       - [setTime, ['@neighborhoods.pylon.time']]
+      - [setProcessPoolLoggerMessageMetadataBuilder, ['@neighborhoods.kojo.process.pool.logger.message.metadata.builder']]
+

@@ -18,11 +18,6 @@ class Message implements MessageInterface, \JsonSerializable
 
     protected $time;
     protected $level;
-    protected $process_id;
-    protected $process_path;
-    protected $kojo_job;
-    /** @var SerializableProcessInterface */
-    protected $kojo_process;
     protected $message;
     protected $context;
     protected $context_json_last_error;
@@ -70,46 +65,6 @@ class Message implements MessageInterface, \JsonSerializable
         }
 
         $this->level = $level;
-
-        return $this;
-    }
-
-    public function getProcessId(): string
-    {
-        if ($this->process_id === null) {
-            throw new \LogicException('Message ' . self::KEY_PROCESS_ID . ' has not been set.');
-        }
-
-        return $this->process_id;
-    }
-
-    public function setProcessId(string $process_id): MessageInterface
-    {
-        if ($this->process_id !== null) {
-            throw new \LogicException('Message ' . self::KEY_PROCESS_ID . ' already set.');
-        }
-
-        $this->process_id = $process_id;
-
-        return $this;
-    }
-
-    public function getProcessPath(): string
-    {
-        if ($this->process_path === null) {
-            throw new \LogicException('Message ' . self::KEY_PROCESS_PATH . ' has not been set.');
-        }
-
-        return $this->process_path;
-    }
-
-    public function setProcessPath(string $process_path): MessageInterface
-    {
-        if ($this->process_path !== null) {
-            throw new \LogicException('Message ' . self::KEY_PROCESS_PATH . ' already set.');
-        }
-
-        $this->process_path = $process_path;
 
         return $this;
     }
@@ -174,57 +129,7 @@ class Message implements MessageInterface, \JsonSerializable
         return $this;
     }
 
-    public function hasKojoJob(): bool
-    {
-        return isset($this->kojo_job);
-    }
-
-    public function getKojoJob() : JobInterface
-    {
-        if ($this->kojo_job === null) {
-            throw new \LogicException('Message kojo_job has not been set.');
-        }
-
-        return $this->kojo_job;
-    }
-
-    public function setKojoJob(JobInterface $kojo_job) : MessageInterface
-    {
-        if ($this->kojo_job !== null) {
-            throw new \LogicException('Message kojo_job is already set.');
-        }
-
-        $this->kojo_job = $kojo_job;
-
-        return $this;
-    }
-
-    public function hasKojoProcess() : bool
-    {
-        return isset($this->kojo_process);
-    }
-
-    public function getKojoProcess() : SerializableProcessInterface
-    {
-        if ($this->kojo_process === null) {
-            throw new \LogicException('Message kojo_process has not been set.');
-        }
-
-        return $this->kojo_process;
-    }
-
-    public function setKojoProcess(SerializableProcessInterface $kojo_process) : MessageInterface
-    {
-        if ($this->kojo_process !== null) {
-            throw new \LogicException('Message kojo_process is already set.');
-        }
-
-        $this->kojo_process = $kojo_process;
-
-        return $this;
-    }
-
-    public function getKojoMetadata() : MetadataInterface
+    public function getMetadata() : MetadataInterface
     {
         if ($this->kojo_metadata === null) {
             throw new \LogicException('Message kojo_metadata has not been set.');
@@ -233,7 +138,7 @@ class Message implements MessageInterface, \JsonSerializable
         return $this->kojo_metadata;
     }
 
-    public function setKojoMetadata(MetadataInterface $kojo_metadata) : MessageInterface
+    public function setMetadata(MetadataInterface $kojo_metadata) : MessageInterface
     {
         if ($this->kojo_metadata !== null) {
             throw new \LogicException('Message kojo_metadata is already set.');

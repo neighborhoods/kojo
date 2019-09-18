@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool;
 
-use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Pylon\Time;
@@ -11,12 +10,9 @@ use Psr\Log;
 
 class Logger extends Log\AbstractLogger implements LoggerInterface
 {
-    use Time\AwareTrait;
     use Logger\Message\Factory\AwareTrait;
-    use Logger\Message\SerializableProcess\FromProcessModel\Builder\Factory\AwareTrait;
-    use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Builder\AwareTrait;
-    use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Builder\Factory\AwareTrait;
-
+    use Logger\Message\Builder\AwareTrait;
+    use Logger\Message\Builder\Factory\AwareTrait;
     use Defensive\AwareTrait;
 
     public const PROP_IS_ENABLED = 'is_enabled';
@@ -24,40 +20,6 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 
     protected $log_formatter;
     protected $level_filter_mask;
-    /** @var JobInterface */
-    protected $job;
-
-    public function setProcess(ProcessInterface $process): LoggerInterface
-    {
-        $this->_createOrUpdate(ProcessInterface::class, $process);
-
-        return $this;
-    }
-
-    public function hasJob(): bool
-    {
-        return isset($this->job);
-    }
-
-    public function getJob() : JobInterface
-    {
-        if ($this->job === null) {
-            throw new \LogicException('Logger job has not been set.');
-        }
-
-        return $this->job;
-    }
-
-    public function setJob(JobInterface $job) : LoggerInterface
-    {
-        if ($this->job !== null) {
-            throw new \LogicException('Logger job is already set.');
-        }
-
-        $this->job = $job;
-
-        return $this;
-    }
 
     protected function getProcess(): ProcessInterface
     {
@@ -66,24 +28,15 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
 
     public function log($level, $message, array $context = [])
     {
-        if ($this->_isEnabled() === true) {
+        if ($this->_isEnabled() === true && $this->getLevelFilterMask()[$level] === false) {
             $logMessageBuilder = $this->getProcessPoolLoggerMessageBuilderFactory()->create();
             $logMessageBuilder->setLevel($level);
             $logMessageBuilder->setMessage($message);
             $logMessageBuilder->setContext($context);
 
-            if ($this->getLevelFilterMask()[$level] === false) {
-                if ($this->_exists(ProcessInterface::class)) {
-                    $logMessageBuilder->setProcess($this->getProcess());
-                }
+            $logMessage = $logMessageBuilder->build();
+            fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage($logMessage) . PHP_EOL);
 
-                if ($this->hasJob()){
-                    $logMessageBuilder->setJob($this->getJob());
-                }
-
-                $logMessage = $logMessageBuilder->build();
-                fwrite(STDOUT, $this->getLogFormatter()->getFormattedMessage($logMessage) . PHP_EOL);
-            }
         }
 
         return;

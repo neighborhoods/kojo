@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
-use Neighborhoods\Kojo\Data\JobInterface;
-use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcessInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\MetadataInterface;
 
 interface MessageInterface
 {
@@ -16,14 +15,6 @@ interface MessageInterface
     public function getLevel(): string;
 
     public function setLevel(string $level): MessageInterface;
-
-    public function getProcessId(): string;
-
-    public function setProcessId(string $process_id): MessageInterface;
-
-    public function getProcessPath(): string;
-
-    public function setProcessPath(string $process_path): MessageInterface;
 
     public function getMessage(): string;
 
@@ -37,14 +28,7 @@ interface MessageInterface
 
     public function setContextJsonLastError(int $context_json_last_error): MessageInterface;
 
-    public function getKojoJob() : JobInterface;
+    public function setMetadata(MetadataInterface $kojo_metadata) : MessageInterface;
 
-    public function setKojoJob(JobInterface $kojo_job) : MessageInterface;
-
-    public function hasKojoJob() : bool;
-
-    public function hasKojoProcess() : bool;
-
-    public function getKojoProcess() : SerializableProcessInterface;
-
+    public function getMetadata() : MetadataInterface;
 }

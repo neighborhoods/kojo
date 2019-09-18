@@ -15,6 +15,7 @@ class Builder implements BuilderInterface
 {
     use Factory\AwareTrait;
     use SerializableProcess\FromProcessModel\Builder\Factory\AwareTrait;
+    use \Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata\Builder\AwareTrait;
     use Time\AwareTrait;
 
     public const CONTEXT_KEY_EXCEPTION = 'exception';
@@ -30,32 +31,16 @@ class Builder implements BuilderInterface
     protected $message;
     /** @var array */
     protected $context;
+    /** @var MetadataInterface */
+    protected $metadata;
 
     public function build() : MessageInterface
     {
         $logMessage = $this->getProcessPoolLoggerMessageFactory()->create();
-        if ($this->hasProcess()) {
-            $processId = (string)$this->getProcess()->getProcessId();
-            $serializableProcess = $this->getProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory()
-                ->create()
-                ->setProcessModelInterface($this->getProcess())
-                ->build();
-            $logMessage->setKojoProcess($serializableProcess);
-
-        } else {
-            $processId = '?';
-        }
 
         $referenceTime = $this->_getTime()->getNow();
         $logMessage->setTime($referenceTime->format(self::LOG_DATE_TIME_FORMAT));
         $logMessage->setLevel($this->getLevel());
-        $logMessage->setProcessId($processId);
-        $logMessage->setProcessPath($this->getProcess()->getPath());
-
-        if ($this->hasJob()) {
-            $logMessage->setKojoJob($this->getJob());
-        }
-
         $logMessage->setMessage($this->getMessage());
         $context = $this->getContext();
 
@@ -76,6 +61,9 @@ class Builder implements BuilderInterface
         }
 
         $logMessage->setContextJsonLastError(json_last_error());
+
+        $metadata = $this->getProcessPoolLoggerMessageMetadataBuilder()->build();
+        $logMessage->setMetadata($metadata);
 
         return $logMessage;
     }
@@ -136,6 +124,26 @@ class Builder implements BuilderInterface
         }
 
         $this->context = $context;
+
+        return $this;
+    }
+
+    public function getMetadata() : MetadataInterface
+    {
+        if ($this->metadata === null) {
+            throw new \LogicException('Builder metadata has not been set.');
+        }
+
+        return $this->metadata;
+    }
+
+    public function setMetadata(MetadataInterface $metadata) : BuilderInterface
+    {
+        if ($this->metadata !== null) {
+            throw new \LogicException('Builder metadata is already set.');
+        }
+
+        $this->metadata = $metadata;
 
         return $this;
     }
