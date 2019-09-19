@@ -1,0 +1,11 @@
+services:
+  neighborhoods.kojo.state_transition_change.repository:
+    class: Neighborhoods\Kojo\StateTransitionChange\Repository
+    public: false
+    shared: true
+    calls:
+      - [setDoctrineConnectionDecoratorRepository, ['@doctrine.connection.decorator.repository']]
+      - [setStateTransitionChangeMapBuilderFactory, ['@state_transition_change.map.builder.factory']]
+  state_transition_change.repository:
+    alias: neighborhoods.kojo.state_transition_change.repository
+    public: false

@@ -1,0 +1,10 @@
+services:
+  neighborhoods.kojo.state_transition_change.factory:
+    class: Neighborhoods\Kojo\StateTransitionChange\Factory
+    public: false
+    shared: true
+    calls:
+      - [setStateTransitionChange, ['@state_transition_change']]
+  state_transition_change.factory:
+    alias: neighborhoods.kojo.state_transition_change.factory
+    public: false

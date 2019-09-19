@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.state_transition_change.map:
+    class: Neighborhoods\Kojo\StateTransitionChange\Map
+    public: false
+    shared: false
+  state_transition_change.map:
+    alias: neighborhoods.kojo.state_transition_change.map
+    public: false
