@@ -15,9 +15,6 @@ class Builder implements BuilderInterface
 
         $host->getHostName();
         $host->getLoadAverage();
-        $host->getMemoryUsageBytes();
-        $host->getPeakMemoryUsageBytes();
-        $host->getMemoryLimitBytes();
 
         return $host;
     }

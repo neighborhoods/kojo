@@ -21,6 +21,9 @@ class Builder implements BuilderInterface
         $process->setPath($this->getProcessModelInterface()->getPath());
         $process->setUuid($this->getProcessModelInterface()->getUuid());
         $process->setTypeCode($this->getProcessModelInterface()->getTypeCode());
+        $process->getMemoryLimitBytes();
+        $process->getMemoryUsageBytes();
+        $process->getPeakMemoryUsageBytes();
 
         return $process;
     }
