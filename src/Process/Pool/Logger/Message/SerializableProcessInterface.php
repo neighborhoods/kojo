@@ -26,7 +26,7 @@ interface SerializableProcessInterface extends \JsonSerializable
 
     public function setPath(string $path) : SerializableProcessInterface;
 
-    public function getPeakMemoryUsageBytes() : int;
+    public function getMemoryPeakUsageBytes() : int;
 
     public function getMemoryUsageBytes() : int;
 

@@ -18,7 +18,7 @@ class SerializableProcess implements SerializableProcessInterface
     /** @var int */
     protected $memory_usage_bytes;
     /** @var int */
-    protected $peak_memory_usage_bytes;
+    protected $memory_peak_usage_bytes;
     /** @var int */
     protected $memory_limit_bytes;
 
@@ -129,11 +129,11 @@ class SerializableProcess implements SerializableProcessInterface
         return $this->memory_usage_bytes;
     }
 
-    public function getPeakMemoryUsageBytes() : int
+    public function getMemoryPeakUsageBytes() : int
     {
-        $this->peak_memory_usage_bytes = memory_get_peak_usage();
+        $this->memory_peak_usage_bytes = memory_get_peak_usage();
 
-        return $this->peak_memory_usage_bytes;
+        return $this->memory_peak_usage_bytes;
     }
 
     public function getMemoryLimitBytes() : int

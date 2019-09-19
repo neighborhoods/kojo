@@ -23,7 +23,7 @@ class Builder implements BuilderInterface
         $process->setTypeCode($this->getProcessModelInterface()->getTypeCode());
         $process->getMemoryLimitBytes();
         $process->getMemoryUsageBytes();
-        $process->getPeakMemoryUsageBytes();
+        $process->getMemoryPeakUsageBytes();
 
         return $process;
     }
