@@ -52,12 +52,6 @@ class Host implements HostInterface
 
     public function jsonSerialize()
     {
-        $this->getHostName();
-        $this->getLoadAverage();
-        $this->getMemoryUsageBytes();
-        $this->getPeakMemoryUsageBytes();
-        $this->getMemoryLimitBytes();
-
         return get_object_vars($this);
     }
 
