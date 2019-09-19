@@ -1,0 +1,5 @@
+services:
+  neighborhoods.kojo.neighborhoods.kojo.src.process.pool.logger.message.metadata.host.factory:
+    class: Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata\Host\Factory
+    calls:
+      - [setProcessPoolLoggerMessageMetadataHost, ['@neighborhoods.kojo.neighborhoods.kojo.src.process.pool.logger.message.metadata.host']]
