@@ -8,46 +8,46 @@ use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcessInterface;
 /** @codeCoverageIgnore */
 trait AwareTrait
 {
-    protected $NeighborhoodsKojoProcessPoolLoggerMessageProcess;
+    protected $NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcess;
 
-    public function setProcessPoolLoggerMessageProcess(
-        SerializableProcessInterface $ProcessPoolLoggerMessageProcess
+    public function setProcessPoolLoggerMessageSerializableProcess(
+        SerializableProcessInterface $ProcessPoolLoggerMessageSerializableProcess
     ) : self
     {
-        if ($this->hasProcessPoolLoggerMessageProcess()) {
+        if ($this->hasProcessPoolLoggerMessageSerializableProcess()) {
             throw new \LogicException(
-                'NeighborhoodsKojoProcessPoolLoggerMessageProcess is already set.'
+                'NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcess is already set.'
             );
         }
-        $this->NeighborhoodsKojoProcessPoolLoggerMessageProcess = $ProcessPoolLoggerMessageProcess;
+        $this->NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcess = $ProcessPoolLoggerMessageSerializableProcess;
 
         return $this;
     }
 
-    protected function getProcessPoolLoggerMessageProcess() : SerializableProcessInterface
+    protected function getProcessPoolLoggerMessageSerializableProcess() : SerializableProcessInterface
     {
-        if (!$this->hasProcessPoolLoggerMessageProcess()) {
+        if (!$this->hasProcessPoolLoggerMessageSerializableProcess()) {
             throw new \LogicException(
-                'NeighborhoodsKojoProcessPoolLoggerMessageProcess is not set.'
+                'NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcess is not set.'
             );
         }
 
-        return $this->NeighborhoodsKojoProcessPoolLoggerMessageProcess;
+        return $this->NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcess;
     }
 
-    protected function hasProcessPoolLoggerMessageProcess() : bool
+    protected function hasProcessPoolLoggerMessageSerializableProcess() : bool
     {
-        return isset($this->NeighborhoodsKojoProcessPoolLoggerMessageProcess);
+        return isset($this->NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcess);
     }
 
-    protected function unsetProcessPoolLoggerMessageProcess() : self
+    protected function unsetProcessPoolLoggerMessageSerializableProcess() : self
     {
-        if (!$this->hasProcessPoolLoggerMessageProcess()) {
+        if (!$this->hasProcessPoolLoggerMessageSerializableProcess()) {
             throw new \LogicException(
-                'NeighborhoodsKojoProcessPoolLoggerMessageProcess is not set.'
+                'NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcess is not set.'
             );
         }
-        unset($this->NeighborhoodsKojoProcessPoolLoggerMessageProcess);
+        unset($this->NeighborhoodsKojoProcessPoolLoggerMessageSerializableProcess);
 
         return $this;
     }

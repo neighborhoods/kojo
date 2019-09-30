@@ -15,17 +15,20 @@ class Builder implements BuilderInterface
 
     public function build() : MessageProcessInterface
     {
-        $process = $this->getProcessPoolLoggerMessageProcessFactory()->create();
-        $process->setProcessId($this->getProcessModelInterface()->getProcessId());
-        $process->setParentProcessId($this->getProcessModelInterface()->getParentProcessId());
-        $process->setPath($this->getProcessModelInterface()->getPath());
-        $process->setUuid($this->getProcessModelInterface()->getUuid());
-        $process->setTypeCode($this->getProcessModelInterface()->getTypeCode());
-        $process->getMemoryLimitBytes();
-        $process->getMemoryUsageBytes();
-        $process->getMemoryPeakUsageBytes();
+        $processModel = $this->getProcessModelInterface();
 
-        return $process;
+        $serializableProcess = $this->getProcessPoolLoggerMessageSerializableProcessFactory()->create();
+
+        $serializableProcess->setProcessId($processModel->getProcessId());
+        $serializableProcess->setParentProcessId($processModel->getParentProcessId());
+        $serializableProcess->setPath($processModel->getPath());
+        $serializableProcess->setUuid($processModel->getUuid());
+        $serializableProcess->setTypeCode($processModel->getTypeCode());
+        $serializableProcess->getMemoryLimitBytes();
+        $serializableProcess->getMemoryUsageBytes();
+        $serializableProcess->getMemoryPeakUsageBytes();
+
+        return $serializableProcess;
     }
 
     public function getProcessModelInterface() : ProcessModelInterface
