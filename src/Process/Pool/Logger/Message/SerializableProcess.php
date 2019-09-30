@@ -124,27 +124,26 @@ class SerializableProcess implements SerializableProcessInterface
 
     public function getMemoryUsageBytes() : int
     {
-        $this->memory_usage_bytes = memory_get_usage();
-
-        return $this->memory_usage_bytes;
+        return  memory_get_usage();
     }
 
     public function getMemoryPeakUsageBytes() : int
     {
-        $this->memory_peak_usage_bytes = memory_get_peak_usage();
-
-        return $this->memory_peak_usage_bytes;
+        return memory_get_peak_usage();
     }
 
     public function getMemoryLimitBytes() : int
     {
-        $this->memory_limit_bytes = $this->dataUnitToBytes(ini_get('memory_limit'));
-        return $this->memory_limit_bytes;
+        return $this->dataUnitToBytes(ini_get('memory_limit'));
     }
 
     public function jsonSerialize()
     {
-        return get_object_vars($this);
+        $data = get_object_vars($this);
+        $data['memory_usage_bytes']= $this->getMemoryUsageBytes();
+        $data['memory_peak_usage_bytes']= $this->getMemoryPeakUsageBytes();
+        $data['memory_limit_bytes']= $this->getMemoryLimitBytes();
+        return $data;
     }
 
     /* converts a number with byte unit (B / K / M / G) into an integer */

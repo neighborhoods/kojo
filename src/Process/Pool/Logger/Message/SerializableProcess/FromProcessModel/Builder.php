@@ -24,9 +24,6 @@ class Builder implements BuilderInterface
         $serializableProcess->setPath($processModel->getPath());
         $serializableProcess->setUuid($processModel->getUuid());
         $serializableProcess->setTypeCode($processModel->getTypeCode());
-        $serializableProcess->getMemoryLimitBytes();
-        $serializableProcess->getMemoryUsageBytes();
-        $serializableProcess->getMemoryPeakUsageBytes();
 
         return $serializableProcess;
     }
