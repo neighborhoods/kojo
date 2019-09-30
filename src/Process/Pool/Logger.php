@@ -73,7 +73,7 @@ class Logger extends Log\AbstractLogger implements LoggerInterface
             if ($this->getLevelFilterMask()[$level] === false) {
                 if ($this->_exists(ProcessInterface::class)) {
                     $processId = (string)$this->_getProcess()->getProcessId();
-                    $serializableProcess = $this->getProcessPoolLoggerMessageProcessFromProcessModelBuilderFactory()
+                    $serializableProcess = $this->getProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory()
                         ->create()
                         ->setProcessModelInterface($this->_getProcess())
                         ->build();

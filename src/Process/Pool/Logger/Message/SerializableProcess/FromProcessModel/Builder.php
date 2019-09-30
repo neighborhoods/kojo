@@ -17,7 +17,7 @@ class Builder implements BuilderInterface
     {
         $processModel = $this->getProcessModelInterface();
 
-        $serializableProcess = $this->getProcessPoolLoggerMessageProcessFactory()->create();
+        $serializableProcess = $this->getProcessPoolLoggerMessageSerializableProcessFactory()->create();
 
         $serializableProcess->setProcessId($processModel->getProcessId());
         $serializableProcess->setParentProcessId($processModel->getParentProcessId());
