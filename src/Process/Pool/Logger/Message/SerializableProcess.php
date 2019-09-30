@@ -5,6 +5,10 @@ namespace Neighborhoods\Kojo\Process\Pool\Logger\Message;
 
 class SerializableProcess implements SerializableProcessInterface
 {
+    const KEY_MEMORY_USAGE_BYTES = 'memory_usage_bytes';
+    const KEY_MEMORY_PEAK_USAGE_BYTES = 'memory_peak_usage_bytes';
+    const KEY_MEMORY_LIMIT_BYTES = 'memory_limit_bytes';
+
     /** @var int  */
     protected $process_id;
     /** @var int */
@@ -140,9 +144,9 @@ class SerializableProcess implements SerializableProcessInterface
     public function jsonSerialize()
     {
         $data = get_object_vars($this);
-        $data['memory_usage_bytes']= $this->getMemoryUsageBytes();
-        $data['memory_peak_usage_bytes']= $this->getMemoryPeakUsageBytes();
-        $data['memory_limit_bytes']= $this->getMemoryLimitBytes();
+        $data[self::KEY_MEMORY_USAGE_BYTES]= $this->getMemoryUsageBytes();
+        $data[self::KEY_MEMORY_PEAK_USAGE_BYTES]= $this->getMemoryPeakUsageBytes();
+        $data[self::KEY_MEMORY_LIMIT_BYTES]= $this->getMemoryLimitBytes();
         return $data;
     }
 
