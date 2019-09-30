@@ -4,4 +4,4 @@ services:
     calls:
       - [setProcessPoolLoggerMessageMetadataFactory, ['@neighborhoods.kojo.process.pool.logger.message.metadata.factory']]
       - [setProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory, ['@neighborhoods.kojo.process.pool.logger.message.serializable_process.from_process_model.builder.factory']]
-      - [setProcessPoolLoggerMessageMetadataHostBuilder, ['@neighborhoods.kojo.process.pool.logger.message.metadata.host.builder']]
+      - [setProcessPoolLoggerMessageMetadataHost, ['@neighborhoods.kojo.neighborhoods.kojo.src.process.pool.logger.message.metadata.host']]
