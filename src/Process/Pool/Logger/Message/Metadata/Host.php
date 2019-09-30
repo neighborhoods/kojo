@@ -5,6 +5,9 @@ namespace Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata;
 
 class Host implements HostInterface
 {
+    const KEY_HOST_NAME = 'host_name';
+    const KEY_LOAD_AVERAGE = 'load_average';
+
     /** @var string */
     protected $host_name;
     /** @var float */
@@ -12,20 +15,20 @@ class Host implements HostInterface
 
     public function getHostName() : string
     {
-        $this->host_name = gethostname();
-
-        return $this->host_name;
+        return gethostname();
     }
 
     public function getLoadAverage() : float
     {
-        $this->load_average = (float)current(sys_getloadavg());
-
-        return $this->load_average;
+        return (float)current(sys_getloadavg());
     }
 
     public function jsonSerialize()
     {
-        return get_object_vars($this);
+        $data = get_object_vars($this);
+        $data[self::KEY_HOST_NAME] = $this->getHostName();
+        $data[self::KEY_LOAD_AVERAGE] = $this->getLoadAverage();
+
+        return $data;
     }
 }
