@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool\Logger\Message;
 
 use LogicException;
-use Throwable;
 use Monolog\Formatter\NormalizerFormatter;
 use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\Process\Pool\Logger\MessageInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Pylon\Time;
+use Throwable;
 
 class Builder implements BuilderInterface
 {
@@ -64,6 +64,16 @@ class Builder implements BuilderInterface
 
         $metadata = $this->getProcessPoolLoggerMessageMetadataBuilder()->build();
         $logMessage->setMetadata($metadata);
+
+        if ($metadata->hasJob()) {
+            $logMessage->setKojoJob($metadata->getJob());
+        }
+
+        if ($metadata->hasProcess()) {
+            $logMessage->setKojoProcess($metadata->getProcess());
+            $logMessage->setProcessId($metadata->getProcess()->getProcessId());
+            $logMessage->setProcessPath($metadata->getProcess()->getPath());
+        }
 
         return $logMessage;
     }
