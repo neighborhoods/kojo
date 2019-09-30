@@ -2,4 +2,4 @@ services:
   neighborhoods.kojo.process.pool.logger.message.serializable_process.factory:
     class: Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess\Factory
     calls:
-      - [setProcessPoolLoggerMessageProcess, ['@neighborhoods.kojo.neighborhoods.kojo.src.process.pool.logger.message.serializable_process']]
+      - [setProcessPoolLoggerMessageSerializableProcess, ['@neighborhoods.kojo.neighborhoods.kojo.src.process.pool.logger.message.serializable_process']]
