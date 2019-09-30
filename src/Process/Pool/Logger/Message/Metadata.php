@@ -11,7 +11,6 @@ class Metadata implements MetadataInterface
     protected $job;
     /** @var SerializableProcessInterface */
     protected $process;
-    /** @var  */
     protected $host;
 
     public function getJob() : JobInterface
