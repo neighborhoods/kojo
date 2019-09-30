@@ -138,7 +138,7 @@ class SerializableProcess implements SerializableProcessInterface
 
     public function getMemoryLimitBytes() : int
     {
-        $this->memory_limit_bytes = $mem_limit = $this->dataUnitToBytes(ini_get('memory_limit'));
+        $this->memory_limit_bytes = $this->dataUnitToBytes(ini_get('memory_limit'));
         return $this->memory_limit_bytes;
     }
 
