@@ -151,10 +151,24 @@ class SerializableProcess implements SerializableProcessInterface
     }
 
     /* converts a number with byte unit (B / K / M / G) into an integer */
-    protected function dataUnitToBytes($s)
+    protected function dataUnitToBytes(string $memoryString) : int
     {
-        return (int)preg_replace_callback('/(\-?\d+)(.?)/', function ($m) {
-            return $m[1] * pow(1024, strpos('BKMG', $m[2]));
-        }, strtoupper($s));
+        $memoryString = trim($memoryString);
+        $lastCharacter = strtolower($memoryString[-1]);
+        switch ($lastCharacter) {
+            case 'g':
+                $bytes = (int)$memoryString * 1024 * 1024 * 1024;
+                break;
+            case 'm':
+                $bytes = (int)$memoryString * 1024 * 1024;
+                break;
+            case 'k':
+                $bytes = (int)$memoryString * 1024;
+                break;
+            default:
+                $bytes = (int)$memoryString;
+        }
+
+        return $bytes;
     }
 }
