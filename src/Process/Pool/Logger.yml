@@ -14,9 +14,9 @@ services:
     class: Neighborhoods\Kojo\Process\Pool\Logger
     calls:
       - [setIsEnabled, ['%process.pool.logger.is_enabled%']]
-      - [setTime, ['@neighborhoods.pylon.time']]
       - [setLogFormatter, ['@neighborhoods.kojo.process.log_formatter']]
-      - [setProcessPoolLoggerMessageFactory, ['@neighborhoods.kojo.process.pool.logger.message.factory']]
+      - [setProcessPoolLoggerMessageBuilderFactory, ['@neighborhoods.kojo.process.pool.logger.message.builder.factory']]
       - [setLevelFilterMask, ['%neighborhoods.kojo.process.pool.logger.level_filter_mask%']]
   process.pool.logger:
     alias: neighborhoods.kojo.process.pool.logger
+

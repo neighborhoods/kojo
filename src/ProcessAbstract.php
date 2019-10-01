@@ -19,6 +19,7 @@ abstract class ProcessAbstract implements ProcessInterface
     use Process\Signal\Dispatcher\AwareTrait;
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
+    use Logger\Message\Metadata\Builder\AwareTrait;
     use Apm\NewRelic\AwareTrait;
     protected $_exitCode = 0;
 
@@ -29,7 +30,7 @@ abstract class ProcessAbstract implements ProcessInterface
         $this->_setParentProcessId(posix_getppid());
         $this->_setProcessId(posix_getpid());
 
-        $this->_getLogger()->setProcess($this);
+        $this->getProcessPoolLoggerMessageMetadataBuilder()->setProcess($this);
         if ($this->_hasProcessPool()) {
             $this->_getProcessPool()->emptyChildProcesses();
             $this->_getProcessPool()->getProcess()->unregisterShutdownMethod();
