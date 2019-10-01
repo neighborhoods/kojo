@@ -1,0 +1,4 @@
+services:
+  neighborhoods.kojo.neighborhoods.kojo.src.process.pool.logger.message.metadata.host:
+    class: Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata\Host
+    shared: true

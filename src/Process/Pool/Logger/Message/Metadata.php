@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool\Logger\Message;
 
 use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata\HostInterface;
 
 class Metadata implements MetadataInterface
 {
@@ -11,6 +12,7 @@ class Metadata implements MetadataInterface
     protected $job;
     /** @var SerializableProcessInterface */
     protected $process;
+    /** @var HostInterface */
     protected $host;
 
     public function getJob() : JobInterface
@@ -66,6 +68,26 @@ class Metadata implements MetadataInterface
     public function jsonSerialize()
     {
         return get_object_vars($this);
+    }
+
+    public function getHost() : HostInterface
+    {
+        if ($this->host === null) {
+            throw new \LogicException('Metadata host has not been set.');
+        }
+
+        return $this->host;
+    }
+
+    public function setHost(HostInterface $host) : MetadataInterface
+    {
+        if ($this->host !== null) {
+            throw new \LogicException('Metadata host is already set.');
+        }
+
+        $this->host = $host;
+
+        return $this;
     }
 
 }

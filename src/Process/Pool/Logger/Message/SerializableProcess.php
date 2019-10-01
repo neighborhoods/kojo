@@ -5,6 +5,10 @@ namespace Neighborhoods\Kojo\Process\Pool\Logger\Message;
 
 class SerializableProcess implements SerializableProcessInterface
 {
+    const KEY_MEMORY_USAGE_BYTES = 'memory_usage_bytes';
+    const KEY_MEMORY_PEAK_USAGE_BYTES = 'memory_peak_usage_bytes';
+    const KEY_MEMORY_LIMIT_BYTES = 'memory_limit_bytes';
+
     /** @var int  */
     protected $process_id;
     /** @var int */
@@ -15,6 +19,12 @@ class SerializableProcess implements SerializableProcessInterface
     protected $uuid;
     /** @var string */
     protected $type_code;
+    /** @var int */
+    protected $memory_usage_bytes;
+    /** @var int */
+    protected $memory_peak_usage_bytes;
+    /** @var int */
+    protected $memory_limit_bytes;
 
     public function getProcessId() : int
     {
@@ -116,8 +126,49 @@ class SerializableProcess implements SerializableProcessInterface
         return $this;
     }
 
+    public function getMemoryUsageBytes() : int
+    {
+        return  memory_get_usage();
+    }
+
+    public function getMemoryPeakUsageBytes() : int
+    {
+        return memory_get_peak_usage();
+    }
+
+    public function getMemoryLimitBytes() : int
+    {
+        return $this->dataUnitToBytes(ini_get('memory_limit'));
+    }
+
     public function jsonSerialize()
     {
-      return get_object_vars($this);
+        $data = get_object_vars($this);
+        $data[self::KEY_MEMORY_USAGE_BYTES]= $this->getMemoryUsageBytes();
+        $data[self::KEY_MEMORY_PEAK_USAGE_BYTES]= $this->getMemoryPeakUsageBytes();
+        $data[self::KEY_MEMORY_LIMIT_BYTES]= $this->getMemoryLimitBytes();
+        return $data;
+    }
+
+    /* converts a number with byte unit (B / K / M / G) into an integer */
+    protected function dataUnitToBytes(string $memoryString) : int
+    {
+        $memoryString = trim($memoryString);
+        $lastCharacter = strtolower($memoryString[-1]);
+        switch ($lastCharacter) {
+            case 'g':
+                $bytes = (int)$memoryString * 1024 * 1024 * 1024;
+                break;
+            case 'm':
+                $bytes = (int)$memoryString * 1024 * 1024;
+                break;
+            case 'k':
+                $bytes = (int)$memoryString * 1024;
+                break;
+            default:
+                $bytes = (int)$memoryString;
+        }
+
+        return $bytes;
     }
 }

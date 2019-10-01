@@ -12,6 +12,7 @@ class Builder implements BuilderInterface
 {
     use Factory\AwareTrait;
     use SerializableProcess\FromProcessModel\Builder\Factory\AwareTrait;
+    use Host\AwareTrait;
 
     /** @var ProcessInterface */
     protected $process;
@@ -34,6 +35,8 @@ class Builder implements BuilderInterface
         if ($this->hasJob()){
             $metadata->setJob($this->getJob());
         }
+
+        $metadata->setHost($this->getProcessPoolLoggerMessageMetadataHost());
 
         return $metadata;
     }

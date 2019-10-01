@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool\Logger\Message;
 
 use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata\HostInterface;
 
 interface MetadataInterface extends \JsonSerializable
 {
@@ -19,4 +20,8 @@ interface MetadataInterface extends \JsonSerializable
     public function hasJob() : bool;
 
     public function hasProcess() : bool;
+
+    public function setHost(HostInterface $host) : MetadataInterface;
+
+    public function getHost() : HostInterface;
 }
