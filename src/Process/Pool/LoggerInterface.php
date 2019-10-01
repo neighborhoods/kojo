@@ -10,8 +10,6 @@ use Psr\Log;
 
 interface LoggerInterface extends Log\LoggerInterface
 {
-    public function setProcess(ProcessInterface $process): LoggerInterface;
-
     public function setIsEnabled(bool $isEnabled): LoggerInterface;
 
     public function getLogFormatter() : FormatterInterface;
@@ -19,6 +17,4 @@ interface LoggerInterface extends Log\LoggerInterface
     public function setLogFormatter(FormatterInterface $log_formatter) : LoggerInterface;
 
     public function setLevelFilterMask(array $level_filter_mask): LoggerInterface;
-
-    public function setJob(JobInterface $job) : LoggerInterface;
 }

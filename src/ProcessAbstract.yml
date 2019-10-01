@@ -7,6 +7,7 @@ services:
     calls:
       - [setProcessRegistry, ['@process.registry']]
       - [setLogger, ['@process.pool.logger']]
+      - [setProcessPoolLoggerMessageMetadataBuilder, ['@neighborhoods.kojo.process.pool.logger.message.metadata.builder']]
       - [setProcessSignalDispatcher, ['@Neighborhoods\Kojo\Process\Signal\DispatcherInterface']]
       - [setApmNewRelic, ['@apm.new_relic']]
   process_abstract:

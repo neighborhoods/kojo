@@ -1,0 +1,7 @@
+services:
+  neighborhoods.kojo.process.pool.logger.message.metadata.builder:
+    class: Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata\Builder
+    shared: true
+    calls:
+      - [setProcessPoolLoggerMessageMetadataFactory, ['@neighborhoods.kojo.process.pool.logger.message.metadata.factory']]
+      - [setProcessPoolLoggerMessageSerializableProcessFromProcessModelBuilderFactory, ['@neighborhoods.kojo.process.pool.logger.message.serializable_process.from_process_model.builder.factory']]

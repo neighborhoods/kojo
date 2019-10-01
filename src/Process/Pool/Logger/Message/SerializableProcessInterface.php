@@ -21,4 +21,8 @@ interface SerializableProcessInterface extends \JsonSerializable
     public function setTypeCode(string $type_code) : SerializableProcessInterface;
 
     public function setProcessId(int $process_id) : SerializableProcessInterface;
+
+    public function getPath() : string;
+
+    public function setPath(string $path) : SerializableProcessInterface;
 }
