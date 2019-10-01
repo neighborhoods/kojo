@@ -46,11 +46,15 @@ class Formatter implements FormatterInterface
     {
         $processPathPaddingLength = $this->getProcessPathPadding();
 
-        $processPath = str_pad($message->getProcessPath(), $processPathPaddingLength, ' ');
+        $processPath = str_pad($message->getMetadata()->getProcess()->getPath(), $processPathPaddingLength, ' ');
         $level = str_pad($message->getLevel(), 8, ' ');
-        $kojoJobTypeCode = str_pad($message->hasKojoJob() ? $message->getKojoJob()->getTypeCode() : '', 26, ' ');
+        $kojoJobTypeCode = str_pad(
+            $message->getMetadata()->hasJob() ? $message->getMetadata()->getJob()->getTypeCode() : '',
+            26,
+            ' '
+        );
         $kojoJobAssignedState = str_pad(
-            $message->hasKojoJob() ? $message->getKojoJob()->getAssignedState() : '',
+            $message->getMetadata()->hasJob() ? $message->getMetadata()->getJob()->getAssignedState() : '',
             20,
             ' '
         );
