@@ -15,3 +15,5 @@ Real-world use cases for Kōjō and instructions for getting Kōjō up and runni
 
 ## Debugging Kōjō
 XDebug version greater than `xdebug-2.7.0alpha1` is required when trying to debug Kōjō. This version of XDebug resolves issues (https://bugs.xdebug.org/938) caused by the way the Kōjō forks using `pcntl`.
+
+You must also increase your `Max. simultaneous connections` to the max value of `20` in PhpStorm's preferences under `Languages & Frameworks` > `PHP` > `Debug`, `External connections` section.
