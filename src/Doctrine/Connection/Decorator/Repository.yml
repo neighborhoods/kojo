@@ -9,7 +9,7 @@ services:
       - [createById, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Doctrine\\\\Connection\\\\DecoratorInterface::ID_JOB\")"]]
       - [createById, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Doctrine\\\\Connection\\\\DecoratorInterface::ID_SCHEMA\")"]]
       - [createById, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Doctrine\\\\Connection\\\\DecoratorInterface::ID_STATUS\")"]]
-      - [createById, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Doctrine\\\\Connection\\\\DecoratorInterface::ID_STATE_TRANSITION_CHANGE\")"]]
+      - [createById, ["@=constant(\"\\\\Neighborhoods\\\\Kojo\\\\Doctrine\\\\Connection\\\\DecoratorInterface::ID_JOB_STATE_CHANGE\")"]]
   doctrine.connection.decorator.repository:
     alias: neighborhoods.kojo.doctrine.connection.decorator.repository
     public: false

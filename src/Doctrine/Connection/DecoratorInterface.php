@@ -14,7 +14,7 @@ interface DecoratorInterface
     public const ID_STATUS = 'status';
     public const ID_JOB = 'job';
     public const ID_NON_TRANSACTIONAL = 'non_transactional';
-    public const ID_STATE_TRANSITION_CHANGE = 'state_transition_logger';
+    public const ID_JOB_STATE_CHANGE = 'job_state_change';
 
     public function getDoctrineConnection(): Connection;
 

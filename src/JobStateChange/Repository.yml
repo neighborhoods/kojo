@@ -1,0 +1,11 @@
+services:
+  neighborhoods.kojo.job_state_change.repository:
+    class: Neighborhoods\Kojo\JobStateChange\Repository
+    public: false
+    shared: true
+    calls:
+      - [setDoctrineConnectionDecoratorRepository, ['@doctrine.connection.decorator.repository']]
+      - [setJobStateChangeMapBuilderFactory, ['@job_state_change.map.builder.factory']]
+  job_state_change.repository:
+    alias: neighborhoods.kojo.job_state_change.repository
+    public: false

@@ -1,0 +1,11 @@
+services:
+  neighborhoods.kojo.job_state_change.builder:
+    class: Neighborhoods\Kojo\JobStateChange\Builder
+    public: false
+    shared: false
+    calls:
+      - [setJobStateChangeFactory, ['@job_state_change.factory']]
+      - [setJobStateChangeDataBuilderFactory, ['@job_state_change.data.builder.factory']]
+  job_state_change.builder:
+    alias: neighborhoods.kojo.job_state_change.builder
+    public: false
