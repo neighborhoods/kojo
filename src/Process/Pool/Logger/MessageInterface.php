@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool\Logger;
 
 use Neighborhoods\Kojo\Data\JobInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcessInterface;
 
 interface MessageInterface
 {
@@ -41,4 +42,9 @@ interface MessageInterface
     public function setKojoJob(JobInterface $kojo_job) : MessageInterface;
 
     public function hasKojoJob() : bool;
+
+    public function hasKojoProcess() : bool;
+
+    public function getKojoProcess() : SerializableProcessInterface;
+
 }
