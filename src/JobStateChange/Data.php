@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\JobStateChange;
 
+use Neighborhoods\Kojo\Process\Pool\Logger\Message;
+
 class Data implements DataInterface
 {
     /** @var string */
@@ -11,8 +13,8 @@ class Data implements DataInterface
     protected $new_state;
     /** @var \DateTimeInterface */
     protected $timestamp;
-    /** @var ? */
-    // protected $metadata;
+    /** @var Message\MetadataInterface */
+    protected $metadata;
 
     public function getOldState() : string
     {
@@ -62,6 +64,23 @@ class Data implements DataInterface
             throw new \LogicException('Data timestamp is already set.');
         }
         $this->timestamp = $timestamp;
+        return $this;
+    }
+
+    public function getMetadata() : Message\MetadataInterface
+    {
+        if ($this->metadata === null) {
+            throw new \LogicException('Data metadata has not been set.');
+        }
+        return $this->metadata;
+    }
+
+    public function setMetadata(Message\MetadataInterface $metadata) : DataInterface
+    {
+        if ($this->metadata !== null) {
+            throw new \LogicException('Data metadata is already set.');
+        }
+        $this->metadata = $metadata;
         return $this;
     }
 }

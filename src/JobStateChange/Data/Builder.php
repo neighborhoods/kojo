@@ -19,6 +19,7 @@ class Builder implements BuilderInterface
         $data->setOldState($record[DataInterface::PROP_OLD_STATE]);
         $data->setNewState($record[DataInterface::PROP_NEW_STATE]);
         $data->setTimestamp(new \DateTimeImmutable($record[DataInterface::PROP_TIMESTAMP]));
+        // use a "from RDBMS" builder for the metadata
 
         return $data;
     }
