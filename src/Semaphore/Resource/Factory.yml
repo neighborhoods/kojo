@@ -54,12 +54,12 @@ services:
       - [setSemaphore, ['@semaphore']]
   semaphore.resource.factory-server:
     alias: neighborhoods.kojo.semaphore.resource.factory-server
-  neighborhoods.kojo.semaphore.resource.factory-state_transition_logger:
+  neighborhoods.kojo.semaphore.resource.factory-job_state_changelog_processor:
     class: Neighborhoods\Kojo\Semaphore\Resource\Factory
     calls:
-      - [setName, ['state_transition_logger']]
-      - [setSemaphoreResource, ['@semaphore.resource-state_transition_logger']]
+      - [setName, ['job_state_changelog_processor']]
+      - [setSemaphoreResource, ['@semaphore.resource-job_state_changelog_processor']]
       - [setMutex, ['@semaphore.mutex.redis']]
       - [setSemaphore, ['@semaphore']]
-  semaphore.resource.factory-state_transition_logger:
-    alias: neighborhoods.kojo.semaphore.resource.factory-state_transition_logger
+  semaphore.resource.factory-job_state_changelog_processor:
+    alias: neighborhoods.kojo.semaphore.resource.factory-job_state_changelog_processor

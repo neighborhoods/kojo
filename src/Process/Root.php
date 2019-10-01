@@ -9,7 +9,7 @@ class Root extends Forked
 {
     public const TYPE_CODE = 'root';
     protected const SINGLETON_PROCESSES = [
-        StateTransitionLogger::TYPE_CODE
+        JobStateChangelogProcessor::TYPE_CODE
     ];
 
     use Semaphore\Resource\Factory\AwareTrait;
@@ -47,6 +47,7 @@ class Root extends Forked
                 } catch (Forked\Exception $forkedException) {
                     // this is fine, another execution environment will spawn this process
                     // TODO: consider breaking here to stop attempting to spawn other singletons
+                    $this->_getLogger()->debug($forkedException->getMessage(), ['exception' => $forkedException]);
                 }
             }
         }

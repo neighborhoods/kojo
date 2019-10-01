@@ -5,6 +5,6 @@ namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\ProcessInterface;
 
-interface StateTransitionLoggerInterface extends ProcessInterface
+interface JobStateChangelogProcessorInterface extends ProcessInterface
 {
 }

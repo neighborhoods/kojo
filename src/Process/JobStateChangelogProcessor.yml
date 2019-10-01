@@ -1,17 +1,16 @@
 services:
-  neighborhoods.kojo.process.root:
-    class: Neighborhoods\Kojo\Process\Root
+  neighborhoods.kojo.process.job_state_changelog_processor:
+    class: Neighborhoods\Kojo\Process\JobStateChangelogProcessor
     public: true
     shared: false
     parent: process_abstract
     calls:
-      - [setProcessPoolFactory, ['@process.pool.factory']]
+      - [setTypeCode, ['job_state_changelog_processor']]
       - [setProcessStrategy, ['@process.strategy.process_control']]
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
+      - [setProcessPoolFactory, ['@process.pool.factory-job_state_changelog_processor']]
       - [setTitlePrefix, ['%process.title.prefix%']]
       - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job_state_changelog_processor']]
-      - [setProcessCollection, ['@process.collection-singleton_manager']]
-  process.root:
-    alias: neighborhoods.kojo.process.root
-    public: false
+  process.job_state_changelog_processor:
+    alias: neighborhoods.kojo.process.job_state_changelog_processor

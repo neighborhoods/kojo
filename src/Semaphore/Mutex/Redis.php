@@ -29,7 +29,7 @@ class Redis extends MutexAbstract implements RedisInterface
 
             // If the mutex resource ID is set, then check if the owning client is connected.
             $mutexKeyValue = $this->_getRedisClient()->get($key);
-            if (!empty($mutexKeyValue)) {
+            if ($mutexKeyValue !== false) {
                 $mutexClientIsConnected = false;
 
                 // Get a list of connected clients.
@@ -84,8 +84,8 @@ class Redis extends MutexAbstract implements RedisInterface
     {
         $keyValue = $this->_getRedisClient()->get($this->_getKey());
 
-        // not likely if nothing cleans up the key after the lock is released
-        if (empty($keyValue)) {
+        // not likely since the entire key is deleted normally when the lock is released
+        if ($keyValue === false) {
             return true;
         }
 

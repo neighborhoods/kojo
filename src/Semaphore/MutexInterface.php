@@ -14,8 +14,6 @@ interface MutexInterface
      *
      * DOES NOT ACQUIRE THE MUTEX
      *
-     * DON'T USE THIS UNLESS YOU KNOW WHAT YOU'RE DOING
-     *
      * @return bool
      */
     public function testLock(): bool;
