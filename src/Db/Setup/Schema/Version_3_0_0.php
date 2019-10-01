@@ -7,8 +7,8 @@ use Doctrine\DBAL\Types\Type;
 use Neighborhoods\Kojo\Db\Schema\VersionAbstract;
 use Neighborhoods\Kojo\Db\Schema\VersionInterface;
 use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
-use Neighborhoods\Kojo\StateTransitionChangeInterface;
-use Neighborhoods\Kojo\StateTransitionChange;
+use Neighborhoods\Kojo\JobStateChangeInterface;
+use Neighborhoods\Kojo\JobStateChange;
 
 class Version_3_0_0 extends VersionAbstract
 {
@@ -16,15 +16,15 @@ class Version_3_0_0 extends VersionAbstract
     {
         $connectionDecoratorRepository = $this->_getDoctrineConnectionDecoratorRepository();
         $createSchema = $connectionDecoratorRepository->createSchema(DecoratorInterface::ID_SCHEMA);
-        $createTable = $createSchema->createTable(StateTransitionChange\RepositoryInterface::TABLE_NAME);
-        $createTable->addColumn(StateTransitionChangeInterface::PROP_ID, Type::BIGINT,
+        $createTable = $createSchema->createTable(JobStateChange\RepositoryInterface::TABLE_NAME);
+        $createTable->addColumn(JobStateChangeInterface::PROP_ID, Type::BIGINT,
             [
                 'autoincrement' => true,
                 'unsigned' => true
             ]
         );
-        $createTable->setPrimaryKey([StateTransitionChangeInterface::PROP_ID]);
-        $createTable->addColumn(StateTransitionChangeInterface::PROP_DATA, Type::TEXT);
+        $createTable->setPrimaryKey([JobStateChangeInterface::PROP_ID]);
+        $createTable->addColumn(JobStateChangeInterface::PROP_DATA, Type::JSON);
         $this->_setCreateTable($createTable);
 
         return $this;
