@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\JobStateChange\Data;
 
 use Neighborhoods\Kojo\JobStateChange\DataInterface;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata;
 
 class Builder implements BuilderInterface
 {
+    use Metadata\FromArrayBuilder\Factory\AwareTrait;
     use Factory\AwareTrait;
     /** @var array */
     protected $record;
@@ -19,7 +21,14 @@ class Builder implements BuilderInterface
         $data->setOldState($record[DataInterface::PROP_OLD_STATE]);
         $data->setNewState($record[DataInterface::PROP_NEW_STATE]);
         $data->setTimestamp(new \DateTimeImmutable($record[DataInterface::PROP_TIMESTAMP]));
-        // use a "from RDBMS" builder for the metadata
+
+        $metadata = $this
+            ->getProcessPoolLoggerMessageMetadataFromArrayBuilderFactory()
+            ->create()
+            ->setRecord($record[DataInterface::PROP_METADATA])
+            ->build();
+
+        $data->setMetadata($metadata);
 
         return $data;
     }
