@@ -1,0 +1,8 @@
+services:
+  neighborhoods.kojo.job_state_change:
+    class: Neighborhoods\Kojo\JobStateChange
+    public: false
+    shared: false
+  job_state_change:
+    alias: neighborhoods.kojo.job_state_change
+    public: false
