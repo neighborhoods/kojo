@@ -9,6 +9,15 @@ interface MutexInterface
 
     public function testAndSetLock(): bool;
 
+    /**
+     * Soft check for whether a mutex is available
+     *
+     * DOES NOT ACQUIRE THE MUTEX
+     *
+     * @return bool
+     */
+    public function testLock(): bool;
+
     public function releaseLock(): MutexInterface;
 
     public function setResource(ResourceInterface $resource): MutexInterface;
