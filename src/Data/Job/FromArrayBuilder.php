@@ -23,21 +23,35 @@ class FromArrayBuilder implements FromArrayBuilderInterface
         $job->setName($record['name']);
         $job->setPriority($record['priority']);
         $job->setImportance($record['importance']);
-        $job->setWorkAtDateTime($record['work_at_date_time']);
+        $job->setWorkAtDateTime(new \DateTime($record['work_at_date_time']));
         $job->setPreviousState($record['previous_state']);
         $job->setWorkerUri($record['worker_uri']);
         $job->setWorkerMethod($record['worker_method']);
         $job->setCanWorkInParallel($record['can_work_in_parallel']);
-        $job->setLastTransitionInDateTime($record['last_transition_date_time']);
-        $job->setLastTransitionInMicroTime($record['last_transition_micro_time']);
+        $job->setLastTransitionInDateTime(new \DateTime($record['last_transition_date_time']));
+        $job->setLastTransitionInMicroTime(
+            \DateTime::createFromFormat(
+                'U.u',
+                sprintf(
+                    '%s.%s',
+                    (int)($record['last_transition_micro_time'] / 1000000),
+                    $record['last_transition_micro_time'] % 1000000
+                )
+            )
+        );
         $job->setTimesWorked($record['times_worked']);
         $job->setTimesRetried($record['times_retried']);
         $job->setTimesHeld($record['times_held']);
         $job->setTimesCrashed($record['times_crashed']);
         $job->setTimesPanicked($record['times_panicked']);
-        $job->setCreatedAtDateTime($record['created_at_date_time']);
-        $job->setCompletedAtDateTime($record['completed_at_date_time']);
-        $job->setDeleteAfterDateTime($record['delete_after_date_time']);
+        $job->setCreatedAtDateTime(new \DateTime($record['created_at_date_time']));
+
+        if (isset($record['completed_at_date_time'])) {
+            $job->setCompletedAtDateTime(new \DateTime($record['completed_at_date_time']));
+        }
+        if (isset($record['delete_after_date_time'])) {
+            $job->setDeleteAfterDateTime(new \DateTime($record['delete_after_date_time']));
+        }
 
         return $job;
     }
