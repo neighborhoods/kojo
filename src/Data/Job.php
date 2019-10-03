@@ -3,11 +3,20 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Data;
 
-use Neighborhoods\Kojo\Db\Model;
+use Neighborhoods\Kojo\Db;
+use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
+use Neighborhoods\Kojo\JobStateChangeInterface;
 use Neighborhoods\Pylon\TimeInterface;
+use Neighborhoods\Kojo\JobStateChange;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata;
 
-class Job extends Model implements JobInterface, \JsonSerializable
+class Job extends Db\Model implements JobInterface, \JsonSerializable
 {
+    use JobStateChange\Factory\AwareTrait;
+    use JobStateChange\Data\Factory\AwareTrait;
+    use JobStateChange\Repository\AwareTrait;
+    use Metadata\Builder\AwareTrait;
+
     public function __construct()
     {
         $this->setTableName(JobInterface::TABLE_NAME);
@@ -323,6 +332,84 @@ class Job extends Model implements JobInterface, \JsonSerializable
         $deleteAfterDateTimeString = $this->_readPersistentProperty(JobInterface::FIELD_NAME_DELETE_AFTER_DATE_TIME);
 
         return new \DateTime($deleteAfterDateTimeString);
+    }
+
+    public function save(): Db\ModelInterface
+    {
+        if (
+            // if state didn't change, we don't have to override any behavior
+            !array_key_exists(JobInterface::FIELD_NAME_ASSIGNED_STATE, $this->_readChangedPersistentProperties()) ||
+            // because of how State\Service works, often assigned state will show up as changed, when really it hasn't
+            $this->getAssignedState() === $this->getPreviousState()
+        ) {
+            return parent::save();
+        }
+
+        // Db\Models have to use a workaround to get RDBMS bigints to work with doctrine
+        // this code extends that workaround to apply to the job we're about to serialize
+        if ($this->hasId()) {
+            $this->_createOrUpdatePersistentProperty($this->getIdPropertyName(), $this->getId());
+        }
+
+        // do this outside the transaction to marginally reduce the chance of failure
+        $jobStateChange = $this->createJobStateChange();
+
+        $connection = $this->_getDoctrineConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_JOB);
+        /** @var \PDO $pdo */
+        $pdo = $connection->getWrappedConnection();
+
+        $isKojospaceTransaction = false;
+
+        if ($pdo->inTransaction()) {
+            // if we're already in a transaction (i.e. one started by userspace), we can proceed, knowing that
+            // if userspace rolls back the transaction, it'll roll back the job state change as well
+        } else {
+            // otherwise, start a transaction in kojospace to make sure the JobStateChangelogProcessor doesn't see
+            // the JobStateChange unless the actual job transitions successfully
+            $pdo->beginTransaction();
+            $isKojospaceTransaction = true;
+        }
+
+        try {
+            parent::save();
+            $this->getJobStateChangeRepository()->insertUsingConnection($jobStateChange, $connection);
+
+            if ($isKojospaceTransaction) {
+                $pdo->commit();
+            }
+        } catch (\Throwable $throwable) {
+            if ($isKojospaceTransaction) {
+                $pdo->rollBack();
+            } else {
+                // userspace will need to roll back the transaction itself
+                // if it chooses to commit instead, we might not log this job state change
+                // (if parent::save() succeeds, but the JSCL insert fails)
+            }
+            // log
+            throw $throwable;
+        }
+
+        return $this;
+    }
+
+    protected function createJobStateChange() : JobStateChangeInterface
+    {
+        $metadata = $this
+            ->getProcessPoolLoggerMessageMetadataBuilder()
+            ->setJob($this) // TODO: discuss this
+            ->build();
+
+        $jobStateChangeData = $this->getJobStateChangeDataFactory()->create();
+        $jobStateChangeData
+            ->setOldState($this->getPreviousState())
+            ->setNewState($this->getAssignedState())
+            ->setTimestamp(new \DateTime())
+            ->setMetadata($metadata);
+
+        $jobStateChange = $this->getJobStateChangeFactory()->create();
+        $jobStateChange->setData($jobStateChangeData);
+
+        return $jobStateChange;
     }
 
     public function jsonSerialize()

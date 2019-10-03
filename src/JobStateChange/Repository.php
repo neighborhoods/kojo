@@ -21,6 +21,23 @@ class Repository implements RepositoryInterface
     /** @var Connection */
     protected $doctrineConnection;
 
+    public function insertUsingConnection(JobStateChangeInterface $jobStateChange, Connection $connection) : RepositoryInterface
+    {
+        $queryBuilder = $connection->createQueryBuilder();
+
+        $queryBuilder
+            ->insert(self::TABLE_NAME)
+            ->values(
+                [
+                    JobStateChangeInterface::PROP_DATA => $queryBuilder->createNamedParameter(json_encode($jobStateChange->getData()))
+                ]
+            );
+
+        $queryBuilder->execute();
+
+        return $this;
+    }
+
     public function selectBatch(int $batchSize) : MapInterface
     {
         $queryBuilder = $this->getDoctrineConnection()->createQueryBuilder();

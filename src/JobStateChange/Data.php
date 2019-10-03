@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\JobStateChange;
 
 use Neighborhoods\Kojo\Process\Pool\Logger\Message;
+use Neighborhoods\Pylon\TimeInterface;
 
 class Data implements DataInterface
 {
@@ -82,5 +83,15 @@ class Data implements DataInterface
         }
         $this->metadata = $metadata;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        $array = get_object_vars($this);
+        // otherwise we get something like 
+        // {"timestamp":{"date":"2019-10-02 22:41:59.915868","timezone_type":3,"timezone":"UTC"}}
+        $array[DataInterface::PROP_TIMESTAMP] = $this->getTimestamp()->format(TimeInterface::MYSQL_DATE_TIME_FORMAT);
+        
+        return $array;
     }
 }

@@ -3,6 +3,11 @@ services:
     class: Neighborhoods\Kojo\Data\Job
     shared: false
     parent: db.model
+    calls:
+      - [setJobStateChangeFactory, ['@neighborhoods.kojo.job_state_change.factory']]
+      - [setJobStateChangeDataFactory, ['@neighborhoods.kojo.job_state_change.data.factory']]
+      - [setJobStateChangeRepository, ['@neighborhoods.kojo.job_state_change.repository']]
+      - [setProcessPoolLoggerMessageMetadataBuilder, ['@neighborhoods.kojo.process.pool.logger.message.metadata.builder']]
   data.job:
     alias: neighborhoods.kojo.data.job
     public: false

@@ -74,10 +74,8 @@ class Builder implements BuilderInterface
 
     public function setJob(JobInterface $job) : BuilderInterface
     {
-        if ($this->job !== null) {
-            throw new \LogicException('Builder job is already set.');
-        }
-
+        // no explode-y setter here because the job can several times over the course of a process
+        // TODO: discuss, see Data\Job::createJobStateChange()
         $this->job = $job;
 
         return $this;
