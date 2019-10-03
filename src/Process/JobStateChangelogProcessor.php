@@ -4,28 +4,67 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\Semaphore;
+use Neighborhoods\Kojo\JobStateChange;
 
 class JobStateChangelogProcessor extends Forked implements JobStateChangelogProcessorInterface
 {
     use Semaphore\Resource\Factory\AwareTrait;
+    use JobStateChange\Repository\AwareTrait;
 
     public const TYPE_CODE = 'job_state_changelog_processor';
+
+    protected $batchSize;
 
     protected function _run(): Forked
     {
         $this->_getLogger()->debug('JobStateChangelogProcessor has been instantiated');
+        $semaphoreResource = $this->_getSemaphoreResource(self::TYPE_CODE);
 
-        if ($this->_getSemaphoreResource('job_state_changelog_processor')->testAndSetLock()) {
+        if ($semaphoreResource->testAndSetLock()) {
             $this->_getLogger()->debug('JobStateChangelogProcessor has acquired mutex');
-
-            // TODO: replace with business logic
-            while (true) {
-                sleep(1);
-            }
+            $this->businessLogic();
+            $semaphoreResource->releaseLock();
         } else {
             $this->_getLogger()->debug('JobStateChangelogProcessor failed to acquire mutex');
         }
 
+        return $this;
+    }
+
+    protected function businessLogic() : JobStateChangelogProcessorInterface
+    {
+        $jobStateChangeRepo = $this->getJobStateChangeRepository();
+        $logger = $this->_getLogger();
+
+        while (
+            // empty() doesn't work on Maps
+            ($jobStateChanges = $jobStateChangeRepo->selectBatch($this->getBatchSize()))->count() !== 0
+        ) {
+            foreach ($jobStateChanges as $jobStateChange) {
+                $logger->info('Job state change', $jobStateChange->jsonSerialize());
+            }
+
+            $jobStateChangeRepo->deleteBatch(...array_keys($jobStateChanges->toArray()));
+        }
+
+        // maybe log this to see how often the JSCLP process is replaced?
+        return $this;
+    }
+
+    public function getBatchSize() : int
+    {
+        if ($this->batchSize === null) {
+            throw new \LogicException('JobStateChangelogProcessor batchSize has not been set.');
+        }
+        return $this->batchSize;
+    }
+
+    public function setBatchSize(int $batchSize) : JobStateChangelogProcessorInterface
+    {
+        if ($this->batchSize !== null) {
+            throw new \LogicException('JobStateChangelogProcessor batchSize is already set.');
+        }
+        $this->batchSize = $batchSize;
         return $this;
     }
 }
