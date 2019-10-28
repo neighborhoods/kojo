@@ -33,30 +33,4 @@ interface MessageInterface
     public function setMetadata(MetadataInterface $kojo_metadata) : MessageInterface;
 
     public function getMetadata() : MetadataInterface;
-
-    /** @param int $process_id
-     * @return MessageInterface
-     * @deprecated
-     */
-    public function setProcessId(int $process_id) : MessageInterface;
-
-    /** @param string $process_path
-     * @return MessageInterface
-     * @deprecated
-     */
-    public function setProcessPath(string $process_path) : MessageInterface;
-
-    /**
-     * @param JobInterface $kojo_job
-     * @return MessageInterface
-     * @deprecated
-     */
-    public function setKojoJob(JobInterface $kojo_job) : MessageInterface;
-
-    /**
-     * @param SerializableProcessInterface $kojo_job
-     * @return MessageInterface
-     * @deprecated
-     */
-    public function setKojoProcess(SerializableProcessInterface $kojo_job) : MessageInterface;
 }
