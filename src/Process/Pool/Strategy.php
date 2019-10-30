@@ -21,7 +21,7 @@ class Strategy extends StrategyAbstract
         } elseif ($process instanceof ListenerInterface) {
             $this->_listenerProcessExited($process);
         } elseif ($process instanceof JobStateChangelogProcessorInterface) {
-            // A new STL process will be created by the Root when appropriate
+            $this->_jobStateChangelogProcessExited($process);
         } else {
             $className = get_class($process);
             throw new \UnexpectedValueException("Unexpected process class[$className].");
@@ -94,6 +94,13 @@ class Strategy extends StrategyAbstract
                 $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
             }
         }
+
+        return $this;
+    }
+
+    protected function _jobStateChangelogProcessExited(JobStateChangelogProcessorInterface $jobStateChangelogProcessor) : Strategy
+    {
+        $this->_getProcessPool()->freeChildProcess($jobStateChangelogProcessor->getProcessId());
 
         return $this;
     }
