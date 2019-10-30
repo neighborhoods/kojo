@@ -14,6 +14,7 @@ class JobStateChangelogProcessor extends Forked implements JobStateChangelogProc
     public const TYPE_CODE = 'job_state_changelog_processor';
 
     protected $batchSize;
+    protected $numMaxIterations;
 
     protected function _run(): Forked
     {
@@ -35,8 +36,10 @@ class JobStateChangelogProcessor extends Forked implements JobStateChangelogProc
     {
         $jobStateChangeRepo = $this->getJobStateChangeRepository();
         $logger = $this->_getLogger();
+        $iterationCount = 0;
 
         while (
+            $iterationCount < $this->getNumMaxIterations() &&
             // empty() doesn't work on Maps
             ($jobStateChanges = $jobStateChangeRepo->selectBatch($this->getBatchSize()))->count() !== 0
         ) {
@@ -45,7 +48,13 @@ class JobStateChangelogProcessor extends Forked implements JobStateChangelogProc
             }
 
             $jobStateChangeRepo->deleteBatch(...array_keys($jobStateChanges->toArray()));
+            $iterationCount++;
         }
+
+        $this->_getLogger()->debug("JobStateChangelogProcessor completed $iterationCount iterations", [
+            'iteration_count' => $iterationCount,
+            'event_type' => 'job_state_changelog_processor_bow_out'
+        ]);
 
         // maybe log this to see how often the JSCLP process is replaced?
         return $this;
@@ -65,6 +74,23 @@ class JobStateChangelogProcessor extends Forked implements JobStateChangelogProc
             throw new \LogicException('JobStateChangelogProcessor batchSize is already set.');
         }
         $this->batchSize = $batchSize;
+        return $this;
+    }
+
+    protected function getNumMaxIterations() : int
+    {
+        if ($this->numMaxIterations === null) {
+            throw new \LogicException('JobStateChangelogProcessor numMaxIterations has not been set.');
+        }
+        return $this->numMaxIterations;
+    }
+
+    public function setNumMaxIterations(int $numMaxIterations) : JobStateChangelogProcessorInterface
+    {
+        if ($this->numMaxIterations !== null) {
+            throw new \LogicException('JobStateChangelogProcessor numMaxIterations is already set.');
+        }
+        $this->numMaxIterations = $numMaxIterations;
         return $this;
     }
 }
