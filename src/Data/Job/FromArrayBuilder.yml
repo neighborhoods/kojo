@@ -1,0 +1,4 @@
+services:
+  neighborhoods.kojo.data.job.from_array_builder:
+    class: Neighborhoods\Kojo\Data\Job\FromArrayBuilder
+    shared: false
