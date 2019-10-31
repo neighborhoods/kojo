@@ -56,7 +56,6 @@ class JobStateChangelogProcessor extends Forked implements JobStateChangelogProc
             'event_type' => 'job_state_changelog_processor_bow_out'
         ]);
 
-        // maybe log this to see how often the JSCLP process is replaced?
         return $this;
     }
 
