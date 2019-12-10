@@ -62,18 +62,8 @@ class Builder implements BuilderInterface
 
         $logMessage->setContextJsonLastError(json_last_error());
 
-        $metadata = $this->getProcessPoolLoggerMessageMetadataBuilder()->build();
-        $logMessage->setMetadata($metadata);
-
-        if ($metadata->hasJob()) {
-            $logMessage->setKojoJob($metadata->getJob());
-        }
-
-        if ($metadata->hasProcess()) {
-            $logMessage->setKojoProcess($metadata->getProcess());
-            $logMessage->setProcessId($metadata->getProcess()->getProcessId());
-            $logMessage->setProcessPath($metadata->getProcess()->getPath());
-        }
+        $kojoMetadata = $this->getProcessPoolLoggerMessageMetadataBuilder()->build();
+        $logMessage->setMetadata($kojoMetadata);
 
         return $logMessage;
     }

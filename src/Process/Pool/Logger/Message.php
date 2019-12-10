@@ -23,26 +23,6 @@ class Message implements MessageInterface, \JsonSerializable
     protected $context_json_last_error;
     /** @var MetadataInterface */
     protected $kojo_metadata;
-    /**
-     * @var int
-     * @deprecated
-     */
-    protected $process_id;
-    /**
-     * @var string
-     * @deprecated
-     */
-    protected $process_path;
-    /**
-     * @var JobInterface
-     * @deprecated
-     */
-    protected $kojo_job;
-    /**
-     * @var SerializableProcessInterface
-     * @deprecated
-     */
-    protected $kojo_process;
 
     public function jsonSerialize(): array
     {
@@ -165,70 +145,6 @@ class Message implements MessageInterface, \JsonSerializable
         }
 
         $this->kojo_metadata = $kojo_metadata;
-
-        return $this;
-    }
-
-    /**
-     * @param int $process_id
-     * @return MessageInterface
-     * @deprecated
-     */
-    public function setProcessId(int $process_id) : MessageInterface
-    {
-        if ($this->process_id !== null) {
-            throw new \LogicException('Message process_id is already set.');
-        }
-
-        $this->process_id = $process_id;
-
-        return $this;
-    }
-
-    /**
-     * @param string $process_path
-     * @return MessageInterface
-     * @deprecated
-     */
-    public function setProcessPath(string $process_path) : MessageInterface
-    {
-        if ($this->process_path !== null) {
-            throw new \LogicException('Message process_path is already set.');
-        }
-
-        $this->process_path = $process_path;
-
-        return $this;
-    }
-
-    /**
-     * @param JobInterface $kojo_job
-     * @return MessageInterface
-     * @deprecated
-     */
-    public function setKojoJob(JobInterface $kojo_job) : MessageInterface
-    {
-        if ($this->kojo_job !== null) {
-            throw new \LogicException('Message kojo_job is already set.');
-        }
-
-        $this->kojo_job = $kojo_job;
-
-        return $this;
-    }
-
-    /**
-     * @param SerializableProcessInterface $kojo_process
-     * @return MessageInterface
-     * @deprecated
-     */
-    public function setKojoProcess(SerializableProcessInterface $kojo_process) : MessageInterface
-    {
-        if ($this->kojo_process !== null) {
-            throw new \LogicException('Message kojo_process is already set.');
-        }
-
-        $this->kojo_process = $kojo_process;
 
         return $this;
     }
