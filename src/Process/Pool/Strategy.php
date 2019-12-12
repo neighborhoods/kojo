@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process\Pool;
 
 use Neighborhoods\Kojo\Process\Forked\Exception;
-use Neighborhoods\Kojo\Process\Listener\CommandInterface;
-use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Kojo\Process\JobInterface;
-use Neighborhoods\Kojo\Process\ListenerInterface;
 use Neighborhoods\Kojo\Process\JobStateChangelogProcessorInterface;
+use Neighborhoods\Kojo\Process\Listener\CommandInterface;
+use Neighborhoods\Kojo\Process\ListenerInterface;
+use Neighborhoods\Kojo\ProcessInterface;
 
 class Strategy extends StrategyAbstract
 {
@@ -38,6 +38,7 @@ class Strategy extends StrategyAbstract
             while (
                 !$this->_getProcessPool()->isFull()
                 && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
+                && $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
                 && $listenerProcess->hasMessages()
             ) {
                 $listenerProcess->processMessage();
@@ -81,7 +82,11 @@ class Strategy extends StrategyAbstract
     protected function _jobProcessExited(JobInterface $jobProcess): Strategy
     {
         $this->_getProcessPool()->freeChildProcess($jobProcess->getProcessId());
-        if ($jobProcess->getExitCode() !== 0 && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+        if (
+            $jobProcess->getExitCode() !== 0
+            && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
+            && $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+        ) {
             $typeCode = $jobProcess->getTypeCode();
             $replacementProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
             $replacementProcess->setThrottle($this->getChildProcessWaitThrottle());
@@ -100,7 +105,11 @@ class Strategy extends StrategyAbstract
 
     public function receivedAlarm(): StrategyInterface
     {
-        if (!$this->_getProcessPool()->isFull() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+        if (
+            !$this->_getProcessPool()->isFull()
+            && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
+            && $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+        ) {
             if ($this->_hasPausedListenerProcess()) {
                 $this->_unPauseListenerProcesses();
             } else {
@@ -134,7 +143,11 @@ class Strategy extends StrategyAbstract
                 }
             }
         }
-        if ($this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+        if (
+            $this->_hasFillProcessTypeCode()
+            && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
+            && $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+        ) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();
                 $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);
@@ -177,6 +190,7 @@ class Strategy extends StrategyAbstract
                     while (
                         !$this->_getProcessPool()->isFull() &&
                         $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses() &&
+                        $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses() &&
                         $listenerProcess->hasMessages()
                     ) {
                         $listenerProcess->processMessage();

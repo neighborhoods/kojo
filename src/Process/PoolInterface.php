@@ -38,4 +38,6 @@ interface PoolInterface extends HandlerInterface
     public function getProcess(): ProcessInterface;
 
     public function canEnvironmentSustainAdditionProcesses(): bool;
+
+    public function shouldEnvironmentCreateAdditionProcesses(): bool;
 }

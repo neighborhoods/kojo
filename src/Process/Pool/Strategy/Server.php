@@ -5,9 +5,9 @@ namespace Neighborhoods\Kojo\Process\Pool\Strategy;
 
 use Neighborhoods\Kojo\Process\Forked\Exception;
 use Neighborhoods\Kojo\Process\Pool\StrategyAbstract;
+use Neighborhoods\Kojo\Process\Pool\StrategyInterface;
 use Neighborhoods\Kojo\Process\Root;
 use Neighborhoods\Kojo\ProcessInterface;
-use Neighborhoods\Kojo\Process\Pool\StrategyInterface;
 
 class Server extends StrategyAbstract
 {
@@ -52,7 +52,10 @@ class Server extends StrategyAbstract
                 $this->_getProcessPool()->getProcess()->exit();
             }
         }
-        if ($this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()) {
+        if (
+            $this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses() &&
+            $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+        ) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();
                 $fillProcess = $this->_getProcessCollection()->getProcessPrototypeClone($fillProcessTypeCode);
