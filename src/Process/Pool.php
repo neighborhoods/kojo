@@ -150,16 +150,23 @@ class Pool extends PoolAbstract implements PoolInterface
         }
 
         if (!$return) {
-            $this->_getLogger()->warning('Pool is draining due to SIGQUIT');
+            $this->_getLogger()->warning(
+                'Pool is draining due to SIGQUIT',
+                ['count_of_child_processes' => $this->getCountOfChildProcesses()]
+            );
         }
 
         return $return;
     }
 
-    protected function propagateSignalToChildren(int $signalNumber)
+    public function propagateSignalToChildren(int $signalNumber) : void
     {
         foreach ($this->_childProcesses as $childProcess) {
-            posix_kill($childProcess->getProcessId(), $signalNumber);
+            $running = posix_kill($childProcess->getProcessId(), $signalNumber);
+            if (!$running){
+                $this->_getLogger()->notice('had zombie',);
+                unset($this->_childProcesses[$childProcess->getProcessId()]);
+            }
         }
     }
 }

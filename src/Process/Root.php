@@ -35,19 +35,21 @@ class Root extends Forked
 
     protected function pollSingletonProcesses() : Root
     {
-        foreach (self::SINGLETON_PROCESSES as $singletonType) {
-            $semaphoreResource = $this->_getSemaphoreResource($singletonType);
+        if ($this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()) {
+            foreach (self::SINGLETON_PROCESSES as $singletonType) {
+                $semaphoreResource = $this->_getSemaphoreResource($singletonType);
 
-            // soft test the lock to spawn a process
-            // that process will go on to attempt to actually acquire the global mutex
-            if ($semaphoreResource->testLock()) {
-                try {
-                    $process = $this->_getProcessCollection()->getProcessPrototypeClone($singletonType);
-                    $this->_getProcessPool()->addChildProcess($process);
-                } catch (Forked\Exception $forkedException) {
-                    // this is fine, another execution environment will spawn this process
-                    // TODO: consider breaking here to stop attempting to spawn other singletons
-                    $this->_getLogger()->debug($forkedException->getMessage(), ['exception' => $forkedException]);
+                // soft test the lock to spawn a process
+                // that process will go on to attempt to actually acquire the global mutex
+                if ($semaphoreResource->testLock()) {
+                    try {
+                        $process = $this->_getProcessCollection()->getProcessPrototypeClone($singletonType);
+                        $this->_getProcessPool()->addChildProcess($process);
+                    } catch (Forked\Exception $forkedException) {
+                        // this is fine, another execution environment will spawn this process
+                        // TODO: consider breaking here to stop attempting to spawn other singletons
+                        $this->_getLogger()->debug($forkedException->getMessage(), ['exception' => $forkedException]);
+                    }
                 }
             }
         }

@@ -15,7 +15,10 @@ class Server extends StrategyAbstract
 
     public function childProcessExited(ProcessInterface $process): StrategyInterface
     {
-        if ($process instanceof Root) {
+        $shouldCreateAdditionProcesses = $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses();
+        $b = $process instanceof Root;
+
+        if ($b && $shouldCreateAdditionProcesses) {
             $this->_getProcessPool()->freeChildProcess($process->getProcessId());
             $rootProcess = $this->_getProcessCollection()->getProcessPrototypeClone($process->getTypeCode());
             try {
@@ -23,6 +26,9 @@ class Server extends StrategyAbstract
             } catch (Exception $forkedException) {
                 $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
             }
+        } elseif ($b && !$shouldCreateAdditionProcesses) {
+            $this->_getLogger()->notice('Root is gone as expected, exiting gracefully');
+            exit(0);
         } else {
             $className = get_class($process);
             throw new \UnexpectedValueException("Unexpected process class[$className].");

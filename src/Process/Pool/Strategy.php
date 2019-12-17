@@ -51,7 +51,9 @@ class Strategy extends StrategyAbstract
                 $typeCode = $listenerProcess->getTypeCode();
                 $replacementListenerProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
                 try {
-                    $this->_getProcessPool()->addChildProcess($replacementListenerProcess);
+                    if ($this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()) {
+                        $this->_getProcessPool()->addChildProcess($replacementListenerProcess);
+                    }
                 } catch (Exception $forkedException) {
                     $this->_pauseListenerProcess($listenerProcess);
                     $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
@@ -124,6 +126,19 @@ class Strategy extends StrategyAbstract
         }
         if (!$this->_getProcessPool()->hasAlarm()) {
             $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
+        }
+
+        if (
+            !$this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+        ) {
+            $countOfChildProcesses = $this->_getProcessPool()->getCountOfChildProcesses();
+
+            if ($countOfChildProcesses === 0) {
+                $this->_getLogger()->notice('Shutting Down');
+                exit(0);
+            } else {
+                $this->_getProcessPool()->propagateSignalToChildren(SIGQUIT);
+            }
         }
 
         return $this;
