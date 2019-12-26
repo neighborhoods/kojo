@@ -153,7 +153,7 @@ class Pool extends PoolAbstract implements PoolInterface
         return $this;
     }
 
-    public function shouldEnvironmentCreateAdditionProcesses() : bool
+    public function shouldEnvironmentCreateAdditionalProcesses() : bool
     {
         $exists = $this->_exists(self::PROP_RECEIVED_SIG_QUIT);
         if ($exists) {
@@ -165,7 +165,7 @@ class Pool extends PoolAbstract implements PoolInterface
         if (!$return) {
             $this->_getLogger()->warning(
                 'Pool is draining due to SIGQUIT',
-                ['count_of_child_processes' => $this->getCountOfChildProcesses()]
+                ['count_of_non_listener_child_processes' => $this->getCountOfNonListenerChildProcesses()]
             );
         }
 

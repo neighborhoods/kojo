@@ -15,10 +15,10 @@ class Server extends StrategyAbstract
 
     public function childProcessExited(ProcessInterface $process): StrategyInterface
     {
-        $shouldCreateAdditionProcesses = $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses();
-        $b = $process instanceof Root;
+        $shouldEnvironmentCreateAdditionalProcesses = $this->_getProcessPool()->shouldEnvironmentCreateAdditionalProcesses();
+        $isRootProcess = $process instanceof Root;
 
-        if ($b && $shouldCreateAdditionProcesses) {
+        if ($isRootProcess && $shouldEnvironmentCreateAdditionalProcesses) {
             $this->_getProcessPool()->freeChildProcess($process->getProcessId());
             $rootProcess = $this->_getProcessCollection()->getProcessPrototypeClone($process->getTypeCode());
             try {
@@ -26,7 +26,7 @@ class Server extends StrategyAbstract
             } catch (Exception $forkedException) {
                 $this->_getLogger()->critical($forkedException->getMessage(), ['exception' => $forkedException]);
             }
-        } elseif ($b && !$shouldCreateAdditionProcesses) {
+        } elseif ($isRootProcess && !$shouldEnvironmentCreateAdditionalProcesses) {
             $this->_getLogger()->notice('Root is gone as expected, exiting gracefully');
             $this->_getProcessPool()->getProcess()->exit();
         } else {
@@ -60,7 +60,7 @@ class Server extends StrategyAbstract
         }
         if (
             $this->_hasFillProcessTypeCode() && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses() &&
-            $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+            $this->_getProcessPool()->shouldEnvironmentCreateAdditionalProcesses()
         ) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();

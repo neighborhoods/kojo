@@ -41,7 +41,7 @@ interface PoolInterface extends HandlerInterface
 
     public function canEnvironmentSustainAdditionProcesses(): bool;
 
-    public function shouldEnvironmentCreateAdditionProcesses(): bool;
+    public function shouldEnvironmentCreateAdditionalProcesses(): bool;
 
     public function propagateSignalToChildren(int $signalNumber) : void;
 }

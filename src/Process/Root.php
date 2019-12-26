@@ -35,7 +35,7 @@ class Root extends Forked
 
     protected function pollSingletonProcesses() : Root
     {
-        if ($this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()) {
+        if ($this->_getProcessPool()->shouldEnvironmentCreateAdditionalProcesses()) {
             foreach (self::SINGLETON_PROCESSES as $singletonType) {
                 $semaphoreResource = $this->_getSemaphoreResource($singletonType);
 

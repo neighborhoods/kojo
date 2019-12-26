@@ -38,7 +38,7 @@ class Strategy extends StrategyAbstract
             while (
                 !$this->_getProcessPool()->isFull()
                 && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
-                && $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+                && $this->_getProcessPool()->shouldEnvironmentCreateAdditionalProcesses()
                 && $listenerProcess->hasMessages()
             ) {
                 $listenerProcess->processMessage();
@@ -51,7 +51,7 @@ class Strategy extends StrategyAbstract
                 $typeCode = $listenerProcess->getTypeCode();
                 $replacementListenerProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
                 try {
-                    if ($this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()) {
+                    if ($this->_getProcessPool()->shouldEnvironmentCreateAdditionalProcesses()) {
                         $this->_getProcessPool()->addChildProcess($replacementListenerProcess);
                     }
                 } catch (Exception $forkedException) {
@@ -87,7 +87,7 @@ class Strategy extends StrategyAbstract
         if (
             $jobProcess->getExitCode() !== 0
             && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
-            && $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+            && $this->_getProcessPool()->shouldEnvironmentCreateAdditionalProcesses()
         ) {
             $typeCode = $jobProcess->getTypeCode();
             $replacementProcess = $this->_getProcessCollection()->getProcessPrototypeClone($typeCode);
@@ -110,7 +110,7 @@ class Strategy extends StrategyAbstract
         if (
             !$this->_getProcessPool()->isFull()
             && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
-            && $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+            && $this->_getProcessPool()->shouldEnvironmentCreateAdditionalProcesses()
         ) {
             if ($this->_hasPausedListenerProcess()) {
                 $this->_unPauseListenerProcesses();
@@ -129,7 +129,7 @@ class Strategy extends StrategyAbstract
         }
 
         if (
-            !$this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+            !$this->_getProcessPool()->shouldEnvironmentCreateAdditionalProcesses()
         ) {
             $countOfNonListenerChildProcesses = $this->_getProcessPool()->getCountOfNonListenerChildProcesses();
 
@@ -161,7 +161,7 @@ class Strategy extends StrategyAbstract
         if (
             $this->_hasFillProcessTypeCode()
             && $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses()
-            && $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
+            && $this->_getProcessPool()->shouldEnvironmentCreateAdditionalProcesses()
         ) {
             while (!$this->_getProcessPool()->isFull()) {
                 $fillProcessTypeCode = $this->_getFillProcessTypeCode();
@@ -205,7 +205,7 @@ class Strategy extends StrategyAbstract
                     while (
                         !$this->_getProcessPool()->isFull() &&
                         $this->_getProcessPool()->canEnvironmentSustainAdditionProcesses() &&
-                        $this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses() &&
+                        $this->_getProcessPool()->shouldEnvironmentCreateAdditionalProcesses() &&
                         $listenerProcess->hasMessages()
                     ) {
                         $listenerProcess->processMessage();
