@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process;
 
+use Neighborhoods\Kojo\Process\Listener\CommandInterface;
 use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 use Neighborhoods\Kojo\ProcessInterface;
@@ -83,6 +84,18 @@ class Pool extends PoolAbstract implements PoolInterface
     public function getCountOfChildProcesses(): int
     {
         return count($this->_childProcesses);
+    }
+
+    public function getCountOfNonListenerChildProcesses() : int
+    {
+        $nonListenerChildProcess = 0;
+
+        foreach ($this->_childProcesses as $childProcess) {
+            if (!($childProcess instanceof ListenerAbstract)) {
+                $nonListenerChildProcess++;
+            }
+        }
+        return $nonListenerChildProcess;
     }
 
     public function addChildProcess(ProcessInterface $childProcess): PoolInterface

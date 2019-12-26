@@ -131,9 +131,9 @@ class Strategy extends StrategyAbstract
         if (
             !$this->_getProcessPool()->shouldEnvironmentCreateAdditionProcesses()
         ) {
-            $countOfChildProcesses = $this->_getProcessPool()->getCountOfChildProcesses();
+            $countOfNonListenerChildProcesses = $this->_getProcessPool()->getCountOfNonListenerChildProcesses();
 
-            if ($countOfChildProcesses === 0) {
+            if ($countOfNonListenerChildProcesses === 0) {
                 $this->_getLogger()->notice('Shutting Down');
                 exit(0);
             } else {

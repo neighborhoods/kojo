@@ -33,6 +33,8 @@ interface PoolInterface extends HandlerInterface
 
     public function getCountOfChildProcesses(): int;
 
+    public function getCountOfNonListenerChildProcesses(): int;
+
     public function setProcess(ProcessInterface $process);
 
     public function getProcess(): ProcessInterface;
