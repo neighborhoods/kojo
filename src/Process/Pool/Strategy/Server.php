@@ -28,7 +28,7 @@ class Server extends StrategyAbstract
             }
         } elseif ($b && !$shouldCreateAdditionProcesses) {
             $this->_getLogger()->notice('Root is gone as expected, exiting gracefully');
-            exit(0);
+            $this->_getProcessPool()->getProcess()->exit();
         } else {
             $className = get_class($process);
             throw new \UnexpectedValueException("Unexpected process class[$className].");
