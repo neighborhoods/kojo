@@ -1,0 +1,4 @@
+services:
+  neighborhoods.kojo.process.pool.logger.message.metadata.host.from_array_builder:
+    class: Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata\Host\FromArrayBuilder
+    shared: false

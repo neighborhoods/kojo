@@ -50,10 +50,10 @@ abstract class ProcessAbstract implements ProcessInterface
     {
         $this->getProcessSignalDispatcher()->registerSignalHandler(SIGCHLD, $this->_getProcessPool(), true);
         $this->getProcessSignalDispatcher()->registerSignalHandler(SIGALRM, $this->_getProcessPool(), true);
+        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGQUIT, $this->_getProcessPool(), false);
         $this->getProcessSignalDispatcher()->registerSignalHandler(SIGTERM, $this, false);
         $this->getProcessSignalDispatcher()->registerSignalHandler(SIGINT, $this, false);
         $this->getProcessSignalDispatcher()->registerSignalHandler(SIGHUP, $this, false);
-        $this->getProcessSignalDispatcher()->registerSignalHandler(SIGQUIT, $this, false);
         $this->getProcessSignalDispatcher()->registerSignalHandler(SIGABRT, $this, false);
         $this->getProcessSignalDispatcher()->registerSignalHandler(SIGUSR1, $this, false);
         $this->_getLogger()->debug('Registered signal handlers.');

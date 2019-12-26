@@ -17,6 +17,28 @@ abstract class PoolAbstract implements PoolInterface
     use Process\AwareTrait;
     use Process\Signal\Dispatcher\AwareTrait;
 
+    const PROP_RECEIVED_SIG_QUIT = 'received_sig_quit';
+
+    public function hasReceivedSigQuit() : bool
+    {
+        if ($this->_hasReceivedSigQuit === null) {
+            throw new \LogicException('PoolAbstract _hasReceivedSigQuit has not been set.');
+        }
+
+        return $this->_hasReceivedSigQuit;
+    }
+
+    public function setHasReceivedSigQuit(bool $hasReceivedSigQuit) : PoolInterface
+    {
+        if ($this->_hasReceivedSigQuit !== false) {
+            throw new \LogicException('PoolAbstract _hasReceivedSigQuit is already set.');
+        }
+
+        $this->_hasReceivedSigQuit = $hasReceivedSigQuit;
+
+        return $this;
+    }
+
     abstract protected function _childExitSignal(InformationInterface $information): PoolInterface;
 
     public function hasAlarm(): bool
@@ -54,7 +76,21 @@ abstract class PoolAbstract implements PoolInterface
 
     public function canEnvironmentSustainAdditionProcesses(): bool
     {
-        return ((float)current(sys_getloadavg()) <= $this->_getProcessPoolStrategy()->getMaximumLoadAverage());
+        $currentLoadAverage = (float)current(sys_getloadavg());
+        $maximumLoadAverage = $this->_getProcessPoolStrategy()->getMaximumLoadAverage();
+        $canEnvironmentSustainAdditionProcesses = $currentLoadAverage <= $maximumLoadAverage;
+
+        if (!$canEnvironmentSustainAdditionProcesses) {
+            $this->_getLogger()->warning(
+                'Kōjō Process Pool is constrained by load average',
+                [
+                    'current_load_average' => $currentLoadAverage,
+                    'maximum_load_average' => $maximumLoadAverage,
+                ]
+            );
+        }
+
+        return $canEnvironmentSustainAdditionProcesses;
     }
 
     protected function _initialize(): PoolInterface

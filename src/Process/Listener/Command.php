@@ -7,6 +7,8 @@ use Neighborhoods\Kojo\Process\Forked;
 use Neighborhoods\Kojo\Process\Forked\Exception;
 use Neighborhoods\Kojo\Process\ListenerAbstract;
 use Neighborhoods\Kojo\Process\ListenerInterface;
+use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
+use Neighborhoods\Kojo\Process\Signal\InformationInterface;
 use Neighborhoods\Kojo\ProcessInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
@@ -83,6 +85,21 @@ class Command extends ListenerAbstract implements CommandInterface
         $this->getProcessSignalDispatcher()->registerSignalHandler(SIGABRT, $this, false);
         $this->getProcessSignalDispatcher()->registerSignalHandler(SIGUSR1, $this, false);
         $this->_getLogger()->debug('Registered signal handlers.');
+
+        return $this;
+    }
+
+    public function handleSignal(InformationInterface $signalInformation): HandlerInterface
+    {
+        $signalNumber = $signalInformation->getSignalNumber();
+        switch ($signalNumber) {
+            case SIGQUIT:
+                $this->_getLogger()->notice('Command Exiting gracefully');
+                $this->exit();
+                break;
+            default:
+                parent::handleSignal($signalInformation);
+        }
 
         return $this;
     }

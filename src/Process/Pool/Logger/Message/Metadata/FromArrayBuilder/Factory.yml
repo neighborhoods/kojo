@@ -1,0 +1,5 @@
+services:
+  neighborhoods.kojo.process.pool.logger.message.metadata.from_array_builder.factory:
+    class: Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata\FromArrayBuilder\Factory
+    calls:
+      - [setProcessPoolLoggerMessageMetadataFromArrayBuilder, ['@neighborhoods.kojo.process.pool.logger.message.metadata.from_array_builder']]

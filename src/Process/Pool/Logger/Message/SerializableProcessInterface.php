@@ -28,7 +28,13 @@ interface SerializableProcessInterface extends \JsonSerializable
 
     public function getMemoryPeakUsageBytes() : int;
 
+    public function setMemoryUsageBytes(int $memory_usage_bytes) : SerializableProcessInterface;
+
     public function getMemoryUsageBytes() : int;
 
+    public function setMemoryPeakUsageBytes(int $memory_peak_usage_bytes) : SerializableProcessInterface;
+
     public function getMemoryLimitBytes() : int;
+
+    public function setMemoryLimitBytes(int $memory_limit_bytes) : SerializableProcessInterface;
 }
