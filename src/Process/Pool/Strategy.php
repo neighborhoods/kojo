@@ -134,7 +134,7 @@ class Strategy extends StrategyAbstract
             $countOfNonListenerChildProcesses = $this->_getProcessPool()->getCountOfNonListenerChildProcesses();
 
             if ($countOfNonListenerChildProcesses === 0) {
-                $this->_getLogger()->notice('Shutting Down');
+                $this->_getLogger()->notice('Root is gracefully shutting down');
                 exit(0);
             } else {
                 $this->_getProcessPool()->propagateSignalToChildren(SIGQUIT);
