@@ -25,16 +25,16 @@ class Uninstall extends CommandAbstract
         return $this;
     }
 
-    public function _execute(): CommandAbstract
+    public function _execute(): int
     {
         if ($this->_isUninstallConfirmedByUser()) {
             $this->_getDbTearDown()->uninstall();
             $this->_getOutput()->writeln('Kōjō has been successfully uninstalled.');
-        } else {
-            $this->_getOutput()->writeln('Kōjō was not uninstalled.');
+            return 0;
         }
 
-        return $this;
+        $this->_getOutput()->writeln('Kōjō was not uninstalled.');
+        return 255;
     }
 
     protected function _isUninstallConfirmedByUser(): bool
