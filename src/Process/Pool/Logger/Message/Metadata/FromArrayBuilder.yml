@@ -1,0 +1,9 @@
+services:
+  neighborhoods.kojo.process.pool.logger.message.metadata.from_array_builder:
+    class: Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata\FromArrayBuilder
+    shared: false
+    calls:
+      - [setProcessPoolLoggerMessageMetadataFactory, ['@neighborhoods.kojo.process.pool.logger.message.metadata.factory']]
+      - [setProcessPoolLoggerMessageSerializableProcessFromArrayBuilderFactory, ['@neighborhoods.kojo.process.pool.logger.message.serializable_process.from_array_builder.factory']]
+      - [setDataJobFromArrayBuilderFactory, ['@neighborhoods.kojo.data.job.from_array_builder.factory']]
+      - [setProcessPoolLoggerMessageMetadataHostFromArrayBuilderFactory, ['@neighborhoods.kojo.process.pool.logger.message.metadata.host.from_array_builder.factory']]

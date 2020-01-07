@@ -10,6 +10,8 @@ services:
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
       - [setTitlePrefix, ['%process.title.prefix%']]
+      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job_state_changelog_processor']]
+      - [setProcessCollection, ['@process.collection-singleton_manager']]
   process.root:
     alias: neighborhoods.kojo.process.root
     public: false

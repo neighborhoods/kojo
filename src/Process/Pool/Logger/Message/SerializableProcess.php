@@ -128,7 +128,16 @@ class SerializableProcess implements SerializableProcessInterface
 
     public function getMemoryUsageBytes() : int
     {
-        return  memory_get_usage();
+        return memory_get_usage();
+    }
+
+    public function setMemoryUsageBytes(int $memory_usage_bytes) : SerializableProcessInterface
+    {
+        if ($this->memory_usage_bytes !== null) {
+            throw new \LogicException('SerializableProcess memory_usage_bytes is already set.');
+        }
+        $this->memory_usage_bytes = $memory_usage_bytes;
+        return $this;
     }
 
     public function getMemoryPeakUsageBytes() : int
@@ -136,17 +145,43 @@ class SerializableProcess implements SerializableProcessInterface
         return memory_get_peak_usage();
     }
 
+    public function setMemoryPeakUsageBytes(int $memory_peak_usage_bytes) : SerializableProcessInterface
+    {
+        if ($this->memory_peak_usage_bytes !== null) {
+            throw new \LogicException('SerializableProcess memory_peak_usage_bytes is already set.');
+        }
+        $this->memory_peak_usage_bytes = $memory_peak_usage_bytes;
+        return $this;
+    }
+
     public function getMemoryLimitBytes() : int
     {
         return $this->dataUnitToBytes(ini_get('memory_limit'));
     }
 
+    public function setMemoryLimitBytes(int $memory_limit_bytes) : SerializableProcessInterface
+    {
+        if ($this->memory_limit_bytes !== null) {
+            throw new \LogicException('SerializableProcess memory_limit_bytes is already set.');
+        }
+        $this->memory_limit_bytes = $memory_limit_bytes;
+        return $this;
+    }
+
     public function jsonSerialize()
     {
         $data = get_object_vars($this);
-        $data[self::KEY_MEMORY_USAGE_BYTES]= $this->getMemoryUsageBytes();
-        $data[self::KEY_MEMORY_PEAK_USAGE_BYTES]= $this->getMemoryPeakUsageBytes();
-        $data[self::KEY_MEMORY_LIMIT_BYTES]= $this->getMemoryLimitBytes();
+
+        if (!isset($data[self::KEY_MEMORY_USAGE_BYTES])) {
+            $data[self::KEY_MEMORY_USAGE_BYTES] = $this->getMemoryUsageBytes();
+        }
+        if (!isset($data[self::KEY_MEMORY_PEAK_USAGE_BYTES])) {
+            $data[self::KEY_MEMORY_PEAK_USAGE_BYTES] = $this->getMemoryPeakUsageBytes();
+        }
+        if (!isset($data[self::KEY_MEMORY_LIMIT_BYTES])) {
+            $data[self::KEY_MEMORY_LIMIT_BYTES] = $this->getMemoryLimitBytes();
+        }
+
         return $data;
     }
 

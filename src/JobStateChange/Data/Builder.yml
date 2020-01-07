@@ -1,0 +1,11 @@
+services:
+  neighborhoods.kojo.job_state_change.data.builder:
+    class: Neighborhoods\Kojo\JobStateChange\Data\Builder
+    public: false
+    shared: false
+    calls:
+      - [setJobStateChangeDataFactory, ['@job_state_change.data.factory']]
+      - [setProcessPoolLoggerMessageMetadataFromArrayBuilderFactory, ['@neighborhoods.kojo.process.pool.logger.message.metadata.from_array_builder.factory']]
+  job_state_change.data.builder:
+    alias: neighborhoods.kojo.job_state_change.data.builder
+    public: false

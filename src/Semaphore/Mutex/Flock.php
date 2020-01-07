@@ -37,6 +37,11 @@ class Flock extends MutexAbstract
         return $this->_hasLock;
     }
 
+    public function testLock(): bool
+    {
+        throw new \LogicException('Mutex::testLock() is unimplemented for filesystem locks');
+    }
+
     public function releaseLock(): MutexInterface
     {
         if ($this->_hasLock === true) {

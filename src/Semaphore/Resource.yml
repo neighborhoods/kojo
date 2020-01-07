@@ -51,3 +51,12 @@ services:
       - [setIsBlocking, [false]]
   semaphore.resource-server:
     alias: neighborhoods.kojo.semaphore.resource-server
+  neighborhoods.kojo.semaphore.resource-job_state_changelog_processor:
+    class: Neighborhoods\Kojo\Semaphore\Resource
+    shared: false
+    calls:
+      - [setResourceName, ['%neighborhoods.kojo.environment.parameters.lock_prefix%/job_state_changelog_processor.lock']]
+      - [setResourcePath, ['neighborhoods/kojo']]
+      - [setIsBlocking, [false]]
+  semaphore.resource-job_state_changelog_processor:
+    alias: neighborhoods.kojo.semaphore.resource-job_state_changelog_processor
