@@ -38,10 +38,9 @@ class Start extends CommandAbstract
             $arguments[] = self::OPT_YSDP . $servicesYmlFilePath;
         }
         pcntl_exec(__DIR__ . '/../../../../../../bin/kojo', $arguments);
-        $this->_getOutput()->writeln('An error occurred trying to start the process pool server.');
 
-        // currently there is no graceful shutdown flow for kojo, it works until terminated
-        // if, in the future, we want such a flow, and want to expose its success via exit code, we will need to make changes here
+        // this code will only get executed if the pcntl_exec() fails, so exit with a non-zero code
+        $this->_getOutput()->writeln('An error occurred trying to start the process pool server.');
         return 255;
     }
 
