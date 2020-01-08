@@ -15,11 +15,11 @@ class Builder implements BuilderInterface
 
     public function build() : JobStateChangeInterface
     {
-        $JobStateChange = $this->getJobStateChangeFactory()->create();
+        $jobStateChange = $this->getJobStateChangeFactory()->create();
         $record = $this->getRecord();
 
-        $JobStateChange->setId((int)$record[JobStateChangeInterface::PROP_ID]);
-        $JobStateChange->setData(
+        $jobStateChange->setId((int)$record[JobStateChangeInterface::PROP_ID]);
+        $jobStateChange->setData(
             $this
                 ->getJobStateChangeDataBuilderFactory()
                 ->create()
@@ -27,7 +27,7 @@ class Builder implements BuilderInterface
                 ->build()
         );
 
-        return $JobStateChange;
+        return $jobStateChange;
     }
 
     protected function getRecord() : array

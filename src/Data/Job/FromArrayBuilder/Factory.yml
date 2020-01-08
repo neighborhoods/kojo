@@ -1,0 +1,5 @@
+services:
+  neighborhoods.kojo.data.job.from_array_builder.factory:
+    class: Neighborhoods\Kojo\Data\Job\FromArrayBuilder\Factory
+    calls:
+      - [setDataJobFromArrayBuilder, ['@neighborhoods.kojo.data.job.from_array_builder']]

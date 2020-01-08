@@ -1,0 +1,5 @@
+services:
+  neighborhoods.kojo.process.pool.logger.message.serializable_process.from_array_builder.factory:
+    class: Neighborhoods\Kojo\Process\Pool\Logger\Message\SerializableProcess\FromArrayBuilder\Factory
+    calls:
+      - [setProcessPoolLoggerMessageSerializableProcessFromArrayBuilder, ['@neighborhoods.kojo.process.pool.logger.message.serializable_process.from_array_builder']]
