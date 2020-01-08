@@ -30,7 +30,7 @@ class Start extends CommandAbstract
         return $this;
     }
 
-    public function _execute(): CommandAbstract
+    public function _execute(): int
     {
         $arguments = [self::OPT_RUN_SERVER];
         $arguments[] = self::OPT_YSDP . $this->_getInput()->getArgument(self::ARG_SERVICES_YML_ROOT_DIRECTORY_PATH);
@@ -38,9 +38,10 @@ class Start extends CommandAbstract
             $arguments[] = self::OPT_YSDP . $servicesYmlFilePath;
         }
         pcntl_exec(__DIR__ . '/../../../../../../bin/kojo', $arguments);
-        $this->_getOutput()->writeln('An error occurred trying to start the process pool server.');
 
-        return $this;
+        // this code will only get executed if the pcntl_exec() fails, so exit with a non-zero code
+        $this->_getOutput()->writeln('An error occurred trying to start the process pool server.');
+        return 255;
     }
 
     protected function _getHelp()
