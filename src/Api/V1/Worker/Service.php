@@ -102,6 +102,8 @@ class Service implements ServiceInterface
                     throw new \UnexpectedValueException('Unexpected value[' . $this->_read(self::PROP_REQUEST) . '].');
             }
             $this->_create(self::PROP_REQUEST_APPLIED, true);
+        } else {
+            throw new \LogicException('A request has already been applied, and cannot be updated');
         }
 
         return $this;
