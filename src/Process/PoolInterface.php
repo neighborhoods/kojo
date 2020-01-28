@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo\Process;
 
 use Neighborhoods\Kojo\Process\Pool\StrategyInterface;
-use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
+use Neighborhoods\Kojo\ProcessInterface;
 
 interface PoolInterface extends HandlerInterface
 {
@@ -33,9 +33,15 @@ interface PoolInterface extends HandlerInterface
 
     public function getCountOfChildProcesses(): int;
 
+    public function getCountOfNonListenerChildProcesses(): int;
+
     public function setProcess(ProcessInterface $process);
 
     public function getProcess(): ProcessInterface;
 
     public function canEnvironmentSustainAdditionProcesses(): bool;
+
+    public function shouldEnvironmentCreateAdditionalProcesses(): bool;
+
+    public function propagateSignalToChildren(int $signalNumber) : void;
 }

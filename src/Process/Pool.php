@@ -3,14 +3,17 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Process;
 
-use Neighborhoods\Kojo\ProcessInterface;
+use Neighborhoods\Kojo\Process\Listener\CommandInterface;
 use Neighborhoods\Kojo\Process\Signal\HandlerInterface;
 use Neighborhoods\Kojo\Process\Signal\InformationInterface;
+use Neighborhoods\Kojo\ProcessInterface;
 
 class Pool extends PoolAbstract implements PoolInterface
 {
     const PROP_STARTED = 'started';
+    /** @var array|ProcessInterface[] */
     protected $_childProcesses = [];
+    protected $_hasReceivedSigQuit = false;
 
     public function start(): PoolInterface
     {
@@ -30,12 +33,18 @@ class Pool extends PoolAbstract implements PoolInterface
             case SIGALRM:
                 $this->_alarmSignal($signalInformation);
                 break;
+            case SIGQUIT:
+                $this->_create(self::PROP_RECEIVED_SIG_QUIT, true);
+                $this->setHasReceivedSigQuit(true);
+                $this->propagateSignalToChildren(SIGQUIT);
+                break;
             default:
                 throw new \UnexpectedValueException("Unexpected signal number[$signalNumber].");
         }
 
         return $this;
     }
+
 
     protected function _childExitSignal(InformationInterface $information): PoolInterface
     {
@@ -75,6 +84,18 @@ class Pool extends PoolAbstract implements PoolInterface
     public function getCountOfChildProcesses(): int
     {
         return count($this->_childProcesses);
+    }
+
+    public function getCountOfNonListenerChildProcesses() : int
+    {
+        $nonListenerChildProcess = 0;
+
+        foreach ($this->_childProcesses as $childProcess) {
+            if (!($childProcess instanceof ListenerAbstract)) {
+                $nonListenerChildProcess++;
+            }
+        }
+        return $nonListenerChildProcess;
     }
 
     public function addChildProcess(ProcessInterface $childProcess): PoolInterface
@@ -130,5 +151,35 @@ class Pool extends PoolAbstract implements PoolInterface
         $this->_childProcesses = [];
 
         return $this;
+    }
+
+    public function shouldEnvironmentCreateAdditionalProcesses() : bool
+    {
+        $exists = $this->_exists(self::PROP_RECEIVED_SIG_QUIT);
+        if ($exists) {
+            $return = !$this->_read(self::PROP_RECEIVED_SIG_QUIT);
+        } else {
+            $return = true;
+        }
+
+        if (!$return) {
+            $this->_getLogger()->warning(
+                'Pool is draining due to SIGQUIT',
+                ['count_of_non_listener_child_processes' => $this->getCountOfNonListenerChildProcesses()]
+            );
+        }
+
+        return $return;
+    }
+
+    public function propagateSignalToChildren(int $signalNumber) : void
+    {
+        foreach ($this->_childProcesses as $childProcess) {
+            $running = posix_kill($childProcess->getProcessId(), $signalNumber);
+            if (!$running){
+                $this->_getLogger()->notice('had zombie',);
+                unset($this->_childProcesses[$childProcess->getProcessId()]);
+            }
+        }
     }
 }
