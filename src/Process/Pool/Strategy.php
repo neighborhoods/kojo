@@ -21,7 +21,7 @@ class Strategy extends StrategyAbstract
         } elseif ($process instanceof ListenerInterface) {
             $this->_listenerProcessExited($process);
         } elseif ($process instanceof JobStateChangelogProcessorInterface) {
-            // A new STL process will be created by the Root when appropriate
+            $this->_jobStateChangelogProcessorProcessExited($process);
         } else {
             $className = get_class($process);
             throw new \UnexpectedValueException("Unexpected process class[$className].");
@@ -93,6 +93,20 @@ class Strategy extends StrategyAbstract
             if (!$this->_getProcessPool()->hasAlarm()) {
                 $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
             }
+        }
+
+        return $this;
+    }
+
+    protected function _jobStateChangelogProcessorProcessExited(JobStateChangelogProcessorInterface $jsclpProcess) : Strategy
+    {
+        $this->_getProcessPool()->freeChildProcess($jsclpProcess->getProcessId());
+
+        // usually this is where we'd spawn a new JSCLP to take the place of the one that exited, but
+        // that is handled by \Neighborhoods\Kojo\Process\Root::pollSingletonProcesses()
+
+        if (!$this->_getProcessPool()->hasAlarm()) {
+            $this->_getProcessPool()->setAlarm($this->getMaxAlarmTime());
         }
 
         return $this;
