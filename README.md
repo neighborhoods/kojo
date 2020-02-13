@@ -23,7 +23,8 @@ If you are using PhpStorm and you have more concurrent Kōjō jobs running than 
 * Stop all local containers and rebuild them
 * Run `ps -auxf` to see if any processes are still running Kōjō with a title like `neighborhoods-kojo: /server[8]/root[22]/job[30]`
     - If yes run `pkill -9 -f kojo` to SIG_KILL all the processes containing the word `kojo`
-* Run docker-compose exec redis redis-cli monitor to monitor
+* Run `docker-compose exec redis redis-cli monitor` to see if Kōjō is creating any activity in redis.
+  * If nothing is streaming by like `"GET" "/neighborhoods/kojo/area_manager/job_state_changelog_processor.lock"` messages then something else is blocking the execution of Kōjō internals. This is typically due to a debugger.
 * Turn off the debugger. Sometimes this will mess with Kojo
 * Check your version of XDEBUG or build.sh (might need to upgrade)
 * Checkout the debugging logs [Troubleshooting common PHP debugging issues - Help | PhpStorm](https://www.jetbrains.com/help/phpstorm/troubleshooting-php-debugging.html#)
