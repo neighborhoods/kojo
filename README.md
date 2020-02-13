@@ -21,7 +21,7 @@ If you are using PhpStorm and you have more concurrent Kōjō jobs running than 
 ## Kojo Hanging Doing Nothing?
 
 * Stop all local containers and rebuild them
-* Run ps-auxf to see if any ports are still running kojo 
+* Run `ps -auxf` to see if any processes are still running Kōjō with a title like `neighborhoods-kojo: /server[8]/root[22]/job[30]`
     - If yes run kill -9 <port_num>
 * Run docker-compose exec redis redis-cli monitor to monitor
 * Turn off the debugger. Sometimes this will mess with Kojo
