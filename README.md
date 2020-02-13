@@ -17,3 +17,13 @@ Real-world use cases for Kōjō and instructions for getting Kōjō up and runni
 XDebug version greater than `xdebug-2.7.0alpha1` is required when trying to debug Kōjō. This version of XDebug resolves issues (https://bugs.xdebug.org/938) caused by the way the Kōjō forks using `pcntl`.
 
 If you are using PhpStorm and you have more concurrent Kōjō jobs running than the `Max. simultaneous connections` defined for your XDebug listener, Kōjō will appear to hang. To avoid this, increase your `Max. simultaneous connections` to the max value of `20` in PhpStorm's preferences under `Languages & Frameworks` > `PHP` > `Debug`, `External connections` section.
+
+## Kojo Hanging Doing Nothing?
+
+* Stop all local containers and rebuild them
+* Run ps-auxf to see if any ports are still running kojo 
+    If yes run kill -9 <port_num>
+* Run docker-compose exec redis redis-cli monitor to monitor
+* Turn off the debugger. Sometime will will mess with Kojo
+* Check your version of XDEBUG or build.sh (might need to upgrade)
+* Checkout the debugging logs [Troubleshooting common PHP debugging issues - Help | PhpStorm](https://www.jetbrains.com/help/phpstorm/troubleshooting-php-debugging.html#)
