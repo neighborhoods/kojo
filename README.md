@@ -24,6 +24,6 @@ If you are using PhpStorm and you have more concurrent Kōjō jobs running than 
 * Run ps-auxf to see if any ports are still running kojo 
     If yes run kill -9 <port_num>
 * Run docker-compose exec redis redis-cli monitor to monitor
-* Turn off the debugger. Sometime will will mess with Kojo
+* Turn off the debugger. Sometimes this will mess with Kojo
 * Check your version of XDEBUG or build.sh (might need to upgrade)
 * Checkout the debugging logs [Troubleshooting common PHP debugging issues - Help | PhpStorm](https://www.jetbrains.com/help/phpstorm/troubleshooting-php-debugging.html#)
