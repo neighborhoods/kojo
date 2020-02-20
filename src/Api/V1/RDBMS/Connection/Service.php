@@ -15,6 +15,10 @@ class Service implements ServiceInterface
 
     public function usePDO(\PDO $PDO): ServiceInterface
     {
+        if ($PDO->getAttribute(\PDO::ATTR_ERRMODE) !== \PDO::ERRMODE_EXCEPTION) {
+            throw new \LogicException('\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION must be used for the RDBMS Connection Service');
+        }
+
         $replacementDecorator = $this->_getDoctrineConnectionDecoratorFactory()->create();
         $replacementDecorator->setId(DecoratorInterface::ID_JOB)->setPDO($PDO);
         $this->_getDoctrineConnectionDecoratorRepository()->replace($replacementDecorator);
