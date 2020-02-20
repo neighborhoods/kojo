@@ -378,14 +378,24 @@ class Job extends Db\Model implements JobInterface, \JsonSerializable
                 $pdo->commit();
             }
         } catch (\Throwable $throwable) {
+            // There are four cases here:
+            // 1: this was caused by a failed database operation, and
+            //      1A: we're in a kojospace transaction, or
+            //      1B: we're in a userspace transaction
+            // 2: this was not a failed database operation, and
+            //      2A: the database operation succeeded before the failure, or
+            //      2B: the database operation has not yet run
+            // For 1A, we should roll back our internal transaction and bubble the throwable up to userspace
+            // For 1B, whether or not we roll back the transaction doesn't matter, as long as we then bubble up the throwable
+            // For 2A, I'm not totally sure how this could have happened, insert and/or transaction commits are the last
+            //      things in this block, so ideally we'd have a way of letting userspace know "database stuff succeeded, so
+            //      you don't need to roll back your transaction, but something else went wrong", but I think it's sufficiently
+            //      edge-y to leave alone
+            // For 2B, just re-throwing seems most appropriate
             if ($isKojospaceTransaction) {
                 $pdo->rollBack();
-            } else {
-                // userspace will need to roll back the transaction itself
-                // if it chooses to commit instead, we might not log this job state change
-                // (if parent::save() succeeds, but the JSCL insert fails)
             }
-            // log
+
             throw $throwable;
         }
 
@@ -396,7 +406,7 @@ class Job extends Db\Model implements JobInterface, \JsonSerializable
     {
         $metadata = $this
             ->getProcessPoolLoggerMessageMetadataBuilder()
-            ->setJob($this) // TODO: discuss this
+            ->setJob($this)
             ->build();
 
         $jobStateChangeData = $this->getJobStateChangeDataFactory()->create();
