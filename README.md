@@ -19,7 +19,7 @@ The `kojo_job_table` database table and the `\Neighborhoods\Kojo\Api\V1\Job\Type
 Each column in the `kojo_job_table` has a specific purpose
 - `type_code`: machine_readable_name used to select and schedule jobs. Typical convention is to use all lowercase with underscores snake_case.
 - `name`: Human-readable name which can be used for display purposes
-- `worker_uri`: Class which will be created for the job
+- `worker_uri`: The fully qualified class name that will be instantiated on job startup
 - `worker_method`: Method of `worker_uri` class that is called when a job is run
 - `can_work_in_parallel`: Defines if multiple instances of job can be worked at the same time across all execution environments
 - `default_importance`:  Defines the priority of the job. Jobs with a higher importance will get scheduled first when resources are constrained
