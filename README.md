@@ -33,23 +33,34 @@ Each column in the `kojo_job_table` has a specific purpose
 ### Example job configurations
 #### Parallel workers
 If you had a Kōjō job designed to read messages from a queue, and wanted to have multiple workers grabbing a message and start doing work to increase throughput you would use the following settings:
-- `can_work_in_parallel`: true - allow multiple jobs to be in `working` state
-- `cron_expression`: '* * * * *' - every 1 minute create new workers to watch the queue
-- `schedule_limit`: 5 - allow up to 5 workers to be in the `working` state
-- `schedule_limit_allowance`: 5 - have 5 workers on standby in `waiting` state to replace the other jobs as they complete
+- `can_work_in_parallel`: true
+  - allow multiple jobs to be in `working` state
+- `cron_expression`: '* * * * *'
+  - every 1 minute create new workers to watch the queue
+- `schedule_limit`: 5
+  - allow up to 5 workers to be in the `working` state
+- `schedule_limit_allowance`: 5
+  - have 5 workers on standby in `waiting` state to replace the other jobs as they complete
 
 #### Singleton worker
 If you needed a worker that had exclusive access to a table or resource, you can use the following setting to ensure that only one worker of this type will be created:
-- `can_work_in_parallel`: false - only 1 worker is allowed in the `working` state
-- `cron_expression`: '0 22 * * 1-5' - create a worker Mon-Fri at 22:00
-- `schedule_limit`: 1 - allow up to 1 workers to be in the `working` state
-- `schedule_limit_allowance`: 1 - have 1 workers on standby in `waiting` state to replace the other job as it completes or fails
+- `can_work_in_parallel`: false
+  - only 1 worker is allowed in the `working` state
+- `cron_expression`: '0 22 * * 1-5'
+  - create a worker Mon-Fri at 22:00
+- `schedule_limit`: 1
+  - allow up to 1 workers to be in the `working` state
+- `schedule_limit_allowance`: 1
+  - have 1 workers on standby in `waiting` state to replace the other job as it completes or fails
 
 #### Dynamically scheduled worker
 If you have worker that is dynamically creating Kōjō workers based on events by using the `\Neighborhoods\Kojo\Api\V1\Worker\ServiceInterface::getNewJobScheduler` API then it needs the have the following settings defined:
-- `cron_expression`: `null` - A `null` value tells Kōjō to never schedule the job based on the current time
-- `schedule_limit`: 0 - this removes the schedule limit and gives that control to the service that is calling the `getNewJobScheduler` method.
-- `schedule_limit_allowance`: 0 - this removes the schedule limit and gives that control to the service that is calling the `getNewJobScheduler` method.
+- `cron_expression`: `null`
+  - A `null` value tells Kōjō to never schedule the job based on the current time
+- `schedule_limit`: 0
+  - this removes the schedule limit and gives that control to the service that is calling the `getNewJobScheduler` method.
+- `schedule_limit_allowance`: 0
+  - this removes the schedule limit and gives that control to the service that is calling the `getNewJobScheduler` method.
 
 ## Debugging Kōjō
 XDebug version greater than `xdebug-2.7.0alpha1` is required when trying to debug Kōjō. This version of XDebug resolves issues (https://bugs.xdebug.org/938) caused by the way the Kōjō forks using `pcntl`.
