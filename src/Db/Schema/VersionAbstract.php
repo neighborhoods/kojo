@@ -35,6 +35,14 @@ abstract class VersionAbstract implements VersionInterface
                 }
                 $connection->getSchemaManager()->createTable($this->_getCreateTable());
                 $connection->commit();
+            } catch (\Doctrine\DBAL\Schema\SchemaException $schemaException) {
+                // if this migration process lost the race in the critical region,
+                // this migration has already been applied, we can gracefully move on
+                if ($schemaException->getTrace()[0]['function'] === 'tableAlreadyExists') {
+                    $connection->rollBack();
+                } else {
+                    throw $schemaException;
+                }
             } catch (\Throwable $throwable) {
                 $connection->rollBack();
                 throw $throwable;
