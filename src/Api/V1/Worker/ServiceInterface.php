@@ -30,6 +30,7 @@ interface ServiceInterface
 
     public function getNewJobScheduler(): SchedulerInterface;
 
+    /** @deprecated  */
     public function reload(): ServiceInterface;
 
     public function getTimesCrashed(): int;
