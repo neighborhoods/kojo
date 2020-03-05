@@ -8,6 +8,7 @@ use Neighborhoods\Kojo\ProcessAbstract;
 use Neighborhoods\Kojo\ProcessInterface;
 use Neighborhoods\Kojo\Semaphore;
 use Neighborhoods\Pylon\Data\Property;
+use Neighborhoods\Kojo\Db;
 
 class Server extends ProcessAbstract implements ServerInterface
 {
@@ -15,6 +16,7 @@ class Server extends ProcessAbstract implements ServerInterface
     use Logger\AwareTrait;
     use Semaphore\AwareTrait;
     use Semaphore\Resource\Factory\AwareTrait;
+    use Db\Setup\AwareTrait;
 
     public const SERVER_SEMAPHORE_RESOURCE_NAME = 'server';
 
@@ -23,8 +25,10 @@ class Server extends ProcessAbstract implements ServerInterface
         $this->_initialize();
         $this->_getLogger()->debug('Starting process pool server...');
         if ($this->_getSemaphore()->testAndSetLock($this->_getServerSemaphoreResource())) {
-            $this->_getLogger()->debug('Process pool server started.');
+            $this->_getDbSetup()->install();
+            $this->_getLogger()->debug('Migrations run.');
             $this->_getProcessPool()->start();
+            $this->_getLogger()->debug('Process pool server started.');
             while (true) {
                 $this->getProcessSignalDispatcher()->processBufferedSignals();
                 sleep(1);
