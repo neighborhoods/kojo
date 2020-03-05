@@ -25,10 +25,10 @@ class Server extends ProcessAbstract implements ServerInterface
         $this->_initialize();
         $this->_getLogger()->debug('Starting process pool server...');
         if ($this->_getSemaphore()->testAndSetLock($this->_getServerSemaphoreResource())) {
+            $this->_getLogger()->debug('Process pool server started.');
             $this->_getDbSetup()->install();
             $this->_getLogger()->debug('Migrations run.');
             $this->_getProcessPool()->start();
-            $this->_getLogger()->debug('Process pool server started.');
             while (true) {
                 $this->getProcessSignalDispatcher()->processBufferedSignals();
                 sleep(1);
