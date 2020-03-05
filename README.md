@@ -23,7 +23,7 @@ Each column in the `kojo_job_table` has a specific purpose
 - `worker_method`: Method of `worker_uri` class that is called when a job is run
 - `can_work_in_parallel`: Defines if multiple instances of job can be worked at the same time across all execution environments
 - `default_importance`:  Defines the priority of the job. Jobs with a higher importance will get scheduled first when resources are constrained
-- `cron_expression`: [crontab](https://crontab.guru/) formatted expression of how often the job will be added to the schedule, or null if the job is supposed to be dynamically scheduled
+- `cron_expression`: [crontab](https://crontab.guru/) formatted expression of how often the job will be scheduled, or null if the job is supposed to be dynamically scheduled
 - `schedule_limit`:  Number of concurrent jobs allowed to be in a `working` state at the same time.
 - `schedule_limit_allowance`: Number of jobs allowed to be in a `waiting` state at the same time.
 - `is_enabled`: Turn the job on and off.
