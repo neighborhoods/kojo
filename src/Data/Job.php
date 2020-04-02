@@ -17,6 +17,8 @@ class Job extends Db\Model implements JobInterface, \JsonSerializable
     use JobStateChange\Repository\AwareTrait;
     use Metadata\Builder\AwareTrait;
 
+    private $shouldLogJobStateChanges;
+
     public function __construct()
     {
         $this->setTableName(JobInterface::TABLE_NAME);
@@ -340,7 +342,8 @@ class Job extends Db\Model implements JobInterface, \JsonSerializable
             // if state didn't change, we don't have to override any behavior
             !array_key_exists(JobInterface::FIELD_NAME_ASSIGNED_STATE, $this->_readChangedPersistentProperties()) ||
             // because of how State\Service works, often assigned state will show up as changed, when really it hasn't
-            $this->getAssignedState() === $this->getPreviousState()
+            $this->getAssignedState() === $this->getPreviousState() ||
+            !$this->shouldLogJobStateChanges()
         ) {
             return parent::save();
         }
@@ -425,5 +428,22 @@ class Job extends Db\Model implements JobInterface, \JsonSerializable
     public function jsonSerialize()
     {
         return $this->_persistentProperties;
+    }
+
+    private function shouldLogJobStateChanges(): bool
+    {
+        if ($this->shouldLogJobStateChanges === null) {
+            throw new \LogicException('Job shouldLogJobStateChanges has not been set.');
+        }
+        return $this->shouldLogJobStateChanges;
+    }
+
+    public function setShouldLogJobStateChanges(bool $shouldLogJobStateChanges) : JobInterface
+    {
+        if ($this->shouldLogJobStateChanges !== null) {
+            throw new \LogicException('Job shouldLogJobStateChanges is already set.');
+        }
+        $this->shouldLogJobStateChanges = $shouldLogJobStateChanges;
+        return $this;
     }
 }

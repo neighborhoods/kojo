@@ -1,3 +1,5 @@
+parameters:
+  neighborhoods.kojo.data.job.should_log_job_state_changes: false
 services:
   neighborhoods.kojo.data.job:
     class: Neighborhoods\Kojo\Data\Job
@@ -8,6 +10,7 @@ services:
       - [setJobStateChangeDataFactory, ['@neighborhoods.kojo.job_state_change.data.factory']]
       - [setJobStateChangeRepository, ['@neighborhoods.kojo.job_state_change.repository']]
       - [setProcessPoolLoggerMessageMetadataBuilder, ['@neighborhoods.kojo.process.pool.logger.message.metadata.builder']]
+      - [setShouldLogJobStateChanges, ['%neighborhoods.kojo.data.job.should_log_job_state_changes%']]
   data.job:
     alias: neighborhoods.kojo.data.job
     public: false
