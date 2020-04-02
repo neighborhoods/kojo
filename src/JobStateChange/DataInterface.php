@@ -5,7 +5,7 @@ namespace Neighborhoods\Kojo\JobStateChange;
 
 use Neighborhoods\Kojo\Process\Pool\Logger\Message;
 
-interface DataInterface
+interface DataInterface extends \JsonSerializable
 {
     public const PROP_OLD_STATE = 'old_state';
     public const PROP_NEW_STATE = 'new_state';

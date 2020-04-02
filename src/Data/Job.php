@@ -3,11 +3,22 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Data;
 
-use Neighborhoods\Kojo\Db\Model;
+use Neighborhoods\Kojo\Db;
+use Neighborhoods\Kojo\Doctrine\Connection\DecoratorInterface;
+use Neighborhoods\Kojo\JobStateChangeInterface;
 use Neighborhoods\Pylon\TimeInterface;
+use Neighborhoods\Kojo\JobStateChange;
+use Neighborhoods\Kojo\Process\Pool\Logger\Message\Metadata;
 
-class Job extends Model implements JobInterface, \JsonSerializable
+class Job extends Db\Model implements JobInterface, \JsonSerializable
 {
+    use JobStateChange\Factory\AwareTrait;
+    use JobStateChange\Data\Factory\AwareTrait;
+    use JobStateChange\Repository\AwareTrait;
+    use Metadata\Builder\AwareTrait;
+
+    private $shouldLogJobStateChanges;
+
     public function __construct()
     {
         $this->setTableName(JobInterface::TABLE_NAME);
@@ -325,8 +336,114 @@ class Job extends Model implements JobInterface, \JsonSerializable
         return new \DateTime($deleteAfterDateTimeString);
     }
 
+    public function save(): Db\ModelInterface
+    {
+        if (
+            // if state didn't change, we don't have to override any behavior
+            !array_key_exists(JobInterface::FIELD_NAME_ASSIGNED_STATE, $this->_readChangedPersistentProperties()) ||
+            // because of how State\Service works, often assigned state will show up as changed, when really it hasn't
+            $this->getAssignedState() === $this->getPreviousState() ||
+            !$this->shouldLogJobStateChanges()
+        ) {
+            return parent::save();
+        }
+
+        // Db\Models have to use a workaround to get RDBMS bigints to work with doctrine
+        // this code extends that workaround to apply to the job we're about to serialize
+        if ($this->hasId()) {
+            $this->_createOrUpdatePersistentProperty($this->getIdPropertyName(), $this->getId());
+        }
+
+        // do this outside the transaction to marginally reduce the chance of failure
+        $jobStateChange = $this->createJobStateChange();
+
+        $connection = $this->_getDoctrineConnectionDecoratorRepository()->getConnection(DecoratorInterface::ID_JOB);
+        /** @var \PDO $pdo */
+        $pdo = $connection->getWrappedConnection();
+
+        $isKojospaceTransaction = false;
+
+        if ($pdo->inTransaction()) {
+            // if we're already in a transaction (i.e. one started by userspace), we can proceed, knowing that
+            // if userspace rolls back the transaction, it'll roll back the job state change as well
+        } else {
+            // otherwise, start a transaction in kojospace to make sure the JobStateChangelogProcessor doesn't see
+            // the JobStateChange unless the actual job transitions successfully
+            $pdo->beginTransaction();
+            $isKojospaceTransaction = true;
+        }
+
+        try {
+            parent::save();
+            $this->getJobStateChangeRepository()->insertUsingConnection($jobStateChange, $connection);
+
+            if ($isKojospaceTransaction) {
+                $pdo->commit();
+            }
+        } catch (\Throwable $throwable) {
+            // There are four cases here:
+            // 1: this was caused by a failed database operation, and
+            //      1A: we're in a kojospace transaction, or
+            //      1B: we're in a userspace transaction
+            // 2: this was not a failed database operation, and
+            //      2A: the database operation succeeded before the failure, or
+            //      2B: the database operation has not yet run
+            // For 1A, we should roll back our internal transaction and bubble the throwable up to userspace
+            // For 1B, whether or not we roll back the transaction doesn't matter, as long as we then bubble up the throwable
+            // For 2A, I'm not totally sure how this could have happened, insert and/or transaction commits are the last
+            //      things in this block, so ideally we'd have a way of letting userspace know "database stuff succeeded, so
+            //      you don't need to roll back your transaction, but something else went wrong", but I think it's sufficiently
+            //      edge-y to leave alone
+            // For 2B, just re-throwing seems most appropriate
+            if ($isKojospaceTransaction) {
+                $pdo->rollBack();
+            }
+
+            throw $throwable;
+        }
+
+        return $this;
+    }
+
+    protected function createJobStateChange() : JobStateChangeInterface
+    {
+        $metadata = $this
+            ->getProcessPoolLoggerMessageMetadataBuilder()
+            ->setJob($this)
+            ->build();
+
+        $jobStateChangeData = $this->getJobStateChangeDataFactory()->create();
+        $jobStateChangeData
+            ->setOldState($this->getPreviousState())
+            ->setNewState($this->getAssignedState())
+            ->setTimestamp(new \DateTime())
+            ->setMetadata($metadata);
+
+        $jobStateChange = $this->getJobStateChangeFactory()->create();
+        $jobStateChange->setData($jobStateChangeData);
+
+        return $jobStateChange;
+    }
+
     public function jsonSerialize()
     {
         return $this->_persistentProperties;
+    }
+
+    private function shouldLogJobStateChanges(): bool
+    {
+        if ($this->shouldLogJobStateChanges === null) {
+            throw new \LogicException('Job shouldLogJobStateChanges has not been set.');
+        }
+        return $this->shouldLogJobStateChanges;
+    }
+
+    public function setShouldLogJobStateChanges(bool $shouldLogJobStateChanges) : JobInterface
+    {
+        if ($this->shouldLogJobStateChanges !== null) {
+            throw new \LogicException('Job shouldLogJobStateChanges is already set.');
+        }
+        $this->shouldLogJobStateChanges = $shouldLogJobStateChanges;
+        return $this;
     }
 }
