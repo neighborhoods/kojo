@@ -8,6 +8,7 @@ services:
       - [setSemaphore, ['@semaphore']]
       - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-server']]
       - [setProcessPoolFactory, ['@process.pool.factory-server']]
+      - [setDbSetup, ['@db.setup']]
       - [setTypeCode, ['server']]
       - [setTerminationSignalNumber, ['@=constant("SIGTERM")']]
       - [setUuidMaximumInteger, [9999999999]]
