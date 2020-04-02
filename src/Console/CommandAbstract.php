@@ -55,9 +55,7 @@ abstract class CommandAbstract extends Command
         if ($this->_getInput()->getOption(self::OPT_ENABLE_SPLASH_ART)) {
             $this->_writeSplashArt();
         }
-        $this->_execute();
-
-        return $this;
+        return $this->_execute();
     }
 
     protected function _setOutput(OutputInterface $output): CommandAbstract
@@ -84,7 +82,7 @@ abstract class CommandAbstract extends Command
         return $this->_read(InputInterface::class);
     }
 
-    abstract function _execute(): CommandAbstract;
+    abstract function _execute(): int;
 
     protected function _writeSplashArt(): CommandAbstract
     {

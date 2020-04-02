@@ -47,7 +47,9 @@ class Root extends Forked
             if ($semaphoreResource->testLock()) {
                 try {
                     $process = $this->_getProcessCollection()->getProcessPrototypeClone($singletonType);
-                    $this->_getProcessPool()->addChildProcess($process);
+                    if (!$this->_getProcessPool()->isFull()) {
+                        $this->_getProcessPool()->addChildProcess($process);
+                    }
                 } catch (Forked\Exception $forkedException) {
                     // this is fine, another execution environment will spawn this process
                     // TODO: consider breaking here to stop attempting to spawn other singletons

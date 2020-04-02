@@ -20,12 +20,12 @@ class Install extends CommandAbstract
         return $this;
     }
 
-    public function _execute(): CommandAbstract
+    public function _execute(): int
     {
         $this->_getDbSetup()->install();
         $this->_getOutput()->writeln('Kōjō has been successfully installed!');
 
-        return $this;
+        return 0;
     }
 
     protected function _getHelp(): string
