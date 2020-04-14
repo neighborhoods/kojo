@@ -1,3 +1,6 @@
+parameters:
+  neighborhoods.kojo.process.job_state_changelog_processor.batch_size: 50
+  neighborhoods.kojo.process.job_state_changelog_processor.num_max_iterations: 100
 services:
   neighborhoods.kojo.process.job_state_changelog_processor:
     class: Neighborhoods\Kojo\Process\JobStateChangelogProcessor
@@ -12,5 +15,8 @@ services:
       - [setProcessPoolFactory, ['@process.pool.factory-job_state_changelog_processor']]
       - [setTitlePrefix, ['%process.title.prefix%']]
       - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job_state_changelog_processor']]
+      - [setJobStateChangeRepository, ['@neighborhoods.kojo.job_state_change.repository']]
+      - [setBatchSize, ['%neighborhoods.kojo.process.job_state_changelog_processor.batch_size%']]
+      - [setNumMaxIterations, ['%neighborhoods.kojo.process.job_state_changelog_processor.num_max_iterations%']]
   process.job_state_changelog_processor:
     alias: neighborhoods.kojo.process.job_state_changelog_processor

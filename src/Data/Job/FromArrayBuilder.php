@@ -16,18 +16,18 @@ class FromArrayBuilder implements FromArrayBuilderInterface
         $job = new Data\Job();
         $record = $this->getRecord();
 
-        $job->setId($record['kojo_job_id']);
+        $job->setId((int)$record['kojo_job_id']);
         $job->setAssignedState($record['assigned_state']);
         $job->setNextStateRequest($record['next_state_request']);
         $job->setTypeCode($record['type_code']);
         $job->setName($record['name']);
-        $job->setPriority($record['priority']);
-        $job->setImportance($record['importance']);
+        $job->setPriority((int)$record['priority']);
+        $job->setImportance((int)$record['importance']);
         $job->setWorkAtDateTime(new \DateTime($record['work_at_date_time']));
         $job->setPreviousState($record['previous_state']);
         $job->setWorkerUri($record['worker_uri']);
         $job->setWorkerMethod($record['worker_method']);
-        $job->setCanWorkInParallel($record['can_work_in_parallel']);
+        $job->setCanWorkInParallel((bool)$record['can_work_in_parallel']);
         $job->setLastTransitionInDateTime(new \DateTime($record['last_transition_date_time']));
         $job->setLastTransitionInMicroTime(
             \DateTime::createFromFormat(
@@ -39,11 +39,11 @@ class FromArrayBuilder implements FromArrayBuilderInterface
                 )
             )
         );
-        $job->setTimesWorked($record['times_worked']);
-        $job->setTimesRetried($record['times_retried']);
-        $job->setTimesHeld($record['times_held']);
-        $job->setTimesCrashed($record['times_crashed']);
-        $job->setTimesPanicked($record['times_panicked']);
+        $job->setTimesWorked((int)$record['times_worked']);
+        $job->setTimesRetried((int)$record['times_retried']);
+        $job->setTimesHeld((int)$record['times_held']);
+        $job->setTimesCrashed((int)$record['times_crashed']);
+        $job->setTimesPanicked((int)$record['times_panicked']);
         $job->setCreatedAtDateTime(new \DateTime($record['created_at_date_time']));
 
         if (isset($record['completed_at_date_time'])) {

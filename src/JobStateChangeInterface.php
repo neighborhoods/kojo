@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo;
 
-interface JobStateChangeInterface
+interface JobStateChangeInterface extends \JsonSerializable
 {
     public const PROP_ID = 'id';
     public const PROP_DATA = 'data';
