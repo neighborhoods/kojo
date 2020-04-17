@@ -15,6 +15,7 @@ interface ServiceInterface
     const STATE_HOLD                                 = 'hold';
     const STATE_PANICKED                             = 'panicked';
     const STATE_CRASHED                              = 'crashed';
+    const STATE_ENVIRONMENT_TERMINATED               = 'environment_terminated';
     const STATE_COMPLETE_SUCCESS                     = 'complete_success';
     const STATE_COMPLETE_TERMINATED                  = 'complete_terminated';
     const STATE_COMPLETE_FAILED                      = 'complete_failed';
@@ -35,6 +36,8 @@ interface ServiceInterface
     public function requestCompleteFailed(): ServiceInterface;
 
     public function requestCrashed(): ServiceInterface;
+
+    public function requestEnvironmentTerminated(): ServiceInterface;
 
     public function requestPanicked(): ServiceInterface;
 
