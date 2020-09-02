@@ -26,7 +26,7 @@ class Root extends Forked
 
         while (true) {
             $this->getProcessSignalDispatcher()->processBufferedSignals();
-            $this->pollSingletonProcesses();
+            // $this->pollSingletonProcesses();
             sleep(1);
         }
 
