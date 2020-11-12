@@ -20,6 +20,10 @@ class Builder implements BuilderInterface
 
     public const CONTEXT_KEY_EXCEPTION = 'exception';
     protected const LOG_DATE_TIME_FORMAT = 'D, d M y H:i:s.u T';
+    // docker doesn't handle >16KB stdout lines very well, this limits the
+    // length of the the `message` and `context.exception.message` values,
+    // leaving a buffer for the rest of the line
+    protected const MAX_MESSAGE_LENGTH = 6000;
 
     /** @var ProcessInterface */
     protected $process;
@@ -41,8 +45,11 @@ class Builder implements BuilderInterface
         $referenceTime = $this->_getTime()->getNow();
         $logMessage->setTime($referenceTime->format(self::LOG_DATE_TIME_FORMAT));
         $logMessage->setLevel($this->getLevel());
-        $logMessage->setMessage($this->getMessage());
         $context = $this->getContext();
+
+        $actualMessage = $this->getMessage();
+        $truncatedMessage = substr($actualMessage, 0, self::MAX_MESSAGE_LENGTH);
+        $logMessage->setMessage($truncatedMessage);
 
         if (
             array_key_exists(self::CONTEXT_KEY_EXCEPTION, $context) &&
@@ -51,6 +58,11 @@ class Builder implements BuilderInterface
         ) {
             $normalizedException = (new NormalizerFormatter())->format([$context[self::CONTEXT_KEY_EXCEPTION]]);
             unset($context[self::CONTEXT_KEY_EXCEPTION]);
+
+            $exceptionMessage = $normalizedException[0]['message'];
+            $truncatedExceptionMessage = substr($exceptionMessage, 0, self::MAX_MESSAGE_LENGTH);
+            $normalizedException[0]['message'] = $truncatedExceptionMessage;
+
             $context[self::CONTEXT_KEY_EXCEPTION] = $normalizedException[0];
         }
 
