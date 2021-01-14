@@ -6,6 +6,13 @@ services:
       - [setIsBlocking, [false]]
   semaphore.resource-job:
     alias: neighborhoods.kojo.semaphore.resource-job
+  neighborhoods.kojo.semaphore.resource-user_defined:
+    class: Neighborhoods\Kojo\Semaphore\Resource
+    shared: false
+    calls:
+      - [setIsBlocking, [false]]
+  semaphore.resource-user_defined:
+    alias: neighborhoods.kojo.semaphore.resource-user_defined
   neighborhoods.kojo.semaphore.resource-maintainer_delete:
     class: Neighborhoods\Kojo\Semaphore\Resource
     shared: false

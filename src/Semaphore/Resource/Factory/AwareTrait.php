@@ -61,4 +61,17 @@ trait AwareTrait
 
         return $jobSemaphoreResource;
     }
+
+    protected function _getNewUserDefinedOwnerResource(string $resourceName): ResourceInterface
+    {
+        $semaphoreResource = $this->_getSemaphoreResourceFactory('user_defined')->create();
+        $resourceOwner = $semaphoreResource->getResourceOwner();
+        if ($resourceOwner instanceof Semaphore\Resource\Owner\UserDefinedInterface) {
+            $resourceOwner->setResourceName($resourceName);
+        } else {
+            throw new \UnexpectedValueException('Resource owner is an unexpected type.');
+        }
+
+        return $semaphoreResource;
+    }
 }

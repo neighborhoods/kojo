@@ -11,6 +11,7 @@ use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Api;
 use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Service\Create;
+use Neighborhoods\Kojo\Semaphore;
 
 class Service implements ServiceInterface
 {
@@ -24,6 +25,7 @@ class Service implements ServiceInterface
     use Create\Factory\AwareTrait;
     use Defensive\AwareTrait;
     use Apm\NewRelic\AwareTrait;
+    use Semaphore\Resource\Factory\AwareTrait;
     protected const PROP_REQUEST = 'request';
     protected const PROP_RETRY_DATE_TIME = 'retry_date_time';
     protected const REQUEST_RETRY = 'retry';
@@ -145,5 +147,23 @@ class Service implements ServiceInterface
     public function getNewRelic(): Apm\NewRelicInterface
     {
         return $this->_getApmNewRelic();
+    }
+
+    public function tryAcquireUserDefinedMutex(string $resourceName) : bool
+    {
+        $userDefinedSemaphoreResource = $this->_getNewUserDefinedResourceOwnerResource($resourceName);
+
+        return $userDefinedSemaphoreResource->testAndSetLock();
+    }
+
+    public function releaseUserDefinedMutex(string $resourceName) : ServiceInterface
+    {
+        $userDefinedSemaphoreResource = $this->_getNewUserDefinedResourceOwnerResource($resourceName);
+
+        if ($userDefinedSemaphoreResource->hasLock()) {
+            $userDefinedSemaphoreResource->releaseLock();
+        }
+
+        return $this;
     }
 }

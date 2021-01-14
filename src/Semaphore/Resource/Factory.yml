@@ -9,6 +9,16 @@ services:
       - [setSemaphore, ['@semaphore']]
   semaphore.resource.factory-job:
     alias: neighborhoods.kojo.semaphore.resource.factory-job
+  neighborhoods.kojo.semaphore.resource.factory-user_defined:
+    class: Neighborhoods\Kojo\Semaphore\Resource\Factory
+    calls:
+      - [setName, ['user_defined']]
+      - [setSemaphoreResource, ['@semaphore.resource-user_defined']]
+      - [setSemaphoreResourceOwner, ['@semaphore.resource.owner.user_defined']]
+      - [setMutex, ['@semaphore.mutex.redis']]
+      - [setSemaphore, ['@semaphore']]
+  semaphore.resource.factory-user_defined:
+    alias: neighborhoods.kojo.semaphore.resource.factory-user_defined
   neighborhoods.kojo.semaphore.resource.factory-maintainer_delete:
     class: Neighborhoods\Kojo\Semaphore\Resource\Factory
     calls:

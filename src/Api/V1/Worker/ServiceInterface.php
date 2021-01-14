@@ -40,6 +40,10 @@ interface ServiceInterface
 
     public function getNewRelic(): Apm\NewRelicInterface;
 
+    public function tryAcquireUserDefinedMutex(string $resourceName) : bool;
+
+    public function releaseUserDefinedMutex(string $resourceName) : ServiceInterface;
+
     /** @injected:configuration */
     public function setServiceUpdateRetryFactory(Retry\FactoryInterface $updateRetryFactory);
 
