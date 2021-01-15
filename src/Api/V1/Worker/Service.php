@@ -151,14 +151,14 @@ class Service implements ServiceInterface
 
     public function tryAcquireUserDefinedMutex(string $resourceName) : bool
     {
-        $userDefinedSemaphoreResource = $this->_getNewUserDefinedResourceOwnerResource($resourceName);
+        $userDefinedSemaphoreResource = $this->_getNewUserDefinedOwnerResource($resourceName);
 
         return $userDefinedSemaphoreResource->testAndSetLock();
     }
 
     public function releaseUserDefinedMutex(string $resourceName) : ServiceInterface
     {
-        $userDefinedSemaphoreResource = $this->_getNewUserDefinedResourceOwnerResource($resourceName);
+        $userDefinedSemaphoreResource = $this->_getNewUserDefinedOwnerResource($resourceName);
 
         if ($userDefinedSemaphoreResource->hasLock()) {
             $userDefinedSemaphoreResource->releaseLock();

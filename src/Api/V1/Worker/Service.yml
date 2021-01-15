@@ -10,5 +10,6 @@ services:
       - [setApiV1JobSchedulerFactory, ['@api.v1.job.scheduler.factory']]
       - [setApiV1Logger, ['@api.v1.logger']]
       - [setApmNewRelic, ['@apm.new_relic']]
+      - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-user_defined']]
   api.v1.worker.service:
     alias: neighborhoods.kojo.api.v1.worker.service
