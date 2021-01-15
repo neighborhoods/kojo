@@ -1,10 +1,9 @@
 parameters:
-  Neighborhoods\Kojo\Semaphore\Resource\Owner\UserDefinedInterface.resource_name_space: '%neighborhoods.kojo.environment.parameters.lock_prefix%/'
+  Neighborhoods\Kojo\Semaphore\Resource\Owner\UserDefinedInterface.resource_name_space: '%neighborhoods.kojo.environment.parameters.lock_prefix%'
 services:
   neighborhoods.kojo.semaphore.resource.owner.user_defined:
     class: Neighborhoods\Kojo\Semaphore\Resource\Owner\UserDefined
     calls:
-      - [setResourceNameSpace, ['%Neighborhoods\Kojo\Semaphore\Resource\Owner\UserDefinedInterface.resource_name_space%']]
-      - [setResourcePath, ['user_defined_resource']]
+      - [setResourcePath, ['%Neighborhoods\Kojo\Semaphore\Resource\Owner\UserDefinedInterface.resource_name_space%/user_defined_resource']]
   semaphore.resource.owner.user_defined:
     alias: neighborhoods.kojo.semaphore.resource.owner.user_defined
