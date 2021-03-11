@@ -41,6 +41,11 @@
         "phpunit/phpunit": "^7.0",
         "phpunit/dbunit": "^4.0"
     },
+    "suggest": {
+        "neighborhoods/kojo-worker-decorator-component": "useful PDO and exception decorators for making well-behaved Kōjō jobs",
+        "neighborhoods/kojo-worker-decorator-component-fitness": "examples on how to use the KojoWorkerDecoratorComponent",
+        "neighborhoods/kojo-phinx-templates": "Database migrations and seeds for defining and creating Kōjō jobs"
+    },
     "bin": [
         "bin/kojo",
         "scaffolding/bin/scaffolding.php"
