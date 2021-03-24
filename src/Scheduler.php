@@ -21,6 +21,9 @@ class Scheduler implements SchedulerInterface
     use Semaphore\Resource\Factory\AwareTrait;
     use Logger\AwareTrait;
 
+    /** @var string */
+    private $disabledJobTypeLogLevel;
+
     public function scheduleStaticJobs(): SchedulerInterface
     {
         if ($this->_getSemaphoreResource(self::SEMAPHORE_RESOURCE_NAME_SCHEDULE)->testAndSetLock()) {
@@ -46,13 +49,7 @@ class Scheduler implements SchedulerInterface
         $this->_getSchedulerJobCollection()->setReferenceDateTime($this->_getTime()->getNow());
         foreach ($this->_getSchedulerJobTypeCollection()->getIterator() as $jobType) {
             if (!$jobType->getIsEnabled()) {
-                $this->_getLogger()->warning(
-                    sprintf(
-                        'Scheduler skipping disabled job type [%s]',
-                        $jobType->getCode()
-                    ),
-                    ['disabled_job_type_skipped' => $jobType->getCode()]
-                );
+                $this->logDisabledJobTypeSkippedEvent($jobType->getCode());
                 continue;
             }
             $cronExpressionString = $jobType->getCronExpression();
@@ -74,6 +71,43 @@ class Scheduler implements SchedulerInterface
             $this->_getSchedulerCache()->cacheScheduledMinutes($unscheduledDateTime);
         }
 
+        return $this;
+    }
+
+    private function logDisabledJobTypeSkippedEvent(string $jobTypeCode) : SchedulerInterface
+    {
+        $logLevel = $this->getDisabledJobTypeLogLevel();
+
+        if (!method_exists(\Psr\Log\LoggerInterface::class, $logLevel)) {
+            throw new \UnexpectedValueException("Unexpected value for disabled job type log level [$logLevel]");
+        }
+
+        $this->_getLogger()->log(
+            $logLevel,
+            sprintf(
+                'Scheduler skipping disabled job type [%s]',
+                $jobTypeCode
+            ),
+            ['disabled_job_type_skipped' => $jobTypeCode]
+        );
+
+        return $this;
+    }
+
+    private function getDisabledJobTypeLogLevel() : string
+    {
+        if ($this->disabledJobTypeLogLevel === null) {
+            throw new \LogicException('Scheduler disabledJobTypeLogLevel has not been set.');
+        }
+        return $this->disabledJobTypeLogLevel;
+    }
+
+    public function setDisabledJobTypeLogLevel(string $disabledJobTypeLogLevel) : SchedulerInterface
+    {
+        if ($this->disabledJobTypeLogLevel !== null) {
+            throw new \LogicException('Scheduler disabledJobTypeLogLevel is already set.');
+        }
+        $this->disabledJobTypeLogLevel = $disabledJobTypeLogLevel;
         return $this;
     }
 }

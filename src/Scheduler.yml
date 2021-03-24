@@ -1,3 +1,5 @@
+parameters:
+  neighborhoods.kojo.scheduler.disabled_job_type_log_level: '%neighborhoods.kojo.environment.parameters.kojospace_logging_levels.disabled_job_type%'
 services:
   neighborhoods.kojo.scheduler:
     class: Neighborhoods\Kojo\Scheduler
@@ -11,6 +13,7 @@ services:
       - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-schedule']]
       - [setSchedulerCache, ['@scheduler.cache']]
       - [setLogger, ['@process.pool.logger']]
+      - [setDisabledJobTypeLogLevel, ['%neighborhoods.kojo.scheduler.disabled_job_type_log_level%']]
   scheduler:
     alias: neighborhoods.kojo.scheduler
     public: false
