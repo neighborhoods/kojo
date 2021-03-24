@@ -8,3 +8,5 @@ parameters:
   neighborhoods.kojo.environment.parameters.database_port: 0
   neighborhoods.kojo.environment.parameters.database_name: ''
   neighborhoods.kojo.environment.parameters.lock_prefix: ''
+  neighborhoods.kojo.environment.parameters.kojospace_logging_levels:
+    disabled_job_type: !php/const \Psr\Log\LogLevel::WARNING
