@@ -8,5 +8,5 @@ use Neighborhoods\Kojo\Api\V1\LoggerInterface;
 
 interface AwareInterface
 {
-    public function setApiV1Logger(LoggerInterface $apiV1Logger): self;
+    public function setApiV1Logger(LoggerInterface $apiV1Logger);
 }

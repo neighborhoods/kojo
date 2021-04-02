@@ -8,5 +8,5 @@ use Neighborhoods\Kojo\Api\V1\Worker\ServiceInterface;
 
 interface AwareInterface
 {
-    public function setApiV1WorkerService(ServiceInterface $apiV1WorkerService): self;
+    public function setApiV1WorkerService(ServiceInterface $apiV1WorkerService);
 }

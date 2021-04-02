@@ -8,5 +8,5 @@ use Neighborhoods\Kojo\Api\V1\Job\Scheduler\FactoryInterface;
 
 interface AwareInterface
 {
-    public function setApiV1JobSchedulerFactory(FactoryInterface $apiV1JobSchedulerFactory): self;
+    public function setApiV1JobSchedulerFactory(FactoryInterface $apiV1JobSchedulerFactory);
 }

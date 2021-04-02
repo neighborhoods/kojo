@@ -8,5 +8,5 @@ use Neighborhoods\Kojo\Api\V1\Job\Type\RegistrarInterface;
 
 interface AwareInterface
 {
-    public function setApiV1JobTypeRegistrar(RegistrarInterface $apiV1JobTypeRegistrar): self;
+    public function setApiV1JobTypeRegistrar(RegistrarInterface $apiV1JobTypeRegistrar);
 }
