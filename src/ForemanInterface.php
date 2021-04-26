@@ -7,7 +7,7 @@ use Neighborhoods\Kojo\Api\V1\RDBMS\Connection;
 use Neighborhoods\Kojo\Api\V1\Worker;
 use Neighborhoods\Kojo\Service\Update;
 
-interface ForemanInterface extends Connection\Service\AwareInterface, Worker\Service\AwareInterface
+interface ForemanInterface
 {
     public function workWorker(): ForemanInterface;
 
