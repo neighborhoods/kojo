@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Api\V1\Job\Type\Registrar;
 
 use Neighborhoods\Kojo\Api\V1\Job\Type\RegistrarInterface;
 
-interface FactoryInterface extends AwareInterface
+interface AwareInterface
 {
-    public function create(): RegistrarInterface;
+    public function setApiV1JobTypeRegistrar(RegistrarInterface $apiV1JobTypeRegistrar);
 }

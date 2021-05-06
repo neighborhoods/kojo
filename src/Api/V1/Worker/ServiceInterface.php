@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Api\V1\Worker;
 
+use Neighborhoods\Kojo\Api\V1\Job\Scheduler;
 use Neighborhoods\Kojo\Api\V1\Job\SchedulerInterface;
+use Neighborhoods\Kojo\Api\V1\Logger;
 use Neighborhoods\Kojo\Api\V1\LoggerInterface;
 use Neighborhoods\Kojo\Data\JobInterface;
 use Neighborhoods\Kojo\Service\Update\Hold;
@@ -12,7 +14,7 @@ use Neighborhoods\Kojo\Service\Update\Complete\Success;
 use Neighborhoods\Kojo\Service\Update\Complete\Failed;
 use Neighborhoods\Kojo\Apm;
 
-interface ServiceInterface
+interface ServiceInterface extends Scheduler\Factory\AwareInterface, Logger\AwareInterface
 {
     public function requestRetry(\DateTime $retryDateTime): ServiceInterface;
 
