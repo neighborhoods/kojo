@@ -11,5 +11,7 @@ interface SchedulerInterface
 
     public function setSchedulerCache(CacheInterface $schedulerCache);
 
+    public function setDisabledJobTypeLogLevel(string $disabledJobTypeLogLevel) : SchedulerInterface;
+
     public function scheduleStaticJobs(): SchedulerInterface;
 }
