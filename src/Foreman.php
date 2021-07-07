@@ -23,7 +23,6 @@ class Foreman implements ForemanInterface
     use Locator\AwareTrait;
     use Update\Work\Factory\AwareTrait;
     use Update\Panic\Factory\AwareTrait;
-    use Update\Crash\Factory\AwareTrait;
     use Update\Complete\Success\Factory\AwareTrait;
     use Defensive\AwareTrait;
     use Logger\AwareTrait;
@@ -46,11 +45,15 @@ class Foreman implements ForemanInterface
         try {
             $this->getProcessPoolLoggerMessageMetadataBuilder()->setJob($this->_getJob());
             $this->_updateJobAsWorking();
+            restore_error_handler();
             $this->_runWorker();
+            set_error_handler(new ErrorHandler());
             $this->_updateJobAfterWork();
-        } catch (Locator\Exception | \Error $throwable) {
+        } catch (\Throwable $throwable) {
+            set_error_handler(new ErrorHandler());
             $this->_panicJob();
             $jobId = $this->_getJob()->getId();
+            // exiting with nonzero code will give the Root's SIGCHLD handler some info
             throw new \RuntimeException("Panicking job with ID[$jobId].", 0, $throwable);
         }
         $this->_getSemaphore()->releaseLock($this->_getNewJobOwnerResource($this->_getJob()));
@@ -84,17 +87,9 @@ class Foreman implements ForemanInterface
 
     protected function _runWorker(): ForemanInterface
     {
-        try {
-            restore_error_handler();
-            $this->_injectWorkerService();
-            $this->_injectRDBMSConnectionService();
-            call_user_func($this->_getLocator()->getCallable());
-            set_error_handler(new ErrorHandler());
-        } catch (\Exception $exception) {
-            set_error_handler(new ErrorHandler());
-            $this->_crashJob();
-            throw $exception;
-        }
+        $this->_injectWorkerService();
+        $this->_injectRDBMSConnectionService();
+        call_user_func($this->_getLocator()->getCallable());
 
         return $this;
     }
@@ -149,15 +144,6 @@ class Foreman implements ForemanInterface
         $updatePanic = $this->_getServiceUpdatePanicFactory()->create();
         $updatePanic->setJob($this->_getJob());
         $updatePanic->save();
-
-        return $this;
-    }
-
-    protected function _crashJob(): ForemanInterface
-    {
-        $updateCrash = $this->_getServiceUpdateCrashFactory()->create();
-        $updateCrash->setJob($this->_getJob());
-        $updateCrash->save();
 
         return $this;
     }

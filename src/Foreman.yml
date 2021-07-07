@@ -11,7 +11,6 @@ services:
     - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-job']]
     - [setServiceUpdateWorkFactory, ['@service.update.work.factory']]
     - [setServiceUpdatePanicFactory, ['@service.update.panic.factory']]
-    - [setServiceUpdateCrashFactory, ['@service.update.crash.factory']]
     - [setServiceUpdateCompleteSuccessFactory, ['@service.update.complete.success.factory']]
     - [setLogger, ['@process.pool.logger']]
     - [setProcessPoolLoggerMessageMetadataBuilder, ['@neighborhoods.kojo.process.pool.logger.message.metadata.builder']]

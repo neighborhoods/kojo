@@ -12,7 +12,5 @@ interface ForemanInterface
 
     public function setServiceUpdateWorkFactory(Update\Work\FactoryInterface $updateWorkFactory);
 
-    public function setServiceUpdateCrashFactory(Update\Crash\FactoryInterface $updateCrashFactory);
-
     public function setApiV1WorkerService(ServiceInterface $workerService);
 }
