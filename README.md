@@ -13,6 +13,10 @@ A distributed task manager.
 
 Real-world use cases for Kōjō and instructions for getting Kōjō up and running in your project can be found at [KojoFitness](https://github.com/neighborhoods/KojoFitness).
 
+Building well-behaved Kōjō jobs is made easier by [KojoWorkerDecoratorComponent](https://github.com/neighborhoods/KojoWorkerDecoratorComponent). Using these decorators helps adhere to best practices like sharing PDO connections, handling exceptions, and controlling retry and crash loops within a job's lifecycle. Code examples of how to use these decorators can be seen in [KojoWorkerDecoratorComponentFitness](https://github.com/neighborhoods/KojoWorkerDecoratorComponentFitness).
+
+Managing the database definitions of Kōjō jobs is made easier with the [Phinx templates for Kōjō](https://github.com/neighborhoods/kojo-phinx-templates) which provides DB migration templates for creating Kōjō job definitions and DB seeds for instantiating jobs.
+
 ## Debugging Kōjō
 XDebug version greater than `xdebug-2.7.0alpha1` is required when trying to debug Kōjō. This version of XDebug resolves issues (https://bugs.xdebug.org/938) caused by the way the Kōjō forks using `pcntl`.
 
