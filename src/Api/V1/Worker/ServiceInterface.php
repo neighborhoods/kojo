@@ -32,6 +32,7 @@ interface ServiceInterface extends Scheduler\Factory\AwareInterface, Logger\Awar
 
     public function getNewJobScheduler(): SchedulerInterface;
 
+    /** @deprecated  */
     public function reload(): ServiceInterface;
 
     public function getTimesCrashed(): int;
