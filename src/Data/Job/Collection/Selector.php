@@ -61,6 +61,7 @@ class Selector extends CollectionAbstract implements SelectorInterface
                     [
                         $this->getQueryBuilder()->createNamedParameter(State\ServiceInterface::STATE_WAITING),
                         $this->getQueryBuilder()->createNamedParameter(State\Service::STATE_CRASHED),
+                        $this->getQueryBuilder()->createNamedParameter(State\Service::STATE_ENVIRONMENT_TERMINATED),
                         $this->getQueryBuilder()->createNamedParameter(State\Service::STATE_NEW),
                     ]),
                 $this->getQueryBuilder()->expr()->lte(
