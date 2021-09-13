@@ -51,6 +51,12 @@ class Pool extends PoolAbstract implements PoolInterface
             $this->_getLogger()->debug("Child process[$childProcessId] is not in the pool for process[$processId].");
         }
 
+        if ($information->getExitValue() === SIGKILL) {
+            $this->_getLogger()->info('SIGKILL detected');
+
+            $this->inspectProcDirectory();
+        }
+
         return $this;
     }
 
@@ -128,6 +134,76 @@ class Pool extends PoolAbstract implements PoolInterface
     public function emptyChildProcesses(): PoolInterface
     {
         $this->_childProcesses = [];
+
+        return $this;
+    }
+
+    private function inspectProcDirectory() : PoolInterface
+    {
+        // get the status file for every process
+        foreach (glob('/proc/[0-9]*/status') as $procStatusFile) {
+            $processId = null;
+            $parentProcessId = null;
+            $processGroupId = null;
+
+            try {
+                $procStatusFd = fopen($procStatusFile, 'r');
+
+                // parse the file for the IDs above
+                while (($line = fgets($procStatusFd))) {
+                    list($item) = sscanf($line, "Pid:\t%s");
+                    if ($item !== null) {
+                        $processId = (int)$item;
+                    }
+
+                    list($item) = sscanf($line, "PPid:\t%s");
+                    if ($item !== null) {
+                        $parentProcessId = (int)$item;
+                    }
+
+                    list($item) = sscanf($line, "NSpgid:\t%s");
+                    if ($item !== null) {
+                        $processGroupId = (int)$item;
+                    }
+
+                    // if we've extracted all the information we need,
+                    // check if this is a process we need to clean up
+                    if ($processId && $parentProcessId && $processGroupId) {
+                        if (
+                            // was it orphaned
+                            $parentProcessId === 1 &&
+                            // was it spawned from the same ancestor (i.e. the Server)
+                            $processGroupId === $this->getProcess()->getProcessGroupId() &&
+                            // guard against false positives
+                            // is not the Root
+                            $processId !== $this->getProcess()->getProcessId() &&
+                            // is not init
+                            $processId !== 1
+                        ) {
+                            $this->_getLogger()->warning(
+                                'Terminating orphaned process',
+                                [
+                                    'process_id' => $processId,
+                                    'parent_process_id' => $parentProcessId,
+                                    'process_group_id' => $processGroupId,
+                                    // Root information is included in the kojo_metadata
+                                ]
+                            );
+                            // SIGKILL must be used here because watchdogs won't handle any signals
+                            // any (unexpected) orphan processes that result from this will be
+                            // cleaned up in the next pass
+                            posix_kill($processId, SIGKILL);
+                        }
+                        // move on to the next /proc/ file regardless
+                        break;
+                    }
+                }
+            } finally {
+                if ($procStatusFd !== false) {
+                    fclose($procStatusFd);
+                }
+            }
+        }
 
         return $this;
     }
