@@ -52,7 +52,7 @@ class Pool extends PoolAbstract implements PoolInterface
         }
 
         if ($information->getExitValue() === SIGKILL) {
-            $this->_getLogger()->info('SIGKILL detected');
+            $this->_getLogger()->notice('SIGKILL detected');
 
             $this->inspectProcDirectory();
         }
