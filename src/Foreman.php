@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Neighborhoods\Kojo;
 
 use Neighborhoods\Kojo\Data\Job;
+use Neighborhoods\Kojo\Doctrine;
 use Neighborhoods\Kojo\Message;
 use Neighborhoods\Kojo\Service\Update;
 use Neighborhoods\Kojo\Worker\Locator;
@@ -28,6 +29,7 @@ class Foreman implements ForemanInterface
     use Logger\AwareTrait;
     use Logger\Message\Metadata\Builder\AwareTrait;
     use Api\V1\RDBMS\Connection\Service\AwareTrait;
+    use Doctrine\Connection\Decorator\Repository\AwareTrait;
 
     public function workWorker(): ForemanInterface
     {
@@ -111,6 +113,20 @@ class Foreman implements ForemanInterface
 
     protected function _updateJobAfterWork(): ForemanInterface
     {
+        /** @var \PDO $pdo */
+        $pdo = $this
+            ->_getDoctrineConnectionDecoratorRepository()
+            ->get(Doctrine\Connection\DecoratorInterface::ID_JOB) // Kojo's decorator of doctrine's connection object
+            ->getDoctrineConnection() // doctrine's connection object
+            ->getWrappedConnection(); // the internal PDO of doctrine's connection object
+
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+            $this->_panicJob();
+            $jobId = $this->_getJob()->getId();
+            throw new \LogicException("Worker related to job with ID[$jobId] left a transaction open.");
+        }
+
         if ($this->_getJobType()->getAutoCompleteSuccess()) {
             $updateCompleteSuccess = $this->_getServiceUpdateCompleteSuccessFactory()->create();
             $updateCompleteSuccess->setJob($this->_getJob());
