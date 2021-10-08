@@ -147,7 +147,15 @@ class Pool extends PoolAbstract implements PoolInterface
             $processGroupId = null;
 
             try {
-                $procStatusFd = fopen($procStatusFile, 'r');
+                // files in /proc/ can be deleted at any time
+                // suppress PHP's warning (which will become an error)
+                // we'll check for failure after attempting to open
+                $procStatusFd = @fopen($procStatusFile, 'r');
+
+                // this file has been deleted (or we don't have permission)
+                if ($procStatusFd === false) {
+                    continue;
+                }
 
                 // parse the file for the IDs above
                 while (($line = fgets($procStatusFd))) {
