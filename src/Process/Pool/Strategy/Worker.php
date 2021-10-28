@@ -70,4 +70,12 @@ class Worker extends StrategyAbstract
 
         return $this;
     }
+
+    public function handlePotentiallyStrayProcesses() : StrategyInterface
+    {
+        // Watchdogs are always SIGKILLed because they need to be unable to handle signals like SIGTERM
+        // so this is normal operation, no action needs to be taken
+
+        return $this;
+    }
 }

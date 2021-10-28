@@ -47,4 +47,6 @@ interface StrategyInterface
     public function setMaximumLoadAverage(float $maximumLoadAverage): StrategyInterface;
 
     public function getMaximumLoadAverage(): float;
+
+    public function handlePotentiallyStrayProcesses() : StrategyInterface;
 }

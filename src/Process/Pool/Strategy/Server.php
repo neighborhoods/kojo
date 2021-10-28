@@ -67,4 +67,13 @@ class Server extends StrategyAbstract
 
         return $this;
     }
+
+    public function handlePotentiallyStrayProcesses() : StrategyInterface
+    {
+        // since the Root is the only child of the Server, this will only be invoked on SIGKILL of the Root
+        // that shouldn't be a problem, since all the children of the Root are responsible for terminating
+        // themselves (as opposed to children of Workers, which need their parents to terminate them)
+
+        return $this;
+    }
 }
