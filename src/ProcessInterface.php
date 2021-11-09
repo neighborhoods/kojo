@@ -14,6 +14,7 @@ interface ProcessInterface extends HandlerInterface
     public const PROP_PATH                                     = 'path';
     public const PROP_TERMINATION_SIGNAL_NUMBER                = 'termination_signal_number';
     public const PROP_PROCESS_ID                               = 'process_id';
+    public const PROP_PROCESS_GROUP_ID                         = 'process_group_id';
     public const PROP_TYPE_CODE                                = 'type_code';
     public const PROP_UUID                                     = 'uuid';
     public const PROP_UUID_MAXIMUM_INTEGER                     = 'uuid_maximum_integer';
@@ -28,6 +29,8 @@ interface ProcessInterface extends HandlerInterface
     public function start(): ProcessInterface;
 
     public function getProcessId(): int;
+
+    public function getProcessGroupId(): int;
 
     public function setLogger(LoggerInterface $logger);
 

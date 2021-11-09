@@ -51,6 +51,10 @@ class Pool extends PoolAbstract implements PoolInterface
             $this->_getLogger()->debug("Child process[$childProcessId] is not in the pool for process[$processId].");
         }
 
+        if ($information->getExitValue() === SIGKILL) {
+            $this->_getProcessPoolStrategy()->handlePotentiallyStrayProcesses();
+        }
+
         return $this;
     }
 

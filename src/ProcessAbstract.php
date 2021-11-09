@@ -29,6 +29,7 @@ abstract class ProcessAbstract implements ProcessInterface
         $this->_getApmNewRelic()->endTransaction();
         $this->_setParentProcessId(posix_getppid());
         $this->_setProcessId(posix_getpid());
+        $this->_setProcessGroupId(posix_getpgrp());
 
         $this->getProcessPoolLoggerMessageMetadataBuilder()->setProcess($this);
         if ($this->_hasProcessPool()) {
@@ -201,6 +202,18 @@ abstract class ProcessAbstract implements ProcessInterface
     public function getParentProcessId(): int
     {
         return $this->_read(self::PROP_PARENT_PROCESS_ID);
+    }
+
+    protected function _setProcessGroupId(int $processGroupId): ProcessAbstract
+    {
+        $this->_create(self::PROP_PROCESS_GROUP_ID, $processGroupId);
+
+        return $this;
+    }
+
+    public function getProcessGroupId(): int
+    {
+        return $this->_read(self::PROP_PROCESS_GROUP_ID);
     }
 
     public function setExitCode(int $exitCode): ProcessInterface
