@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace Neighborhoods\Kojo\Api\V1\Worker;
 
+use Neighborhoods\Kojo\Api;
 use Neighborhoods\Kojo\Api\V1\Job\SchedulerInterface;
 use Neighborhoods\Kojo\Api\V1\LoggerInterface;
 use Neighborhoods\Kojo\Apm;
 use Neighborhoods\Kojo\Data\Job;
-use Neighborhoods\Kojo\Service\Update;
-use Neighborhoods\Kojo\Api;
-use Neighborhoods\Pylon\Data\Property\Defensive;
 use Neighborhoods\Kojo\Service\Create;
+use Neighborhoods\Kojo\Service\Update;
+use Neighborhoods\Pylon\Data\Property\Defensive;
 
 class Service implements ServiceInterface
 {
@@ -102,6 +102,17 @@ class Service implements ServiceInterface
                     throw new \UnexpectedValueException('Unexpected value[' . $this->_read(self::PROP_REQUEST) . '].');
             }
             $this->_create(self::PROP_REQUEST_APPLIED, true);
+        } else {
+            $this->getLogger()->alert(
+                'applyRequest was called repeatedly',
+                [
+                    'requested_state' => $this->_read(self::PROP_REQUEST),
+                ]
+            );
+            // Reload the state from the database
+            $this->reload();
+            // Apply the request and allow the State Service to complain if it is an invalid transition
+            $this->applyRequest();
         }
 
         return $this;
@@ -122,8 +133,13 @@ class Service implements ServiceInterface
         return $this->getApiV1Logger();
     }
 
+    /** @deprecated  */
     public function reload(): ServiceInterface
     {
+        $newJob = $this->_getJob()->load();
+        $this->_unsetJob();
+        $this->setJob($newJob);
+        $this->_delete(self::PROP_REQUEST_APPLIED);
         return $this;
     }
 
