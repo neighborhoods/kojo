@@ -103,6 +103,14 @@ class Service implements ServiceInterface
         return $this;
     }
 
+    public function requestEnvironmentTerminated(): ServiceInterface
+    {
+        $this->_nextStateRequestUpdate = ServiceInterface::STATE_WORKING;
+        $this->_assignedStateUpdate = ServiceInterface::STATE_ENVIRONMENT_TERMINATED;
+
+        return $this;
+    }
+
     public function requestPanicked(): ServiceInterface
     {
         $this->_nextStateRequestUpdate = ServiceInterface::STATE_NONE;
@@ -213,6 +221,7 @@ class Service implements ServiceInterface
                     case ServiceInterface::STATE_PANICKED:
                     case ServiceInterface::STATE_HOLD:
                     case ServiceInterface::STATE_CRASHED:
+                    case ServiceInterface::STATE_ENVIRONMENT_TERMINATED:
                     case ServiceInterface::STATE_NEW:
                         break;
                     default:
@@ -231,10 +240,11 @@ class Service implements ServiceInterface
                         $isValidTransition = false;
                 }
                 break;
-            // Complete success, complete failed, or crashed.
+            // Complete success, complete failed, or non-terminal crashed and environment_terminated.
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_SUCCESS:
             case ServiceInterface::STATE_NONE . ServiceInterface::STATE_COMPLETE_FAILED:
             case ServiceInterface::STATE_WORKING . ServiceInterface::STATE_CRASHED:
+            case ServiceInterface::STATE_WORKING . ServiceInterface::STATE_ENVIRONMENT_TERMINATED:
                 switch ($assignedState) {
                     case ServiceInterface::STATE_WORKING:
                         break;
@@ -256,6 +266,7 @@ class Service implements ServiceInterface
                 switch ($assignedState) {
                     case ServiceInterface::STATE_WAITING:
                     case ServiceInterface::STATE_CRASHED:
+                    case ServiceInterface::STATE_ENVIRONMENT_TERMINATED:
                         break;
                     default:
                         $isValidTransition = false;
