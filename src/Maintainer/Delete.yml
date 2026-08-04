@@ -7,6 +7,5 @@ services:
       - [addSemaphoreResourceFactory, ['@semaphore.resource.factory-maintainer_delete']]
       - [setSemaphore, ['@semaphore']]
       - [setPageSize, [50]]
-      - [setOffset, [50]]
   maintainer.delete:
     alias: neighborhoods.kojo.maintainer.delete
