@@ -4,7 +4,8 @@ services:
     public: false
     shared: true
     calls:
-      - [addOption, [!php/const \Redis::OPT_READ_TIMEOUT, '-1']]
+      # 120s: must exceed brpoplpush blocking timeout (61s) so the Redis server responds before the socket gives up
+      - [addOption, [!php/const \Redis::OPT_READ_TIMEOUT, '120']]
       - [setHost, ['%neighborhoods.kojo.environment.parameters.redis_host%']]
       - [setPort, ['%neighborhoods.kojo.environment.parameters.redis_port%']]
   redis.factory:

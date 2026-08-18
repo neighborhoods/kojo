@@ -23,4 +23,23 @@ class Repository implements RepositoryInterface
 
         return $this->_redisCollection[$id];
     }
+
+    public function ensureConnected(\Redis $redis): \Redis
+    {
+        $key = array_search($redis, $this->_redisCollection, true);
+        try {
+            $redis->ping();
+            return $redis;
+        } catch (\Throwable $throwable) {
+            try {
+                $redis->close();
+            } catch (\Throwable $ignored) {
+            }
+            $fresh = $this->_getRedisFactory()->create();
+            if ($key !== false) {
+                $this->_redisCollection[$key] = $fresh;
+            }
+            return $fresh;
+        }
+    }
 }
