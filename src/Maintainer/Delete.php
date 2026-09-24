@@ -16,8 +16,6 @@ class Delete implements DeleteInterface
     use Job\Collection\Delete\AwareTrait;
     use Logger\AwareTrait;
     const PROP_PAGE_SIZE = 'page_size';
-    const PROP_OFFSET = 'offset';
-    protected $_collectionIterations = 0;
 
     public function deleteCompletedJobs(): DeleteInterface
     {
@@ -39,7 +37,6 @@ class Delete implements DeleteInterface
     protected function _deleteCompletedJobs(): DeleteInterface
     {
         $queryBuilder = $this->_getJobCollectionDelete()->getQueryBuilder();
-        $queryBuilder->setFirstResult($this->_collectionIterations * $this->_getPageSize());
         $queryBuilder->setMaxResults($this->_getPageSize());
         $jobCandidates = $this->_getJobCollectionDelete()->getModelsArray();
 
@@ -47,8 +44,6 @@ class Delete implements DeleteInterface
             foreach ($this->_getJobCollectionDelete()->getIterator() as $jobCandidate) {
                 $jobCandidate->delete();
             }
-            ++$this->_collectionIterations;
-            $queryBuilder->setFirstResult($this->_collectionIterations * $this->_getPageSize());
             $jobCandidates = $this->_getJobCollectionDelete()->getRecords();
         }
 
@@ -63,18 +58,6 @@ class Delete implements DeleteInterface
     public function setPageSize(int $pageSize): DeleteInterface
     {
         $this->_create(self::PROP_PAGE_SIZE, $pageSize);
-
-        return $this;
-    }
-
-    protected function _getOffset(): int
-    {
-        return $this->_read(self::PROP_OFFSET);
-    }
-
-    public function setOffset(int $offset): DeleteInterface
-    {
-        $this->_create(self::PROP_OFFSET, $offset);
 
         return $this;
     }
