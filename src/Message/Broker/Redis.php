@@ -15,11 +15,17 @@ class Redis extends BrokerAbstract
     public function waitForNewMessage(): BrokerInterface
     {
         try {
-            $this->_getRedisClient()->brpoplpush(
-                $this->_getPublishChannelName(),
-                $this->_getSubscriptionChannelName(),
-                0
-            );
+            while (true) {
+                $result = $this->_getRedisClient()->brpoplpush(
+                    $this->_getPublishChannelName(),
+                    $this->_getSubscriptionChannelName(),
+                    61
+                );
+                if ($result !== false) {
+                    break;
+                }
+                $this->_redisClient = $this->_getRedisRepository()->ensureConnected($this->_redisClient);
+            }
         } catch (\Throwable $throwable) {
             $this->_getLogger()->critical($throwable->getMessage(), ['exception' => $throwable]);
             throw $throwable;

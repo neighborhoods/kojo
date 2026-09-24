@@ -9,6 +9,8 @@ interface RepositoryInterface
 {
     public function getById(string $id): \Redis;
 
+    public function ensureConnected(\Redis $redis): \Redis;
+
     public function setRedisFactory(FactoryInterface $factory);
 
     public function setProcessRegistry(RegistryInterface $registry);
