@@ -18,6 +18,7 @@ services:
     - [setStateService, ['@state.service']]
     - [setMessageBroker, ['@message.broker.redis']]
     - [setApiV1RDBMSConnectionService, ['@Neighborhoods\Kojo\Api\V1\RDBMS\Connection\ServiceInterface']]
+    - [setDoctrineConnectionDecoratorRepository, ['@neighborhoods.kojo.doctrine.connection.decorator.repository']]
   foreman:
     alias: neighborhoods.kojo.foreman
     public: false
