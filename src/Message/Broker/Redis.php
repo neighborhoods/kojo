@@ -12,17 +12,24 @@ class Redis extends BrokerAbstract
     use Repository\AwareTrait;
     protected $_redisClient;
 
+    private const BRPOPLPUSH_TIMEOUT_SECONDS = 61;
+
     public function waitForNewMessage(): BrokerInterface
     {
         try {
             while (true) {
+                $start = microtime(true);
                 $result = $this->_getRedisClient()->brpoplpush(
                     $this->_getPublishChannelName(),
                     $this->_getSubscriptionChannelName(),
-                    61
+                    self::BRPOPLPUSH_TIMEOUT_SECONDS
                 );
                 if ($result !== false) {
                     break;
+                }
+                $elapsed = microtime(true) - $start;
+                if ($elapsed < self::BRPOPLPUSH_TIMEOUT_SECONDS - 1) {
+                    sleep((int)(self::BRPOPLPUSH_TIMEOUT_SECONDS - 1 - $elapsed));
                 }
                 $this->_redisClient = $this->_getRedisRepository()->ensureConnected($this->_redisClient);
             }
