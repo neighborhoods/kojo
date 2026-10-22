@@ -16,9 +16,11 @@ class Redis extends BrokerAbstract
     {
         try {
             while (true) {
-                $result = $this->_getRedisClient()->brpoplpush(
+                $result = $this->_getRedisClient()->blmove(
                     $this->_getPublishChannelName(),
                     $this->_getSubscriptionChannelName(),
+                    'RIGHT',
+                    'LEFT',
                     61
                 );
                 if ($result !== false) {
