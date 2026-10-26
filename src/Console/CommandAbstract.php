@@ -48,7 +48,7 @@ abstract class CommandAbstract extends Command
 
     abstract protected function _configure(): CommandAbstract;
 
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->_setInput($input);
         $this->_setOutput($output);
